@@ -315,3 +315,41 @@ html.font-large { font-size: 18px; }
   --font-serif: 'Noto Serif JP', 'Hiragino Mincho', serif;
   --font-mono: 'JetBrains Mono', 'Consolas', monospace;
 }
+
+/* ============================================================
+   Enhanced Modern SaaS & Learning Dashboard Utilities
+   ============================================================ */
+
+/* Sleek subtle card hover elevation */
+.card-hover-effect {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-strong);
+}
+
+/* Subtle glow for badges & interactive buttons */
+.badge-pulse {
+  animation: badge-pulse-anim 2.5s infinite ease-in-out;
+}
+
+@keyframes badge-pulse-anim {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+}
+
+/* Japanese pattern subtle background */
+.bg-japanese-wave {
+  background-image: radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
+                    radial-gradient(circle at 0% 100%, rgba(99, 102, 241, 0.04) 0%, transparent 50%);
+}
+

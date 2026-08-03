@@ -3,14 +3,24 @@
 // ============================================================
 // Principles:
 // - Flow State Design: Zero distractions, full immersion
-// - Deep Work: No sidebars, no notifications
-// - Fitts's Law: Centered content, large tap area
-// - Keyboard-first: Space=Flip, ←→=Navigate, ↑↓=Rate, Esc=Exit
+// - Scaled Card Size: Large 5xl cards, big text
+// - YouTube-style Fullscreen Icon Button: Placed in the bottom-right corner INSIDE the card
 // ============================================================
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useApp } from '@/hooks/useApp';
-import { ChevronLeft, ChevronRight, RotateCcw, X, BookmarkCheck, Sparkles, BookOpen, Volume2 } from 'lucide-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  X,
+  BookmarkCheck,
+  Sparkles,
+  BookOpen,
+  Volume2,
+  Maximize2,
+  Minimize2,
+} from 'lucide-react';
 import type { VocabItem, KanjiItem } from '@/types';
 
 export function FlashcardPage() {
@@ -71,7 +81,7 @@ export function FlashcardPage() {
               Complete N3 Vocabulary
             </div>
             <div className="text-sm text-[var(--color-text-secondary)]">
-              {vocabulary.length} words · Meanings & Hiragana
+              {vocabulary.length} words · Meanings &amp; Hiragana
             </div>
           </div>
           <div className="text-xs text-[var(--color-text-tertiary)] mt-6 flex items-center gap-2 font-mono">
@@ -81,7 +91,7 @@ export function FlashcardPage() {
           </div>
         </button>
 
-        {/* Kanji Deck (NEW!) */}
+        {/* Kanji Deck */}
         <button
           onClick={() => setActiveDeck('kanji')}
           className="
@@ -99,10 +109,10 @@ export function FlashcardPage() {
               <Sparkles size={18} className="text-[var(--color-warning)]" />
             </div>
             <div className="text-lg font-semibold text-[var(--color-text)] mb-1">
-              Master N3 Kanji
+              Master N3 Kanji (1 → N Order)
             </div>
             <div className="text-sm text-[var(--color-text-secondary)]">
-              {kanji.length} characters · Hán Việt & Compound Words
+              {kanji.length} characters · Sequential Dataset Order
             </div>
           </div>
           <div className="text-xs text-[var(--color-text-tertiary)] mt-6 flex items-center gap-2 font-mono">
@@ -149,14 +159,12 @@ export function FlashcardPage() {
 
 export function parseRelatedWords(rawText?: string) {
   if (!rawText) return [];
-  // Split by comma, semicolon, or newline ONLY when followed by Japanese characters and an opening bracket (, （, 【, [
   const parts = rawText.split(/(?:[,;]|\r?\n)\s*(?=[^\(（【\[,;]+[\(（【\[])/);
   const items: { word: string; reading: string; meaning: string; raw: string }[] = [];
 
   for (const part of parts) {
     const trimmed = part.trim().replace(/^[,;]\s*/, '');
     if (!trimmed) continue;
-    // Match pattern like: 抱く (いだく): Ấp ủ or 抱える【かかえる】: Ôm
     const match = trimmed.match(/^([^\(（【\[]+)[\(（【\[]([^\)）】\]]+)[\)）】\]]\s*[:：]?\s*(.*)$/);
     if (match) {
       items.push({
@@ -198,6 +206,7 @@ export function VocabFlashcardSession({
 }) {
   const [index, setIndex] = useState(initialIndex || 0);
   const [flipped, setFlipped] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [shuffledItems] = useState(() =>
     preserveOrder ? [...items] : [...items].sort(() => Math.random() - 0.5)
   );
@@ -219,6 +228,33 @@ export function VocabFlashcardSession({
     }
   }, [index]);
 
+  const toggleFullscreen = useCallback(() => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+      setIsFullscreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+      setIsFullscreen(false);
+    }
+  }, []);
+
+  const handleExit = useCallback(() => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
+    onExit();
+  }, [onExit]);
+
+  useEffect(() => {
+    const onFsChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', onFsChange);
+    return () => document.removeEventListener('fullscreenchange', onFsChange);
+  }, []);
+
   // Keyboard controls
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -238,34 +274,34 @@ export function VocabFlashcardSession({
           break;
         case 'Escape':
           e.preventDefault();
-          onExit();
+          handleExit();
           break;
       }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [flip, next, prev, onExit]);
+  }, [flip, next, prev, handleExit]);
 
   if (!current) return null;
 
   return (
     <div className="fixed inset-0 z-50 bg-[var(--color-bg)] flex flex-col justify-between select-none">
-      {/* Top bar — 100% synchronized with Kanji Mode */}
+      {/* Top bar */}
       <div className="flex items-center justify-between px-8 py-6">
         <button
-          onClick={onExit}
-          className="flex items-center gap-2 text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer focus-ring px-3 py-1.5 rounded-lg border border-transparent hover:border-[var(--color-border)] transition-all"
+          onClick={handleExit}
+          className="flex items-center gap-2 text-sm font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer focus-ring px-4 py-2 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-all shadow-2xs"
         >
           <X size={18} />
-          <span>Exit Session</span>
+          <span>Exit Session (Esc)</span>
         </button>
 
         {/* Progress bar */}
         <div className="flex items-center gap-4">
-          <span className="text-xs font-mono font-medium text-[var(--color-text-secondary)]">
+          <span className="text-sm font-mono font-semibold text-[var(--color-text-secondary)]">
             Vocab Card {index + 1} of {total}
           </span>
-          <div className="w-48 h-1.5 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
+          <div className="w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"
               style={{ width: `${((index + 1) / total) * 100}%` }}
@@ -278,31 +314,51 @@ export function VocabFlashcardSession({
         </div>
       </div>
 
-      {/* Card area — perfectly centered vertically and horizontally, aspect-[16/10], same as Kanji Mode */}
-      <div className="flex-1 flex items-center justify-center px-6 py-4">
+      {/* Card area — Scaled up max-w-5xl, min-h-[520px], YouTube-style Fullscreen Icon inside */}
+      <div className="flex-1 flex items-center justify-center px-6 py-6">
         <button
           onClick={flip}
           className="
-            w-full max-w-2xl aspect-[16/10] rounded-3xl
+            w-full max-w-4xl lg:max-w-5xl min-h-[460px] sm:min-h-[520px] rounded-3xl
             bg-[var(--color-surface)] border border-[var(--color-border)]
-            shadow-md hover:shadow-lg flex flex-col items-center justify-center p-8
+            shadow-lg hover:shadow-xl flex flex-col items-center justify-center p-8 sm:p-12
             cursor-pointer transition-all duration-200
             focus-ring relative overflow-hidden
           "
           aria-label={flipped ? 'Showing answer, click to show question' : 'Showing question, click to flip'}
         >
           {/* Top Left (Anchor): Lesson Pill */}
-          <div className="absolute top-6 left-8 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] tracking-wide select-none">
-            {current.lesson || 'Bài 2'}
+          <div className="absolute top-8 left-10 inline-flex items-center px-4 py-1.5 rounded-full text-sm font-bold bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] tracking-wide select-none">
+            {current.lesson || 'N3 Vocab'}
+          </div>
+
+          {/* YouTube-style Fullscreen Icon Button (Bottom Right inside card) */}
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleFullscreen();
+            }}
+            title={isFullscreen ? "Exit Fullscreen (Esc)" : "Fullscreen"}
+            className="
+              absolute bottom-6 right-6 z-20 p-2.5 rounded-xl
+              bg-[var(--color-surface-alt)]/80 hover:bg-[var(--color-surface-alt)]
+              text-[var(--color-text-secondary)] hover:text-[var(--color-text)]
+              transition-all duration-150 cursor-pointer focus-ring
+              backdrop-blur-xs shadow-2xs flex items-center gap-1.5 text-xs font-semibold
+            "
+          >
+            {isFullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
           </div>
 
           {!flipped ? (
-            /* Front Side (Question view) — dead center! */
-            <div className="text-center flex flex-col items-center justify-center my-auto gap-4">
+            /* Front Side (Question view) — Huge Kanji */
+            <div className="text-center flex flex-col items-center justify-center my-auto gap-6">
               <div
-                className="font-jp-serif font-semibold tracking-tight"
+                className="font-jp-serif font-bold tracking-tight"
                 style={{
-                  fontSize: 'clamp(4.5rem, 14vw, 8.5rem)',
+                  fontSize: 'clamp(6rem, 18vw, 11rem)',
                   lineHeight: 1,
                   color: 'var(--color-text)',
                   textShadow: '0 2px 24px rgba(0,0,0,0.08)',
@@ -311,7 +367,7 @@ export function VocabFlashcardSession({
                 {current.kanji}
               </div>
 
-              <div className="mt-4 flex items-center justify-center gap-2.5 text-xs md:text-sm font-medium text-[var(--color-text-secondary)] opacity-80 tracking-wide select-none">
+              <div className="mt-4 flex items-center justify-center gap-3 text-base font-semibold text-[var(--color-text-secondary)] opacity-80 tracking-wide select-none">
                 <div
                   role="button"
                   tabIndex={0}
@@ -320,101 +376,57 @@ export function VocabFlashcardSession({
                     speakJapanese(current.kanji);
                   }}
                   title="Nghe phát âm"
-                  className="p-2 rounded-full hover:bg-[var(--color-surface-alt)] transition-colors text-[var(--color-accent)]"
+                  className="p-2.5 rounded-full hover:bg-[var(--color-surface-alt)] transition-colors text-[var(--color-accent)]"
                 >
-                  <Volume2 size={18} />
+                  <Volume2 size={22} />
                 </div>
                 <span>•</span>
-                <span>Chạm để lật thẻ</span>
+                <span>Click / Space to Flip</span>
               </div>
             </div>
           ) : (
-            /* Back Side (Answer view) — dead center! Synchronized gold #C9A84C for furigana! */
-            <div className="text-center flex flex-col items-center justify-center gap-4 w-full max-w-lg my-auto">
-              {/* Vietnamese meaning */}
+            /* Back Side (Answer view) — Scaled up text */
+            <div className="text-center flex flex-col items-center justify-center gap-6 w-full max-w-2xl my-auto">
               <div
-                className="font-bold tracking-tight text-center"
+                className="font-extrabold tracking-tight text-center"
                 style={{
-                  fontSize: 'clamp(1.8rem, 4.2vw, 2.6rem)',
+                  fontSize: 'clamp(2.2rem, 5vw, 3.2rem)',
                   color: 'var(--color-text)',
-                  lineHeight: 1.25,
+                  lineHeight: 1.2,
                 }}
               >
                 {current.meaning}
               </div>
 
-              {/* Reading (Furigana) in synchronized gold/ochre color (#C9A84C) */}
               <div
-                className="font-jp font-semibold"
+                className="font-jp font-bold"
                 style={{
-                  fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
+                  fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
                   color: '#C9A84C',
-                  letterSpacing: '0.05em',
                 }}
               >
                 【{current.hiragana}】
               </div>
-
-              {/* Related Section (Left-aligned, BIG Kanji, 1 horizontal line per word) */}
-              {parseRelatedWords(current.relatedWords).length > 0 && (
-                <div className="w-full max-w-lg mt-4 pt-4 border-t border-[var(--color-border)] text-left">
-                  <div className="text-[11px] uppercase tracking-[0.2em] font-semibold text-[var(--color-text-tertiary)] mb-2.5">
-                    ✦ Từ liên quan / Mở rộng
-                  </div>
-                  <div className="flex flex-col items-start gap-2 w-full">
-                    {parseRelatedWords(current.relatedWords).slice(0, 4).map((v, i) => (
-                      <div
-                        key={i}
-                        className="flex items-baseline gap-2.5 w-full text-left"
-                      >
-                        {v.word ? (
-                          <div className="flex items-baseline gap-2.5 flex-wrap sm:flex-nowrap">
-                            {/* Kanji word (BIG font text-xl md:text-2xl) */}
-                            <span className="font-jp-serif font-bold text-xl md:text-2xl text-[var(--color-text)] shrink-0">
-                              {v.word}
-                            </span>
-                            {/* Reading in gold brackets */}
-                            {v.reading && (
-                              <span className="font-jp font-medium text-base md:text-lg text-[#C9A84C] shrink-0">
-                                【{v.reading}】
-                              </span>
-                            )}
-                            {/* Meaning on 1 line */}
-                            <span className="text-sm md:text-base text-[var(--color-text-secondary)] font-normal">
-                              : {v.meaning ? v.meaning.replace(/[\r\n]+/g, ' ').trim() : ''}
-                            </span>
-                          </div>
-                        ) : (
-                          <span className="text-sm md:text-base text-[var(--color-text-secondary)]">
-                            {v.raw ? v.raw.replace(/[\r\n]+/g, ' ').trim() : ''}
-                          </span>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           )}
         </button>
       </div>
 
-      {/* Footer — 100% synchronized with Kanji Mode, with optional subtle self-assessment buttons in the center! */}
-      <div className="px-8 py-5 border-t border-[var(--color-border)] flex items-center justify-between text-xs text-[var(--color-text-tertiary)]">
-        <div className="flex items-center gap-6 font-mono hidden md:flex">
+      {/* Footer / Shortcut Badges */}
+      <div className="px-8 py-5 border-t border-[var(--color-border)] flex items-center justify-between text-xs text-[var(--color-text-tertiary)] font-mono">
+        <div className="flex items-center gap-6 hidden md:flex">
           <span>Space / Click = Flip</span>
           <span>← / → = Previous / Next</span>
-          <span>Esc = Exit</span>
+          <span>Esc = Exit Session / Fullscreen</span>
         </div>
 
-        {/* Tactile buttons in footer so card stays perfectly centered */}
         <div className="flex items-center gap-3 mx-auto md:mx-0">
           <button
             onClick={(e) => {
               e.stopPropagation();
               next();
             }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#FECACA] dark:border-[#991B1B]/50 bg-[#FEF2F2] dark:bg-[#7F1D1D]/20 text-[#DC2626] dark:text-[#FCA5A5] font-medium hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 font-bold hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer text-xs"
           >
             <span>✕ Chưa nhớ</span>
           </button>
@@ -423,7 +435,7 @@ export function VocabFlashcardSession({
               e.stopPropagation();
               next();
             }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#BBF7D0] dark:border-[#166534]/50 bg-[#F0FDF4] dark:bg-[#14532D]/20 text-[#16A34A] dark:text-[#86EFAC] font-medium hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-green-200 dark:border-green-900/50 bg-green-50 dark:bg-green-950/30 text-green-600 dark:text-green-400 font-bold hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer text-xs"
           >
             <span>✓ Đã nhớ</span>
           </button>
@@ -438,24 +450,25 @@ export function VocabFlashcardSession({
 }
 
 // ============================================================
-// Fullscreen Kanji Flashcard Session (NEW!)
+// Fullscreen Kanji Flashcard Session
 // ============================================================
 
 function KanjiFlashcardSession({
   items,
   onExit,
+  initialIndex = 0,
 }: {
   items: KanjiItem[];
   onExit: () => void;
+  initialIndex?: number;
 }) {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(initialIndex || 0);
   const [flipped, setFlipped] = useState(false);
-  const [shuffledItems] = useState(() =>
-    [...items].sort(() => Math.random() - 0.5)
-  );
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const current = shuffledItems[index];
-  const total = shuffledItems.length;
+  // Preserve exact dataset order from start to end (1 -> N)
+  const current = items[index];
+  const total = items.length;
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
   const next = useCallback(() => {
@@ -471,6 +484,33 @@ function KanjiFlashcardSession({
     }
   }, [index]);
 
+  const toggleFullscreen = useCallback(() => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+      setIsFullscreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+      setIsFullscreen(false);
+    }
+  }, []);
+
+  const handleExit = useCallback(() => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
+    onExit();
+  }, [onExit]);
+
+  useEffect(() => {
+    const onFsChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', onFsChange);
+    return () => document.removeEventListener('fullscreenchange', onFsChange);
+  }, []);
+
   // Keyboard controls
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -490,13 +530,13 @@ function KanjiFlashcardSession({
           break;
         case 'Escape':
           e.preventDefault();
-          onExit();
+          handleExit();
           break;
       }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [flip, next, prev, onExit]);
+  }, [flip, next, prev, handleExit]);
 
   if (!current) return null;
 
@@ -505,19 +545,19 @@ function KanjiFlashcardSession({
       {/* Top bar */}
       <div className="flex items-center justify-between px-8 py-6">
         <button
-          onClick={onExit}
-          className="flex items-center gap-2 text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer focus-ring px-3 py-1.5 rounded-lg border border-transparent hover:border-[var(--color-border)] transition-all"
+          onClick={handleExit}
+          className="flex items-center gap-2 text-sm font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer focus-ring px-4 py-2 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-all shadow-2xs"
         >
           <X size={18} />
-          <span>Exit Session</span>
+          <span>Exit Session (Esc)</span>
         </button>
 
         {/* Progress bar */}
         <div className="flex items-center gap-4">
-          <span className="text-xs font-mono font-medium text-[var(--color-text-secondary)]">
+          <span className="text-sm font-mono font-semibold text-[var(--color-text-secondary)]">
             Kanji Card {index + 1} of {total}
           </span>
-          <div className="w-48 h-1.5 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
+          <div className="w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"
               style={{ width: `${((index + 1) / total) * 100}%` }}
@@ -530,27 +570,47 @@ function KanjiFlashcardSession({
         </div>
       </div>
 
-      {/* Card area — perfectly centered */}
-      <div className="flex-1 flex items-center justify-center px-6 py-4">
+      {/* Card area — YouTube-style Fullscreen Icon inside bottom-right corner */}
+      <div className="flex-1 flex items-center justify-center px-6 py-6">
         <button
           onClick={flip}
           className="
-            w-full max-w-2xl aspect-[16/10] rounded-3xl
+            w-full max-w-4xl lg:max-w-5xl min-h-[460px] sm:min-h-[520px] rounded-3xl
             bg-[var(--color-surface)] border border-[var(--color-border)]
-            shadow-md hover:shadow-lg flex flex-col items-center justify-center p-8
+            shadow-lg hover:shadow-xl flex flex-col items-center justify-center p-8 sm:p-12
             cursor-pointer transition-all duration-200
             focus-ring relative overflow-hidden
           "
           aria-label={flipped ? 'Showing answer, click to show question' : 'Showing question, click to flip'}
         >
+          {/* YouTube-style Fullscreen Icon Button (Bottom Right inside card) */}
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleFullscreen();
+            }}
+            title={isFullscreen ? "Exit Fullscreen (Esc)" : "Fullscreen"}
+            className="
+              absolute bottom-6 right-6 z-20 p-2.5 rounded-xl
+              bg-[var(--color-surface-alt)]/80 hover:bg-[var(--color-surface-alt)]
+              text-[var(--color-text-secondary)] hover:text-[var(--color-text)]
+              transition-all duration-150 cursor-pointer focus-ring
+              backdrop-blur-xs shadow-2xs flex items-center gap-1.5 text-xs font-semibold
+            "
+          >
+            {isFullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
+          </div>
+
           {!flipped ? (
-            /* Front — Kanji + Hán tự */
-            <div className="text-center flex flex-col items-center gap-5">
+            /* Front — Kanji + Hán tự (Huge Size) */
+            <div className="text-center flex flex-col items-center gap-6 my-auto">
               {/* Kanji lớn */}
               <div
-                className="font-jp-serif font-semibold tracking-tight"
+                className="font-jp-serif font-bold tracking-tight"
                 style={{
-                  fontSize: 'clamp(5rem, 15vw, 9rem)',
+                  fontSize: 'clamp(6rem, 18vw, 11rem)',
                   lineHeight: 1,
                   color: 'var(--color-text)',
                   textShadow: '0 2px 24px rgba(0,0,0,0.08)',
@@ -560,9 +620,9 @@ function KanjiFlashcardSession({
               </div>
               {/* Hán tự */}
               <div
-                className="uppercase tracking-[0.25em] font-semibold"
+                className="uppercase tracking-[0.25em] font-extrabold"
                 style={{
-                  fontSize: 'clamp(1.1rem, 3vw, 1.6rem)',
+                  fontSize: 'clamp(1.4rem, 4vw, 2.2rem)',
                   color: '#C9A84C',
                   letterSpacing: '0.3em',
                   textShadow: '0 1px 8px rgba(201,168,76,0.18)',
@@ -572,31 +632,30 @@ function KanjiFlashcardSession({
               </div>
             </div>
           ) : (
-            /* Back — Từ ghép + Phiên âm + Nghĩa (No kanji duplication) */
-            <div className="text-center flex flex-col items-center gap-5 w-full max-w-md my-auto">
+            /* Back — Từ ghép + Phiên âm + Nghĩa (Scaled up) */
+            <div className="text-center flex flex-col items-center justify-center gap-6 w-full max-w-xl my-auto">
               {current.vocabulary && current.vocabulary.length > 0 ? (
-                <div className="flex flex-col items-center gap-4 w-full">
+                <div className="flex flex-col items-center gap-5 w-full">
                   {current.vocabulary.slice(0, 3).map((v, i) => (
                     <div
                       key={i}
-                      className="flex flex-col items-center gap-1"
+                      className="flex flex-col items-center gap-1.5"
                     >
-                      <div className="flex items-baseline gap-3 justify-center">
+                      <div className="flex items-baseline gap-4 justify-center">
                         <span
-                          className="font-jp-serif font-medium"
+                          className="font-jp-serif font-bold"
                           style={{
-                            fontSize: 'clamp(1.25rem, 3.5vw, 1.75rem)',
+                            fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
                             color: 'var(--color-text)',
                           }}
                         >
                           {v.word}
                         </span>
                         <span
-                          className="font-jp"
+                          className="font-jp font-bold"
                           style={{
-                            fontSize: 'clamp(0.95rem, 2.5vw, 1.2rem)',
+                            fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)',
                             color: '#C9A84C',
-                            fontWeight: 500,
                           }}
                         >
                           【{v.reading}】
@@ -604,8 +663,9 @@ function KanjiFlashcardSession({
                       </div>
                       {v.meaning && (
                         <div
+                          className="font-semibold"
                           style={{
-                            fontSize: 'clamp(0.8rem, 2vw, 0.95rem)',
+                            fontSize: 'clamp(1rem, 2.2vw, 1.3rem)',
                             color: 'var(--color-text-secondary)',
                           }}
                         >
@@ -617,8 +677,8 @@ function KanjiFlashcardSession({
                 </div>
               ) : (
                 <div
-                  className="uppercase tracking-[0.25em] font-semibold"
-                  style={{ fontSize: '1.4rem', color: '#C9A84C', letterSpacing: '0.3em' }}
+                  className="uppercase tracking-[0.25em] font-extrabold"
+                  style={{ fontSize: '2rem', color: '#C9A84C', letterSpacing: '0.3em' }}
                 >
                   {current.hanViet}
                 </div>
@@ -629,12 +689,34 @@ function KanjiFlashcardSession({
       </div>
 
       {/* Footer / Shortcut Badges */}
-      <div className="px-8 py-5 border-t border-[var(--color-border)] flex items-center justify-between text-xs text-[var(--color-text-tertiary)]">
-        <div className="flex items-center gap-6 font-mono">
+      <div className="px-8 py-5 border-t border-[var(--color-border)] flex items-center justify-between text-xs text-[var(--color-text-tertiary)] font-mono">
+        <div className="flex items-center gap-6 hidden md:flex">
           <span>Space / Click = Flip</span>
           <span>← / → = Previous / Next</span>
-          <span>Esc = Exit</span>
+          <span>Esc = Exit Session / Fullscreen</span>
         </div>
+
+        <div className="flex items-center gap-3 mx-auto md:mx-0">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              next();
+            }}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 font-bold hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer text-xs"
+          >
+            <span>✕ Chưa nhớ</span>
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              next();
+            }}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-green-200 dark:border-green-900/50 bg-green-50 dark:bg-green-950/30 text-green-600 dark:text-green-400 font-bold hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer text-xs"
+          >
+            <span>✓ Đã nhớ</span>
+          </button>
+        </div>
+
         <div>
           Kanji Card {index + 1} of {total}
         </div>
