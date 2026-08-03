@@ -10,6 +10,7 @@ export interface VocabItem {
   meaning: string;
   type: 'main' | 'compound';
   relatedWords?: string;
+  lesson?: string;
 }
 
 // --- Kanji ---
@@ -24,6 +25,7 @@ export interface KanjiItem {
   kanji: string;
   hanViet: string;
   vocabulary: KanjiVocab[];
+  lesson?: string;
 }
 
 // --- Grammar ---
@@ -37,6 +39,7 @@ export interface GrammarItem {
   commonMistakes: string;
   comparison: string;
   examples: GrammarExample[];
+  lesson?: string;
 }
 
 export interface GrammarExample {
