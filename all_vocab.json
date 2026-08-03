@@ -1,0 +1,5418 @@
+[
+  {
+    "STT": 0,
+    "Bài": "Bài 1",
+    "Từ vựng": "抱く",
+    "Cách đọc (Phiên âm)": "だく",
+    "Ý nghĩa": "Ôm, bế (cụ thể)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "抱く (いだく): Ấp ủ, ôm ấp (trừu tượng)"
+  },
+  {
+    "STT": 0.5,
+    "Bài": "Bài 1",
+    "Từ vựng": "誘う",
+    "Cách đọc (Phiên âm)": "さそう",
+    "Ý nghĩa": "Mời, rủ rê",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "誘うをうける (さそうをうける): Nhận lời mời, 誘惑 (ゆうわく): Dụ dỗ, cám dỗ"
+  },
+  {
+    "STT": 1,
+    "Bài": "Bài 1",
+    "Từ vựng": "高齢",
+    "Cách đọc (Phiên âm)": "こうれい",
+    "Ý nghĩa": "Già, cao tuổi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "高齢化社会 (こうれいかしゃかい): Xã hội già hóa"
+  },
+  {
+    "STT": 2,
+    "Bài": "Bài 1",
+    "Từ vựng": "目上",
+    "Cách đọc (Phiên âm)": "めうえ",
+    "Ý nghĩa": "Người trên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "目下 (めした): Người dưới"
+  },
+  {
+    "STT": 3,
+    "Bài": "Bài 1",
+    "Từ vựng": "先輩",
+    "Cách đọc (Phiên âm)": "せんぱい",
+    "Ý nghĩa": "Tiền bối",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 4,
+    "Bài": "Bài 1",
+    "Từ vựng": "後輩",
+    "Cách đọc (Phiên âm)": "こうはい",
+    "Ý nghĩa": "Hậu bối",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 5,
+    "Bài": "Bài 1",
+    "Từ vựng": "上司",
+    "Cách đọc (Phiên âm)": "じょうし",
+    "Ý nghĩa": "Sếp, cấp trên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "部下 (ぶか): Cấp dưới"
+  },
+  {
+    "STT": 6,
+    "Bài": "Bài 1",
+    "Từ vựng": "相手",
+    "Cách đọc (Phiên âm)": "あいて",
+    "Ý nghĩa": "Đối phương, đối thủ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "話し相手 (はなしあいて): Người nói chuyện cùng, 相談相手 (そうだんあいて): Người bàn bạc cùng, 結婚相手 (けっこんあいて): Đối tượng kết hôn"
+  },
+  {
+    "STT": 7,
+    "Bài": "Bài 1",
+    "Từ vựng": "友人",
+    "Cách đọc (Phiên âm)": "ゆうじん",
+    "Ý nghĩa": "Bạn bè",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 8,
+    "Bài": "Bài 1",
+    "Từ vựng": "仲",
+    "Cách đọc (Phiên âm)": "なか",
+    "Ý nghĩa": "Mối quan hệ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "仕事仲間 (しごとなかま): Bạn đồng nghiệp, 勉強仲間 (べんきょうなかま): Bạn học, 飲み仲間 (のみなかま): Bạn nhậu"
+  },
+  {
+    "STT": 9,
+    "Bài": "Bài 1",
+    "Từ vựng": "生年月日",
+    "Cách đọc (Phiên âm)": "せいねんがっぴ",
+    "Ý nghĩa": "Ngày tháng năm sinh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 10,
+    "Bài": "Bài 1",
+    "Từ vựng": "年",
+    "Cách đọc (Phiên âm)": "とし",
+    "Ý nghĩa": "Năm, tuổi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 11,
+    "Bài": "Bài 1",
+    "Từ vựng": "出身",
+    "Cách đọc (Phiên âm)": "しゅっしん",
+    "Ý nghĩa": "Xuất thân",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 12,
+    "Bài": "Bài 1",
+    "Từ vựng": "故郷",
+    "Cách đọc (Phiên âm)": "こきょう",
+    "Ý nghĩa": "Quê hương",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "故郷 (ふるさと): Quê hương"
+  },
+  {
+    "STT": 13,
+    "Bài": "Bài 1",
+    "Từ vựng": "合格",
+    "Cách đọc (Phiên âm)": "ごうかく",
+    "Ý nghĩa": "Thi đỗ, đỗ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "不合格 (ふごうかく): Không đỗ"
+  },
+  {
+    "STT": 14,
+    "Bài": "Bài 1",
+    "Từ vựng": "進学",
+    "Cách đọc (Phiên âm)": "しんがく",
+    "Ý nghĩa": "Học lên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 15,
+    "Bài": "Bài 1",
+    "Từ vựng": "就職",
+    "Cách đọc (Phiên âm)": "しゅうしょく",
+    "Ý nghĩa": "Xin việc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "就職活動 (しゅうしょくかつどう): Hoạt động tìm việc"
+  },
+  {
+    "STT": 16,
+    "Bài": "Bài 1",
+    "Từ vựng": "退職",
+    "Cách đọc (Phiên âm)": "たいしょく",
+    "Ý nghĩa": "Nghỉ việc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "辞職 (じしょく): Nghỉ việc (người có chức quyền)"
+  },
+  {
+    "STT": 17,
+    "Bài": "Bài 1",
+    "Từ vựng": "失業",
+    "Cách đọc (Phiên âm)": "しつぎょう",
+    "Ý nghĩa": "Thất nghiệp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "失業者 (しつぎょうしゃ): Người thất nghiệp, 就職活動中 (しゅうしょくかつどうちゅう): Đang tìm việc"
+  },
+  {
+    "STT": 18,
+    "Bài": "Bài 1",
+    "Từ vựng": "残業",
+    "Cách đọc (Phiên âm)": "ざんぎょう",
+    "Ý nghĩa": "Làm thêm giờ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 19,
+    "Bài": "Bài 1",
+    "Từ vựng": "生活",
+    "Cách đọc (Phiên âm)": "せいかつ",
+    "Ý nghĩa": "Cuộc sống",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "生活費 (せいかつひ): Phí sinh hoạt"
+  },
+  {
+    "STT": 20,
+    "Bài": "Bài 1",
+    "Từ vựng": "通勤",
+    "Cách đọc (Phiên âm)": "つうきん",
+    "Ý nghĩa": "Đi làm (Di chuyển)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "通勤時間 (つうきんじかん): Thời gian đi làm, 勤務時間 (きんむじかん): Thời gian làm việc, 出勤時間 (しゅっきんじかん): Thời gian xuất phát"
+  },
+  {
+    "STT": 21,
+    "Bài": "Bài 1",
+    "Từ vựng": "学歴",
+    "Cách đọc (Phiên âm)": "がくれき",
+    "Ý nghĩa": "Trình độ học vấn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "高学歴 (こうがくれき): Học vấn cao"
+  },
+  {
+    "STT": 22,
+    "Bài": "Bài 1",
+    "Từ vựng": "給料",
+    "Cách đọc (Phiên âm)": "きゅうりょう",
+    "Ý nghĩa": "Lương",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "給料日 (きゅうりょうび): Ngày nhận lương"
+  },
+  {
+    "STT": 23,
+    "Bài": "Bài 1",
+    "Từ vựng": "面接",
+    "Cách đọc (Phiên âm)": "めんせつ",
+    "Ý nghĩa": "Phỏng vấn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "面接試験 (めんせつしけん): Kỳ thi phỏng vấn"
+  },
+  {
+    "STT": 24,
+    "Bài": "Bài 1",
+    "Từ vựng": "休憩",
+    "Cách đọc (Phiên âm)": "きゅうけい",
+    "Ý nghĩa": "Nghỉ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "休憩室 (きゅうけいしつ): Phòng nghỉ"
+  },
+  {
+    "STT": 25,
+    "Bài": "Bài 1",
+    "Từ vựng": "観光",
+    "Cách đọc (Phiên âm)": "かんこう",
+    "Ý nghĩa": "Du lịch, tham quan",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 26,
+    "Bài": "Bài 1",
+    "Từ vựng": "帰国",
+    "Cách đọc (Phiên âm)": "きこく",
+    "Ý nghĩa": "Về nước",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 27,
+    "Bài": "Bài 1",
+    "Từ vựng": "帰省",
+    "Cách đọc (Phiên âm)": "きせい",
+    "Ý nghĩa": "Về quê",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 28,
+    "Bài": "Bài 1",
+    "Từ vựng": "帰宅",
+    "Cách đọc (Phiên âm)": "きたく",
+    "Ý nghĩa": "Về nhà",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 29,
+    "Bài": "Bài 1",
+    "Từ vựng": "参加",
+    "Cách đọc (Phiên âm)": "さんか",
+    "Ý nghĩa": "Tham gia",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "参加者 (さんかしゃ): Người tham gia"
+  },
+  {
+    "STT": 30,
+    "Bài": "Bài 1",
+    "Từ vựng": "出席",
+    "Cách đọc (Phiên âm)": "しゅっせき",
+    "Ý nghĩa": "Có mặt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 31,
+    "Bài": "Bài 1",
+    "Từ vựng": "欠席",
+    "Cách đọc (Phiên âm)": "けっせき",
+    "Ý nghĩa": "Vắng mặt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "退職届け (たいしょくとどけ): Đơn xin nghỉ việc, 欠席届け (けっせきとどけ): Đơn xin vắng mặt"
+  },
+  {
+    "STT": 32,
+    "Bài": "Bài 1",
+    "Từ vựng": "遅刻",
+    "Cách đọc (Phiên âm)": "ちこく",
+    "Ý nghĩa": "Đến muộn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 33,
+    "Bài": "Bài 1",
+    "Từ vựng": "化粧",
+    "Cách đọc (Phiên âm)": "けしょう",
+    "Ý nghĩa": "Trang điểm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "メイク (めいく): Trang điểm, 化粧品 (けしょうひん): Mỹ phẩm"
+  },
+  {
+    "STT": 34,
+    "Bài": "Bài 1",
+    "Từ vựng": "計算",
+    "Cách đọc (Phiên âm)": "けいさん",
+    "Ý nghĩa": "Tính toán",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 35,
+    "Bài": "Bài 1",
+    "Từ vựng": "計画",
+    "Cách đọc (Phiên âm)": "けいかく",
+    "Ý nghĩa": "Lên kế hoạch",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "プラン (ぷらん): Kế hoạch"
+  },
+  {
+    "STT": 36,
+    "Bài": "Bài 1",
+    "Từ vựng": "成功",
+    "Cách đọc (Phiên âm)": "せいこう",
+    "Ý nghĩa": "Thành công",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "失敗は成功の元 (しっぱいわせいこうのもと): Thất bại là mẹ thành công"
+  },
+  {
+    "STT": 37,
+    "Bài": "Bài 1",
+    "Từ vựng": "失敗",
+    "Cách đọc (Phiên âm)": "しっぱい",
+    "Ý nghĩa": "Thất bại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 38,
+    "Bài": "Bài 1",
+    "Từ vựng": "準備",
+    "Cách đọc (Phiên âm)": "じゅんび",
+    "Ý nghĩa": "Chuẩn bị",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "用意 (ようい): Chuẩn bị (đồ vật)"
+  },
+  {
+    "STT": 39,
+    "Bài": "Bài 1",
+    "Từ vựng": "整理",
+    "Cách đọc (Phiên âm)": "せいり",
+    "Ý nghĩa": "Sắp xếp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 40,
+    "Bài": "Bài 1",
+    "Từ vựng": "注文",
+    "Cách đọc (Phiên âm)": "ちゅうもん",
+    "Ý nghĩa": "Đặt hàng, Gọi món",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "注文の品 (ちゅうもんのしな): Hàng đặt"
+  },
+  {
+    "STT": 41,
+    "Bài": "Bài 1",
+    "Từ vựng": "貯金",
+    "Cách đọc (Phiên âm)": "ちょきん",
+    "Ý nghĩa": "Tích tiền",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "貯金を引き出す (ちょきんをひきだす): Rút tiền tiết kiệm, 貯金を下ろす (ちょきんをおろす): Rút tiền tiết kiệm"
+  },
+  {
+    "STT": 42,
+    "Bài": "Bài 1",
+    "Từ vựng": "徹夜",
+    "Cách đọc (Phiên âm)": "てつや",
+    "Ý nghĩa": "Thức đêm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 43,
+    "Bài": "Bài 1",
+    "Từ vựng": "引越し",
+    "Cách đọc (Phiên âm)": "ひっこし",
+    "Ý nghĩa": "Chuyển nhà",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 44,
+    "Bài": "Bài 1",
+    "Từ vựng": "身長",
+    "Cách đọc (Phiên âm)": "しんちょう",
+    "Ý nghĩa": "Chiều cao",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "身長が伸びる (しんちょうがのびる): Chiều cao tăng lên"
+  },
+  {
+    "STT": 45,
+    "Bài": "Bài 1",
+    "Từ vựng": "体重",
+    "Cách đọc (Phiên âm)": "たいじゅう",
+    "Ý nghĩa": "Cân nặng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "体重が増える (たいじゅうがふえる): Tăng cân, 体重が減る (たいじゅうがへる): Giảm cân"
+  },
+  {
+    "STT": 46,
+    "Bài": "Bài 1",
+    "Từ vựng": "〜会",
+    "Cách đọc (Phiên âm)": "かい",
+    "Ý nghĩa": "Tiệc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "忘年会 (ぼうねんかい): Tiệc tất niên"
+  },
+  {
+    "STT": 47,
+    "Bài": "Bài 1",
+    "Từ vựng": "趣味",
+    "Cách đọc (Phiên âm)": "しゅみ",
+    "Ý nghĩa": "Sở thích",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "趣味がいい (しゅみがいい): Sở thích tốt (gu tốt), 趣味が悪い (しゅみがわるい): Sở thích xấu"
+  },
+  {
+    "STT": 48,
+    "Bài": "Bài 1",
+    "Từ vựng": "興味",
+    "Cách đọc (Phiên âm)": "きょうみ",
+    "Ý nghĩa": "Quan tâm, hứng thú",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "興味深い (きょうみぶかい): Rất hứng thú"
+  },
+  {
+    "STT": 49,
+    "Bài": "Bài 1",
+    "Từ vựng": "思い出",
+    "Cách đọc (Phiên âm)": "おもいで",
+    "Ý nghĩa": "Kỷ niệm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "思い出してうれしい (おもいだしてうれしい): Vui khi nhớ lại"
+  },
+  {
+    "STT": 50,
+    "Bài": "Bài 1",
+    "Từ vựng": "冗談",
+    "Cách đọc (Phiên âm)": "じょうだん",
+    "Ý nghĩa": "Nói đùa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 51,
+    "Bài": "Bài 1",
+    "Từ vựng": "目的",
+    "Cách đọc (Phiên âm)": "もくてき",
+    "Ý nghĩa": "Mục đích",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "目的地 (もくてきち): Đích đến"
+  },
+  {
+    "STT": 52,
+    "Bài": "Bài 1",
+    "Từ vựng": "約束",
+    "Cách đọc (Phiên âm)": "やくそく",
+    "Ý nghĩa": "Lời hứa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "約束を守る (やくそくをまもる): Giữ lời hứa, 約束を破る (やくそくをやぶる): Phá vỡ lời hứa"
+  },
+  {
+    "STT": 53,
+    "Bài": "Bài 1",
+    "Từ vựng": "遠慮",
+    "Cách đọc (Phiên âm)": "えんりょ",
+    "Ý nghĩa": "Ngại, kiềm chế, dè chừng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 54,
+    "Bài": "Bài 1",
+    "Từ vựng": "我慢",
+    "Cách đọc (Phiên âm)": "がまん",
+    "Ý nghĩa": "Chịu đựng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "我慢強い人 (がまんづよいひと): Người giỏi chịu đựng"
+  },
+  {
+    "STT": 55,
+    "Bài": "Bài 1",
+    "Từ vựng": "迷惑",
+    "Cách đọc (Phiên âm)": "めいわく",
+    "Ý nghĩa": "Phiền toái",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "近所迷惑 (きんじょめいわく): Làm phiền hàng xóm"
+  },
+  {
+    "STT": 56,
+    "Bài": "Bài 1",
+    "Từ vựng": "希望",
+    "Cách đọc (Phiên âm)": "きぼう",
+    "Ý nghĩa": "Hy vọng, Mong muốn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "望み (のぞみ): Mong muốn, 夢 (ゆめ): Giấc mơ"
+  },
+  {
+    "STT": 57,
+    "Bài": "Bài 1",
+    "Từ vựng": "夢",
+    "Cách đọc (Phiên âm)": "ゆめ",
+    "Ý nghĩa": "Giấc mơ, Ước mơ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "夢を持つ (ゆめをもつ): Có ước mơ, 夢を叶える (ゆめをかなえる): Thực hiện ước mơ"
+  },
+  {
+    "STT": 58,
+    "Bài": "Bài 1",
+    "Từ vựng": "賛成",
+    "Cách đọc (Phiên âm)": "さんせい",
+    "Ý nghĩa": "Tán thành",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "賛成側 (さんせいがわ): Phe tán thành"
+  },
+  {
+    "STT": 59,
+    "Bài": "Bài 1",
+    "Từ vựng": "反対",
+    "Cách đọc (Phiên âm)": "はんたい",
+    "Ý nghĩa": "Phản đối",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "反対側 (はんたいがわ): Phe phản đối"
+  },
+  {
+    "STT": 60,
+    "Bài": "Bài 1",
+    "Từ vựng": "想像",
+    "Cách đọc (Phiên âm)": "そうぞう",
+    "Ý nghĩa": "Tưởng tượng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "想像力 (そうぞうりょく): Trí tưởng tượng, 想像がつく (そうぞうがつく): Có thể tưởng tượng được"
+  },
+  {
+    "STT": 61,
+    "Bài": "Bài 1",
+    "Từ vựng": "努力",
+    "Cách đọc (Phiên âm)": "どりょく",
+    "Ý nghĩa": "Nỗ lực, cố gắng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "努力家 (どりょくか): Người nỗ lực, 努力を重ねる (どりょくをかさねる): Tích lũy nỗ lực"
+  },
+  {
+    "STT": 62,
+    "Bài": "Bài 1",
+    "Từ vựng": "太陽",
+    "Cách đọc (Phiên âm)": "たいよう",
+    "Ý nghĩa": "Mặt trời",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "太陽が昇る (たいようがのぼる): Mặt trời mọc, 太陽が沈む (たいようがしずむ): Mặt trời lặn"
+  },
+  {
+    "STT": 63,
+    "Bài": "Bài 1",
+    "Từ vựng": "地球",
+    "Cách đọc (Phiên âm)": "ちきゅう",
+    "Ý nghĩa": "Trái đất",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "地球温暖化 (ちきゅうおんだんか): Hiện tượng nóng lên toàn cầu"
+  },
+  {
+    "STT": 64,
+    "Bài": "Bài 1",
+    "Từ vựng": "温度",
+    "Cách đọc (Phiên âm)": "おんど",
+    "Ý nghĩa": "Nhiệt độ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "温度が上がる (おんどがあがる): Nhiệt độ tăng, 温度が下がる (おんどがさがる): Nhiệt độ giảm"
+  },
+  {
+    "STT": 65,
+    "Bài": "Bài 1",
+    "Từ vựng": "湿度",
+    "Cách đọc (Phiên âm)": "しつど",
+    "Ý nghĩa": "Độ ẩm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "湿気が多い (しっけがおおい): Độ ẩm cao (nhiều hơi ẩm)"
+  },
+  {
+    "STT": 66,
+    "Bài": "Bài 1",
+    "Từ vựng": "湿気",
+    "Cách đọc (Phiên âm)": "しっけ",
+    "Ý nghĩa": "Hơi ẩm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "湿気が少ない (しっけがすくない): Ít hơi ẩm"
+  },
+  {
+    "STT": 67,
+    "Bài": "Bài 1",
+    "Từ vựng": "梅雨",
+    "Cách đọc (Phiên âm)": "つゆ",
+    "Ý nghĩa": "Mùa mưa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "梅雨に入る (つゆにはいる): Vào mùa mưa, 梅雨が明ける (つゆがあける): Hết mùa mưa"
+  },
+  {
+    "STT": 68,
+    "Bài": "Bài 1",
+    "Từ vựng": "かび",
+    "Cách đọc (Phiên âm)": "かび",
+    "Ý nghĩa": "Nấm mốc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 69,
+    "Bài": "Bài 1",
+    "Từ vựng": "暖房",
+    "Cách đọc (Phiên âm)": "だんぼう",
+    "Ý nghĩa": "Máy sưởi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "冷房 (れいぼう): Máy lạnh, クーラー (くーらー): Máy điều hòa"
+  },
+  {
+    "STT": 70,
+    "Bài": "Bài 1",
+    "Từ vựng": "皮",
+    "Cách đọc (Phiên âm)": "かわ",
+    "Ý nghĩa": "Vỏ, da",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 71,
+    "Bài": "Bài 1",
+    "Từ vựng": "缶",
+    "Cách đọc (Phiên âm)": "かん",
+    "Ý nghĩa": "Lon, hộp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "缶詰 (かんづめ): Đồ hộp"
+  },
+  {
+    "STT": 72,
+    "Bài": "Bài 1",
+    "Từ vựng": "記事",
+    "Cách đọc (Phiên âm)": "きじ",
+    "Ý nghĩa": "Bài báo",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "新聞記事 (しんぶんきじ): Bài báo (trên báo giấy)"
+  },
+  {
+    "STT": 73,
+    "Bài": "Bài 1",
+    "Từ vựng": "近所",
+    "Cách đọc (Phiên âm)": "きんじょ",
+    "Ý nghĩa": "Hàng xóm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "付近 (ふきん): Khu vực lân cận, 近く (ちかく): Gần"
+  },
+  {
+    "STT": 74,
+    "Bài": "Bài 1",
+    "Từ vựng": "犯人",
+    "Cách đọc (Phiên âm)": "はんにん",
+    "Ý nghĩa": "Hung thủ, tội phạm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 75,
+    "Bài": "Bài 1",
+    "Từ vựng": "警察",
+    "Cách đọc (Phiên âm)": "けいさつ",
+    "Ý nghĩa": "Cảnh sát",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "警察官 (けいさつかん): Sĩ quan cảnh sát, 警察署 (けいさつしょ): Đồn cảnh sát, 交番 (こうばん): Bốt cảnh sát"
+  },
+  {
+    "STT": 76,
+    "Bài": "Bài 1",
+    "Từ vựng": "作品",
+    "Cách đọc (Phiên âm)": "さくひん",
+    "Ý nghĩa": "Tác phẩm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "文学作品 (ぶんがくさくひん): Tác phẩm văn học, 芸術作品 (げいじゅつさくひん): Tác phẩm nghệ thuật"
+  },
+  {
+    "STT": 77,
+    "Bài": "Bài 1",
+    "Từ vựng": "制服",
+    "Cách đọc (Phiên âm)": "せいふく",
+    "Ý nghĩa": "Đồng phục",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ユニフォーム (ゆにふぉーむ): Đồng phục thể thao, 私服 (しふく): Thường phục"
+  },
+  {
+    "STT": 78,
+    "Bài": "Bài 1",
+    "Từ vựng": "洗剤",
+    "Cách đọc (Phiên âm)": "せんざい",
+    "Ý nghĩa": "Chất tẩy rửa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "食器用洗剤 (しょっきようせんざい): Nước rửa bát"
+  },
+  {
+    "STT": 79,
+    "Bài": "Bài 1",
+    "Từ vựng": "底",
+    "Cách đọc (Phiên âm)": "そこ",
+    "Ý nghĩa": "Đế, đáy",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 80,
+    "Bài": "Bài 1",
+    "Từ vựng": "高速道路",
+    "Cách đọc (Phiên âm)": "こうそくどうろ",
+    "Ý nghĩa": "Đường cao tốc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "道路 (どうろ): Đường lớn (cho xe), 道 (みち): Đường (đi bộ được)"
+  },
+  {
+    "STT": 81,
+    "Bài": "Bài 1",
+    "Từ vựng": "坂",
+    "Cách đọc (Phiên âm)": "さか",
+    "Ý nghĩa": "Con dốc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "急な坂 (きゅうなさか): Dốc đứng, 緩やかな坂 (ゆるやかなさか): Dốc thoai thoải"
+  },
+  {
+    "STT": 82,
+    "Bài": "Bài 1",
+    "Từ vựng": "判",
+    "Cách đọc (Phiên âm)": "はん",
+    "Ý nghĩa": "Con dấu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "判子 (はんこ): Con dấu, 印 (しるし): Dấu ấn, 印鑑 (いんかん): Con dấu (đã đăng ký)"
+  },
+  {
+    "STT": 83,
+    "Bài": "Bài 1",
+    "Từ vựng": "名刺",
+    "Cách đọc (Phiên âm)": "めいし",
+    "Ý nghĩa": "Danh thiếp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "名刺を交換する (めいしをこうかんする): Trao đổi danh thiếp, 名刺を配る (めいしをくばる): Phát danh thiếp"
+  },
+  {
+    "STT": 84,
+    "Bài": "Bài 1",
+    "Từ vựng": "免許",
+    "Cách đọc (Phiên âm)": "めんきょ",
+    "Ý nghĩa": "Giấy phép",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "運転免許 (うんてんめんきょ): Bằng lái xe"
+  },
+  {
+    "STT": 85,
+    "Bài": "Bài 1",
+    "Từ vựng": "最初",
+    "Cách đọc (Phiên âm)": "さいしょ",
+    "Ý nghĩa": "Đầu tiên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 86,
+    "Bài": "Bài 1",
+    "Từ vựng": "最後",
+    "Cách đọc (Phiên âm)": "さいご",
+    "Ý nghĩa": "Cuối cùng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 87,
+    "Bài": "Bài 1",
+    "Từ vựng": "自動",
+    "Cách đọc (Phiên âm)": "じどう",
+    "Ý nghĩa": "Tự động",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "自販機 (じはんき): Máy bán hàng tự động, 自動販売機 (じどうはんばいき): Máy bán hàng tự động"
+  },
+  {
+    "STT": 88,
+    "Bài": "Bài 1",
+    "Từ vựng": "種類",
+    "Cách đọc (Phiên âm)": "しゅるい",
+    "Ý nghĩa": "Chủng loại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 89,
+    "Bài": "Bài 1",
+    "Từ vựng": "性格",
+    "Cách đọc (Phiên âm)": "せいかく",
+    "Ý nghĩa": "Tính cách (dùng cho người)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "明るい性格 (あかるいせいかく): Tính cách vui vẻ, まじめな性格 (まじめなせいかく): Tính cách nghiêm túc"
+  },
+  {
+    "STT": 90,
+    "Bài": "Bài 1",
+    "Từ vựng": "性質",
+    "Cách đọc (Phiên âm)": "せいしつ",
+    "Ý nghĩa": "Tính chất (dùng cho vật/người/động vật)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 91,
+    "Bài": "Bài 1",
+    "Từ vựng": "順番",
+    "Cách đọc (Phiên âm)": "じゅんばん",
+    "Ý nghĩa": "Thứ tự",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 92,
+    "Bài": "Bài 1",
+    "Từ vựng": "製品",
+    "Cách đọc (Phiên âm)": "せいひん",
+    "Ý nghĩa": "Sản phẩm, đồ, hàng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "電気製品 (でんきせいひん): Đồ điện, 家電製品 (かでんせいひん): Đồ điện gia dụng, 日本製 (にほんせい): Hàng Nhật"
+  },
+  {
+    "STT": 93,
+    "Bài": "Bài 1",
+    "Từ vựng": "〜番",
+    "Cách đọc (Phiên âm)": "ばん",
+    "Ý nghĩa": "Lượt, giữ chỗ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "留守番 (るすばん): Trông nhà"
+  },
+  {
+    "STT": 94,
+    "Bài": "Bài 1",
+    "Từ vựng": "方法",
+    "Cách đọc (Phiên âm)": "ほうほう",
+    "Ý nghĩa": "Phương pháp, cách",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 95,
+    "Bài": "Bài 1",
+    "Từ vựng": "値上がり",
+    "Cách đọc (Phiên âm)": "ねあがり",
+    "Ý nghĩa": "Sự tăng giá",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "値段が上がる (ねだんがあがる): Giá tăng"
+  },
+  {
+    "STT": 96,
+    "Bài": "Bài 1",
+    "Từ vựng": "生〜",
+    "Cách đọc (Phiên âm)": "なま",
+    "Ý nghĩa": "Tươi sống",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "生野菜 (なまやさい): Rau sống, 生魚 (なまざかな): Cá sống, 生肉 (なまにく): Thịt sống, 生物 (なまもの): Đồ sống, 生ビール (なまびーる): Bia hơi, 生ゴミ (なまごみ): Rác sinh hoạt"
+  },
+  {
+    "STT": 97,
+    "Bài": "Bài 2",
+    "Từ vựng": "かぐ",
+    "Cách đọc (Phiên âm)": "かぐ",
+    "Ý nghĩa": "Ngửi, hít",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 98,
+    "Bài": "Bài 2",
+    "Từ vựng": "叩く",
+    "Cách đọc (Phiên âm)": "たたく",
+    "Ý nghĩa": "Đánh, vỗ, gõ, tét",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "拍手 (はくしゅ): Vỗ tay"
+  },
+  {
+    "STT": 99,
+    "Bài": "Bài 2",
+    "Từ vựng": "殴る",
+    "Cách đọc (Phiên âm)": "なぐる",
+    "Ý nghĩa": "Đánh, đấm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 100,
+    "Bài": "Bài 2",
+    "Từ vựng": "抱く",
+    "Cách đọc (Phiên âm)": "だく",
+    "Ý nghĩa": "Ôm, bế (cụ thể)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "抱く (いだく): Ấp ủ, ôm ấp (trừu tượng)"
+  },
+  {
+    "STT": 101,
+    "Bài": "Bài 2",
+    "Từ vựng": "が倒れる",
+    "Cách đọc (Phiên âm)": "たおれる",
+    "Ý nghĩa": "Đổ, Ngất, bất tỉnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 102,
+    "Bài": "Bài 2",
+    "Từ vựng": "を倒す",
+    "Cách đọc (Phiên âm)": "たおす",
+    "Ý nghĩa": "Làm đổ, Đánh bại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 103,
+    "Bài": "Bài 2",
+    "Từ vựng": "が起きる/起こる",
+    "Cách đọc (Phiên âm)": "おきる/おこる",
+    "Ý nghĩa": "Thức, xảy ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 104,
+    "Bài": "Bài 2",
+    "Từ vựng": "を起こす",
+    "Cách đọc (Phiên âm)": "おこす",
+    "Ý nghĩa": "Đánh thức, dựng lên, gây ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 105,
+    "Bài": "Bài 2",
+    "Từ vựng": "尋ねる",
+    "Cách đọc (Phiên âm)": "たずねる",
+    "Ý nghĩa": "Hỏi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 106,
+    "Bài": "Bài 2",
+    "Từ vựng": "叫ぶ",
+    "Cách đọc (Phiên âm)": "さけぶ",
+    "Ý nghĩa": "Hét lên, gào thét",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "叫び声 (さけびごえ): Tiếng gào thét"
+  },
+  {
+    "STT": 107,
+    "Bài": "Bài 2",
+    "Từ vựng": "黙る",
+    "Cách đọc (Phiên âm)": "だまる",
+    "Ý nghĩa": "Im lặng, lẳng lặng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 108,
+    "Bài": "Bài 2",
+    "Từ vựng": "飼う",
+    "Cách đọc (Phiên âm)": "かう",
+    "Ý nghĩa": "Nuôi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 109,
+    "Bài": "Bài 2",
+    "Từ vựng": "が乾く",
+    "Cách đọc (Phiên âm)": "かわく",
+    "Ý nghĩa": "Khô",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 110,
+    "Bài": "Bài 2",
+    "Từ vựng": "を乾かす",
+    "Cách đọc (Phiên âm)": "かわかす",
+    "Ý nghĩa": "Làm khô",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 111,
+    "Bài": "Bài 2",
+    "Từ vựng": "畳む",
+    "Cách đọc (Phiên âm)": "たたむ",
+    "Ý nghĩa": "Gấp, xếp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "折り畳み傘 (おりたたみがさ): Ô gập"
+  },
+  {
+    "STT": 112,
+    "Bài": "Bài 2",
+    "Từ vựng": "誘う",
+    "Cách đọc (Phiên âm)": "さそう",
+    "Ý nghĩa": "Mời",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "誘いを受ける (さそいうをうける): Nhận lời mời, 断る (ことわる): Từ chối"
+  },
+  {
+    "STT": 113,
+    "Bài": "Bài 2",
+    "Từ vựng": "おごる",
+    "Cách đọc (Phiên âm)": "おごる",
+    "Ý nghĩa": "Đãi, chiêu đãi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "おごり (おごり): Bữa khao"
+  },
+  {
+    "STT": 114,
+    "Bài": "Bài 2",
+    "Từ vựng": "を預かる",
+    "Cách đọc (Phiên âm)": "あずかる",
+    "Ý nghĩa": "Trông, giữ, chăm sóc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 115,
+    "Bài": "Bài 2",
+    "Từ vựng": "を預ける",
+    "Cách đọc (Phiên âm)": "あずける",
+    "Ý nghĩa": "Gửi, nhờ trông",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 116,
+    "Bài": "Bài 2",
+    "Từ vựng": "が決まる",
+    "Cách đọc (Phiên âm)": "きまる",
+    "Ý nghĩa": "Được quyết định, được ấn định",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 117,
+    "Bài": "Bài 2",
+    "Từ vựng": "を決める",
+    "Cách đọc (Phiên âm)": "きめる",
+    "Ý nghĩa": "Quyết định, quy ước, ghi bàn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 118,
+    "Bài": "Bài 2",
+    "Từ vựng": "が写る",
+    "Cách đọc (Phiên âm)": "うつる",
+    "Ý nghĩa": "Được chụp / ghi lại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 119,
+    "Bài": "Bài 2",
+    "Từ vựng": "を写す",
+    "Cách đọc (Phiên âm)": "うつす",
+    "Ý nghĩa": "Chụp, chép",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 120,
+    "Bài": "Bài 2",
+    "Từ vựng": "を思い出す",
+    "Cách đọc (Phiên âm)": "おもいだす",
+    "Ý nghĩa": "Nhớ lại, nhớ ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 121,
+    "Bài": "Bài 2",
+    "Từ vựng": "教わる",
+    "Cách đọc (Phiên âm)": "おそわる",
+    "Ý nghĩa": "Được dạy",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 122,
+    "Bài": "Bài 2",
+    "Từ vựng": "申し込む",
+    "Cách đọc (Phiên âm)": "もうしこむ",
+    "Ý nghĩa": "Đăng ký",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 123,
+    "Bài": "Bài 2",
+    "Từ vựng": "断る",
+    "Cách đọc (Phiên âm)": "ことわる",
+    "Ý nghĩa": "Từ chối, xin phép",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 124,
+    "Bài": "Bài 2",
+    "Từ vựng": "捕まる",
+    "Cách đọc (Phiên âm)": "つかまる",
+    "Ý nghĩa": "Bị bắt, bám vào",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 125,
+    "Bài": "Bài 2",
+    "Từ vựng": "捕まえる",
+    "Cách đọc (Phiên âm)": "つかまえる",
+    "Ý nghĩa": "Tóm, bắt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 126,
+    "Bài": "Bài 2",
+    "Từ vựng": "が降りる / 下りる",
+    "Cách đọc (Phiên âm)": "おりる",
+    "Ý nghĩa": "Xuống xe, Xuống cầu thang, Được cho phép",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 127,
+    "Bài": "Bài 2",
+    "Từ vựng": "を降ろす / 下ろす",
+    "Cách đọc (Phiên âm)": "おろす",
+    "Ý nghĩa": "Cho xuống, Hạ xuống, Rút tiền",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 128,
+    "Bài": "Bài 2",
+    "Từ vựng": "が直る",
+    "Cách đọc (Phiên âm)": "なおる",
+    "Ý nghĩa": "Được sửa, cải thiện",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 129,
+    "Bài": "Bài 2",
+    "Từ vựng": "を直す",
+    "Cách đọc (Phiên âm)": "なおす",
+    "Ý nghĩa": "Sửa chữa, chỉnh lại, dịch",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 130,
+    "Bài": "Bài 2",
+    "Từ vựng": "が治る",
+    "Cách đọc (Phiên âm)": "なおる",
+    "Ý nghĩa": "Hồi phục, khỏi (bệnh)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 131,
+    "Bài": "Bài 2",
+    "Từ vựng": "を治す",
+    "Cách đọc (Phiên âm)": "なおす",
+    "Ý nghĩa": "Trị, chữa (bệnh)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "修理 (しゅうり): Sửa chữa (máy móc)"
+  },
+  {
+    "STT": 132,
+    "Bài": "Bài 2",
+    "Từ vựng": "亡くなる",
+    "Cách đọc (Phiên âm)": "なくなる",
+    "Ý nghĩa": "Chết, mất, qua đời",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 133,
+    "Bài": "Bài 2",
+    "Từ vựng": "亡くす",
+    "Cách đọc (Phiên âm)": "なくす",
+    "Ý nghĩa": "Mất (ai đó)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 134,
+    "Bài": "Bài 2",
+    "Từ vựng": "が生まれる",
+    "Cách đọc (Phiên âm)": "うまれる",
+    "Ý nghĩa": "Được sinh ra, tạo ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "誕生 (たんじょう): Sự ra đời (Từ cứng hơn)"
+  },
+  {
+    "STT": 135,
+    "Bài": "Bài 2",
+    "Từ vựng": "産む / 生む",
+    "Cách đọc (Phiên âm)": "うむ",
+    "Ý nghĩa": "Sinh, Đẻ ra, Tạo ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "出産 (しゅっさん): Sinh đẻ (Từ cứng hơn)"
+  },
+  {
+    "STT": 136,
+    "Bài": "Bài 2",
+    "Từ vựng": "が出会う",
+    "Cách đọc (Phiên âm)": "であう",
+    "Ý nghĩa": "Gặp gỡ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 137,
+    "Bài": "Bài 2",
+    "Từ vựng": "を訪ねる",
+    "Cách đọc (Phiên âm)": "たずねる",
+    "Ý nghĩa": "Ghé thăm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 138,
+    "Bài": "Bài 2",
+    "Từ vựng": "付き合う",
+    "Cách đọc (Phiên âm)": "つきあう",
+    "Ý nghĩa": "Giao du, cùng làm, hẹn hò",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 139,
+    "Bài": "Bài 2",
+    "Từ vựng": "効く",
+    "Cách đọc (Phiên âm)": "きく",
+    "Ý nghĩa": "Có hiệu quả, hoạt động",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 140,
+    "Bài": "Bài 2",
+    "Từ vựng": "はやる",
+    "Cách đọc (Phiên âm)": "はやる",
+    "Ý nghĩa": "Lây, Bùng phát, Thịnh hành",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "流行する (りゅうこうする): Lưu hành, thịnh hành"
+  },
+  {
+    "STT": 141,
+    "Bài": "Bài 2",
+    "Từ vựng": "経つ",
+    "Cách đọc (Phiên âm)": "たつ",
+    "Ý nghĩa": "Trôi qua (thời gian)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 142,
+    "Bài": "Bài 2",
+    "Từ vựng": "間に合う",
+    "Cách đọc (Phiên âm)": "まにあう",
+    "Ý nghĩa": "Kịp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 143,
+    "Bài": "Bài 2",
+    "Từ vựng": "間に合わせる",
+    "Cách đọc (Phiên âm)": "まにあわせる",
+    "Ý nghĩa": "Làm cho kịp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 144,
+    "Bài": "Bài 2",
+    "Từ vựng": "通う",
+    "Cách đọc (Phiên âm)": "かよう",
+    "Ý nghĩa": "Đi lại thường xuyên, Hiểu (cảm giác)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "通学 (つうがく): Đi học, 通勤 (つうきん): Đi làm, 通院 (つういん): Đi viện"
+  },
+  {
+    "STT": 145,
+    "Bài": "Bài 2",
+    "Từ vựng": "が掛かる",
+    "Cách đọc (Phiên âm)": "かかる",
+    "Ý nghĩa": "Phủ, Bọc, Tốn (tiền/thời gian), Mắc bệnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 146,
+    "Bài": "Bài 2",
+    "Từ vựng": "を掛ける",
+    "Cách đọc (Phiên âm)": "かける",
+    "Ý nghĩa": "Rưới, Bọc, Tốn, Làm cho, Nhân (phép tính)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 147,
+    "Bài": "Bài 2",
+    "Từ vựng": "動かす",
+    "Cách đọc (Phiên âm)": "うごかす",
+    "Ý nghĩa": "Cử động, Lay động, Thay đổi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 148,
+    "Bài": "Bài 2",
+    "Từ vựng": "離れる",
+    "Cách đọc (Phiên âm)": "はなれる",
+    "Ý nghĩa": "Xa, rời xa, Cách",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 149,
+    "Bài": "Bài 2",
+    "Từ vựng": "離す",
+    "Cách đọc (Phiên âm)": "はなす",
+    "Ý nghĩa": "Tách ra, Tách xa, Buông",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 150,
+    "Bài": "Bài 2",
+    "Từ vựng": "ぶつかる",
+    "Cách đọc (Phiên âm)": "ぶつかる",
+    "Ý nghĩa": "Đâm, va chạm, Bất đồng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "衝突する (しょうとつする): Xung đột, đâm nhau"
+  },
+  {
+    "STT": 151,
+    "Bài": "Bài 2",
+    "Từ vựng": "ぶつける",
+    "Cách đọc (Phiên âm)": "ぶつける",
+    "Ý nghĩa": "Đâm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 152,
+    "Bài": "Bài 2",
+    "Từ vựng": "こぼれる",
+    "Cách đọc (Phiên âm)": "こぼれる",
+    "Ý nghĩa": "Chảy ra, đổ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 153,
+    "Bài": "Bài 2",
+    "Từ vựng": "こぼす",
+    "Cách đọc (Phiên âm)": "こぼす",
+    "Ý nghĩa": "Làm đổ, vãi ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 154,
+    "Bài": "Bài 2",
+    "Từ vựng": "ふく",
+    "Cách đọc (Phiên âm)": "ふく",
+    "Ý nghĩa": "Lau",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ふき取る (ふきとる): Lau sạch"
+  },
+  {
+    "STT": 155,
+    "Bài": "Bài 2",
+    "Từ vựng": "片付く",
+    "Cách đọc (Phiên âm)": "かたづく",
+    "Ý nghĩa": "Được dọn dẹp, Giải quyết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 156,
+    "Bài": "Bài 2",
+    "Từ vựng": "片付ける",
+    "Cách đọc (Phiên âm)": "かたづける",
+    "Ý nghĩa": "Dọn dẹp, Sắp xếp, Giải quyết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 157,
+    "Bài": "Bài 2",
+    "Từ vựng": "包む",
+    "Cách đọc (Phiên âm)": "つつむ",
+    "Ý nghĩa": "Gói, bọc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 158,
+    "Bài": "Bài 2",
+    "Từ vựng": "張る",
+    "Cách đọc (Phiên âm)": "はる",
+    "Ý nghĩa": "Dán",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "剥がす (はがす): Bóc, gỡ"
+  },
+  {
+    "STT": 159,
+    "Bài": "Bài 2",
+    "Từ vựng": "足りる",
+    "Cách đọc (Phiên âm)": "たりる",
+    "Ý nghĩa": "Đủ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 160,
+    "Bài": "Bài 2",
+    "Từ vựng": "残る",
+    "Cách đọc (Phiên âm)": "のこる",
+    "Ý nghĩa": "Thừa, còn lại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 161,
+    "Bài": "Bài 2",
+    "Từ vựng": "残す",
+    "Cách đọc (Phiên âm)": "のこす",
+    "Ý nghĩa": "Để thừa lại, Còn lại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 162,
+    "Bài": "Bài 2",
+    "Từ vựng": "腐る",
+    "Cách đọc (Phiên âm)": "くさる",
+    "Ý nghĩa": "Thiu, hỏng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 163,
+    "Bài": "Bài 2",
+    "Từ vựng": "むける",
+    "Cách đọc (Phiên âm)": "むける",
+    "Ý nghĩa": "Bị bong, tróc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 164,
+    "Bài": "Bài 2",
+    "Từ vựng": "むく",
+    "Cách đọc (Phiên âm)": "むく",
+    "Ý nghĩa": "Gọt, bóc, lột",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "シールを剥がす (しーるをはがす): Bóc nhãn dán"
+  },
+  {
+    "STT": 165,
+    "Bài": "Bài 2",
+    "Từ vựng": "滑る",
+    "Cách đọc (Phiên âm)": "すべる",
+    "Ý nghĩa": "Trơn trượt, Lướt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 166,
+    "Bài": "Bài 2",
+    "Từ vựng": "積もる",
+    "Cách đọc (Phiên âm)": "つもる",
+    "Ý nghĩa": "Chất đống",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 167,
+    "Bài": "Bài 2",
+    "Từ vựng": "積む",
+    "Cách đọc (Phiên âm)": "つむ",
+    "Ý nghĩa": "Chất lên, Xếp chồng, Tích lũy, Rèn luyện",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "乗せる (のせる): Chở (người/hành lý)"
+  },
+  {
+    "STT": 168,
+    "Bài": "Bài 2",
+    "Từ vựng": "空く",
+    "Cách đọc (Phiên âm)": "あく",
+    "Ý nghĩa": "Thủng, Trống, Rảnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 169,
+    "Bài": "Bài 2",
+    "Từ vựng": "空ける",
+    "Cách đọc (Phiên âm)": "あける",
+    "Ý nghĩa": "Đâm thủng, Để trống",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ふさぐ (ふさぐ): Bịt lại"
+  },
+  {
+    "STT": 170,
+    "Bài": "Bài 2",
+    "Từ vựng": "下がる",
+    "Cách đọc (Phiên âm)": "さがる",
+    "Ý nghĩa": "Giảm, lùi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 171,
+    "Bài": "Bài 2",
+    "Từ vựng": "下げる",
+    "Cách đọc (Phiên âm)": "さげる",
+    "Ý nghĩa": "Thu dọn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 172,
+    "Bài": "Bài 2",
+    "Từ vựng": "冷える",
+    "Cách đọc (Phiên âm)": "ひえる",
+    "Ý nghĩa": "Lạnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "あたたまる (あたたまる): Ấm lên"
+  },
+  {
+    "STT": 173,
+    "Bài": "Bài 2",
+    "Từ vựng": "冷やす",
+    "Cách đọc (Phiên âm)": "ひやす",
+    "Ý nghĩa": "Làm lạnh, Để lạnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "頭を冷やす (あたまをひやす): Giữ cái đầu lạnh (bình tĩnh)"
+  },
+  {
+    "STT": 174,
+    "Bài": "Bài 2",
+    "Từ vựng": "冷める",
+    "Cách đọc (Phiên âm)": "さめる",
+    "Ý nghĩa": "Nguội, Nguôi đi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 175,
+    "Bài": "Bài 2",
+    "Từ vựng": "冷ます",
+    "Cách đọc (Phiên âm)": "さます",
+    "Ý nghĩa": "Làm nguội, Để nguội",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 176,
+    "Bài": "Bài 2",
+    "Từ vựng": "燃える",
+    "Cách đọc (Phiên âm)": "もえる",
+    "Ý nghĩa": "Cháy, Nung nấu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 177,
+    "Bài": "Bài 2",
+    "Từ vựng": "燃やす",
+    "Cách đọc (Phiên âm)": "もやす",
+    "Ý nghĩa": "Đốt, Quyết tâm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 178,
+    "Bài": "Bài 2",
+    "Từ vựng": "沸く",
+    "Cách đọc (Phiên âm)": "わく",
+    "Ý nghĩa": "Sôi, Sôi sục",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 179,
+    "Bài": "Bài 2",
+    "Từ vựng": "鳴る",
+    "Cách đọc (Phiên âm)": "なる",
+    "Ý nghĩa": "Kêu, Đánh (sấm)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 180,
+    "Bài": "Bài 2",
+    "Từ vựng": "飾り",
+    "Cách đọc (Phiên âm)": "かざり",
+    "Ý nghĩa": "Đồ trang trí",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "飾る (かざる): Trang trí"
+  },
+  {
+    "STT": 181,
+    "Bài": "Bài 2",
+    "Từ vựng": "考え",
+    "Cách đọc (Phiên âm)": "かんがえ",
+    "Ý nghĩa": "Suy nghĩ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "考える (かんがえる): Suy nghĩ"
+  },
+  {
+    "STT": 182,
+    "Bài": "Bài 2",
+    "Từ vựng": "片付け",
+    "Cách đọc (Phiên âm)": "かたづけ",
+    "Ý nghĩa": "Dọn dẹp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "片付ける (かたづける): Dọn dẹp"
+  },
+  {
+    "STT": 183,
+    "Bài": "Bài 2",
+    "Từ vựng": "働き",
+    "Cách đọc (Phiên âm)": "はたらき",
+    "Ý nghĩa": "Chức năng, Vai trò, Ảnh hưởng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "働く (はたらく): Hoạt động, làm việc"
+  },
+  {
+    "STT": 184,
+    "Bài": "Bài 2",
+    "Từ vựng": "決まり",
+    "Cách đọc (Phiên âm)": "きまり",
+    "Ý nghĩa": "Quy định",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "決まる (きまる): Được quyết định"
+  },
+  {
+    "STT": 185,
+    "Bài": "Bài 2",
+    "Từ vựng": "知らせ",
+    "Cách đọc (Phiên âm)": "しらせ",
+    "Ý nghĩa": "Thông báo, báo hiệu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "知らせる (しらせる): Thông báo"
+  },
+  {
+    "STT": 186,
+    "Bài": "Bài 2",
+    "Từ vựng": "疲れ",
+    "Cách đọc (Phiên âm)": "つかれ",
+    "Ý nghĩa": "Mệt mỏi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "疲れる (つかれる): Mệt mỏi"
+  },
+  {
+    "STT": 187,
+    "Bài": "Bài 2",
+    "Từ vựng": "続き",
+    "Cách đọc (Phiên âm)": "つづき",
+    "Ý nghĩa": "Phần kế tiếp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "続く (つづく): Tiếp tục"
+  },
+  {
+    "STT": 188,
+    "Bài": "Bài 2",
+    "Từ vựng": "暮れ",
+    "Cách đọc (Phiên âm)": "くれ",
+    "Ý nghĩa": "Cuối (năm, ngày)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "暮れる (くれる): Lặn, hết (ngày/năm)"
+  },
+  {
+    "STT": 189,
+    "Bài": "Bài 2",
+    "Từ vựng": "遅れ",
+    "Cách đọc (Phiên âm)": "おくれ",
+    "Ý nghĩa": "Muộn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "流行遅れ (りゅうこうおくれ): Lỗi thời, 遅れる (おくれる): Muộn"
+  },
+  {
+    "STT": 190,
+    "Bài": "Bài 2",
+    "Từ vựng": "終わり",
+    "Cách đọc (Phiên âm)": "おわり",
+    "Ý nghĩa": "Kết thúc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "終わる (おわる): Kết thúc"
+  },
+  {
+    "STT": 191,
+    "Bài": "Bài 2",
+    "Từ vựng": "楽しみ",
+    "Cách đọc (Phiên âm)": "たのしみ",
+    "Ý nghĩa": "Thưởng thức, hài lòng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "楽しみにする (たのしみにする): Mong đợi, 楽しむ (たのしむ): Thưởng thức"
+  },
+  {
+    "STT": 192,
+    "Bài": "Bài 2",
+    "Từ vựng": "驚き",
+    "Cách đọc (Phiên âm)": "おどろき",
+    "Ý nghĩa": "Ngạc nhiên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "驚く (おどろく): Ngạc nhiên"
+  },
+  {
+    "STT": 193,
+    "Bài": "Bài 3",
+    "Từ vựng": "得意な",
+    "Cách đọc (Phiên âm)": "とくいな",
+    "Ý nghĩa": "Giỏi, tự hào",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 194,
+    "Bài": "Bài 3",
+    "Từ vựng": "苦手な",
+    "Cách đọc (Phiên âm)": "にがてな",
+    "Ý nghĩa": "Kém, sợ, không ưa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "得意な (とくいな): Giỏi, tự hào"
+  },
+  {
+    "STT": 195,
+    "Bài": "Bài 3",
+    "Từ vựng": "熱心な",
+    "Cách đọc (Phiên âm)": "ねっしんな",
+    "Ý nghĩa": "Nhiệt tình, tâm huyết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 196,
+    "Bài": "Bài 3",
+    "Từ vựng": "退屈な",
+    "Cách đọc (Phiên âm)": "たいくつな",
+    "Ý nghĩa": "Nhàm chán",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 197,
+    "Bài": "Bài 3",
+    "Từ vựng": "健康な",
+    "Cách đọc (Phiên âm)": "けんこうな",
+    "Ý nghĩa": "Khỏe mạnh, lành mạnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 198,
+    "Bài": "Bài 3",
+    "Từ vựng": "平気な",
+    "Cách đọc (Phiên âm)": "へいきな",
+    "Ý nghĩa": "Dửng dưng, bình thản",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 199,
+    "Bài": "Bài 3",
+    "Từ vựng": "苦しい",
+    "Cách đọc (Phiên âm)": "くるしい",
+    "Ý nghĩa": "Khó chịu, khó khăn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "寝苦しい (ねぐるしい): Khó ngủ, 息苦しい (いきぐるしい): Khó thở"
+  },
+  {
+    "STT": 200,
+    "Bài": "Bài 3",
+    "Từ vựng": "悔しい",
+    "Cách đọc (Phiên âm)": "くやしい",
+    "Ý nghĩa": "Tiếc, cay cú",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 201,
+    "Bài": "Bài 3",
+    "Từ vựng": "うらやましい",
+    "Cách đọc (Phiên âm)": "うらやましい",
+    "Ý nghĩa": "Ghen tị",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 202,
+    "Bài": "Bài 3",
+    "Từ vựng": "かゆい",
+    "Cách đọc (Phiên âm)": "かゆい",
+    "Ý nghĩa": "Ngứa rát",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 203,
+    "Bài": "Bài 3",
+    "Từ vựng": "おとなしい",
+    "Cách đọc (Phiên âm)": "おとなしい",
+    "Ý nghĩa": "Hiền lành, ngoan, nhã nhặn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 204,
+    "Bài": "Bài 3",
+    "Từ vựng": "正直な",
+    "Cách đọc (Phiên âm)": "しょうじきな",
+    "Ý nghĩa": "Thật thà",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "正直に話す (しょうじきにはなす): Nói thật"
+  },
+  {
+    "STT": 205,
+    "Bài": "Bài 3",
+    "Từ vựng": "けちな",
+    "Cách đọc (Phiên âm)": "けちな",
+    "Ý nghĩa": "Keo kiệt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ケチケチする (けちけちする): Keo kiệt, bủn xỉn"
+  },
+  {
+    "STT": 206,
+    "Bài": "Bài 3",
+    "Từ vựng": "積極的な",
+    "Cách đọc (Phiên âm)": "せっきょくてきな",
+    "Ý nghĩa": "Chủ động, tích cực",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 207,
+    "Bài": "Bài 3",
+    "Từ vựng": "消極的な",
+    "Cách đọc (Phiên âm)": "しょうきょくてきな",
+    "Ý nghĩa": "Tiêu cực",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 208,
+    "Bài": "Bài 3",
+    "Từ vựng": "満足な",
+    "Cách đọc (Phiên âm)": "まんぞくな",
+    "Ý nghĩa": "Thỏa mãn, hài lòng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "不満な (ふまんな): Bất mãn, 不満足な (ふまんぞくな): Không thỏa mãn"
+  },
+  {
+    "STT": 209,
+    "Bài": "Bài 3",
+    "Từ vựng": "不満な",
+    "Cách đọc (Phiên âm)": "ふまんな",
+    "Ý nghĩa": "Bất mãn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "不満がある (ふまんがある): Có sự bất mãn, 不満がない (ふまんがない): Không có sự bất mãn"
+  },
+  {
+    "STT": 210,
+    "Bài": "Bài 3",
+    "Từ vựng": "不安な",
+    "Cách đọc (Phiên âm)": "ふあんな",
+    "Ý nghĩa": "Bất an, lo lắng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "心配 (しんぱい): Lo lắng, 不安がある (ふあんがある): Cảm thấy bất an"
+  },
+  {
+    "STT": 211,
+    "Bài": "Bài 3",
+    "Từ vựng": "大変な",
+    "Cách đọc (Phiên âm)": "たいへんな",
+    "Ý nghĩa": "Vất vả, kinh khủng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "大変な目にあう (たいへんなめにあう): Gặp chuyện kinh khủng/tồi tệ"
+  },
+  {
+    "STT": 212,
+    "Bài": "Bài 3",
+    "Từ vựng": "不注意な",
+    "Cách đọc (Phiên âm)": "ふちゅういな",
+    "Ý nghĩa": "Bất cẩn, sơ ý, vô ý",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 213,
+    "Bài": "Bài 3",
+    "Từ vựng": "面倒な",
+    "Cách đọc (Phiên âm)": "めんどうな",
+    "Ý nghĩa": "Rắc rối, lười, ngại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "面倒を見る (めんどうをみる): Chăm sóc"
+  },
+  {
+    "STT": 214,
+    "Bài": "Bài 3",
+    "Từ vựng": "楽な",
+    "Cách đọc (Phiên âm)": "らくな",
+    "Ý nghĩa": "Thoải mái, dễ dàng, nhàn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "気が楽な (きがらくな): Nhẹ nhõm/Thoải mái, 簡単 (かんたん): Đơn giản/Dễ dàng"
+  },
+  {
+    "STT": 215,
+    "Bài": "Bài 3",
+    "Từ vựng": "失礼な",
+    "Cách đọc (Phiên âm)": "しつれいな",
+    "Ý nghĩa": "Thất lễ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 216,
+    "Bài": "Bài 3",
+    "Từ vựng": "当然だ",
+    "Cách đọc (Phiên âm)": "とうぜんだ",
+    "Ý nghĩa": "Đương nhiên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "あたりまえ (あたりまえ): Đương nhiên/Hiển nhiên"
+  },
+  {
+    "STT": 217,
+    "Bài": "Bài 3",
+    "Từ vựng": "意外な",
+    "Cách đọc (Phiên âm)": "いがいな",
+    "Ý nghĩa": "Không ngờ, không tưởng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 218,
+    "Bài": "Bài 3",
+    "Từ vựng": "結構な",
+    "Cách đọc (Phiên âm)": "けっこうな",
+    "Ý nghĩa": "Được, tốt, đủ rồi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 219,
+    "Bài": "Bài 3",
+    "Từ vựng": "派手な",
+    "Cách đọc (Phiên âm)": "はでな",
+    "Ý nghĩa": "Lòe loẹt, phô trương",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 220,
+    "Bài": "Bài 3",
+    "Từ vựng": "地味な",
+    "Cách đọc (Phiên âm)": "じみな",
+    "Ý nghĩa": "Đơn giản, xuềnh xoàng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 221,
+    "Bài": "Bài 3",
+    "Từ vựng": "おしゃれな",
+    "Cách đọc (Phiên âm)": "おしゃれな",
+    "Ý nghĩa": "Diện, mốt, thời thượng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 222,
+    "Bài": "Bài 3",
+    "Từ vựng": "変な",
+    "Cách đọc (Phiên âm)": "へんな",
+    "Ý nghĩa": "Lạ, kì lạ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "おかしい (おかしい): Lạ/buồn cười"
+  },
+  {
+    "STT": 223,
+    "Bài": "Bài 3",
+    "Từ vựng": "不思議な",
+    "Cách đọc (Phiên âm)": "ふしぎな",
+    "Ý nghĩa": "Kì quái, lạ khác thường",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 224,
+    "Bài": "Bài 3",
+    "Từ vựng": "むだな",
+    "Cách đọc (Phiên âm)": "むだな",
+    "Ý nghĩa": "Vô ích",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "むだづかい (むだづかい): Tiêu xài lãng phí"
+  },
+  {
+    "STT": 225,
+    "Bài": "Bài 3",
+    "Từ vựng": "自由な",
+    "Cách đọc (Phiên âm)": "じゆうな",
+    "Ý nghĩa": "Tự do",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "不自由な (ふじゆうな): Mất tự do/Không thoải mái"
+  },
+  {
+    "STT": 226,
+    "Bài": "Bài 4",
+    "Từ vựng": "世話",
+    "Cách đọc (Phiên âm)": "せわ",
+    "Ý nghĩa": "Chăm sóc, hỗ trợ, giúp đỡ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "面倒を見る (めんどうをみる): Chăm sóc"
+  },
+  {
+    "STT": 227,
+    "Bài": "Bài 4",
+    "Từ vựng": "家庭",
+    "Cách đọc (Phiên âm)": "かてい",
+    "Ý nghĩa": "Gia đình",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "家庭的な (かていてきな): Thuộc về gia đình, 主婦 (しゅふ): Bà nội trợ"
+  },
+  {
+    "STT": 228,
+    "Bài": "Bài 4",
+    "Từ vựng": "協力",
+    "Cách đọc (Phiên âm)": "きょうりょく",
+    "Ý nghĩa": "Chung sức, hợp tác",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "協力を求める (きょうりょくをもとめる): Mong muốn hợp tác"
+  },
+  {
+    "STT": 229,
+    "Bài": "Bài 4",
+    "Từ vựng": "感謝",
+    "Cách đọc (Phiên âm)": "かんしゃ",
+    "Ý nghĩa": "Biết ơn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "深く感謝する (ふかくかんしゃする): Biết ơn sâu sắc"
+  },
+  {
+    "STT": 230,
+    "Bài": "Bài 4",
+    "Từ vựng": "(お)礼",
+    "Cách đọc (Phiên âm)": "おれい",
+    "Ý nghĩa": "Cảm ơn (bằng lời, quà)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 231,
+    "Bài": "Bài 4",
+    "Từ vựng": "(お)詫び",
+    "Cách đọc (Phiên âm)": "おわび",
+    "Ý nghĩa": "Xin lỗi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "謝る (あやまる): Xin lỗi, ごめんなさい (ごめんなさい): Xin lỗi, すみません (すみません): Xin lỗi"
+  },
+  {
+    "STT": 232,
+    "Bài": "Bài 4",
+    "Từ vựng": "お辞儀",
+    "Cách đọc (Phiên âm)": "おじぎ",
+    "Ý nghĩa": "Cúi chào",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "礼儀 (れいぎ): Lễ nghi"
+  },
+  {
+    "STT": 233,
+    "Bài": "Bài 4",
+    "Từ vựng": "握手",
+    "Cách đọc (Phiên âm)": "あくしゅ",
+    "Ý nghĩa": "Nắm tay, bắt tay",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 234,
+    "Bài": "Bài 4",
+    "Từ vựng": "意地悪",
+    "Cách đọc (Phiên âm)": "いじわる",
+    "Ý nghĩa": "Xấu tính",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "いじめる (いじめる): Bắt nạt"
+  },
+  {
+    "STT": 235,
+    "Bài": "Bài 4",
+    "Từ vựng": "いたずら",
+    "Cách đọc (Phiên âm)": "いたずら",
+    "Ý nghĩa": "Nghịch ngợm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 236,
+    "Bài": "Bài 4",
+    "Từ vựng": "節約",
+    "Cách đọc (Phiên âm)": "せつやく",
+    "Ý nghĩa": "Tiết kiệm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "浪費 (ろうひ): Lãng phí, 倹約 (けんやく): Tiết kiệm (chỉ dùng cho tiền)"
+  },
+  {
+    "STT": 237,
+    "Bài": "Bài 4",
+    "Từ vựng": "経営",
+    "Cách đọc (Phiên âm)": "けいえい",
+    "Ý nghĩa": "Kinh doanh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 238,
+    "Bài": "Bài 4",
+    "Từ vựng": "反省",
+    "Cách đọc (Phiên âm)": "はんせい",
+    "Ý nghĩa": "Kiểm điểm, rút kinh nghiệm, tự nhìn lại, hối lỗi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 239,
+    "Bài": "Bài 4",
+    "Từ vựng": "実行",
+    "Cách đọc (Phiên âm)": "じっこう",
+    "Ý nghĩa": "Thực hiện",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 240,
+    "Bài": "Bài 4",
+    "Từ vựng": "進歩",
+    "Cách đọc (Phiên âm)": "しんぽ",
+    "Ý nghĩa": "Tiến bộ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 241,
+    "Bài": "Bài 4",
+    "Từ vựng": "変化",
+    "Cách đọc (Phiên âm)": "へんか",
+    "Ý nghĩa": "Thay đổi (trạng thái, tính chất)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "個体 (こたい): Thể rắn, 液体 (えきたい): Thể lỏng"
+  },
+  {
+    "STT": 242,
+    "Bài": "Bài 4",
+    "Từ vựng": "発達",
+    "Cách đọc (Phiên âm)": "はったつ",
+    "Ý nghĩa": "Trưởng thành, phát triển, (quy mô) lớn mạnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "発育 (はついく): Phát triển (cơ thể), 発展 (はってん): Phát triển (văn minh, kinh tế)"
+  },
+  {
+    "STT": 243,
+    "Bài": "Bài 4",
+    "Từ vựng": "体力",
+    "Cách đọc (Phiên âm)": "たいりょく",
+    "Ý nghĩa": "Thể lực",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "気力 (きりょく): Sức mạnh tinh thần, 精神力 (せいしんりょく): Sức mạnh tinh thần"
+  },
+  {
+    "STT": 244,
+    "Bài": "Bài 4",
+    "Từ vựng": "出場",
+    "Cách đọc (Phiên âm)": "しゅつじょう",
+    "Ý nghĩa": "Có mặt, tham gia",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 245,
+    "Bài": "Bài 4",
+    "Từ vựng": "活躍",
+    "Cách đọc (Phiên âm)": "かつやく",
+    "Ý nghĩa": "Hoạt động tích cực",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 246,
+    "Bài": "Bài 4",
+    "Từ vựng": "競争",
+    "Cách đọc (Phiên âm)": "きょうそう",
+    "Ý nghĩa": "Cạnh tranh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "競争率 (きょうそうりつ): Tỉ lệ chọi"
+  },
+  {
+    "STT": 247,
+    "Bài": "Bài 4",
+    "Từ vựng": "応援",
+    "Cách đọc (Phiên âm)": "おうえん",
+    "Ý nghĩa": "Cổ vũ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 248,
+    "Bài": "Bài 4",
+    "Từ vựng": "拍手",
+    "Cách đọc (Phiên âm)": "はくしゅ",
+    "Ý nghĩa": "Vỗ tay",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 249,
+    "Bài": "Bài 4",
+    "Từ vựng": "人気",
+    "Cách đọc (Phiên âm)": "にんき",
+    "Ý nghĩa": "Được yêu thích",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "人気がある (にんきがある): Được yêu thích, 人気がない (にんきがない): Không được yêu thích, 人気が出る (にんきがでる): Trở nên được yêu thích"
+  },
+  {
+    "STT": 250,
+    "Bài": "Bài 4",
+    "Từ vựng": "情報",
+    "Cách đọc (Phiên âm)": "じょうほう",
+    "Ý nghĩa": "Thông tin",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 251,
+    "Bài": "Bài 4",
+    "Từ vựng": "交換",
+    "Cách đọc (Phiên âm)": "こうかん",
+    "Ý nghĩa": "Trao đổi, đổi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "やり取り (やりとり): Liên lạc/trao đổi"
+  },
+  {
+    "STT": 252,
+    "Bài": "Bài 4",
+    "Từ vựng": "流行",
+    "Cách đọc (Phiên âm)": "りゅうこう",
+    "Ý nghĩa": "Thịnh hành, mốt, trend, lây lan, lan rộng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "流行語 (りゅうこうご): Từ thông dụng, はやる (はやる): Thịnh hành"
+  },
+  {
+    "STT": 253,
+    "Bài": "Bài 4",
+    "Từ vựng": "宣伝",
+    "Cách đọc (Phiên âm)": "せんでん",
+    "Ý nghĩa": "Tuyên truyền",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 254,
+    "Bài": "Bài 4",
+    "Từ vựng": "広告",
+    "Cách đọc (Phiên âm)": "こうこく",
+    "Ý nghĩa": "Quảng cáo",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "コマーシャル (こまーしゃる): Quảng cáo (CM), ダイレクトメール (だうれくとめーる): Thư quảng cáo (DM)"
+  },
+  {
+    "STT": 255,
+    "Bài": "Bài 4",
+    "Từ vựng": "注目",
+    "Cách đọc (Phiên âm)": "ちゅうもく",
+    "Ý nghĩa": "Chú ý, quan tâm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "注目を集める (ちゅうもくをあつめる): Thu hút sự chú ý, 注目を浴びる (ちゅうもくをあびる): Thu hút sự chú ý"
+  },
+  {
+    "STT": 256,
+    "Bài": "Bài 4",
+    "Từ vựng": "通訳",
+    "Cách đọc (Phiên âm)": "つうやく",
+    "Ý nghĩa": "Phiên dịch",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "訳す (やくす): Dịch"
+  },
+  {
+    "STT": 257,
+    "Bài": "Bài 4",
+    "Từ vựng": "翻訳",
+    "Cách đọc (Phiên âm)": "ほんやく",
+    "Ý nghĩa": "Biên dịch",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "翻訳者 (ほんやくしゃ): Người biên dịch, 翻訳家 (ほんやくか): Nhà biên dịch"
+  },
+  {
+    "STT": 258,
+    "Bài": "Bài 4",
+    "Từ vựng": "伝言",
+    "Cách đọc (Phiên âm)": "でんごん",
+    "Ý nghĩa": "Lời nhắn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 259,
+    "Bài": "Bài 4",
+    "Từ vựng": "報告",
+    "Cách đọc (Phiên âm)": "ほうこく",
+    "Ý nghĩa": "Báo cáo",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 260,
+    "Bài": "Bài 4",
+    "Từ vựng": "混雑",
+    "Cách đọc (Phiên âm)": "こんざつ",
+    "Ý nghĩa": "Hỗn loạn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 261,
+    "Bài": "Bài 4",
+    "Từ vựng": "渋滞",
+    "Cách đọc (Phiên âm)": "じゅうたい",
+    "Ý nghĩa": "Tắc đường",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 262,
+    "Bài": "Bài 4",
+    "Từ vựng": "衝突",
+    "Cách đọc (Phiên âm)": "しょうとつ",
+    "Ý nghĩa": "Đâm, va chạm, xung đột",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 263,
+    "Bài": "Bài 4",
+    "Từ vựng": "被害",
+    "Cách đọc (Phiên âm)": "ひがい",
+    "Ý nghĩa": "Thiệt hại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 264,
+    "Bài": "Bài 4",
+    "Từ vựng": "事故",
+    "Cách đọc (Phiên âm)": "じこ",
+    "Ý nghĩa": "Tai nạn, sự cố",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "発生する (はっせいする): Phát sinh"
+  },
+  {
+    "STT": 265,
+    "Bài": "Bài 4",
+    "Từ vựng": "事件",
+    "Cách đọc (Phiên âm)": "じけん",
+    "Ý nghĩa": "Vụ án, vụ kiện",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "殺人事件 (さつじんじけん): Vụ giết người, 盗難事件 (とうなんじけん): Vụ trộm cắp, 未解決事件 (みかいけつじけん): Vụ án chưa giải quyết"
+  },
+  {
+    "STT": 266,
+    "Bài": "Bài 4",
+    "Từ vựng": "故障",
+    "Cách đọc (Phiên âm)": "こしょう",
+    "Ý nghĩa": "Bị hỏng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 267,
+    "Bài": "Bài 4",
+    "Từ vựng": "修理",
+    "Cách đọc (Phiên âm)": "しゅうり",
+    "Ý nghĩa": "Sửa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 268,
+    "Bài": "Bài 4",
+    "Từ vựng": "停電",
+    "Cách đọc (Phiên âm)": "ていでん",
+    "Ý nghĩa": "Mất điện",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 269,
+    "Bài": "Bài 4",
+    "Từ vựng": "調子",
+    "Cách đọc (Phiên âm)": "ちょうし",
+    "Ý nghĩa": "Tình trạng, phong độ, giọng điệu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "語調 (ごちょう): Giọng điệu"
+  },
+  {
+    "STT": 270,
+    "Bài": "Bài 4",
+    "Từ vựng": "緊張",
+    "Cách đọc (Phiên âm)": "きんちょう",
+    "Ý nghĩa": "Căng thẳng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "緊張が解ける (きんちょうがとける): Hết căng thẳng"
+  },
+  {
+    "STT": 271,
+    "Bài": "Bài 4",
+    "Từ vựng": "自慢",
+    "Cách đọc (Phiên âm)": "じまん",
+    "Ý nghĩa": "Tự hào, tự mãn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 272,
+    "Bài": "Bài 4",
+    "Từ vựng": "感心",
+    "Cách đọc (Phiên âm)": "かんしん",
+    "Ý nghĩa": "Khâm phục, giỏi, ngoan",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 273,
+    "Bài": "Bài 4",
+    "Từ vựng": "感動",
+    "Cách đọc (Phiên âm)": "かんどう",
+    "Ý nghĩa": "Cảm động",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 274,
+    "Bài": "Bài 4",
+    "Từ vựng": "興奮",
+    "Cách đọc (Phiên âm)": "こうふん",
+    "Ý nghĩa": "Xúc động, quá khích",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 275,
+    "Bài": "Bài 4",
+    "Từ vựng": "感想",
+    "Cách đọc (Phiên âm)": "かんそう",
+    "Ý nghĩa": "Suy nghĩ, cảm nhận",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 276,
+    "Bài": "Bài 4",
+    "Từ vựng": "予想",
+    "Cách đọc (Phiên âm)": "よそう",
+    "Ý nghĩa": "Dự đoán",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 277,
+    "Bài": "Bài 4",
+    "Từ vựng": "専門",
+    "Cách đọc (Phiên âm)": "せんもん",
+    "Ý nghĩa": "Chuyên môn, chuyên gia",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 278,
+    "Bài": "Bài 4",
+    "Từ vựng": "研究",
+    "Cách đọc (Phiên âm)": "けんきゅう",
+    "Ý nghĩa": "Học tập, nghiên cứu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "研究者 (けんきゅうしゃ): Nhà nghiên cứu"
+  },
+  {
+    "STT": 279,
+    "Bài": "Bài 4",
+    "Từ vựng": "調査",
+    "Cách đọc (Phiên âm)": "ちょうさ",
+    "Ý nghĩa": "Điều tra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 280,
+    "Bài": "Bài 4",
+    "Từ vựng": "原因",
+    "Cách đọc (Phiên âm)": "げんいん",
+    "Ý nghĩa": "Nguyên nhân",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 281,
+    "Bài": "Bài 4",
+    "Từ vựng": "結果",
+    "Cách đọc (Phiên âm)": "けっか",
+    "Ý nghĩa": "Kết quả",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 282,
+    "Bài": "Bài 4",
+    "Từ vựng": "解決",
+    "Cách đọc (Phiên âm)": "かいけつ",
+    "Ý nghĩa": "Giải quyết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 283,
+    "Bài": "Bài 4",
+    "Từ vựng": "確認",
+    "Cách đọc (Phiên âm)": "かくにん",
+    "Ý nghĩa": "Xác nhận",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 284,
+    "Bài": "Bài 4",
+    "Từ vựng": "利用",
+    "Cách đọc (Phiên âm)": "りよう",
+    "Ý nghĩa": "Sử dụng, lợi dụng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 285,
+    "Bài": "Bài 4",
+    "Từ vựng": "理解",
+    "Cách đọc (Phiên âm)": "りかい",
+    "Ý nghĩa": "Hiểu, lý giải, thấu hiểu, cảm thông",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "理解者 (りかいしゃ): Người thấu hiểu"
+  },
+  {
+    "STT": 286,
+    "Bài": "Bài 4",
+    "Từ vựng": "発見",
+    "Cách đọc (Phiên âm)": "はっけん",
+    "Ý nghĩa": "Phát hiện",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "見つける (みつける): Tìm thấy"
+  },
+  {
+    "STT": 287,
+    "Bài": "Bài 4",
+    "Từ vựng": "発明",
+    "Cách đọc (Phiên âm)": "はつめい",
+    "Ý nghĩa": "Phát minh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 288,
+    "Bài": "Bài 4",
+    "Từ vựng": "関係",
+    "Cách đọc (Phiên âm)": "かんけい",
+    "Ý nghĩa": "Mối quan hệ, liên quan",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 289,
+    "Bài": "Bài 4",
+    "Từ vựng": "団体",
+    "Cách đọc (Phiên âm)": "だんたい",
+    "Ý nghĩa": "Tập thể, nhóm, đoàn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "団体割引 (だんたいわりびき): Giảm giá cho nhóm, 団体行動 (だんたいこうどう): Hành động theo nhóm"
+  },
+  {
+    "STT": 290,
+    "Bài": "Bài 4",
+    "Từ vựng": "選挙",
+    "Cách đọc (Phiên âm)": "せんきょ",
+    "Ý nghĩa": "Bầu cử",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "選挙権 (せんきょけん): Quyền bầu cử"
+  },
+  {
+    "STT": 291,
+    "Bài": "Bài 4",
+    "Từ vựng": "税金",
+    "Cách đọc (Phiên âm)": "ぜいきん",
+    "Ý nghĩa": "Thuế",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "増税 (ぞうぜい): Tăng thuế, 減税 (げんぜい): Giảm thuế, 脱税 (だつぜい): Trốn thuế"
+  },
+  {
+    "STT": 292,
+    "Bài": "Bài 4",
+    "Từ vựng": "責任",
+    "Cách đọc (Phiên âm)": "せきにん",
+    "Ý nghĩa": "Trách nhiệm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 293,
+    "Bài": "Bài 4",
+    "Từ vựng": "書類",
+    "Cách đọc (Phiên âm)": "しょるい",
+    "Ý nghĩa": "Tài liệu, giấy tờ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "書類審査 (しょるいしんさ): Thẩm định hồ sơ"
+  },
+  {
+    "STT": 294,
+    "Bài": "Bài 4",
+    "Từ vựng": "題名",
+    "Cách đọc (Phiên âm)": "だいめい",
+    "Ý nghĩa": "Nhan đề, tiêu đề",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "タイトル (たいとる): Tiêu đề"
+  },
+  {
+    "STT": 295,
+    "Bài": "Bài 4",
+    "Từ vựng": "条件",
+    "Cách đọc (Phiên âm)": "じょうけん",
+    "Ý nghĩa": "Điều kiện",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 296,
+    "Bài": "Bài 4",
+    "Từ vựng": "締め切り",
+    "Cách đọc (Phiên âm)": "しめきり",
+    "Ý nghĩa": "Hạn chót, đóng đăng ký",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 297,
+    "Bài": "Bài 4",
+    "Từ vựng": "期間",
+    "Cách đọc (Phiên âm)": "きかん",
+    "Ý nghĩa": "Thời kì, khoảng thời gian",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 298,
+    "Bài": "Bài 4",
+    "Từ vựng": "倍",
+    "Cách đọc (Phiên âm)": "ばい",
+    "Ý nghĩa": "Gấp đôi, gấp ~ lần",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 299,
+    "Bài": "Bài 4",
+    "Từ vựng": "近道",
+    "Cách đọc (Phiên âm)": "ちかみち",
+    "Ý nghĩa": "Đường tắt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "遠回りする (とおまわりする): Đi đường vòng"
+  },
+  {
+    "STT": 300,
+    "Bài": "Bài 4",
+    "Từ vựng": "中心",
+    "Cách đọc (Phiên âm)": "ちゅうしん",
+    "Ý nghĩa": "Trung tâm, xoay quanh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 301,
+    "Bài": "Bài 4",
+    "Từ vựng": "辺り",
+    "Cách đọc (Phiên âm)": "あたり",
+    "Ý nghĩa": "Vùng, khoảng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 302,
+    "Bài": "Bài 4",
+    "Từ vựng": "周り / 回り",
+    "Cách đọc (Phiên âm)": "まわり",
+    "Ý nghĩa": "Xung quanh, quanh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "周囲 (しゅうい): Xung quanh, 周辺 (しゅうへん): Vùng xung quanh"
+  },
+  {
+    "STT": 303,
+    "Bài": "Bài 4",
+    "Từ vựng": "穴",
+    "Cách đọc (Phiên âm)": "あな",
+    "Ý nghĩa": "Hố, lỗ thủng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 304,
+    "Bài": "Bài 4",
+    "Từ vựng": "列",
+    "Cách đọc (Phiên âm)": "れつ",
+    "Ý nghĩa": "Hàng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "行列 (ぎょうれつ): Hàng người"
+  },
+  {
+    "STT": 305,
+    "Bài": "Bài 4",
+    "Từ vựng": "範囲",
+    "Cách đọc (Phiên âm)": "はんい",
+    "Ý nghĩa": "Phạm vi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "幅 (はば): Chiều rộng"
+  },
+  {
+    "STT": 306,
+    "Bài": "Bài 4",
+    "Từ vựng": "内容",
+    "Cách đọc (Phiên âm)": "ないよう",
+    "Ý nghĩa": "Nội dung",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "中身 (なかみ): Nội dung, bên trong"
+  },
+  {
+    "STT": 307,
+    "Bài": "Bài 4",
+    "Từ vựng": "中身",
+    "Cách đọc (Phiên âm)": "なかみ",
+    "Ý nghĩa": "Nội dung, bên trong",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "内容 (ないよう): Nội dung"
+  },
+  {
+    "STT": 308,
+    "Bài": "Bài 4",
+    "Từ vựng": "特徴",
+    "Cách đọc (Phiên âm)": "とくちょう",
+    "Ý nghĩa": "Đặc trưng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "特色 (とくしょく): Đặc sắc"
+  },
+  {
+    "STT": 309,
+    "Bài": "Bài 4",
+    "Từ vựng": "普通",
+    "Cách đọc (Phiên âm)": "ふつう",
+    "Ý nghĩa": "Bình thường",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 310,
+    "Bài": "Bài 4",
+    "Từ vựng": "当たり前",
+    "Cách đọc (Phiên âm)": "あたりまえ",
+    "Ý nghĩa": "Đương nhiên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "当然 (とうぜん): Đương nhiên"
+  },
+  {
+    "STT": 311,
+    "Bài": "Bài 4",
+    "Từ vựng": "偽札",
+    "Cách đọc (Phiên âm)": "にせさつ",
+    "Ý nghĩa": "Tiền giả",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 312,
+    "Bài": "Bài 4",
+    "Từ vựng": "国籍",
+    "Cách đọc (Phiên âm)": "こくせき",
+    "Ý nghĩa": "Quốc tịch",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 313,
+    "Bài": "Bài 4",
+    "Từ vựng": "国際",
+    "Cách đọc (Phiên âm)": "こくさい",
+    "Ý nghĩa": "Quốc tế",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 314,
+    "Bài": "Bài 4",
+    "Từ vựng": "自然",
+    "Cách đọc (Phiên âm)": "しぜん",
+    "Ý nghĩa": "Thiên nhiên, tự nhiên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 315,
+    "Bài": "Bài 4",
+    "Từ vựng": "景色",
+    "Cách đọc (Phiên âm)": "けしき",
+    "Ý nghĩa": "Phong cảnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "風景 (ふうけい): Phong cảnh, 光景 (こうけい): Quang cảnh"
+  },
+  {
+    "STT": 316,
+    "Bài": "Bài 4",
+    "Từ vựng": "宗教",
+    "Cách đọc (Phiên âm)": "しゅうきょう",
+    "Ý nghĩa": "Tôn giáo",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 317,
+    "Bài": "Bài 5",
+    "Từ vựng": "が届く",
+    "Cách đọc (Phiên âm)": "とどく",
+    "Ý nghĩa": "Đến, gửi đến, chạm đến",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 318,
+    "Bài": "Bài 5",
+    "Từ vựng": "を届ける",
+    "Cách đọc (Phiên âm)": "とどける",
+    "Ý nghĩa": "Gửi đến, mang đến",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "届けを出す (とどけをだす): Gửi đơn"
+  },
+  {
+    "STT": 319,
+    "Bài": "Bài 5",
+    "Từ vựng": "かく",
+    "Cách đọc (Phiên âm)": "かく",
+    "Ý nghĩa": "Gãi, toát mồ hôi, ngáy, xấu hổ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 320,
+    "Bài": "Bài 5",
+    "Từ vựng": "つかむ",
+    "Cách đọc (Phiên âm)": "つかむ",
+    "Ý nghĩa": "Tóm, nắm bắt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 321,
+    "Bài": "Bài 5",
+    "Từ vựng": "握る",
+    "Cách đọc (Phiên âm)": "にぎる",
+    "Ý nghĩa": "Nắm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 322,
+    "Bài": "Bài 5",
+    "Từ vựng": "押さえる",
+    "Cách đọc (Phiên âm)": "おさえる",
+    "Ý nghĩa": "Giữ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 323,
+    "Bài": "Bài 5",
+    "Từ vựng": "近づく",
+    "Cách đọc (Phiên âm)": "ちかづく",
+    "Ý nghĩa": "Đến gần",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 324,
+    "Bài": "Bài 5",
+    "Từ vựng": "近づける",
+    "Cách đọc (Phiên âm)": "ちかづける",
+    "Ý nghĩa": "Đưa ~ lại gần",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 325,
+    "Bài": "Bài 5",
+    "Từ vựng": "合わせる",
+    "Cách đọc (Phiên âm)": "あわせる",
+    "Ý nghĩa": "Kết hợp, làm cho hợp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 326,
+    "Bài": "Bài 5",
+    "Từ vựng": "が当たる",
+    "Cách đọc (Phiên âm)": "あたる",
+    "Ý nghĩa": "Trúng, chạm trán",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 327,
+    "Bài": "Bài 5",
+    "Từ vựng": "を当てる",
+    "Cách đọc (Phiên âm)": "あてる",
+    "Ý nghĩa": "Đặt, trả lời đúng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "はずす (はずす): Sai, trượt"
+  },
+  {
+    "STT": 328,
+    "Bài": "Bài 5",
+    "Từ vựng": "を比べる",
+    "Cách đọc (Phiên âm)": "くらべる",
+    "Ý nghĩa": "So sánh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 329,
+    "Bài": "Bài 5",
+    "Từ vựng": "が似合う",
+    "Cách đọc (Phiên âm)": "にあう",
+    "Ý nghĩa": "Hợp, vừa vặn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 330,
+    "Bài": "Bài 5",
+    "Từ vựng": "が似る",
+    "Cách đọc (Phiên âm)": "にる",
+    "Ý nghĩa": "Giống, y như",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 331,
+    "Bài": "Bài 5",
+    "Từ vựng": "が分かれる",
+    "Cách đọc (Phiên âm)": "わかれる",
+    "Ý nghĩa": "Được chia ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 332,
+    "Bài": "Bài 5",
+    "Từ vựng": "を分ける",
+    "Cách đọc (Phiên âm)": "わける",
+    "Ý nghĩa": "Chia, tách",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 333,
+    "Bài": "Bài 5",
+    "Từ vựng": "が増える",
+    "Cách đọc (Phiên âm)": "ふえる",
+    "Ý nghĩa": "Tăng lên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 334,
+    "Bài": "Bài 5",
+    "Từ vựng": "が減る",
+    "Cách đọc (Phiên âm)": "へる",
+    "Ý nghĩa": "Giảm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 335,
+    "Bài": "Bài 5",
+    "Từ vựng": "変わる / 変える",
+    "Cách đọc (Phiên âm)": "かわる / かえる",
+    "Ý nghĩa": "Thay đổi, di chuyển",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 336,
+    "Bài": "Bài 5",
+    "Từ vựng": "代わる / 代える",
+    "Cách đọc (Phiên âm)": "かわる / かえる",
+    "Ý nghĩa": "Thay thế, thay mặt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 337,
+    "Bài": "Bài 5",
+    "Từ vựng": "換わる / 換える",
+    "Cách đọc (Phiên âm)": "かわる / かえる",
+    "Ý nghĩa": "Hoán đổi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 338,
+    "Bài": "Bài 5",
+    "Từ vựng": "替わる / 替える",
+    "Cách đọc (Phiên âm)": "かわる / かえる",
+    "Ý nghĩa": "Thay thế bằng cái mới",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 339,
+    "Bài": "Bài 5",
+    "Từ vựng": "が返る",
+    "Cách đọc (Phiên âm)": "かえる",
+    "Ý nghĩa": "Được trả lại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 340,
+    "Bài": "Bài 5",
+    "Từ vựng": "を返す",
+    "Cách đọc (Phiên âm)": "かえす",
+    "Ý nghĩa": "Trả lại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 341,
+    "Bài": "Bài 5",
+    "Từ vựng": "に/を譲る",
+    "Cách đọc (Phiên âm)": "ゆずる",
+    "Ý nghĩa": "Nhường, nhượng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 342,
+    "Bài": "Bài 5",
+    "Từ vựng": "が助かる",
+    "Cách đọc (Phiên âm)": "たすかる",
+    "Ý nghĩa": "Được trợ giúp, được cứu, hữu ích",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 343,
+    "Bài": "Bài 5",
+    "Từ vựng": "を助ける",
+    "Cách đọc (Phiên âm)": "たすける",
+    "Ý nghĩa": "Cứu, giúp đỡ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "助けを求める (たすけをもとめる): Cầu cứu"
+  },
+  {
+    "STT": 344,
+    "Bài": "Bài 5",
+    "Từ vựng": "をだます",
+    "Cách đọc (Phiên âm)": "だます",
+    "Ý nghĩa": "Lừa gạt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 345,
+    "Bài": "Bài 5",
+    "Từ vựng": "を盗む",
+    "Cách đọc (Phiên âm)": "ぬすむ",
+    "Ý nghĩa": "Lấy trộm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ぬすみをする (ぬすみをする): Trộm cắp"
+  },
+  {
+    "STT": 346,
+    "Bài": "Bài 5",
+    "Từ vựng": "が隠れる",
+    "Cách đọc (Phiên âm)": "かくれる",
+    "Ý nghĩa": "Núp, ẩn náu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 347,
+    "Bài": "Bài 5",
+    "Từ vựng": "を隠す",
+    "Cách đọc (Phiên âm)": "かくす",
+    "Ý nghĩa": "Giấu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 348,
+    "Bài": "Bài 5",
+    "Từ vựng": "が埋まる",
+    "Cách đọc (Phiên âm)": "うまる",
+    "Ý nghĩa": "Bị chôn vùi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 349,
+    "Bài": "Bài 5",
+    "Từ vựng": "を埋める",
+    "Cách đọc (Phiên âm)": "うめる",
+    "Ý nghĩa": "Chôn, chôn lấp, tô kín",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 350,
+    "Bài": "Bài 5",
+    "Từ vựng": "を囲む",
+    "Cách đọc (Phiên âm)": "かこむ",
+    "Ý nghĩa": "Vây quanh, bao quanh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 351,
+    "Bài": "Bài 5",
+    "Từ vựng": "が詰まる",
+    "Cách đọc (Phiên âm)": "つまる",
+    "Ý nghĩa": "Đầy chặt, kín mít, được rút ngắn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 352,
+    "Bài": "Bài 5",
+    "Từ vựng": "をつめる",
+    "Cách đọc (Phiên âm)": "つめる",
+    "Ý nghĩa": "Nhét, nhồi, rút ngắn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "知識を詰め込む (ちしきをつめこむ): Nhồi nhét kiến thức"
+  },
+  {
+    "STT": 353,
+    "Bài": "Bài 5",
+    "Từ vựng": "が/を閉じる",
+    "Cách đọc (Phiên âm)": "とじる",
+    "Ý nghĩa": "Đóng, đóng cửa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "開く (ひらく): Mở"
+  },
+  {
+    "STT": 354,
+    "Bài": "Bài 5",
+    "Từ vựng": "が飛ぶ",
+    "Cách đọc (Phiên âm)": "とぶ",
+    "Ý nghĩa": "Bay, bắn ra, lao đến, biến mất",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 355,
+    "Bài": "Bài 5",
+    "Từ vựng": "をふる",
+    "Cách đọc (Phiên âm)": "ふる",
+    "Ý nghĩa": "Vẫy, rung, lắc, rắc, từ chối",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 356,
+    "Bài": "Bài 5",
+    "Từ vựng": "をめくる",
+    "Cách đọc (Phiên âm)": "めくる",
+    "Ý nghĩa": "Lật",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 357,
+    "Bài": "Bài 5",
+    "Từ vựng": "を見かける",
+    "Cách đọc (Phiên âm)": "みかける",
+    "Ý nghĩa": "Tình cờ nhìn thấy",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "見かけ (みかけ): Vẻ ngoài, 見た目 (みため): Vẻ ngoài"
+  },
+  {
+    "STT": 358,
+    "Bài": "Bài 5",
+    "Từ vựng": "を確かめる",
+    "Cách đọc (Phiên âm)": "たしかめる",
+    "Ý nghĩa": "Xác nhận",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 359,
+    "Bài": "Bài 5",
+    "Từ vựng": "を試す",
+    "Cách đọc (Phiên âm)": "ためす",
+    "Ý nghĩa": "Thử",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 360,
+    "Bài": "Bài 5",
+    "Từ vựng": "を繰り返す",
+    "Cách đọc (Phiên âm)": "くりかえす",
+    "Ý nghĩa": "Lặp lại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 361,
+    "Bài": "Bài 5",
+    "Từ vựng": "を訳す",
+    "Cách đọc (Phiên âm)": "やくす",
+    "Ý nghĩa": "Dịch",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "翻訳をする (ほんやくをする): Biên dịch, 通訳をする (つうやくをする): Phiên dịch"
+  },
+  {
+    "STT": 362,
+    "Bài": "Bài 5",
+    "Từ vựng": "を行う",
+    "Cách đọc (Phiên âm)": "おこなう",
+    "Ý nghĩa": "Tổ chức, tiến hành",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 363,
+    "Bài": "Bài 5",
+    "Từ vựng": "が/を間違う",
+    "Cách đọc (Phiên âm)": "まちがう",
+    "Ý nghĩa": "Sai, nhầm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 364,
+    "Bài": "Bài 5",
+    "Từ vựng": "を間違える",
+    "Cách đọc (Phiên âm)": "まちがえる",
+    "Ý nghĩa": "Làm sai, nhầm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 365,
+    "Bài": "Bài 5",
+    "Từ vựng": "を立てる",
+    "Cách đọc (Phiên âm)": "たてる",
+    "Ý nghĩa": "Dựng, dựng đứng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 366,
+    "Bài": "Bài 5",
+    "Từ vựng": "を許す",
+    "Cách đọc (Phiên âm)": "ゆるす",
+    "Ý nghĩa": "Tha thứ, cho phép",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "許可する (きょかする): Cho phép, 許しをもらう (ゆるしをもらう): Nhận sự tha thứ"
+  },
+  {
+    "STT": 367,
+    "Bài": "Bài 5",
+    "Từ vựng": "が育つ",
+    "Cách đọc (Phiên âm)": "そだつ",
+    "Ý nghĩa": "Lớn, phát triển, đào tạo",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "成長している (せいちょうしている): Đang trưởng thành"
+  },
+  {
+    "STT": 368,
+    "Bài": "Bài 5",
+    "Từ vựng": "を育てる",
+    "Cách đọc (Phiên âm)": "そだてる",
+    "Ý nghĩa": "Nuôi dạy, nuôi trồng, đào tạo",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 369,
+    "Bài": "Bài 5",
+    "Từ vựng": "が生える",
+    "Cách đọc (Phiên âm)": "はえる",
+    "Ý nghĩa": "Mọc, lớn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 370,
+    "Bài": "Bài 5",
+    "Từ vựng": "を生やす",
+    "Cách đọc (Phiên âm)": "はやす",
+    "Ý nghĩa": "Nuôi (râu, tóc)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 371,
+    "Bài": "Bài 5",
+    "Từ vựng": "が汚れる",
+    "Cách đọc (Phiên âm)": "よごれる",
+    "Ý nghĩa": "Bị bẩn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "汚れ (よごれ): Vết bẩn, 汚い (きたない): Bẩn"
+  },
+  {
+    "STT": 372,
+    "Bài": "Bài 5",
+    "Từ vựng": "を汚す",
+    "Cách đọc (Phiên âm)": "よごす",
+    "Ý nghĩa": "Làm bẩn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 373,
+    "Bài": "Bài 5",
+    "Từ vựng": "が壊れる",
+    "Cách đọc (Phiên âm)": "こわれる",
+    "Ý nghĩa": "Bị hỏng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 374,
+    "Bài": "Bài 5",
+    "Từ vựng": "を壊す",
+    "Cách đọc (Phiên âm)": "こわす",
+    "Ý nghĩa": "Làm hỏng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 375,
+    "Bài": "Bài 5",
+    "Từ vựng": "が割れる",
+    "Cách đọc (Phiên âm)": "われる",
+    "Ý nghĩa": "Vỡ, nứt, bị chia ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 376,
+    "Bài": "Bài 5",
+    "Từ vựng": "を割る",
+    "Cách đọc (Phiên âm)": "わる",
+    "Ý nghĩa": "Làm vỡ, chia, tách, chia (phép tính)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 377,
+    "Bài": "Bài 5",
+    "Từ vựng": "が折れる",
+    "Cách đọc (Phiên âm)": "おれる",
+    "Ý nghĩa": "Bị gãy",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 378,
+    "Bài": "Bài 5",
+    "Từ vựng": "を折る",
+    "Cách đọc (Phiên âm)": "おる",
+    "Ý nghĩa": "Làm gãy",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 379,
+    "Bài": "Bài 5",
+    "Từ vựng": "が破れる",
+    "Cách đọc (Phiên âm)": "やぶれる",
+    "Ý nghĩa": "Bị rách",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 380,
+    "Bài": "Bài 5",
+    "Từ vựng": "を破る",
+    "Cách đọc (Phiên âm)": "やぶる",
+    "Ý nghĩa": "Thất hứa, phá (kỷ lục)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "守る (まもる): Giữ, tuân thủ"
+  },
+  {
+    "STT": 381,
+    "Bài": "Bài 5",
+    "Từ vựng": "を曲げる",
+    "Cách đọc (Phiên âm)": "まげる",
+    "Ý nghĩa": "Uốn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 382,
+    "Bài": "Bài 5",
+    "Từ vựng": "が外れる",
+    "Cách đọc (Phiên âm)": "はずれる",
+    "Ý nghĩa": "Chệch, lệch, bị loại ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 384,
+    "Bài": "Bài 5",
+    "Từ vựng": "を外す",
+    "Cách đọc (Phiên âm)": "はずす",
+    "Ý nghĩa": "Tuột, tháo",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 385,
+    "Bài": "Bài 5",
+    "Từ vựng": "が揺れる",
+    "Cách đọc (Phiên âm)": "ゆれる",
+    "Ý nghĩa": "Rung, lung lay, dao động",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 386,
+    "Bài": "Bài 5",
+    "Từ vựng": "が濡れる",
+    "Cách đọc (Phiên âm)": "ぬれる",
+    "Ý nghĩa": "Ướt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 387,
+    "Bài": "Bài 5",
+    "Từ vựng": "を濡らす",
+    "Cách đọc (Phiên âm)": "ぬらす",
+    "Ý nghĩa": "Làm ướt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "乾かす (かわかす): Làm khô"
+  },
+  {
+    "STT": 388,
+    "Bài": "Bài 5",
+    "Từ vựng": "が流れる",
+    "Cách đọc (Phiên âm)": "ながれる",
+    "Ý nghĩa": "Chảy, thả trôi, chơi nhạc, lan truyền",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 389,
+    "Bài": "Bài 5",
+    "Từ vựng": "を流す",
+    "Cách đọc (Phiên âm)": "ながす",
+    "Ý nghĩa": "Làm chảy, xả",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 390,
+    "Bài": "Bài 5",
+    "Từ vựng": "迷う",
+    "Cách đọc (Phiên âm)": "まよう",
+    "Ý nghĩa": "Lạc, phân vân",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 391,
+    "Bài": "Bài 5",
+    "Từ vựng": "に悩む",
+    "Cách đọc (Phiên âm)": "なやむ",
+    "Ý nghĩa": "Trăn trở về",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "悩み (なやみ): Phiền não"
+  },
+  {
+    "STT": 392,
+    "Bài": "Bài 5",
+    "Từ vựng": "が慌てる",
+    "Cách đọc (Phiên âm)": "あわてる",
+    "Ý nghĩa": "Hoảng loạn, vội vàng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 393,
+    "Bài": "Bài 5",
+    "Từ vựng": "が覚める",
+    "Cách đọc (Phiên âm)": "さめる",
+    "Ý nghĩa": "Tỉnh dậy, mở mắt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 394,
+    "Bài": "Bài 5",
+    "Từ vựng": "を覚ます",
+    "Cách đọc (Phiên âm)": "さます",
+    "Ý nghĩa": "Đánh thức",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 395,
+    "Bài": "Bài 5",
+    "Từ vựng": "眠る",
+    "Cách đọc (Phiên âm)": "ねむる",
+    "Ý nghĩa": "Ngủ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "寝る (ねる): Ngủ, 眠り (ねむり): Giấc ngủ"
+  },
+  {
+    "STT": 396,
+    "Bài": "Bài 5",
+    "Từ vựng": "を祈る",
+    "Cách đọc (Phiên âm)": "いのる",
+    "Ý nghĩa": "Cầu nguyện",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 397,
+    "Bài": "Bài 5",
+    "Từ vựng": "を祝う",
+    "Cách đọc (Phiên âm)": "いわう",
+    "Ý nghĩa": "Chúc mừng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "祝い (いわい): Sự chúc mừng"
+  },
+  {
+    "STT": 398,
+    "Bài": "Bài 5",
+    "Từ vựng": "を感じる",
+    "Cách đọc (Phiên âm)": "かんじる",
+    "Ý nghĩa": "Cảm giác, cảm thấy",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "感じがする (かんじがする): Có cảm giác"
+  },
+  {
+    "STT": 399,
+    "Bài": "Bài 6",
+    "Từ vựng": "グループ",
+    "Cách đọc (Phiên âm)": "ぐるーぷ",
+    "Ý nghĩa": "Nhóm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 400,
+    "Bài": "Bài 6",
+    "Từ vựng": "アマ (アマチュア)",
+    "Cách đọc (Phiên âm)": "あま",
+    "Ý nghĩa": "Nghiệp dư",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "プロ (ぷろ): Chuyên nghiệp"
+  },
+  {
+    "STT": 401,
+    "Bài": "Bài 6",
+    "Từ vựng": "トレーニング",
+    "Cách đọc (Phiên âm)": "とれーにんぐ",
+    "Ý nghĩa": "Luyện tập",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 402,
+    "Bài": "Bài 6",
+    "Từ vựng": "アドバイス",
+    "Cách đọc (Phiên âm)": "あどばいす",
+    "Ý nghĩa": "Lời khuyên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 403,
+    "Bài": "Bài 6",
+    "Từ vựng": "アイデア / アイディア",
+    "Cách đọc (Phiên âm)": "あいでぃあ",
+    "Ý nghĩa": "Ý tưởng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "グッドアイディア (ぐっどあいでぃあ): Ý tưởng hay"
+  },
+  {
+    "STT": 404,
+    "Bài": "Bài 6",
+    "Từ vựng": "トップ",
+    "Cách đọc (Phiên âm)": "とっぷ",
+    "Ý nghĩa": "Đứng đầu, nổi bật",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "トップ争い (とっぷあらそい): Cạnh tranh vị trí dẫn đầu, トップバッター (とっぷばったー): Người mở màn"
+  },
+  {
+    "STT": 405,
+    "Bài": "Bài 6",
+    "Từ vựng": "スピード",
+    "Cách đọc (Phiên âm)": "すぴーど",
+    "Ý nghĩa": "Tốc độ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "スピード違反 (すぴーどいはん): Vi phạm tốc độ, スピードアップ (すぴーどあっぷ): Tăng tốc, スピードオーバー (すぴーどおーばー): Quá tốc độ"
+  },
+  {
+    "STT": 406,
+    "Bài": "Bài 6",
+    "Từ vựng": "ラッシュ",
+    "Cách đọc (Phiên âm)": "らっしゅ",
+    "Ý nghĩa": "Cao điểm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 407,
+    "Bài": "Bài 6",
+    "Từ vựng": "バイク",
+    "Cách đọc (Phiên âm)": "ばいく",
+    "Ý nghĩa": "Xe máy",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "オートバイ (おーとばい): Xe máy"
+  },
+  {
+    "STT": 408,
+    "Bài": "Bài 6",
+    "Từ vựng": "プラスチック",
+    "Cách đọc (Phiên âm)": "ぷらすちっく",
+    "Ý nghĩa": "Nhựa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ビニール (びにーる): Ni lông"
+  },
+  {
+    "STT": 409,
+    "Bài": "Bài 6",
+    "Từ vựng": "ベランダ",
+    "Cách đọc (Phiên âm)": "べらんだ",
+    "Ý nghĩa": "Ban công",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 410,
+    "Bài": "Bài 6",
+    "Từ vựng": "ペット",
+    "Cách đọc (Phiên âm)": "ぺっと",
+    "Ý nghĩa": "Thú cưng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ペットショップ (ぺっとしょっぷ): Cửa hàng thú cưng"
+  },
+  {
+    "STT": 411,
+    "Bài": "Bài 6",
+    "Từ vựng": "ベンチ",
+    "Cách đọc (Phiên âm)": "べんち",
+    "Ý nghĩa": "Ghế",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 412,
+    "Bài": "Bài 6",
+    "Từ vựng": "デザイン",
+    "Cách đọc (Phiên âm)": "でざいん",
+    "Ý nghĩa": "Thiết kế",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "デザイナー (でざいなー): Nhà thiết kế"
+  },
+  {
+    "STT": 413,
+    "Bài": "Bài 6",
+    "Từ vựng": "バーゲン / セール",
+    "Cách đọc (Phiên âm)": "ばーげん / せーる",
+    "Ý nghĩa": "Giảm giá",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 414,
+    "Bài": "Bài 6",
+    "Từ vựng": "レジ",
+    "Cách đọc (Phiên âm)": "れじ",
+    "Ý nghĩa": "Máy tính tiền, nhân viên thu ngân, quầy thu ngân",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 415,
+    "Bài": "Bài 6",
+    "Từ vựng": "レシート",
+    "Cách đọc (Phiên âm)": "れしーと",
+    "Ý nghĩa": "Hoá đơn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 416,
+    "Bài": "Bài 6",
+    "Từ vựng": "デザート",
+    "Cách đọc (Phiên âm)": "でざーと",
+    "Ý nghĩa": "Món tráng miệng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "別腹 (べつばら): Dạ dày thứ hai (dành cho món tráng miệng)"
+  },
+  {
+    "STT": 417,
+    "Bài": "Bài 6",
+    "Từ vựng": "チャイム",
+    "Cách đọc (Phiên âm)": "ちゃいむ",
+    "Ý nghĩa": "Chuông",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 418,
+    "Bài": "Bài 6",
+    "Từ vựng": "アナウンス",
+    "Cách đọc (Phiên âm)": "あなうんす",
+    "Ý nghĩa": "Thông báo",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "アナウンサー (あなうんさー): Phát thanh viên"
+  },
+  {
+    "STT": 419,
+    "Bài": "Bài 6",
+    "Từ vựng": "メッセージ",
+    "Cách đọc (Phiên âm)": "めっせーじ",
+    "Ý nghĩa": "Lời nhắn, thông điệp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "伝言 (でんごん): Lời nhắn"
+  },
+  {
+    "STT": 420,
+    "Bài": "Bài 6",
+    "Từ vựng": "パンフレット",
+    "Cách đọc (Phiên âm)": "ぱんふれっと",
+    "Ý nghĩa": "Sách mỏng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "チラシ (ちらし): Tờ rơi"
+  },
+  {
+    "STT": 421,
+    "Bài": "Bài 6",
+    "Từ vựng": "インタビュー",
+    "Cách đọc (Phiên âm)": "いんたびゅー",
+    "Ý nghĩa": "Phỏng vấn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 422,
+    "Bài": "Bài 6",
+    "Từ vựng": "アンケート",
+    "Cách đọc (Phiên âm)": "あんけーと",
+    "Ý nghĩa": "Phiếu điều tra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 423,
+    "Bài": "Bài 6",
+    "Từ vựng": "データ",
+    "Cách đọc (Phiên âm)": "でーた",
+    "Ý nghĩa": "Dữ liệu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 424,
+    "Bài": "Bài 6",
+    "Từ vựng": "パーセント",
+    "Cách đọc (Phiên âm)": "ぱーせんと",
+    "Ý nghĩa": "Phần trăm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "割 (わり): Phần mười (10%)"
+  },
+  {
+    "STT": 424,
+    "Bài": "Bài 7",
+    "Từ vựng": "濃い",
+    "Cách đọc (Phiên âm)": "こい",
+    "Ý nghĩa": "Nồng, đậm, rậm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "薄い (うすい): Mỏng, 濃さ (こさ): Độ đậm"
+  },
+  {
+    "STT": 425,
+    "Bài": "Bài 7",
+    "Từ vựng": "薄い",
+    "Cách đọc (Phiên âm)": "うすい",
+    "Ý nghĩa": "Mỏng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "厚い (あつい): Dày"
+  },
+  {
+    "STT": 426,
+    "Bài": "Bài 7",
+    "Từ vựng": "臭い",
+    "Cách đọc (Phiên âm)": "くさい",
+    "Ý nghĩa": "Hôi, thối, tanh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "N＋臭い (くさい): Nồng nặc mùi"
+  },
+  {
+    "STT": 427,
+    "Bài": "Bài 7",
+    "Từ vựng": "おかしい",
+    "Cách đọc (Phiên âm)": "おかしい",
+    "Ý nghĩa": "Lạ, buồn cười, không bình thường",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 428,
+    "Bài": "Bài 7",
+    "Từ vựng": "うまい",
+    "Cách đọc (Phiên âm)": "うまい",
+    "Ý nghĩa": "Giỏi, ngon",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "美味しい (おいしい): Ngon, うまくいく (うまくい): Thuận lợi, suôn sẻ"
+  },
+  {
+    "STT": 429,
+    "Bài": "Bài 7",
+    "Từ vựng": "親しい",
+    "Cách đọc (Phiên âm)": "したしい",
+    "Ý nghĩa": "Thân thiết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "仲良く (なかよく): Thân thiết"
+  },
+  {
+    "STT": 430,
+    "Bài": "Bài 7",
+    "Từ vựng": "詳しい",
+    "Cách đọc (Phiên âm)": "くわしい",
+    "Ý nghĩa": "Chi tiết, am hiểu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 431,
+    "Bài": "Bài 7",
+    "Từ vựng": "細かい",
+    "Cách đọc (Phiên âm)": "こまかい",
+    "Ý nghĩa": "Nhỏ, vụn, chi tiết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "細かいお金 (こまかいおかね): Tiền lẻ"
+  },
+  {
+    "STT": 432,
+    "Bài": "Bài 7",
+    "Từ vựng": "浅い",
+    "Cách đọc (Phiên âm)": "あさい",
+    "Ý nghĩa": "Nông, cạn, ít, hời hợt, nhẹ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "深い (ふかい): Sâu"
+  },
+  {
+    "STT": 433,
+    "Bài": "Bài 7",
+    "Từ vựng": "固い",
+    "Cách đọc (Phiên âm)": "かたい",
+    "Ý nghĩa": "Cứng, chắc chắn, chặt, nghiêm ngặt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "柔らかい (やわらかい): Mềm, 頭が固い (あたまがかたい): Cứng đầu, 口が固い (くちがかたい): Biết giữ miệng, 口が軽い (くちがかるい): Ba hoa"
+  },
+  {
+    "STT": 434,
+    "Bài": "Bài 7",
+    "Từ vựng": "ぬるい",
+    "Cách đọc (Phiên âm)": "ぬるい",
+    "Ý nghĩa": "Nguội (không ngon)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 435,
+    "Bài": "Bài 7",
+    "Từ vựng": "まぶしい",
+    "Cách đọc (Phiên âm)": "まぶしい",
+    "Ý nghĩa": "Chói, rạng ngời",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 436,
+    "Bài": "Bài 7",
+    "Từ vựng": "清潔な",
+    "Cách đọc (Phiên âm)": "せいけつな",
+    "Ý nghĩa": "Sạch sẽ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "清潔感 (せいけつかん): Ý thức sạch sẽ"
+  },
+  {
+    "STT": 437,
+    "Bài": "Bài 7",
+    "Từ vựng": "新鮮な",
+    "Cách đọc (Phiên âm)": "しんせんな",
+    "Ý nghĩa": "Tươi, sống, tươi mới",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 438,
+    "Bài": "Bài 7",
+    "Từ vựng": "豊かな",
+    "Cách đọc (Phiên âm)": "ゆたかな",
+    "Ý nghĩa": "Giàu có, phong phú",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 439,
+    "Bài": "Bài 7",
+    "Từ vựng": "正確な",
+    "Cách đọc (Phiên âm)": "せいかくな",
+    "Ý nghĩa": "Chính xác, chuẩn chỉnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 440,
+    "Bài": "Bài 7",
+    "Từ vựng": "立派な",
+    "Cách đọc (Phiên âm)": "りっぱな",
+    "Ý nghĩa": "Tuyệt vời, ra dáng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 441,
+    "Bài": "Bài 7",
+    "Từ vựng": "確かな",
+    "Cách đọc (Phiên âm)": "たしかな",
+    "Ý nghĩa": "Chính xác, chuẩn, hình như là, chắc chắn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 442,
+    "Bài": "Bài 7",
+    "Từ vựng": "必要な",
+    "Cách đọc (Phiên âm)": "ひつような",
+    "Ý nghĩa": "Cần thiết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "必要性 (ひつようせい): Tính cần thiết"
+  },
+  {
+    "STT": 443,
+    "Bài": "Bài 7",
+    "Từ vựng": "もったいない",
+    "Cách đọc (Phiên âm)": "もったいない",
+    "Ý nghĩa": "Tiếc, lãng phí",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 444,
+    "Bài": "Bài 7",
+    "Từ vựng": "重要な",
+    "Cách đọc (Phiên âm)": "じゅうような",
+    "Ý nghĩa": "Quan trọng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "大事な (だいじな): Quan trọng, 大切な (たいせつな): Quan trọng"
+  },
+  {
+    "STT": 445,
+    "Bài": "Bài 7",
+    "Từ vựng": "すごい",
+    "Cách đọc (Phiên âm)": "すごい",
+    "Ý nghĩa": "Nồng nhiệt, giỏi, ngầu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "すごく〜 (すごく): Cực kỳ, khủng khiếp"
+  },
+  {
+    "STT": 446,
+    "Bài": "Bài 7",
+    "Từ vựng": "激しい",
+    "Cách đọc (Phiên âm)": "はげしい",
+    "Ý nghĩa": "Mạnh, mãnh liệt, dữ dội, cực kỳ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 447,
+    "Bài": "Bài 7",
+    "Từ vựng": "ひどい",
+    "Cách đọc (Phiên âm)": "ひどい",
+    "Ý nghĩa": "Tệ, khủng khiếp, không ra gì",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ひどい目にあう (ひどいめにあう): Trải qua chuyện tồi tệ, 大変な目にあう (たいへんなめにあう): Ngày tồi tệ"
+  },
+  {
+    "STT": 448,
+    "Bài": "Bài 7",
+    "Từ vựng": "そっくりな",
+    "Cách đọc (Phiên âm)": "そっくりな",
+    "Ý nghĩa": "Giống hệt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 449,
+    "Bài": "Bài 7",
+    "Từ vựng": "急な",
+    "Cách đọc (Phiên âm)": "きゅうな",
+    "Ý nghĩa": "Đột nhiên, gấp, đột ngột, xiết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "緩やかな (ゆるやかな): Thoai thoải"
+  },
+  {
+    "STT": 450,
+    "Bài": "Bài 7",
+    "Từ vựng": "適当な",
+    "Cách đọc (Phiên âm)": "てきとうな",
+    "Ý nghĩa": "Thích hợp, phù hợp, vừa, qua loa, vô trách nhiệm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "不適当な (ふてきとうな): Không thích hợp, ちょうどいい (ちょうどいい): Vừa vặn"
+  },
+  {
+    "STT": 451,
+    "Bài": "Bài 7",
+    "Từ vựng": "特別な",
+    "Cách đọc (Phiên âm)": "とくべつな",
+    "Ý nghĩa": "Đặc biệt, rất, đặc biệt khác thường",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 452,
+    "Bài": "Bài 7",
+    "Từ vựng": "完全な",
+    "Cách đọc (Phiên âm)": "かんぜんな",
+    "Ý nghĩa": "Nguyên vẹn, chỉn chu, tươm tất, hoàn toàn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "不完全な (ふかんぜんな): Không hoàn toàn"
+  },
+  {
+    "STT": 453,
+    "Bài": "Bài 7",
+    "Từ vựng": "盛んな",
+    "Cách đọc (Phiên âm)": "さかんな",
+    "Ý nghĩa": "Phát triển, lớn, nồng nhiệt, thịnh hành",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 454,
+    "Bài": "Bài 7",
+    "Từ vựng": "さまざまな",
+    "Cách đọc (Phiên âm)": "さまざまな",
+    "Ý nghĩa": "Nhiều, đa dạng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 455,
+    "Bài": "Bài 7",
+    "Từ vựng": "可能な",
+    "Cách đọc (Phiên âm)": "かのうな",
+    "Ý nghĩa": "Có khả năng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "可能性 (かのうせい): Tính khả thi"
+  },
+  {
+    "STT": 456,
+    "Bài": "Bài 7",
+    "Từ vựng": "基本的な",
+    "Cách đọc (Phiên âm)": "きほんてきな",
+    "Ý nghĩa": "Cơ bản",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 457,
+    "Bài": "Bài 7",
+    "Từ vựng": "ばらばらな",
+    "Cách đọc (Phiên âm)": "ばらばらな",
+    "Ý nghĩa": "Rời rạc, xa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 458,
+    "Bài": "Bài 7",
+    "Từ vựng": "ぼろぼろな",
+    "Cách đọc (Phiên âm)": "ぼろぼろな",
+    "Ý nghĩa": "Rách nát, te tua",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 459,
+    "Bài": "Bài 8",
+    "Từ vựng": "非常に",
+    "Cách đọc (Phiên âm)": "ひじょうに",
+    "Ý nghĩa": "Rất, khẩn cấp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "大変に (たいへんに): Rất, 非常口 (ひじょうぐち): Cửa thoát hiểm, 非常階段 (ひじょうかいだん): Cầu thang thoát hiểm, 非常ベル (ひじょうべる): Chuông báo động"
+  },
+  {
+    "STT": 460,
+    "Bài": "Bài 8",
+    "Từ vựng": "大変",
+    "Cách đọc (Phiên âm)": "たいへん",
+    "Ý nghĩa": "Cực, rất",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "とても (とても): Rất"
+  },
+  {
+    "STT": 461,
+    "Bài": "Bài 8",
+    "Từ vựng": "かなり",
+    "Cách đọc (Phiên âm)": "かなり",
+    "Ý nghĩa": "Rất, cực kỳ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 462,
+    "Bài": "Bài 8",
+    "Từ vựng": "だいたい",
+    "Cách đọc (Phiên âm)": "だいたい",
+    "Ý nghĩa": "Hầu như",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ほとんど (ほとんど): Hầu như"
+  },
+  {
+    "STT": 463,
+    "Bài": "Bài 8",
+    "Từ vựng": "ずいぶん",
+    "Cách đọc (Phiên âm)": "ずいぶん",
+    "Ý nghĩa": "Tương đối, rất",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 464,
+    "Bài": "Bài 8",
+    "Từ vựng": "けっこう",
+    "Cách đọc (Phiên âm)": "けっこう",
+    "Ý nghĩa": "Rất, kha khá",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 465,
+    "Bài": "Bài 8",
+    "Từ vựng": "だいぶ",
+    "Cách đọc (Phiên âm)": "だいぶ",
+    "Ý nghĩa": "Khá nhiều, hầu như",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 466,
+    "Bài": "Bài 8",
+    "Từ vựng": "もっと",
+    "Cách đọc (Phiên âm)": "もっと",
+    "Ý nghĩa": "Hơn, hơn nữa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 467,
+    "Bài": "Bài 8",
+    "Từ vựng": "すっかり",
+    "Cách đọc (Phiên âm)": "すっかり",
+    "Ý nghĩa": "Toàn bộ, hết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "完全に (かんぜんに): Hoàn toàn"
+  },
+  {
+    "STT": 468,
+    "Bài": "Bài 8",
+    "Từ vựng": "いっぱい",
+    "Cách đọc (Phiên âm)": "いっぱい",
+    "Ý nghĩa": "Đầy, nhiều, no, hết cỡ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 469,
+    "Bài": "Bài 8",
+    "Từ vựng": "ぎりぎり",
+    "Cách đọc (Phiên âm)": "ぎりぎり",
+    "Ý nghĩa": "Sát giờ, sát nút",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 470,
+    "Bài": "Bài 8",
+    "Từ vựng": "ぴったり",
+    "Cách đọc (Phiên âm)": "ぴったり",
+    "Ý nghĩa": "Vừa vặn, đúng, chặt, hoàn toàn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 471,
+    "Bài": "Bài 8",
+    "Từ vựng": "たいてい",
+    "Cách đọc (Phiên âm)": "たいてい",
+    "Ý nghĩa": "Thường, hay, hầu hết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 472,
+    "Bài": "Bài 8",
+    "Từ vựng": "同時に",
+    "Cách đọc (Phiên âm)": "どうじに",
+    "Ý nghĩa": "Cùng lúc, ngay sau khi, đồng thời",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 473,
+    "Bài": "Bài 8",
+    "Từ vựng": "前もって",
+    "Cách đọc (Phiên âm)": "まえもって",
+    "Ý nghĩa": "Trước",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 474,
+    "Bài": "Bài 8",
+    "Từ vựng": "すぐに",
+    "Cách đọc (Phiên âm)": "すぐに",
+    "Ý nghĩa": "Ngay lập tức",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 475,
+    "Bài": "Bài 8",
+    "Từ vựng": "突然",
+    "Cách đọc (Phiên âm)": "とつぜん",
+    "Ý nghĩa": "Đột nhiên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 476,
+    "Bài": "Bài 8",
+    "Từ vựng": "いつの間にか",
+    "Cách đọc (Phiên âm)": "いつのまにか",
+    "Ý nghĩa": "Lúc nào không biết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 477,
+    "Bài": "Bài 8",
+    "Từ vựng": "しばらく",
+    "Cách đọc (Phiên âm)": "しばらく",
+    "Ý nghĩa": "Một chút",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 478,
+    "Bài": "Bài 8",
+    "Từ vựng": "ずっと",
+    "Cách đọc (Phiên âm)": "ずっと",
+    "Ý nghĩa": "Hẳn, rất, suốt, nhiều",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 479,
+    "Bài": "Bài 8",
+    "Từ vựng": "あいかわらず",
+    "Cách đọc (Phiên âm)": "あいかわらず",
+    "Ý nghĩa": "Như mọi khi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 480,
+    "Bài": "Bài 8",
+    "Từ vựng": "どんどん",
+    "Cách đọc (Phiên âm)": "どんどん",
+    "Ý nghĩa": "Nhanh & dồn dập",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 481,
+    "Bài": "Bài 8",
+    "Từ vựng": "ますます",
+    "Cách đọc (Phiên âm)": "ますます",
+    "Ý nghĩa": "Ngày càng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 482,
+    "Bài": "Bài 8",
+    "Từ vựng": "やっと",
+    "Cách đọc (Phiên âm)": "やっと",
+    "Ý nghĩa": "Cuối cùng cũng đã, chật vật",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 483,
+    "Bài": "Bài 8",
+    "Từ vựng": "とうとう",
+    "Cách đọc (Phiên âm)": "とうとう",
+    "Ý nghĩa": "Cuối cùng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 484,
+    "Bài": "Bài 8",
+    "Từ vựng": "ついに",
+    "Cách đọc (Phiên âm)": "ついに",
+    "Ý nghĩa": "Cuối cùng ~ cũng đã, cuối cùng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 485,
+    "Bài": "Bài 8",
+    "Từ vựng": "もちろん",
+    "Cách đọc (Phiên âm)": "もちろん",
+    "Ý nghĩa": "Đương nhiên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 486,
+    "Bài": "Bài 8",
+    "Từ vựng": "やはり / やっぱり",
+    "Cách đọc (Phiên âm)": "やはり / やっぱり",
+    "Ý nghĩa": "Quả nhiên, vẫn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 487,
+    "Bài": "Bài 8",
+    "Từ vựng": "きっと",
+    "Cách đọc (Phiên âm)": "きっと",
+    "Ý nghĩa": "Chắc chắn, nhất định",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "必ず (かならず): Chắc chắn"
+  },
+  {
+    "STT": 488,
+    "Bài": "Bài 8",
+    "Từ vựng": "ぜひ",
+    "Cách đọc (Phiên âm)": "ぜひ",
+    "Ý nghĩa": "Nhất định",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 489,
+    "Bài": "Bài 8",
+    "Từ vựng": "なるべく",
+    "Cách đọc (Phiên âm)": "なるべく",
+    "Ý nghĩa": "Cố gắng hết mức có thể",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "できるだけ (できるだけ): Hết mức có thể"
+  },
+  {
+    "STT": 490,
+    "Bài": "Bài 8",
+    "Từ vựng": "案外",
+    "Cách đọc (Phiên âm)": "あんがい",
+    "Ý nghĩa": "Không ngờ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "意外に (いがいに): Ngoài dự đoán"
+  },
+  {
+    "STT": 491,
+    "Bài": "Bài 8",
+    "Từ vựng": "もしかすると",
+    "Cách đọc (Phiên âm)": "もしかすると",
+    "Ý nghĩa": "Có lẽ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "もしかしたら (もしかしたら): Có lẽ, もしかして (もしかして): Có lẽ nào"
+  },
+  {
+    "STT": 492,
+    "Bài": "Bài 8",
+    "Từ vựng": "まさか",
+    "Cách đọc (Phiên âm)": "まさか",
+    "Ý nghĩa": "Không đời nào",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 493,
+    "Bài": "Bài 8",
+    "Từ vựng": "うっかりする",
+    "Cách đọc (Phiên âm)": "うっかりする",
+    "Ý nghĩa": "Lơ đễnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 494,
+    "Bài": "Bài 8",
+    "Từ vựng": "ついてしまった",
+    "Cách đọc (Phiên âm)": "ついてしまった",
+    "Ý nghĩa": "Vô ý, lỡ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 495,
+    "Bài": "Bài 8",
+    "Từ vựng": "思わず",
+    "Cách đọc (Phiên âm)": "おもわず",
+    "Ý nghĩa": "Vô tình, bất giác",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 496,
+    "Bài": "Bài 8",
+    "Từ vựng": "ほっとする",
+    "Cách đọc (Phiên âm)": "ほっとする",
+    "Ý nghĩa": "Yên tâm, thở phào nhẹ nhõm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 497,
+    "Bài": "Bài 8",
+    "Từ vựng": "いらいら",
+    "Cách đọc (Phiên âm)": "いらいら",
+    "Ý nghĩa": "Khó chịu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 498,
+    "Bài": "Bài 8",
+    "Từ vựng": "のんびりする",
+    "Cách đọc (Phiên âm)": "のんびりする",
+    "Ý nghĩa": "Thư thả, thong thả",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 499,
+    "Bài": "Bài 9",
+    "Từ vựng": "読書",
+    "Cách đọc (Phiên âm)": "どくしょ",
+    "Ý nghĩa": "Đọc sách",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 500,
+    "Bài": "Bài 9",
+    "Từ vựng": "演奏",
+    "Cách đọc (Phiên âm)": "えんそう",
+    "Ý nghĩa": "Biểu diễn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 501,
+    "Bài": "Bài 9",
+    "Từ vựng": "芸術",
+    "Cách đọc (Phiên âm)": "げいじゅつ",
+    "Ý nghĩa": "Nghệ thuật",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 502,
+    "Bài": "Bài 9",
+    "Từ vựng": "検査",
+    "Cách đọc (Phiên âm)": "けんさ",
+    "Ý nghĩa": "Kiểm tra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "精密検査 (せいみつけんさ): Kiểm tra tổng quát"
+  },
+  {
+    "STT": 503,
+    "Bài": "Bài 9",
+    "Từ vựng": "血液",
+    "Cách đọc (Phiên âm)": "けつえき",
+    "Ý nghĩa": "Máu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "血 (ち): Máu, 血液型 (けつえきがた): Nhóm máu"
+  },
+  {
+    "STT": 504,
+    "Bài": "Bài 9",
+    "Từ vựng": "治療",
+    "Cách đọc (Phiên âm)": "ちりょう",
+    "Ý nghĩa": "Trị liệu, chữa trị",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 505,
+    "Bài": "Bài 9",
+    "Từ vựng": "症状",
+    "Cách đọc (Phiên âm)": "しょうじょう",
+    "Ý nghĩa": "Triệu chứng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 506,
+    "Bài": "Bài 9",
+    "Từ vựng": "予防",
+    "Cách đọc (Phiên âm)": "よぼう",
+    "Ý nghĩa": "Phòng, phòng tránh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 507,
+    "Bài": "Bài 9",
+    "Từ vựng": "栄養",
+    "Cách đọc (Phiên âm)": "えいよう",
+    "Ý nghĩa": "Dinh dưỡng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 508,
+    "Bài": "Bài 9",
+    "Từ vựng": "手術",
+    "Cách đọc (Phiên âm)": "しゅじゅつ",
+    "Ý nghĩa": "Phẫu thuật",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 509,
+    "Bài": "Bài 9",
+    "Từ vựng": "死亡",
+    "Cách đọc (Phiên âm)": "しぼう",
+    "Ý nghĩa": "Tử vong",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 510,
+    "Bài": "Bài 9",
+    "Từ vựng": "誤解",
+    "Cách đọc (Phiên âm)": "ごかい",
+    "Ý nghĩa": "Hiểu nhầm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 511,
+    "Bài": "Bài 9",
+    "Từ vựng": "後悔",
+    "Cách đọc (Phiên âm)": "こうかい",
+    "Ý nghĩa": "Hối hận",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 512,
+    "Bài": "Bài 9",
+    "Từ vựng": "訳",
+    "Cách đọc (Phiên âm)": "わけ",
+    "Ý nghĩa": "Lý do, cớ, ý nghĩa, mạch",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "理由 (りゆう): Lý do, 意味 (いみ): Ý nghĩa, 理屈 (りくつ): Tính logic"
+  },
+  {
+    "STT": 513,
+    "Bài": "Bài 9",
+    "Từ vựng": "態度",
+    "Cách đọc (Phiên âm)": "たいど",
+    "Ý nghĩa": "Thái độ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 514,
+    "Bài": "Bài 9",
+    "Từ vựng": "癖",
+    "Cách đọc (Phiên âm)": "くせ",
+    "Ý nghĩa": "Thói quen (hơi xấu), tật",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "口癖 (くちぐせ): Câu cửa miệng"
+  },
+  {
+    "STT": 515,
+    "Bài": "Bài 9",
+    "Từ vựng": "礼儀",
+    "Cách đọc (Phiên âm)": "れいぎ",
+    "Ý nghĩa": "Lễ nghĩa, lễ phép, phép xã giao",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "エチケット (えちけっと): Phép lịch sự, マナー (まなー): Cách cư xử"
+  },
+  {
+    "STT": 516,
+    "Bài": "Bài 9",
+    "Từ vựng": "文句",
+    "Cách đọc (Phiên âm)": "もんく",
+    "Ý nghĩa": "Phàn nàn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 517,
+    "Bài": "Bài 9",
+    "Từ vựng": "表情",
+    "Cách đọc (Phiên âm)": "ひょうじょう",
+    "Ý nghĩa": "Biểu cảm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 518,
+    "Bài": "Bài 9",
+    "Từ vựng": "禁煙",
+    "Cách đọc (Phiên âm)": "きんえん",
+    "Ý nghĩa": "Cấm hút thuốc, bỏ thuốc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "禁煙席 (きんえんせき): Ghế cấm hút thuốc, 喫煙する (きつえんする): Hút thuốc"
+  },
+  {
+    "STT": 519,
+    "Bài": "Bài 9",
+    "Từ vựng": "禁止",
+    "Cách đọc (Phiên âm)": "きんし",
+    "Ý nghĩa": "Cấm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 520,
+    "Bài": "Bài 9",
+    "Từ vựng": "完成",
+    "Cách đọc (Phiên âm)": "かんせい",
+    "Ý nghĩa": "Hoàn thành",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 521,
+    "Bài": "Bài 9",
+    "Từ vựng": "基本",
+    "Cách đọc (Phiên âm)": "きほん",
+    "Ý nghĩa": "Cơ bản",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 522,
+    "Bài": "Bài 9",
+    "Từ vựng": "課題",
+    "Cách đọc (Phiên âm)": "かだい",
+    "Ý nghĩa": "Vấn đề, bài tập, nhiệm vụ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 523,
+    "Bài": "Bài 9",
+    "Từ vựng": "記録",
+    "Cách đọc (Phiên âm)": "きろく",
+    "Ý nghĩa": "Hồ sơ, ghi chép, lưu lại, kỷ lục",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "記録的 (きろくてき): Mang tính kỷ lục"
+  },
+  {
+    "STT": 524,
+    "Bài": "Bài 9",
+    "Từ vựng": "状態",
+    "Cách đọc (Phiên âm)": "じょうたい",
+    "Ý nghĩa": "Tình trạng, tình hình",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "状況 (じょうきょう): Tình huống"
+  },
+  {
+    "STT": 525,
+    "Bài": "Bài 9",
+    "Từ vựng": "場面",
+    "Cách đọc (Phiên âm)": "ばめん",
+    "Ý nghĩa": "Cảnh, phân cảnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "シーン (しーん): Cảnh"
+  },
+  {
+    "STT": 526,
+    "Bài": "Bài 9",
+    "Từ vựng": "機会",
+    "Cách đọc (Phiên âm)": "きかい",
+    "Ý nghĩa": "Cơ hội",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "チャンス (ちゃんす): Cơ hội"
+  },
+  {
+    "STT": 527,
+    "Bài": "Bài 9",
+    "Từ vựng": "距離",
+    "Cách đọc (Phiên âm)": "きょり",
+    "Ý nghĩa": "Cự ly, khoảng cách",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "遠距離恋愛 (えんきょりれんあい): Yêu xa, 近距離 (きんきょり): Khoảng cách gần"
+  },
+  {
+    "STT": 528,
+    "Bài": "Bài 9",
+    "Từ vựng": "提案",
+    "Cách đọc (Phiên âm)": "ていあん",
+    "Ý nghĩa": "Đề xuất",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 529,
+    "Bài": "Bài 9",
+    "Từ vựng": "知識",
+    "Cách đọc (Phiên âm)": "ちしき",
+    "Ý nghĩa": "Kiến thức, tri thức",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "乏しい (とぼしい): Nghèo nàn/thiếu thốn"
+  },
+  {
+    "STT": 530,
+    "Bài": "Bài 9",
+    "Từ vựng": "実力",
+    "Cách đọc (Phiên âm)": "じつりょく",
+    "Ý nghĩa": "Thực lực, năng lực",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 531,
+    "Bài": "Bài 9",
+    "Từ vựng": "手段",
+    "Cách đọc (Phiên âm)": "しゅだん",
+    "Ý nghĩa": "Cách thức, phương pháp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "交通手段 (こうつうしゅだん): Phương tiện giao thông"
+  },
+  {
+    "STT": 532,
+    "Bài": "Bài 9",
+    "Từ vựng": "代表",
+    "Cách đọc (Phiên âm)": "だいひょう",
+    "Ý nghĩa": "Đại diện, thay mặt, tiêu biểu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 533,
+    "Bài": "Bài 9",
+    "Từ vựng": "影響",
+    "Cách đọc (Phiên âm)": "えいきょう",
+    "Ý nghĩa": "Ảnh hưởng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 534,
+    "Bài": "Bài 9",
+    "Từ vựng": "効果",
+    "Cách đọc (Phiên âm)": "こうか",
+    "Ý nghĩa": "Có hiệu quả",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 535,
+    "Bài": "Bài 9",
+    "Từ vựng": "印象",
+    "Cách đọc (Phiên âm)": "いんしょう",
+    "Ý nghĩa": "Ấn tượng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 536,
+    "Bài": "Bài 9",
+    "Từ vựng": "印",
+    "Cách đọc (Phiên âm)": "しるし",
+    "Ý nghĩa": "Ký hiệu, biểu tượng, minh chứng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "証し (あかし): Minh chứng"
+  },
+  {
+    "STT": 537,
+    "Bài": "Bài 9",
+    "Từ vựng": "合図",
+    "Cách đọc (Phiên âm)": "あいず",
+    "Ý nghĩa": "Tín hiệu, ám hiệu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 538,
+    "Bài": "Bài 9",
+    "Từ vựng": "共通",
+    "Cách đọc (Phiên âm)": "きょうつう",
+    "Ý nghĩa": "Chung",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "共通点 (きょうつうてん): Điểm chung"
+  },
+  {
+    "STT": 539,
+    "Bài": "Bài 9",
+    "Từ vựng": "強調",
+    "Cách đọc (Phiên âm)": "きょうちょう",
+    "Ý nghĩa": "Nhấn mạnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 540,
+    "Bài": "Bài 9",
+    "Từ vựng": "省略",
+    "Cách đọc (Phiên âm)": "しょうりゃく",
+    "Ý nghĩa": "Lược bớt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 541,
+    "Bài": "Bài 9",
+    "Từ vựng": "挑戦",
+    "Cách đọc (Phiên âm)": "ちょうせん",
+    "Ý nghĩa": "Thử thách, thử sức",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 542,
+    "Bài": "Bài 9",
+    "Từ vựng": "やる気",
+    "Cách đọc (Phiên âm)": "やるき",
+    "Ý nghĩa": "Hứng thú",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 543,
+    "Bài": "Bài 9",
+    "Từ vựng": "資格",
+    "Cách đọc (Phiên âm)": "しかく",
+    "Ý nghĩa": "Bằng cấp, điều kiện, tư cách",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "資格試験 (しかくしけん): Kỳ thi lấy bằng"
+  },
+  {
+    "STT": 544,
+    "Bài": "Bài 9",
+    "Từ vựng": "申請",
+    "Cách đọc (Phiên âm)": "しんせい",
+    "Ý nghĩa": "Đăng ký, xin",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 545,
+    "Bài": "Bài 9",
+    "Từ vựng": "本人",
+    "Cách đọc (Phiên âm)": "ほんにん",
+    "Ý nghĩa": "Chính chủ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "代理人 (だいりにん): Người đại diện"
+  },
+  {
+    "STT": 546,
+    "Bài": "Bài 9",
+    "Từ vựng": "契約",
+    "Cách đọc (Phiên âm)": "けいやく",
+    "Ý nghĩa": "Hợp đồng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 547,
+    "Bài": "Bài 9",
+    "Từ vựng": "証明",
+    "Cách đọc (Phiên âm)": "しょうめい",
+    "Ý nghĩa": "Chứng minh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "身分証明書 (みぶんしょうめいしょ): Thẻ căn cước"
+  },
+  {
+    "STT": 548,
+    "Bài": "Bài 9",
+    "Từ vựng": "変更",
+    "Cách đọc (Phiên âm)": "へんこう",
+    "Ý nghĩa": "Thay đổi",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 549,
+    "Bài": "Bài 9",
+    "Từ vựng": "保存",
+    "Cách đọc (Phiên âm)": "ほぞん",
+    "Ý nghĩa": "Lưu, bảo quản",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 550,
+    "Bài": "Bài 9",
+    "Từ vựng": "保護",
+    "Cách đọc (Phiên âm)": "ほご",
+    "Ý nghĩa": "Bảo vệ, bảo hộ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "保護者 (ほごしゃ): Người bảo lãnh, 過保護 (かほご): Bao bọc quá mức, 生活保護 (せいかつほご): Phúc lợi xã hội"
+  },
+  {
+    "STT": 551,
+    "Bài": "Bài 9",
+    "Từ vựng": "環境",
+    "Cách đọc (Phiên âm)": "かんきょう",
+    "Ý nghĩa": "Môi trường",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 552,
+    "Bài": "Bài 9",
+    "Từ vựng": "資源",
+    "Cách đọc (Phiên âm)": "しげん",
+    "Ý nghĩa": "Tài nguyên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "天然資源 (てんねんしげん): Tài nguyên thiên nhiên, 地下資源 (ちかしげん): Tài nguyên dưới lòng đất"
+  },
+  {
+    "STT": 553,
+    "Bài": "Bài 9",
+    "Từ vựng": "不足",
+    "Cách đọc (Phiên âm)": "ふそく",
+    "Ý nghĩa": "Không đủ, thiếu",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 554,
+    "Bài": "Bài 9",
+    "Từ vựng": "平均",
+    "Cách đọc (Phiên âm)": "へいきん",
+    "Ý nghĩa": "Trung bình",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 555,
+    "Bài": "Bài 9",
+    "Từ vựng": "割合",
+    "Cách đọc (Phiên âm)": "わりあい",
+    "Ý nghĩa": "Tỷ lệ, rất",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 556,
+    "Bài": "Bài 9",
+    "Từ vựng": "商売",
+    "Cách đọc (Phiên âm)": "しょうばい",
+    "Ý nghĩa": "Kinh doanh, buôn bán",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 557,
+    "Bài": "Bài 9",
+    "Từ vựng": "商品",
+    "Cách đọc (Phiên âm)": "しょうひん",
+    "Ý nghĩa": "Sản phẩm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 558,
+    "Bài": "Bài 9",
+    "Từ vựng": "質",
+    "Cách đọc (Phiên âm)": "しつ",
+    "Ý nghĩa": "Chất lượng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 559,
+    "Bài": "Bài 9",
+    "Từ vựng": "型",
+    "Cách đọc (Phiên âm)": "かた",
+    "Ý nghĩa": "Mẫu, kiểu, cỡ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "新型 (しんがた): Đời mới"
+  },
+  {
+    "STT": 560,
+    "Bài": "Bài 9",
+    "Từ vựng": "生産",
+    "Cách đọc (Phiên âm)": "せいさん",
+    "Ý nghĩa": "Sản xuất",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 561,
+    "Bài": "Bài 9",
+    "Từ vựng": "消費",
+    "Cách đọc (Phiên âm)": "しょうひ",
+    "Ý nghĩa": "Tiêu hao",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "消費税 (しょうひぜい): Thuế VAT, thuế tiêu dùng"
+  },
+  {
+    "STT": 562,
+    "Bài": "Bài 9",
+    "Từ vựng": "物価",
+    "Cách đọc (Phiên âm)": "ぶっか",
+    "Ý nghĩa": "Vật giá, giá cả",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 563,
+    "Bài": "Bài 9",
+    "Từ vựng": "倒産",
+    "Cách đọc (Phiên âm)": "とうさん",
+    "Ý nghĩa": "Phá sản",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 564,
+    "Bài": "Bài 9",
+    "Từ vựng": "文化",
+    "Cách đọc (Phiên âm)": "ぶんか",
+    "Ý nghĩa": "Văn hóa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 565,
+    "Bài": "Bài 9",
+    "Từ vựng": "地方",
+    "Cách đọc (Phiên âm)": "ちほう",
+    "Ý nghĩa": "Vùng, khu vực, địa phương",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "地域 (ちいき): Khu vực, いなか (いなか): Quê, 中央 (ちゅうおう): Trung ương"
+  },
+  {
+    "STT": 566,
+    "Bài": "Bài 9",
+    "Từ vựng": "戦争",
+    "Cách đọc (Phiên âm)": "せんそう",
+    "Ý nghĩa": "Chiến tranh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 567,
+    "Bài": "Bài 9",
+    "Từ vựng": "平和",
+    "Cách đọc (Phiên âm)": "へいわ",
+    "Ý nghĩa": "Hòa bình, hòa hợp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 568,
+    "Bài": "Bài 10",
+    "Từ vựng": "越える / 超える",
+    "Cách đọc (Phiên âm)": "こえる",
+    "Ý nghĩa": "Vượt qua, vượt quá",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 569,
+    "Bài": "Bài 10",
+    "Từ vựng": "が過ぎる",
+    "Cách đọc (Phiên âm)": "すぎる",
+    "Ý nghĩa": "Đi qua, quá, vượt quá",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": "570-571",
+    "Bài": "Bài 10",
+    "Từ vựng": "が移る / を移す",
+    "Cách đọc (Phiên âm)": "うつる / うつす",
+    "Ý nghĩa": "Di chuyển, bị lây / Di chuyển, lây sang",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 572,
+    "Bài": "Bài 10",
+    "Từ vựng": "連れる",
+    "Cách đọc (Phiên âm)": "つれる",
+    "Ý nghĩa": "Dẫn, dẫn theo, đưa theo",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 573,
+    "Bài": "Bài 10",
+    "Từ vựng": "寄る",
+    "Cách đọc (Phiên âm)": "よる",
+    "Ý nghĩa": "Tiến về phía, lệch, ghé vào",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "近寄る (ちかよる): Lại gần"
+  },
+  {
+    "STT": 574,
+    "Bài": "Bài 10",
+    "Từ vựng": "を寄せる",
+    "Cách đọc (Phiên âm)": "よせる",
+    "Ý nghĩa": "Di chuyển ~ về phía",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 575,
+    "Bài": "Bài 10",
+    "Từ vựng": "与える",
+    "Cách đọc (Phiên âm)": "あたえる",
+    "Ý nghĩa": "Trao, cho, đem lại, gây ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "受ける (うける): Nhận"
+  },
+  {
+    "STT": "576-577",
+    "Bài": "Bài 10",
+    "Từ vựng": "が向く / を向ける",
+    "Cách đọc (Phiên âm)": "むく / むける",
+    "Ý nghĩa": "Hướng về, phù hợp với / Hướng đến, dành cho",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "向き (むき): Hướng, 向いている (むいている): Phù hợp"
+  },
+  {
+    "STT": 578,
+    "Bài": "Bài 10",
+    "Từ vựng": "任せる",
+    "Cách đọc (Phiên âm)": "まかせる",
+    "Ý nghĩa": "Giao phó",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 579,
+    "Bài": "Bài 10",
+    "Từ vựng": "守る",
+    "Cách đọc (Phiên âm)": "まもる",
+    "Ý nghĩa": "Bảo vệ, tuân thủ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "違反する (いはんする): Vi phạm, 破る (やぶる): Phá vỡ"
+  },
+  {
+    "STT": 580,
+    "Bài": "Bài 10",
+    "Từ vựng": "争う",
+    "Cách đọc (Phiên âm)": "あらそう",
+    "Ý nghĩa": "Tranh cãi, tranh chấp, cạnh tranh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 581,
+    "Bài": "Bài 10",
+    "Từ vựng": "望む",
+    "Cách đọc (Phiên âm)": "のぞむ",
+    "Ý nghĩa": "Hi vọng, kỳ vọng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "願う (ねがう): Cầu mong, 望み (のぞみ): Hi vọng, 希望 (きぼう): Nguyện vọng"
+  },
+  {
+    "STT": 582,
+    "Bài": "Bài 10",
+    "Từ vựng": "信じる",
+    "Cách đọc (Phiên âm)": "しんじる",
+    "Ý nghĩa": "Tin tưởng, tin vào, tín",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 583,
+    "Bài": "Bài 10",
+    "Từ vựng": "通じる",
+    "Cách đọc (Phiên âm)": "つうじる",
+    "Ý nghĩa": "Hiểu, dẫn đến, kết nối",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 584,
+    "Bài": "Bài 10",
+    "Từ vựng": "飽きる",
+    "Cách đọc (Phiên âm)": "あきる",
+    "Ý nghĩa": "Chán",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 585,
+    "Bài": "Bài 10",
+    "Từ vựng": "思いつく",
+    "Cách đọc (Phiên âm)": "おもいつく",
+    "Ý nghĩa": "Nghĩ ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 586,
+    "Bài": "Bài 10",
+    "Từ vựng": "熱中する",
+    "Cách đọc (Phiên âm)": "ねっちゅうする",
+    "Ý nghĩa": "Mải mê, chăm chú, say mê",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "熱中症 (ねっちゅうしょう): Say nắng, shock nhiệt"
+  },
+  {
+    "STT": 587,
+    "Bài": "Bài 10",
+    "Từ vựng": "暮らす",
+    "Cách đọc (Phiên âm)": "くらす",
+    "Ý nghĩa": "Sống, sinh sống",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 588,
+    "Bài": "Bài 10",
+    "Từ vựng": "巻く",
+    "Cách đọc (Phiên âm)": "まく",
+    "Ý nghĩa": "Quấn, cuốn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 589,
+    "Bài": "Bài 10",
+    "Từ vựng": "結ぶ",
+    "Cách đọc (Phiên âm)": "むすぶ",
+    "Ý nghĩa": "Buộc, thắt, nối, ký kết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ほどく (ほどく): Cởi, tháo"
+  },
+  {
+    "STT": "590-591",
+    "Bài": "Bài 10",
+    "Từ vựng": "済む / を済ませる / を済ます",
+    "Cách đọc (Phiên âm)": "すむ / すませる / すます",
+    "Ý nghĩa": "Xong, hoàn thành / Hoàn tất",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 592,
+    "Bài": "Bài 10",
+    "Từ vựng": "切れる",
+    "Cách đọc (Phiên âm)": "きれる",
+    "Ý nghĩa": "Cắt được, sắc, hết hạn, hết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "電池切れ (でんちぎれ): Hết pin"
+  },
+  {
+    "STT": "593-594",
+    "Bài": "Bài 10",
+    "Từ vựng": "が伝わる / を伝える",
+    "Cách đọc (Phiên âm)": "つたわる / つたえる",
+    "Ý nghĩa": "Được lưu truyền / Truyền đạt, chuyển lời",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 595,
+    "Bài": "Bài 10",
+    "Từ vựng": "続く",
+    "Cách đọc (Phiên âm)": "つづく",
+    "Ý nghĩa": "Liên tục, trải dài, tiếp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 596,
+    "Bài": "Bài 10",
+    "Từ vựng": "続ける",
+    "Cách đọc (Phiên âm)": "つづける",
+    "Ý nghĩa": "Kéo dài, tiếp tục",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 597,
+    "Bài": "Bài 10",
+    "Từ vựng": "がつながる",
+    "Cách đọc (Phiên âm)": "つながる",
+    "Ý nghĩa": "Được kết nối, dẫn đến, liên tục",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 598,
+    "Bài": "Bài 10",
+    "Từ vựng": "をつなぐ",
+    "Cách đọc (Phiên âm)": "つなぐ",
+    "Ý nghĩa": "Nối, kết nối",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 599,
+    "Bài": "Bài 10",
+    "Từ vựng": "をつなげる",
+    "Cách đọc (Phiên âm)": "つなげる",
+    "Ý nghĩa": "Kết nối",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": "600-601",
+    "Bài": "Bài 10",
+    "Từ vựng": "が伸びる / を伸ばす",
+    "Cách đọc (Phiên âm)": "のびる / のばす",
+    "Ý nghĩa": "Dài ra, tăng lên / Kéo dài, kéo dãn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": "602-603",
+    "Bài": "Bài 10",
+    "Từ vựng": "が延びる / を延ばす",
+    "Cách đọc (Phiên âm)": "のびる / のばす",
+    "Ý nghĩa": "Kéo dài, tăng / Trì hoãn, kéo dài",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": "604-605",
+    "Bài": "Bài 10",
+    "Từ vựng": "が重なる / を重ねる",
+    "Cách đọc (Phiên âm)": "かさなる / かさねる",
+    "Ý nghĩa": "Chồng lên, trùng nhau / Chồng lên, nhiều",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": "606-607",
+    "Bài": "Bài 10",
+    "Từ vựng": "が載る / を載せる",
+    "Cách đọc (Phiên âm)": "のる / のせる",
+    "Ý nghĩa": "Chất lên, đăng lên / Chất lên, đăng lên",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 608,
+    "Bài": "Bài 10",
+    "Từ vựng": "そろえる",
+    "Cách đọc (Phiên âm)": "そろえる",
+    "Ý nghĩa": "Sắp xếp, để ngay ngắn, tập trung",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 609,
+    "Bài": "Bài 10",
+    "Từ vựng": "まとめる",
+    "Cách đọc (Phiên âm)": "まとめる",
+    "Ý nghĩa": "Tổng hợp, thống nhất, tập trung",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": "610-611",
+    "Bài": "Bài 10",
+    "Từ vựng": "が溜まる / を溜める",
+    "Cách đọc (Phiên âm)": "たまる / ためる",
+    "Ý nghĩa": "Đọng, dồn lại / Dồn lại, tích lại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 612,
+    "Bài": "Bài 10",
+    "Từ vựng": "交じる",
+    "Cách đọc (Phiên âm)": "まじる",
+    "Ý nghĩa": "Trộn, kết hợp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 613,
+    "Bài": "Bài 10",
+    "Từ vựng": "まざる",
+    "Cách đọc (Phiên âm)": "まざる",
+    "Ý nghĩa": "Được trộn lẫn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 614,
+    "Bài": "Bài 10",
+    "Từ vựng": "をまぜる",
+    "Cách đọc (Phiên âm)": "まぜる",
+    "Ý nghĩa": "Trộn lẫn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "かき混ぜる (かきまぜる): Trộn, khuấy mạnh"
+  },
+  {
+    "STT": 615,
+    "Bài": "Bài 10",
+    "Từ vựng": "が解ける / を解く",
+    "Cách đọc (Phiên âm)": "とける / とく",
+    "Ý nghĩa": "Được giải quyết / Giải quyết",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 616,
+    "Bài": "Bài 10",
+    "Từ vựng": "溶かす",
+    "Cách đọc (Phiên âm)": "とかす",
+    "Ý nghĩa": "Đánh tan, làm tan ra",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 617,
+    "Bài": "Bài 10",
+    "Từ vựng": "含む",
+    "Cách đọc (Phiên âm)": "ふくむ",
+    "Ý nghĩa": "Chứa, bao gồm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 618,
+    "Bài": "Bài 10",
+    "Từ vựng": "含める",
+    "Cách đọc (Phiên âm)": "ふくめる",
+    "Ý nghĩa": "Bao gồm, bao hàm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 619,
+    "Bài": "Bài 10",
+    "Từ vựng": "が現れる",
+    "Cách đọc (Phiên âm)": "あらわれる",
+    "Ý nghĩa": "Xuất hiện, có (tác dụng)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 620,
+    "Bài": "Bài 10",
+    "Từ vựng": "を表す",
+    "Cách đọc (Phiên âm)": "あらわす",
+    "Ý nghĩa": "Thể hiện, biểu thị",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": "621-622",
+    "Bài": "Bài 10",
+    "Từ vựng": "が散る / を散らす",
+    "Cách đọc (Phiên âm)": "ちる / ちらす",
+    "Ý nghĩa": "Rơi, rụng / Làm rụng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "飛び散る (とびちる): Bay, bắn khắp nơi"
+  },
+  {
+    "STT": 623,
+    "Bài": "Bài 10",
+    "Từ vựng": "が明ける",
+    "Cách đọc (Phiên âm)": "あける",
+    "Ý nghĩa": "Cuối, sau",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "夜明け (よあけ): Sáng sớm, 年明け (としあけ): Cuối năm, 週明け (しゅうあけ): Thứ 2"
+  },
+  {
+    "STT": 624,
+    "Bài": "Bài 11",
+    "Từ vựng": "リーダー",
+    "Cách đọc (Phiên âm)": "りーだー",
+    "Ý nghĩa": "Thủ lĩnh, lãnh đạo",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "リーダーシップ (りーだーしっぷ): Khả năng lãnh đạo, チアリーダー (ちありーだー): Đội trưởng đội cổ vũ"
+  },
+  {
+    "STT": 625,
+    "Bài": "Bài 11",
+    "Từ vựng": "ボランティア",
+    "Cách đọc (Phiên âm)": "ぼらんてぃあ",
+    "Ý nghĩa": "Tình nguyện",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 626,
+    "Bài": "Bài 11",
+    "Từ vựng": "コミュニケーション",
+    "Cách đọc (Phiên âm)": "こみゅにけーしょん",
+    "Ý nghĩa": "Giao tiếp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 627,
+    "Bài": "Bài 11",
+    "Từ vựng": "ユーモア",
+    "Cách đọc (Phiên âm)": "ゆーもあ",
+    "Ý nghĩa": "Hài hước",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "おもしろい (おもしろい): Thú vị, センス (せんす): Có khiếu"
+  },
+  {
+    "STT": 628,
+    "Bài": "Bài 11",
+    "Từ vựng": "ショック",
+    "Cách đọc (Phiên âm)": "しょっく",
+    "Ý nghĩa": "Cú sốc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 629,
+    "Bài": "Bài 11",
+    "Từ vựng": "ストレス",
+    "Cách đọc (Phiên âm)": "すとれす",
+    "Ý nghĩa": "Căng thẳng, áp lực",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "プレッシャー (ぷれっしゃー): Áp lực"
+  },
+  {
+    "STT": 630,
+    "Bài": "Bài 11",
+    "Từ vựng": "バランス",
+    "Cách đọc (Phiên âm)": "ばらんす",
+    "Ý nghĩa": "Sự cân bằng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 631,
+    "Bài": "Bài 11",
+    "Từ vựng": "レベル",
+    "Cách đọc (Phiên âm)": "れべる",
+    "Ý nghĩa": "Trình độ, mức độ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 632,
+    "Bài": "Bài 11",
+    "Từ vựng": "アップ",
+    "Cách đọc (Phiên âm)": "あっぷ",
+    "Ý nghĩa": "Tăng, (chụp) cận cảnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ダウン (だうん): Giảm"
+  },
+  {
+    "STT": 633,
+    "Bài": "Bài 11",
+    "Từ vựng": "ダウン",
+    "Cách đọc (Phiên âm)": "だうん",
+    "Ý nghĩa": "Mệt, kiệt sức, giảm",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 634,
+    "Bài": "Bài 11",
+    "Từ vựng": "プラス / マイナス",
+    "Cách đọc (Phiên âm)": "ぷらす / まいなす",
+    "Ý nghĩa": "Cộng thêm, có lợi / Trừ đi, lỗ, thiệt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 635,
+    "Bài": "Bài 11",
+    "Từ vựng": "イメージ",
+    "Cách đọc (Phiên âm)": "いめーじ",
+    "Ý nghĩa": "Hình dung, tưởng tượng, hình ảnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 636,
+    "Bài": "Bài 11",
+    "Từ vựng": "プライバシー",
+    "Cách đọc (Phiên âm)": "ぷらいばしー",
+    "Ý nghĩa": "Sự riêng tư",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 637,
+    "Bài": "Bài 11",
+    "Từ vựng": "オフィス",
+    "Cách đọc (Phiên âm)": "おふぃす",
+    "Ý nghĩa": "Văn phòng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 638,
+    "Bài": "Bài 11",
+    "Từ vựng": "ルール",
+    "Cách đọc (Phiên âm)": "るーる",
+    "Ý nghĩa": "Quy tắc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "規則 (きそく): Quy tắc (cứng nhắc hơn)"
+  },
+  {
+    "STT": 639,
+    "Bài": "Bài 11",
+    "Từ vựng": "マナー",
+    "Cách đọc (Phiên âm)": "まなー",
+    "Ý nghĩa": "Lễ nghi, cách cư xử",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 640,
+    "Bài": "Bài 11",
+    "Từ vựng": "スケジュール",
+    "Cách đọc (Phiên âm)": "すけじゅーる",
+    "Ý nghĩa": "Thời khoá biểu, lịch trình",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "スケジュール表 (すけじゅーるひょう): Bảng kế hoạch"
+  },
+  {
+    "STT": 641,
+    "Bài": "Bài 11",
+    "Từ vựng": "タイトル",
+    "Cách đọc (Phiên âm)": "たいとる",
+    "Ý nghĩa": "Tiêu đề, đầu đề",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 642,
+    "Bài": "Bài 11",
+    "Từ vựng": "テーマ",
+    "Cách đọc (Phiên âm)": "てーま",
+    "Ý nghĩa": "Chủ đề, đề tài",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 643,
+    "Bài": "Bài 11",
+    "Từ vựng": "ストーリー",
+    "Cách đọc (Phiên âm)": "すとーりー",
+    "Ý nghĩa": "Cốt truyện",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 644,
+    "Bài": "Bài 11",
+    "Từ vựng": "レンタル",
+    "Cách đọc (Phiên âm)": "れんたる",
+    "Ý nghĩa": "Hàng thuê, cho thuê",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 645,
+    "Bài": "Bài 11",
+    "Từ vựng": "リサイクル",
+    "Cách đọc (Phiên âm)": "りさいくる",
+    "Ý nghĩa": "Tái sử dụng, tái chế",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 646,
+    "Bài": "Bài 11",
+    "Từ vựng": "タイプ",
+    "Cách đọc (Phiên âm)": "たいぷ",
+    "Ý nghĩa": "Kiểu, loại, tuýp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "種類 (しゅるい): Chủng loại"
+  },
+  {
+    "STT": 647,
+    "Bài": "Bài 11",
+    "Từ vựng": "スタイル",
+    "Cách đọc (Phiên âm)": "すたいる",
+    "Ý nghĩa": "Dáng, phong cách",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 648,
+    "Bài": "Bài 11",
+    "Từ vựng": "セット",
+    "Cách đọc (Phiên âm)": "せっと",
+    "Ý nghĩa": "Bộ, ván, set, cài đặt",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "設定 (せってい): Thiết lập"
+  },
+  {
+    "STT": 649,
+    "Bài": "Bài 11",
+    "Từ vựng": "ウイルス",
+    "Cách đọc (Phiên âm)": "ういるす",
+    "Ý nghĩa": "Virus",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 650,
+    "Bài": "Bài 11",
+    "Từ vựng": "エネルギー",
+    "Cách đọc (Phiên âm)": "えねるぎー",
+    "Ý nghĩa": "Năng lượng",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "省エネ (しょうえね): Tiết kiệm năng lượng"
+  },
+  {
+    "STT": 651,
+    "Bài": "Bài 11",
+    "Từ vựng": "ブレーキ",
+    "Cách đọc (Phiên âm)": "ぶれーき",
+    "Ý nghĩa": "Phanh xe, hãm lại",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "アクセル (あくせる): Chân ga"
+  },
+  {
+    "STT": "652-653",
+    "Bài": "Bài 11",
+    "Từ vựng": "が炊ける / を炊く",
+    "Cách đọc (Phiên âm)": "たける / たく",
+    "Ý nghĩa": "Được nấu / Nấu (cơm)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": "654-655",
+    "Bài": "Bài 11",
+    "Từ vựng": "が煮える / を煮る",
+    "Cách đọc (Phiên âm)": "にえる / にる",
+    "Ý nghĩa": "Được nấu, ninh / Nấu, ninh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": "656-657",
+    "Bài": "Bài 11",
+    "Từ vựng": "が焼ける / を焼く",
+    "Cách đọc (Phiên âm)": "やける / やく",
+    "Ý nghĩa": "Chín / Nướng, làm chín",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 658,
+    "Bài": "Bài 11",
+    "Từ vựng": "をゆでる",
+    "Cách đọc (Phiên âm)": "ゆでる",
+    "Ý nghĩa": "Luộc",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ゆで卵 (ゆでたまご): Trứng luộc"
+  },
+  {
+    "STT": 659,
+    "Bài": "Bài 11",
+    "Từ vựng": "を揚げる",
+    "Cách đọc (Phiên âm)": "あげる",
+    "Ý nghĩa": "Rán, chiên (ngập dầu)",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 660,
+    "Bài": "Bài 11",
+    "Từ vựng": "を蒸す",
+    "Cách đọc (Phiên âm)": "むす",
+    "Ý nghĩa": "Hấp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "蒸し暑い (むしあつい): Ooi bức"
+  },
+  {
+    "STT": 661,
+    "Bài": "Bài 12",
+    "Từ vựng": "ぐっすり",
+    "Cách đọc (Phiên âm)": "ぐっすり",
+    "Ý nghĩa": "Ngủ say",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 662,
+    "Bài": "Bài 12",
+    "Từ vựng": "きちんと",
+    "Cách đọc (Phiên âm)": "きちんと",
+    "Ý nghĩa": "Nghiêm chỉnh, chỉnh tề",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ちゃんと (ちゃんと): Cẩn thận"
+  },
+  {
+    "STT": 663,
+    "Bài": "Bài 12",
+    "Từ vựng": "しっかり",
+    "Cách đọc (Phiên âm)": "しっかり",
+    "Ý nghĩa": "Rõ ràng, cẩn thận, chặt, tỉnh",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 664,
+    "Bài": "Bài 12",
+    "Từ vựng": "はっきり",
+    "Cách đọc (Phiên âm)": "はっきり",
+    "Ý nghĩa": "Rõ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 665,
+    "Bài": "Bài 12",
+    "Từ vựng": "じっと",
+    "Cách đọc (Phiên âm)": "じっと",
+    "Ý nghĩa": "Chăm chú, suốt, yên 1 chỗ",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 666,
+    "Bài": "Bài 12",
+    "Từ vựng": "そっと",
+    "Cách đọc (Phiên âm)": "そっと",
+    "Ý nghĩa": "Nhẹ nhàng, rón rén",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "そっとしておく (そっとしておく): Để yên"
+  },
+  {
+    "STT": 667,
+    "Bài": "Bài 12",
+    "Từ vựng": "別々に",
+    "Cách đọc (Phiên âm)": "べつべつに",
+    "Ý nghĩa": "Riêng, từng cái một",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 668,
+    "Bài": "Bài 12",
+    "Từ vựng": "互いに",
+    "Cách đọc (Phiên âm)": "たがいに",
+    "Ý nghĩa": "Lẫn nhau",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "お互い様 (おたがいさま): Cùng cảnh ngộ, có qua có lại"
+  },
+  {
+    "STT": 669,
+    "Bài": "Bài 12",
+    "Từ vựng": "直接",
+    "Cách đọc (Phiên âm)": "ちょくせつ",
+    "Ý nghĩa": "Trực tiếp",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 670,
+    "Bài": "Bài 12",
+    "Từ vựng": "必ず",
+    "Cách đọc (Phiên âm)": "かならず",
+    "Ý nghĩa": "Nhất định",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 671,
+    "Bài": "Bài 12",
+    "Từ vựng": "絶対",
+    "Cách đọc (Phiên âm)": "ぜったい",
+    "Ý nghĩa": "Tuyệt đối",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 672,
+    "Bài": "Bài 12",
+    "Từ vựng": "ただ〜だけ/ばかり",
+    "Cách đọc (Phiên âm)": "ただ〜だけ/ばかり",
+    "Ý nghĩa": "Chỉ, chỉ toàn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 673,
+    "Bài": "Bài 12",
+    "Từ vựng": "少なくとも",
+    "Cách đọc (Phiên âm)": "すくなくとも",
+    "Ý nghĩa": "Ít nhất, chí ít là",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 674,
+    "Bài": "Bài 12",
+    "Từ vựng": "決して〜ない",
+    "Cách đọc (Phiên âm)": "けっして〜ない",
+    "Ý nghĩa": "Tuyệt đối không, quyết không",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 675,
+    "Bài": "Bài 12",
+    "Từ vựng": "ちっとも",
+    "Cách đọc (Phiên âm)": "ちっとも",
+    "Ý nghĩa": "Không một chút gì",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 676,
+    "Bài": "Bài 12",
+    "Từ vựng": "全く〜ない",
+    "Cách đọc (Phiên âm)": "まったく〜ない",
+    "Ý nghĩa": "Hoàn toàn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ぜんぜん (ぜんぜん): Hoàn toàn không"
+  },
+  {
+    "STT": 677,
+    "Bài": "Bài 12",
+    "Từ vựng": "どんなに〜か",
+    "Cách đọc (Phiên âm)": "どんなに〜か",
+    "Ý nghĩa": "Rất nhiều, cực kỳ, đến mức nào",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "どれほど (どれほど): Cỡ nào"
+  },
+  {
+    "STT": 678,
+    "Bài": "Bài 12",
+    "Từ vựng": "どうしても",
+    "Cách đọc (Phiên âm)": "どうしても",
+    "Ý nghĩa": "Kiểu gì thì kiểu, bất kể",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 679,
+    "Bài": "Bài 12",
+    "Từ vựng": "一体",
+    "Cách đọc (Phiên âm)": "いったい",
+    "Ý nghĩa": "Rốt cuộc là",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 680,
+    "Bài": "Bài 12",
+    "Từ vựng": "別に〜ない",
+    "Cách đọc (Phiên âm)": "べつに〜ない",
+    "Ý nghĩa": "Không có gì đặc biệt, không hẳn là",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "特に (とくに): Đặc biệt"
+  },
+  {
+    "STT": 681,
+    "Bài": "Bài 12",
+    "Từ vựng": "たった",
+    "Cách đọc (Phiên âm)": "たった",
+    "Ý nghĩa": "Chỉ vẻn vẹn",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 682,
+    "Bài": "Bài 12",
+    "Từ vựng": "ほんの",
+    "Cách đọc (Phiên âm)": "ほんの",
+    "Ý nghĩa": "Chỉ, chỉ là",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "ほんの気持ち (ほんのきもち): Chỉ là chút lòng thành"
+  },
+  {
+    "STT": 683,
+    "Bài": "Bài 12",
+    "Từ vựng": "それで",
+    "Cách đọc (Phiên âm)": "それで",
+    "Ý nghĩa": "Vì vậy, rồi sao nữa, do vậy",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "だから (だから): Vì vậy, そこで (そこで): Do đó"
+  },
+  {
+    "STT": 684,
+    "Bài": "Bài 12",
+    "Từ vựng": "そのうえ",
+    "Cách đọc (Phiên âm)": "そのうえ",
+    "Ý nghĩa": "Hơn nữa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 685,
+    "Bài": "Bài 12",
+    "Từ vựng": "また",
+    "Cách đọc (Phiên âm)": "また",
+    "Ý nghĩa": "Lại, vả lại, hơn nữa",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 686,
+    "Bài": "Bài 12",
+    "Từ vựng": "または",
+    "Cách đọc (Phiên âm)": "または",
+    "Ý nghĩa": "Hoặc, hay là",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": "あるいは (あるいは): Hoặc là"
+  },
+  {
+    "STT": 687,
+    "Bài": "Bài 12",
+    "Từ vựng": "それとも",
+    "Cách đọc (Phiên âm)": "それとも",
+    "Ý nghĩa": "Hay là",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  },
+  {
+    "STT": 688,
+    "Bài": "Bài 12",
+    "Từ vựng": "つまり",
+    "Cách đọc (Phiên âm)": "つまり",
+    "Ý nghĩa": "Tóm lại là, nghĩa là",
+    "Từ liên quan (Từ (Phiên âm): Nghĩa)": ""
+  }
+]

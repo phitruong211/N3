@@ -1,0 +1,2092 @@
+[
+    {
+        "kanji": "任",
+        "han_viet": "NHIỆM",
+        "vocabulary": [
+            {"word": "責任", "reading": "せきにん", "meaning": "Trách nhiệm"},
+            {"word": "担任", "reading": "たんにん", "meaning": "Giáo viên chủ nhiệm"},
+            {"word": "任せる", "reading": "まかせる", "meaning": "Giao phó, phó thác"}
+        ]
+    },
+    {
+        "kanji": "信",
+        "han_viet": "TÍN",
+        "vocabulary": [
+            {"word": "信じる", "reading": "しんじる", "meaning": "Tin tưởng"},
+            {"word": "通信", "reading": "つうしん", "meaning": "Truyền thông, thông tin"},
+            {"word": "信用", "reading": "しんよう", "meaning": "Lòng tin, tín nhiệm"},
+            {"word": "信頼", "reading": "しんらい", "meaning": "Sự tin cậy, tín nhiệm"}
+        ]
+    },
+    {
+        "kanji": "伸",
+        "han_viet": "THÂN",
+        "vocabulary": [
+            {"word": "伸ばす", "reading": "のばす", "meaning": "Kéo dài, làm thẳng ra"},
+            {"word": "伸びる", "reading": "のびる", "meaning": "Dài ra, tăng lên"}
+        ]
+    },
+    {
+        "kanji": "代",
+        "han_viet": "ĐẠI",
+        "vocabulary": [
+            {"word": "代表", "reading": "だいひょう", "meaning": "Đại diện"},
+            {"word": "代金", "reading": "だいきん", "meaning": "Tiền thanh toán, tiền hàng"},
+            {"word": "時代", "reading": "じだい", "meaning": "Thời đại"},
+            {"word": "代わる", "reading": "かわる", "meaning": "Thay thế, thế chỗ"}
+        ]
+    },
+    {
+        "kanji": "付",
+        "han_viet": "PHÓ",
+        "vocabulary": [
+            {"word": "付近", "reading": "ふきん", "meaning": "Gần, khu vực lân cận"},
+            {"word": "付く", "reading": "つく", "meaning": "Dính, gắn, đính kèm"}
+        ]
+    },
+    {
+        "kanji": "件",
+        "han_viet": "KIỆN",
+        "vocabulary": [
+            {"word": "事件", "reading": "じけん", "meaning": "Vụ án, sự kiện"},
+            {"word": "条件", "reading": "じょうけん", "meaning": "Điều kiện"},
+            {"word": "用件", "reading": "ようけん", "meaning": "Việc, công việc"}
+        ]
+    },
+    {
+        "kanji": "位",
+        "han_viet": "VỊ",
+        "vocabulary": [
+            {"word": "位置", "reading": "いち", "meaning": "Vị trí"},
+            {"word": "単位", "reading": "たんい", "meaning": "Đơn vị"},
+            {"word": "一位", "reading": "いちい", "meaning": "Vị trí thứ nhất, hạng nhất"}
+        ]
+    },
+    {
+        "kanji": "倍",
+        "han_viet": "BỘI",
+        "vocabulary": [
+            {"word": "何倍", "reading": "なんばい", "meaning": "Gấp mấy lần"},
+            {"word": "倍", "reading": "ばい", "meaning": "Lần, gấp đôi"},
+            {"word": "倍返し", "reading": "ばいがえし", "meaning": "Trả đũa gấp đôi, đền đáp gấp đôi"}
+        ]
+    },
+    {
+        "kanji": "保",
+        "han_viet": "BẢO",
+        "vocabulary": [
+            {"word": "保存", "reading": "ほぞん", "meaning": "Bảo tồn, lưu trữ"},
+            {"word": "保険", "reading": "ほけん", "meaning": "Bảo hiểm"},
+            {"word": "保つ", "reading": "たもつ", "meaning": "Giữ gìn, duy trì"}
+        ]
+    },
+    {
+        "kanji": "個",
+        "han_viet": "CÁ",
+        "vocabulary": [
+            {"word": "個性的", "reading": "こせいてき", "meaning": "Có cá tính"},
+            {"word": "個人", "reading": "こじん", "meaning": "Cá nhân"},
+            {"word": "一個", "reading": "いっこ", "meaning": "Một cái"}
+        ]
+    },
+    {
+        "kanji": "価",
+        "han_viet": "GIÁ",
+        "vocabulary": [
+            {"word": "評価", "reading": "ひょうか", "meaning": "Đánh giá"},
+            {"word": "価格", "reading": "かかく", "meaning": "Giá cả"}
+        ]
+    },
+    {
+        "kanji": "便",
+        "han_viet": "TIỆN",
+        "vocabulary": [
+            {"word": "便利", "reading": "べんり", "meaning": "Tiện lợi"},
+            {"word": "不便", "reading": "ふべん", "meaning": "Bất tiện"},
+            {"word": "郵便局", "reading": "ゆうびんきょく", "meaning": "Bưu điện"}
+        ]
+    },
+    {
+        "kanji": "停",
+        "han_viet": "ĐÌNH",
+        "vocabulary": [
+            {"word": "停電", "reading": "ていでん", "meaning": "Mất điện"},
+            {"word": "停止", "reading": "ていし", "meaning": "Đình chỉ, dừng lại"},
+            {"word": "停車", "reading": "ていしゃ", "meaning": "Dừng xe"}
+        ]
+    },
+    {
+        "kanji": "係",
+        "han_viet": "HỆ",
+        "vocabulary": [
+            {"word": "関係", "reading": "かんけい", "meaning": "Quan hệ, mối quan hệ"},
+            {"word": "係", "reading": "かかり", "meaning": "Người phụ trách"},
+            {"word": "係員", "reading": "かかりいん", "meaning": "Nhân viên phụ trách"}
+        ]
+    },
+    {
+        "kanji": "優",
+        "han_viet": "ƯU",
+        "vocabulary": [
+            {"word": "優勝", "reading": "ゆうしょう", "meaning": "Vô địch, chiến thắng"},
+            {"word": "女優", "reading": "じょゆう", "meaning": "Nữ diễn viên"},
+            {"word": "優秀", "reading": "ゆうしゅう", "meaning": "Ưu tú, xuất sắc"},
+            {"word": "優しい", "reading": "やさしい", "meaning": "Hiền lành, tốt bụng"},
+            {"word": "優れる", "reading": "すぐれる", "meaning": "Xuất sắc, vượt trội"}
+        ]
+    },
+    {
+        "kanji": "仲",
+        "han_viet": "TRỌNG",
+        "vocabulary": [
+            {"word": "仲介", "reading": "ちゅうかい", "meaning": "Môi giới, trung gian"},
+            {"word": "仲", "reading": "なか", "meaning": "Mối quan hệ"},
+            {"word": "仲間", "reading": "なかま", "meaning": "Đồng nghiệp, bạn bè, đồng bọn"}
+        ]
+    },
+    {
+        "kanji": "借",
+        "han_viet": "TÁ",
+        "vocabulary": [
+            {"word": "借金", "reading": "しゃっきん", "meaning": "Tiền nợ, khoản vay"},
+            {"word": "借りる", "reading": "かりる", "meaning": "Mượn, vay"}
+        ]
+    },
+    {
+        "kanji": "供",
+        "han_viet": "CUNG",
+        "vocabulary": [
+            {"word": "供給", "reading": "きょうきゅう", "meaning": "Cung cấp"},
+            {"word": "提供", "reading": "ていきょう", "meaning": "Tài trợ, cung cấp"},
+            {"word": "子供", "reading": "こども", "meaning": "Trẻ em"}
+        ]
+    },
+    {
+        "kanji": "他",
+        "han_viet": "THA",
+        "vocabulary": [
+            {"word": "他人", "reading": "たにん", "meaning": "Người khác, người dưng"},
+            {"word": "他", "reading": "ほか", "meaning": "Khác, ngoài ra"}
+        ]
+    },
+    {
+        "kanji": "候",
+        "han_viet": "HẬU",
+        "vocabulary": [
+            {"word": "気候", "reading": "きこう", "meaning": "Khí hậu"},
+            {"word": "候補", "reading": "こうほ", "meaning": "Ứng cử viên, sự lựa chọn"},
+            {"word": "候補者", "reading": "こうほしゃ", "meaning": "Người ứng cử"}
+        ]
+    },
+    {
+        "kanji": "支",
+        "han_viet": "CHI",
+        "vocabulary": [
+            {"word": "支社", "reading": "ししゃ", "meaning": "Chi nhánh (công ty)"},
+            {"word": "支持", "reading": "しじ", "meaning": "Ủng hộ, hỗ trợ"},
+            {"word": "支える", "reading": "ささえる", "meaning": "Nâng đỡ, hỗ trợ"}
+        ]
+    },
+    {
+        "kanji": "技",
+        "han_viet": "KỸ",
+        "vocabulary": [
+            {"word": "技術", "reading": "ぎじゅつ", "meaning": "Kỹ thuật, công nghệ"},
+            {"word": "演技", "reading": "えんぎ", "meaning": "Kỹ năng diễn xuất"}
+        ]
+    },
+    {
+        "kanji": "席",
+        "han_viet": "TỊCH",
+        "vocabulary": [
+            {"word": "出席", "reading": "しゅっせき", "meaning": "Có mặt, tham dự"},
+            {"word": "着席", "reading": "ちゃくせき", "meaning": "Ngồi xuống (vào chỗ)"},
+            {"word": "座席", "reading": "ざせき", "meaning": "Chỗ ngồi"}
+        ]
+    },
+    {
+        "kanji": "度",
+        "han_viet": "ĐỘ",
+        "vocabulary": [
+            {"word": "温度", "reading": "おんど", "meaning": "Nhiệt độ"},
+            {"word": "度", "reading": "ど", "meaning": "Độ, lần"}
+        ]
+    },
+    {
+        "kanji": "渡",
+        "han_viet": "ĐỘ",
+        "vocabulary": [
+            {"word": "渡る", "reading": "わたる", "meaning": "Băng qua, đi ngang qua"},
+            {"word": "渡す", "reading": "わたす", "meaning": "Trao, đưa cho"}
+        ]
+    },
+    {
+        "kanji": "悲",
+        "han_viet": "BI",
+        "vocabulary": [
+            {"word": "悲劇", "reading": "ひげき", "meaning": "Bi kịch"},
+            {"word": "悲しい", "reading": "かなしい", "meaning": "Buồn bã"}
+        ]
+    },
+    {
+        "kanji": "性",
+        "han_viet": "TÍNH",
+        "vocabulary": [
+            {"word": "性格", "reading": "せいかく", "meaning": "Tính cách"}
+        ]
+    },
+    {
+        "kanji": "悩",
+        "han_viet": "NÃO",
+        "vocabulary": [
+            {"word": "悩む", "reading": "なやむ", "meaning": "Trăn trở, phiền não"}
+        ]
+    },
+    {
+        "kanji": "情",
+        "han_viet": "TÌNH",
+        "vocabulary": [
+            {"word": "感情", "reading": "かんじょう", "meaning": "Tình cảm, cảm xúc"}
+        ]
+    },
+    {
+        "kanji": "精",
+        "han_viet": "TINH",
+        "vocabulary": [
+            {"word": "精神", "reading": "せいしん", "meaning": "Tinh thần"}
+        ]
+    },
+    {
+        "kanji": "洗",
+        "han_viet": "TẨY",
+        "vocabulary": [
+            {"word": "洗濯", "reading": "せんたく", "meaning": "Giặt giũ"},
+            {"word": "洗剤", "reading": "せんざい", "meaning": "Chất tẩy rửa, bột giặt"},
+            {"word": "洗う", "reading": "あらう", "meaning": "Rửa, giặt"}
+        ]
+    },
+    {
+        "kanji": "汚",
+        "han_viet": "Ô",
+        "vocabulary": [
+            {"word": "汚染", "reading": "おせん", "meaning": "Ô nhiễm"},
+            {"word": "汚れる", "reading": "よごれる", "meaning": "Bị bẩn"},
+            {"word": "汚い", "reading": "きたない", "meaning": "Bẩn thỉu, dơ bẩn"}
+        ]
+    },
+    {
+        "kanji": "活",
+        "han_viet": "HOẠT",
+        "vocabulary": [
+            {"word": "生活", "reading": "せいかつ", "meaning": "Cuộc sống, sinh hoạt"},
+            {"word": "生活費", "reading": "せいかつひ", "meaning": "Chi phí sinh hoạt"}
+        ]
+    },
+    {
+        "kanji": "液",
+        "han_viet": "DỊCH",
+        "vocabulary": [
+            {"word": "血液型", "reading": "けつえきがた", "meaning": "Nhóm máu"},
+            {"word": "血液検査", "reading": "けつえきけんさ", "meaning": "Xét nghiệm máu"},
+            {"word": "液体", "reading": "えきたい", "meaning": "Chất lỏng"}
+        ]
+    },
+    {
+        "kanji": "流",
+        "han_viet": "LƯU",
+        "vocabulary": [
+            {"word": "流行語", "reading": "りゅうこうご", "meaning": "Từ ngữ thịnh hành, tạo trend"},
+            {"word": "流れる", "reading": "ながれる", "meaning": "Chảy, trôi đi"},
+            {"word": "流す", "reading": "ながす", "meaning": "Làm chảy, xả (nước)"}
+        ]
+    },
+    {
+        "kanji": "涙",
+        "han_viet": "LỆ",
+        "vocabulary": [
+            {"word": "涙", "reading": "なみだ", "meaning": "Nước mắt"}
+        ]
+    },
+    {
+        "kanji": "深",
+        "han_viet": "THÂM",
+        "vocabulary": [
+            {"word": "深夜", "reading": "しんや", "meaning": "Đêm khuya"},
+            {"word": "深刻", "reading": "しんこく", "meaning": "Nghiêm trọng"},
+            {"word": "深い", "reading": "ふかい", "meaning": "Sâu, sâu sắc"}
+        ]
+    },
+    {
+        "kanji": "消",
+        "han_viet": "TIÊU",
+        "vocabulary": [
+            {"word": "消費", "reading": "しょうひ", "meaning": "Tiêu dùng, tiêu thụ"},
+            {"word": "消極的", "reading": "しょうきょくてき", "meaning": "Tiêu cực, thụ động"},
+            {"word": "消える", "reading": "きえる", "meaning": "Biến mất, tắt"},
+            {"word": "消す", "reading": "けす", "meaning": "Xóa, tắt"}
+        ]
+    },
+    {
+        "kanji": "法",
+        "han_viet": "PHÁP",
+        "vocabulary": [
+            {"word": "方法", "reading": "ほうほう", "meaning": "Phương pháp, cách thức"},
+            {"word": "法律", "reading": "ほうりつ", "meaning": "Pháp luật"},
+            {"word": "法律家", "reading": "ほうりつか", "meaning": "Chuyên gia pháp lý, luật sư"}
+        ]
+    },
+    {
+        "kanji": "決",
+        "han_viet": "QUYẾT",
+        "vocabulary": [
+            {"word": "解決", "reading": "かいけつ", "meaning": "Giải quyết"},
+            {"word": "決める", "reading": "きめる", "meaning": "Quyết định (tha động từ)"},
+            {"word": "決まる", "reading": "きまる", "meaning": "Được quyết định (tự động từ)"}
+        ]
+    },
+    {
+        "kanji": "浅",
+        "han_viet": "THIỀN",
+        "vocabulary": [
+            {"word": "浅学", "reading": "せんがく", "meaning": "Thiển học, kiến thức nông cạn"},
+            {"word": "浅い", "reading": "あさい", "meaning": "Nông, cạn"}
+        ]
+    },
+    {
+        "kanji": "満",
+        "han_viet": "MÃN",
+        "vocabulary": [
+            {"word": "不満", "reading": "ふまん", "meaning": "Bất mãn, không hài lòng"},
+            {"word": "満足", "reading": "まんぞく", "meaning": "Thỏa mãn, hài lòng"},
+            {"word": "満たす", "reading": "みたす", "meaning": "Làm đầy, đáp ứng"}
+        ]
+    },
+    {
+        "kanji": "演",
+        "han_viet": "DIỄN",
+        "vocabulary": [
+            {"word": "演技", "reading": "えんぎ", "meaning": "Kỹ năng diễn xuất"},
+            {"word": "講演会", "reading": "こうえんかい", "meaning": "Buổi diễn thuyết"},
+            {"word": "演奏", "reading": "えんそう", "meaning": "Biểu diễn (âm nhạc)"}
+        ]
+    },
+    {
+        "kanji": "混",
+        "han_viet": "HỖN",
+        "vocabulary": [
+            {"word": "混雑", "reading": "こんざつ", "meaning": "Đông đúc, hỗn loạn"},
+            {"word": "込む", "reading": "こむ", "meaning": "Đông đúc"},
+            {"word": "混ざる", "reading": "まざる", "meaning": "Được trộn lẫn"}
+        ]
+    },
+    {
+        "kanji": "湿",
+        "han_viet": "THẤP",
+        "vocabulary": [
+            {"word": "湿気", "reading": "しっけ", "meaning": "Hơi ẩm"},
+            {"word": "湿度", "reading": "しつど", "meaning": "Độ ẩm"},
+            {"word": "湿る", "reading": "しめる", "meaning": "Ẩm ướt"}
+        ]
+    },
+    {
+        "kanji": "温",
+        "han_viet": "ÔN",
+        "vocabulary": [
+            {"word": "温度", "reading": "おんど", "meaning": "Nhiệt độ"},
+            {"word": "温かい", "reading": "あたたかい", "meaning": "Ấm áp"},
+            {"word": "温める", "reading": "あたためる", "meaning": "Làm ấm"}
+        ]
+    },
+    {
+        "kanji": "塩",
+        "han_viet": "DIÊM",
+        "vocabulary": [
+            {"word": "塩分", "reading": "えんぶん", "meaning": "Lượng muối"},
+            {"word": "食塩水", "reading": "しょくえんすい", "meaning": "Dung dịch nước muối"},
+            {"word": "塩", "reading": "しお", "meaning": "Muối"}
+        ]
+    },
+    {
+        "kanji": "賃",
+        "han_viet": "NHẪM",
+        "vocabulary": [
+            {"word": "家賃", "reading": "やちん", "meaning": "Tiền thuê nhà"},
+            {"word": "最低賃金", "reading": "さいていちんぎん", "meaning": "Mức lương tối thiểu"}
+        ]
+    },
+    {
+        "kanji": "貸",
+        "han_viet": "THẢI",
+        "vocabulary": [
+            {"word": "賃貸", "reading": "ちんたい", "meaning": "Cho thuê"},
+            {"word": "貸す", "reading": "かす", "meaning": "Cho mượn, cho vay"}
+        ]
+    },
+    {
+        "kanji": "貧",
+        "han_viet": "BẦN",
+        "vocabulary": [
+            {"word": "貧困問題", "reading": "ひんこんもんだい", "meaning": "Vấn đề nghèo đói"},
+            {"word": "貧しい", "reading": "まずしい", "meaning": "Nghèo khó"}
+        ]
+    },
+    {
+        "kanji": "費",
+        "han_viet": "PHÍ",
+        "vocabulary": [
+            {"word": "費用", "reading": "ひよう", "meaning": "Chi phí, lệ phí"},
+            {"word": "食費", "reading": "しょくひ", "meaning": "Tiền ăn"},
+            {"word": "交通費", "reading": "こうつうひ", "meaning": "Chi phí đi lại"},
+            {"word": "費やす", "reading": "ついやす", "meaning": "Tiêu tốn, dành (thời gian/tiền bạc)"}
+        ]
+    },
+    {
+        "kanji": "賛",
+        "han_viet": "TÁN",
+        "vocabulary": [
+            {"word": "賛成", "reading": "さんせい", "meaning": "Tán thành, đồng ý"}
+        ]
+    },
+    {
+        "kanji": "財",
+        "han_viet": "TÀI",
+        "vocabulary": [
+            {"word": "財布", "reading": "さいふ", "meaning": "Cái ví"},
+            {"word": "長財布", "reading": "ながざいふ", "meaning": "Cái ví dài"},
+            {"word": "全財産", "reading": "ぜんざいさん", "meaning": "Toàn bộ tài sản"}
+        ]
+    },
+    {
+        "kanji": "貯",
+        "han_viet": "TRỮ",
+        "vocabulary": [
+            {"word": "貯金", "reading": "ちょきん", "meaning": "Tiết kiệm tiền"},
+            {"word": "貯める", "reading": "ためる", "meaning": "Tích trữ, dành dụm"}
+        ]
+    },
+    {
+        "kanji": "敗",
+        "han_viet": "BẠI",
+        "vocabulary": [
+            {"word": "勝敗", "reading": "しょうはい", "meaning": "Thắng bại"},
+            {"word": "失敗", "reading": "しっぱい", "meaning": "Thất bại"},
+            {"word": "敗れる", "reading": "やぶれる", "meaning": "Bị đánh bại, thua"}
+        ]
+    },
+    {
+        "kanji": "績",
+        "han_viet": "TÍCH",
+        "vocabulary": [
+            {"word": "成績", "reading": "せいせき", "meaning": "Thành tích"},
+            {"word": "業績", "reading": "ぎょうせき", "meaning": "Thành tựu, kết quả kinh doanh"}
+        ]
+    },
+    {
+        "kanji": "積",
+        "han_viet": "TÍCH",
+        "vocabulary": [
+            {"word": "面積", "reading": "めんせき", "meaning": "Diện tích"},
+            {"word": "積もる", "reading": "つもる", "meaning": "Chất đống, tích tụ"},
+            {"word": "積む", "reading": "つむ", "meaning": "Tích lũy, xếp chồng"}
+        ]
+    },
+    {
+        "kanji": "改",
+        "han_viet": "CẢI",
+        "vocabulary": [
+            {"word": "改善", "reading": "かいぜん", "meaning": "Cải thiện"},
+            {"word": "改める", "reading": "あらためる", "meaning": "Sửa đổi, cải thiện"}
+        ]
+    },
+    {
+        "kanji": "配",
+        "han_viet": "PHỐI",
+        "vocabulary": [
+            {"word": "心配", "reading": "しんぱい", "meaning": "Lo lắng"},
+            {"word": "宅配", "reading": "たくはい", "meaning": "Giao hàng tận nhà"},
+            {"word": "配達員", "reading": "はいたついん", "meaning": "Nhân viên giao hàng"},
+            {"word": "配る", "reading": "くばる", "meaning": "Phân phát"}
+        ]
+    },
+    {
+        "kanji": "記",
+        "han_viet": "KÍ",
+        "vocabulary": [
+            {"word": "記入", "reading": "きにゅう", "meaning": "Điền vào"},
+            {"word": "暗記", "reading": "あんき", "meaning": "Học thuộc lòng"},
+            {"word": "記憶力", "reading": "きおくりょく", "meaning": "Trí nhớ"}
+        ]
+    },
+    {
+        "kanji": "仮",
+        "han_viet": "GIẢ",
+        "vocabulary": [
+            {"word": "仮面", "reading": "かめん", "meaning": "Mặt nạ"},
+            {"word": "仮病", "reading": "けびょう", "meaning": "Giả bệnh"},
+            {"word": "仮", "reading": "かり", "meaning": "Giả định, tạm thời"}
+        ]
+    },
+    {
+        "kanji": "坂",
+        "han_viet": "PHẢN",
+        "vocabulary": [
+            {"word": "坂道", "reading": "さかみち", "meaning": "Đường dốc, con dốc"}
+        ]
+    },
+    {
+        "kanji": "返",
+        "han_viet": "PHẢN",
+        "vocabulary": [
+            {"word": "返品", "reading": "へんぴん", "meaning": "Trả lại hàng"},
+            {"word": "返事", "reading": "へんじ", "meaning": "Trả lời, đáp lại"},
+            {"word": "返信", "reading": "へんしん", "meaning": "Hồi âm, phản hồi"},
+            {"word": "返す", "reading": "かえす", "meaning": "Trả lại"}
+        ]
+    },
+    {
+        "kanji": "札",
+        "han_viet": "TRÁT",
+        "vocabulary": [
+            {"word": "名札", "reading": "なふだ", "meaning": "Thẻ tên"},
+            {"word": "札", "reading": "さつ", "meaning": "Tờ tiền (VD: 万円札)"}
+        ]
+    },
+    {
+        "kanji": "材",
+        "han_viet": "TÀI",
+        "vocabulary": [
+            {"word": "材料", "reading": "ざいりょう", "meaning": "Tài liệu, nguyên liệu"},
+            {"word": "教材", "reading": "きょうざい", "meaning": "Giáo trình"},
+            {"word": "取材", "reading": "しゅざい", "meaning": "Thu thập tài liệu, phỏng vấn"}
+        ]
+    },
+    {
+        "kanji": "枚",
+        "han_viet": "MAI",
+        "vocabulary": [
+            {"word": "何枚", "reading": "なんまい", "meaning": "Mấy tờ, mấy tấm"},
+            {"word": "枚数", "reading": "まいすう", "meaning": "Số tờ, số tấm"},
+            {"word": "枚", "reading": "まい", "meaning": "Tờ, tấm (Đơn vị đếm)"}
+        ]
+    },
+    {
+        "kanji": "機",
+        "han_viet": "CƠ",
+        "vocabulary": [
+            {"word": "機械", "reading": "きかい", "meaning": "Máy móc"},
+            {"word": "洗濯機", "reading": "せんたくき", "meaning": "Máy giặt"},
+            {"word": "機会", "reading": "きかい", "meaning": "Cơ hội"}
+        ]
+    },
+    {
+        "kanji": "横",
+        "han_viet": "HOÀNH",
+        "vocabulary": [
+            {"word": "横断歩道", "reading": "おうだんほどう", "meaning": "Vạch qua đường dành cho người đi bộ"},
+            {"word": "横", "reading": "よこ", "meaning": "Bề ngang, bên cạnh"}
+        ]
+    },
+    {
+        "kanji": "根",
+        "han_viet": "CĂN",
+        "vocabulary": [
+            {"word": "大根", "reading": "だいこん", "meaning": "Củ cải trắng"},
+            {"word": "根", "reading": "ね", "meaning": "Rễ, cội rễ, bản chất"},
+            {"word": "屋根", "reading": "やね", "meaning": "Mái nhà"}
+        ]
+    },
+    {
+        "kanji": "相",
+        "han_viet": "TƯƠNG",
+        "vocabulary": [
+            {"word": "相談", "reading": "そうだん", "meaning": "Thảo luận, bàn bạc"},
+            {"word": "首相", "reading": "しゅしょう", "meaning": "Thủ tướng"},
+            {"word": "相手", "reading": "あいて", "meaning": "Đối phương"},
+            {"word": "相変わらず", "reading": "あいかわらず", "meaning": "Như mọi khi"}
+        ]
+    },
+    {
+        "kanji": "想",
+        "han_viet": "TƯỞNG",
+        "vocabulary": [
+            {"word": "感想", "reading": "かんそう", "meaning": "Cảm tưởng, suy nghĩ"},
+            {"word": "予想", "reading": "よそう", "meaning": "Dự đoán"},
+            {"word": "想像", "reading": "そうぞう", "meaning": "Tưởng tượng"}
+        ]
+    },
+    {
+        "kanji": "科",
+        "han_viet": "KHOA",
+        "vocabulary": [
+            {"word": "得意科目", "reading": "とくいかもく", "meaning": "Môn học sở trường"},
+            {"word": "内科", "reading": "ないか", "meaning": "Nội khoa"},
+            {"word": "外科", "reading": "げか", "meaning": "Ngoại khoa"}
+        ]
+    },
+    {
+        "kanji": "秒",
+        "han_viet": "MIỂU",
+        "vocabulary": [
+            {"word": "一秒", "reading": "いちびょう", "meaning": "1 giây"},
+            {"word": "秒針", "reading": "びょうしん", "meaning": "Kim giây"}
+        ]
+    },
+    {
+        "kanji": "移",
+        "han_viet": "DI",
+        "vocabulary": [
+            {"word": "移動", "reading": "いどう", "meaning": "Di chuyển"},
+            {"word": "移す", "reading": "うつす", "meaning": "Chuyển, dời đi"},
+            {"word": "移る", "reading": "うつる", "meaning": "Lây nhiễm, chuyển sang"}
+        ]
+    },
+    {
+        "kanji": "税",
+        "han_viet": "THUẾ",
+        "vocabulary": [
+            {"word": "税金", "reading": "ぜいきん", "meaning": "Thuế"},
+            {"word": "消費税", "reading": "しょうひぜい", "meaning": "Thuế tiêu dùng"}
+        ]
+    },
+    {
+        "kanji": "協",
+        "han_viet": "HIỆP",
+        "vocabulary": [
+            {"word": "協力", "reading": "きょうりょく", "meaning": "Hợp tác, hiệp lực"}
+        ]
+    },
+    {
+        "kanji": "加",
+        "han_viet": "GIA",
+        "vocabulary": [
+            {"word": "参加", "reading": "さんか", "meaning": "Tham gia"},
+            {"word": "増加", "reading": "ぞうか", "meaning": "Gia tăng"},
+            {"word": "加える", "reading": "くわえる", "meaning": "Thêm vào"}
+        ]
+    },
+    {
+        "kanji": "助",
+        "han_viet": "TRỢ",
+        "vocabulary": [
+            {"word": "援助", "reading": "えんじょ", "meaning": "Viện trợ, hỗ trợ"},
+            {"word": "助ける", "reading": "たすける", "meaning": "Giúp đỡ, cứu"}
+        ]
+    },
+    {
+        "kanji": "効",
+        "han_viet": "HIỆU",
+        "vocabulary": [
+            {"word": "効果", "reading": "こうか", "meaning": "Hiệu quả"},
+            {"word": "効率", "reading": "こうりつ", "meaning": "Năng suất, hiệu suất"},
+            {"word": "効く", "reading": "きく", "meaning": "Có tác dụng"}
+        ]
+    },
+    {
+        "kanji": "勤",
+        "han_viet": "CẦN",
+        "vocabulary": [
+            {"word": "出勤", "reading": "しゅっきん", "meaning": "Đi làm"},
+            {"word": "欠勤", "reading": "けっきん", "meaning": "Nghỉ làm"},
+            {"word": "勤める", "reading": "つとめる", "meaning": "Làm việc, cống hiến"}
+        ]
+    },
+    {
+        "kanji": "紹",
+        "han_viet": "THIỆU",
+        "vocabulary": [
+            {"word": "自己紹介", "reading": "じこしょうかい", "meaning": "Tự giới thiệu"},
+            {"word": "紹介", "reading": "しょうかい", "meaning": "Giới thiệu"}
+        ]
+    },
+    {
+        "kanji": "給",
+        "han_viet": "CẤP",
+        "vocabulary": [
+            {"word": "給料日", "reading": "きゅうりょうび", "meaning": "Ngày nhận lương"},
+            {"word": "支給", "reading": "しきゅう", "meaning": "Chi trả, cấp phát"},
+            {"word": "給食", "reading": "きゅうしょく", "meaning": "Suất ăn trường học"}
+        ]
+    },
+    {
+        "kanji": "結",
+        "han_viet": "KẾT",
+        "vocabulary": [
+            {"word": "結果", "reading": "けっか", "meaning": "Kết quả"},
+            {"word": "結局", "reading": "けっきょく", "meaning": "Kết cục, rốt cuộc"},
+            {"word": "結ぶ", "reading": "むすぶ", "meaning": "Buộc, thắt, nối"}
+        ]
+    },
+    {
+        "kanji": "約",
+        "han_viet": "ƯỚC",
+        "vocabulary": [
+            {"word": "予約", "reading": "よやく", "meaning": "Đặt trước, hẹn trước"},
+            {"word": "約", "reading": "やく", "meaning": "Khoảng chừng"},
+            {"word": "節約", "reading": "せつやく", "meaning": "Tiết kiệm"}
+        ]
+    },
+    {
+        "kanji": "続",
+        "han_viet": "TỤC",
+        "vocabulary": [
+            {"word": "連続", "reading": "れんぞく", "meaning": "Liên tục, liên tiếp"},
+            {"word": "続く", "reading": "つづく", "meaning": "Tiếp tục, kéo dài (tự động từ)"},
+            {"word": "続ける", "reading": "つづける", "meaning": "Làm tiếp, duy trì (tha động từ)"}
+        ]
+    },
+    {
+        "kanji": "経",
+        "han_viet": "KINH",
+        "vocabulary": [
+            {"word": "経営", "reading": "けいえい", "meaning": "Kinh doanh"},
+            {"word": "経費", "reading": "けいひ", "meaning": "Kinh phí, chi phí"},
+            {"word": "経つ", "reading": "たつ", "meaning": "Trôi qua (thời gian)"}
+        ]
+    },
+    {
+        "kanji": "泉",
+        "han_viet": "TUYỀN",
+        "vocabulary": [
+            {"word": "温泉", "reading": "おんせん", "meaning": "Suối nước nóng"},
+            {"word": "泉", "reading": "いずみ", "meaning": "Con suối"}
+        ]
+    },
+    {
+        "kanji": "線",
+        "han_viet": "TUYẾN",
+        "vocabulary": [
+            {"word": "線", "reading": "せん", "meaning": "Đường kẻ, tuyến đường"},
+            {"word": "新幹線", "reading": "しんかんせん", "meaning": "Tàu Shinkansen"},
+            {"word": "地下鉄路線図", "reading": "ちかてつろせんず", "meaning": "Bản đồ tuyến tàu điện ngầm"}
+        ]
+    },
+    {
+        "kanji": "込",
+        "han_viet": "NHẬP",
+        "vocabulary": [
+            {"word": "申し込む", "reading": "もうしこむ", "meaning": "Đăng ký"},
+            {"word": "飛び込む", "reading": "とびこむ", "meaning": "Nhảy vào, lao vào"},
+            {"word": "込める", "reading": "こめる", "meaning": "Dồn, chứa đựng (tình cảm)"}
+        ]
+    },
+    {
+        "kanji": "遊",
+        "han_viet": "DU",
+        "vocabulary": [
+            {"word": "遊園地", "reading": "ゆうえんち", "meaning": "Khu vui chơi giải trí"},
+            {"word": "遊ぶ", "reading": "あそぶ", "meaning": "Vui chơi"}
+        ]
+    },
+    {
+        "kanji": "過",
+        "han_viet": "QUÁ",
+        "vocabulary": [
+            {"word": "過去", "reading": "かこ", "meaning": "Quá khứ"},
+            {"word": "過ぎる", "reading": "すぎる", "meaning": "Quá, trôi qua"},
+            {"word": "過ごす", "reading": "すごす", "meaning": "Trải qua, dành (thời gian)"}
+        ]
+    },
+    {
+        "kanji": "逆",
+        "han_viet": "NGHỊCH",
+        "vocabulary": [
+            {"word": "逆", "reading": "ぎゃく", "meaning": "Ngược lại"},
+            {"word": "逆立ち", "reading": "さかだち", "meaning": "Trồng cây chuối (lộn ngược)"},
+            {"word": "逆らう", "reading": "さからう", "meaning": "Chống đối, làm ngược lại"}
+        ]
+    },
+    {
+        "kanji": "迎",
+        "han_viet": "NGHÊNH",
+        "vocabulary": [
+            {"word": "歓迎会", "reading": "かんげいかい", "meaning": "Tiệc chào mừng"},
+            {"word": "大歓迎", "reading": "だいかんげい", "meaning": "Nhiệt liệt chào đón"},
+            {"word": "迎える", "reading": "むかえる", "meaning": "Đón, nghênh tiếp"}
+        ]
+    },
+    {
+        "kanji": "退",
+        "han_viet": "THOÁI",
+        "vocabulary": [
+            {"word": "引退", "reading": "いんたい", "meaning": "Giải nghệ, nghỉ hưu"},
+            {"word": "早退", "reading": "そうたい", "meaning": "Về sớm"},
+            {"word": "退職届", "reading": "たいしょくとどけ", "meaning": "Đơn xin nghỉ việc"}
+        ]
+    },
+    {
+        "kanji": "選",
+        "han_viet": "TUYỂN",
+        "vocabulary": [
+            {"word": "選択", "reading": "せんたく", "meaning": "Lựa chọn"},
+            {"word": "選手", "reading": "せんしゅ", "meaning": "Tuyển thủ, vận động viên"},
+            {"word": "選ぶ", "reading": "えらぶ", "meaning": "Chọn lọc"}
+        ]
+    },
+    {
+        "kanji": "緑",
+        "han_viet": "LỤC",
+        "vocabulary": [
+            {"word": "緑茶", "reading": "りょくちゃ", "meaning": "Trà xanh"},
+            {"word": "緑", "reading": "みどり", "meaning": "Màu xanh lá"}
+        ]
+    },
+    {
+        "kanji": "録",
+        "han_viet": "LỤC",
+        "vocabulary": [
+            {"word": "登録", "reading": "とうろく", "meaning": "Đăng ký"},
+            {"word": "録画", "reading": "ろくが", "meaning": "Ghi hình"}
+        ]
+    },
+    {
+        "kanji": "訓",
+        "han_viet": "HUẤN",
+        "vocabulary": [
+            {"word": "訓練", "reading": "くんれん", "meaning": "Huấn luyện"},
+            {"word": "教訓", "reading": "きょうくん", "meaning": "Giáo huấn, bài học"}
+        ]
+    },
+    {
+        "kanji": "調",
+        "han_viet": "ĐIỀU",
+        "vocabulary": [
+            {"word": "調整", "reading": "ちょうせい", "meaning": "Điều chỉnh"},
+            {"word": "調査", "reading": "ちょうさ", "meaning": "Điều tra"},
+            {"word": "調べる", "reading": "しらべる", "meaning": "Tìm hiểu, tra cứu"}
+        ]
+    },
+    {
+        "kanji": "談",
+        "han_viet": "ĐÀM",
+        "vocabulary": [
+            {"word": "相談", "reading": "そうだん", "meaning": "Bàn bạc, thảo luận"},
+            {"word": "冗談", "reading": "じょうだん", "meaning": "Nói đùa"}
+        ]
+    },
+    {
+        "kanji": "訳",
+        "han_viet": "DỊCH",
+        "vocabulary": [
+            {"word": "翻訳", "reading": "ほんやく", "meaning": "Biên dịch (văn bản)"},
+            {"word": "通訳", "reading": "つうやく", "meaning": "Phiên dịch (nói)"},
+            {"word": "申し訳", "reading": "もうしわけ", "meaning": "Lời xin lỗi, lý do"}
+        ]
+    },
+    {
+        "kanji": "誌",
+        "han_viet": "CHÍ",
+        "vocabulary": [
+            {"word": "雑誌", "reading": "ざっし", "meaning": "Tạp chí"},
+            {"word": "日誌", "reading": "にっし", "meaning": "Sổ nhật ký"}
+        ]
+    },
+    {
+        "kanji": "議",
+        "han_viet": "NGHỊ",
+        "vocabulary": [
+            {"word": "会議", "reading": "かいぎ", "meaning": "Cuộc họp, hội nghị"},
+            {"word": "不思議", "reading": "ふしぎ", "meaning": "Kỳ lạ, huyền bí"},
+            {"word": "国会議員", "reading": "こっかいぎいん", "meaning": "Nghị sĩ quốc hội"}
+        ]
+    },
+    {
+        "kanji": "確",
+        "han_viet": "XÁC",
+        "vocabulary": [
+            {"word": "確認", "reading": "かくにん", "meaning": "Xác nhận"},
+            {"word": "正確", "reading": "せいかく", "meaning": "Chính xác"},
+            {"word": "確か", "reading": "たしか", "meaning": "Chắc chắn, có lẽ"}
+        ]
+    },
+    {
+        "kanji": "進",
+        "han_viet": "TIẾN",
+        "vocabulary": [
+            {"word": "進化", "reading": "しんか", "meaning": "Tiến hóa"},
+            {"word": "進む", "reading": "すすむ", "meaning": "Tiến lên, tiến triển"},
+            {"word": "進める", "reading": "すすめる", "meaning": "Thúc đẩy, tiến hành"}
+        ]
+    },
+    {
+        "kanji": "集",
+        "han_viet": "TẬP",
+        "vocabulary": [
+            {"word": "集中", "reading": "しゅうちゅう", "meaning": "Tập trung"},
+            {"word": "集める", "reading": "あつめる", "meaning": "Thu thập, tập hợp"}
+        ]
+    },
+    {
+        "kanji": "雑",
+        "han_viet": "TẠP",
+        "vocabulary": [
+            {"word": "混雑", "reading": "こんざつ", "meaning": "Đông đúc, hỗn tạp"},
+            {"word": "雑", "reading": "ざつ", "meaning": "Tạp nham, cẩu thả"},
+            {"word": "雑談", "reading": "ざつだん", "meaning": "Nói chuyện phiếm"}
+        ]
+    },
+    {
+        "kanji": "完",
+        "han_viet": "HOÀN",
+        "vocabulary": [
+            {"word": "完了", "reading": "かんりょう", "meaning": "Hoàn tất, kết thúc"},
+            {"word": "完璧", "reading": "かんぺき", "meaning": "Hoàn hảo"}
+        ]
+    },
+    {
+        "kanji": "空",
+        "han_viet": "KHÔNG",
+        "vocabulary": [
+            {"word": "空港", "reading": "くうこう", "meaning": "Sân bay"},
+            {"word": "空く", "reading": "あく", "meaning": "Trống, rảnh"},
+            {"word": "空いている", "reading": "すいている", "meaning": "Trống, vắng"}
+        ]
+    },
+    {
+        "kanji": "守",
+        "han_viet": "THỦ",
+        "vocabulary": [
+            {"word": "留守番", "reading": "るすばん", "meaning": "Trông nhà"},
+            {"word": "守る", "reading": "まもる", "meaning": "Bảo vệ, tuân thủ"}
+        ]
+    },
+    {
+        "kanji": "実",
+        "han_viet": "THỰC",
+        "vocabulary": [
+            {"word": "実力", "reading": "じつりょく", "meaning": "Thực lực"},
+            {"word": "現実", "reading": "げんじつ", "meaning": "Hiện thực, thực tế"},
+            {"word": "実る", "reading": "みのる", "meaning": "Kết trái, đạt kết quả"}
+        ]
+    },
+    {
+        "kanji": "突",
+        "han_viet": "ĐỘT",
+        "vocabulary": [
+            {"word": "突然", "reading": "とつぜん", "meaning": "Đột nhiên"},
+            {"word": "衝突", "reading": "しょうとつ", "meaning": "Va chạm, xung đột"}
+        ]
+    },
+    {
+        "kanji": "宅",
+        "han_viet": "TRẠCH",
+        "vocabulary": [
+            {"word": "住宅", "reading": "じゅうたく", "meaning": "Nhà ở, khu dân cư"},
+            {"word": "宅配便", "reading": "たくはいびん", "meaning": "Dịch vụ giao hàng tận nhà"},
+            {"word": "在宅勤務", "reading": "ざいたくきんむ", "meaning": "Làm việc tại nhà"}
+        ]
+    },
+    {
+        "kanji": "定",
+        "han_viet": "ĐỊNH",
+        "vocabulary": [
+            {"word": "安定", "reading": "あんてい", "meaning": "Ổn định"},
+            {"word": "予定", "reading": "よてい", "meaning": "Dự định, kế hoạch"},
+            {"word": "定める", "reading": "さだめる", "meaning": "Quyết định, ban hành"}
+        ]
+    },
+    {
+        "kanji": "官",
+        "han_viet": "QUAN",
+        "vocabulary": [
+            {"word": "警察官", "reading": "けいさつかん", "meaning": "Cảnh sát"}
+        ]
+    },
+    {
+        "kanji": "追",
+        "han_viet": "TRUY",
+        "vocabulary": [
+            {"word": "追加", "reading": "ついか", "meaning": "Thêm vào, bổ sung"},
+            {"word": "追う", "reading": "おう", "meaning": "Đuổi theo"},
+            {"word": "追われる", "reading": "おわれる", "meaning": "Bị đuổi theo, bận rộn"}
+        ]
+    },
+    {
+        "kanji": "師",
+        "han_viet": "SƯ",
+        "vocabulary": [
+            {"word": "教師", "reading": "きょうし", "meaning": "Giáo viên"}
+        ]
+    },
+    {
+        "kanji": "容",
+        "han_viet": "DUNG",
+        "vocabulary": [
+            {"word": "容量", "reading": "ようりょう", "meaning": "Dung lượng"},
+            {"word": "容易", "reading": "ようい", "meaning": "Dễ dàng, đơn giản"},
+            {"word": "内容", "reading": "ないよう", "meaning": "Nội dung"}
+        ]
+    },
+    {
+        "kanji": "浴",
+        "han_viet": "DỤC",
+        "vocabulary": [
+            {"word": "浴室", "reading": "よくしつ", "meaning": "Phòng tắm"},
+            {"word": "浴びる", "reading": "あびる", "meaning": "Tắm, phơi (nắng)"}
+        ]
+    },
+    {
+        "kanji": "老",
+        "han_viet": "LÃO",
+        "vocabulary": [
+            {"word": "老人", "reading": "ろうじん", "meaning": "Người già"},
+            {"word": "老後", "reading": "ろうご", "meaning": "Tuổi già"}
+        ]
+    },
+    {
+        "kanji": "注",
+        "han_viet": "CHÚ",
+        "vocabulary": [
+            {"word": "注文", "reading": "ちゅうもん", "meaning": "Gọi món, đặt hàng"},
+            {"word": "注射", "reading": "ちゅうしゃ", "meaning": "Tiêm, chích"},
+            {"word": "注ぐ", "reading": "そそぐ", "meaning": "Rót, trút vào"}
+        ]
+    },
+    {
+        "kanji": "柱",
+        "han_viet": "TRỤ",
+        "vocabulary": [
+            {"word": "電柱", "reading": "でんちゅう", "meaning": "Cột điện"},
+            {"word": "柱", "reading": "はしら", "meaning": "Cột nhà"}
+        ]
+    },
+    {
+        "kanji": "駐",
+        "han_viet": "TRÚ",
+        "vocabulary": [
+            {"word": "駐車場", "reading": "ちゅうしゃじょう", "meaning": "Bãi đỗ xe"},
+            {"word": "駐車", "reading": "ちゅうしゃ", "meaning": "Đỗ xe"},
+            {"word": "駐在", "reading": "ちゅうざい", "meaning": "Thường trú"}
+        ]
+    },
+    {
+        "kanji": "規",
+        "han_viet": "QUY",
+        "vocabulary": [
+            {"word": "規則", "reading": "きそく", "meaning": "Quy tắc, nội quy"},
+            {"word": "規制", "reading": "きせい", "meaning": "Quy chế, hạn chế"}
+        ]
+    },
+    {
+        "kanji": "現",
+        "han_viet": "HIỆN",
+        "vocabulary": [
+            {"word": "現代", "reading": "げんだい", "meaning": "Hiện đại"},
+            {"word": "現在", "reading": "げんざい", "meaning": "Hiện tại"},
+            {"word": "現れる", "reading": "あらわれる", "meaning": "Xuất hiện"}
+        ]
+    },
+    {
+        "kanji": "覚",
+        "han_viet": "GIÁC",
+        "vocabulary": [
+            {"word": "感覚", "reading": "かんかく", "meaning": "Cảm giác"},
+            {"word": "目覚め", "reading": "めざめ", "meaning": "Sự thức tỉnh"},
+            {"word": "覚える", "reading": "おぼえる", "meaning": "Nhớ, ghi nhớ"}
+        ]
+    },
+    {
+        "kanji": "観",
+        "han_viet": "QUAN",
+        "vocabulary": [
+            {"word": "客観的", "reading": "きゃっかんてき", "meaning": "Mang tính khách quan"},
+            {"word": "楽観的", "reading": "らっかんてき", "meaning": "Lạc quan"},
+            {"word": "悲観的", "reading": "ひかんてき", "meaning": "Bi quan"},
+            {"word": "観光", "reading": "かんこう", "meaning": "Tham quan, du lịch"},
+            {"word": "観る", "reading": "みる", "meaning": "Xem (phim, kịch)"}
+        ]
+    },
+    {
+        "kanji": "簡",
+        "han_viet": "GIẢN",
+        "vocabulary": [
+            {"word": "簡単", "reading": "かんたん", "meaning": "Đơn giản, dễ dàng"},
+            {"word": "簡素", "reading": "かんそ", "meaning": "Giản dị, đơn sơ"}
+        ]
+    },
+    {
+        "kanji": "関",
+        "han_viet": "QUAN",
+        "vocabulary": [
+            {"word": "玄関", "reading": "げんかん", "meaning": "Sảnh nhà, cửa vào"},
+            {"word": "関する", "reading": "かんする", "meaning": "Liên quan đến"},
+            {"word": "関わる", "reading": "かかわる", "meaning": "Liên quan tới"}
+        ]
+    },
+    {
+        "kanji": "眠",
+        "han_viet": "MIÊN",
+        "vocabulary": [
+            {"word": "睡眠不足", "reading": "すいみんぶそく", "meaning": "Thiếu ngủ"},
+            {"word": "眠る", "reading": "ねむる", "meaning": "Ngủ"},
+            {"word": "眠い", "reading": "ねむい", "meaning": "Buồn ngủ"}
+        ]
+    },
+    {
+        "kanji": "暖",
+        "han_viet": "NOÃN",
+        "vocabulary": [
+            {"word": "暖房", "reading": "だんぼう", "meaning": "Máy sưởi, lò sưởi"},
+            {"word": "暖かい", "reading": "あたたかい", "meaning": "Ấm áp"},
+            {"word": "暖める", "reading": "あたためる", "meaning": "Làm ấm"}
+        ]
+    },
+    {
+        "kanji": "複",
+        "han_viet": "PHỨC",
+        "vocabulary": [
+            {"word": "複数", "reading": "ふくすう", "meaning": "Số nhiều"},
+            {"word": "複雑", "reading": "ふくざつ", "meaning": "Phức tạp"}
+        ]
+    },
+    {
+        "kanji": "復",
+        "han_viet": "PHỤC",
+        "vocabulary": [
+            {"word": "往復", "reading": "おうふく", "meaning": "Khứ hồi"},
+            {"word": "回復", "reading": "かいふく", "meaning": "Hồi phục, phục hồi"},
+            {"word": "復習", "reading": "ふくしゅう", "meaning": "Ôn tập"}
+        ]
+    },
+    {
+        "kanji": "腹",
+        "han_viet": "PHÚC",
+        "vocabulary": [
+            {"word": "満腹", "reading": "まんぷく", "meaning": "No bụng"},
+            {"word": "腹痛", "reading": "ふくつう", "meaning": "Đau bụng"},
+            {"word": "腹", "reading": "はら", "meaning": "Bụng"}
+        ]
+    },
+    {
+        "kanji": "布",
+        "han_viet": "BỐ",
+        "vocabulary": [
+            {"word": "財布", "reading": "さいふ", "meaning": "Ví tiền"},
+            {"word": "布団", "reading": "ふとん", "meaning": "Chăn nệm"},
+            {"word": "布", "reading": "ぬの", "meaning": "Vải, tấm vải"}
+        ]
+    },
+    {
+        "kanji": "怖",
+        "han_viet": "BỐ",
+        "vocabulary": [
+            {"word": "恐怖", "reading": "きょうふ", "meaning": "Sự sợ hãi, khủng bố"},
+            {"word": "怖い", "reading": "こわい", "meaning": "Sợ, đáng sợ"}
+        ]
+    },
+    {
+        "kanji": "希",
+        "han_viet": "HI",
+        "vocabulary": [
+            {"word": "希望", "reading": "きぼう", "meaning": "Hy vọng, mong muốn"}
+        ]
+    },
+    {
+        "kanji": "厚",
+        "han_viet": "HẬU",
+        "vocabulary": [
+            {"word": "温厚", "reading": "おんこう", "meaning": "Hiền hòa, ôn hậu"},
+            {"word": "厚い", "reading": "あつい", "meaning": "Dày"}
+        ]
+    },
+    {
+        "kanji": "原",
+        "han_viet": "NGUYÊN",
+        "vocabulary": [
+            {"word": "原因", "reading": "げんいん", "meaning": "Nguyên nhân"},
+            {"word": "原作", "reading": "げんさく", "meaning": "Nguyên tác, bản gốc"},
+            {"word": "野原", "reading": "のはら", "meaning": "Cánh đồng, thảo nguyên"}
+        ]
+    },
+    {
+        "kanji": "圧",
+        "han_viet": "ÁP",
+        "vocabulary": [
+            {"word": "圧力", "reading": "あつりょく", "meaning": "Áp lực"},
+            {"word": "圧倒的", "reading": "あっとうてき", "meaning": "Áp đảo, vượt trội"},
+            {"word": "血圧", "reading": "けつあつ", "meaning": "Huyết áp"}
+        ]
+    },
+    {
+        "kanji": "成",
+        "han_viet": "THÀNH",
+        "vocabulary": [
+            {"word": "成長", "reading": "せいちょう", "meaning": "Trưởng thành, phát triển"},
+            {"word": "成績", "reading": "せいせき", "meaning": "Thành tích"},
+            {"word": "成功", "reading": "せいこう", "meaning": "Thành công"}
+        ]
+    },
+    {
+        "kanji": "感",
+        "han_viet": "CẢM",
+        "vocabulary": [
+            {"word": "感じる", "reading": "かんじる", "meaning": "Cảm nhận, cảm thấy"},
+            {"word": "感情", "reading": "かんじょう", "meaning": "Tình cảm, cảm xúc"},
+            {"word": "感想", "reading": "かんそう", "meaning": "Cảm tưởng, suy nghĩ"}
+        ]
+    },
+    {
+        "kanji": "減",
+        "han_viet": "GIẢM",
+        "vocabulary": [
+            {"word": "減少", "reading": "げんしょう", "meaning": "Giảm sút"},
+            {"word": "減る", "reading": "へる", "meaning": "Giảm bớt"}
+        ]
+    },
+    {
+        "kanji": "越",
+        "han_viet": "VIỆT",
+        "vocabulary": [
+            {"word": "優越感", "reading": "ゆうえつかん", "meaning": "Cảm giác ưu việt"},
+            {"word": "越える", "reading": "こえる", "meaning": "Vượt qua"},
+            {"word": "引っ越す", "reading": "ひっこす", "meaning": "Chuyển nhà"}
+        ]
+    },
+    {
+        "kanji": "超",
+        "han_viet": "SIÊU",
+        "vocabulary": [
+            {"word": "超過料金", "reading": "ちょうかりょうきん", "meaning": "Phí quá cước, cước phụ trội"},
+            {"word": "超える", "reading": "こえる", "meaning": "Vượt quá, vượt mức"},
+            {"word": "超", "reading": "ちょう", "meaning": "Siêu, quá"}
+        ]
+    },
+    {
+        "kanji": "向",
+        "han_viet": "HƯỚNG",
+        "vocabulary": [
+            {"word": "方向音痴", "reading": "ほうこうおんち", "meaning": "Mù phương hướng"},
+            {"word": "向上心", "reading": "こうじょうしん", "meaning": "Tinh thần cầu tiến"},
+            {"word": "向く", "reading": "むく", "meaning": "Hướng về, phù hợp"}
+        ]
+    },
+    {
+        "kanji": "困",
+        "han_viet": "KHỐN",
+        "vocabulary": [
+            {"word": "困難", "reading": "こんなん", "meaning": "Khó khăn"},
+            {"word": "困る", "reading": "こまる", "meaning": "Rắc rối, gặp khó khăn"}
+        ]
+    },
+    {
+        "kanji": "因",
+        "han_viet": "NHÂN",
+        "vocabulary": [
+            {"word": "原因", "reading": "げんいん", "meaning": "Nguyên nhân"}
+        ]
+    },
+    {
+        "kanji": "回",
+        "han_viet": "HỒI",
+        "vocabulary": [
+            {"word": "回転", "reading": "かいてん", "meaning": "Xoay chuyển"},
+            {"word": "回答", "reading": "かいとう", "meaning": "Trả lời, đáp án"},
+            {"word": "回す", "reading": "まわす", "meaning": "Xoay, vặn"}
+        ]
+    },
+    {
+        "kanji": "固",
+        "han_viet": "CỐ",
+        "vocabulary": [
+            {"word": "固める", "reading": "かためる", "meaning": "Củng cố, làm cứng"},
+            {"word": "固定", "reading": "こてい", "meaning": "Cố định"},
+            {"word": "頑固", "reading": "がんこ", "meaning": "Ngoan cố, bảo thủ"},
+            {"word": "固い", "reading": "かたい", "meaning": "Cứng rắn"}
+        ]
+    },
+    {
+        "kanji": "図",
+        "han_viet": "ĐỒ",
+        "vocabulary": [
+            {"word": "地図", "reading": "ちず", "meaning": "Bản đồ"},
+            {"word": "路線図", "reading": "ろせんず", "meaning": "Bản đồ tuyến đường"},
+            {"word": "意図", "reading": "いと", "meaning": "Ý đồ, mục đích"}
+        ]
+    },
+    {
+        "kanji": "歯",
+        "han_viet": "XỈ",
+        "vocabulary": [
+            {"word": "歯", "reading": "は", "meaning": "Răng"},
+            {"word": "歯医者", "reading": "はいしゃ", "meaning": "Nha sĩ"},
+            {"word": "虫歯", "reading": "むしば", "meaning": "Sâu răng"}
+        ]
+    },
+    {
+        "kanji": "座",
+        "han_viet": "TỌA",
+        "vocabulary": [
+            {"word": "座席", "reading": "ざせき", "meaning": "Chỗ ngồi"},
+            {"word": "正座", "reading": "せいざ", "meaning": "Ngồi ngay ngắn (kiểu Nhật)"},
+            {"word": "座る", "reading": "すわる", "meaning": "Ngồi"}
+        ]
+    },
+    {
+        "kanji": "庭",
+        "han_viet": "ĐÌNH",
+        "vocabulary": [
+            {"word": "庭園", "reading": "ていえん", "meaning": "Đình viên, khu vườn"},
+            {"word": "庭", "reading": "にわ", "meaning": "Sân vườn"}
+        ]
+    },
+    {
+        "kanji": "痛",
+        "han_viet": "THỐNG",
+        "vocabulary": [
+            {"word": "頭痛", "reading": "ずつう", "meaning": "Đau đầu"}
+        ]
+    },
+    {
+        "kanji": "疲",
+        "han_viet": "BÌ",
+        "vocabulary": [
+            {"word": "疲れる", "reading": "つかれる", "meaning": "Mệt mỏi"}
+        ]
+    },
+    {
+        "kanji": "彼",
+        "han_viet": "BỈ",
+        "vocabulary": [
+            {"word": "彼氏", "reading": "かれし", "meaning": "Bạn trai"},
+            {"word": "彼女", "reading": "かのじょ", "meaning": "Bạn gái, cô ấy"}
+        ]
+    },
+    {
+        "kanji": "波",
+        "han_viet": "BA",
+        "vocabulary": [
+            {"word": "波長", "reading": "はちょう", "meaning": "Bước sóng, tần số"},
+            {"word": "電波", "reading": "でんぱ", "meaning": "Sóng điện từ, sóng radio"},
+            {"word": "波", "reading": "なみ", "meaning": "Con sóng"},
+            {"word": "津波警報", "reading": "つなみけいほう", "meaning": "Cảnh báo sóng thần"}
+        ]
+    },
+    {
+        "kanji": "皿",
+        "han_viet": "MÃNH",
+        "vocabulary": [
+            {"word": "皿", "reading": "さら", "meaning": "Cái đĩa"},
+            {"word": "灰皿", "reading": "はいざら", "meaning": "Gạt tàn thuốc"},
+            {"word": "大皿", "reading": "おおざら", "meaning": "Đĩa lớn"}
+        ]
+    },
+    {
+        "kanji": "血",
+        "han_viet": "HUYẾT",
+        "vocabulary": [
+            {"word": "低血圧", "reading": "ていけつあつ", "meaning": "Huyết áp thấp"},
+            {"word": "貧血", "reading": "ひんけつ", "meaning": "Thiếu máu"},
+            {"word": "血液型", "reading": "けつえきがた", "meaning": "Nhóm máu"},
+            {"word": "血", "reading": "ち", "meaning": "Máu"}
+        ]
+    },
+    {
+        "kanji": "冊",
+        "han_viet": "SÁCH",
+        "vocabulary": [
+            {"word": "〜冊", "reading": "さつ", "meaning": "Cuốn, quyển (đơn vị đếm sách)"},
+            {"word": "短冊", "reading": "たんざく", "meaning": "Thẻ giấy mảnh (để viết điều ước)"}
+        ]
+    },
+    {
+        "kanji": "曲",
+        "han_viet": "KHÚC",
+        "vocabulary": [
+            {"word": "曲線", "reading": "きょくせん", "meaning": "Đường cong"},
+            {"word": "曲", "reading": "きょく", "meaning": "Ca khúc, bản nhạc"},
+            {"word": "曲名", "reading": "きょくめい", "meaning": "Tên bài hát"},
+            {"word": "曲がる", "reading": "まがる", "meaning": "Rẽ, uốn cong"}
+        ]
+    },
+    {
+        "kanji": "燃",
+        "han_viet": "NHIÊN",
+        "vocabulary": [
+            {"word": "燃料", "reading": "ねんりょう", "meaning": "Nhiên liệu"},
+            {"word": "燃える", "reading": "もえる", "meaning": "Cháy"},
+            {"word": "燃やす", "reading": "もやす", "meaning": "Đốt"}
+        ]
+    },
+    {
+        "kanji": "熱",
+        "han_viet": "NHIỆT",
+        "vocabulary": [
+            {"word": "熱心", "reading": "ねっしん", "meaning": "Nhiệt tình"},
+            {"word": "熱", "reading": "ねつ", "meaning": "Nhiệt, sốt"}
+        ]
+    },
+    {
+        "kanji": "焼",
+        "han_viet": "THIÊU",
+        "vocabulary": [
+            {"word": "燃焼室", "reading": "ねんしょうしつ", "meaning": "Buồng đốt"},
+            {"word": "焼肉", "reading": "やきにく", "meaning": "Thịt nướng"},
+            {"word": "焼ける", "reading": "やける", "meaning": "Được nướng, cháy nắng"},
+            {"word": "焼く", "reading": "やく", "meaning": "Nướng"}
+        ]
+    },
+    {
+        "kanji": "干",
+        "han_viet": "CAN",
+        "vocabulary": [
+            {"word": "干す", "reading": "ほす", "meaning": "Phơi"}
+        ]
+    },
+    {
+        "kanji": "刊",
+        "han_viet": "KHAN",
+        "vocabulary": [
+            {"word": "月刊誌", "reading": "げっかんし", "meaning": "Tạp chí phát hành hàng tháng"},
+            {"word": "週刊誌", "reading": "しゅうかんし", "meaning": "Tạp chí phát hành hàng tuần"},
+            {"word": "刊行", "reading": "かんこう", "meaning": "Phát hành, xuất bản"}
+        ]
+    },
+    {
+        "kanji": "汗",
+        "han_viet": "HÃN",
+        "vocabulary": [
+            {"word": "汗", "reading": "あせ", "meaning": "Mồ hôi"}
+        ]
+    },
+    {
+        "kanji": "平",
+        "han_viet": "BÌNH",
+        "vocabulary": [
+            {"word": "平均", "reading": "へいきん", "meaning": "Trung bình"},
+            {"word": "平日", "reading": "へいじつ", "meaning": "Ngày thường"},
+            {"word": "平等", "reading": "びょうどう", "meaning": "Bình đẳng"},
+            {"word": "不平等", "reading": "ふびょうどう", "meaning": "Bất bình đẳng"}
+        ]
+    },
+    {
+        "kanji": "欠",
+        "han_viet": "KHIẾM",
+        "vocabulary": [
+            {"word": "欠席", "reading": "けっせき", "meaning": "Vắng mặt"},
+            {"word": "欠点", "reading": "けってん", "meaning": "Khuyết điểm"},
+            {"word": "欠ける", "reading": "かける", "meaning": "Thiếu, khiếm khuyết"}
+        ]
+    },
+    {
+        "kanji": "次",
+        "han_viet": "THỨ",
+        "vocabulary": [
+            {"word": "目次", "reading": "もくじ", "meaning": "Mục lục"},
+            {"word": "次", "reading": "つぎ", "meaning": "Tiếp theo, lần tới"}
+        ]
+    },
+    {
+        "kanji": "姿",
+        "han_viet": "TƯ",
+        "vocabulary": [
+            {"word": "姿勢", "reading": "しせい", "meaning": "Tư thế"},
+            {"word": "後ろ姿", "reading": "うしろすがた", "meaning": "Dáng vẻ nhìn từ đằng sau"},
+            {"word": "姿", "reading": "すがた", "meaning": "Bóng dáng, dáng vẻ"}
+        ]
+    },
+    {
+        "kanji": "欲",
+        "han_viet": "DỤC",
+        "vocabulary": [
+            {"word": "食欲", "reading": "しょくよく", "meaning": "Sự thèm ăn, cảm giác ngon miệng"},
+            {"word": "欲張り", "reading": "よくばり", "meaning": "Tham lam"},
+            {"word": "欲しい", "reading": "ほしい", "meaning": "Muốn (có cái gì đó)"}
+        ]
+    },
+    {
+        "kanji": "吹",
+        "han_viet": "XUY",
+        "vocabulary": [
+            {"word": "吹く", "reading": "ふく", "meaning": "Thổi"}
+        ]
+    },
+    {
+        "kanji": "頭",
+        "han_viet": "ĐẦU",
+        "vocabulary": [
+            {"word": "頭痛", "reading": "ずつう", "meaning": "Đau đầu"},
+            {"word": "先頭", "reading": "せんとう", "meaning": "Dẫn đầu, đi đầu"},
+            {"word": "頭", "reading": "あたま", "meaning": "Đầu"}
+        ]
+    },
+    {
+        "kanji": "順",
+        "han_viet": "THUẬN",
+        "vocabulary": [
+            {"word": "順番", "reading": "じゅんばん", "meaning": "Thứ tự"},
+            {"word": "順調", "reading": "じゅんちょう", "meaning": "Thuận lợi"}
+        ]
+    },
+    {
+        "kanji": "願",
+        "han_viet": "NGUYỆN",
+        "vocabulary": [
+            {"word": "願書", "reading": "がんしょ", "meaning": "Đơn xin (nhập học, dự thi...)"},
+            {"word": "願う", "reading": "ねがう", "meaning": "Mong muốn, cầu nguyện"}
+        ]
+    },
+    {
+        "kanji": "類",
+        "han_viet": "LOẠI",
+        "vocabulary": [
+            {"word": "種類", "reading": "しゅるい", "meaning": "Chủng loại, loại"},
+            {"word": "分類", "reading": "ぶんるい", "meaning": "Phân loại"},
+            {"word": "書類", "reading": "しょるい", "meaning": "Giấy tờ, tài liệu"}
+        ]
+    },
+    {
+        "kanji": "数",
+        "han_viet": "SỐ",
+        "vocabulary": [
+            {"word": "数字", "reading": "すうじ", "meaning": "Chữ số"},
+            {"word": "数", "reading": "かず", "meaning": "Số, số lượng"},
+            {"word": "数える", "reading": "かぞえる", "meaning": "Đếm"}
+        ]
+    },
+    {
+        "kanji": "断",
+        "han_viet": "ĐOẠN",
+        "vocabulary": [
+            {"word": "判断", "reading": "はんだん", "meaning": "Phán đoán"},
+            {"word": "決断", "reading": "けつだん", "meaning": "Quyết đoán"},
+            {"word": "断る", "reading": "ことわる", "meaning": "Từ chối"}
+        ]
+    },
+    {
+        "kanji": "以",
+        "han_viet": "DĨ",
+        "vocabulary": [
+            {"word": "以降", "reading": "いこう", "meaning": "Từ sau khi, về sau"},
+            {"word": "以内", "reading": "いない", "meaning": "Trong vòng"},
+            {"word": "以来", "reading": "いらい", "meaning": "Kể từ đó"}
+        ]
+    },
+    {
+        "kanji": "似",
+        "han_viet": "TỰ",
+        "vocabulary": [
+            {"word": "疑似", "reading": "ぎじ", "meaning": "Giả lập, mô phỏng"},
+            {"word": "似る", "reading": "にる", "meaning": "Giống, tựa như"}
+        ]
+    },
+    {
+        "kanji": "建",
+        "han_viet": "KIẾN",
+        "vocabulary": [
+            {"word": "建設", "reading": "けんせつ", "meaning": "Xây dựng, kiến thiết"},
+            {"word": "建てる", "reading": "たてる", "meaning": "Xây dựng, cất (nhà)"}
+        ]
+    },
+    {
+        "kanji": "健",
+        "han_viet": "KIỆN",
+        "vocabulary": [
+            {"word": "健康", "reading": "けんこう", "meaning": "Sức khỏe, khỏe mạnh"},
+            {"word": "健康的", "reading": "けんこうてき", "meaning": "Có tính lành mạnh"}
+        ]
+    },
+    {
+        "kanji": "律",
+        "han_viet": "LUẬT",
+        "vocabulary": [
+            {"word": "法律", "reading": "ほうりつ", "meaning": "Pháp luật"},
+            {"word": "規律", "reading": "きりつ", "meaning": "Kỷ luật"}
+        ]
+    },
+    {
+        "kanji": "卒",
+        "han_viet": "TỐT",
+        "vocabulary": [
+            {"word": "卒業", "reading": "そつぎょう", "meaning": "Tốt nghiệp"}
+        ]
+    },
+    {
+        "kanji": "式",
+        "han_viet": "THỨC",
+        "vocabulary": [
+            {"word": "形式", "reading": "けいしき", "meaning": "Hình thức"},
+            {"word": "結婚式", "reading": "けっこんしき", "meaning": "Lễ cưới"}
+        ]
+    },
+    {
+        "kanji": "未",
+        "han_viet": "VỊ",
+        "vocabulary": [
+            {"word": "未満", "reading": "みまん", "meaning": "Chưa đầy, dưới mức"},
+            {"word": "未成年", "reading": "みせいねん", "meaning": "Vị thành niên"},
+            {"word": "未来", "reading": "みらい", "meaning": "Tương lai"}
+        ]
+    },
+    {
+        "kanji": "失",
+        "han_viet": "THẤT",
+        "vocabulary": [
+            {"word": "失恋", "reading": "しつれん", "meaning": "Thất tình"},
+            {"word": "失業率", "reading": "しつぎょうりつ", "meaning": "Tỷ lệ thất nghiệp"},
+            {"word": "失う", "reading": "うしなう", "meaning": "Đánh mất"}
+        ]
+    },
+    {
+        "kanji": "運",
+        "han_viet": "VẬN",
+        "vocabulary": [
+            {"word": "運動", "reading": "うんどう", "meaning": "Vận động, tập thể dục"},
+            {"word": "運", "reading": "うん", "meaning": "Vận may"},
+            {"word": "運ぶ", "reading": "はこぶ", "meaning": "Vận chuyển"}
+        ]
+    },
+    {
+        "kanji": "軍",
+        "han_viet": "QUÂN",
+        "vocabulary": [
+            {"word": "軍人", "reading": "ぐんじん", "meaning": "Quân nhân"},
+            {"word": "軍隊", "reading": "ぐんたい", "meaning": "Quân đội"}
+        ]
+    },
+    {
+        "kanji": "庫",
+        "han_viet": "KHỐ",
+        "vocabulary": [
+            {"word": "車庫", "reading": "しゃこ", "meaning": "Nhà để xe"},
+            {"word": "金庫", "reading": "きんこ", "meaning": "Két sắt"},
+            {"word": "在庫", "reading": "ざいこ", "meaning": "Hàng tồn kho"},
+            {"word": "冷蔵庫", "reading": "れいぞうこ", "meaning": "Tủ lạnh"}
+        ]
+    },
+    {
+        "kanji": "軽",
+        "han_viet": "KHINH",
+        "vocabulary": [
+            {"word": "軽自動車", "reading": "けいじどうしゃ", "meaning": "Xe ô tô hạng nhẹ"},
+            {"word": "軽視", "reading": "けいし", "meaning": "Khinh thường, coi nhẹ"},
+            {"word": "軽い", "reading": "かるい", "meaning": "Nhẹ"}
+        ]
+    },
+    {
+        "kanji": "輸",
+        "han_viet": "THÂU",
+        "vocabulary": [
+            {"word": "輸出", "reading": "ゆしゅつ", "meaning": "Xuất khẩu"},
+            {"word": "輸入", "reading": "ゆにゅう", "meaning": "Nhập khẩu"}
+        ]
+    },
+    {
+        "kanji": "乗",
+        "han_viet": "THỪA",
+        "vocabulary": [
+            {"word": "乗客", "reading": "じょうきゃく", "meaning": "Hành khách"},
+            {"word": "乗る", "reading": "のる", "meaning": "Lên (xe, tàu)"},
+            {"word": "乗り換える", "reading": "のりかえる", "meaning": "Chuyển tuyến, đổi tàu xe"}
+        ]
+    },
+    {
+        "kanji": "郵",
+        "han_viet": "BƯU",
+        "vocabulary": [
+            {"word": "郵便局", "reading": "ゆうびんきょく", "meaning": "Bưu điện"},
+            {"word": "郵便物", "reading": "ゆうびんぶつ", "meaning": "Bưu phẩm"}
+        ]
+    },
+    {
+        "kanji": "身",
+        "han_viet": "THÂN",
+        "vocabulary": [
+            {"word": "自身", "reading": "じしん", "meaning": "Bản thân"},
+            {"word": "身", "reading": "み", "meaning": "Thân mình"},
+            {"word": "身分証明書", "reading": "みぶんしょうめいしょ", "meaning": "Giấy chứng minh nhân dân"},
+            {"word": "身分証", "reading": "みぶんしょう", "meaning": "Thẻ căn cước"}
+        ]
+    },
+    {
+        "kanji": "検",
+        "han_viet": "KIỂM",
+        "vocabulary": [
+            {"word": "点検", "reading": "てんけん", "meaning": "Kiểm tra, bảo dưỡng"},
+            {"word": "検査", "reading": "けんさ", "meaning": "Xét nghiệm, kiểm tra"}
+        ]
+    },
+    {
+        "kanji": "険",
+        "han_viet": "HIỂM",
+        "vocabulary": [
+            {"word": "危険", "reading": "きけん", "meaning": "Nguy hiểm"}
+        ]
+    },
+    {
+        "kanji": "案",
+        "han_viet": "ÁN",
+        "vocabulary": [
+            {"word": "案内", "reading": "あんない", "meaning": "Hướng dẫn"}
+        ]
+    },
+    {
+        "kanji": "角",
+        "han_viet": "GIÁC",
+        "vocabulary": [
+            {"word": "四角", "reading": "しかく", "meaning": "Tứ giác, hình vuông"},
+            {"word": "角", "reading": "かど", "meaning": "Góc (đường)"}
+        ]
+    },
+    {
+        "kanji": "触",
+        "han_viet": "XÚC",
+        "vocabulary": [
+            {"word": "感触", "reading": "かんしょく", "meaning": "Cảm giác chạm, xúc giác"},
+            {"word": "触る", "reading": "さわる", "meaning": "Sờ, chạm vào"},
+            {"word": "触れる", "reading": "ふれる", "meaning": "Đụng chạm, tiếp xúc"}
+        ]
+    },
+    {
+        "kanji": "解",
+        "han_viet": "GIẢI",
+        "vocabulary": [
+            {"word": "理解", "reading": "りかい", "meaning": "Hiểu, lý giải"},
+            {"word": "解決", "reading": "かいけつ", "meaning": "Giải quyết"},
+            {"word": "誤解", "reading": "ごかい", "meaning": "Hiểu lầm"},
+            {"word": "解く", "reading": "とく", "meaning": "Giải (bài toán), tháo gỡ"}
+        ]
+    },
+    {
+        "kanji": "苦",
+        "han_viet": "KHỔ",
+        "vocabulary": [
+            {"word": "苦労", "reading": "くろう", "meaning": "Gian khổ, vất vả"},
+            {"word": "苦手", "reading": "にがて", "meaning": "Yếu kém, không giỏi"},
+            {"word": "苦しい", "reading": "くるしい", "meaning": "Đau khổ, khó thở"}
+        ]
+    },
+    {
+        "kanji": "葉",
+        "han_viet": "DIỆP",
+        "vocabulary": [
+            {"word": "紅葉", "reading": "こうよう", "meaning": "Lá đỏ (mùa thu)"},
+            {"word": "落ち葉", "reading": "おちば", "meaning": "Lá rụng"},
+            {"word": "言葉", "reading": "ことば", "meaning": "Từ vựng, lời nói"}
+        ]
+    },
+    {
+        "kanji": "初",
+        "han_viet": "SƠ",
+        "vocabulary": [
+            {"word": "最初", "reading": "さいしょ", "meaning": "Đầu tiên"},
+            {"word": "初め", "reading": "はじめ", "meaning": "Ban đầu"},
+            {"word": "初恋", "reading": "はつこい", "meaning": "Mối tình đầu"}
+        ]
+    },
+    {
+        "kanji": "券",
+        "han_viet": "KHOÁN",
+        "vocabulary": [
+            {"word": "乗車券", "reading": "じょうしゃけん", "meaning": "Vé lên tàu xe"},
+            {"word": "入場券", "reading": "にゅうじょうけん", "meaning": "Vé vào cửa"}
+        ]
+    },
+    {
+        "kanji": "測",
+        "han_viet": "TRẮC",
+        "vocabulary": [
+            {"word": "予測", "reading": "よそく", "meaning": "Dự đoán, ước lượng"},
+            {"word": "測る", "reading": "はかる", "meaning": "Đo đạc"}
+        ]
+    },
+    {
+        "kanji": "側",
+        "han_viet": "TRẮC",
+        "vocabulary": [
+            {"word": "内側", "reading": "うちがわ", "meaning": "Phía trong"},
+            {"word": "両側", "reading": "りょうがわ", "meaning": "Cả hai bên"},
+            {"word": "側", "reading": "がわ", "meaning": "Phía, bên"}
+        ]
+    },
+    {
+        "kanji": "割",
+        "han_viet": "CÁT",
+        "vocabulary": [
+            {"word": "割る", "reading": "わる", "meaning": "Làm vỡ, chia"},
+            {"word": "割引", "reading": "わりびき", "meaning": "Giảm giá"},
+            {"word": "割合", "reading": "わりあい", "meaning": "Tỷ lệ"}
+        ]
+    },
+    {
+        "kanji": "型",
+        "han_viet": "HÌNH",
+        "vocabulary": [
+            {"word": "典型的", "reading": "てんけいてき", "meaning": "Điển hình"},
+            {"word": "血液型", "reading": "けつえきがた", "meaning": "Nhóm máu"},
+            {"word": "型", "reading": "かた", "meaning": "Kiểu, khuôn mẫu"}
+        ]
+    },
+    {
+        "kanji": "刻",
+        "han_viet": "KHẮC",
+        "vocabulary": [
+            {"word": "時刻表", "reading": "じこくひょう", "meaning": "Thời gian biểu, lịch trình"},
+            {"word": "深刻", "reading": "しんこく", "meaning": "Nghiêm trọng"},
+            {"word": "刻む", "reading": "きざむ", "meaning": "Thái, khắc"}
+        ]
+    },
+    {
+        "kanji": "制",
+        "han_viet": "CHẾ",
+        "vocabulary": [
+            {"word": "制限", "reading": "せいげん", "meaning": "Hạn chế"},
+            {"word": "制服", "reading": "せいふく", "meaning": "Đồng phục"}
+        ]
+    },
+    {
+        "kanji": "製",
+        "han_viet": "CHẾ",
+        "vocabulary": [
+            {"word": "日本製", "reading": "にほんせい", "meaning": "Sản xuất tại Nhật Bản"},
+            {"word": "製造", "reading": "せいぞう", "meaning": "Chế tạo, sản xuất"}
+        ]
+    },
+    {
+        "kanji": "到",
+        "han_viet": "ĐÁO",
+        "vocabulary": [
+            {"word": "到着", "reading": "とうちゃく", "meaning": "Đến nơi"},
+            {"word": "到達", "reading": "とうたつ", "meaning": "Đạt đến"}
+        ]
+    },
+    {
+        "kanji": "倒",
+        "han_viet": "ĐẢO",
+        "vocabulary": [
+            {"word": "倒産", "reading": "とうさん", "meaning": "Phá sản"},
+            {"word": "倒れる", "reading": "たおれる", "meaning": "Ngã, đổ"}
+        ]
+    },
+    {
+        "kanji": "由",
+        "han_viet": "DO",
+        "vocabulary": [
+            {"word": "自由", "reading": "じゆう", "meaning": "Tự do"},
+            {"word": "不自由", "reading": "ふじゆう", "meaning": "Bất tiện, không tự do"},
+            {"word": "理由", "reading": "りゆう", "meaning": "Lý do"}
+        ]
+    },
+    {
+        "kanji": "申",
+        "han_viet": "THÂN",
+        "vocabulary": [
+            {"word": "申請", "reading": "しんせい", "meaning": "Xin, đăng ký"},
+            {"word": "申し込む", "reading": "もうしこむ", "meaning": "Đăng ký, đệ đơn"},
+            {"word": "申す", "reading": "もうす", "meaning": "Nói, gọi là (khiêm nhường ngữ)"}
+        ]
+    },
+    {
+        "kanji": "留",
+        "han_viet": "LƯU",
+        "vocabulary": [
+            {"word": "留学", "reading": "りゅうがく", "meaning": "Du học"},
+            {"word": "留守番", "reading": "るすばん", "meaning": "Trông nhà"}
+        ]
+    },
+    {
+        "kanji": "番",
+        "han_viet": "PHIÊN",
+        "vocabulary": [
+            {"word": "順番", "reading": "じゅんばん", "meaning": "Thứ tự"},
+            {"word": "番号", "reading": "ばんごう", "meaning": "Số, mã số"},
+            {"word": "一番", "reading": "いちばん", "meaning": "Số một, nhất"}
+        ]
+    },
+    {
+        "kanji": "理",
+        "han_viet": "LÍ",
+        "vocabulary": [
+            {"word": "修理", "reading": "しゅうり", "meaning": "Sửa chữa"},
+            {"word": "無理", "reading": "むり", "meaning": "Vô lý, quá sức"},
+            {"word": "理解", "reading": "りかい", "meaning": "Hiểu, lý giải"}
+        ]
+    },
+    {
+        "kanji": "面",
+        "han_viet": "DIỆN",
+        "vocabulary": [
+            {"word": "画面", "reading": "がめん", "meaning": "Màn hình"},
+            {"word": "面接", "reading": "めんせつ", "meaning": "Phỏng vấn"},
+            {"word": "面白い", "reading": "おもしろい", "meaning": "Thú vị"}
+        ]
+    },
+    {
+        "kanji": "包",
+        "han_viet": "BAO",
+        "vocabulary": [
+            {"word": "包装", "reading": "ほうそう", "meaning": "Đóng gói, bao bì"},
+            {"word": "包む", "reading": "つつむ", "meaning": "Bọc, gói"}
+        ]
+    },
+    {
+        "kanji": "商",
+        "han_viet": "THƯƠNG",
+        "vocabulary": [
+            {"word": "商品", "reading": "しょうひん", "meaning": "Hàng hóa, sản phẩm"},
+            {"word": "営業中", "reading": "えいぎょうちゅう", "meaning": "Đang mở cửa kinh doanh"}
+        ]
+    },
+    {
+        "kanji": "章",
+        "han_viet": "CHƯƠNG",
+        "vocabulary": [
+            {"word": "文章", "reading": "ぶんしょう", "meaning": "Bài văn, đoạn văn"},
+            {"word": "第一章", "reading": "だいいっしょう", "meaning": "Chương một"}
+        ]
+    },
+    {
+        "kanji": "整",
+        "han_viet": "CHỈNH",
+        "vocabulary": [
+            {"word": "整理", "reading": "せいり", "meaning": "Sắp xếp, chỉnh lý"},
+            {"word": "調整", "reading": "ちょうせい", "meaning": "Điều chỉnh"},
+            {"word": "整える", "reading": "ととのえる", "meaning": "Chuẩn bị, sắp đặt"}
+        ]
+    },
+    {
+        "kanji": "算",
+        "han_viet": "TOÁN",
+        "vocabulary": [
+            {"word": "暗算", "reading": "あんざん", "meaning": "Tính nhẩm"},
+            {"word": "計算", "reading": "けいさん", "meaning": "Tính toán"},
+            {"word": "予算", "reading": "よさん", "meaning": "Ngân sách, dự toán"}
+        ]
+    },
+    {
+        "kanji": "等",
+        "han_viet": "ĐẲNG",
+        "vocabulary": [
+            {"word": "平等", "reading": "びょうどう", "meaning": "Bình đẳng"},
+            {"word": "優等生", "reading": "ゆうとうせい", "meaning": "Học sinh xuất sắc"},
+            {"word": "等", "reading": "など", "meaning": "Vân vân"}
+        ]
+    },
+    {
+        "kanji": "命",
+        "han_viet": "MỆNH",
+        "vocabulary": [
+            {"word": "命", "reading": "いのち", "meaning": "Sinh mệnh, mạng sống"}
+        ]
+    },
+    {
+        "kanji": "令",
+        "han_viet": "LỆNH",
+        "vocabulary": [
+            {"word": "命令", "reading": "めいれい", "meaning": "Mệnh lệnh"},
+            {"word": "令和", "reading": "れいわ", "meaning": "Thời kỳ Lệnh Hòa (Reiwa)"}
+        ]
+    },
+    {
+        "kanji": "冷",
+        "han_viet": "LÃNH",
+        "vocabulary": [
+            {"word": "冷蔵庫", "reading": "れいぞうこ", "meaning": "Tủ lạnh"},
+            {"word": "冷たい", "reading": "つめたい", "meaning": "Lạnh (cảm giác chạm)"},
+            {"word": "冷える", "reading": "ひえる", "meaning": "Trở nên lạnh"}
+        ]
+    },
+    {
+        "kanji": "煙",
+        "han_viet": "YÊN",
+        "vocabulary": [
+            {"word": "禁煙", "reading": "きんえん", "meaning": "Cấm hút thuốc"},
+            {"word": "煙", "reading": "けむり", "meaning": "Khói"}
+        ]
+    },
+    {
+        "kanji": "伝",
+        "han_viet": "TRUYỀN",
+        "vocabulary": [
+            {"word": "伝言", "reading": "でんごん", "meaning": "Lời nhắn"}
+        ]
+    },
+    {
+        "kanji": "転",
+        "han_viet": "CHUYỂN",
+        "vocabulary": [
+            {"word": "運転", "reading": "うんてん", "meaning": "Lái xe, vận hành"}
+        ]
+    },
+    {
+        "kanji": "芸",
+        "han_viet": "NGHỆ",
+        "vocabulary": [
+            {"word": "芸術", "reading": "げいじゅつ", "meaning": "Nghệ thuật"}
+        ]
+    },
+    {
+        "kanji": "共",
+        "han_viet": "CỘNG",
+        "vocabulary": [
+            {"word": "共通点", "reading": "きょうつうてん", "meaning": "Điểm chung"},
+            {"word": "公共", "reading": "こうきょう", "meaning": "Công cộng"},
+            {"word": "共に", "reading": "ともに", "meaning": "Cùng nhau"}
+        ]
+    },
+    {
+        "kanji": "期",
+        "han_viet": "KÌ",
+        "vocabulary": [
+            {"word": "期間", "reading": "きかん", "meaning": "Thời hạn, thời kỳ"},
+            {"word": "定期券", "reading": "ていきけん", "meaning": "Vé định kỳ"},
+            {"word": "期待", "reading": "きたい", "meaning": "Kỳ vọng, mong đợi"}
+        ]
+    },
+    {
+        "kanji": "残",
+        "han_viet": "TÀN",
+        "vocabulary": [
+            {"word": "残念", "reading": "ざんねん", "meaning": "Đáng tiếc"},
+            {"word": "残す", "reading": "のこす", "meaning": "Bỏ lại, để lại"},
+            {"word": "残る", "reading": "のこる", "meaning": "Còn lại"}
+        ]
+    },
+    {
+        "kanji": "独",
+        "han_viet": "ĐỘC",
+        "vocabulary": [
+            {"word": "独立心", "reading": "どくりつしん", "meaning": "Tinh thần tự lập"},
+            {"word": "独身", "reading": "どくしん", "meaning": "Độc thân"},
+            {"word": "独立", "reading": "どくりつ", "meaning": "Độc lập"}
+        ]
+    },
+    {
+        "kanji": "岩",
+        "han_viet": "NHAM",
+        "vocabulary": [
+            {"word": "岩石", "reading": "がんせき", "meaning": "Đá, nham thạch"},
+            {"word": "岩山", "reading": "いわやま", "meaning": "Núi đá"}
+        ]
+    },
+    {
+        "kanji": "張",
+        "han_viet": "TRƯƠNG",
+        "vocabulary": [
+            {"word": "出張", "reading": "しゅっちょう", "meaning": "Công tác"},
+            {"word": "張る", "reading": "はる", "meaning": "Kéo căng, phình ra"},
+            {"word": "頑張る", "reading": "がんばる", "meaning": "Cố gắng"}
+        ]
+    },
+    {
+        "kanji": "疑",
+        "han_viet": "NGHI",
+        "vocabulary": [
+            {"word": "疑問", "reading": "ぎもん", "meaning": "Sự hoài nghi, thắc mắc"},
+            {"word": "疑う", "reading": "うたがう", "meaning": "Nghi ngờ"}
+        ]
+    },
+    {
+        "kanji": "飛",
+        "han_viet": "PHI",
+        "vocabulary": [
+            {"word": "飛行機", "reading": "ひこうき", "meaning": "Máy bay"},
+            {"word": "飛ぶ", "reading": "とぶ", "meaning": "Bay"}
+        ]
+    },
+    {
+        "kanji": "器",
+        "han_viet": "KHÍ",
+        "vocabulary": [
+            {"word": "食器", "reading": "しょっき", "meaning": "Bát đĩa, đồ dùng ăn uống"}
+        ]
+    }
+]
