@@ -1,31 +1,30 @@
 // ============================================================
-// Dashboard — Home page
+// Dashboard — Study Session & Course Metrics Home
 // ============================================================
-// Scaled & Balanced Layout:
-// - Generous scale: text-3xl/4xl metrics, h-40 cards, p-8 panels
-// - Even vertical & horizontal spacing across the full viewport
-// - 2-Column layout matching target design (Hero, 4 Stat Cards, SRS Mastery | Weakest Items, Shortcuts)
+// Clean, soothing, eye-friendly typography & pastel aesthetics
+// Focused purely on study telemetry: streak, today's activity,
+// due reviews, SRS retention distribution, and course parameters.
 // ============================================================
 
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useApp } from '@/hooks/useApp';
 import { getDueCards, getStateDistribution } from '@/lib/srs';
 import { calculateStreak, getStudyDays } from '@/lib/storage';
 import {
-  RotateCcw,
   Flame,
-  Target,
   TrendingUp,
-  AlertCircle,
+  Activity,
+  Clock,
+  Sparkles,
+  Compass,
+  ArrowRight,
+  BookOpen,
   Layers,
-  X,
+  CheckCircle2,
 } from 'lucide-react';
 
 export function Dashboard() {
   const { vocabulary, srsCards, setCurrentPage } = useApp();
-
-  // State for interactive Weak Item Preview Modal
-  const [previewItemId, setPreviewItemId] = useState<string | null>(null);
 
   const dueCards = useMemo(() => getDueCards(srsCards), [srsCards]);
   const distribution = useMemo(() => getStateDistribution(srsCards), [srsCards]);
@@ -36,27 +35,14 @@ export function Dashboard() {
     (d) => d.date === new Date().toISOString().split('T')[0]
   );
 
-  // Weak items: top cards with low accuracy (< 60%)
-  const weakItems = useMemo(() => {
-    return srsCards
-      .filter((c) => c.totalReviews > 0 && c.correctCount / c.totalReviews < 0.6)
-      .slice(0, 5);
-  }, [srsCards]);
-
-  const previewVocab = useMemo(() => {
-    if (!previewItemId) return null;
-    return vocabulary.find((v) => v.id === previewItemId) || null;
-  }, [vocabulary, previewItemId]);
-
-  // Press Enter on Dashboard to start session
+  // Press Enter on Dashboard to launch study session
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
       if (
         target.tagName === 'INPUT' ||
         target.tagName === 'TEXTAREA' ||
-        target.isContentEditable ||
-        previewItemId !== null
+        target.isContentEditable
       ) {
         return;
       }
@@ -67,393 +53,324 @@ export function Dashboard() {
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [dueCards.length, setCurrentPage, previewItemId]);
+  }, [dueCards.length, setCurrentPage]);
 
   return (
-    <div className="w-full space-y-8 pb-20 pt-2 min-h-[calc(100vh-4rem)]">
+    <div className="w-full space-y-10 pb-24 pt-4 min-h-[calc(100vh-4rem)]">
       {/* ============================================================
-          Page Header (Scaled up for bold presence)
+          PAGE HEADER: Gentle, Soothing & Warm
           ============================================================ */}
-      <div className="flex items-baseline justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)]/60 pb-6">
         <div className="space-y-1">
-          <h1 className="text-3xl font-bold text-[var(--color-text)] tracking-tight">
-            Dashboard
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)] text-xs font-semibold tracking-wide">
+            <Sparkles size={13} className="text-[var(--color-accent)]" />
+            <span>HỆ THỐNG THEO DÕI HỌC TẬP N3</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[var(--color-text)] tracking-tight font-sans">
+            Tổng Quan Học Tập
           </h1>
-          <p className="text-base text-[var(--color-text-secondary)]">
-            N3 Japanese vocabulary, kanji, and grammar study progress
+          <p className="text-sm text-[var(--color-text-secondary)] font-normal">
+            Theo dõi chuỗi ngày học, số thẻ đã xem hôm nay và thông số tiến độ ghi nhớ SRS
           </p>
         </div>
-        <div className="text-sm text-[var(--color-text-tertiary)] hidden sm:flex items-center gap-2">
-          <span>Press</span>
-          <kbd className="kbd-shortcut text-xs px-2 py-1">Enter</kbd>
-          <span>to begin study session</span>
+
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>{dueCards.length > 0 ? `CẦN ÔN: ${dueCards.length} THẺ` : 'ĐÃ ÔN HẾT THẺ HÔM NAY'}</span>
+          </div>
+          <button
+            onClick={() => setCurrentPage(dueCards.length > 0 ? 'srs' : 'flashcards')}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1D63ED] hover:bg-blue-700 text-white font-semibold text-xs tracking-wide transition-colors shadow-xs cursor-pointer"
+          >
+            <span>Vào bài học</span>
+            <ArrowRight size={14} />
+          </button>
         </div>
       </div>
 
       {/* ============================================================
-          Main Two-Column Grid (Scaled 8:4 Ratio, gap-8 lg:gap-10)
+          SECTION 1: 4 THẺ CHỈ SỐ BÀI HỌC (Soothing Typography)
           ============================================================ */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-        {/* Left/Middle Main Column (col-span-8): Hero Card, 4 Stat Cards, SRS Mastery */}
-        <div className="lg:col-span-8 space-y-8">
-          {/* Panel 1: Blue Hero Card (Generous p-8 padding) */}
-          <div className="p-7 sm:p-8 rounded-3xl bg-[#EEF4FF] dark:bg-blue-950/30 border border-blue-100/90 dark:border-blue-900/40 shadow-xs card-hover-effect">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-              <div className="space-y-2.5 max-w-xl">
-                <h2 className="text-2xl sm:text-3xl font-bold text-[var(--color-text)] tracking-tight">
-                  {dueCards.length > 0
-                    ? `${dueCards.length} review cards ready for today`
-                    : 'All caught up with due reviews!'}
-                </h2>
-                <p className="text-base text-[var(--color-text-secondary)] leading-relaxed">
-                  {dueCards.length > 0
-                    ? 'You have scheduled Spaced Repetition reviews waiting. Practice flashcards or continue learning vocabulary at your own pace.'
-                    : "You've completed today's scheduled SRS reviews. Practice flashcards or explore new vocabulary at your own pace."}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap sm:flex-nowrap items-center gap-4 shrink-0 pt-2 md:pt-0">
-                {dueCards.length > 0 ? (
-                  <button
-                    onClick={() => setCurrentPage('srs')}
-                    className="
-                      flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl
-                      bg-[#1D63ED] text-white text-base font-bold
-                      hover:bg-blue-700 shadow-xs
-                      transition-colors duration-150 cursor-pointer focus-ring
-                    "
-                  >
-                    <RotateCcw size={18} />
-                    <span>Start Review Session</span>
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => setCurrentPage('flashcards')}
-                    className="
-                      flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl
-                      bg-[#1D63ED] text-white text-base font-bold
-                      hover:bg-blue-700 shadow-xs
-                      transition-colors duration-150 cursor-pointer focus-ring
-                    "
-                  >
-                    <Layers size={18} />
-                    <span>Practice Flashcards</span>
-                  </button>
-                )}
-                <button
-                  onClick={() => setCurrentPage('vocabulary')}
-                  className="
-                    text-base font-bold text-[#1D63ED] hover:underline
-                    transition-colors duration-150 cursor-pointer focus-ring py-2 px-1
-                  "
-                >
-                  Explore Vocabulary
-                </button>
-              </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Metric 1: CHUỖI NGÀY HỌC */}
+        <div className="p-6 sm:p-7 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-amber-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
+              CHUỖI NGÀY HỌC
+            </span>
+            <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <Flame size={20} />
             </div>
           </div>
-
-          {/* Panel 2: 4 Metric Cards Grid (Scaled height h-40, big text-3xl/4xl numbers) */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
-            {/* Card 1: CURRENT STREAK */}
-            <div className="h-40 p-6 rounded-3xl bg-white dark:bg-[var(--color-surface)] border border-gray-100 dark:border-[var(--color-border)] flex flex-col justify-between card-hover-effect shadow-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[var(--color-text-secondary)] uppercase tracking-wider">
-                  CURRENT STREAK
-                </span>
-                <Flame size={22} className="text-[#FF7043] badge-pulse" />
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
-                  {streak.current} days
-                </div>
-                <div className="text-xs text-[var(--color-text-tertiary)] mt-1.5 font-medium">
-                  Best: {streak.longest} days
-                </div>
-              </div>
+          <div>
+            <div className="text-3xl sm:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
+              {streak.current} <span className="text-lg font-normal text-[var(--color-text-secondary)]">ngày</span>
             </div>
-
-            {/* Card 2: TODAY'S ACTIVITY */}
-            <div className="h-40 p-6 rounded-3xl bg-white dark:bg-[var(--color-surface)] border border-gray-100 dark:border-[var(--color-border)] flex flex-col justify-between card-hover-effect shadow-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[var(--color-text-secondary)] uppercase tracking-wider">
-                  TODAY&apos;S ACTIVITY
-                </span>
-                <Target size={22} className="text-[#1D63ED]" />
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
-                  {todayStudy?.cardsReviewed || 0} reviewed
-                </div>
-                <div className="text-xs text-[var(--color-text-tertiary)] mt-1.5 font-medium">
-                  {todayStudy?.newCardsLearned || 0} new cards
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3: MASTERED CARDS */}
-            <div className="h-40 p-6 rounded-3xl bg-white dark:bg-[var(--color-surface)] border border-gray-100 dark:border-[var(--color-border)] flex flex-col justify-between card-hover-effect shadow-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[var(--color-text-secondary)] uppercase tracking-wider">
-                  MASTERED CARDS
-                </span>
-                <TrendingUp size={22} className="text-[#10B981]" />
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
-                  {distribution.mastered}
-                </div>
-                <div className="text-xs text-[var(--color-text-tertiary)] mt-1.5 font-medium">
-                  of {srsCards.length} tracked
-                </div>
-              </div>
-            </div>
-
-            {/* Card 4: NEEDS DRILL */}
-            <div className="h-40 p-6 rounded-3xl bg-white dark:bg-[var(--color-surface)] border border-gray-100 dark:border-[var(--color-border)] flex flex-col justify-between card-hover-effect shadow-xs">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[var(--color-text-secondary)] uppercase tracking-wider">
-                  NEEDS DRILL
-                </span>
-                <AlertCircle size={22} className="text-[#EF4444]" />
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
-                  {weakItems.length} items
-                </div>
-                <div className="text-xs text-[var(--color-text-tertiary)] mt-1.5 font-medium">
-                  Accuracy &lt; 60%
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Panel 3: Spaced Repetition Mastery (p-8, h-4.5 thick progress bar) */}
-          <div className="p-7 sm:p-8 rounded-3xl bg-white dark:bg-[var(--color-surface)] border border-gray-100 dark:border-[var(--color-border)] space-y-5 shadow-xs">
-            <div className="flex items-center justify-between">
-              <h2 className="text-base sm:text-lg font-bold text-[var(--color-text)]">
-                Spaced Repetition Mastery
-              </h2>
-              <span className="text-sm font-mono font-medium text-[var(--color-text-secondary)]">
-                {srsCards.length} cards total
-              </span>
-            </div>
-
-            <div className="flex gap-2 h-4.5 rounded-full overflow-hidden bg-[var(--color-surface-alt)]">
-              {distribution.mastered > 0 && (
-                <div
-                  className="bg-[#10B981] rounded-full transition-all duration-300"
-                  style={{ width: `${(distribution.mastered / Math.max(srsCards.length, 1)) * 100}%` }}
-                  title={`Mastered: ${distribution.mastered}`}
-                />
-              )}
-              {distribution.review > 0 && (
-                <div
-                  className="bg-[#1D63ED] rounded-full transition-all duration-300"
-                  style={{ width: `${(distribution.review / Math.max(srsCards.length, 1)) * 100}%` }}
-                  title={`Reviewing: ${distribution.review}`}
-                />
-              )}
-              {distribution.learning > 0 && (
-                <div
-                  className="bg-[#F59E0B] rounded-full transition-all duration-300"
-                  style={{ width: `${(distribution.learning / Math.max(srsCards.length, 1)) * 100}%` }}
-                  title={`Learning: ${distribution.learning}`}
-                />
-              )}
-              {distribution.new > 0 && (
-                <div
-                  className="bg-[#8A8A8A] rounded-full transition-all duration-300"
-                  style={{ width: `${(distribution.new / Math.max(srsCards.length, 1)) * 100}%` }}
-                  title={`New: ${distribution.new}`}
-                />
-              )}
-            </div>
-
-            <div className="flex flex-wrap gap-8 text-sm text-[var(--color-text-secondary)] pt-2">
-              <span className="flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-[#10B981]" />
-                <span>
-                  Mastered <strong className="text-[var(--color-text)] font-mono font-bold">{distribution.mastered}</strong>
-                </span>
-              </span>
-              <span className="flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-[#1D63ED]" />
-                <span>
-                  Reviewing <strong className="text-[var(--color-text)] font-mono font-bold">{distribution.review}</strong>
-                </span>
-              </span>
-              <span className="flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-[#F59E0B]" />
-                <span>
-                  Learning <strong className="text-[var(--color-text)] font-mono font-bold">{distribution.learning}</strong>
-                </span>
-              </span>
-              <span className="flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-[#8A8A8A]" />
-                <span>
-                  New <strong className="text-[var(--color-text)] font-mono font-bold">{distribution.new}</strong>
-                </span>
-              </span>
+            <div className="text-xs font-medium text-amber-600 dark:text-amber-400 mt-2 flex items-center gap-1.5">
+              <span>Kỷ lục cao nhất: {streak.longest} ngày</span>
             </div>
           </div>
         </div>
 
-        {/* Right Sidebar Column (col-span-4): Weakest Items & Keyboard Shortcuts */}
-        <div className="lg:col-span-4 space-y-10 pt-2">
-          {/* Widget 1: Weakest Items */}
-          <div className="space-y-5">
-            <div className="flex items-center justify-between border-b border-gray-100 dark:border-[var(--color-border)]/60 pb-3">
-              <div className="flex items-center gap-2.5">
-                <AlertCircle size={18} className="text-[#EF4444]" />
-                <h2 className="text-base font-bold text-[var(--color-text)]">
-                  Weakest Items
-                </h2>
-              </div>
-              <span className="text-xs font-semibold text-[var(--color-text-tertiary)]">
-                Below 60% accuracy
-              </span>
+        {/* Metric 2: ĐÃ HỌC HÔM NAY */}
+        <div className="p-6 sm:p-7 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-blue-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
+              ĐÃ HỌC HÔM NAY
+            </span>
+            <div className="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <Activity size={20} />
             </div>
+          </div>
+          <div>
+            <div className="text-3xl sm:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
+              {todayStudy?.cardsReviewed || 0} <span className="text-lg font-normal text-[var(--color-text-secondary)]">thẻ</span>
+            </div>
+            <div className="text-xs font-medium text-blue-600 dark:text-blue-400 mt-2 flex items-center gap-1.5">
+              <span>+{todayStudy?.newCardsLearned || 0} từ mới hôm nay</span>
+            </div>
+          </div>
+        </div>
 
-            {weakItems.length > 0 ? (
-              <div className="space-y-4">
-                {weakItems.map((card) => {
-                  const vocab = vocabulary.find((v) => v.id === card.itemId);
-                  if (!vocab) return null;
-                  const accuracy = Math.round(
-                    (card.correctCount / card.totalReviews) * 100
-                  );
-                  return (
-                    <div
-                      key={card.itemId}
-                      className="flex items-center justify-between text-base group hover:bg-[var(--color-surface-alt)] p-2 -mx-2 rounded-xl transition-colors cursor-pointer"
-                      onClick={() => setPreviewItemId(vocab.id)}
-                      title="Click to drill item"
-                    >
-                      <div className="flex items-center gap-3 min-w-0">
-                        <span className="font-jp text-lg font-bold text-[var(--color-text)] shrink-0">
-                          {vocab.kanji}
-                        </span>
-                        <span className="font-jp text-sm font-medium text-[#FF7043] truncate">
-                          【{vocab.hiragana}】
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-3 shrink-0 ml-2">
-                        {/* Red Marker Bar */}
-                        <div className="w-12 h-1.5 rounded-full bg-gray-200 dark:bg-[var(--color-surface-alt)] overflow-hidden hidden sm:block">
-                          <div
-                            className="h-full bg-[#EF4444] rounded-full"
-                            style={{ width: `${Math.max(15, accuracy)}%` }}
-                          />
-                        </div>
-                        <span className="text-sm font-mono font-bold text-[#EF4444] shrink-0">
-                          {accuracy}%
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="py-6 text-sm text-[var(--color-text-secondary)]">
-                All reviewed items are currently above 60% accuracy. Great retention!
-              </div>
-            )}
+        {/* Metric 3: CẦN ÔN HÔM NAY */}
+        <div className="p-6 sm:p-7 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-rose-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
+              CẦN ÔN HÔM NAY
+            </span>
+            <div className={`w-10 h-10 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform ${
+              dueCards.length > 0 ? 'bg-rose-500/10 text-rose-500' : 'bg-emerald-500/10 text-emerald-500'
+            }`}>
+              {dueCards.length > 0 ? <Clock size={20} /> : <CheckCircle2 size={20} />}
+            </div>
+          </div>
+          <div>
+            <div className="text-3xl sm:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
+              {dueCards.length} <span className="text-lg font-normal text-[var(--color-text-secondary)]">thẻ</span>
+            </div>
+            <div className={`text-xs font-medium mt-2 flex items-center gap-1.5 ${
+              dueCards.length > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'
+            }`}>
+              <span>{dueCards.length > 0 ? 'Sẵn sàng kiểm tra SRS' : 'Hoàn tất bài ôn hôm nay'}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Metric 4: TỶ LỆ THUỘC BÀI */}
+        <div className="p-6 sm:p-7 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-emerald-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
+              TỶ LỆ THUỘC BÀI
+            </span>
+            <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <TrendingUp size={20} />
+            </div>
+          </div>
+          <div>
+            <div className="text-3xl sm:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
+              {Math.round((distribution.mastered / Math.max(srsCards.length, 1)) * 100)}%
+            </div>
+            <div className="text-xs font-medium text-emerald-600 dark:text-emerald-400 mt-2 flex items-center gap-1.5">
+              <span>{distribution.mastered} / {srsCards.length} thẻ đã thành thạo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ============================================================
+          SECTION 2: THÔNG SỐ TIẾN ĐỘ SRS & THAM SỐ KHÓA HỌC
+          ============================================================ */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left Column (col-span-7): Phân Bổ Ghi Nhớ Spaced Repetition */}
+        <div className="lg:col-span-7 p-7 sm:p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[var(--color-border)]/50 pb-4">
+            <div>
+              <h3 className="text-lg font-bold text-[var(--color-text)]">
+                Phân bổ tiến độ ghi nhớ SRS
+              </h3>
+              <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
+                Các mức độ thành thạo theo lặp lại ngắt quãng của toàn bộ từ vựng N3
+              </p>
+            </div>
+            <span className="text-xs font-medium text-[var(--color-text-secondary)] bg-[var(--color-surface-alt)] px-3 py-1.5 rounded-xl border border-[var(--color-border)]">
+              Tổng số lượng: <strong className="text-[var(--color-text)]">{srsCards.length} thẻ</strong>
+            </span>
           </div>
 
-          {/* Widget 2: Keyboard Shortcuts */}
-          <div className="space-y-4 pt-2">
-            <h2 className="text-base font-bold text-[var(--color-text)] border-b border-gray-100 dark:border-[var(--color-border)]/60 pb-3">
-              Keyboard Shortcuts
-            </h2>
-            <div className="space-y-3 text-sm text-[var(--color-text-secondary)] font-medium">
-              <div className="flex items-center justify-between">
-                <span>Start Review / Flip</span>
+          {/* Gentle, Rounded 18px Spectrum Bar */}
+          <div className="space-y-2">
+            <div className="flex justify-between text-xs text-[var(--color-text-tertiary)] font-medium">
+              <span>MỨC ĐỘ THÀNH THẠO</span>
+              <span>100% TỔNG THẺ</span>
+            </div>
+            <div className="flex gap-1.5 h-4.5 rounded-full overflow-hidden bg-[var(--color-surface-alt)] p-1 border border-[var(--color-border)]/70">
+              {distribution.mastered > 0 && (
+                <div
+                  className="bg-emerald-500 rounded-full transition-all duration-500"
+                  style={{ width: `${(distribution.mastered / Math.max(srsCards.length, 1)) * 100}%` }}
+                  title={`Thành thạo: ${distribution.mastered}`}
+                />
+              )}
+              {distribution.review > 0 && (
+                <div
+                  className="bg-blue-500 rounded-full transition-all duration-500"
+                  style={{ width: `${(distribution.review / Math.max(srsCards.length, 1)) * 100}%` }}
+                  title={`Đang ôn tập: ${distribution.review}`}
+                />
+              )}
+              {distribution.learning > 0 && (
+                <div
+                  className="bg-amber-500 rounded-full transition-all duration-500"
+                  style={{ width: `${(distribution.learning / Math.max(srsCards.length, 1)) * 100}%` }}
+                  title={`Đang học: ${distribution.learning}`}
+                />
+              )}
+              {distribution.new > 0 && (
+                <div
+                  className="bg-slate-400 dark:bg-slate-600 rounded-full transition-all duration-500"
+                  style={{ width: `${(distribution.new / Math.max(srsCards.length, 1)) * 100}%` }}
+                  title={`Chưa học: ${distribution.new}`}
+                />
+              )}
+            </div>
+          </div>
+
+          {/* Soothing 4-stage data grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+            <div className="p-4 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/60">
+              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span>Thành thạo</span>
+              </div>
+              <div className="text-2xl font-bold text-[var(--color-text)] mt-1.5">
+                {distribution.mastered}
+              </div>
+              <div className="text-[11px] text-[var(--color-text-tertiary)] mt-0.5">
+                {Math.round((distribution.mastered / Math.max(srsCards.length, 1)) * 100)}% tổng số
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/60">
+              <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400">
+                <span className="w-2 h-2 rounded-full bg-blue-500" />
+                <span>Đang ôn</span>
+              </div>
+              <div className="text-2xl font-bold text-[var(--color-text)] mt-1.5">
+                {distribution.review}
+              </div>
+              <div className="text-[11px] text-[var(--color-text-tertiary)] mt-0.5">
+                {Math.round((distribution.review / Math.max(srsCards.length, 1)) * 100)}% tổng số
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/60">
+              <div className="flex items-center gap-2 text-xs font-semibold text-amber-600 dark:text-amber-400">
+                <span className="w-2 h-2 rounded-full bg-amber-500" />
+                <span>Mới quen</span>
+              </div>
+              <div className="text-2xl font-bold text-[var(--color-text)] mt-1.5">
+                {distribution.learning}
+              </div>
+              <div className="text-[11px] text-[var(--color-text-tertiary)] mt-0.5">
+                {Math.round((distribution.learning / Math.max(srsCards.length, 1)) * 100)}% tổng số
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/60">
+              <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
+                <span className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500" />
+                <span>Chưa học</span>
+              </div>
+              <div className="text-2xl font-bold text-[var(--color-text)] mt-1.5">
+                {distribution.new}
+              </div>
+              <div className="text-[11px] text-[var(--color-text-tertiary)] mt-0.5">
+                {Math.round((distribution.new / Math.max(srsCards.length, 1)) * 100)}% tổng số
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column (col-span-5): Thông Số Khóa Học N3 & Phím Tắt Thao Tác */}
+        <div className="lg:col-span-5 space-y-6">
+          {/* Widget 1: Thông Số Học Phần Khóa Học N3 */}
+          <div className="p-7 sm:p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs space-y-5">
+            <div className="flex items-center justify-between border-b border-[var(--color-border)]/50 pb-4">
+              <h3 className="text-base font-bold text-[var(--color-text)] flex items-center gap-2">
+                <Layers size={18} className="text-blue-500" />
+                <span>Quy Mô Học Phần N3</span>
+              </h3>
+              <span className="text-xs font-medium text-[var(--color-text-tertiary)]">CHỈ SỐ DỮ LIỆU</span>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/50">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center">
+                    <BookOpen size={16} />
+                  </div>
+                  <span className="text-sm font-medium text-[var(--color-text)]">Từ vựng N3</span>
+                </div>
+                <span className="text-base font-bold text-[var(--color-text)]">{vocabulary.length} từ</span>
+              </div>
+
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/50">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+                    <Sparkles size={16} />
+                  </div>
+                  <span className="text-sm font-medium text-[var(--color-text)]">Hán tự (Kanji) N3</span>
+                </div>
+                <span className="text-base font-bold text-[var(--color-text)]">200+ Hán tự</span>
+              </div>
+
+              <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/50">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+                    <TrendingUp size={16} />
+                  </div>
+                  <span className="text-sm font-medium text-[var(--color-text)]">Ngữ pháp N3</span>
+                </div>
+                <span className="text-base font-bold text-[var(--color-text)]">150+ mẫu câu</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Widget 2: Phím Tắt Thao Tác Nhanh */}
+          <div className="p-7 sm:p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs space-y-4">
+            <div className="flex items-center justify-between border-b border-[var(--color-border)]/50 pb-4">
+              <h3 className="text-base font-bold text-[var(--color-text)] flex items-center gap-2">
+                <Compass size={18} className="text-[var(--color-text-secondary)]" />
+                <span>Phím tắt thao tác nhanh</span>
+              </h3>
+              <span className="text-xs font-medium text-[var(--color-text-tertiary)]">PHÍM NHANH</span>
+            </div>
+            <div className="space-y-2.5 text-xs font-medium text-[var(--color-text-secondary)]">
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/40">
+                <span>Lật thẻ / Xem đáp án</span>
                 <kbd className="kbd-shortcut text-xs px-2.5 py-1">Space / Enter</kbd>
               </div>
-              <div className="flex items-center justify-between">
-                <span>Rate Answer (SRS)</span>
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/40">
+                <span>Đánh giá độ nhớ (SRS)</span>
                 <kbd className="kbd-shortcut text-xs px-2.5 py-1">1 – 4</kbd>
               </div>
-              <div className="flex items-center justify-between">
-                <span>Command Palette</span>
-                <kbd className="kbd-shortcut text-xs px-2.5 py-1">⌘K</kbd>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Go to Vocabulary</span>
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/40">
+                <span>Đến trang Từ vựng</span>
                 <kbd className="kbd-shortcut text-xs px-2.5 py-1">G V</kbd>
               </div>
-              <div className="flex items-center justify-between">
-                <span>Go to Kanji</span>
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/40">
+                <span>Đến trang Kanji</span>
                 <kbd className="kbd-shortcut text-xs px-2.5 py-1">G K</kbd>
               </div>
-              <div className="flex items-center justify-between">
-                <span>Go to Grammar</span>
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/40">
+                <span>Đến trang Ngữ pháp</span>
                 <kbd className="kbd-shortcut text-xs px-2.5 py-1">G G</kbd>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* ============================================================
-          Interactive Weak Item Preview Modal
-          ============================================================ */}
-      {previewVocab && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4">
-          <div className="w-full max-w-md rounded-3xl bg-white dark:bg-[var(--color-surface)] border border-gray-100 dark:border-[var(--color-border)] shadow-lg p-7 space-y-4 animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between border-b border-[var(--color-border)]/60 pb-3">
-              <div className="flex items-center gap-2">
-                <AlertCircle size={18} className="text-[#EF4444]" />
-                <span className="text-xs font-bold uppercase tracking-wider text-[#EF4444]">
-                  Needs Drill
-                </span>
-              </div>
-              <button
-                onClick={() => setPreviewItemId(null)}
-                className="p-1 rounded-lg hover:bg-[var(--color-surface-alt)] text-[var(--color-text-tertiary)] hover:text-[var(--color-text)] transition-colors cursor-pointer"
-              >
-                <X size={18} />
-              </button>
-            </div>
-
-            <div className="text-center py-4 space-y-2">
-              <div className="font-jp text-4xl font-bold text-[var(--color-text)]">
-                {previewVocab.kanji}
-              </div>
-              <div className="font-jp text-base text-[#1D63ED] font-semibold">
-                【{previewVocab.hiragana}】
-              </div>
-              <div className="text-lg font-bold text-[var(--color-text)] pt-1">
-                {previewVocab.meaning}
-              </div>
-              {previewVocab.relatedWords && (
-                <div className="text-xs text-[var(--color-text-secondary)] font-jp">
-                  Related: {previewVocab.relatedWords}
-                </div>
-              )}
-            </div>
-
-            <div className="flex items-center gap-3 pt-2">
-              <button
-                onClick={() => {
-                  setPreviewItemId(null);
-                  setCurrentPage('flashcards');
-                }}
-                className="w-full py-3.5 rounded-2xl bg-[#1D63ED] text-white text-base font-bold hover:bg-blue-700 transition-colors cursor-pointer shadow-xs"
-              >
-                Practice in Flashcards
-              </button>
-              <button
-                onClick={() => setPreviewItemId(null)}
-                className="px-6 py-3.5 rounded-2xl bg-[var(--color-surface-alt)] hover:bg-[var(--color-border)] text-[var(--color-text)] text-sm font-semibold transition-colors cursor-pointer"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

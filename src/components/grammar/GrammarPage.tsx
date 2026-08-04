@@ -36,6 +36,7 @@ export function GrammarPage() {
     return (
       <GrammarFlashcardSession
         items={filtered}
+        preserveOrder={true}
         onExit={() => setFlashcardMode(false)}
       />
     );

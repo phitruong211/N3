@@ -39,10 +39,22 @@ export async function loadVocabulary(): Promise<VocabItem[]> {
 
 // --- Kanji ---
 
+interface RawKanjiVocab {
+  word?: string;
+  tu?: string;
+  reading?: string;
+  phien_am?: string;
+  meaning?: string;
+  nghia?: string;
+}
+
 interface RawKanji {
-  kanji: string;
-  han_viet: string;
-  vocabulary: { word: string; reading: string; meaning: string }[];
+  kanji?: string;
+  tu_chinh?: string;
+  han_viet?: string;
+  Han_viet?: string;
+  vocabulary?: RawKanjiVocab[];
+  tu_lien_quan?: RawKanjiVocab[];
 }
 
 let _kanjiCache: KanjiItem[] | null = null;
@@ -53,15 +65,25 @@ export async function loadKanji(): Promise<KanjiItem[]> {
   const res = await fetch('/data/kanjiN3_vocab_full.json?t=' + Date.now());
   const raw: RawKanji[] = await res.json();
 
-  _kanjiCache = raw.map((item, index) => ({
-    id: `kanji-${index}`,
-    kanji: item.kanji,
-    hanViet: item.han_viet,
-    vocabulary: item.vocabulary
-      .filter((v) => v.word.length <= 6 && v.reading.length > 1)
-      .slice(0, 5)
-      .map((v) => ({ word: v.word, reading: v.reading, meaning: v.meaning ?? '' })),
-  }));
+  _kanjiCache = raw.map((item, index) => {
+    const kanjiChar = item.tu_chinh || item.kanji || '';
+    const hanVietStr = item.han_viet || item.Han_viet || '';
+    const rawVocab = item.tu_lien_quan || item.vocabulary || [];
+
+    return {
+      id: `kanji-${index}`,
+      kanji: kanjiChar,
+      hanViet: hanVietStr,
+      vocabulary: rawVocab
+        .map((v) => ({
+          word: v.tu || v.word || '',
+          reading: v.phien_am || v.reading || '',
+          meaning: v.nghia || v.meaning || '',
+        }))
+        .filter((v) => v.word.length <= 6 && v.reading.length > 1)
+        .slice(0, 5),
+    };
+  });
 
   return _kanjiCache;
 }
