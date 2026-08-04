@@ -10,13 +10,15 @@
 import React, { useState, useMemo } from 'react';
 import { useApp } from '@/hooks/useApp';
 import type { GrammarItem } from '@/types';
-import { ChevronDown, ChevronUp, Bookmark, BookmarkCheck, Search, X } from 'lucide-react';
+import { ChevronDown, ChevronUp, Bookmark, BookmarkCheck, Search, X, Sparkles } from 'lucide-react';
+import { GrammarFlashcardSession } from '@/components/flashcard/FlashcardPage';
 
 export function GrammarPage() {
   const { grammar, isBookmarked, toggleBookmark } = useApp();
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<'all' | 'bookmarked'>('all');
+  const [flashcardMode, setFlashcardMode] = useState(false);
 
   const filtered = useMemo(() => {
     return grammar.filter((item) => {
@@ -29,6 +31,15 @@ export function GrammarPage() {
       return matchesSearch && matchesBookmark;
     });
   }, [grammar, searchQuery, filter, isBookmarked]);
+
+  if (flashcardMode && filtered.length > 0) {
+    return (
+      <GrammarFlashcardSession
+        items={filtered}
+        onExit={() => setFlashcardMode(false)}
+      />
+    );
+  }
 
   return (
     <div className="space-y-6 w-full">
@@ -43,8 +54,17 @@ export function GrammarPage() {
           </p>
         </div>
 
-        {/* Filter toggle */}
-        <div className="flex items-center p-1 rounded-xl bg-[var(--color-surface-alt)] border border-[var(--color-border)] shrink-0 self-start sm:self-auto">
+        <div className="flex items-center gap-3 self-start sm:self-auto flex-wrap">
+          <button
+            onClick={() => setFlashcardMode(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold hover:opacity-95 shadow-xs cursor-pointer transition-all"
+          >
+            <Sparkles size={14} />
+            <span>Launch Grammar Flashcards →</span>
+          </button>
+
+          {/* Filter toggle */}
+          <div className="flex items-center p-1 rounded-xl bg-[var(--color-surface-alt)] border border-[var(--color-border)] shrink-0">
           {(['all', 'bookmarked'] as const).map((f) => (
             <button
               key={f}
@@ -62,6 +82,7 @@ export function GrammarPage() {
               {f === 'all' ? 'All Patterns' : '★ Saved'}
             </button>
           ))}
+          </div>
         </div>
       </div>
 

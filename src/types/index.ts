@@ -32,8 +32,10 @@ export interface KanjiItem {
 export interface GrammarItem {
   id: string;
   pattern: string;
+  reading?: string;
   meaning: string;
   structure: string;
+  congThuc?: string;
   usage: string;
   nuance: string;
   commonMistakes: string;

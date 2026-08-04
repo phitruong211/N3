@@ -1,0 +1,1574 @@
+[
+  {
+    "bai": 1,
+    "stt": 1,
+    "mau_ngu_phap": "受け身使役形",
+    "phien_am": "Ukemi shiekikei",
+    "cong_thuc": "Nhóm I: V(a)せられる/される | Nhóm II: Vさせられる | Nhóm III: させられる / こさせられる",
+    "y_nghia": "Thể bị động sai khiến",
+    "chu_y": "Dùng để diễn tả việc bị người khác ép buộc làm một việc gì đó mà bản thân không muốn.",
+    "vi_du": [
+      {
+        "nhat": "子供の時、母に嫌いな野菜を食べさせられた。",
+        "viet": "Hồi bé, tôi bị mẹ ép ăn loại rau mà mình ghét."
+      }
+    ]
+  },
+  {
+    "bai": 1,
+    "stt": 2,
+    "mau_ngu_phap": "～がる・～がっている",
+    "phien_am": "~ garu / ~ gatte iru",
+    "cong_thuc": "Aい (bỏ い) / Aな (bỏ な) / Vたい (bỏ い) + がる / がっている",
+    "y_nghia": "Cảm xúc, mong muốn của người thứ 3",
+    "chu_y": "Chỉ dùng để miêu tả cảm xúc, mong muốn của người thứ ba (không dùng cho bản thân người nói).",
+    "vi_du": [
+      {
+        "nhat": "彼は新しいパソコンを欲しがっている。",
+        "viet": "Anh ấy đang tỏ ra muốn có một chiếc máy tính mới."
+      }
+    ]
+  },
+  {
+    "bai": 1,
+    "stt": 3,
+    "mau_ngu_phap": "Vて もらいたい / ほしい / いただきたい",
+    "phien_am": "V-te moraitai / hoshii / itadakitai",
+    "cong_thuc": "Vて / Vないで + もらいたい / ほしい / いただきたい",
+    "y_nghia": "Muốn ai đó làm gì cho mình",
+    "chu_y": "Dùng khi yêu cầu, mong muốn người khác thực hiện một hành động nào đó cho mình. 'いただきたい' lịch sự nhất.",
+    "vi_du": [
+      {
+        "nhat": "先生にこの文法を教えていただきたいんですが。",
+        "viet": "Thưa thầy/cô, em muốn nhờ thầy/cô dạy cho em mẫu ngữ pháp này ạ."
+      }
+    ]
+  },
+  {
+    "bai": 1,
+    "stt": 4,
+    "mau_ngu_phap": "～って",
+    "phien_am": "~ tte",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + って",
+    "y_nghia": "Trích dẫn (văn nói)",
+    "chu_y": "Là cách nói ngắn gọn của 「～と言っている」 hoặc 「～と聞いた」, dùng phổ biến trong giao tiếp hàng ngày.",
+    "vi_du": [
+      {
+        "nhat": "天気予報によると、明日は雨だって。",
+        "viet": "Theo dự báo thời tiết thì nghe nói ngày mai trời mưa đấy."
+      }
+    ]
+  },
+  {
+    "bai": 1,
+    "stt": 5,
+    "mau_ngu_phap": "Vない＋ずに",
+    "phien_am": "V-nai + zuni",
+    "cong_thuc": "Vない (bỏ ない) + ずに (Riêng: する ➝ せずに)",
+    "y_nghia": "Làm V2 mà không làm V1",
+    "chu_y": "Đồng nghĩa với 「Vないで」. Chú ý động từ する chuyển thành せずに.",
+    "vi_du": [
+      {
+        "nhat": "今朝は時間がなくて、朝ご飯を食べずに学校へ行った。",
+        "viet": "Sáng nay không có thời gian nên tôi đã đi học mà không ăn sáng."
+      }
+    ]
+  },
+  {
+    "bai": 2,
+    "stt": 6,
+    "mau_ngu_phap": "～ことにしている",
+    "phien_am": "~ koto ni shite iru",
+    "cong_thuc": "Vる / Vない + ことにしている",
+    "y_nghia": "Cố gắng / Quyết tâm",
+    "chu_y": "Diễn tả thói quen do bản thân tự quyết định. Không dùng với lễ nghi, thói quen văn hóa.",
+    "vi_du": [
+      {
+        "nhat": "毎日、寝る前に、リキアプリでのビデオを見ることにしている。",
+        "viet": "Mỗi ngày, trước khi đi ngủ, tôi quyết tâm (có thói quen) xem video trên ứng dụng Riki."
+      },
+      {
+        "nhat": "毎朝、早く起きてジョギングすることにしている。",
+        "viet": "Mỗi sáng, tôi tạo thói quen dậy sớm và chạy bộ."
+      }
+    ]
+  },
+  {
+    "bai": 2,
+    "stt": 7,
+    "mau_ngu_phap": "～ことになっている",
+    "phien_am": "~ koto ni natte iru",
+    "cong_thuc": "Vる / Vない + ことになっている",
+    "y_nghia": "Đã được quyết định / Quy định là",
+    "chu_y": "Diễn tả những việc được quyết định, quy định, dự định (công ty, pháp luật...). Không phải do bản thân quyết định.",
+    "vi_du": [
+      {
+        "nhat": "法律では、20歳未満お酒を飲んではいけないことになっている。",
+        "viet": "Theo pháp luật, quy định là người dưới 20 tuổi không được uống rượu."
+      },
+      {
+        "nhat": "今日は10時に歯医者へ行くことになっている。",
+        "viet": "Theo lịch trình, hôm nay tôi sẽ đi nha sĩ lúc 10 giờ."
+      }
+    ]
+  },
+  {
+    "bai": 2,
+    "stt": 8,
+    "mau_ngu_phap": "～だけでなく / ～ばかりでなく",
+    "phien_am": "~ dake denaku / ~ bakari denaku",
+    "cong_thuc": "V・Aい (普通形) / Aな・である / N・である + だけでなく / ばかりでなく",
+    "y_nghia": "Không chỉ... mà còn...",
+    "chu_y": "Dùng khi muốn mở rộng phạm vi. Thường đi với 「も」, 「まで」, 「でも」.",
+    "vi_du": [
+      {
+        "nhat": "兄は留学でフランス語を学んだばかりでなく、結婚相手まで見つけてきた。",
+        "viet": "Anh trai tôi đi du học không chỉ học được tiếng Pháp mà còn tìm được cả đối tượng kết hôn."
+      }
+    ]
+  },
+  {
+    "bai": 2,
+    "stt": 9,
+    "mau_ngu_phap": "～ようとする / ～ようとしない",
+    "phien_am": "~ you to suru / ~ you to shinai",
+    "cong_thuc": "V(ý hướng: よう) + とする / としない",
+    "y_nghia": "Định, cố gắng / Không có ý định",
+    "chu_y": "Diễn tả ý định, vừa mới định làm gì (ようとする) hoặc hoàn toàn không có ý định làm gì (ようとしない).",
+    "vi_du": [
+      {
+        "nhat": "この猫は、私が触ろうとすると、すぐ逃げる。",
+        "viet": "Con mèo này hễ tôi định chạm vào là bỏ chạy ngay."
+      },
+      {
+        "nhat": "彼女にちゃんと説明したが、ぼくの話を聞こうとしないんだ。",
+        "viet": "Tôi đã giải thích tử tế với cô ấy rồi, nhưng cô ấy hoàn toàn không có ý định nghe tôi nói."
+      }
+    ]
+  },
+  {
+    "bai": 2,
+    "stt": 10,
+    "mau_ngu_phap": "～つもりだった",
+    "phien_am": "~ tsumori datta",
+    "cong_thuc": "Vた / Vている / Vない / Aい / Aな / Nの + つもりだった",
+    "y_nghia": "Đã định làm.. mà lại... / Cứ nghĩ là...",
+    "chu_y": "Diễn tả dự định trong quá khứ nhưng sau đó không thực hiện, hoặc thực tế khác với những gì đã đinh ninh.",
+    "vi_du": [
+      {
+        "nhat": "かばんに財布を入れたつもりだったが、買い物するとき、なかった。",
+        "viet": "Tôi cứ đinh ninh là đã cho ví vào túi xách rồi, nhưng lúc mua sắm lại không thấy đâu."
+      },
+      {
+        "nhat": "まだ若いつもりだったのに、電車で席を譲られてしまった。",
+        "viet": "Tôi cứ nghĩ mình vẫn còn trẻ, thế mà lại bị nhường ghế trên tàu điện."
+      }
+    ]
+  },
+  {
+    "bai": 3,
+    "stt": 11,
+    "mau_ngu_phap": "～そうに（も）ない",
+    "phien_am": "~ sou ni (mo) nai",
+    "cong_thuc": "Vます (bỏ ます) / Vられます (bỏ ます) + そうに（も）ない",
+    "y_nghia": "Khó mà...",
+    "chu_y": "Suy đoán dự định khó xảy ra, thường thể hiện tâm trạng tiếc nuối.",
+    "vi_du": [
+      {
+        "nhat": "風邪をひいてしまったので、今夜の飲み会は参加できそうもないよ。",
+        "viet": "Bị cảm mất rồi nên có vẻ khó mà tham gia buổi nhậu tối nay được."
+      }
+    ]
+  },
+  {
+    "bai": 3,
+    "stt": 12,
+    "mau_ngu_phap": "～はずがない",
+    "phien_am": "~ hazu ga nai",
+    "cong_thuc": "V・Aい (普通形) / Aな / Nの + はずがない",
+    "y_nghia": "Làm gì có chuyện / Chắc chắn không",
+    "chu_y": "Phủ định mạnh mẽ một việc hoàn toàn không thể xảy ra (phán đoán chủ quan).",
+    "vi_du": [
+      {
+        "nhat": "夏に雪が降るはずがない。",
+        "viet": "Mùa hè làm gì có chuyện tuyết rơi."
+      },
+      {
+        "nhat": "こんなにたくさん、明日までに覚えられるはずがないよ。",
+        "viet": "Nhiều thế này thì làm sao có thể nhớ hết trước ngày mai được."
+      }
+    ]
+  },
+  {
+    "bai": 3,
+    "stt": 13,
+    "mau_ngu_phap": "～たところ…た",
+    "phien_am": "~ ta tokoro... ta",
+    "cong_thuc": "Vた + ところ",
+    "y_nghia": "Sau khi... thì",
+    "chu_y": "Nhấn mạnh cảm xúc ngạc nhiên, kết quả không ngờ tới sau khi làm vế trước.",
+    "vi_du": [
+      {
+        "nhat": "初めて山田先生に会うとき、怖そうな人だと思ったが、話したところ、優しい人だとわかった。",
+        "viet": "Lần đầu gặp thầy Yamada, tôi tưởng thầy có vẻ đáng sợ, nhưng sau khi nói chuyện mới biết thầy là người rất hiền."
+      }
+    ]
+  },
+  {
+    "bai": 3,
+    "stt": 14,
+    "mau_ngu_phap": "～ところを・へ・に・で",
+    "phien_am": "~ tokoro o / e / ni / de",
+    "cong_thuc": "Vる / Vている / Vた / Aい / Aな / Nの・である + ところを・へ・に・で",
+    "y_nghia": "Đúng lúc / Trong lúc... thì",
+    "chu_y": "Diễn tả thời điểm, hoàn cảnh mà sự việc nào đó vừa mới xảy ra bị hành động vế sau xen ngang hoặc tác động.",
+    "vi_du": [
+      {
+        "nhat": "一人で泣いているところを友達に見られてしまった。",
+        "viet": "Đúng lúc đang khóc một mình thì bị bạn nhìn thấy."
+      },
+      {
+        "nhat": "楽しみにしていたテレビドラマが始まったところで電話がなった。",
+        "viet": "Vừa đúng lúc bộ phim truyền hình tôi mong đợi bắt đầu thì điện thoại reo."
+      }
+    ]
+  },
+  {
+    "bai": 3,
+    "stt": 15,
+    "mau_ngu_phap": "～から…にかけて",
+    "phien_am": "~ kara... ni kakete",
+    "cong_thuc": "N1 から N2 にかけて",
+    "y_nghia": "Từ... đến",
+    "chu_y": "Diễn tả phạm vi đại khái của không gian hoặc thời gian, nhấn mạnh sự việc xảy ra liên tục trong phạm vi đó.",
+    "vi_du": [
+      {
+        "nhat": "台風の影響で、昨夜から今朝にかけて激しい雨が降り続いた。",
+        "viet": "Do ảnh hưởng của bão, mưa lớn kéo dài từ đêm qua đến sáng nay."
+      }
+    ]
+  },
+  {
+    "bai": 3,
+    "stt": 16,
+    "mau_ngu_phap": "～しかない / （より）ほかない",
+    "phien_am": "~ shika nai / (yori) hoka nai",
+    "cong_thuc": "Vる + しかない / （より）ほかない",
+    "y_nghia": "Chỉ còn cách",
+    "chu_y": "Tình trạng không còn cách nào khác, thể hiện tâm trạng bất mãn, tiếc nuối.",
+    "vi_du": [
+      {
+        "nhat": "会社のエレベーターが壊れているから、階段を使うしかない。",
+        "viet": "Thang máy của công ty bị hỏng nên chỉ còn cách đi cầu thang bộ."
+      }
+    ]
+  },
+  {
+    "bai": 4,
+    "stt": 17,
+    "mau_ngu_phap": "Vてる・Vとく・Vちゃう・Vなきゃ",
+    "phien_am": "V-teru / V-toku / V-chau / V-nakya",
+    "cong_thuc": "Vている➝てる | Vておく➝とく | Vてしまう➝ちゃう | Vなければならない➝なきゃ",
+    "y_nghia": "Dạng rút gọn trong văn nói",
+    "chu_y": "ている ➝ てる / ておく ➝ とく / てしまう ➝ ちゃう / なければならない ➝ なきゃ.",
+    "vi_du": [
+      {
+        "nhat": "あなたのことが好きになっちゃった。",
+        "viet": "Lỡ thích cậu mất rồi."
+      },
+      {
+        "nhat": "そろそろ帰らなくちゃ。遅くなると母が心配するから。",
+        "viet": "Sắp phải về rồi. Muộn là mẹ tôi lo lắng đấy."
+      }
+    ]
+  },
+  {
+    "bai": 4,
+    "stt": 18,
+    "mau_ngu_phap": "～んじゃない / のではないだろうか",
+    "phien_am": "~ n ja nai / no de wa nai darou ka",
+    "cong_thuc": "V・Aい (普通形) + んじゃない(か) / のではないだろうか | Aな・N + な + んじゃない / のではないか",
+    "y_nghia": "Chẳng phải là... hay sao? / Tôi nghĩ là...",
+    "chu_y": "Diễn tả ý kiến, phỏng đoán bản thân một cách lịch sự. Lên giọng cuối câu.",
+    "vi_du": [
+      {
+        "nhat": "みんなでがんばれば、できるのではないでしょうか？",
+        "viet": "Nếu mọi người cùng cố gắng thì chẳng phải là sẽ làm được hay sao?"
+      },
+      {
+        "nhat": "日曜日なら、みんな暇なんじゃない？",
+        "viet": "Nếu là Chủ Nhật thì chẳng phải mọi người đều rảnh sao?"
+      }
+    ]
+  },
+  {
+    "bai": 4,
+    "stt": 19,
+    "mau_ngu_phap": "～っぽい",
+    "phien_am": "~ ppoi",
+    "cong_thuc": "Vます (bỏ ます) / Aい (bỏ い) / Aな (bỏ な) / N + っぽい",
+    "y_nghia": "1. Giống như là / 2. Có vẻ / 3. Thường hay... (tính cách)",
+    "chu_y": "1. Cảm giác gần giống (本物っぽい) / 2. Nhìn bề ngoài có vẻ (安っぽい) / 3. Tính cách thường xuyên xảy ra mang ý tiêu cực (怒りっぽい).",
+    "vi_du": [
+      {
+        "nhat": "彼は飽きっぽい性格で、一つの仕事を長く続けることができない。",
+        "viet": "Anh ta có tính cách cả thèm chóng chán nên không thể làm một công việc được lâu."
+      },
+      {
+        "nhat": "昨日彼が買ったテーブルは高いらしいが、安っぽく見える。",
+        "viet": "Cái bàn anh ấy mua hôm qua nghe nói đắt tiền, nhưng trông có vẻ rẻ tiền."
+      }
+    ]
+  },
+  {
+    "bai": 5,
+    "stt": 20,
+    "mau_ngu_phap": "～っけ",
+    "phien_am": "~ kke",
+    "cong_thuc": "Vた / Aかった / Aな・N + だ/だった + っけ",
+    "y_nghia": "1. ...phải không nhỉ? / 2. Ngày xưa thường...",
+    "chu_y": "1. Xác nhận lại điều đã quên hoặc không nhớ rõ. / 2. Hồi tưởng về quá khứ (độc thoại).",
+    "vi_du": [
+      {
+        "nhat": "ねぇ、試験はいつだっけ？",
+        "viet": "Này, kỳ thi vào lúc nào ấy nhỉ?"
+      },
+      {
+        "nhat": "小学生の時は、いつも妹とケンカしていたっけ。",
+        "viet": "Hồi tiểu học, tôi thường hay cãi nhau với em gái."
+      }
+    ]
+  },
+  {
+    "bai": 5,
+    "stt": 21,
+    "mau_ngu_phap": "～てくる",
+    "phien_am": "V-te kuru",
+    "cong_thuc": "Vて + くる",
+    "y_nghia": "1. Hướng về người nói / 2. Biến đổi từ trước đến nay / 3. Bộc lộ cảm xúc / 4. Đi rồi quay lại",
+    "chu_y": "1. Sự di chuyển lại gần người nói. / 2. Thay đổi diễn biến từ 1 mốc QK đến hiện tại. / 3. Hiện tượng tâm lý tự bộc lộ ra. / 4. Đi làm gì rồi quay lại chỗ cũ.",
+    "vi_du": [
+      {
+        "nhat": "先生にじっと見られているから、汗が出てくる。",
+        "viet": "Bị thầy giáo nhìn chằm chằm nên mồ hôi cứ túa ra."
+      },
+      {
+        "nhat": "台所からカレーのいい匂いがしてきた。",
+        "viet": "Từ bếp có mùi cà ri thơm phức bay tới."
+      }
+    ]
+  },
+  {
+    "bai": 5,
+    "stt": 22,
+    "mau_ngu_phap": "～ていく",
+    "phien_am": "V-te iku",
+    "cong_thuc": "Vて + いく",
+    "y_nghia": "1. Rời xa người nói / 2. Biến đổi từ nay tới tương lai / 3. Trình tự (Làm xong rồi đi)",
+    "chu_y": "1. Sự di chuyển ra xa vị trí người nói. / 2. Sự thay đổi tiếp diễn từ hiện tại đến tương lai. / 3. Trình tự sự việc: sau khi làm V thì sẽ đi.",
+    "vi_du": [
+      {
+        "nhat": "日本に住んでいる外国人が多くなってきました。これからも増えていくでしょう。",
+        "viet": "Người nước ngoài sống ở Nhật đã trở nên nhiều hơn. Từ giờ trở đi chắc sẽ còn tăng lên nữa."
+      },
+      {
+        "nhat": "お金が趣味に飛んでいった。",
+        "viet": "Tiền bạc cứ thế bay đi theo sở thích."
+      }
+    ]
+  },
+  {
+    "bai": 5,
+    "stt": 23,
+    "mau_ngu_phap": "～ばと思う / いいのに / よかった",
+    "phien_am": "~ ba to omou / ii noni / yokatta",
+    "cong_thuc": "V・A・N (Thể điều kiện: Vば, Aければ, Aな・Nなら) + と思う / いいのに / よかった",
+    "y_nghia": "Phải chi... / Giá mà...",
+    "chu_y": "Nuối tiếc những việc trong quá khứ, mong muốn những việc không phải là sự thật.",
+    "vi_du": [
+      {
+        "nhat": "昨日のパーティー楽しかったよ！君も行けばよかったのに。",
+        "viet": "Bữa tiệc hôm qua vui lắm đấy! Giá mà cậu cũng đi thì tốt."
+      }
+    ]
+  },
+  {
+    "bai": 6,
+    "stt": 24,
+    "mau_ngu_phap": "～だらけ",
+    "phien_am": "~ darake",
+    "cong_thuc": "N + だらけだ / だらけの + N",
+    "y_nghia": "Đầy... / Toàn là...",
+    "chu_y": "Diễn tả việc có nhiều thứ gì đó không tốt (rác, bùn, lỗi sai...).",
+    "vi_du": [
+      {
+        "nhat": "自信あったのに間違いだらけだったよ。",
+        "viet": "Tự tin thế mà lại toàn lỗi sai."
+      },
+      {
+        "nhat": "えっ！靴、泥だらけになっちゃった。",
+        "viet": "Ế! Giày dính đầy bùn mất rồi."
+      }
+    ]
+  },
+  {
+    "bai": 6,
+    "stt": 25,
+    "mau_ngu_phap": "～ばかり",
+    "phien_am": "~ bakari",
+    "cong_thuc": "N / Vて + ばかり",
+    "y_nghia": "Chỉ toàn...",
+    "chu_y": "Chỉ toàn làm/ xảy ra cái gì đó, thường mang ý chỉ trích, phê phán.",
+    "vi_du": [
+      {
+        "nhat": "一人暮らしの息子は、ファストフードばかり食べているので少し心配です。",
+        "viet": "Đứa con trai sống một mình toàn ăn thức ăn nhanh nên tôi hơi lo lắng."
+      }
+    ]
+  },
+  {
+    "bai": 6,
+    "stt": 26,
+    "mau_ngu_phap": "～たびに",
+    "phien_am": "~ tabi ni",
+    "cong_thuc": "Vる / Nの + たび(に)",
+    "y_nghia": "Cứ mỗi khi... / Mỗi lần... lại...",
+    "chu_y": "Cứ mỗi khi làm gì thì sự việc tất yếu xảy ra. Không dùng với thói quen hằng ngày.",
+    "vi_du": [
+      {
+        "nhat": "この歌を聞くたびに、学生時代を思い出すね。",
+        "viet": "Cứ mỗi lần nghe bài hát này, tôi lại nhớ về thời học sinh."
+      }
+    ]
+  },
+  {
+    "bai": 6,
+    "stt": 27,
+    "mau_ngu_phap": "～ついでに",
+    "phien_am": "~ tsuide ni",
+    "cong_thuc": "Vる / Vた / Nの + ついでに",
+    "y_nghia": "Nhân tiện... / Tiện thể...",
+    "chu_y": "Nhân cơ hội làm việc chính thì làm thêm hành động phụ.",
+    "vi_du": [
+      {
+        "nhat": "京都出張のついでに、友人に会いに行こうと思っている。",
+        "viet": "Nhân chuyến công tác đến Kyoto, tôi định đi gặp bạn luôn."
+      }
+    ]
+  },
+  {
+    "bai": 6,
+    "stt": 28,
+    "mau_ngu_phap": "～うちに",
+    "phien_am": "~ uchi ni",
+    "cong_thuc": "Vる / Vている / Vない / Aい / Aな / Nの + うちに",
+    "y_nghia": "1. Tranh thủ... / 2. Trong lúc đang...",
+    "chu_y": "1. Tranh thủ làm việc gì trước khi trạng thái thay đổi. / 2. Trong lúc đang làm thì phát sinh biến đổi ngoài ý muốn.",
+    "vi_du": [
+      {
+        "nhat": "冷めないうちにどうぞ。",
+        "viet": "Xin mời dùng ngay khi còn chưa nguội."
+      },
+      {
+        "nhat": "古くからの友人としゃべりしているうちに、空が暗くなっちゃった。",
+        "viet": "Trong lúc mải nói chuyện với người bạn cũ, trời đã tối sầm lại lúc nào không hay."
+      }
+    ]
+  },
+  {
+    "bai": 6,
+    "stt": 29,
+    "mau_ngu_phap": "～あいだ / あいだに",
+    "phien_am": "~ aida / aida ni",
+    "cong_thuc": "Vる / Vている / Vない / Nの + あいだ / あいだに",
+    "y_nghia": "1. Trong suốt... (あいだ) / 2. Trong khi... (あいだに)",
+    "chu_y": "1. あいだ: 2 hành động xảy ra song song suốt thời gian. / 2. あいだに: Hành động sau chỉ xảy ra trong một khoảnh khắc ngắn.",
+    "vi_du": [
+      {
+        "nhat": "母が料理を作っているあいだ、テレビを見て待っていた。",
+        "viet": "Trong suốt lúc mẹ nấu ăn, tôi đã xem TV để đợi."
+      },
+      {
+        "nhat": "私が宿題をしているあいだに、彼氏がご飯を作ってくれました。",
+        "viet": "Trong lúc tôi đang làm bài tập thì bạn trai đã nấu cơm cho tôi."
+      }
+    ]
+  },
+  {
+    "bai": 7,
+    "stt": 30,
+    "mau_ngu_phap": "～など / なんか / なんて",
+    "phien_am": "~ nado / nanka / nante",
+    "cong_thuc": "Vる / N + など / なんて / なんか",
+    "y_nghia": "1. Như là... / 2. ...ấy à / 3. Thật đúng là...",
+    "chu_y": "1. Đề xuất, đưa ra ví dụ. / 2. Xem nhẹ sự việc (hoặc khiêm tốn về bản thân). / 3. Bày tỏ cảm xúc ngạc nhiên, chán nản (chỉ dùng なんて).",
+    "vi_du": [
+      {
+        "nhat": "キャンプするなんてどう？",
+        "viet": "Đi cắm trại thì sao nhỉ?"
+      },
+      {
+        "nhat": "朝4時に起きて勉強しているなんて、すごいですね！",
+        "viet": "Sáng thức dậy từ 4 giờ để học bài, cậu thật đúng là siêu quá!"
+      }
+    ]
+  },
+  {
+    "bai": 7,
+    "stt": 31,
+    "mau_ngu_phap": "くらい・ぐらい",
+    "phien_am": "kurai / gurai",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + くらい・ぐらい",
+    "y_nghia": "1. Đến mức... / 2. Tối thiểu là... / 3. Cỡ, chỉ tầm...",
+    "chu_y": "1. Mức độ mang tính so sánh. / 2. Mức độ tối thiểu, ít nhất. / 3. Xem nhẹ việc gì đó là đơn giản, nhỏ nhặt.",
+    "vi_du": [
+      {
+        "nhat": "大声で叫びたいくらい嬉しかったよ！",
+        "viet": "Tôi vui đến mức muốn hét to lên!"
+      },
+      {
+        "nhat": "日曜日くらい寝させてよ。",
+        "viet": "Ít nhất là Chủ Nhật thì hãy cho tôi ngủ chứ."
+      }
+    ]
+  },
+  {
+    "bai": 7,
+    "stt": 32,
+    "mau_ngu_phap": "～ほど・～ほど～ない",
+    "phien_am": "~ hodo / ~ hodo~nai",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + ほど | N・Vる + ほど + Vない・Aくない・Aなじゃない",
+    "y_nghia": "1. Đến mức... / 2. Không nào bằng...",
+    "chu_y": "1. Mức độ cực kỳ cao (cứng hơn くらい). / 2. Khẳng định không có gì sánh bằng N (N ほど... ない).",
+    "vi_du": [
+      {
+        "nhat": "昨日は風が強くて、目を開けていられないほどだった。",
+        "viet": "Hôm qua gió mạnh đến mức không thể mở mắt ra được."
+      }
+    ]
+  },
+  {
+    "bai": 7,
+    "stt": 33,
+    "mau_ngu_phap": "～ば～ほど",
+    "phien_am": "~ ba ~ hodo",
+    "cong_thuc": "Vば + Vる + ほど | Aければ + Aい + ほど | Aななら(ば) + Aな + ほど | N/Aなであれば + N/Aなである + ほど",
+    "y_nghia": "Càng... càng...",
+    "chu_y": "Thay đổi tỷ lệ thuận giữa 2 vế.",
+    "vi_du": [
+      {
+        "nhat": "彼のことを知れば知るほど好きになる。",
+        "viet": "Càng hiểu về anh ấy tôi lại càng thấy thích."
+      },
+      {
+        "nhat": "早ければ早いほどいいです。",
+        "viet": "Càng sớm càng tốt."
+      }
+    ]
+  },
+  {
+    "bai": 8,
+    "stt": 34,
+    "mau_ngu_phap": "～ぎみ",
+    "phien_am": "~ gimi",
+    "cong_thuc": "Vます (bỏ ます) / N + ぎみ",
+    "y_nghia": "Có vẻ... / Có cảm giác...",
+    "chu_y": "Có xu hướng, biểu hiện hoặc triệu chứng (thường mang nghĩa tiêu cực).",
+    "vi_du": [
+      {
+        "nhat": "最近、少し疲れぎみなんじゃない？",
+        "viet": "Dạo này có vẻ hơi mệt mỏi phải không?"
+      }
+    ]
+  },
+  {
+    "bai": 8,
+    "stt": 35,
+    "mau_ngu_phap": "～がち",
+    "phien_am": "~ gachi",
+    "cong_thuc": "Vます (bỏ ます) / N + がち",
+    "y_nghia": "Thường... / Hay...",
+    "chu_y": "Sự việc dễ xảy ra, thường xảy ra (mang ý trạng thái không tốt, tiêu cực).",
+    "vi_du": [
+      {
+        "nhat": "年を取ると、人の名前を忘れがちになる。",
+        "viet": "Khi có tuổi, người ta thường hay quên tên người khác."
+      }
+    ]
+  },
+  {
+    "bai": 8,
+    "stt": 36,
+    "mau_ngu_phap": "～てたまらない",
+    "phien_am": "~ te tamaranai",
+    "cong_thuc": "Vて / Aくて / Aなで + たまらない",
+    "y_nghia": "Vô cùng... / Không chịu nổi...",
+    "chu_y": "Cảm xúc mạnh không kiềm chế được.",
+    "vi_du": [
+      {
+        "nhat": "もうすぐ同窓会がある。早く昔の友人に会いたくてたまらない。",
+        "viet": "Sắp có buổi họp lớp rồi. Tôi nôn nóng muốn gặp lại bạn bè ngày xưa không chịu nổi."
+      }
+    ]
+  },
+  {
+    "bai": 8,
+    "stt": 37,
+    "mau_ngu_phap": "～むき・～むけ",
+    "phien_am": "~ muki / ~ muke",
+    "cong_thuc": "N + 向きだ/向きの/向きに (向けだ/向けの/向けに)",
+    "y_nghia": "1. ～むき: Phù hợp với / 2. ～むけ: Dành cho",
+    "chu_y": "1. 向き là phù hợp một cách tự nhiên. / 2. 向け là có chủ đích hướng tới đối tượng đó.",
+    "vi_du": [
+      {
+        "nhat": "自由が大好きな私は、やっぱり結婚向きではないと思う。",
+        "viet": "Người cực kỳ yêu tự do như tôi quả nhiên là không hợp với việc kết hôn."
+      },
+      {
+        "nhat": "ここのランチはお金のない学生向きだよね！",
+        "viet": "Bữa trưa ở đây là dành cho sinh viên nghèo nhỉ!"
+      }
+    ]
+  },
+  {
+    "bai": 9,
+    "stt": 38,
+    "mau_ngu_phap": "～始める",
+    "phien_am": "~ hajimeru",
+    "cong_thuc": "Vます (bỏ ます) + 始める",
+    "y_nghia": "Bắt đầu...",
+    "chu_y": "Bắt đầu làm gì đó mang tính chủ ý.",
+    "vi_du": [
+      {
+        "nhat": "雨が降り始めたのは3日前だ。",
+        "viet": "Mưa bắt đầu rơi từ 3 ngày trước."
+      }
+    ]
+  },
+  {
+    "bai": 9,
+    "stt": 39,
+    "mau_ngu_phap": "～終わる",
+    "phien_am": "~ owaru",
+    "cong_thuc": "Vます (bỏ ます) + 終わる",
+    "y_nghia": "Xong...",
+    "chu_y": "Kết thúc, hoàn thành một hành động.",
+    "vi_du": [
+      {
+        "nhat": "「1リットルの涙」っていう本、もう読み終わった？",
+        "viet": "Cuốn sách có tựa đề \"1 Lít Nước Mắt\", cậu đã đọc xong chưa?"
+      }
+    ]
+  },
+  {
+    "bai": 9,
+    "stt": 40,
+    "mau_ngu_phap": "～続ける",
+    "phien_am": "~ tsuzukeru",
+    "cong_thuc": "Vます (bỏ ます) + 続ける",
+    "y_nghia": "Tiếp tục / Liên tục...",
+    "chu_y": "Lặp đi lặp lại hoặc duy trì hành động.",
+    "vi_du": [
+      {
+        "nhat": "スマホを見続けると目が悪くなるよ。",
+        "viet": "Xem điện thoại liên tục thì mắt sẽ kém đi đấy."
+      }
+    ]
+  },
+  {
+    "bai": 9,
+    "stt": 41,
+    "mau_ngu_phap": "～直す",
+    "phien_am": "~ naosu",
+    "cong_thuc": "Vます (bỏ ます) + 直す",
+    "y_nghia": "... lại",
+    "chu_y": "Làm lại hay sửa lại cái gì đó đã làm rồi.",
+    "vi_du": [
+      {
+        "nhat": "この漢字間違っているよ！書き直すね！",
+        "viet": "Chữ Hán này sai rồi! Viết lại nhé!"
+      }
+    ]
+  },
+  {
+    "bai": 9,
+    "stt": 42,
+    "mau_ngu_phap": "～出す",
+    "phien_am": "~ dasu",
+    "cong_thuc": "Vます (bỏ ます) + 出す",
+    "y_nghia": "Bắt đầu... / Đột nhiên...",
+    "chu_y": "Sự việc đột nhiên xảy ra bất thình lình, không có ý chí.",
+    "vi_du": [
+      {
+        "nhat": "急に雨が降り出して、傘持ってないの。",
+        "viet": "Đột nhiên trời đổ mưa mà tôi lại không mang ô."
+      },
+      {
+        "nhat": "彼女が突然泣き出してびっくりしたよ。",
+        "viet": "Cô ấy đột nhiên bật khóc khiến tôi giật mình."
+      }
+    ]
+  },
+  {
+    "bai": 10,
+    "stt": 43,
+    "mau_ngu_phap": "尊敬語",
+    "phien_am": "Sonkeigo",
+    "cong_thuc": "お/ご + Vます(bỏ ます) + になる / V(ら)れる / お/ご + Vます(bỏ ます) + です",
+    "y_nghia": "Tôn kính ngữ",
+    "chu_y": "Nâng cao đối phương (Kèm các động từ đặc biệt như いらっしゃる, 召し上がる...).",
+    "vi_du": [
+      {
+        "nhat": "何をお飲みになりますか。",
+        "viet": "Quý khách muốn uống gì ạ?"
+      },
+      {
+        "nhat": "山田課長は会社にいらっしゃいますか。",
+        "viet": "Trưởng phòng Yamada có ở công ty không ạ?"
+      }
+    ]
+  },
+  {
+    "bai": 10,
+    "stt": 44,
+    "mau_ngu_phap": "謙譲語",
+    "phien_am": "Kenjougo",
+    "cong_thuc": "お/ご + Vます(bỏ ます) + する / いたす",
+    "y_nghia": "Khiêm nhường ngữ",
+    "chu_y": "Hạ thấp bản thân (Kèm các động từ đặc biệt như 参る, 拝見する...).",
+    "vi_du": [
+      {
+        "nhat": "順番になったらお呼びしますので、少々お待ちください。",
+        "viet": "Khi nào đến lượt tôi sẽ gọi nên xin vui lòng đợi một chút."
+      },
+      {
+        "nhat": "面接の結果は1週間後に私から電話いたします。",
+        "viet": "Kết quả phỏng vấn thì 1 tuần sau tôi sẽ gọi điện thoại thông báo ạ."
+      }
+    ]
+  },
+  {
+    "bai": 10,
+    "stt": 45,
+    "mau_ngu_phap": "丁寧形",
+    "phien_am": "Teineikei",
+    "cong_thuc": "です ➝ でございます | あります ➝ ございます",
+    "y_nghia": "Dạng lịch sự",
+    "chu_y": "Dùng với tất cả đối tượng.",
+    "vi_du": [
+      {
+        "nhat": "お世話になっております。りきセンターのアンでございます。",
+        "viet": "Xin cảm ơn quý công ty đã luôn giúp đỡ. Tôi là An của trung tâm Riki."
+      }
+    ]
+  },
+  {
+    "bai": 11,
+    "stt": 46,
+    "mau_ngu_phap": "～ように～",
+    "phien_am": "~ you ni ~",
+    "cong_thuc": "Vる / Vない + ように + 言う/注意する/伝える...",
+    "y_nghia": "1. Nói, truyền đạt, nhắc nhở (Gián tiếp) / 2. Hãy... Đừng... (Đề nghị)",
+    "chu_y": "1. Trích dẫn gián tiếp nội dung nhắc nhở. / 2. Khuyên bảo, yêu cầu ai đó mang tính nghĩa vụ.",
+    "vi_du": [
+      {
+        "nhat": "田中さんが戻ったら電話をくれるように伝えてください。",
+        "viet": "Nếu anh Tanaka quay lại, hãy nhắn anh ấy gọi điện thoại cho tôi nhé."
+      },
+      {
+        "nhat": "ここで、タバコを吸わないように。",
+        "viet": "Đừng hút thuốc ở đây nhé."
+      }
+    ]
+  },
+  {
+    "bai": 11,
+    "stt": 47,
+    "mau_ngu_phap": "～ように。",
+    "phien_am": "~ you ni.",
+    "cong_thuc": "Vます / Vません / Vれます + ように。",
+    "y_nghia": "Mong là... / Ước là...",
+    "chu_y": "Cầu nguyện, lời chúc.",
+    "vi_du": [
+      {
+        "nhat": "素晴らしい一年になりますように！",
+        "viet": "Cầu chúc một năm tuyệt vời sẽ đến!"
+      }
+    ]
+  },
+  {
+    "bai": 11,
+    "stt": 48,
+    "mau_ngu_phap": "～ようだ",
+    "phien_am": "~ you da",
+    "cong_thuc": "V・Nの (普通形) + ようだ / ような+N / ように+V/A",
+    "y_nghia": "Cứ như là...",
+    "chu_y": "So sánh ví von một trường hợp khác vốn dĩ không phải như thế (văn viết).",
+    "vi_du": [
+      {
+        "nhat": "トゥンさんとのデートはまるで夢のような時間だった。",
+        "viet": "Cuổi hẹn hò với Tùng trôi qua cứ như là mơ vậy."
+      }
+    ]
+  },
+  {
+    "bai": 11,
+    "stt": 49,
+    "mau_ngu_phap": "～みたい",
+    "phien_am": "~ mitai",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + みたいだ / みたいな+N / みたいに+V/A (Aな, N bỏ だ)",
+    "y_nghia": "1. Như là... (So sánh) / 2. Hình như (Suy đoán) / 3. Như... (Ví dụ tiêu biểu)",
+    "chu_y": "1. So sánh ví von (văn nói). / 2. Suy đoán dựa trên tình huống thực tế. / 3. Đưa ra ví dụ điển hình.",
+    "vi_du": [
+      {
+        "nhat": "すごい汗だね。シャワーを浴びたみたい。",
+        "viet": "Mồ hôi ghê thật đấy. Nhìn như vừa tắm xong."
+      },
+      {
+        "nhat": "あなたみたいに優しい人に出会ったのは初めてだよ。",
+        "viet": "Đây là lần đầu tiên tôi gặp một người hiền lành như cậu."
+      }
+    ]
+  },
+  {
+    "bai": 12,
+    "stt": 50,
+    "mau_ngu_phap": "～らしい",
+    "phien_am": "~ rashii",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + らしい (Aな, N bỏ だ)",
+    "y_nghia": "1. Nghe nói... (Truyền đạt) / 2. Đậm chất, ra dáng (Bản chất)",
+    "chu_y": "1. Truyền đạt thông tin nghe được. / 2. Miêu tả bản chất đặc trưng vốn có của sự vật.",
+    "vi_du": [
+      {
+        "nhat": "あの二人は付き合っているらしいよ。",
+        "viet": "Nghe nói hai người đó đang hẹn hò đấy."
+      },
+      {
+        "nhat": "山田選手って本当に男らしくて、かっこいいね。",
+        "viet": "Tuyển thủ Yamada thật sự rất nam tính và phong độ."
+      }
+    ]
+  },
+  {
+    "bai": 12,
+    "stt": 51,
+    "mau_ngu_phap": "～おかげで",
+    "phien_am": "~ okage de",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + おかげで (Aな ➝ Aな/である, N ➝ Nの/である)",
+    "y_nghia": "Nhờ có...",
+    "chu_y": "Nguyên nhân dẫn đến kết quả tốt (biết ơn).",
+    "vi_du": [
+      {
+        "nhat": "仕事が早く済んだのは、友達が手伝ってくれたおかげだ。",
+        "viet": "Công việc xong sớm là nhờ có bạn bè giúp đỡ."
+      }
+    ]
+  },
+  {
+    "bai": 12,
+    "stt": 52,
+    "mau_ngu_phap": "～せいで・せいだ",
+    "phien_am": "~ sei de / sei da",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + せいで/せいだ (Aな ➝ Aな/である, N ➝ Nの/である)",
+    "y_nghia": "Tại vì...",
+    "chu_y": "Nguyên nhân dẫn đến kết quả xấu, không tốt.",
+    "vi_du": [
+      {
+        "nhat": "今朝、寝坊のせいで、会社に遅刻してしまった。",
+        "viet": "Sáng nay tại ngủ quên nên tôi đã đến công ty muộn."
+      }
+    ]
+  },
+  {
+    "bai": 12,
+    "stt": 53,
+    "mau_ngu_phap": "～のだから・～んだから",
+    "phien_am": "~ no dakara / ~ n dakara",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + のだから/んだから (Aな ➝ Aな, N ➝ Nな)",
+    "y_nghia": "Vì...",
+    "chu_y": "Lý do là sự thật hiển nhiên cả hai đều biết.",
+    "vi_du": [
+      {
+        "nhat": "もうすぐ発車するんだから、我慢してよ。",
+        "viet": "Vì tàu sắp chạy rồi nên hãy ráng nhịn chút đi."
+      }
+    ]
+  },
+  {
+    "bai": 12,
+    "stt": 54,
+    "mau_ngu_phap": "～まま",
+    "phien_am": "~ mama",
+    "cong_thuc": "Vた / Vない / Aい / Aな / Nの + まま",
+    "y_nghia": "Cứ / Giữ nguyên...",
+    "chu_y": "Tình trạng không thay đổi.",
+    "vi_du": [
+      {
+        "nhat": "え、なんで知ってるの？値札がついたままだよ。",
+        "viet": "Ủa, sao cậu biết? Tại cậu vẫn để nguyên nhãn giá kìa."
+      }
+    ]
+  },
+  {
+    "bai": 13,
+    "stt": 55,
+    "mau_ngu_phap": "～ことか",
+    "phien_am": "~ koto ka",
+    "cong_thuc": "Vる / Vた / Aい / Aい(bỏ い)かった / Aな / Aだった + ことか",
+    "y_nghia": "... biết bao / biết mấy",
+    "chu_y": "Cảm thán mức độ vô cùng to lớn không đong đếm được.",
+    "vi_du": [
+      {
+        "nhat": "月日が経つのはなんと早いことか。",
+        "viet": "Năm tháng trôi qua sao mà nhanh biết bao."
+      }
+    ]
+  },
+  {
+    "bai": 13,
+    "stt": 56,
+    "mau_ngu_phap": "～一方で / ～一方だ",
+    "phien_am": "~ ippou de / ~ ippou da",
+    "cong_thuc": "Vる / Aい / Aな / Nの(である) + 一方で | Vる / Nの + 一方だ",
+    "y_nghia": "1. ～一方で: Mặt khác... / 2. ～一方だ: Ngày càng...",
+    "chu_y": "1. So sánh 2 mặt trái ngược của sự việc. / 2. Chỉ xu hướng tiếp diễn liên tục theo 1 chiều.",
+    "vi_du": [
+      {
+        "nhat": "会議では自分の意見を言う一方で、他の人の話もよく聞いてください。",
+        "viet": "Trong cuộc họp, một mặt hãy nói lên ý kiến của mình, mặt khác cũng hãy lắng nghe người khác nói."
+      },
+      {
+        "nhat": "税金は上がる一方で、生活は大変になる一方ですよ。",
+        "viet": "Tiền thuế thì cứ tăng đều, còn cuộc sống thì ngày càng trở nên khó khăn."
+      }
+    ]
+  },
+  {
+    "bai": 13,
+    "stt": 57,
+    "mau_ngu_phap": "～を中心に",
+    "phien_am": "~ o chuushin ni",
+    "cong_thuc": "N + を中心に",
+    "y_nghia": "Tập trung vào... / Chủ yếu là...",
+    "chu_y": "Chỉ phạm vi hoạt động xoay quanh trung tâm nào đó.",
+    "vi_du": [
+      {
+        "nhat": "京都を中心に観光しようと思っているんだ。",
+        "viet": "Tôi đang định đi tham quan tập trung chủ yếu ở Kyoto."
+      }
+    ]
+  },
+  {
+    "bai": 13,
+    "stt": 58,
+    "mau_ngu_phap": "～に違いない",
+    "phien_am": "~ ni chigai nai",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + に違いない (Aな ➝ Aな/である, N ➝ Nだ/である)",
+    "y_nghia": "Chắc chắn là... / Nhất định là...",
+    "chu_y": "Khẳng định phán đoán của bản thân dựa trên căn cứ nhất định (văn viết).",
+    "vi_du": [
+      {
+        "nhat": "あの女性は薬指に指輪をしているから、結婚しているに違いない。",
+        "viet": "Người phụ nữ kia đeo nhẫn ở ngón áp út nên chắc chắn là đã kết hôn rồi."
+      }
+    ]
+  },
+  {
+    "bai": 13,
+    "stt": 59,
+    "mau_ngu_phap": "～に従い・～に従って",
+    "phien_am": "~ ni shitagai / ~ ni shitagatte",
+    "cong_thuc": "Vる / Nの + にしたがい/にしたがって | (Nghĩa 2: N + に従って)",
+    "y_nghia": "1. Càng... càng (Kéo theo) / 2. Theo... (Tuân thủ)",
+    "chu_y": "1. Vế trước biến đổi kéo theo vế sau biến đổi. / 2. Tuân thủ, làm theo chỉ thị, quy tắc.",
+    "vi_du": [
+      {
+        "nhat": "年をとるにしたがって、病気になりやすくなってきたんだよ。",
+        "viet": "Càng có tuổi thì càng dễ bị bệnh hơn."
+      },
+      {
+        "nhat": "指示に従って、絵を描いてください。",
+        "viet": "Hãy vẽ tranh tuân theo đúng chỉ thị."
+      }
+    ]
+  },
+  {
+    "bai": 14,
+    "stt": 60,
+    "mau_ngu_phap": "～（の）に対して",
+    "phien_am": "~ (no) ni taishite",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + のに対して (Aな/N ➝ Aな/Nな・である) | N + に対して",
+    "y_nghia": "Ngược lại... / Trái lại...",
+    "chu_y": "Thể hiện sự tương phản, đối lập giữa 2 đối tượng.",
+    "vi_du": [
+      {
+        "nhat": "大人しい兄に対して、弟はおしゃべりです。",
+        "viet": "Trái ngược với người anh trai trầm tính, cậu em trai lại rất hay nói."
+      }
+    ]
+  },
+  {
+    "bai": 14,
+    "stt": 61,
+    "mau_ngu_phap": "～に対して",
+    "phien_am": "~ ni taishite",
+    "cong_thuc": "N + に対して",
+    "y_nghia": "Đối với...",
+    "chu_y": "Hướng hành vi, thái độ, cảm xúc về phía đối tượng.",
+    "vi_du": [
+      {
+        "nhat": "お客様に対して失礼な言葉を使ってはいけない。",
+        "viet": "Không được dùng lời lẽ thất lễ đối với khách hàng."
+      }
+    ]
+  },
+  {
+    "bai": 14,
+    "stt": 62,
+    "mau_ngu_phap": "～にとって",
+    "phien_am": "~ ni totte",
+    "cong_thuc": "N + にとって",
+    "y_nghia": "Đối với... (Đánh giá)",
+    "chu_y": "Đưa ra đánh giá, quan điểm từ lập trường của ai đó.",
+    "vi_du": [
+      {
+        "nhat": "一人暮らしの学生にとって、インスタントラーメンは欠かせないものの一つだ。",
+        "viet": "Đối với những sinh viên sống một mình, mì ăn liền là một trong những thứ không thể thiếu."
+      }
+    ]
+  },
+  {
+    "bai": 14,
+    "stt": 63,
+    "mau_ngu_phap": "～に・と比べて",
+    "phien_am": "~ ni / to kurabete",
+    "cong_thuc": "N + に・と比べて",
+    "y_nghia": "So với...",
+    "chu_y": "Dùng so sánh 2 đối tượng trở lên.",
+    "vi_du": [
+      {
+        "nhat": "田舎は都会に比べて、交通が不便ですが、静かで暮らしやすいです。",
+        "viet": "So với thành thị thì nông thôn giao thông bất tiện hơn, nhưng yên tĩnh và dễ sống."
+      }
+    ]
+  },
+  {
+    "bai": 14,
+    "stt": 64,
+    "mau_ngu_phap": "～において・における",
+    "phien_am": "~ ni oite / ~ ni okeru",
+    "cong_thuc": "N + において / N1 + における + N2",
+    "y_nghia": "Tại / Trong / Ở...",
+    "chu_y": "Chỉ thời gian, địa điểm, lĩnh vực (trang trọng, văn viết).",
+    "vi_du": [
+      {
+        "nhat": "会議は3階の会議室において3時から行う予定です。",
+        "viet": "Hội nghị dự kiến sẽ được tổ chức tại phòng họp tầng 3 từ lúc 3 giờ."
+      }
+    ]
+  },
+  {
+    "bai": 14,
+    "stt": 65,
+    "mau_ngu_phap": "～について",
+    "phien_am": "~ ni tsuite",
+    "cong_thuc": "N + について",
+    "y_nghia": "Về...",
+    "chu_y": "Liên quan đến nội dung nào đó.",
+    "vi_du": [
+      {
+        "nhat": "オリンピックについてのニュースを見ましたか？",
+        "viet": "Bạn đã xem tin tức về kỳ thi Olympic chưa?"
+      }
+    ]
+  },
+  {
+    "bai": 15,
+    "stt": 66,
+    "mau_ngu_phap": "～によって・により・による",
+    "phien_am": "~ ni yotte / ~ ni yori / ~ ni yoru",
+    "cong_thuc": "N + によって・により / N + による + N",
+    "y_nghia": "1. Vì, Do (Nguyên nhân) / 2. Bằng, Thông qua (Phương pháp) / 3. Tùy theo (Thay đổi)",
+    "chu_y": "1. Chỉ lý do, nguyên nhân. / 2. Phương pháp cách thức. / 3. Phụ thuộc vào đối tượng mà khác nhau.",
+    "vi_du": [
+      {
+        "nhat": "ボランティアに参加したことによって、今の彼女と出会った。",
+        "viet": "Nhờ tham gia tình nguyện mà tôi đã gặp được cô bạn gái hiện tại."
+      },
+      {
+        "nhat": "時代によって言葉は変わるんだよ！",
+        "viet": "Tùy theo thời đại mà ngôn ngữ sẽ thay đổi!"
+      }
+    ]
+  },
+  {
+    "bai": 15,
+    "stt": 67,
+    "mau_ngu_phap": "～として(は)・としても",
+    "phien_am": "~ toshite (wa) / ~ toshite mo",
+    "cong_thuc": "N + として(は) / としても",
+    "y_nghia": "Với tư cách là... / Dưới danh nghĩa là...",
+    "chu_y": "Nói về tư cách, lập trường, thể loại.",
+    "vi_du": [
+      {
+        "nhat": "彼は歌手だけでなく、モデルとしても有名だよ。",
+        "viet": "Anh ấy không chỉ là ca sĩ mà còn nổi tiếng với tư cách là một người mẫu."
+      }
+    ]
+  },
+  {
+    "bai": 15,
+    "stt": 68,
+    "mau_ngu_phap": "～としても",
+    "phien_am": "~ toshite mo",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + としても",
+    "y_nghia": "Cho dù... thì cũng...",
+    "chu_y": "Trái với mong đợi, điều kiện vế trước không ảnh hưởng vế sau.",
+    "vi_du": [
+      {
+        "nhat": "彼はお金持ちだとしても、彼とは結婚したくないです。",
+        "viet": "Cho dù anh ta có giàu có đi chăng nữa, tôi cũng không muốn kết hôn với anh ta."
+      }
+    ]
+  },
+  {
+    "bai": 15,
+    "stt": 69,
+    "mau_ngu_phap": "～としたら・とすると・とすれば",
+    "phien_am": "~ to shitara / ~ to suruto / ~ to sureba",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + としたら / とすると / とすれば",
+    "y_nghia": "Giả sử / Nếu... thì...",
+    "chu_y": "Đưa ra điều kiện giả định.",
+    "vi_du": [
+      {
+        "nhat": "彼女に誕生日プレゼントをあげるとしたら、何がいいと思う？",
+        "viet": "Giả sử nếu tặng quà sinh nhật cho cô ấy, cậu nghĩ tặng gì thì được?"
+      }
+    ]
+  },
+  {
+    "bai": 16,
+    "stt": 70,
+    "mau_ngu_phap": "～ものだ / もんだ",
+    "phien_am": "~ mono da / ~ mon da",
+    "cong_thuc": "V・Aい・Aな (普通形) + ものだ / もんだ (Nghĩa khuyên bảo chỉ đi với V普通形)",
+    "y_nghia": "1. Đương nhiên là... / 2. Nên, không nên...",
+    "chu_y": "1. Diễn tả lẽ tất yếu, chân lý. / 2. Đưa ra lời khuyên chung chung (không dùng cho người trên).",
+    "vi_du": [
+      {
+        "nhat": "地震の時は、誰でも慌てるものだ。",
+        "viet": "Khi có động đất, bất cứ ai cũng đương nhiên sẽ hoảng hốt."
+      },
+      {
+        "nhat": "学生は、もっと勉強するものです。",
+        "viet": "Học sinh thì nên học hành chăm chỉ hơn."
+      }
+    ]
+  },
+  {
+    "bai": 16,
+    "stt": 71,
+    "mau_ngu_phap": "～ものですから / ものだから",
+    "phien_am": "~ mono desu kara / ~ mono dakara",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + ものですから/ものだから (Aな ➝ Aな, N ➝ Nな)",
+    "y_nghia": "Tại vì... / Vì...",
+    "chu_y": "Biện minh nguyên nhân cho hành vi cá nhân.",
+    "vi_du": [
+      {
+        "nhat": "目覚まし時計は壊れていたものですから。",
+        "viet": "Là tại vì cái đồng hồ báo thức của tôi bị hỏng mất rồi."
+      }
+    ]
+  },
+  {
+    "bai": 16,
+    "stt": 72,
+    "mau_ngu_phap": "～ものか",
+    "phien_am": "~ mono ka",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + ものか (Aな ➝ Aな, N ➝ Nな)",
+    "y_nghia": "Không đời nào... / Làm gì có chuyện...",
+    "chu_y": "Phủ định mạnh mẽ, dứt khoát không làm.",
+    "vi_du": [
+      {
+        "nhat": "ボーナスもくれない会社でもう働くものか。",
+        "viet": "Công ty đến tiền thưởng cũng không cho thì không đời nào tôi thèm làm nữa."
+      }
+    ]
+  },
+  {
+    "bai": 16,
+    "stt": 73,
+    "mau_ngu_phap": "～さえ / ～さえ～ば",
+    "phien_am": "~ sae / ~ sae ~ ba",
+    "cong_thuc": "Vます(bỏ ます) / Vて / Aく / Aなで / N + さえ、～ば",
+    "y_nghia": "1. Miễn là, chỉ cần... / 2. Thậm chí, ngay cả...",
+    "chu_y": "1. Điều kiện tối thiểu cần thiết để đạt kết quả. / 2. Nêu ra ví dụ cực đoan.",
+    "vi_du": [
+      {
+        "nhat": "時間さえあれば、あんな問題全部できたよ。",
+        "viet": "Chỉ cần có thời gian, mấy câu hỏi đó tôi giải được hết."
+      },
+      {
+        "nhat": "最近は忙しくて、ご飯を食べる時間さえないよ。",
+        "viet": "Dạo này bận quá, thậm chí đến thời gian ăn cơm tôi cũng không có."
+      }
+    ]
+  },
+  {
+    "bai": 16,
+    "stt": 74,
+    "mau_ngu_phap": "～こそ",
+    "phien_am": "~ koso",
+    "cong_thuc": "N + こそ",
+    "y_nghia": "Chính là... / Chính vì...",
+    "chu_y": "Nhấn mạnh sự vật sự việc này chứ không phải cái khác.",
+    "vi_du": [
+      {
+        "nhat": "明日こそ、勉強するぞ！",
+        "viet": "Nhất định ngày mai tôi sẽ học!"
+      }
+    ]
+  },
+  {
+    "bai": 17,
+    "stt": 75,
+    "mau_ngu_phap": "～とは・というのは",
+    "phien_am": "~ to wa / ~ to iu no wa",
+    "cong_thuc": "N + とは / というのは",
+    "y_nghia": "Cái gọi là... nghĩa là...",
+    "chu_y": "Giải thích, định nghĩa một từ, cụm từ.",
+    "vi_du": [
+      {
+        "nhat": "良い教師とは、学生のことを理解してあげられる教師のことだ。",
+        "viet": "Cái gọi là giáo viên tốt nghĩa là người giáo viên có thể thấu hiểu học sinh."
+      }
+    ]
+  },
+  {
+    "bai": 17,
+    "stt": 76,
+    "mau_ngu_phap": "ということだ・とのことだ",
+    "phien_am": "~ to iu koto da / ~ to no koto da",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + ということだ / とのことだ",
+    "y_nghia": "1. Nghe nói là... / 2. Tức là, tóm lại là...",
+    "chu_y": "1. Truyền đạt thông tin nghe được. / 2. Tóm tắt lại vấn đề, kết luận.",
+    "vi_du": [
+      {
+        "nhat": "うわさですが、新しい課長は厳しいとのことですよ。",
+        "viet": "Chỉ là tin đồn thôi, nhưng nghe nói vị trưởng phòng mới rất nghiêm khắc đấy."
+      },
+      {
+        "nhat": "明日から会社に来なくてもいいですよ！ ➝ つまり、私はクビということですか？",
+        "viet": "\"Từ ngày mai cậu không cần đến công ty nữa!\" ➝ \"Tóm lại, ý sếp là tôi bị sa thải ạ?\""
+      }
+    ]
+  },
+  {
+    "bai": 17,
+    "stt": 77,
+    "mau_ngu_phap": "～こと",
+    "phien_am": "~ koto",
+    "cong_thuc": "Vる / Vない + こと",
+    "y_nghia": "Hãy / Không được...",
+    "chu_y": "Đưa ra quy tắc, nhắc nhở (thường trong văn viết, bảng thông báo).",
+    "vi_du": [
+      {
+        "nhat": "授業中は友達と話さないこと。",
+        "viet": "Trong giờ học không được nói chuyện với bạn bè."
+      }
+    ]
+  },
+  {
+    "bai": 17,
+    "stt": 78,
+    "mau_ngu_phap": "～ないことはない・もない",
+    "phien_am": "~ nai koto wa nai / ~ mo nai",
+    "cong_thuc": "Vない / Aくない / Aじゃない / Nじゃない + ことはない",
+    "y_nghia": "Không phải là không... (nhưng...)",
+    "chu_y": "Phủ định một phần ý kiến trước đó.",
+    "vi_du": [
+      {
+        "nhat": "来ないことはないだろうけど、ちょっと遅れるんだと思う。",
+        "viet": "Không phải là không đến đâu, chắc là sẽ muộn một chút thôi."
+      }
+    ]
+  },
+  {
+    "bai": 17,
+    "stt": 79,
+    "mau_ngu_phap": "～ことはない",
+    "phien_am": "~ koto wa nai",
+    "cong_thuc": "Vる + ことはない",
+    "y_nghia": "Không cần phải...",
+    "chu_y": "Khuyên không cần làm gì đó.",
+    "vi_du": [
+      {
+        "nhat": "他人の言うことなど気にすることはない。",
+        "viet": "Không cần phải bận tâm đến những lời người khác nói đâu."
+      }
+    ]
+  },
+  {
+    "bai": 17,
+    "stt": 80,
+    "mau_ngu_phap": "～べきだ・べきではない",
+    "phien_am": "~ beki da / ~ beki de wa nai",
+    "cong_thuc": "Vる + べきだ / べきではない (する ➝ すべきだ / するべきだ)",
+    "y_nghia": "Nên... / Không nên...",
+    "chu_y": "Cảnh báo, khuyên nhủ, răn dạy một cách chủ quan.",
+    "vi_du": [
+      {
+        "nhat": "人を見た目で判断するべきではない。",
+        "viet": "Không nên đánh giá con người qua vẻ bề ngoài."
+      }
+    ]
+  },
+  {
+    "bai": 18,
+    "stt": 81,
+    "mau_ngu_phap": "～わけだ",
+    "phien_am": "~ wake da",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + わけだ (Aな ➝ Aな/である, N ➝ Nの/な/である)",
+    "y_nghia": "1. Thảo nào, hèn chi... / 2. Có nghĩa là...",
+    "chu_y": "1. Lý do đã sáng tỏ, hiểu ra vấn đề. / 2. Giải thích kết luận.",
+    "vi_du": [
+      {
+        "nhat": "暗いわけだ。蛍光灯が一本切れている。",
+        "viet": "Thảo nào lại tối thế. Một bóng đèn huỳnh quang bị cháy rồi."
+      }
+    ]
+  },
+  {
+    "bai": 18,
+    "stt": 82,
+    "mau_ngu_phap": "～わけがない",
+    "phien_am": "~ wake ga nai",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + わけがない (Aな ➝ Aな/である, N ➝ Nの/な/である)",
+    "y_nghia": "Sao có thể... / Không đời nào...",
+    "chu_y": "Phủ định chủ quan hoàn toàn, cho rằng không thể nào xảy ra.",
+    "vi_du": [
+      {
+        "nhat": "美味しくないわけがないよ、有名な料理人がつくったんだから。",
+        "viet": "Sao có thể không ngon được, do đầu bếp nổi tiếng làm cơ mà."
+      }
+    ]
+  },
+  {
+    "bai": 18,
+    "stt": 83,
+    "mau_ngu_phap": "～わけではない",
+    "phien_am": "~ wake de wa nai",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + わけではない (Aな ➝ Aな/である, N ➝ Nの/な/である)",
+    "y_nghia": "Không hẳn là... / Không nhất thiết là...",
+    "chu_y": "Phủ định một phần sự việc được suy ra đương nhiên.",
+    "vi_du": [
+      {
+        "nhat": "日本人の皆が好きなわけじゃないよ。",
+        "viet": "Không hẳn là mọi người Nhật đều thích đâu."
+      }
+    ]
+  },
+  {
+    "bai": 18,
+    "stt": 84,
+    "mau_ngu_phap": "～わけにはいかない",
+    "phien_am": "~ wake ni wa ikanai",
+    "cong_thuc": "Vる / Vない + わけにはいかない",
+    "y_nghia": "Không thể làm được... / Không nỡ...",
+    "chu_y": "Vì trái với lương tâm, quy chuẩn đạo đức xã hội nên không thể làm.",
+    "vi_du": [
+      {
+        "nhat": "家族がいるから、働かないわけにはいかない。",
+        "viet": "Vì có gia đình nên tôi không thể không làm việc được."
+      }
+    ]
+  },
+  {
+    "bai": 18,
+    "stt": 85,
+    "mau_ngu_phap": "～かける・かけだ・かけの",
+    "phien_am": "~ kakeru / ~ kake da / ~ kake no",
+    "cong_thuc": "Vます(bỏ ます) + かける / かけだ / かけの + N",
+    "y_nghia": "Dang dở...",
+    "chu_y": "Hành động chưa kết thúc, vẫn đang trong quá trình làm.",
+    "vi_du": [
+      {
+        "nhat": "あれ？このミルクティーは誰かの飲みかけだ。",
+        "viet": "Ủa? Ly trà sữa này ai đó đang uống dở."
+      }
+    ]
+  },
+  {
+    "bai": 19,
+    "stt": 86,
+    "mau_ngu_phap": "～に決まっている",
+    "phien_am": "~ ni kimatte iru",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + に決まっている (Aな ➝ Aな/である, N ➝ N/である)",
+    "y_nghia": "Nhất định là...",
+    "chu_y": "Suy đoán chắc chắn mang tính trực giác, cảm tính của người nói.",
+    "vi_du": [
+      {
+        "nhat": "紙に書いても、わすれるに決まっている。",
+        "viet": "Dù có viết ra giấy thì chắc chắn cũng sẽ quên thôi."
+      }
+    ]
+  },
+  {
+    "bai": 19,
+    "stt": 87,
+    "mau_ngu_phap": "～に関して",
+    "phien_am": "~ ni kanshite",
+    "cong_thuc": "N + に関して / に関する + N",
+    "y_nghia": "Về... / Liên quan đến...",
+    "chu_y": "Nói về chủ đề, đề tài (Dùng trong văn viết, trang trọng).",
+    "vi_du": [
+      {
+        "nhat": "会議の日時に関して、もう一度連絡いたします。",
+        "viet": "Về ngày giờ của cuộc họp, tôi sẽ liên lạc lại lần nữa."
+      }
+    ]
+  },
+  {
+    "bai": 19,
+    "stt": 88,
+    "mau_ngu_phap": "～に加えて",
+    "phien_am": "~ ni kuwaete",
+    "cong_thuc": "N + に加えて",
+    "y_nghia": "Thêm vào đó",
+    "chu_y": "Gắn thêm một sự việc, tình trạng khác vào.",
+    "vi_du": [
+      {
+        "nhat": "このアニメは内容に加えて、音楽も素晴らしい。",
+        "viet": "Bộ anime này thêm vào nội dung hay thì âm nhạc cũng rất tuyệt vời."
+      }
+    ]
+  },
+  {
+    "bai": 19,
+    "stt": 89,
+    "mau_ngu_phap": "～かわりに",
+    "phien_am": "~ kawari ni",
+    "cong_thuc": "Vる / Nの + 代わりに | V (普通形) + 代わりに | Aい・Aな + 代わりに",
+    "y_nghia": "1. Thay cho / 2. Đổi lại / 3. Mặc dù... nhưng...",
+    "chu_y": "1. Đại diện, thay thế. / 2. Sự đánh đổi tương đương. / 3. Mặt này tốt nhưng mặt kia không (sự bù trừ).",
+    "vi_du": [
+      {
+        "nhat": "課長の代わりに私が会議に出席します。",
+        "viet": "Tôi sẽ tham dự cuộc họp thay cho trưởng phòng."
+      },
+      {
+        "nhat": "息子は運動が得意な代わりに、勉強があまりできない。",
+        "viet": "Con trai tôi đổi lại giỏi thể thao thì việc học lại không được tốt lắm."
+      }
+    ]
+  },
+  {
+    "bai": 19,
+    "stt": 90,
+    "mau_ngu_phap": "～はもちろん／～はもとより",
+    "phien_am": "~ wa mochiron / ~ wa motoyori",
+    "cong_thuc": "N + はもちろん / はもとより",
+    "y_nghia": "... là đương nhiên rồi nhưng... cũng",
+    "chu_y": "Nhấn mạnh cái điển hình, sau đó nêu ra cái khác cùng loại.",
+    "vi_du": [
+      {
+        "nhat": "彼は歌うのはもちろん、踊るのも上手だよ。",
+        "viet": "Anh ấy hát hay là đương nhiên rồi, nhảy cũng giỏi nữa."
+      }
+    ]
+  },
+  {
+    "bai": 20,
+    "stt": 91,
+    "mau_ngu_phap": "～最中に",
+    "phien_am": "~ saichuu ni",
+    "cong_thuc": "Vている / Nの + 最中に",
+    "y_nghia": "Đúng lúc đang...",
+    "chu_y": "Có sự việc khác xen vào gây cản trở, phiền toái.",
+    "vi_du": [
+      {
+        "nhat": "恋人とデートしている最中に、会社の上司から電話がかかってきたの～。",
+        "viet": "Đúng lúc đang hẹn hò với người yêu thì lại có điện thoại từ sếp gọi đến~."
+      },
+      {
+        "nhat": "ごめん、テストの最中に、話しかけないで！",
+        "viet": "Xin lỗi, trong lúc tôi đang làm bài kiểm tra thì đừng có bắt chuyện!"
+      }
+    ]
+  },
+  {
+    "bai": 20,
+    "stt": 92,
+    "mau_ngu_phap": "～以来",
+    "phien_am": "~ irai",
+    "cong_thuc": "Vて / N + 以来",
+    "y_nghia": "Suốt từ khi / Kể từ khi...",
+    "chu_y": "Hành động, tình trạng tiếp diễn kéo dài đều đặn (không dùng cho việc chỉ xảy ra 1 lần).",
+    "vi_du": [
+      {
+        "nhat": "彼女に出会って以来、毎日彼女のことについて考えている。",
+        "viet": "Kể từ khi gặp cô ấy, ngày nào tôi cũng nghĩ về cô ấy."
+      }
+    ]
+  },
+  {
+    "bai": 20,
+    "stt": 93,
+    "mau_ngu_phap": "～からでないと / からでなければ",
+    "phien_am": "~ kara de nai to / ~ kara de nakereba",
+    "cong_thuc": "Vて + からでないと / からでなければ",
+    "y_nghia": "Nếu chưa... thì",
+    "chu_y": "Nhấn mạnh sự cần thiết phải làm vế trước thì mới có thể làm vế sau.",
+    "vi_du": [
+      {
+        "nhat": "両親に相談してからでないと、留学できるかどうか分からない。",
+        "viet": "Nếu chưa bàn bạc với bố mẹ thì tôi không thể biết là có đi du học được hay không."
+      }
+    ]
+  },
+  {
+    "bai": 20,
+    "stt": 94,
+    "mau_ngu_phap": "～からといって",
+    "phien_am": "~ kara to itte",
+    "cong_thuc": "普通形 + からといって",
+    "y_nghia": "Cho dù...",
+    "chu_y": "Dù lý do là gì thì hành động vế sau cũng không thể chấp nhận được.",
+    "vi_du": [
+      {
+        "nhat": "いくら仕事が忙しいからといって、家族を捨ててはいけないよ。",
+        "viet": "Cho dù công việc có bận rộn đến mấy đi chăng nữa cũng không được vứt bỏ gia đình."
+      }
+    ]
+  },
+  {
+    "bai": 20,
+    "stt": 95,
+    "mau_ngu_phap": "～わりに（は）",
+    "phien_am": "~ wari ni (wa)",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + わりに (Aな ➝ Aな/である, N ➝ Nの)",
+    "y_nghia": "Tuy... nhưng... / So với... thì khá là...",
+    "chu_y": "Kết quả khác với lẽ đương nhiên, ngoài dự tính.",
+    "vi_du": [
+      {
+        "nhat": "あの人はお金がないと言っているわりに、いい車に乗っている。",
+        "viet": "Người kia miệng cứ bảo không có tiền, vậy mà lại đi xe xịn thế."
+      }
+    ]
+  },
+  {
+    "bai": 20,
+    "stt": 96,
+    "mau_ngu_phap": "～くせに",
+    "phien_am": "~ kuse ni",
+    "cong_thuc": "V・Aい・Aな・N (普通形) + くせに (Aな ➝ Aな, N ➝ Nの)",
+    "y_nghia": "Vậy mà... / Thế mà...",
+    "chu_y": "Trái dự đoán, mang ý chê trách, mỉa mai. Hai vế phải cùng một chủ ngữ.",
+    "vi_du": [
+      {
+        "nhat": "知っているくせに、教えてくれない。",
+        "viet": "Biết rõ thế mà lại không chỉ cho tôi."
+      }
+    ]
+  }
+]
