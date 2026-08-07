@@ -15,7 +15,10 @@ import type {
 import { formatDate } from './srs';
 
 const KEYS = {
-  SRS_CARDS: 'n3_srs_cards',
+  SRS_CARDS_VOCAB_V1: 'srs_cards_vocab_v1',
+  SRS_CARDS_KANJI_V1: 'srs_cards_kanji_v1',
+  SRS_CARDS_GRAMMAR_V1: 'srs_cards_grammar_v1',
+  MIGRATED_SRS_V1: 'migrated_srs_v1',
   BOOKMARKS: 'n3_bookmarks',
   SETTINGS: 'n3_settings',
   STUDY_DAYS: 'n3_study_days',
@@ -42,27 +45,95 @@ function setJSON<T>(key: string, value: T): void {
 
 // --- SRS Cards ---
 
-export function getSRSCards(): SRSCard[] {
-  return getJSON<SRSCard[]>(KEYS.SRS_CARDS, []);
+export function getSRSKey(deckType: 'vocabulary' | 'kanji' | 'grammar'): string {
+  switch (deckType) {
+    case 'vocabulary': return KEYS.SRS_CARDS_VOCAB_V1;
+    case 'kanji': return KEYS.SRS_CARDS_KANJI_V1;
+    case 'grammar': return KEYS.SRS_CARDS_GRAMMAR_V1;
+  }
 }
 
-export function saveSRSCards(cards: SRSCard[]): void {
-  setJSON(KEYS.SRS_CARDS, cards);
+export function getSRSCards(deckType: 'vocabulary' | 'kanji' | 'grammar'): SRSCard[] {
+  return getJSON<SRSCard[]>(getSRSKey(deckType), []);
 }
 
-export function getSRSCard(itemId: string): SRSCard | undefined {
-  return getSRSCards().find((c) => c.itemId === itemId);
+export function saveSRSCards(deckType: 'vocabulary' | 'kanji' | 'grammar', cards: SRSCard[]): void {
+  setJSON(getSRSKey(deckType), cards);
+}
+
+export function getSRSCard(cardId: string, deckType: 'vocabulary' | 'kanji' | 'grammar'): SRSCard | undefined {
+  return getSRSCards(deckType).find((c) => c.cardId === cardId);
 }
 
 export function upsertSRSCard(card: SRSCard): void {
-  const cards = getSRSCards();
-  const index = cards.findIndex((c) => c.itemId === card.itemId);
+  const cards = getSRSCards(card.deckType);
+  const index = cards.findIndex((c) => c.cardId === card.cardId);
   if (index >= 0) {
     cards[index] = card;
   } else {
     cards.push(card);
   }
-  saveSRSCards(cards);
+  saveSRSCards(card.deckType, cards);
+}
+
+export function getOrCreateSRSCard(cardId: string, deckType: 'vocabulary' | 'kanji' | 'grammar'): SRSCard {
+  const existing = getSRSCard(cardId, deckType);
+  if (existing) return existing;
+
+  const newCard: SRSCard = {
+    cardId,
+    deckType,
+    state: 'new',
+    easeFactor: 2.5,
+    dueDate: new Date().toISOString(),
+    reps: 0,
+    lapses: 0,
+    lastReviewedAt: null,
+  };
+  return newCard;
+}
+
+export function migrateV1(): void {
+  const isMigrated = getJSON<boolean>(KEYS.MIGRATED_SRS_V1, false);
+  if (isMigrated) return;
+
+  const oldCards = getJSON<any[]>('n3_srs_cards', []);
+  if (!oldCards || oldCards.length === 0) {
+    setJSON(KEYS.MIGRATED_SRS_V1, true);
+    return;
+  }
+
+  const vocabCards: SRSCard[] = [];
+  const kanjiCards: SRSCard[] = [];
+  const grammarCards: SRSCard[] = [];
+
+  oldCards.forEach(old => {
+    // Map old fields to new schema
+    let newState: SRSCard['state'] = 'new';
+    if (old.state === 'mastered' || old.state === 'review') newState = 'review';
+    else if (old.state === 'learning' || old.state === 'forgotten') newState = 'learning';
+
+    const card: SRSCard = {
+      cardId: old.itemId,
+      deckType: old.itemType,
+      state: newState,
+      easeFactor: old.easeFactor ?? 2.5,
+      intervalDays: old.interval, // Old interval was in days
+      dueDate: old.dueDate || new Date().toISOString(),
+      reps: old.repetitions ?? 0,
+      lapses: old.state === 'forgotten' ? 1 : 0, // Approximate lapses
+      lastReviewedAt: old.lastReview || null,
+    };
+
+    if (card.deckType === 'vocabulary') vocabCards.push(card);
+    else if (card.deckType === 'kanji') kanjiCards.push(card);
+    else if (card.deckType === 'grammar') grammarCards.push(card);
+  });
+
+  saveSRSCards('vocabulary', vocabCards);
+  saveSRSCards('kanji', kanjiCards);
+  saveSRSCards('grammar', grammarCards);
+  setJSON(KEYS.MIGRATED_SRS_V1, true);
 }
 
 // --- Bookmarks ---
@@ -139,7 +210,8 @@ export function recordStudyActivity(
   cardsReviewed: number,
   newCardsLearned: number,
   accuracy: number,
-  timeSpent: number
+  timeSpent: number,
+  mode: 'flashcard' | 'srs'
 ): void {
   const days = getStudyDays();
   const today = formatDate(new Date());
@@ -147,6 +219,11 @@ export function recordStudyActivity(
 
   if (existing) {
     existing.cardsReviewed += cardsReviewed;
+    if (mode === 'flashcard') {
+      existing.flashcardReviewed = (existing.flashcardReviewed || 0) + cardsReviewed;
+    } else {
+      existing.srsReviewed = (existing.srsReviewed || 0) + cardsReviewed;
+    }
     existing.newCardsLearned += newCardsLearned;
     existing.accuracy =
       (existing.accuracy + accuracy) / 2; // rolling average
@@ -155,6 +232,8 @@ export function recordStudyActivity(
     days.push({
       date: today,
       cardsReviewed,
+      flashcardReviewed: mode === 'flashcard' ? cardsReviewed : 0,
+      srsReviewed: mode === 'srs' ? cardsReviewed : 0,
       newCardsLearned,
       accuracy,
       timeSpent,

@@ -11,6 +11,7 @@ export interface VocabItem {
   type: 'main' | 'compound';
   relatedWords?: string;
   lesson?: string;
+  level?: string;
 }
 
 // --- Kanji ---
@@ -42,6 +43,7 @@ export interface GrammarItem {
   comparison: string;
   examples: GrammarExample[];
   lesson?: string;
+  level?: string;
 }
 
 export interface GrammarExample {
@@ -60,7 +62,7 @@ export interface GrammarExample {
  * - mastered: Interval > 30 days, consistently correct
  * - forgotten: Failed during review, needs relearning
  */
-export type CardState = 'new' | 'learning' | 'review' | 'mastered' | 'forgotten';
+export type CardState = 'new' | 'learning' | 'review' | 'relearning';
 
 /**
  * Rating options (SM-2 inspired):
@@ -71,29 +73,19 @@ export type CardState = 'new' | 'learning' | 'review' | 'mastered' | 'forgotten'
  */
 export type Rating = 'again' | 'hard' | 'good' | 'easy';
 
+export type DeckType = 'vocabulary' | 'kanji' | 'grammar';
+
 export interface SRSCard {
-  /** Unique ID matching the vocab/kanji item */
-  itemId: string;
-  /** Type of content */
-  itemType: 'vocabulary' | 'kanji' | 'grammar';
-  /** Current learning state */
+  cardId: string;
+  deckType: DeckType;
   state: CardState;
-  /** Ease factor (SM-2), starts at 2.5 */
   easeFactor: number;
-  /** Current interval in days */
-  interval: number;
-  /** Number of consecutive correct reviews */
-  repetitions: number;
-  /** Next review date (ISO string) */
+  intervalMinutes?: number;
+  intervalDays?: number;
   dueDate: string;
-  /** Last review date (ISO string) */
-  lastReview: string | null;
-  /** Total number of reviews */
-  totalReviews: number;
-  /** Total correct answers */
-  correctCount: number;
-  /** Current learning step (for learning state) */
-  learningStep: number;
+  reps: number;
+  lapses: number;
+  lastReviewedAt: string | null;
 }
 
 // --- Quiz ---
@@ -137,7 +129,9 @@ export interface QuizSession {
 // --- Progress ---
 export interface StudyDay {
   date: string; // YYYY-MM-DD
-  cardsReviewed: number;
+  cardsReviewed: number; // Legacy total
+  flashcardReviewed?: number; // New: flashcard specific
+  srsReviewed?: number; // New: Anki specific
   newCardsLearned: number;
   accuracy: number;
   timeSpent: number; // minutes

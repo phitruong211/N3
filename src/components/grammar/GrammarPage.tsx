@@ -18,6 +18,7 @@ export function GrammarPage() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<'all' | 'bookmarked'>('all');
+  const [levelFilter, setLevelFilter] = useState<'all' | 'N3' | 'N4'>('all');
   const [flashcardMode, setFlashcardMode] = useState(false);
 
   const filtered = useMemo(() => {
@@ -28,9 +29,10 @@ export function GrammarPage() {
         item.meaning.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.usage.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesBookmark = filter === 'all' || isBookmarked(item.id);
-      return matchesSearch && matchesBookmark;
+      const matchesLevel = levelFilter === 'all' || item.level === levelFilter;
+      return matchesSearch && matchesBookmark && matchesLevel;
     });
-  }, [grammar, searchQuery, filter, isBookmarked]);
+  }, [grammar, searchQuery, filter, isBookmarked, levelFilter]);
 
   if (flashcardMode && filtered.length > 0) {
     return (
@@ -51,7 +53,7 @@ export function GrammarPage() {
             Grammar
           </h1>
           <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-            {filtered.length} of {grammar.length} N3 Japanese grammar patterns and usage
+            {filtered.length} of {grammar.length} Japanese grammar patterns and usage
           </p>
         </div>
 
@@ -83,6 +85,22 @@ export function GrammarPage() {
               {f === 'all' ? 'All Patterns' : '★ Saved'}
             </button>
           ))}
+          </div>
+
+          <div className="flex gap-1 bg-[#F1F5F9] dark:bg-[#1E293B] rounded-lg p-0.5 border border-[#E2E8F0] dark:border-[#334155]">
+            {(['all', 'N3', 'N4'] as const).map(lvl => (
+              <button
+                key={lvl}
+                onClick={() => setLevelFilter(lvl)}
+                className={`px-3 py-1.5 text-xs font-bold rounded-md transition-colors cursor-pointer ${
+                  levelFilter === lvl
+                    ? 'bg-white dark:bg-[#334155] text-[#1E293B] dark:text-white shadow-sm'
+                    : 'text-[#64748B] dark:text-[#94A3B8] hover:text-[#1E293B] dark:hover:text-white'
+                }`}
+              >
+                {lvl === 'all' ? 'TẤT CẢ' : lvl}
+              </button>
+            ))}
           </div>
         </div>
       </div>

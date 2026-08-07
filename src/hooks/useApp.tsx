@@ -8,7 +8,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react';
 import type { VocabItem, KanjiItem, GrammarItem, PageId, AppSettings, SRSCard, Bookmark } from '@/types';
 import { loadVocabulary, loadKanji, loadGrammar } from '@/lib/data';
-import { getSettings, saveSettings, applyTheme, getBookmarks, saveBookmarks, getSRSCards, saveSRSCards, setLastPage } from '@/lib/storage';
+import { getSettings, saveSettings, applyTheme, getBookmarks, saveBookmarks, getSRSCards, saveSRSCards, upsertSRSCard, setLastPage, migrateV1 } from '@/lib/storage';
 
 interface AppState {
   // <Data>                                 </Data>
@@ -54,7 +54,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [currentPage, _setCurrentPage] = useState<PageId>('dashboard');
   const [settings, _setSettings] = useState<AppSettings>(getSettings());
   const [bookmarks, _setBookmarks] = useState<Bookmark[]>(getBookmarks());
-  const [srsCards, _setSRSCards] = useState<SRSCard[]>(getSRSCards());
+  const [srsCards, _setSRSCards] = useState<SRSCard[]>(() => {
+    migrateV1(); // ensure data is migrated before reading
+    return [
+      ...getSRSCards('vocabulary'),
+      ...getSRSCards('kanji'),
+      ...getSRSCards('grammar'),
+    ];
+  });
   const [searchOpen, setSearchOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
@@ -129,12 +136,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const setSRSCards = useCallback((cards: SRSCard[]) => {
     _setSRSCards(cards);
-    saveSRSCards(cards);
+    // Note: setSRSCards shouldn't really be used directly to overwrite all cards anymore, 
+    // but if it is, we need to split them and save.
+    const vocab = cards.filter(c => c.deckType === 'vocabulary');
+    const kanji = cards.filter(c => c.deckType === 'kanji');
+    const grammar = cards.filter(c => c.deckType === 'grammar');
+    saveSRSCards('vocabulary', vocab);
+    saveSRSCards('kanji', kanji);
+    saveSRSCards('grammar', grammar);
   }, []);
 
   const updateSRSCard = useCallback((card: SRSCard) => {
     _setSRSCards((prev) => {
-      const index = prev.findIndex((c) => c.itemId === card.itemId);
+      const index = prev.findIndex((c) => c.cardId === card.cardId && c.deckType === card.deckType);
       let next: SRSCard[];
       if (index >= 0) {
         next = [...prev];
@@ -142,9 +156,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       } else {
         next = [...prev, card];
       }
-      saveSRSCards(next);
       return next;
     });
+    // Immediately save to storage (Single Source of Truth)
+    upsertSRSCard(card);
   }, []);
 
   return (

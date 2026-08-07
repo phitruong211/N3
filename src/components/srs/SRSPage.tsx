@@ -25,7 +25,7 @@ export function SRSPage() {
 
   // Items that are completely new (never studied)
   const newItemCount = useMemo(() => {
-    const studied = new Set(srsCards.map((c) => c.itemId));
+    const studied = new Set(srsCards.map((c) => c.cardId));
     return vocabulary.filter((v) => !studied.has(v.id)).length;
   }, [vocabulary, srsCards]);
 
@@ -101,7 +101,7 @@ export function SRSPage() {
         <button
           onClick={() => {
             // Add 10 new items to the SRS system
-            const studied = new Set(srsCards.map((c) => c.itemId));
+            const studied = new Set(srsCards.map((c) => c.cardId));
             const newItems = vocabulary
               .filter((v) => !studied.has(v.id))
               .slice(0, 10);
@@ -160,7 +160,7 @@ function SRSSession({
   });
 
   const currentCard = queue[currentIndex];
-  const vocabItem = vocabulary.find((v) => v.id === currentCard?.itemId);
+  const vocabItem = vocabulary.find((v) => v.id === currentCard?.cardId);
 
   // Keyboard controls
   useEffect(() => {
@@ -210,7 +210,8 @@ function SRSSession({
         stats.total,
         0,
         stats.total > 0 ? stats.correct / stats.total : 0,
-        elapsed
+        elapsed,
+        'srs'
       );
       setSessionDone(true);
     }

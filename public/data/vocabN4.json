@@ -1,0 +1,3019 @@
+
+
+[
+    {
+        "kanji": "診ます",
+        "phien_am": "みます [CHẨN]",
+        "nghia": "Khám, kiểm tra"
+    },
+    {
+        "kanji": "探します",
+        "phien_am": "さがします [THÁM]",
+        "nghia": "Tìm, tìm kiếm"
+    },
+    {
+        "kanji": "遅れます",
+        "phien_am": "おくれます [TRÌ]",
+        "nghia": "Trễ, muộn (giờ)"
+    },
+    {
+        "kanji": "間に合います",
+        "phien_am": "まにあいます [GIAN HỢP]",
+        "nghia": "Kịp (giờ)"
+    },
+    {
+        "kanji": "やります",
+        "phien_am": "やります",
+        "nghia": "Cho, tặng (dùng cho người dưới, động vật, thực vật)"
+    },
+    {
+        "kanji": "拾います",
+        "phien_am": "ひろいます [THẬP]",
+        "nghia": "Nhặt, lượm"
+    },
+    {
+        "kanji": "連絡します",
+        "phien_am": "れんらくします [LIÊN LẠC]",
+        "nghia": "Liên lạc"
+    },
+    {
+        "kanji": "燃えます",
+        "phien_am": "もえます [NHIÊN]",
+        "nghia": "Cháy, đốt được"
+    },
+    {
+        "kanji": "運動会",
+        "phien_am": "うんどうかい [VẬN ĐỘNG HỘI]",
+        "nghia": "Đại hội thể thao"
+    },
+    {
+        "kanji": "フリーマーケット",
+        "phien_am": "フリーマーケット",
+        "nghia": "Chợ đồ cũ"
+    },
+    {
+        "kanji": "財布",
+        "phien_am": "さいふ [TÀI BỐ]",
+        "nghia": "Cái ví"
+    },
+    {
+        "kanji": "ボランティア",
+        "phien_am": "ボランティア",
+        "nghia": "Tình nguyện viên"
+    },
+    {
+        "kanji": "ごみ",
+        "phien_am": "ごみ",
+        "nghia": "Rác"
+    },
+    {
+        "kanji": "平日",
+        "phien_am": "へいじつ [BÌNH NHẬT]",
+        "nghia": "Ngày thường"
+    },
+    {
+        "kanji": "場所",
+        "phien_am": "ばしょ [TRƯỜNG SỞ]",
+        "nghia": "Địa điểm, nơi chốn"
+    },
+    {
+        "kanji": "～弁",
+        "phien_am": "～べん [BIỆN]",
+        "nghia": "Tiếng, phương ngữ ~"
+    },
+    {
+        "kanji": "横",
+        "phien_am": "よこ [HOÀNH]",
+        "nghia": "Bên cạnh, bề ngang"
+    },
+    {
+        "kanji": "売り場",
+        "phien_am": "うりば [MẠI TRƯỜNG]",
+        "nghia": "Quầy bán hàng"
+    },
+    {
+        "kanji": "今度",
+        "phien_am": "こんど [KIM ĐỘ]",
+        "nghia": "Lần tới, lần này"
+    },
+    {
+        "kanji": "直接",
+        "phien_am": "ちょくせつ [TRỰC TIẾP]",
+        "nghia": "Trực tiếp"
+    },
+    {
+        "kanji": "いつでも",
+        "phien_am": "いつでも",
+        "nghia": "Lúc nào cũng / Bất cứ lúc nào"
+    },
+    {
+        "kanji": "どこでも",
+        "phien_am": "どこでも",
+        "nghia": "Ở đâu cũng / Bất cứ nơi đâu"
+    },
+    {
+        "kanji": "だれでも",
+        "phien_am": "だれでも",
+        "nghia": "Ai cũng / Bất cứ ai"
+    },
+    {
+        "kanji": "なんでも",
+        "phien_am": "なんでも",
+        "nghia": "Cái gì cũng / Bất cứ cái gì"
+    },
+    {
+        "kanji": "こんな",
+        "phien_am": "こんな",
+        "nghia": "Như thế này"
+    },
+    {
+        "kanji": "そんな",
+        "phien_am": "そんな",
+        "nghia": "Như thế đó"
+    },
+    {
+        "kanji": "あんな",
+        "phien_am": "あんな",
+        "nghia": "Như thế kia"
+    },
+    {
+        "kanji": "飼います",
+        "phien_am": "かいます [TỰ]",
+        "nghia": "Nuôi (thú cưng)"
+    },
+    {
+        "kanji": "走ります",
+        "phien_am": "はしります [TẨU]",
+        "nghia": "Chạy"
+    },
+    {
+        "kanji": "見えます",
+        "phien_am": "みえます [KIẾN]",
+        "nghia": "Có thể nhìn thấy (tự đập vào mắt)"
+    },
+    {
+        "kanji": "聞こえます",
+        "phien_am": "きこえます [VĂN]",
+        "nghia": "Có thể nghe thấy (tự lọt vào tai)"
+    },
+    {
+        "kanji": "できます",
+        "phien_am": "できます",
+        "nghia": "Hoàn thành, được xây dựng xong"
+    },
+    {
+        "kanji": "開きます",
+        "phien_am": "ひらきます [KHAI]",
+        "nghia": "Mở, tổ chức"
+    },
+    {
+        "kanji": "建てます",
+        "phien_am": "たてます [KIẾN]",
+        "nghia": "Xây dựng"
+    },
+    {
+        "kanji": "ペット",
+        "phien_am": "ペット",
+        "nghia": "Thú cưng"
+    },
+    {
+        "kanji": "鳥",
+        "phien_am": "とり [ĐIỂU]",
+        "nghia": "Chim"
+    },
+    {
+        "kanji": "声",
+        "phien_am": "こえ [THANH]",
+        "nghia": "Tiếng, giọng nói"
+    },
+    {
+        "kanji": "波",
+        "phien_am": "なみ [BA]",
+        "nghia": "Sóng"
+    },
+    {
+        "kanji": "花火",
+        "phien_am": "はなび [HOA HỎA]",
+        "nghia": "Pháo hoa"
+    },
+    {
+        "kanji": "クリーニング",
+        "phien_am": "クリーニング",
+        "nghia": "Giặt ủi"
+    },
+    {
+        "kanji": "マンション",
+        "phien_am": "マンション",
+        "nghia": "Chung cư"
+    },
+    {
+        "kanji": "道具",
+        "phien_am": "どうぐ [ĐẠO CỤ]",
+        "nghia": "Dụng cụ"
+    },
+    {
+        "kanji": "心配",
+        "phien_am": "しんぱい [TÂM PHỐI]",
+        "nghia": "Lo lắng"
+    },
+    {
+        "kanji": "すばらしい",
+        "phien_am": "すばらしい",
+        "nghia": "Tuyệt vời"
+    },
+    {
+        "kanji": "しか",
+        "phien_am": "しか",
+        "nghia": "Chỉ ~ (đi với phủ định)"
+    },
+    {
+        "kanji": "いつか",
+        "phien_am": "いつか",
+        "nghia": "Một lúc nào đó"
+    },
+    {
+        "kanji": "他の",
+        "phien_am": "ほかの [THA]",
+        "nghia": "Khác"
+    },
+    {
+        "kanji": "はっきり",
+        "phien_am": "はっきり",
+        "nghia": "Rõ ràng"
+    },
+    {
+        "kanji": "売れます",
+        "phien_am": "うれます [MẠI]",
+        "nghia": "Bán chạy, bán được"
+    },
+    {
+        "kanji": "踊ります",
+        "phien_am": "おどります [DŨNG]",
+        "nghia": "Múa, nhảy"
+    },
+    {
+        "kanji": "かみます",
+        "phien_am": "かみます",
+        "nghia": "Nhai"
+    },
+    {
+        "kanji": "通います",
+        "phien_am": "かよいます [THÔNG]",
+        "nghia": "Đi đi về về, đi học/làm (thường xuyên)"
+    },
+    {
+        "kanji": "選びます",
+        "phien_am": "えらびます [TUYỂN]",
+        "nghia": "Lựa chọn"
+    },
+    {
+        "kanji": "メモします",
+        "phien_am": "メモします",
+        "nghia": "Ghi chú"
+    },
+    {
+        "kanji": "景色",
+        "phien_am": "けしき [CẢNH SẮC]",
+        "nghia": "Phong cảnh"
+    },
+    {
+        "kanji": "美容院",
+        "phien_am": "びよういん [MỸ DUNG VIỆN]",
+        "nghia": "Tiệm làm đẹp, tiệm cắt tóc"
+    },
+    {
+        "kanji": "台所",
+        "phien_am": "だいどころ [ĐÀI SỞ]",
+        "nghia": "Nhà bếp (kiểu Nhật)"
+    },
+    {
+        "kanji": "経験",
+        "phien_am": "けいけん [KINH NGHIỆM]",
+        "nghia": "Kinh nghiệm"
+    },
+    {
+        "kanji": "力",
+        "phien_am": "ちから [LỰC]",
+        "nghia": "Sức mạnh, năng lực"
+    },
+    {
+        "kanji": "人気",
+        "phien_am": "にんき [NHÂN KHÍ]",
+        "nghia": "Nổi tiếng, được yêu thích"
+    },
+    {
+        "kanji": "形",
+        "phien_am": "かたち [HÌNH]",
+        "nghia": "Hình dạng"
+    },
+    {
+        "kanji": "色",
+        "phien_am": "いろ [SẮC]",
+        "nghia": "Màu sắc"
+    },
+    {
+        "kanji": "味",
+        "phien_am": "あじ [VỊ]",
+        "nghia": "Vị"
+    },
+    {
+        "kanji": "値段",
+        "phien_am": "ねだん [TRỊ ĐOẠN]",
+        "nghia": "Giá cả"
+    },
+    {
+        "kanji": "給料",
+        "phien_am": "きゅうりょう [CẤP LIÊU]",
+        "nghia": "Lương"
+    },
+    {
+        "kanji": "ボーナス",
+        "phien_am": "ボーナス",
+        "nghia": "Tiền thưởng"
+    },
+    {
+        "kanji": "番組",
+        "phien_am": "ばんぐみ [PHIÊN TỔ]",
+        "nghia": "Chương trình (TV)"
+    },
+    {
+        "kanji": "ドラマ",
+        "phien_am": "ドラマ",
+        "nghia": "Phim truyền hình"
+    },
+    {
+        "kanji": "歌手",
+        "phien_am": "かしゅ [CA THỦ]",
+        "nghia": "Ca sĩ"
+    },
+    {
+        "kanji": "小説",
+        "phien_am": "しょうせつ [TIỂU THUYẾT]",
+        "nghia": "Tiểu thuyết"
+    },
+    {
+        "kanji": "小説家",
+        "phien_am": "しょうせつか [TIỂU THUYẾT GIA]",
+        "nghia": "Tiểu thuyết gia"
+    },
+    {
+        "kanji": "自分",
+        "phien_am": "じぶん [TỰ PHÂN]",
+        "nghia": "Bản thân mình"
+    },
+    {
+        "kanji": "将来",
+        "phien_am": "しょうらい [TƯƠNG LAI]",
+        "nghia": "Tương lai"
+    },
+    {
+        "kanji": "娘",
+        "phien_am": "むすめ [NƯƠNG]",
+        "nghia": "Con gái"
+    },
+    {
+        "kanji": "息子",
+        "phien_am": "むすこ [TỨC]",
+        "nghia": "Con trai"
+    },
+    {
+        "kanji": "まじめ",
+        "phien_am": "まじめ",
+        "nghia": "Nghiêm túc, chăm chỉ"
+    },
+    {
+        "kanji": "熱心",
+        "phien_am": "ねっしん [NHIỆT TÂM]",
+        "nghia": "Nhiệt tình"
+    },
+    {
+        "kanji": "えらい",
+        "phien_am": "えらい",
+        "nghia": "Siêu, giỏi, đáng ngưỡng mộ"
+    },
+    {
+        "kanji": "ちょうどいい",
+        "phien_am": "ちょうどいい",
+        "nghia": "Vừa vặn"
+    },
+    {
+        "kanji": "しばらく",
+        "phien_am": "しばらく",
+        "nghia": "Một lúc"
+    },
+    {
+        "kanji": "たいてい",
+        "phien_am": "たいてい",
+        "nghia": "Thường thì"
+    },
+    {
+        "kanji": "それに",
+        "phien_am": "それに",
+        "nghia": "Hơn nữa"
+    },
+    {
+        "kanji": "それで",
+        "phien_am": "それで",
+        "nghia": "Vì thế"
+    },
+    {
+        "kanji": "破ります",
+        "phien_am": "やぶります [PHÁ]",
+        "nghia": "Làm rách"
+    },
+    {
+        "kanji": "破れます",
+        "phien_am": "やぶれます [PHÁ]",
+        "nghia": "Bị rách"
+    },
+    {
+        "kanji": "壊します",
+        "phien_am": "こわします [HOẠI]",
+        "nghia": "Phá hỏng"
+    },
+    {
+        "kanji": "壊れます",
+        "phien_am": "こわれます [HOẠI]",
+        "nghia": "Bị hỏng"
+    },
+    {
+        "kanji": "片づけます",
+        "phien_am": "かたづけます [PHIẾN]",
+        "nghia": "Dọn dẹp"
+    },
+    {
+        "kanji": "片づきます",
+        "phien_am": "かたづきます [PHIẾN]",
+        "nghia": "Được dọn gọn"
+    },
+    {
+        "kanji": "開けます",
+        "phien_am": "あけます [KHAI]",
+        "nghia": "Mở"
+    },
+    {
+        "kanji": "開きます",
+        "phien_am": "あきます [KHAI]",
+        "nghia": "Tự mở"
+    },
+    {
+        "kanji": "つけます",
+        "phien_am": "つけます",
+        "nghia": "Đánh [dấu tròn]"
+    },
+    {
+        "kanji": "つきます",
+        "phien_am": "つきます",
+        "nghia": "Tự bật"
+    },
+    {
+        "kanji": "折ります",
+        "phien_am": "おります [CHIẾT]",
+        "nghia": "Bẻ, gấp [giấy]"
+    },
+    {
+        "kanji": "折れます",
+        "phien_am": "おれます [CHIẾT]",
+        "nghia": "Bị gãy"
+    },
+    {
+        "kanji": "汚します",
+        "phien_am": "よごします [Ô]",
+        "nghia": "Làm bẩn"
+    },
+    {
+        "kanji": "汚れます",
+        "phien_am": "よごれます [Ô]",
+        "nghia": "Bị bẩn"
+    },
+    {
+        "kanji": "倒します",
+        "phien_am": "たおします [ĐẢO]",
+        "nghia": "Làm đổ"
+    },
+    {
+        "kanji": "倒れます",
+        "phien_am": "たおれます [ĐẢO]",
+        "nghia": "Đổ, ngã"
+    },
+    {
+        "kanji": "割ります",
+        "phien_am": "わります [CÁT]",
+        "nghia": "Làm vỡ"
+    },
+    {
+        "kanji": "割れます",
+        "phien_am": "われます [CÁT]",
+        "nghia": "Bị vỡ"
+    },
+    {
+        "kanji": "外します",
+        "phien_am": "はずします [NGOẠI]",
+        "nghia": "Rời (ghế), tháo ra"
+    },
+    {
+        "kanji": "外れます",
+        "phien_am": "はずれます [NGOẠI]",
+        "nghia": "Bị tuột, rời"
+    },
+    {
+        "kanji": "閉めます",
+        "phien_am": "しめます [BẾ]",
+        "nghia": "Đóng"
+    },
+    {
+        "kanji": "閉まります",
+        "phien_am": "しまります [BẾ]",
+        "nghia": "Bị đóng"
+    },
+    {
+        "kanji": "落とします",
+        "phien_am": "おとします [LẠC]",
+        "nghia": "Đánh rơi"
+    },
+    {
+        "kanji": "落ちます",
+        "phien_am": "おちます [LẠC]",
+        "nghia": "Rơi"
+    },
+    {
+        "kanji": "かけます",
+        "phien_am": "かけます",
+        "nghia": "Khóa/treo"
+    },
+    {
+        "kanji": "かかります",
+        "phien_am": "かかります",
+        "nghia": "Bị khóa/treo"
+    },
+    {
+        "kanji": "消します",
+        "phien_am": "けします [TIÊU]",
+        "nghia": "Tắt"
+    },
+    {
+        "kanji": "消えます",
+        "phien_am": "きえます [TIÊU]",
+        "nghia": "Bị tắt"
+    },
+    {
+        "kanji": "止めます",
+        "phien_am": "とめます [CHỈ]",
+        "nghia": "Làm dừng"
+    },
+    {
+        "kanji": "止まります",
+        "phien_am": "とまります [CHỈ]",
+        "nghia": "Tự dừng"
+    },
+    {
+        "kanji": "取り替えます",
+        "phien_am": "とりかえます [THỦ THẾ]",
+        "nghia": "Đổi lại, thay thế"
+    },
+    {
+        "kanji": "ふきます",
+        "phien_am": "ふきます",
+        "nghia": "Lau, gạt bỏ"
+    },
+    {
+        "kanji": "間違えます",
+        "phien_am": "まちがえます [GIAN VI]",
+        "nghia": "Nhầm lẫn"
+    },
+    {
+        "kanji": "おちゃわん",
+        "phien_am": "おちゃわん",
+        "nghia": "Cái chén"
+    },
+    {
+        "kanji": "えだ",
+        "phien_am": "えだ",
+        "nghia": "Cành cây"
+    },
+    {
+        "kanji": "返事",
+        "phien_am": "へんじ [PHẢN SỰ]",
+        "nghia": "Trả lời, hồi đáp"
+    },
+    {
+        "kanji": "あみだな",
+        "phien_am": "あみだな",
+        "nghia": "Giá để hành lý (trên tàu)"
+    },
+    {
+        "kanji": "忘れ物",
+        "phien_am": "わすれもの [VONG VẬT]",
+        "nghia": "Đồ để quên"
+    },
+    {
+        "kanji": "書類",
+        "phien_am": "しょるい [THƯ LOẠI]",
+        "nghia": "Tài liệu, giấy tờ"
+    },
+    {
+        "kanji": "駅員",
+        "phien_am": "えきいん [DỊCH VIÊN]",
+        "nghia": "Nhân viên nhà ga"
+    },
+    {
+        "kanji": "コップ",
+        "phien_am": "コップ",
+        "nghia": "Cái cốc"
+    },
+    {
+        "kanji": "お皿",
+        "phien_am": "おさら [MÃNH]",
+        "nghia": "Cái đĩa"
+    },
+    {
+        "kanji": "ポケット",
+        "phien_am": "ポケット",
+        "nghia": "Túi (áo, quần)"
+    },
+    {
+        "kanji": "ふくろ",
+        "phien_am": "ふくろ",
+        "nghia": "Túi, bao"
+    },
+    {
+        "kanji": "交番",
+        "phien_am": "こうばん [GIAO PHIÊN]",
+        "nghia": "Đồn cảnh sát"
+    },
+    {
+        "kanji": "スピーチ",
+        "phien_am": "スピーチ",
+        "nghia": "Bài phát biểu"
+    },
+    {
+        "kanji": "はります",
+        "phien_am": "はります",
+        "nghia": "Dán"
+    },
+    {
+        "kanji": "かけます",
+        "phien_am": "かけます",
+        "nghia": "Treo"
+    },
+    {
+        "kanji": "飾ります",
+        "phien_am": "かざります [SỨC]",
+        "nghia": "Trang trí"
+    },
+    {
+        "kanji": "並べます",
+        "phien_am": "ならべます [TỊNH]",
+        "nghia": "Sắp xếp"
+    },
+    {
+        "kanji": "植えます",
+        "phien_am": "うえます [THỰC]",
+        "nghia": "Trồng (cây)"
+    },
+    {
+        "kanji": "戻します",
+        "phien_am": "もどします [LỆ]",
+        "nghia": "Để lại, hoàn lại (vị trí cũ)"
+    },
+    {
+        "kanji": "まとめます",
+        "phien_am": "まとめます",
+        "nghia": "Thu dọn, tổng hợp"
+    },
+    {
+        "kanji": "しまいます",
+        "phien_am": "しまいます",
+        "nghia": "Cất đi"
+    },
+    {
+        "kanji": "決めます",
+        "phien_am": "きめます [QUYẾT]",
+        "nghia": "Quyết định"
+    },
+    {
+        "kanji": "予習します",
+        "phien_am": "よしゅうします [DỰ TẬP]",
+        "nghia": "Chuẩn bị bài trước"
+    },
+    {
+        "kanji": "復習します",
+        "phien_am": "ふくしゅうします [PHỤC TẬP]",
+        "nghia": "Ôn tập lại"
+    },
+    {
+        "kanji": "そのままにします",
+        "phien_am": "そのままにします",
+        "nghia": "Để nguyên như vậy"
+    },
+    {
+        "kanji": "カレンダー",
+        "phien_am": "カレンダー",
+        "nghia": "Lịch"
+    },
+    {
+        "kanji": "授業",
+        "phien_am": "じゅぎょう [THỤ NGHIỆP]",
+        "nghia": "Giờ học"
+    },
+    {
+        "kanji": "ポスター",
+        "phien_am": "ポスター",
+        "nghia": "Áp phích (quảng cáo)"
+    },
+    {
+        "kanji": "講義",
+        "phien_am": "こうぎ [GIẢNG NGHĨA]",
+        "nghia": "Bài giảng"
+    },
+    {
+        "kanji": "ゴミ箱",
+        "phien_am": "ゴミばこ [TƯƠNG]",
+        "nghia": "Thùng rác"
+    },
+    {
+        "kanji": "ガイドブック",
+        "phien_am": "ガイドブック",
+        "nghia": "Sách hướng dẫn du lịch"
+    },
+    {
+        "kanji": "予定",
+        "phien_am": "よてい [DỰ ĐỊNH]",
+        "nghia": "Dự định"
+    },
+    {
+        "kanji": "ミーティング",
+        "phien_am": "ミーティング",
+        "nghia": "Cuộc họp"
+    },
+    {
+        "kanji": "予定表",
+        "phien_am": "よていひょう [DỰ ĐỊNH BIỂU]",
+        "nghia": "Lịch làm việc"
+    },
+    {
+        "kanji": "かがみ",
+        "phien_am": "かがみ",
+        "nghia": "Gương"
+    },
+    {
+        "kanji": "かびん",
+        "phien_am": "かびん",
+        "nghia": "Lọ hoa"
+    },
+    {
+        "kanji": "人形",
+        "phien_am": "にんぎょう [NHÂN HÌNH]",
+        "nghia": "Búp bê"
+    },
+    {
+        "kanji": "引き出し",
+        "phien_am": "ひきだし [DẪN XUẤT]",
+        "nghia": "Ngăn kéo"
+    },
+    {
+        "kanji": "玄関",
+        "phien_am": "げんかん [HUYỀN QUAN]",
+        "nghia": "Lối vào nhà, tiền sảnh"
+    },
+    {
+        "kanji": "廊下",
+        "phien_am": "ろうか [LANG HẠ]",
+        "nghia": "Hành lang"
+    },
+    {
+        "kanji": "池",
+        "phien_am": "いけ [TRÌ]",
+        "nghia": "Ao, hồ"
+    },
+    {
+        "kanji": "壁",
+        "phien_am": "かべ [BÍCH]",
+        "nghia": "Tường"
+    },
+    {
+        "kanji": "元のところ",
+        "phien_am": "もとのところ [NGUYÊN]",
+        "nghia": "Vị trí ban đầu"
+    },
+    {
+        "kanji": "真ん中",
+        "phien_am": "まんなか [CHÂN TRUNG]",
+        "nghia": "Chính giữa"
+    },
+    {
+        "kanji": "すみ",
+        "phien_am": "すみ",
+        "nghia": "Góc, xó xỉnh"
+    },
+    {
+        "kanji": "まだ",
+        "phien_am": "まだ",
+        "nghia": "Vẫn chưa"
+    },
+    {
+        "kanji": "続けます",
+        "phien_am": "つづけます [TỤC]",
+        "nghia": "Tiếp tục, liên tục"
+    },
+    {
+        "kanji": "見つけます",
+        "phien_am": "みつけます [KIẾN]",
+        "nghia": "Tìm kiếm, tìm thấy"
+    },
+    {
+        "kanji": "取ります",
+        "phien_am": "とります [THỦ]",
+        "nghia": "Xin [nghỉ]"
+    },
+    {
+        "kanji": "申し込みます",
+        "phien_am": "もうしこみます [THÂN VÀO]",
+        "nghia": "Đăng kí"
+    },
+    {
+        "kanji": "休憩します",
+        "phien_am": "きゅうけいします [HƯU KHẾ]",
+        "nghia": "Nghỉ giải lao"
+    },
+    {
+        "kanji": "受けます",
+        "phien_am": "うけます [THỤ]",
+        "nghia": "Dự [thi]"
+    },
+    {
+        "kanji": "作文",
+        "phien_am": "さくぶん [TÁC VĂN]",
+        "nghia": "Bài văn"
+    },
+    {
+        "kanji": "発表",
+        "phien_am": "はっぴょう [PHÁT BIỂU]",
+        "nghia": "Phát biểu, công bố"
+    },
+    {
+        "kanji": "結婚式",
+        "phien_am": "けっこんしき [KẾT HÔN THỨC]",
+        "nghia": "Lễ cưới, đám cưới"
+    },
+    {
+        "kanji": "葬式",
+        "phien_am": "そうしき [TÁNG THỨC]",
+        "nghia": "Đám tang"
+    },
+    {
+        "kanji": "教会",
+        "phien_am": "きょうかい [GIÁO HỘI]",
+        "nghia": "Giáo hội, nhà thờ"
+    },
+    {
+        "kanji": "温泉",
+        "phien_am": "おんせん [ÔN TUYỀN]",
+        "nghia": "Suối nước nóng"
+    },
+    {
+        "kanji": "動物園",
+        "phien_am": "どうぶつえん [ĐỘNG VẬT VIÊN]",
+        "nghia": "Sở thú"
+    },
+    {
+        "kanji": "大学院",
+        "phien_am": "だいがくいん [ĐẠI HỌC VIỆN]",
+        "nghia": "Cao học"
+    },
+    {
+        "kanji": "本社",
+        "phien_am": "ほんしゃ [BẢN XÃ]",
+        "nghia": "Trụ sở chính"
+    },
+    {
+        "kanji": "支店",
+        "phien_am": "してん [CHI ĐIẾM]",
+        "nghia": "Chi nhánh"
+    },
+    {
+        "kanji": "展覧会",
+        "phien_am": "てんらんかい [TRIỂN LÃM HỘI]",
+        "nghia": "Triển lãm"
+    },
+    {
+        "kanji": "ずっと",
+        "phien_am": "ずっと",
+        "nghia": "Suốt, liền"
+    },
+    {
+        "kanji": "運動します",
+        "phien_am": "うんどうします [VẬN ĐỘNG]",
+        "nghia": "Vận động, tập thể thao"
+    },
+    {
+        "kanji": "合格します",
+        "phien_am": "ごうかくします [HỢP CÁCH]",
+        "nghia": "Đỗ [kì thi]"
+    },
+    {
+        "kanji": "成功します",
+        "phien_am": "せいこうします [THÀNH CÔNG]",
+        "nghia": "Thành công"
+    },
+    {
+        "kanji": "失敗します",
+        "phien_am": "しっぱいします [THẤT BẠI]",
+        "nghia": "Thất bại, trượt [kì thi]"
+    },
+    {
+        "kanji": "込みます",
+        "phien_am": "こみます [VÀO]",
+        "nghia": "[Đường] đông, ùn tắc"
+    },
+    {
+        "kanji": "やみます",
+        "phien_am": "やみます",
+        "nghia": "Tạnh [mưa]"
+    },
+    {
+        "kanji": "晴れます",
+        "phien_am": "はれます [TÌNH]",
+        "nghia": "Quang đãng, có nắng"
+    },
+    {
+        "kanji": "曇ります",
+        "phien_am": "くもります [ĐÀM]",
+        "nghia": "Có mây, âm u"
+    },
+    {
+        "kanji": "ひきます",
+        "phien_am": "ひきます",
+        "nghia": "Bị cảm"
+    },
+    {
+        "kanji": "冷やします",
+        "phien_am": "ひやします [LÂNH]",
+        "nghia": "Làm mát, làm lạnh"
+    },
+    {
+        "kanji": "続きます",
+        "phien_am": "つづきます [TỤC]",
+        "nghia": "[Sốt] kéo dài, liên tục"
+    },
+    {
+        "kanji": "すきます",
+        "phien_am": "すきます",
+        "nghia": "[Đường] vắng"
+    },
+    {
+        "kanji": "出ます",
+        "phien_am": "でます [XUẤT]",
+        "nghia": "Rời bến, khởi hành [xe buýt]"
+    },
+    {
+        "kanji": "無理をします",
+        "phien_am": "むりをします [VÔ LÝ]",
+        "nghia": "Làm quá sức"
+    },
+    {
+        "kanji": "けが",
+        "phien_am": "けが",
+        "nghia": "Vết thương"
+    },
+    {
+        "kanji": "やけど",
+        "phien_am": "やけど",
+        "nghia": "Vết bỏng"
+    },
+    {
+        "kanji": "胃",
+        "phien_am": "い [VỊ]",
+        "nghia": "Dạ dày"
+    },
+    {
+        "kanji": "インフルエンザ",
+        "phien_am": "インフルエンザ",
+        "nghia": "Bệnh cúm"
+    },
+    {
+        "kanji": "風",
+        "phien_am": "かぜ [PHONG]",
+        "nghia": "Gió"
+    },
+    {
+        "kanji": "星",
+        "phien_am": "ほし [TINH]",
+        "nghia": "Ngôi sao"
+    },
+    {
+        "kanji": "ストレス",
+        "phien_am": "ストレス",
+        "nghia": "Căng thẳng, áp lực"
+    },
+    {
+        "kanji": "せき",
+        "phien_am": "せき",
+        "nghia": "Tiếng ho"
+    },
+    {
+        "kanji": "太陽",
+        "phien_am": "たいよう [THÁI DƯƠNG]",
+        "nghia": "Mặt trời"
+    },
+    {
+        "kanji": "空",
+        "phien_am": "そら [KHÔNG]",
+        "nghia": "Bầu trời"
+    },
+    {
+        "kanji": "今夜",
+        "phien_am": "こんや [KIM DẠ]",
+        "nghia": "Đêm nay"
+    },
+    {
+        "kanji": "夕方",
+        "phien_am": "ゆうがた [TỊCH PHƯƠNG]",
+        "nghia": "Chiều tối"
+    },
+    {
+        "kanji": "東",
+        "phien_am": "ひがし [ĐÔNG]",
+        "nghia": "Phía Đông"
+    },
+    {
+        "kanji": "西",
+        "phien_am": "にし [TÂY]",
+        "nghia": "Phía Tây"
+    },
+    {
+        "kanji": "南",
+        "phien_am": "みなみ [NAM]",
+        "nghia": "Phía Nam"
+    },
+    {
+        "kanji": "北",
+        "phien_am": "きた [BẮC]",
+        "nghia": "Phía Bắc"
+    },
+    {
+        "kanji": "国際",
+        "phien_am": "こくさい [QUỐC TẾ]",
+        "nghia": "Quốc tế"
+    },
+    {
+        "kanji": "水道",
+        "phien_am": "すいどお [THỦY ĐẠO]",
+        "nghia": "Nước máy"
+    },
+    {
+        "kanji": "チーム",
+        "phien_am": "チーム",
+        "nghia": "Đội, nhóm"
+    },
+    {
+        "kanji": "エンジン",
+        "phien_am": "エンジン",
+        "nghia": "Động cơ"
+    },
+    {
+        "kanji": "十分",
+        "phien_am": "じゅうぶん [THẬP PHÂN]",
+        "nghia": "Đầy đủ"
+    },
+    {
+        "kanji": "おかしい",
+        "phien_am": "おかしい",
+        "nghia": "Kỳ lạ, kỳ quặc"
+    },
+    {
+        "kanji": "うるさい",
+        "phien_am": "うるさい",
+        "nghia": "Ồn ào"
+    },
+    {
+        "kanji": "こんなに",
+        "phien_am": "こんなに",
+        "nghia": "Như thế này"
+    },
+    {
+        "kanji": "そんなに",
+        "phien_am": "そんなに",
+        "nghia": "Như thế đó"
+    },
+    {
+        "kanji": "あんなに",
+        "phien_am": "あんなに",
+        "nghia": "Như thế kia"
+    },
+    {
+        "kanji": "遅く",
+        "phien_am": "おそく [TRÌ]",
+        "nghia": "Muộn"
+    },
+    {
+        "kanji": "たしかに",
+        "phien_am": "たしかに",
+        "nghia": "Chắc chắn là"
+    },
+    {
+        "kanji": "もしかしたら",
+        "phien_am": "もしかしたら",
+        "nghia": "Có thể, biết đâu là"
+    },
+    {
+        "kanji": "逃げます",
+        "phien_am": "にげます [ĐÀO]",
+        "nghia": "Chạy trốn, đào tẩu"
+    },
+    {
+        "kanji": "騒ぎます",
+        "phien_am": "さわぎます [TAO]",
+        "nghia": "Làm ồn, làm loạn"
+    },
+    {
+        "kanji": "あきらめます",
+        "phien_am": "あきらめます",
+        "nghia": "Từ bỏ, bỏ cuộc"
+    },
+    {
+        "kanji": "投げます",
+        "phien_am": "なげます [ĐẦU]",
+        "nghia": "Ném"
+    },
+    {
+        "kanji": "守ります",
+        "phien_am": "ままリます [THỦ]",
+        "nghia": "Tuân thủ (quy tắc), giữ (lời hứa)"
+    },
+    {
+        "kanji": "始まります",
+        "phien_am": "はじまります [THỦY]",
+        "nghia": "(Cuộc họp) bắt đầu"
+    },
+    {
+        "kanji": "出席します",
+        "phien_am": "しゅっせきします [XUẤT TỊCH]",
+        "nghia": "Tham gia, có mặt"
+    },
+    {
+        "kanji": "伝えます",
+        "phien_am": "つたえます [TRUYỀN]",
+        "nghia": "Truyền đạt, nhắn lại"
+    },
+    {
+        "kanji": "注意します",
+        "phien_am": "ちゅういします [CHÚ Ý]",
+        "nghia": "Chú ý, nhắc nhở"
+    },
+    {
+        "kanji": "戻ります",
+        "phien_am": "もどります [LỆ]",
+        "nghia": "Trở lại, quay trở lại"
+    },
+    {
+        "kanji": "リサイクルします",
+        "phien_am": "リサイクルします",
+        "nghia": "Tái chế"
+    },
+    {
+        "kanji": "だめ",
+        "phien_am": "だめ",
+        "nghia": "Không được"
+    },
+    {
+        "kanji": "同じ",
+        "phien_am": "おなじ [ĐỒNG]",
+        "nghia": "Giống nhau"
+    },
+    {
+        "kanji": "警察",
+        "phien_am": "けいさつ [CẢNH SÁT]",
+        "nghia": "Cảnh sát"
+    },
+    {
+        "kanji": "席",
+        "phien_am": "せき [TỊCH]",
+        "nghia": "Chỗ ngồi"
+    },
+    {
+        "kanji": "マーク",
+        "phien_am": "マーク",
+        "nghia": "Kí hiệu, nhãn mác"
+    },
+    {
+        "kanji": "ボール",
+        "phien_am": "ボール",
+        "nghia": "Quả bóng"
+    },
+    {
+        "kanji": "締め切り",
+        "phien_am": "しめきり [ĐẾ THIẾT]",
+        "nghia": "Hạn chót, hạn cuối"
+    },
+    {
+        "kanji": "規則",
+        "phien_am": "きそく [QUY TẮC]",
+        "nghia": "Quy tắc"
+    },
+    {
+        "kanji": "危険",
+        "phien_am": "きけん [NGUY HIỂM]",
+        "nghia": "Nguy hiểm"
+    },
+    {
+        "kanji": "使用禁止",
+        "phien_am": "しようきんし [SỬ DỤNG CẤM CHỈ]",
+        "nghia": "Cấm sử dụng"
+    },
+    {
+        "kanji": "立ち入り禁止",
+        "phien_am": "たちいりきんし [LẬP NHẬP CẤM CHỈ]",
+        "nghia": "Cấm vào"
+    },
+    {
+        "kanji": "徐行",
+        "phien_am": "じょこう [TỪ HÀNH]",
+        "nghia": "Chạy chậm, đi chậm"
+    },
+    {
+        "kanji": "入口",
+        "phien_am": "いりぐち [NHẬP KHẨU]",
+        "nghia": "Lối vào"
+    },
+    {
+        "kanji": "出口",
+        "phien_am": "でぐち [XUẤT KHẨU]",
+        "nghia": "Lối ra"
+    },
+    {
+        "kanji": "非常口",
+        "phien_am": "ひじょうぐち [PHI THƯỜNG KHẨU]",
+        "nghia": "Lối thoát hiểm"
+    },
+    {
+        "kanji": "無料",
+        "phien_am": "むりょう [VÔ LIÊU]",
+        "nghia": "Miễn phí"
+    },
+    {
+        "kanji": "割引",
+        "phien_am": "わりびき [CÁT DẪN]",
+        "nghia": "Giảm giá"
+    },
+    {
+        "kanji": "飲み放題",
+        "phien_am": "のみほうだい [ẨM PHÓNG ĐỀ]",
+        "nghia": "Uống thỏa thích, uống buffet"
+    },
+    {
+        "kanji": "使用中",
+        "phien_am": "しようちゅう [SỬ DỤNG TRUNG]",
+        "nghia": "Đang sử dụng"
+    },
+    {
+        "kanji": "募集中",
+        "phien_am": "ぼしゅうちゅう [MỘ TẬP TRUNG]",
+        "nghia": "Đang tuyển dụng"
+    },
+    {
+        "kanji": "あと～",
+        "phien_am": "あと～",
+        "nghia": "Còn ~"
+    },
+    {
+        "kanji": "～ほど",
+        "phien_am": "～ほど",
+        "nghia": "Khoảng ~"
+    },
+    {
+        "kanji": "もう",
+        "phien_am": "もう",
+        "nghia": "Nữa (dùng với phủ định)"
+    },
+    {
+        "kanji": "磨きます",
+        "phien_am": "みがきます [MA]",
+        "nghia": "Đánh [răng], chà sát"
+    },
+    {
+        "kanji": "組み立てます",
+        "phien_am": "くみたてます [TỔ LẬP]",
+        "nghia": "Lắp ráp"
+    },
+    {
+        "kanji": "気が付きます",
+        "phien_am": "きがつきます [KHÍ PHÓ]",
+        "nghia": "Phát hiện, nhận ra"
+    },
+    {
+        "kanji": "見つかります",
+        "phien_am": "みつかります [KIÊN]",
+        "nghia": "Tìm thấy"
+    },
+    {
+        "kanji": "質問します",
+        "phien_am": "しつもんします [CHẤT VẤN]",
+        "nghia": "Đặt câu hỏi"
+    },
+    {
+        "kanji": "さします",
+        "phien_am": "さします",
+        "nghia": "Che [ô]"
+    },
+    {
+        "kanji": "スポーツクラブ",
+        "phien_am": "スポーツクラブ",
+        "nghia": "Câu lạc bộ thể thao"
+    },
+    {
+        "kanji": "お城",
+        "phien_am": "おしろ [THÀNH]",
+        "nghia": "Tòa thành, lâu đài"
+    },
+    {
+        "kanji": "説明書",
+        "phien_am": "せつめいしょ [THUYẾT MINH THƯ]",
+        "nghia": "Sách hướng dẫn"
+    },
+    {
+        "kanji": "図",
+        "phien_am": "ず [ĐỒ]",
+        "nghia": "Hình minh họa, sơ đồ"
+    },
+    {
+        "kanji": "線",
+        "phien_am": "せん [TUYẾN]",
+        "nghia": "Đường kẻ, đường ray"
+    },
+    {
+        "kanji": "矢印",
+        "phien_am": "やじるし [THỈ ẤN]",
+        "nghia": "Mũi tên"
+    },
+    {
+        "kanji": "黒",
+        "phien_am": "くろ [HẮC]",
+        "nghia": "Màu đen"
+    },
+    {
+        "kanji": "白",
+        "phien_am": "しろ [BẠCH]",
+        "nghia": "Màu trắng"
+    },
+    {
+        "kanji": "赤",
+        "phien_am": "あか [XÍCH]",
+        "nghia": "Màu đỏ"
+    },
+    {
+        "kanji": "青",
+        "phien_am": "あお [THANH]",
+        "nghia": "Màu xanh da trời"
+    },
+    {
+        "kanji": "紺",
+        "phien_am": "こん [CÁM]",
+        "nghia": "Màu xanh thẫm"
+    },
+    {
+        "kanji": "黄色",
+        "phien_am": "きいろ [HOÀNG SẮC]",
+        "nghia": "Màu vàng"
+    },
+    {
+        "kanji": "茶色",
+        "phien_am": "ちゃいろ [TRÀ SẮC]",
+        "nghia": "Màu nâu"
+    },
+    {
+        "kanji": "しょうゆ",
+        "phien_am": "しょうゆ",
+        "nghia": "Xì dầu, nước tương"
+    },
+    {
+        "kanji": "ソース",
+        "phien_am": "ソース",
+        "nghia": "Nước sốt"
+    },
+    {
+        "kanji": "お客さん",
+        "phien_am": "おきゃくさん [KHÁCH]",
+        "nghia": "Khách hàng"
+    },
+    {
+        "kanji": "ゆうべ",
+        "phien_am": "ゆうべ",
+        "nghia": "Tối qua"
+    },
+    {
+        "kanji": "さっき",
+        "phien_am": "さっき",
+        "nghia": "Lúc nãy"
+    },
+    {
+        "kanji": "苦い",
+        "phien_am": "にがい [KHỔ]",
+        "nghia": "Đắng"
+    },
+    {
+        "kanji": "咲きます",
+        "phien_am": "さきます [TIẾU]",
+        "nghia": "[Hoa] nở"
+    },
+    {
+        "kanji": "変わります",
+        "phien_am": "かわります [BIẾN]",
+        "nghia": "[Màu sắc] thay đổi"
+    },
+    {
+        "kanji": "困ります",
+        "phien_am": "こまります [KHỐN]",
+        "nghia": "Khó khăn, rắc rối"
+    },
+    {
+        "kanji": "治ります",
+        "phien_am": "なおります [TRÌ]",
+        "nghia": "Khỏi [bệnh]"
+    },
+    {
+        "kanji": "直ります",
+        "phien_am": "なおります [TRỰC]",
+        "nghia": "[Hỏng hóc] được sửa chữa"
+    },
+    {
+        "kanji": "クリックします",
+        "phien_am": "クリックします",
+        "nghia": "Click chuột"
+    },
+    {
+        "kanji": "入力します",
+        "phien_am": "にゅうりょくします [NHẬP LỰC]",
+        "nghia": "Nhập vào"
+    },
+    {
+        "kanji": "正しい",
+        "phien_am": "正しい [CHÁNH]",
+        "nghia": "Đúng, chính xác"
+    },
+    {
+        "kanji": "向こう",
+        "phien_am": "むこう [HƯỚNG]",
+        "nghia": "Đằng kia, phía đối diện"
+    },
+    {
+        "kanji": "島",
+        "phien_am": "しま [ĐẢO]",
+        "nghia": "Hòn đảo"
+    },
+    {
+        "kanji": "港",
+        "phien_am": "みなと [CẢNG]",
+        "nghia": "Bến cảng"
+    },
+    {
+        "kanji": "近所",
+        "phien_am": "きんじょ [CẬN SỞ]",
+        "nghia": "Hàng xóm, lân cận"
+    },
+    {
+        "kanji": "屋上",
+        "phien_am": "おくじょう [ỐC THƯỢNG]",
+        "nghia": "Tầng thượng"
+    },
+    {
+        "kanji": "海外",
+        "phien_am": "かいがい [HẢI NGOẠI]",
+        "nghia": "Nước ngoài"
+    },
+    {
+        "kanji": "山登り",
+        "phien_am": "やまのぼり [SƠN ĐĂNG]",
+        "nghia": "Leo núi"
+    },
+    {
+        "kanji": "歴史",
+        "phien_am": "れきし [LỊCH SỬ]",
+        "nghia": "Lịch sử"
+    },
+    {
+        "kanji": "機会",
+        "phien_am": "きかい [CƠ HỘI]",
+        "nghia": "Cơ hội"
+    },
+    {
+        "kanji": "許可",
+        "phien_am": "きょか [HỨA KHẢ]",
+        "nghia": "Sự cho phép"
+    },
+    {
+        "kanji": "丸",
+        "phien_am": "まる [HOÀN]",
+        "nghia": "Hình tròn"
+    },
+    {
+        "kanji": "レバー",
+        "phien_am": "レバー",
+        "nghia": "Cần số, cần gạt"
+    },
+    {
+        "kanji": "キー",
+        "phien_am": "キー",
+        "nghia": "Phím, chìa khóa"
+    },
+    {
+        "kanji": "カーテン",
+        "phien_am": "カーテン",
+        "nghia": "Rèm cửa"
+    },
+    {
+        "kanji": "ひも",
+        "phien_am": "ひも",
+        "nghia": "Sơị dây"
+    },
+    {
+        "kanji": "炊飯器",
+        "phien_am": "すいはんき [XUY PHẠN KHÍ]",
+        "nghia": "Nồi cơm điện"
+    },
+    {
+        "kanji": "葉",
+        "phien_am": "は [DIỆP]",
+        "nghia": "Lá cây"
+    },
+    {
+        "kanji": "昔",
+        "phien_am": "むかし [TÍCH]",
+        "nghia": "Ngày xưa"
+    },
+    {
+        "kanji": "もっと",
+        "phien_am": "もっと",
+        "nghia": "Hơn nữa"
+    },
+    {
+        "kanji": "自動販売機",
+        "phien_am": "じどうはんばいき [TỰ ĐỘNG PHÁN MẠI KHÍ]",
+        "nghia": "Máy bán hàng tự động"
+    },
+    {
+        "kanji": "届きます",
+        "phien_am": "とどきます [GIỚI]",
+        "nghia": "Được giao đến [hành lý]"
+    },
+    {
+        "kanji": "打ちます",
+        "phien_am": "うちます [ĐẢ]",
+        "nghia": "Đánh (máy chữ), gõ"
+    },
+    {
+        "kanji": "貯金します",
+        "phien_am": "ちょきんします [TRỮ KIM]",
+        "nghia": "Tiết kiệm tiền"
+    },
+    {
+        "kanji": "太ります",
+        "phien_am": "ふとります [THÁI]",
+        "nghia": "Béo lên"
+    },
+    {
+        "kanji": "やせます",
+        "phien_am": "やせます",
+        "nghia": "Gầy đi"
+    },
+    {
+        "kanji": "過ぎます",
+        "phien_am": "すぎます [QUÁ]",
+        "nghia": "Quá (giờ)"
+    },
+    {
+        "kanji": "慣れます",
+        "phien_am": "なれます [QUÁN]",
+        "nghia": "Quen với"
+    },
+    {
+        "kanji": "硬い",
+        "phien_am": "かたい [NGẠNH]",
+        "nghia": "Cứng"
+    },
+    {
+        "kanji": "軟らかい",
+        "phien_am": "やわらかい [NHUYỄN]",
+        "nghia": "Mềm"
+    },
+    {
+        "kanji": "工場",
+        "phien_am": "こうじょう [CÔNG TRƯỜNG]",
+        "nghia": "Nhà máy"
+    },
+    {
+        "kanji": "健康",
+        "phien_am": "けんこう [KIỆN KHANG]",
+        "nghia": "Sức khỏe"
+    },
+    {
+        "kanji": "剣道",
+        "phien_am": "けんどう [KIẾM ĐẠO]",
+        "nghia": "Kiếm đạo"
+    },
+    {
+        "kanji": "毎週",
+        "phien_am": "まいしゅう [MỖI CHU]",
+        "nghia": "Hàng tuần"
+    },
+    {
+        "kanji": "毎月",
+        "phien_am": "まいつき [MỖI NGUYỆT]",
+        "nghia": "Hàng tháng"
+    },
+    {
+        "kanji": "毎年",
+        "phien_am": "まいとし [MỖI NIÊN]",
+        "nghia": "Hàng năm"
+    },
+    {
+        "kanji": "かなり",
+        "phien_am": "かなり",
+        "nghia": "Khá, tương đối"
+    },
+    {
+        "kanji": "必ず",
+        "phien_am": "かならず [TẤT]",
+        "nghia": "Chắc chắn, nhất định"
+    },
+    {
+        "kanji": "絶対に",
+        "phien_am": "ぜったいに [TUYỆT ĐỐI]",
+        "nghia": "Tuyệt đối"
+    },
+    {
+        "kanji": "上手に",
+        "phien_am": "じょうずに [THƯỢNG THỦ]",
+        "nghia": "Giỏi, khéo léo"
+    },
+    {
+        "kanji": "できるだけ",
+        "phien_am": "できるだけ",
+        "nghia": "Cố gắng hết sức"
+    },
+    {
+        "kanji": "このごろ",
+        "phien_am": "このごろ",
+        "nghia": "Gần đây"
+    },
+    {
+        "kanji": "褒めます",
+        "phien_am": "ほめます [BAO]",
+        "nghia": "Khen ngợi"
+    },
+    {
+        "kanji": "叱ります",
+        "phien_am": "しかります [SẤT]",
+        "nghia": "Mắng"
+    },
+    {
+        "kanji": "誘います",
+        "phien_am": "さそいます [DỤ]",
+        "nghia": "Mời, rủ rê"
+    },
+    {
+        "kanji": "招待します",
+        "phien_am": "しょうたいします [CHIÊU ĐÃI]",
+        "nghia": "Mời"
+    },
+    {
+        "kanji": "頼みます",
+        "phien_am": "たのみます [LẠI]",
+        "nghia": "Nhờ vả"
+    },
+    {
+        "kanji": "とります",
+        "phien_am": "とります",
+        "nghia": "Lấy cắp"
+    },
+    {
+        "kanji": "踏みます",
+        "phien_am": "ふみます [ĐẠP]",
+        "nghia": "Dẫm, đạp"
+    },
+    {
+        "kanji": "行います",
+        "phien_am": "おこないます [HÀNH]",
+        "nghia": "Tổ chức, tiến hành"
+    },
+    {
+        "kanji": "輸出します",
+        "phien_am": "ゆしゅつします [THÂU XUẤT]",
+        "nghia": "Xuất khẩu"
+    },
+    {
+        "kanji": "輸入します",
+        "phien_am": "ゆにゅうします [THÂU NHẬP]",
+        "nghia": "Nhập khẩu"
+    },
+    {
+        "kanji": "翻訳します",
+        "phien_am": "ほんやくします [PHIÊN DỊCH]",
+        "nghia": "Dịch (viết)"
+    },
+    {
+        "kanji": "発明します",
+        "phien_am": "はつめいします [PHÁT MINH]",
+        "nghia": "Phát minh"
+    },
+    {
+        "kanji": "発見します",
+        "phien_am": "はっけんします [PHÁT KIẾN]",
+        "nghia": "Phát hiện"
+    },
+    {
+        "kanji": "米",
+        "phien_am": "こめ [MỄ]",
+        "nghia": "Gạo"
+    },
+    {
+        "kanji": "麦",
+        "phien_am": "むぎ [MẠCH]",
+        "nghia": "Lúa mạch"
+    },
+    {
+        "kanji": "石油",
+        "phien_am": "せきゆ [THẠCH DU]",
+        "nghia": "Dầu mỏ"
+    },
+    {
+        "kanji": "原料",
+        "phien_am": "げんりょう [NGUYÊN LIÊU]",
+        "nghia": "Nguyên liệu"
+    },
+    {
+        "kanji": "泥棒",
+        "phien_am": "どろぼう [NÊ BỔNG]",
+        "nghia": "Kẻ trộm"
+    },
+    {
+        "kanji": "警官",
+        "phien_am": "けいかん [CẢNH QUAN]",
+        "nghia": "Cảnh sát"
+    },
+    {
+        "kanji": "世界中",
+        "phien_am": "せかいじゅう [THẾ GIỚI TRUNG]",
+        "nghia": "Khắp thế giới"
+    },
+    {
+        "kanji": "育てます",
+        "phien_am": "そだてます [DỤC]",
+        "nghia": "Nuôi nấng, trồng trọt"
+    },
+    {
+        "kanji": "運びます",
+        "phien_am": "はこびます [VẬN]",
+        "nghia": "Vận chuyển, mang đi"
+    },
+    {
+        "kanji": "亡くなります",
+        "phien_am": "なくなります [VONG]",
+        "nghia": "Mất, qua đời"
+    },
+    {
+        "kanji": "入院します",
+        "phien_am": "にゅういんします [NHẬP VIỆN]",
+        "nghia": "Nhập viện"
+    },
+    {
+        "kanji": "退院します",
+        "phien_am": "たいいんします [THỐÁI VIỆN]",
+        "nghia": "Xuất viện"
+    },
+    {
+        "kanji": "入れます",
+        "phien_am": "いれます [NHẬP]",
+        "nghia": "Bật (công tắc)"
+    },
+    {
+        "kanji": "切れます",
+        "phien_am": "きれます [THIẾT]",
+        "nghia": "Đứt"
+    },
+    {
+        "kanji": "掛けます",
+        "phien_am": "かけます [QUÁI]",
+        "nghia": "Ngồi (ghế - 椅子に掛けます)"
+    },
+    {
+        "kanji": "気持ちがいい",
+        "phien_am": "きもちがいい [KHÍ TRÌ]",
+        "nghia": "Cảm giác dễ chịu"
+    },
+    {
+        "kanji": "気持ちが悪い",
+        "phien_am": "きもちがわるい [KHÍ TRÌ ÁC]",
+        "nghia": "Cảm giác khó chịu"
+    },
+    {
+        "kanji": "赤ちゃん",
+        "phien_am": "あかちゃん [XÍCH]",
+        "nghia": "Em bé"
+    },
+    {
+        "kanji": "小学校",
+        "phien_am": "しょうがっこう [TIỂU HỌC HIỆU]",
+        "nghia": "Trường tiểu học"
+    },
+    {
+        "kanji": "中学校",
+        "phien_am": "ちゅうがっこう [TRUNG HỌC HIỆU]",
+        "nghia": "Trường trung học cơ sở"
+    },
+    {
+        "kanji": "駅前",
+        "phien_am": "えきまえ [DỊCH TIỀN]",
+        "nghia": "Trước nhà ga"
+    },
+    {
+        "kanji": "海岸",
+        "phien_am": "かいがん [HẢI NGẠN]",
+        "nghia": "Bờ biển"
+    },
+    {
+        "kanji": "うそ",
+        "phien_am": "うそ",
+        "nghia": "Nói dối"
+    },
+    {
+        "kanji": "電源",
+        "phien_am": "でんげん [ĐIỆN NGUYÊN]",
+        "nghia": "Nguồn điện"
+    },
+    {
+        "kanji": "答えます",
+        "phien_am": "こたえます [ĐÁP]",
+        "nghia": "Trả lời"
+    },
+    {
+        "kanji": "通ります",
+        "phien_am": "とおります [THÔNG]",
+        "nghia": "Đi qua"
+    },
+    {
+        "kanji": "死にます",
+        "phien_am": "しにます [TỬ]",
+        "nghia": "Chết"
+    },
+    {
+        "kanji": "びっくりします",
+        "phien_am": "びっくりします",
+        "nghia": "Giật mình, ngạc nhiên"
+    },
+    {
+        "kanji": "がっかりします",
+        "phien_am": "がっかりします",
+        "nghia": "Thất vọng"
+    },
+    {
+        "kanji": "安心します",
+        "phien_am": "あんしんします [AN TÂM]",
+        "nghia": "An tâm"
+    },
+    {
+        "kanji": "けんかします",
+        "phien_am": "けんかします",
+        "nghia": "Cãi nhau"
+    },
+    {
+        "kanji": "離婚します",
+        "phien_am": "りこんします [LY HÔN]",
+        "nghia": "Ly hôn"
+    },
+    {
+        "kanji": "複雑な",
+        "phien_am": "ふくざつな [PHỨC TẠP]",
+        "nghia": "Phức tạp"
+    },
+    {
+        "kanji": "邪魔な",
+        "phien_am": "じゃまな [TÀ MA]",
+        "nghia": "Cản trở, vướng víu"
+    },
+    {
+        "kanji": "悲しい",
+        "phien_am": "かなしい [BI]",
+        "nghia": "Buồn"
+    },
+    {
+        "kanji": "恥ずかしい",
+        "phien_am": "はずかしい [SỈ]",
+        "nghia": "Xấu hổ"
+    },
+    {
+        "kanji": "地震",
+        "phien_am": "じしん [ĐỊA CHẤN]",
+        "nghia": "Động đất"
+    },
+    {
+        "kanji": "台風",
+        "phien_am": "たいふう [ĐÀI PHONG]",
+        "nghia": "Bão"
+    },
+    {
+        "kanji": "火事",
+        "phien_am": "かじ [HỎA SỰ]",
+        "nghia": "Hỏa hoạn"
+    },
+    {
+        "kanji": "事故",
+        "phien_am": "じこ [SỰ CỐ]",
+        "nghia": "Tai nạn"
+    },
+    {
+        "kanji": "お見合い",
+        "phien_am": "おみあい [KIẾN HỢP]",
+        "nghia": "Xem mắt"
+    },
+    {
+        "kanji": "電話代",
+        "phien_am": "でんわだい [ĐIỆN THOẠI ĐẠI]",
+        "nghia": "Tiền điện thoại"
+    },
+    {
+        "kanji": "大勢",
+        "phien_am": "おおぜい [ĐẠI THẾ]",
+        "nghia": "Nhiều người"
+    },
+    {
+        "kanji": "数えます",
+        "phien_am": "かぞえます [SỐ]",
+        "nghia": "Đếm"
+    },
+    {
+        "kanji": "測ります",
+        "phien_am": "はかります [TRẮC]",
+        "nghia": "Đo (chiều dài, nhiệt độ)"
+    },
+    {
+        "kanji": "確かめます",
+        "phien_am": "たしかめます [XÁC]",
+        "nghia": "Xác nhận"
+    },
+    {
+        "kanji": "合います",
+        "phien_am": "あいます [HỢP]",
+        "nghia": "Vừa, hợp"
+    },
+    {
+        "kanji": "出発します",
+        "phien_am": "しゅっぱつします [XUẤT PHÁT]",
+        "nghia": "Xuất phát"
+    },
+    {
+        "kanji": "到着します",
+        "phien_am": "とうちゃくします [ĐÁO TRƯỚC]",
+        "nghia": "Đến nơi"
+    },
+    {
+        "kanji": "酔います",
+        "phien_am": "よいます [TÚY]",
+        "nghia": "Say"
+    },
+    {
+        "kanji": "危険な",
+        "phien_am": "きけんな [NGUY HIỂM]",
+        "nghia": "Nguy hiểm"
+    },
+    {
+        "kanji": "必要な",
+        "phien_am": "ひつような [TẤT YẾU]",
+        "nghia": "Cần thiết"
+    },
+    {
+        "kanji": "宇宙",
+        "phien_am": "うちゅう [VŨ TRỤ]",
+        "nghia": "Vũ trụ"
+    },
+    {
+        "kanji": "地球",
+        "phien_am": "ちきゅう [ĐỊA CẦU]",
+        "nghia": "Trái đất"
+    },
+    {
+        "kanji": "忘年会",
+        "phien_am": "ぼうねんかい [VONG NIÊN HỘI]",
+        "nghia": "Tiệc tất niên"
+    },
+    {
+        "kanji": "新年会",
+        "phien_am": "しんねんかい [TÂN NIÊN HỘI]",
+        "nghia": "Tiệc tân niên"
+    },
+    {
+        "kanji": "二次会",
+        "phien_am": "にじかい [NHỊ THỨ HỘI]",
+        "nghia": "Bữa tiệc thứ 2"
+    },
+    {
+        "kanji": "大会",
+        "phien_am": "たいかい [ĐẠI HỘI]",
+        "nghia": "Đại hội, cuộc thi"
+    },
+    {
+        "kanji": "マラソン",
+        "phien_am": "マラソン",
+        "nghia": "Marathon"
+    },
+    {
+        "kanji": "表",
+        "phien_am": "おもて [BIỂU]",
+        "nghia": "Mặt phải, mặt trước"
+    },
+    {
+        "kanji": "裏",
+        "phien_am": "うら [LÝ]",
+        "nghia": "Mặt trái, mặt sau"
+    },
+    {
+        "kanji": "傷",
+        "phien_am": "きず [THƯƠNG]",
+        "nghia": "Vết thương, vết xước"
+    },
+    {
+        "kanji": "ズボン",
+        "phien_am": "ずぼん",
+        "nghia": "Quần dài"
+    },
+    {
+        "kanji": "いただきます",
+        "phien_am": "いただきます",
+        "nghia": "Ăn, uống, nhận (Khiêm nhường ngữ)"
+    },
+    {
+        "kanji": "くださいます",
+        "phien_am": "くださいます",
+        "nghia": "Cho, tặng (tôn kính ngữ của くれます)"
+    },
+    {
+        "kanji": "上げます",
+        "phien_am": "あげます [THƯỢNG]",
+        "nghia": "Tăng lên, nâng lên"
+    },
+    {
+        "kanji": "下げます",
+        "phien_am": "さげます [HẠ]",
+        "nghia": "Giảm xuống, hạ xuống"
+    },
+    {
+        "kanji": "親切にします",
+        "phien_am": "しんせつにします [THÂN THIẾT]",
+        "nghia": "Đối xử tử tế"
+    },
+    {
+        "kanji": "かわいい",
+        "phien_am": "かわいい",
+        "nghia": "Đáng yêu, dễ thương"
+    },
+    {
+        "kanji": "珍しい",
+        "phien_am": "めずらしい [TRÂN]",
+        "nghia": "Hiếm, hiếm có"
+    },
+    {
+        "kanji": "お祝い",
+        "phien_am": "おいわい [CHÚC]",
+        "nghia": "Quà mừng, việc chúc mừng"
+    },
+    {
+        "kanji": "お年玉",
+        "phien_am": "おとしだま [NIÊN NGỌC]",
+        "nghia": "Tiền mừng tuổi"
+    },
+    {
+        "kanji": "お見舞い",
+        "phien_am": "おみまい [KIẾN VŨ]",
+        "nghia": "Quà thăm ốm"
+    },
+    {
+        "kanji": "興味",
+        "phien_am": "きょうみ [HƯNG VỊ]",
+        "nghia": "Hứng thú, quan tâm"
+    },
+    {
+        "kanji": "情報",
+        "phien_am": "じょうほう [TÌNH BÁO]",
+        "nghia": "Thông tin"
+    },
+    {
+        "kanji": "文法",
+        "phien_am": "ぶんぽう [VĂN PHÁP]",
+        "nghia": "Ngữ pháp"
+    },
+    {
+        "kanji": "発音",
+        "phien_am": "はつおん [PHÁT ÂM]",
+        "nghia": "Phát âm"
+    },
+    {
+        "kanji": "猿",
+        "phien_am": "さる [VIÊN]",
+        "nghia": "Con khỉ"
+    },
+    {
+        "kanji": "えさ",
+        "phien_am": "えさ",
+        "nghia": "Đồ ăn cho động vật"
+    },
+    {
+        "kanji": "おもちゃ",
+        "phien_am": "おもちゃ",
+        "nghia": "Đồ chơi"
+    },
+    {
+        "kanji": "絵本",
+        "phien_am": "えほん [HỘI BẢN]",
+        "nghia": "Sách tranh"
+    },
+    {
+        "kanji": "絵はがき",
+        "phien_am": "えはがき [HỘI]",
+        "nghia": "Bưu ảnh"
+    },
+    {
+        "kanji": "靴下",
+        "phien_am": "くつした [NGOA HẠ]",
+        "nghia": "Tất, vớ"
+    },
+    {
+        "kanji": "手袋",
+        "phien_am": "てぶくろ [THỦ ĐẠI]",
+        "nghia": "Găng tay"
+    },
+    {
+        "kanji": "指輪",
+        "phien_am": "ゆびわ [CHỈ LUÂN]",
+        "nghia": "Nhẫn"
+    },
+    {
+        "kanji": "包みます",
+        "phien_am": "つつみます [BAO]",
+        "nghia": "Bọc, gói"
+    },
+    {
+        "kanji": "沸かします",
+        "phien_am": "わかします [PHÍ]",
+        "nghia": "Đun sôi"
+    },
+    {
+        "kanji": "混ぜます",
+        "phien_am": "まぜます [HỖN]",
+        "nghia": "Trộn, khuấy"
+    },
+    {
+        "kanji": "計算します",
+        "phien_am": "けいさんします [KẾ TOÁN]",
+        "nghia": "Tính toán"
+    },
+    {
+        "kanji": "並びます",
+        "phien_am": "ならびます [TỊNH]",
+        "nghia": "Xếp hàng"
+    },
+    {
+        "kanji": "丈夫な",
+        "phien_am": "じょうぶな [TRƯỢNG PHU]",
+        "nghia": "Chắc, bền"
+    },
+    {
+        "kanji": "弁護士",
+        "phien_am": "べんごし [BIỆN HỘ SĨ]",
+        "nghia": "Luật sư"
+    },
+    {
+        "kanji": "音楽家",
+        "phien_am": "おんがくか [ÂM NHẠC GIA]",
+        "nghia": "Nhạc sĩ"
+    },
+    {
+        "kanji": "自然",
+        "phien_am": "しぜん [TỰ NHIÊN]",
+        "nghia": "Tự nhiên, thiên nhiên"
+    },
+    {
+        "kanji": "教育",
+        "phien_am": "きょういく [GIÁO DỤC]",
+        "nghia": "Giáo dục"
+    },
+    {
+        "kanji": "文化",
+        "phien_am": "ぶんか [VĂN HÓA]",
+        "nghia": "Văn hóa"
+    },
+    {
+        "kanji": "社会",
+        "phien_am": "しゃかい [XÃ HỘI]",
+        "nghia": "Xã hội"
+    },
+    {
+        "kanji": "政治",
+        "phien_am": "せいじ [CHÍNH TRỊ]",
+        "nghia": "Chính trị"
+    },
+    {
+        "kanji": "法律",
+        "phien_am": "ほうりつ [PHÁP LUẬT]",
+        "nghia": "Pháp luật"
+    },
+    {
+        "kanji": "戦争",
+        "phien_am": "せんそう [CHIẾN TRANH]",
+        "nghia": "Chiến tranh"
+    },
+    {
+        "kanji": "平和",
+        "phien_am": "へいわ [HÒA BÌNH]",
+        "nghia": "Hòa bình"
+    },
+    {
+        "kanji": "目的",
+        "phien_am": "もくてき [MỤC ĐÍCH]",
+        "nghia": "Mục đích"
+    },
+    {
+        "kanji": "論文",
+        "phien_am": "ろんぶん [LUẬN VĂN]",
+        "nghia": "Luận văn"
+    },
+    {
+        "kanji": "楽しみ",
+        "phien_am": "たのしみ [LẠC]",
+        "nghia": "Niềm vui, sự mong đợi"
+    },
+    {
+        "kanji": "やかん",
+        "phien_am": "やかん",
+        "nghia": "Ấm đun nước"
+    },
+    {
+        "kanji": "ふた",
+        "phien_am": "ふた",
+        "nghia": "Cái nắp"
+    },
+    {
+        "kanji": "栓抜き",
+        "phien_am": "せんぬき [XUYÊN BẠT]",
+        "nghia": "Cái mở nắp chai"
+    },
+    {
+        "kanji": "缶切り",
+        "phien_am": "かんきり [PHẪU THIẾT]",
+        "nghia": "Cái mở đồ hộp"
+    },
+    {
+        "kanji": "缶詰",
+        "phien_am": "かんづめ [PHẪU CẬT]",
+        "nghia": "Đồ hộp"
+    },
+    {
+        "kanji": "のし袋",
+        "phien_am": "のしぶくろ [ĐẠI]",
+        "nghia": "Phong bì mừng"
+    },
+    {
+        "kanji": "ふろしき",
+        "phien_am": "ふろしき",
+        "nghia": "Khăn gói đồ (kiểu Nhật)"
+    },
+    {
+        "kanji": "そろばん",
+        "phien_am": "そろばん",
+        "nghia": "Bàn tính"
+    },
+    {
+        "kanji": "体温計",
+        "phien_am": "たいおんけい [THỂ ÔN KẾ]",
+        "nghia": "Nhiệt kế"
+    },
+    {
+        "kanji": "材料",
+        "phien_am": "ざいりょう [TÀI LIỆU]",
+        "nghia": "Nguyên liệu"
+    },
+    {
+        "kanji": "増えます",
+        "phien_am": "ふえます [TĂNG]",
+        "nghia": "Tăng lên"
+    },
+    {
+        "kanji": "減ります",
+        "phien_am": "へります [GIẢM]",
+        "nghia": "Giảm xuống"
+    },
+    {
+        "kanji": "上がります",
+        "phien_am": "あがります [THƯỢNG]",
+        "nghia": "Tăng lên (giá cả)"
+    },
+    {
+        "kanji": "下がります",
+        "phien_am": "さがります [HẠ]",
+        "nghia": "Giảm xuống (giá cả)"
+    },
+    {
+        "kanji": "とれます",
+        "phien_am": "とれます",
+        "nghia": "Tuột"
+    },
+    {
+        "kanji": "なくなります",
+        "phien_am": "なくなります",
+        "nghia": "Mất, hết"
+    },
+    {
+        "kanji": "変な",
+        "phien_am": "へんな [BIẾN]",
+        "nghia": "Kỳ lạ"
+    },
+    {
+        "kanji": "幸せな",
+        "phien_am": "しあわせな [HẠNH]",
+        "nghia": "Hạnh phúc"
+    },
+    {
+        "kanji": "楽な",
+        "phien_am": "らくな [LẠC]",
+        "nghia": "Nhàn nhã, thoải mái"
+    },
+    {
+        "kanji": "うまい",
+        "phien_am": "うまい",
+        "nghia": "Ngon, giỏi"
+    },
+    {
+        "kanji": "まずい",
+        "phien_am": "まずい",
+        "nghia": "Dở, không ngon"
+    },
+    {
+        "kanji": "つまらない",
+        "phien_am": "つまらない",
+        "nghia": "Nhạt nhẽo, chán"
+    },
+    {
+        "kanji": "優しい",
+        "phien_am": "やさしい [ƯU]",
+        "nghia": "Hiền lành, tốt bụng"
+    },
+    {
+        "kanji": "ガソリン",
+        "phien_am": "ガソリン",
+        "nghia": "Xăng"
+    },
+    {
+        "kanji": "火",
+        "phien_am": "ひ [HỎA]",
+        "nghia": "Lửa"
+    },
+    {
+        "kanji": "パンフレット",
+        "phien_am": "パンフレット",
+        "nghia": "Tờ rơi"
+    },
+    {
+        "kanji": "今にも",
+        "phien_am": "いまにも [KIM]",
+        "nghia": "Bất kỳ lúc nào, sắp sửa"
+    },
+    {
+        "kanji": "ばら",
+        "phien_am": "ばら",
+        "nghia": "Hoa hồng"
+    },
+    {
+        "kanji": "理由",
+        "phien_am": "りゆう [LÝ DO]",
+        "nghia": "Lý do"
+    },
+    {
+        "kanji": "謝ります",
+        "phien_am": "あやまります [TẠ]",
+        "nghia": "Xin lỗi"
+    },
+    {
+        "kanji": "知り合います",
+        "phien_am": "しりあいます [TRI HỢP]",
+        "nghia": "Quen biết"
+    },
+    {
+        "kanji": "泣きます",
+        "phien_am": "なきます [KHẤP]",
+        "nghia": "Khóc"
+    },
+    {
+        "kanji": "笑います",
+        "phien_am": "わらいます [TIẾU]",
+        "nghia": "Cười"
+    },
+    {
+        "kanji": "眠ります",
+        "phien_am": "ねむります [MIÊN]",
+        "nghia": "Ngủ"
+    },
+    {
+        "kanji": "乾きます",
+        "phien_am": "かわきます [KIỀN]",
+        "nghia": "Khô"
+    },
+    {
+        "kanji": "ぬれます",
+        "phien_am": "ぬれます",
+        "nghia": "Ướt"
+    },
+    {
+        "kanji": "滑ります",
+        "phien_am": "すべります [HOẠT]",
+        "nghia": "Trượt"
+    },
+    {
+        "kanji": "起きます",
+        "phien_am": "おきます [KHỞI]",
+        "nghia": "Xảy ra"
+    },
+    {
+        "kanji": "調節します",
+        "phien_am": "ちょうせつします [ĐIỀU TIẾT]",
+        "nghia": "Điều chỉnh"
+    },
+    {
+        "kanji": "安全な",
+        "phien_am": "あんぜんな [AN TOÀN]",
+        "nghia": "An toàn"
+    },
+    {
+        "kanji": "丁寧な",
+        "phien_am": "ていねいな [ĐINH NINH]",
+        "nghia": "Lịch sự, cẩn thận"
+    },
+    {
+        "kanji": "細かい",
+        "phien_am": "こまかい [TẾ]",
+        "nghia": "Tỉ mỉ, chi tiết, nhỏ"
+    },
+    {
+        "kanji": "濃い",
+        "phien_am": "こい [NÙNG]",
+        "nghia": "Đậm, đặc"
+    },
+    {
+        "kanji": "薄い",
+        "phien_am": "うすい [BẠC]",
+        "nghia": "Nhạt, mỏng"
+    },
+    {
+        "kanji": "空気",
+        "phien_am": "くうき [KHÔNG KHÍ]",
+        "nghia": "Không khí"
+    },
+    {
+        "kanji": "涙",
+        "phien_am": "なみだ [LỆ]",
+        "nghia": "Nước mắt"
+    },
+    {
+        "kanji": "和食",
+        "phien_am": "わしょく [HÒA THỰC]",
+        "nghia": "Món ăn Nhật"
+    },
+    {
+        "kanji": "洋食",
+        "phien_am": "ようしょく [DƯƠNG THỰC]",
+        "nghia": "Món ăn Âu"
+    },
+    {
+        "kanji": "おかず",
+        "phien_am": "おかず",
+        "nghia": "Thức ăn (ăn với cơm)"
+    },
+    {
+        "kanji": "量",
+        "phien_am": "りょう [LƯỢNG]",
+        "nghia": "Lượng"
+    },
+    {
+        "kanji": "倍",
+        "phien_am": "ばい [BỘI]",
+        "nghia": "Gấp đôi"
+    },
+    {
+        "kanji": "半分",
+        "phien_am": "はんぶん [BÁN PHÂN]",
+        "nghia": "Một nửa"
+    },
+    {
+        "kanji": "シングル",
+        "phien_am": "シングル",
+        "nghia": "Phòng đơn"
+    },
+    {
+        "kanji": "ツイン",
+        "phien_am": "ツイン",
+        "nghia": "Phòng đôi"
+    },
+    {
+        "kanji": "洗濯物",
+        "phien_am": "せんたくもの [TẨY TRẠC VẬT]",
+        "nghia": "Đồ giặt"
+    },
+    {
+        "kanji": "カット",
+        "phien_am": "カット",
+        "nghia": "Cắt (tóc)"
+    },
+    {
+        "kanji": "シャンプー",
+        "phien_am": "シャンプー",
+        "nghia": "Dầu gội"
+    },
+    {
+        "kanji": "信じます",
+        "phien_am": "しんじます [TÍN]",
+        "nghia": "Tin tưởng"
+    },
+    {
+        "kanji": "キャンセルします",
+        "phien_am": "キャンセルします",
+        "nghia": "Hủy bỏ"
+    },
+    {
+        "kanji": "知らせます",
+        "phien_am": "しらせます [TRI]",
+        "nghia": "Thông báo"
+    },
+    {
+        "kanji": "保証書",
+        "phien_am": "ほしょうしょ [BẢO CHỨNG THƯ]",
+        "nghia": "Giấy bảo hành"
+    },
+    {
+        "kanji": "キャンプ",
+        "phien_am": "キャンプ",
+        "nghia": "Cắm trại"
+    },
+    {
+        "kanji": "中止",
+        "phien_am": "ちゅうし [TRUNG CHỈ]",
+        "nghia": "Hủy bỏ, đình chỉ"
+    },
+    {
+        "kanji": "点",
+        "phien_am": "てん [ĐIỂM]",
+        "nghia": "Điểm"
+    },
+    {
+        "kanji": "梅",
+        "phien_am": "うめ [MAI]",
+        "nghia": "Hoa mai, quả mơ"
+    },
+    {
+        "kanji": "１１０番",
+        "phien_am": "ひゃくとおばん [PHIÊN]",
+        "nghia": "Số gọi cảnh sát"
+    },
+    {
+        "kanji": "１１９番",
+        "phien_am": "ひゃくじゅうきゅうばん [PHIÊN]",
+        "nghia": "Số gọi cứu hỏa, cấp cứu"
+    },
+    {
+        "kanji": "急に",
+        "phien_am": "きゅうに [CẤP]",
+        "nghia": "Đột nhiên"
+    },
+    {
+        "kanji": "無理に",
+        "phien_am": "むりに [VÔ LÝ]",
+        "nghia": "Quá sức, ép buộc"
+    },
+    {
+        "kanji": "係員",
+        "phien_am": "かかりいん [HỆ VIÊN]",
+        "nghia": "Nhân viên (phụ trách)"
+    },
+    {
+        "kanji": "コース",
+        "phien_am": "コース",
+        "nghia": "Đường chạy, khóa học"
+    },
+    {
+        "kanji": "スタート",
+        "phien_am": "スタート",
+        "nghia": "Bắt đầu"
+    },
+    {
+        "kanji": "優勝します",
+        "phien_am": "ゆうしょうします [ƯU THẮNG]",
+        "nghia": "Vô địch"
+    },
+    {
+        "kanji": "悩みます",
+        "phien_am": "なやみます [NÃO]",
+        "nghia": "Buồn phiền, trăn trở"
+    },
+    {
+        "kanji": "目覚まし時計",
+        "phien_am": "めざましどけい [MỤC GIÁC THỜI KẾ]",
+        "nghia": "Đồng hồ báo thức"
+    },
+    {
+        "kanji": "大学生",
+        "phien_am": "だいがくせい [ĐẠI HỌC SINH]",
+        "nghia": "Sinh viên đại học"
+    },
+    {
+        "kanji": "回答します",
+        "phien_am": "かいとうします [HỒI ĐÁP]",
+        "nghia": "Trả lời"
+    },
+    {
+        "kanji": "鳴ります",
+        "phien_am": "なります [MINH]",
+        "nghia": "Reo, kêu"
+    },
+    {
+        "kanji": "渡します",
+        "phien_am": "わたします [ĐỘ]",
+        "nghia": "Giao, trao"
+    },
+    {
+        "kanji": "帰って来ます",
+        "phien_am": "かえってきます [QUY LAI]",
+        "nghia": "Trở về"
+    },
+    {
+        "kanji": "入学します",
+        "phien_am": "にゅう学します [NHẬP HỌC]",
+        "nghia": "Nhập học"
+    },
+    {
+        "kanji": "卒業します",
+        "phien_am": "そつぎょうします [TỐT NGHIỆP]",
+        "nghia": "Tốt nghiệp"
+    },
+    {
+        "kanji": "焼きます",
+        "phien_am": "やきます [THIÊU]",
+        "nghia": "Nướng, rán"
+    },
+    {
+        "kanji": "焼けます",
+        "phien_am": "やけます [THIÊU]",
+        "nghia": "Được nướng chín"
+    },
+    {
+        "kanji": "留守",
+        "phien_am": "るす [LƯU THỦ]",
+        "nghia": "Vắng nhà"
+    },
+    {
+        "kanji": "宅配便",
+        "phien_am": "たくはいびん [TRẠCH PHỐI TIỆN]",
+        "nghia": "Dịch vụ chuyển phát nhanh"
+    },
+    {
+        "kanji": "原因",
+        "phien_am": "げんいん [NGUYÊN NHÂN]",
+        "nghia": "Nguyên nhân"
+    },
+    {
+        "kanji": "こちら",
+        "phien_am": "こちら",
+        "nghia": "Phía này, bên này (kính ngữ)"
+    },
+    {
+        "kanji": "～の所",
+        "phien_am": "～のところ [SỬ]",
+        "nghia": "Chỗ của ~"
+    },
+    {
+        "kanji": "半年",
+        "phien_am": "はんとし [BÁN NIÊN]",
+        "nghia": "Nửa năm"
+    },
+    {
+        "kanji": "ちょうど",
+        "phien_am": "ちょうど",
+        "nghia": "Vừa đúng"
+    },
+    {
+        "kanji": "たった今",
+        "phien_am": "たったいま [KIM]",
+        "nghia": "Vừa mới (dùng với thể quá khứ)"
+    },
+    {
+        "kanji": "向かいます",
+        "phien_am": "むかいます [HƯỚNG]",
+        "nghia": "Hướng về, đi về phía"
+    },
+    {
+        "kanji": "お祝いします",
+        "phien_am": "おいわいします [CHÚC]",
+        "nghia": "Chúc mừng"
+    },
+    {
+        "kanji": "吹きます",
+        "phien_am": "ふきます [XUY]",
+        "nghia": "Thổi [gió]"
+    },
+    {
+        "kanji": "集まります",
+        "phien_am": "あつまります [TẬP]",
+        "nghia": "Tập trung, tụ tập"
+    },
+    {
+        "kanji": "別れます",
+        "phien_am": "わかれます [BIỆT]",
+        "nghia": "Chia tay, rời xa"
+    },
+    {
+        "kanji": "音がします",
+        "phien_am": "おとがします [ÂM]",
+        "nghia": "Có âm thanh, phát ra tiếng động"
+    },
+    {
+        "kanji": "声がします",
+        "phien_am": "こえがします [THANH]",
+        "nghia": "Có tiếng người nói"
+    },
+    {
+        "kanji": "味がします",
+        "phien_am": "あじがします [VỊ]",
+        "nghia": "Có vị"
+    },
+    {
+        "kanji": "匂いがします",
+        "phien_am": "においがします",
+        "nghia": "Có mùi"
+    },
+    {
+        "kanji": "厳しい",
+        "phien_am": "きびしい [NGHIÊM]",
+        "nghia": "Nghiêm khắc, nghiêm ngặt"
+    },
+    {
+        "kanji": "ひどい",
+        "phien_am": "ひどい",
+        "nghia": "Tồi tệ, kinh khủng"
+    },
+    {
+        "kanji": "実験",
+        "phien_am": "じっけん [THỰC NGHIỆM]",
+        "nghia": "Thực nghiệm, thí nghiệm"
+    },
+    {
+        "kanji": "データ",
+        "phien_am": "データ",
+        "nghia": "Dữ liệu"
+    },
+    {
+        "kanji": "人口",
+        "phien_am": "じんこう [NHÂN KHẨU]",
+        "nghia": "Dân số"
+    },
+    {
+        "kanji": "科学",
+        "phien_am": "かがく [KHOA HỌC]",
+        "nghia": "Khoa học"
+    },
+    {
+        "kanji": "医学",
+        "phien_am": "いがく [Y HỌC]",
+        "nghia": "Y học"
+    },
+    {
+        "kanji": "文学",
+        "phien_am": "ぶんがく [VĂN HỌC]",
+        "nghia": "Văn học"
+    },
+    {
+        "kanji": "パトカー",
+        "phien_am": "パトカー",
+        "nghia": "Xe cảnh sát tuần tra"
+    },
+    {
+        "kanji": "救急車",
+        "phien_am": "きゅうきゅうしゃ [CỨU CẤP XA]",
+        "nghia": "Xe cấp cứu"
+    },
+    {
+        "kanji": "下ろします",
+        "phien_am": "おろします [HẠ]",
+        "nghia": "Hạ xuống, rút (tiền)"
+    },
+    {
+        "kanji": "届けます",
+        "phien_am": "とどけます [GIỚI]",
+        "nghia": "Giao đến, trình báo"
+    },
+    {
+        "kanji": "世話をします",
+        "phien_am": "せわをします [THẾ THOẠI]",
+        "nghia": "Chăm sóc"
+    },
+    {
+        "kanji": "録音します",
+        "phien_am": "ろくおんします [LỤC ÂM]",
+        "nghia": "Ghi âm"
+    },
+    {
+        "kanji": "塾",
+        "phien_am": "じゅく [THỤC]",
+        "nghia": "Lớp học thêm"
+    },
+    {
+        "kanji": "生徒",
+        "phien_am": "せいと [SINH ĐỒ]",
+        "nghia": "Học sinh (cấp 1, 2, 3)"
+    },
+    {
+        "kanji": "自由",
+        "phien_am": "じゆう [TỰ DO]",
+        "nghia": "Tự do"
+    },
+    {
+        "kanji": "～間",
+        "phien_am": "～かん [GIAN]",
+        "nghia": "Trong vòng (thời gian)"
+    },
+    {
+        "kanji": "いいこと",
+        "phien_am": "いいこと",
+        "nghia": "Điều tốt, điều hay"
+    },
+    {
+        "kanji": "営業",
+        "phien_am": "えいぎょう [DOANH NGHIỆP]",
+        "nghia": "Kinh doanh"
+    },
+    {
+        "kanji": "嫌な",
+        "phien_am": "いやな [HIỀM]",
+        "nghia": "Ghét, khó chịu, không thích"
+    },
+    {
+        "kanji": "片付けます",
+        "phien_am": "かたづけます [PHIẾN PHÓ]",
+        "nghia": "Dọn dẹp"
+    },
+    {
+        "kanji": "スケジュール",
+        "phien_am": "スケジュール",
+        "nghia": "Lịch trình"
+    },
+    {
+        "kanji": "利用します",
+        "phien_am": "りようします [LỢI DỤNG]",
+        "nghia": "Sử dụng"
+    },
+    {
+        "kanji": "勤めます",
+        "phien_am": "つとめます [CẦN]",
+        "nghia": "Làm việc tại (ở đâu đó dùng に)"
+    },
+    {
+        "kanji": "過ごします",
+        "phien_am": "すごします [QUÁ]",
+        "nghia": "Trải qua, dành thời gian"
+    },
+    {
+        "kanji": "召し上がります",
+        "phien_am": "めしあがります",
+        "nghia": "Ăn, uống (Kính ngữ)"
+    },
+    {
+        "kanji": "おっしゃいます",
+        "phien_am": "おっしゃいます",
+        "nghia": "Nói (Kính ngữ)"
+    },
+    {
+        "kanji": "なさいます",
+        "phien_am": "なさいます",
+        "nghia": "Làm (Kính ngữ)"
+    },
+    {
+        "kanji": "ご覧になります",
+        "phien_am": "ごらんになります",
+        "nghia": "Xem, nhìn (Kính ngữ)"
+    },
+    {
+        "kanji": "ご存じです",
+        "phien_am": "ごぞんじです",
+        "nghia": "Biết (Kính ngữ)"
+    },
+    {
+        "kanji": "挨拶",
+        "phien_am": "あいさつ [AI TẠT]",
+        "nghia": "Chào hỏi"
+    },
+    {
+        "kanji": "旅館",
+        "phien_am": "りょかん [LỮ QUÁN]",
+        "nghia": "Nhà trọ kiểu Nhật"
+    },
+    {
+        "kanji": "バス停",
+        "phien_am": "バスてい [ĐÌNH]",
+        "nghia": "Trạm xe bus"
+    },
+    {
+        "kanji": "奥様",
+        "phien_am": "おくさま [ÁO DẠNG]",
+        "nghia": "Vợ của người khác (kính ngữ)"
+    },
+    {
+        "kanji": "どなたでも",
+        "phien_am": "どなたでも",
+        "nghia": "Bất cứ ai (kính ngữ của だれでも)"
+    },
+    {
+        "kanji": "参ります",
+        "phien_am": "まいります [THAM]",
+        "nghia": "Đi, đến (Khiêm nhường ngữ)"
+    },
+    {
+        "kanji": "おります",
+        "phien_am": "おります",
+        "nghia": "Ở, có (Khiêm nhường ngữ)"
+    },
+    {
+        "kanji": "申します",
+        "phien_am": "もうします [THÂN]",
+        "nghia": "Nói, tên là (Khiêm nhường ngữ)"
+    },
+    {
+        "kanji": "いたします",
+        "phien_am": "いたします",
+        "nghia": "Làm (Khiêm nhường ngữ)"
+    },
+    {
+        "kanji": "拝見します",
+        "phien_am": "はいけんします [BÁI KIẾN]",
+        "nghia": "Xem, nhìn (Khiêm nhường ngữ)"
+    },
+    {
+        "kanji": "存じております",
+        "phien_am": "ぞんじております",
+        "nghia": "Biết (Khiêm nhường ngữ)"
+    },
+    {
+        "kanji": "伺います",
+        "phien_am": "うかがいます [TÝ]",
+        "nghia": "Hỏi, đến thăm (Khiêm nhường ngữ)"
+    },
+    {
+        "kanji": "お目にかかります",
+        "phien_am": "おめにかかります [MỤC]",
+        "nghia": "Gặp gỡ (Khiêm nhường ngữ)"
+    },
+    {
+        "kanji": "淹れます",
+        "phien_am": "いれます",
+        "nghia": "Pha (trà, cà phê)"
+    },
+    {
+        "kanji": "用意します",
+        "phien_am": "よういします [DỤNG Ý]",
+        "nghia": "Chuẩn bị"
+    },
+    {
+        "kanji": "私",
+        "phien_am": "わたくし [TƯ]",
+        "nghia": "Tôi (khiêm nhường)"
+    },
+    {
+        "kanji": "最初に",
+        "phien_am": "さいしょに [TỐI SƠ]",
+        "nghia": "Đầu tiên"
+    },
+    {
+        "kanji": "最後に",
+        "phien_am": "さいごに [TỐI HẬU]",
+        "nghia": "Cuối cùng"
+    },
+    {
+        "kanji": "アナウンス",
+        "phien_am": "アナウンス",
+        "nghia": "Thông báo, phát thanh"
+    },
+    {
+        "kanji": "お越しください",
+        "phien_am": "おこしください",
+        "nghia": "Xin mời đến (lịch sự)"
+    },
+    {
+        "kanji": "ご遠慮ください",
+        "phien_am": "ごえんりょください [VIỄN LỰ]",
+        "nghia": "Xin vui lòng không làm việc gì đó"
+    },
+    {
+        "kanji": "携帯電話",
+        "phien_am": "けいたいでんわ [HUỀ ĐỚI ĐIỆN THOẠI]",
+        "nghia": "Điện thoại di động"
+    },
+    {
+        "kanji": "たいへん",
+        "phien_am": "たいへん",
+        "nghia": "Rất (lịch sự của とても)"
+    }
+]

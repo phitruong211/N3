@@ -64,6 +64,7 @@ export function VocabularyPage() {
   const { vocabulary, isBookmarked, toggleBookmark } = useApp();
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<'all' | 'main' | 'compound' | 'bookmarked'>('all');
+  const [levelFilter, setLevelFilter] = useState<'all' | 'N3' | 'N4'>('all');
   const [focusMode, setFocusMode] = useState(false);
   const [focusIndex, setFocusIndex] = useState(0);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -72,6 +73,7 @@ export function VocabularyPage() {
   const filtered = useMemo(() => {
     let items = vocabulary;
 
+    if (levelFilter !== 'all') items = items.filter((v) => v.level === levelFilter);
     if (filter === 'main') items = items.filter((v) => v.type === 'main');
     if (filter === 'compound') items = items.filter((v) => v.type === 'compound');
     if (filter === 'bookmarked') items = items.filter((v) => isBookmarked(v.id));
@@ -87,7 +89,7 @@ export function VocabularyPage() {
     }
 
     return items;
-  }, [vocabulary, filter, searchQuery, isBookmarked]);
+  }, [vocabulary, filter, levelFilter, searchQuery, isBookmarked]);
 
   const currentCard = filtered[focusIndex] || filtered[0];
 
@@ -170,13 +172,30 @@ export function VocabularyPage() {
             ============================================================ */}
         <div className="lg:col-span-7 space-y-4">
           {/* Title and Count Header */}
-          <div className="flex items-baseline justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
             <h1 className="text-2xl md:text-3xl font-bold text-[#1E293B] dark:text-white tracking-tight">
               Vocabulary
             </h1>
-            <span className="text-xs font-semibold text-[#64748B] dark:text-[#94A3B8]">
-              {filtered.length} of {vocabulary.length} words · N3
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-semibold text-[#64748B] dark:text-[#94A3B8]">
+                {filtered.length} of {vocabulary.length} words
+              </span>
+              <div className="flex gap-1 bg-[#F1F5F9] dark:bg-[#1E293B] rounded-lg p-0.5 border border-[#E2E8F0] dark:border-[#334155]">
+                {(['all', 'N3', 'N4'] as const).map(lvl => (
+                  <button
+                    key={lvl}
+                    onClick={() => setLevelFilter(lvl)}
+                    className={`px-2.5 py-1 text-[10px] font-bold rounded-md transition-colors ${
+                      levelFilter === lvl
+                        ? 'bg-white dark:bg-[#334155] text-[#1E293B] dark:text-white shadow-sm'
+                        : 'text-[#64748B] dark:text-[#94A3B8] hover:text-[#1E293B] dark:hover:text-white'
+                    }`}
+                  >
+                    {lvl === 'all' ? 'TẤT CẢ' : lvl}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Search Bar */}
@@ -277,10 +296,26 @@ export function VocabularyPage() {
                       {item.hiragana}
                     </span>
 
-                    {/* Meaning */}
-                    <span className="text-sm font-medium text-[#1E293B] dark:text-[#F8FAFC] flex-1 truncate">
-                      {item.meaning}
-                    </span>
+                    {/* Meaning and Badges */}
+                    <div className="flex-1 flex flex-col items-start min-w-0">
+                      <span className="text-sm font-medium text-[#1E293B] dark:text-[#F8FAFC] w-full truncate">
+                        {item.meaning}
+                      </span>
+                      <div className="flex items-center gap-1.5 mt-1 flex-wrap">
+                        {item.type === 'compound' && (
+                          <span className="px-1.5 py-0.5 rounded-[4px] bg-amber-500/10 text-amber-600 dark:text-amber-400 text-[9px] font-bold uppercase tracking-wider">
+                            Compound
+                          </span>
+                        )}
+                        {item.level && (
+                          <span className={`px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold uppercase tracking-wider ${
+                            item.level === 'N3' ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400' : 'bg-purple-500/10 text-purple-600 dark:text-purple-400'
+                          }`}>
+                            {item.level}
+                          </span>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   {/* Right Bookmark Indicator */}
@@ -417,6 +452,20 @@ export function VocabularyPage() {
                       >
                         {v.word ? (
                           <div className="flex items-baseline gap-2.5 flex-wrap sm:flex-nowrap">
+                            <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5 flex-wrap">
+                              {v.type === 'compound' && (
+                                <span className="px-1.5 py-0.5 rounded-[4px] bg-amber-500/10 text-amber-600 dark:text-amber-400 text-[9px] font-bold uppercase tracking-wider">
+                                  Compound
+                                </span>
+                              )}
+                              {v.level && (
+                                <span className={`px-1.5 py-0.5 rounded-[4px] text-[9px] font-bold uppercase tracking-wider ${
+                                  v.level === 'N3' ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400' : 'bg-purple-500/10 text-purple-600 dark:text-purple-400'
+                                }`}>
+                                  {v.level}
+                                </span>
+                              )}
+                            </div>
                             {/* BIG Kanji word */}
                             <span className="font-jp-serif font-bold text-xl md:text-2xl text-[#1E293B] dark:text-[#F8FAFC] shrink-0">
                               {v.word}

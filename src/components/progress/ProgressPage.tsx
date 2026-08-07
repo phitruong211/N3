@@ -14,15 +14,15 @@ import { calculateStreak, getStudyDays } from '@/lib/storage';
 import { Flame, Target, TrendingUp, Calendar, BarChart3 } from 'lucide-react';
 
 export function ProgressPage() {
-  const { srsCards, vocabulary, kanji } = useApp();
+  const { srsCards, vocabulary, kanji, grammar } = useApp();
   const distribution = useMemo(() => getStateDistribution(srsCards), [srsCards]);
   const streak = useMemo(() => calculateStreak(), []);
   const studyDays = useMemo(() => getStudyDays(), []);
 
   const totalAccuracy = useMemo(() => {
     if (srsCards.length === 0) return 0;
-    const total = srsCards.reduce((sum, c) => sum + c.totalReviews, 0);
-    const correct = srsCards.reduce((sum, c) => sum + c.correctCount, 0);
+    const total = srsCards.reduce((sum, c) => sum + c.reps, 0);
+    const correct = srsCards.reduce((sum, c) => sum + Math.max(0, c.reps - c.lapses), 0);
     return total > 0 ? Math.round((correct / total) * 100) : 0;
   }, [srsCards]);
 
@@ -77,11 +77,10 @@ export function ProgressPage() {
         </h2>
 
         <div className="space-y-3">
-          <ProgressBar label="New" count={distribution.new} total={vocabulary.length + kanji.length} color="var(--color-new)" />
-          <ProgressBar label="Learning" count={distribution.learning} total={vocabulary.length + kanji.length} color="var(--color-learning)" />
-          <ProgressBar label="Review" count={distribution.review} total={vocabulary.length + kanji.length} color="var(--color-review)" />
-          <ProgressBar label="Mastered" count={distribution.mastered} total={vocabulary.length + kanji.length} color="var(--color-mastered)" />
-          <ProgressBar label="Forgotten" count={distribution.forgotten} total={vocabulary.length + kanji.length} color="var(--color-forgotten)" />
+          <ProgressBar label="New" count={distribution.new} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-new)" />
+          <ProgressBar label="Learning" count={distribution.learning} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-learning)" />
+          <ProgressBar label="Review" count={distribution.review} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-review)" />
+          <ProgressBar label="Relearning" count={distribution.relearning} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-forgotten)" />
         </div>
 
         <div className="mt-4 pt-4 border-t border-[var(--color-border)] flex items-center justify-between text-xs text-[var(--color-text-tertiary)]">
@@ -207,25 +206,31 @@ function Heatmap({ studyDays }: { studyDays: { date: string; cardsReviewed: numb
   );
 }
 
+import type { SRSCard } from '@/types';
+
 function WeakItems({
   srsCards,
   vocabulary,
 }: {
-  srsCards: { itemId: string; totalReviews: number; correctCount: number }[];
+  srsCards: SRSCard[];
   vocabulary: { id: string; kanji: string; hiragana: string; meaning: string }[];
 }) {
   const weak = useMemo(() => {
     return srsCards
-      .filter((c) => c.totalReviews >= 2 && c.correctCount / c.totalReviews < 0.6)
-      .sort((a, b) => a.correctCount / a.totalReviews - b.correctCount / b.totalReviews)
+      .filter((c) => c.reps >= 2 && (c.reps === 0 ? 0 : Math.max(0, c.reps - c.lapses) / c.reps) < 0.6)
+      .sort((a, b) => {
+        const aAcc = a.reps === 0 ? 0 : Math.max(0, a.reps - a.lapses) / a.reps;
+        const bAcc = b.reps === 0 ? 0 : Math.max(0, b.reps - b.lapses) / b.reps;
+        return aAcc - bAcc;
+      })
       .slice(0, 10)
       .map((c) => {
-        const vocab = vocabulary.find((v) => v.id === c.itemId);
+        const vocab = vocabulary.find((v) => v.id === c.cardId);
         return {
           ...c,
-          kanji: vocab?.kanji || c.itemId,
+          kanji: vocab?.kanji || c.cardId,
           meaning: vocab?.meaning || '',
-          accuracy: Math.round((c.correctCount / c.totalReviews) * 100),
+          accuracy: Math.round((c.reps === 0 ? 0 : Math.max(0, c.reps - c.lapses) / c.reps) * 100),
         };
       });
   }, [srsCards, vocabulary]);
@@ -240,7 +245,7 @@ function WeakItems({
       <div className="space-y-2">
         {weak.map((item) => (
           <div
-            key={item.itemId}
+            key={item.cardId}
             className="flex items-center gap-4 px-3 py-2 rounded-lg bg-[var(--color-surface-alt)]"
           >
             <span className="font-jp text-sm font-medium text-[var(--color-text)] w-24">

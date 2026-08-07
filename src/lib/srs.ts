@@ -6,7 +6,7 @@
 // successful reviews maximizes long-term retention.
 // ============================================================
 
-import type { SRSCard, Rating, CardState } from '../types';
+import type { SRSCard, Rating, CardState, DeckType } from '../types';
 
 // Learning steps in minutes (short-term repetition)
 const LEARNING_STEPS = [1, 10, 60]; // 1 min, 10 min, 1 hour
@@ -19,21 +19,18 @@ const MIN_EASE = 1.3;
  * Create a new SRS card for an item.
  */
 export function createSRSCard(
-  itemId: string,
-  itemType: 'vocabulary' | 'kanji' | 'grammar'
+  cardId: string,
+  deckType: DeckType
 ): SRSCard {
   return {
-    itemId,
-    itemType,
+    cardId,
+    deckType,
     state: 'new',
     easeFactor: DEFAULT_EASE,
-    interval: 0,
-    repetitions: 0,
     dueDate: new Date().toISOString(),
-    lastReview: null,
-    totalReviews: 0,
-    correctCount: 0,
-    learningStep: 0,
+    reps: 0,
+    lapses: 0,
+    lastReviewedAt: null,
   };
 }
 
@@ -49,21 +46,15 @@ export function createSRSCard(
 export function processReview(card: SRSCard, rating: Rating): SRSCard {
   const now = new Date();
   const updated = { ...card };
-  updated.totalReviews++;
-  updated.lastReview = now.toISOString();
-
-  if (rating !== 'again') {
-    updated.correctCount++;
-  }
+  updated.lastReviewedAt = now.toISOString();
 
   switch (card.state) {
     case 'new':
     case 'learning':
-    case 'forgotten':
-      updated.state = processLearningState(updated, rating);
+    case 'relearning':
+      processLearningState(updated, rating);
       break;
     case 'review':
-    case 'mastered':
       processReviewState(updated, rating);
       break;
   }
@@ -71,81 +62,89 @@ export function processReview(card: SRSCard, rating: Rating): SRSCard {
   return updated;
 }
 
-function processLearningState(card: SRSCard, rating: Rating): CardState {
+function processLearningState(card: SRSCard, rating: Rating): void {
+  let currentStepIdx = 0;
+  if (card.intervalMinutes) {
+    const idx = LEARNING_STEPS.indexOf(card.intervalMinutes);
+    if (idx >= 0) currentStepIdx = idx;
+  }
+
   switch (rating) {
     case 'again':
       // Reset to first learning step
-      card.learningStep = 0;
-      card.dueDate = addMinutes(new Date(), LEARNING_STEPS[0]).toISOString();
-      return 'learning';
+      card.intervalMinutes = LEARNING_STEPS[0];
+      card.dueDate = addMinutes(new Date(), card.intervalMinutes).toISOString();
+      card.state = card.state === 'relearning' ? 'relearning' : 'learning';
+      break;
 
     case 'hard':
       // Repeat current step
-      card.dueDate = addMinutes(
-        new Date(),
-        LEARNING_STEPS[card.learningStep] || LEARNING_STEPS[0]
-      ).toISOString();
-      return 'learning';
+      card.intervalMinutes = LEARNING_STEPS[currentStepIdx];
+      card.dueDate = addMinutes(new Date(), card.intervalMinutes).toISOString();
+      card.state = card.state === 'relearning' ? 'relearning' : 'learning';
+      break;
 
     case 'good':
       // Advance to next step
-      card.learningStep++;
-      if (card.learningStep >= LEARNING_STEPS.length) {
+      if (currentStepIdx + 1 >= LEARNING_STEPS.length) {
         // Graduate to review
-        card.interval = 1; // 1 day
-        card.repetitions = 1;
+        card.state = 'review';
+        card.intervalDays = 1; // 1 day
+        card.intervalMinutes = undefined;
+        card.reps = 1;
         card.dueDate = addDays(new Date(), 1).toISOString();
-        return 'review';
+      } else {
+        card.intervalMinutes = LEARNING_STEPS[currentStepIdx + 1];
+        card.dueDate = addMinutes(new Date(), card.intervalMinutes).toISOString();
+        card.state = card.state === 'relearning' ? 'relearning' : 'learning';
       }
-      card.dueDate = addMinutes(
-        new Date(),
-        LEARNING_STEPS[card.learningStep]
-      ).toISOString();
-      return 'learning';
+      break;
 
     case 'easy':
       // Graduate immediately with 4-day interval
-      card.interval = 4;
-      card.repetitions = 1;
+      card.state = 'review';
+      card.intervalDays = 4;
+      card.intervalMinutes = undefined;
+      card.reps = 1;
       card.easeFactor = Math.max(MIN_EASE, card.easeFactor + 0.15);
       card.dueDate = addDays(new Date(), 4).toISOString();
-      return 'review';
+      break;
   }
 }
 
 function processReviewState(card: SRSCard, rating: Rating): void {
+  const currentInterval = card.intervalDays || 1;
+
   switch (rating) {
     case 'again':
       // Lapse: reset to learning
-      card.state = 'forgotten';
-      card.learningStep = 0;
+      card.state = 'relearning';
+      card.lapses += 1;
       card.easeFactor = Math.max(MIN_EASE, card.easeFactor - 0.2);
-      card.interval = 1;
-      card.repetitions = 0;
-      card.dueDate = addMinutes(new Date(), LEARNING_STEPS[0]).toISOString();
+      card.intervalMinutes = LEARNING_STEPS[0];
+      card.intervalDays = undefined;
+      card.reps = 0;
+      card.dueDate = addMinutes(new Date(), card.intervalMinutes).toISOString();
       break;
 
     case 'hard':
       card.easeFactor = Math.max(MIN_EASE, card.easeFactor - 0.15);
-      card.interval = Math.max(1, Math.round(card.interval * 1.2));
-      card.repetitions++;
-      card.dueDate = addDays(new Date(), card.interval).toISOString();
-      card.state = card.interval >= 30 ? 'mastered' : 'review';
+      card.intervalDays = Math.max(1, Math.round(currentInterval * 1.2));
+      card.reps += 1;
+      card.dueDate = addDays(new Date(), card.intervalDays).toISOString();
       break;
 
     case 'good':
-      card.interval = Math.max(1, Math.round(card.interval * card.easeFactor));
-      card.repetitions++;
-      card.dueDate = addDays(new Date(), card.interval).toISOString();
-      card.state = card.interval >= 30 ? 'mastered' : 'review';
+      card.intervalDays = Math.max(1, Math.round(currentInterval * card.easeFactor));
+      card.reps += 1;
+      card.dueDate = addDays(new Date(), card.intervalDays).toISOString();
       break;
 
     case 'easy':
       card.easeFactor = Math.max(MIN_EASE, card.easeFactor + 0.15);
-      card.interval = Math.max(1, Math.round(card.interval * card.easeFactor * 1.3));
-      card.repetitions++;
-      card.dueDate = addDays(new Date(), card.interval).toISOString();
-      card.state = card.interval >= 30 ? 'mastered' : 'review';
+      card.intervalDays = Math.max(1, Math.round(currentInterval * card.easeFactor * 1.3));
+      card.reps += 1;
+      card.dueDate = addDays(new Date(), card.intervalDays).toISOString();
       break;
   }
 }
@@ -198,10 +197,11 @@ export function getStateDistribution(
     new: 0,
     learning: 0,
     review: 0,
-    mastered: 0,
-    forgotten: 0,
+    relearning: 0,
   };
-  cards.forEach((card) => dist[card.state]++);
+  cards.forEach((card) => {
+    if (dist[card.state] !== undefined) dist[card.state]++;
+  });
   return dist;
 }
 
@@ -224,12 +224,26 @@ export function formatDate(date: Date): string {
 /**
  * Format interval for display.
  */
+export function formatCardInterval(card: SRSCard | null): string {
+  if (!card || card.state === 'new') return 'Chưa học';
+  if (card.state === 'learning' || card.state === 'relearning') {
+    const min = card.intervalMinutes || LEARNING_STEPS[0];
+    return min < 60 ? `${min}m` : `${Math.round(min / 60)}h`;
+  }
+  
+  const interval = card.intervalDays || 1;
+  if (interval === 1) return '1 ngày';
+  if (interval < 30) return `${interval} ngày`;
+  if (interval < 365) return `${Math.round(interval / 30)} tháng`;
+  return `${(interval / 365).toFixed(1)} năm`;
+}
+
 export function formatInterval(interval: number): string {
-  if (interval < 1) return '< 1 day';
-  if (interval === 1) return '1 day';
-  if (interval < 30) return `${interval} days`;
-  if (interval < 365) return `${Math.round(interval / 30)} months`;
-  return `${(interval / 365).toFixed(1)} years`;
+  if (interval < 1) return '< 1 ngày';
+  if (interval === 1) return '1 ngày';
+  if (interval < 30) return `${interval} ngày`;
+  if (interval < 365) return `${Math.round(interval / 30)} tháng`;
+  return `${(interval / 365).toFixed(1)} năm`;
 }
 
 /**
@@ -238,23 +252,27 @@ export function formatInterval(interval: number): string {
 export function getNextIntervals(
   card: SRSCard
 ): Record<Rating, string> {
-  return {
-    again: card.state === 'review' || card.state === 'mastered' ? '1 min' : '1 min',
-    hard:
-      card.state === 'learning' || card.state === 'new' || card.state === 'forgotten'
-        ? `${LEARNING_STEPS[card.learningStep] || LEARNING_STEPS[0]} min`
-        : formatInterval(Math.max(1, Math.round(card.interval * 1.2))),
-    good:
-      card.state === 'learning' || card.state === 'new' || card.state === 'forgotten'
-        ? card.learningStep + 1 >= LEARNING_STEPS.length
-          ? '1 day'
-          : `${LEARNING_STEPS[card.learningStep + 1]} min`
-        : formatInterval(Math.max(1, Math.round(card.interval * card.easeFactor))),
-    easy:
-      card.state === 'learning' || card.state === 'new' || card.state === 'forgotten'
-        ? '4 days'
-        : formatInterval(
-            Math.max(1, Math.round(card.interval * card.easeFactor * 1.3))
-          ),
-  };
+  if (card.state === 'review') {
+    const currentInterval = card.intervalDays || 1;
+    return {
+      again: '1m',
+      hard: formatInterval(Math.max(1, Math.round(currentInterval * 1.2))),
+      good: formatInterval(Math.max(1, Math.round(currentInterval * card.easeFactor))),
+      easy: formatInterval(Math.max(1, Math.round(currentInterval * card.easeFactor * 1.3))),
+    };
+  } else {
+    let currentStepIdx = 0;
+    if (card.intervalMinutes) {
+      const idx = LEARNING_STEPS.indexOf(card.intervalMinutes);
+      if (idx >= 0) currentStepIdx = idx;
+    }
+    const nextStep = LEARNING_STEPS[currentStepIdx + 1];
+    
+    return {
+      again: '1m',
+      hard: `${LEARNING_STEPS[currentStepIdx]}m`,
+      good: nextStep ? (nextStep < 60 ? `${nextStep}m` : `${Math.round(nextStep / 60)}h`) : '1 ngày',
+      easy: '4 ngày',
+    };
+  }
 }

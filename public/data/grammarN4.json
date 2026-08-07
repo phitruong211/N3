@@ -1,0 +1,1496 @@
+[
+  {
+    "stt": 1,
+    "mau_ngu_phap": "んです",
+    "phien_am": "ndesu",
+    "cong_thuc": "V普通形 / Aい / Aな [な] / N [な] + んです",
+    "y_nghia": "Nhấn mạnh, giải thích lý do, nguyên nhân hoặc hoàn cảnh.",
+    "chu_y": "Dùng trong hội thoại nói hàng ngày để nhấn mạnh thông tin, giải thích một tình huống thực tế hoặc hỏi để đào sâu thông tin do tò mò. LƯU Ý: Trong văn viết trang trọng, cấu trúc này chuyển thành のです. Không dùng để phát biểu những sự thật hiển nhiên khách quan.",
+    "vi_du": [
+      {
+        "nhat": "どうして遅れたんですか。- バスが来なかったんです。",
+        "viet": "Tại sao đến muộn vậy? - Vì xe buýt không đến."
+      },
+      {
+        "nhat": "頭が痛いんです。",
+        "viet": "Vì tôi đang bị đau đầu."
+      }
+    ]
+  },
+  {
+    "stt": 2,
+    "mau_ngu_phap": "Vて いただけませんか",
+    "phien_am": "V-te itadakemasenka",
+    "cong_thuc": "Vて + いただけませんか",
+    "y_nghia": "Làm ơn... giúp tôi có được không?",
+    "chu_y": "Dùng để nhờ vả, yêu cầu ai đó làm gì giúp mình một cách vô cùng lịch sự và tôn kính. LƯU Ý: Mức độ lịch sự cao hơn rất nhiều so với Vてください và Vてもらえませんか.",
+    "vi_du": [
+      {
+        "nhat": "この漢字の読み方を教えていただけませんか。",
+        "viet": "Bạn có thể làm ơn chỉ giúp tôi cách đọc chữ Hán này được không?"
+      },
+      {
+        "nhat": "手紙の日本語をチェックしていただけませんか。",
+        "viet": "Bạn có thể kiểm tra giúp tôi tiếng Nhật trong bức thư này được không?"
+      }
+    ]
+  },
+  {
+    "stt": 3,
+    "mau_ngu_phap": "Vたらいいですか",
+    "phien_am": "V-tara ii desu ka",
+    "cong_thuc": "Từ để hỏi + Vたら + いいですか",
+    "y_nghia": "Nên làm ~ thế nào thì tốt? / Nên làm gì bây giờ?",
+    "chu_y": "Dùng khi người nói muốn xin lời khuyên, ý kiến hoặc sự chỉ dẫn từ người khác về một việc mình chưa biết cách giải quyết. LƯU Ý: Động từ phải chia sang thể quá khứ + ら (Vたら). Đầu câu luôn đi kèm từ để hỏi như どう, どこ, いつ, だれ.",
+    "vi_du": [
+      {
+        "nhat": "カメラを買いたいんですが、どこで買ったらいいですか。",
+        "viet": "Tôi muốn mua máy ảnh, tôi nên mua ở đâu thì tốt ạ?"
+      },
+      {
+        "nhat": "パスポートをなくしたんですが、どうしたらいいですか。",
+        "viet": "Tôi bị mất hộ chiếu rồi, tôi nên làm thế nào bây giờ?"
+      }
+    ]
+  },
+  {
+    "stt": 4,
+    "mau_ngu_phap": "とか",
+    "phien_am": "toka",
+    "cong_thuc": "N + とか",
+    "y_nghia": "Như là... / Chẳng hạn như là...",
+    "chu_y": "Dùng để liệt kê một vài ví dụ tiêu biểu trong số nhiều sự vật, sự việc cùng loại. LƯU Ý: Mang tính chất khẩu ngữ, thân mật hơn so với trợ từ liệt kê や.",
+    "vi_du": [
+      {
+        "nhat": "休みの日はテニスとか水泳とかをします。",
+        "viet": "Vào ngày nghỉ tôi thường chơi tennis hoặc bơi lội chẳng hạn."
+      },
+      {
+        "nhat": "冷蔵庫に肉とか野菜とかがあります。",
+        "viet": "Trong tủ lạnh có những thứ như thịt hay rau quả."
+      }
+    ]
+  },
+  {
+    "stt": 5,
+    "mau_ngu_phap": "Động từ thể khả năng (V可能形)",
+    "phien_am": "V-kanoukei",
+    "cong_thuc": "Động từ thể khả năng (V可能形)",
+    "y_nghia": "Có thể làm V / Biết làm V",
+    "chu_y": "Diễn tả năng lực cá nhân của chủ thể hoặc một điều kiện khách quan cho phép thực hiện hành động. LƯU Ý: Trợ từ を của ngoại động từ khi chuyển sang thể khả năng thường biến đổi thành trợ từ が.",
+    "vi_du": [
+      {
+        "nhat": "私は日本語の新聞が読めます。",
+        "viet": "Tôi có thể đọc được báo tiếng Nhật."
+      },
+      {
+        "nhat": "このホテルでインターネットが使えます。",
+        "viet": "Ở khách sạn này có thể dùng được internet."
+      }
+    ]
+  },
+  {
+    "stt": 6,
+    "mau_ngu_phap": "見えます / 聞こえます",
+    "phien_am": "miemasu / kikoemasu",
+    "cong_thuc": "N + が + 見えます / 聞こえます",
+    "y_nghia": "Có thể nhìn thấy N / Có thể nghe thấy N",
+    "chu_y": "Diễn tả hình ảnh hoặc âm thanh tự nhiên đập vào mắt, lọt vào tai một cách khách quan mà không cần chủ ý của con người. LƯU Ý: Phân biệt với 見られます (có thể xem, có chủ ý lựa chọn) và 聞けます (có thể nghe, có chủ ý).",
+    "vi_du": [
+      {
+        "nhat": "窓からきれいな海が見えます。",
+        "viet": "Từ cửa sổ có thể nhìn thấy biển rất đẹp."
+      },
+      {
+        "nhat": "ラジオの音が聞こえます。",
+        "viet": "Có thể nghe thấy tiếng đài phát thanh."
+      }
+    ]
+  },
+  {
+    "stt": 7,
+    "mau_ngu_phap": "できます",
+    "phien_am": "dekimasu",
+    "cong_thuc": "N + が + できます",
+    "y_nghia": "N được hoàn thành / Được xây xong / Được nấu xong",
+    "chu_y": "Diễn tả một sự vật, công trình kiến trúc hoặc sự việc được hoàn thành, xuất hiện hoặc làm xong. LƯU Ý: Nghĩa này khác hoàn toàn với nghĩa 'bản thân có khả năng làm gì'.",
+    "vi_du": [
+      {
+        "nhat": "駅の前に新しいスーパーができました。",
+        "viet": "Một siêu thị mới đã được xây xong ở trước nhà ga."
+      },
+      {
+        "nhat": "晩ご飯ができましたよ。",
+        "viet": "Cơm tối đã nấu xong rồi đấy nhé."
+      }
+    ]
+  },
+  {
+    "stt": 8,
+    "mau_ngu_phap": "しか ~ ない",
+    "phien_am": "shika ~ nai",
+    "cong_thuc": "N + しか + Vない (thể phủ định)",
+    "y_nghia": "Chỉ N... mà thôi",
+    "chu_y": "Dùng để giới hạn duy nhất một sự vật, sự việc, mang sắc thái cảm xúc chê ít, tiếc nuối hoặc không đủ. LƯU Ý: Sau しか luôn luôn là động từ ở thể phủ định (ない). しか thay thế hoàn toàn cho trợ từ が và を.",
+    "vi_du": [
+      {
+        "nhat": "財布の中に100円しかありません。",
+        "viet": "Trong ví chỉ còn đúng 100 yên thôi."
+      },
+      {
+        "nhat": "ひらがなしか書けません。",
+        "viet": "Tôi chỉ có thể viết được chữ Hiragana thôi."
+      }
+    ]
+  },
+  {
+    "stt": 9,
+    "mau_ngu_phap": "ながら",
+    "phien_am": "nagara",
+    "cong_thuc": "Vます [bỏ ます] + ながら",
+    "y_nghia": "Vừa làm V1 vừa làm V2",
+    "chu_y": "Diễn tả hai hành động được thực hiện đồng thời song song bởi cùng một chủ thể. LƯU Ý: Hành động V2 đứng sau ながら luôn là hành động chính của câu. Thì của câu quyết định ở V2.",
+    "vi_du": [
+      {
+        "nhat": "音楽を聞きながら勉強します。",
+        "viet": "Tôi vừa nghe nhạc vừa học bài."
+      },
+      {
+        "nhat": "働きながら大学に通っています。",
+        "viet": "Tôi vừa đi làm vừa đi học đại học."
+      }
+    ]
+  },
+  {
+    "stt": 10,
+    "mau_ngu_phap": "Vています (Thói quen)",
+    "phien_am": "V-te imasu",
+    "cong_thuc": "Vて + います (Thói quen)",
+    "y_nghia": "Đang duy trì thói quen làm V / Thường xuyên làm V",
+    "chu_y": "Diễn tả một hành động mang tính thói quen, lặp đi lặp lại đều đặn trong một thời gian dài. LƯU Ý: Thường đi kèm với các từ chỉ tần suất như 毎日, いつも, 毎週.",
+    "vi_du": [
+      {
+        "nhat": "私は毎朝ジョギングをしています。",
+        "viet": "Tôi chạy bộ mỗi sáng."
+      },
+      {
+        "nhat": "休みの日はいつも料理を作っています。",
+        "viet": "Vào ngày nghỉ tôi luôn luôn nấu ăn."
+      }
+    ]
+  },
+  {
+    "stt": 11,
+    "mau_ngu_phap": "~ も ~ し、~ も ~ し",
+    "phien_am": "~ mo ~ shi, ~ mo ~ shi",
+    "cong_thuc": "~ も 普通形 + し, ~ も 普通形 + し",
+    "y_nghia": "Không những... mà còn... / Vừa... lại vừa... / Vì... và vì...",
+    "chu_y": "Dùng để liệt kê nhiều đặc điểm, tính chất của cùng một sự vật hoặc liệt kê các lý do để dẫn tới một kết luận. LƯU Ý: Đối với tính từ đuôi な và danh từ, dạng thông thường sẽ giữ nguyên だ khi đi với し (だし).",
+    "vi_du": [
+      {
+        "nhat": "この店は値段も安いし、味もいいし、いつも混んでいます。",
+        "viet": "Cửa hàng này giá vừa rẻ, vị lại ngon nên lúc nào cũng đông khách."
+      },
+      {
+        "nhat": "頭も痛いし、熱もあるし、今日は会社を休みます。",
+        "viet": "Vì vừa đau đầu lại vừa sốt nên hôm nay tôi xin nghỉ làm."
+      }
+    ]
+  },
+  {
+    "stt": 12,
+    "mau_ngu_phap": "Vています (Tự động từ)",
+    "phien_am": "V-te imasu",
+    "cong_thuc": "N + が + Vて います (Tự động từ)",
+    "y_nghia": "N đang ở trạng thái V",
+    "chu_y": "Dùng tự động từ ở thể ています để diễn tả một trạng thái hiện hữu của sự vật, là kết quả sau một hành động tự nhiên xảy ra. LƯU Ý: Trợ từ đi với chủ ngữ của trạng thái luôn là が. Hành động này không chứa ý chí con người.",
+    "vi_du": [
+      {
+        "nhat": "窓ガラスが割れています。",
+        "viet": "Kính cửa sổ đang bị vỡ."
+      },
+      {
+        "nhat": "電気がついています。",
+        "viet": "Đèn điện đang được bật."
+      }
+    ]
+  },
+  {
+    "stt": 13,
+    "mau_ngu_phap": "Vてしまいました",
+    "phien_am": "V-te shimaimashita",
+    "cong_thuc": "Vて + しまいました / しまいます",
+    "y_nghia": "Đã làm xong hoàn toàn V / Lỡ... mất rồi (tiếc nuối)",
+    "chu_y": "1. Nhấn mạnh việc đã hoàn thành xong toàn bộ 100% kế hoạch. 2. Diễn tả tâm trạng hối hận, lỡ làm một việc ngoài ý muốn. LƯU Ý: Trong hội thoại nói chuyện hàng ngày, cấu trúc này hay nói tắt thành ~ちゃう (Vちゃいました).",
+    "vi_du": [
+      {
+        "nhat": "宿題を全部やってしまいました。",
+        "viet": "Tôi đã làm xong sạch sành sanh bài tập rồi."
+      },
+      {
+        "nhat": "パスポートをなくしてしまいました。",
+        "viet": "Tôi lỡ làm mất hộ chiếu mất tiêu rồi."
+      }
+    ]
+  },
+  {
+    "stt": 14,
+    "mau_ngu_phap": "Vてしまいます (Tương lai chắc chắn xong)",
+    "phien_am": "V-te shimaimasu",
+    "cong_thuc": "Vて + しまいます (Tương lai chắc chắn xong)",
+    "y_nghia": "Sẽ hoàn thành xong V trong tương lai",
+    "chu_y": "Dùng dạng Vてしまいます để thể hiện một quyết tâm sẽ làm xong hoàn toàn một việc gì đó trước một thời điểm nhất định. LƯU Ý: Thường kết hợp với các từ chỉ mốc thời gian như ~までに.",
+    "vi_du": [
+      {
+        "nhat": "明日までにレポートを書いてしまいます。",
+        "viet": "Đến trước ngày mai tôi sẽ viết xong toàn bộ báo cáo."
+      },
+      {
+        "nhat": "出かける前にご飯を食べてしまいます。",
+        "viet": "Trước khi ra ngoài tôi sẽ ăn cơm cho xong."
+      }
+    ]
+  },
+  {
+    "stt": 15,
+    "mau_ngu_phap": "Vてあります (Tha động từ)",
+    "phien_am": "V-te arimasu",
+    "cong_thuc": "N + が + Vて あります (Tha động từ)",
+    "y_nghia": "Có N được làm sẵn V",
+    "chu_y": "Diễn tả trạng thái của sự vật là kết quả của một hành động có chủ ý của con người nhằm phục vụ mục đích nào đó. LƯU Ý: Bắt buộc đi với Tha động từ (他動詞). Trợ từ đứng trước vật luôn đổi thành が thay vì を.",
+    "vi_du": [
+      {
+        "nhat": "壁にカレンダーが掛けてあります。",
+        "viet": "Trên tường có treo sẵn cuốn lịch."
+      },
+      {
+        "nhat": "机の上に本が置いてあります。",
+        "viet": "Trên bàn có đặt sẵn quyển sách."
+      }
+    ]
+  },
+  {
+    "stt": 16,
+    "mau_ngu_phap": "Vておきます (Chuẩn bị sẵn)",
+    "phien_am": "V-te okimasu",
+    "cong_thuc": "Vて + おきます (Chuẩn bị sẵn)",
+    "y_nghia": "Làm sẵn V / Chuẩn bị trước V",
+    "chu_y": "Diễn tả việc thực hiện một hành động trước để chuẩn bị cho một sự việc trong tương lai hoặc một lần sử dụng kế tiếp. LƯU Ý: Thường đi kèm các từ như Trước khi (~ の前に), Cho đến khi (~ までに). Văn nói chuyển thành ~ときます.",
+    "vi_du": [
+      {
+        "nhat": "旅行の前に、ホテルを予約しておきます。",
+        "viet": "Trước khi đi du lịch tôi sẽ đặt sẵn khách sạn."
+      },
+      {
+        "nhat": "パーティーの前に、部屋を掃除しておきます。",
+        "viet": "Trước bữa tiệc tôi sẽ dọn dẹp sẵn phòng."
+      }
+    ]
+  },
+  {
+    "stt": 17,
+    "mau_ngu_phap": "Vておきます (Giữ nguyên trạng thái)",
+    "phien_am": "V-te okimasu",
+    "cong_thuc": "Vて + おきます (Giữ nguyên trạng thái)",
+    "y_nghia": "Cứ để nguyên trạng thái V như vậy",
+    "chu_y": "Diễn tả hành động giữ nguyên hoặc duy trì một trạng thái hiện tại vì mục đích sử dụng sau đó. LƯU Ý: Thường đi với cụm Từ そのままに (để nguyên thế).",
+    "vi_du": [
+      {
+        "nhat": "道具を使ったら、元のところに戻しておいてください。",
+        "viet": "Dùng dụng cụ xong thì hãy để lại chỗ cũ giúp nhé."
+      },
+      {
+        "nhat": "まだ使っていますから、電気をつけておいてください。",
+        "viet": "Vì vẫn đang dùng nên hãy cứ bật đèn để nguyên thế nhé."
+      }
+    ]
+  },
+  {
+    "stt": 18,
+    "mau_ngu_phap": "Thể ý chí (V意向形)",
+    "phien_am": "V-ikoukei",
+    "cong_thuc": "Thể ý chí (V意向形)",
+    "y_nghia": "Cùng làm V nhé / Sẽ làm V",
+    "chu_y": "Là dạng rút gọn, thân mật của thể Vましょう. Dùng để rủ rê, đề xuất hoặc tự nhủ quyết tâm với bản thân. LƯU Ý: Nhóm 1 chuyển cột i sang o + う. Nhóm 2 bỏ ます + よう. Nhóm 3: します->しよう, 来ます->こよう.",
+    "vi_du": [
+      {
+        "nhat": "少し疲れたから、ちょっと休もう。",
+        "viet": "Hơi mệt rồi, chúng mình nghỉ một lát đi."
+      },
+      {
+        "nhat": "明日から毎日日記を書こう。",
+        "viet": "Từ ngày mai mình sẽ viết nhật ký mỗi ngày."
+      }
+    ]
+  },
+  {
+    "stt": 19,
+    "mau_ngu_phap": "Vようと思っています",
+    "phien_am": "V-you to omotte imasu",
+    "cong_thuc": "Vよう + と思っています",
+    "y_nghia": "Đang dự định làm V",
+    "chu_y": "Diễn tả một ý định, kế hoạch đã được người nói suy nghĩ và ấp ủ từ trước thời điểm nói và bây giờ vẫn giữ ý định đó. LƯU Ý: Nếu dùng Vようと思います (không có ている) thì ý định đó vừa mới nảy ra ngay lúc nói.",
+    "vi_du": [
+      {
+        "nhat": "将来、自分の会社を作ろうと思っています。",
+        "viet": "Trong tương lai, tôi đang định thành lập công ty riêng của mình."
+      },
+      {
+        "nhat": "週末は家でゆっくり休もうと思っています。",
+        "viet": "Cuối tuần này tôi đang định sẽ ở nhà nghỉ ngơi thong thả."
+      }
+    ]
+  },
+  {
+    "stt": 20,
+    "mau_ngu_phap": "つもりです",
+    "phien_am": "tsumori desu",
+    "cong_thuc": "Vる / Vない + つもりです",
+    "y_nghia": "Dự định làm V / Định không làm V",
+    "chu_y": "Diễn tả một ý định, quyết tâm thực hiện hành động một cách khá chắc chắn. LƯU Ý: Ý chí quyết tâm mạnh hơn cấu trúc と思っています. Không dùng cho ngôi thứ 3 hoặc người bề trên.",
+    "vi_du": [
+      {
+        "nhat": "来年、日本へ留学するつもりです。",
+        "viet": "Năm sau tôi dự định sẽ đi du học Nhật Bản."
+      },
+      {
+        "nhat": "今日からタバコを吸わないつもりです。",
+        "viet": "Từ ngày hôm nay tôi định sẽ không hút thuốc nữa."
+      }
+    ]
+  },
+  {
+    "stt": 21,
+    "mau_ngu_phap": "予定です",
+    "phien_am": "yotei desu",
+    "cong_thuc": "Vる / N の + 予定です",
+    "y_nghia": "Theo kế hoạch là... / Dự định là...",
+    "chu_y": "Diễn tả một kế hoạch, lịch trình công việc đã được định sẵn mang tính khách quan (lịch bay, lịch họp, tour du lịch...). LƯU Ý: Mang tính công việc khách quan, không phụ thuộc hoàn toàn vào ý chí bộc phát cá nhân.",
+    "vi_du": [
+      {
+        "nhat": "出張は1週間の予定です。",
+        "viet": "Chuyến công tác theo kế hoạch kéo dài một tuần."
+      },
+      {
+        "nhat": "来月、新しい工場が建設される予定です。",
+        "viet": "Tháng sau theo kế hoạch nhà máy mới sẽ được xây dựng."
+      }
+    ]
+  },
+  {
+    "stt": 22,
+    "mau_ngu_phap": "まだ ~ ていません",
+    "phien_am": "mada ~ te imasen",
+    "cong_thuc": "まだ + Vて いません",
+    "y_nghia": "Vẫn chưa làm V",
+    "chu_y": "Diễn tả một hành động, sự việc cho đến thời điểm hiện tại vẫn chưa được thực hiện. LƯU Ý: Không dùng まだ Vない để thay thế cho cấu trúc này khi nói về hành động chưa làm.",
+    "vi_du": [
+      {
+        "nhat": "レポートはもう書きましたか。- いいえ、まだ書いていません。",
+        "viet": "Báo cáo viết xong chưa? - Chưa, tôi vẫn chưa viết."
+      },
+      {
+        "nhat": "お昼ご飯はもう食べましたか。- いいえ、まだ食べていません。",
+        "viet": "Ăn trưa chưa? - Chưa, vẫn chưa ăn."
+      }
+    ]
+  },
+  {
+    "stt": 23,
+    "mau_ngu_phap": "ほうがいいです",
+    "phien_am": "hou ga ii desu",
+    "cong_thuc": "Vた / Vない + ほうがいいです",
+    "y_nghia": "Nên làm V / Không nên làm V thì tốt hơn",
+    "chu_y": "Dùng để đưa ra lời khuyên, gợi ý mạnh mẽ cho đối phương trong một tình huống cụ thể. LƯU Ý: Mang tính áp đặt nhẹ hoặc cảnh báo (nếu không làm sẽ có kết quả xấu). Khẳng định bắt buộc chia thể た.",
+    "vi_du": [
+      {
+        "nhat": "風邪をひいたなら、早く寝たほうがいいですよ。",
+        "viet": "Nếu bị cảm cúm thì bạn nên đi ngủ sớm đi thì tốt hơn đấy."
+      },
+      {
+        "nhat": "無理をしないほうがいいです。",
+        "viet": "Bạn không nên làm việc quá sức đâu."
+      }
+    ]
+  },
+  {
+    "stt": 24,
+    "mau_ngu_phap": "でしょう",
+    "phien_am": "deshou",
+    "cong_thuc": "普通形 (Tính từ な / N bỏ だ) + でしょう",
+    "y_nghia": "Chắc là... / Có lẽ là...",
+    "chu_y": "Diễn tả sự phỏng đoán chủ quan của người nói dựa trên một số căn cứ, độ chắc chắn khoảng 75-80%. LƯU Ý: Tính từ đuôi な và danh từ bỏ だ. Khi lên giọng ở cuối câu mang nghĩa xác nhận sự đồng tình.",
+    "vi_du": [
+      {
+        "nhat": "明日は雨が降るでしょう。",
+        "viet": "Ngày mai chắc là trời sẽ mưa đấy."
+      },
+      {
+        "nhat": "北海道は寒かったでしょう。",
+        "viet": "Hokkaido chắc là đã lạnh lắm đúng không?"
+      }
+    ]
+  },
+  {
+    "stt": 25,
+    "mau_ngu_phap": "かもしれません",
+    "phien_am": "kamoshiremasen",
+    "cong_thuc": "普通形 (Tính từ な / N bỏ だ) + かもしれません",
+    "y_nghia": "Có lẽ... không chừng... / Biết đâu là...",
+    "chu_y": "Diễn tả sự phỏng đoán của người nói nhưng có mức độ chắc chắn thấp hơn (chỉ khoảng 50% khả năng xảy ra). LƯU Ý: Tính từ đuôi な và danh từ bỏ だ. Văn nói thân mật rút gọn thành かもしれないまたはかも.",
+    "vi_du": [
+      {
+        "nhat": "約束の時間に間に合わないかもしれません。",
+        "viet": "Không chừng chúng ta không kịp giờ hẹn đâu."
+      },
+      {
+        "nhat": "彼は今日、病気かもしれません。",
+        "viet": "Biết đâu hôm nay anh ấy lại bị ốm."
+      }
+    ]
+  },
+  {
+    "stt": 26,
+    "mau_ngu_phap": "で (Phạm vi)",
+    "phien_am": "de",
+    "cong_thuc": "N (Số từ) + で",
+    "y_nghia": "Trong phạm vi lượng từ / Chỉ với...",
+    "chu_y": "Dùng để giới hạn một mức độ, giá cả, thời gian hoặc số lượng tối đa phục vụ cho hành động. LƯU Ý: Đứng sau một danh từ chỉ số lượng hoặc tiền bạc.",
+    "vi_du": [
+      {
+        "nhat": "この駅は30分で行けます。",
+        "viet": "Nhà ga này có thể đi đến nơi chỉ trong vòng 30 phút."
+      },
+      {
+        "nhat": "3000円でカバンが買えますか。",
+        "viet": "Chỉ với 3000 yên có thể mua được cặp sách không?"
+      }
+    ]
+  },
+  {
+    "stt": 27,
+    "mau_ngu_phap": "Thể mệnh lệnh (命令形)",
+    "phien_am": "meireikei",
+    "cong_thuc": "Thể mệnh lệnh (命令形)",
+    "y_nghia": "Hãy làm V đi! / Làm V mau!",
+    "chu_y": "Dùng để ra lệnh, bắt buộc người dưới phải thực hiện hành động một cách tuyệt đối. LƯU Ý: Sắc thái cực kỳ mạnh, thô lỗ. Chỉ dùng cho nam giới thân mật, trường hợp khẩn cấp hoặc cổ vũ thể thao.",
+    "vi_du": [
+      {
+        "nhat": "早く走れ！",
+        "viet": "Chạy nhanh lên!"
+      },
+      {
+        "nhat": "がんばれ！",
+        "viet": "Cố lên!"
+      }
+    ]
+  },
+  {
+    "stt": 28,
+    "mau_ngu_phap": "Vるな (Thể cấm đoán)",
+    "phien_am": "V-ru na",
+    "cong_thuc": "Vる + な (Thể cấm đoán)",
+    "y_nghia": "Cấm làm V! / Không được làm V!",
+    "chu_y": "Dùng để cấm cản, ra lệnh không cho đối phương thực hiện một hành động nào đó. LƯU Ý: Cách chia cực kỳ đơn giản: lấy Động từ thể từ điển (Vる) thêm đuôi な. Sắc thái rất gay gắt.",
+    "vi_du": [
+      {
+        "nhat": "ここに車を止めるな！",
+        "viet": "Cấm đỗ xe ở đây!"
+      },
+      {
+        "nhat": "触るな！",
+        "viet": "Cấm chạm vào!"
+      }
+    ]
+  },
+  {
+    "stt": 29,
+    "mau_ngu_phap": "と読みます / と書いてあります",
+    "phien_am": "to yomimasu / to kaite arimasu",
+    "cong_thuc": "~ と 読みます / ~ と 書いてあります",
+    "y_nghia": "Đọc là ~ / Có viết là ~",
+    "chu_y": "Dùng để trích dẫn giải thích nội dung, cách đọc của một chữ Hán, biển báo hay ký hiệu nào đó. LƯU Ý: Trợ từ と dùng để bao bọc mệnh đề trích dẫn.",
+    "vi_du": [
+      {
+        "nhat": "あの漢字は何と読みますか。",
+        "viet": "Chữ Hán kia đọc là chữ gì vậy?"
+      },
+      {
+        "nhat": "あそこに「立入禁止」と書いてあります。",
+        "viet": "Ở đằng kia có viết là 'Cấm vào'."
+      }
+    ]
+  },
+  {
+    "stt": 30,
+    "mau_ngu_phap": "という意味です",
+    "phien_am": "to iu imi desu",
+    "cong_thuc": "X は Y + という意味です",
+    "y_nghia": "X có nghĩa là Y",
+    "chu_y": "Dùng để định nghĩa, giải thích ngữ nghĩa của một từ ngữ hoặc biểu tượng X bằng mệnh đề thông thường Y. LƯU Ý: Y chia về thể thông thường 普通形.",
+    "vi_du": [
+      {
+        "nhat": "「駐車禁止」はここに車を止めるなという意味です。",
+        "viet": "'Chuusha kinshi' nghĩa là cấm đỗ xe ở đây."
+      },
+      {
+        "nhat": "このマークは洗濯機で洗えるという意味です。",
+        "viet": "Ký hiệu này có nghĩa là có thể giặt bằng máy diễn."
+      }
+    ]
+  },
+  {
+    "stt": 31,
+    "mau_ngu_phap": "と言っていました",
+    "phien_am": "to itte imashita",
+    "cong_thuc": "普通形 + と言っていました",
+    "y_nghia": "(Ai đó) đã nói rằng...",
+    "chu_y": "Dùng để truyền đạt, kể lại lời nói, thông tin của một người thứ ba cho người nghe biết. LƯU Ý: Nhấn mạnh vào việc truyền tin gián tiếp. Khác với と言いました chỉ tường thuật hành động nói đơn thuần.",
+    "vi_du": [
+      {
+        "nhat": "田中さんは、明日休むと言っていました。",
+        "viet": "Anh Tanaka đã nói là ngày mai anh ấy nghỉ làm."
+      },
+      {
+        "nhat": "先生は来週試験があると言っていました。",
+        "viet": "Thầy giáo đã nói là tuần sau sẽ có bài thi."
+      }
+    ]
+  },
+  {
+    "stt": 32,
+    "mau_ngu_phap": "と伝えていただけませんか",
+    "phien_am": "to tsutaete itadakemasenka",
+    "cong_thuc": "普通形 + と伝えていただけませんか",
+    "y_nghia": "Làm ơn nhắn lại giúp tôi rằng... được không?",
+    "chu_y": "Dùng để nhờ vả một người làm trung gian chuyển lời nhắn lịch sự của mình tới một người khác. LƯU Ý: Cấu trúc rất lịch sự, hay dùng trong công việc hoặc gọi điện thoại.",
+    "vi_du": [
+      {
+        "nhat": "山田さんに、会議は3時 からだと伝えていただけませんか。",
+        "viet": "Bạn làm ơn nhắn lại với anh Yamada giúp tôi là cuộc họp bắt đầu từ 3 giờ được không?"
+      },
+      {
+        "nhat": "佐藤さんに、少し遅れると伝えていただけませんか。",
+        "viet": "Làm ơn nhắn với chị Sato giùm tôi là tôi sẽ tới muộn một chút."
+      }
+    ]
+  },
+  {
+    "stt": 33,
+    "mau_ngu_phap": "とおりに",
+    "phien_am": "toori ni",
+    "cong_thuc": "Vる / Vた / N の + とおりに",
+    "y_nghia": "Làm theo đúng như...",
+    "chu_y": "Diễn tả hành động vế sau được thực hiện chính xác, sao chép theo đúng khuôn mẫu của hành động vế trước. LƯU Ý: Nếu đi trực tiếp với Danh từ mà không qua trợ từ の, chữ とおり sẽ biến âm thành どおり (Nどおりに).",
+    "vi_du": [
+      {
+        "nhat": "私が言うとおりに、書いてください。",
+        "viet": "Hãy viết theo đúng những gì tôi nói."
+      },
+      {
+        "nhat": "説明書のとおりに、組み立てました。",
+        "viet": "Tôi đã lắp ráp theo đúng như sách hướng dẫn."
+      }
+    ]
+  },
+  {
+    "stt": 34,
+    "mau_ngu_phap": "あとで",
+    "phien_am": "ato de",
+    "cong_thuc": "Vた / N の + あとで",
+    "y_nghia": "Sau khi làm... / Sau N...",
+    "chu_y": "Diễn tả trình tự thời gian, hành động vế sau xảy ra sau khi hành động vế trước kết thúc hoàn toàn. LƯU Ý: Khác với Vてから, cấu trúc này nhấn mạnh mốc thời gian sau khi hoàn thành xong hành động trước.",
+    "vi_du": [
+      {
+        "nhat": "仕事が終わったあとで、飲みに行きましょう。",
+        "viet": "Sau khi công việc kết thúc, tụi mình đi uống nước nhé."
+      },
+      {
+        "nhat": "スポーツのあとで、シャワーを浴びます。",
+        "viet": "Sau khi chơi thể thao tôi sẽ đi tắm vòi sen."
+      }
+    ]
+  },
+  {
+    "stt": 35,
+    "mau_ngu_phap": "V1て + V2 / V1ないで + V2 (Trạng thái đi kèm)",
+    "phien_am": "V1-te + V2 / V1-naide + V2",
+    "cong_thuc": "V1て + V2 / V1ないで + V2",
+    "y_nghia": "Làm V2 trong trạng thái có V1 / không làm V1",
+    "chu_y": "Diễn tả hành động chính V2 được thực hiện trong một điều kiện, trạng thái đi kèm là V1. LƯU Ý: Hành động V1 là phụ bổ trợ trạng thái cho hành động chính V2.",
+    "vi_du": [
+      {
+        "nhat": "眼鏡をかけて本を読みます。",
+        "viet": "Tôi đọc sách trong trạng thái có đeo kính."
+      },
+      {
+        "nhat": "砂糖を入れないでコーヒーを飲みます。",
+        "viet": "Tôi uống cà phê trong trạng thái không cho đường."
+      }
+    ]
+  },
+  {
+    "stt": 36,
+    "mau_ngu_phap": "V1ないで + V2 (Lựa chọn thay thế)",
+    "phien_am": "V1-naide + V2",
+    "cong_thuc": "V1ないで + V2 (Lựa chọn thay thế)",
+    "y_nghia": "Không làm V1 mà làm V2",
+    "chu_y": "Diễn tả việc bỏ qua hành động V1 theo lẽ thường tình để thực hiện hành động thay thế là V2. LƯU Ý: Mang nghĩa lựa chọn giữa hai hành động đối lập.",
+    "vi_du": [
+      {
+        "nhat": "昨日はどこも出かけないで、家で寝ていました。",
+        "viet": "Hôm qua tôi chẳng đi đâu chơi cả mà ở nhà ngủ."
+      },
+      {
+        "nhat": "エレベーターに乗らないで、階段を使います。",
+        "viet": "Tôi không đi thang máy mà đi bằng cầu thang bộ."
+      }
+    ]
+  },
+  {
+    "stt": 37,
+    "mau_ngu_phap": "途中で",
+    "phien_am": "tochuu de",
+    "cong_thuc": "Vる / N の + 途中で",
+    "y_nghia": "Giữa chừng / Trên đường đang làm V...",
+    "chu_y": "Diễn tả một sự việc đột xuất xảy ra cắt ngang khi hành động di chuyển hoặc thực hiện việc khác đang dở dang. LƯU Ý: Động từ phải ở thể từ điển Vる.",
+    "vi_du": [
+      {
+        "nhat": "ここへ来る途中で、事故を見ました。",
+        "viet": "Trên đường đi đến đây, tôi đã nhìn thấy một vụ tai nạn."
+      },
+      {
+        "nhat": "マラソンの途中で、気分が悪くなりました。",
+        "viet": "Giữa chừng cuộc chạy marathon, tôi cảm thấy khó chịu trong người."
+      }
+    ]
+  },
+  {
+    "stt": 38,
+    "mau_ngu_phap": "Thể điều kiện (Vば / Aければ / naなら / Nなら)",
+    "phien_am": "joukenkei",
+    "cong_thuc": "Thể điều kiện (Vば / Aければ / naなら / Nなら)",
+    "y_nghia": "Nếu... thì...",
+    "chu_y": "Diễn tả một điều kiện giả định hoặc một điều kiện cần thiết để dẫn đến một kết quả tất yếu. LƯU Ý: Vế sau không dùng các thể hiện ý chí, ra lệnh, rủ rê nếu vế trước đi với động từ có tính chủ ý.",
+    "vi_du": [
+      {
+        "nhat": "ボタンを押せば、切符が出ます。",
+        "viet": "Nếu ấn nút này thì vé sẽ chạy ra."
+      },
+      {
+        "nhat": "天気がよければ、富士山が見えます。",
+        "viet": "Nếu thời tiết đẹp thì có thể nhìn thấy núi Phú Sĩ."
+      }
+    ]
+  },
+  {
+    "stt": 39,
+    "mau_ngu_phap": "なら",
+    "phien_am": "nara",
+    "cong_thuc": "N + なら",
+    "y_nghia": "Nếu là N... / Trong trường hợp N thì...",
+    "chu_y": "Dùng để tiếp nhận thông tin từ đối phương câu trước rồi đưa ra lời khuyên hoặc gợi ý giới hạn trong phạm vi danh từ đó. LƯU Ý: Chuyên dùng để đưa ra giải pháp tối ưu liên quan tới Danh từ N.",
+    "vi_du": [
+      {
+        "nhat": "カメラを買いたいんですが。- カメラなら、秋葉原がいいですよ。",
+        "viet": "Tôi muốn mua máy ảnh. - Nếu là máy ảnh thì ra Akihabara là tuyệt nhất."
+      },
+      {
+        "nhat": "日本語のことなら、鈴木先生に聞いてください。",
+        "viet": "Nếu là chuyện tiếng Nhật thì hãy hỏi thầy Suzuki nhé."
+      }
+    ]
+  },
+  {
+    "stt": 40,
+    "mau_ngu_phap": "Vばいいですか",
+    "phien_am": "V-ba ii desu ka",
+    "cong_thuc": "Từ để hỏi + Vば + いいですか",
+    "y_nghia": "Tôi nên làm ~ thế nào thì được ạ?",
+    "chu_y": "Là cấu trúc tương đương với Từ để hỏi + Vたらいいですか dùng để xin lời khuyên một cách lịch sự. LƯU Ý: Sử dụng thể điều kiện ば thay cho たら.",
+    "vi_du": [
+      {
+        "nhat": "本を借りたいんですが、どうすればいいですか。",
+        "viet": "Tôi muốn mượn sách, làm thế nào thì tốt ạ?"
+      },
+      {
+        "nhat": "どこへ行けば、その書類がもらえますか。",
+        "viet": "Tôi nên đi đâu để nhận được tài liệu đó ạ?"
+      }
+    ]
+  },
+  {
+    "stt": 41,
+    "mau_ngu_phap": "~ ば ~ ほど",
+    "phien_am": "~ ba ~ hodo",
+    "cong_thuc": "Vば Vる / Aければ Aい / naなら naな + ほど",
+    "y_nghia": "Càng... càng...",
+    "chu_y": "Diễn tả mức độ của vế sau thay đổi tỷ lệ thuận biến thiên theo mức độ tăng tiến của vế trước. LƯU Ý: Bắt buộc phải lặp lại cùng một từ ở hai vế dạng Thể điều kiện và Thể thông thường.",
+    "vi_du": [
+      {
+        "nhat": "日本語は勉強すれば勉強するほど、難しくなります。",
+        "viet": "Tiếng Nhật càng học sâu thì càng trở nên khó."
+      },
+      {
+        "nhat": "パソコンは操作が簡単なら簡単なほど、使いやすいです。",
+        "viet": "Máy tính thao tác càng đơn giản thì càng dễ sử dụng."
+      }
+    ]
+  },
+  {
+    "stt": 42,
+    "mau_ngu_phap": "ように (Mục đích)",
+    "phien_am": "you ni",
+    "cong_thuc": "Vる / Vない + ように",
+    "y_nghia": "Để làm V / Sao cho không bị V",
+    "chu_y": "Diễn tả mục đích để đạt tới một trạng thái tốt. Thường đi kèm động từ khả năng hoặc động từ không có chủ ý (tự động từ). LƯU Ý: Phân biệt với ために (ために đi với động từ chứa ý chí cao của con người).",
+    "vi_du": [
+      {
+        "nhat": "忘れないように、メモをしておきます。",
+        "viet": "Để không bị quên, tôi ghi chú sẵn lại."
+      },
+      {
+        "nhat": "日本語が話せるように、毎日練習しています。",
+        "viet": "Để có thể nói được tiếng Nhật, tôi luyện tập hàng ngày."
+      }
+    ]
+  },
+  {
+    "stt": 43,
+    "mau_ngu_phap": "ようになります",
+    "phien_am": "you ni narimasu",
+    "cong_thuc": "Vる (thể khả năng) + ようになります",
+    "y_nghia": "Trở nên có thể làm V / Đã biết làm V",
+    "chu_y": "Diễn tả sự thay đổi trạng thái năng lực từ không thể làm được sang có thể thực hiện được hành động. LƯU Ý: Hầu như luôn đi trước với động từ ở thể khả năng (V可能形).",
+    "vi_du": [
+      {
+        "nhat": "毎日練習して、泳げるようになりました。",
+        "viet": "Nhờ luyện tập mỗi ngày, tôi đã trở nên biết bơi."
+      },
+      {
+        "nhat": "やっと日本語の新聞が読めるようになりました。",
+        "viet": "Cuối cùng thì tôi cũng đã có thể đọc được báo tiếng Nhật."
+      }
+    ]
+  },
+  {
+    "stt": 44,
+    "mau_ngu_phap": "ようにします",
+    "phien_am": "you ni shimasu",
+    "cong_thuc": "Vる / Vない + ようにします",
+    "y_nghia": "Cố gắng làm V / Cố gắng không làm V",
+    "chu_y": "Diễn tả một nỗ lực cá nhân nhằm tạo dựng một thói quen hoặc hành vi tốt trong cuộc sống liên tục. LƯU Ý: Dùng để biểu thị quyết tâm thay đổi hành vi kéo dài.",
+    "vi_du": [
+      {
+        "nhat": "健康のために、毎日野菜を食べるようにします。",
+        "viet": "Vì sức khỏe, tôi sẽ cố gắng ăn rau xanh mỗi ngày."
+      },
+      {
+        "nhat": "夜は甘いものを食べないようにします。",
+        "viet": "Tôi sẽ cố gắng không ăn đồ ngọt vào ban đêm."
+      }
+    ]
+  },
+  {
+    "stt": 45,
+    "mau_ngu_phap": "ようにしてください",
+    "phien_am": "you ni shite kudasai",
+    "cong_thuc": "Vる / Vない + ようにしてください",
+    "y_nghia": "Xin hãy chú ý cố gắng làm V / không làm V",
+    "chu_y": "Dùng để đưa ra lời yêu cầu, nhắc nhở nhẹ nhàng, lịch sự đối phương thực hiện một thói quen tốt hoặc tránh hành vi xấu. LƯU Ý: Sắc thái nhẹ nhàng hơn Vてください trực tiếp. Không dùng yêu cầu làm ngay lập tức tại chỗ.",
+    "vi_du": [
+      {
+        "nhat": "毎日必ず宿題を出すようにしてください。",
+        "viet": "Xin hãy chú ý cố gắng nộp bài tập đầy đủ mỗi ngày nhé."
+      },
+      {
+        "nhat": "遅れないようにしてください。",
+        "viet": "Xin hãy lưu ý cố gắng đừng đến muộn."
+      }
+    ]
+  },
+  {
+    "stt": 46,
+    "mau_ngu_phap": "Thể bị động (受身形)",
+    "phien_am": "ukemikei",
+    "cong_thuc": "Thể bị động (受身形: Vれる / られる)",
+    "y_nghia": "Bị... / Được...",
+    "chu_y": "Diễn tả việc chủ thể nhận một hành động tác động từ đối tượng khác tác động vào. LƯU Ý: Nhóm 1 đổi sang cột a + れる. Nhóm 2 bỏ ます + られる. Nhóm 3: します->される, 来ます->こられる.",
+    "vi_du": [
+      {
+        "nhat": "私は先生に褒められました。",
+        "viet": "Tôi đã được thầy giáo khen ngợi."
+      },
+      {
+        "nhat": "泥棒に財布を盗まれました。",
+        "viet": "Tôi bị kẻ trộm ăn cắp mất ví."
+      }
+    ]
+  },
+  {
+    "stt": 47,
+    "mau_ngu_phap": "Vられる (Bị hại)",
+    "phien_am": "V-rareru",
+    "cong_thuc": "N1 は N2 に N3 を + Vられる",
+    "y_nghia": "N1 bị N2 làm hại, tổn hại tới tài sản N3",
+    "chu_y": "Diễn tả việc người khác làm một hành động xấu tác động lên đồ vật thuộc quyền sở hữu của mình, gây ra phiền toái, bực mình. LƯU Ý: Không bao giờ nói 'Đồ vật của tôi bị vế sau V'. Phải lấy Bản thân người làm chủ ngữ N1.",
+    "vi_du": [
+      {
+        "nhat": "私は弟にパソコンを壊されました。",
+        "viet": "Tôi bị đứa em trai làm hỏng mất cái máy tính."
+      },
+      {
+        "nhat": "満員電車で足を誰かに踏まれました。",
+        "viet": "Tôi bị ai đó dẫm vào chân trên tàu điện đông đúc."
+      }
+    ]
+  },
+  {
+    "stt": 48,
+    "mau_ngu_phap": "Vられる (Vật)",
+    "phien_am": "V-rareru",
+    "cong_thuc": "N (Vật) + が + Vられる",
+    "y_nghia": "N được tổ chức / Được xây dựng / Được phát minh",
+    "chu_y": "Dùng khi chủ ngữ là đồ vật, sự kiện, tòa nhà công cộng được sản xuất, phát hiện hoặc tổ chức mà không cần nhấn mạnh tác nhân làm. LƯU Ý: Tác nhân nếu có là một nhóm người chung chung thường bị ẩn đi.",
+    "vi_du": [
+      {
+        "nhat": "2020年にオリンピックが東京で開催されました。",
+        "viet": "Thế vận hội Olympic đã được tổ chức tại Tokyo vào năm 2020."
+      },
+      {
+        "nhat": "この本は世界中で読まれています。",
+        "viet": "Cuốn sách này đang được đọc trên toàn thế giới."
+      }
+    ]
+  },
+  {
+    "stt": 49,
+    "mau_ngu_phap": "によって Vられる",
+    "phien_am": "ni yotte V-rareru",
+    "cong_thuc": "N + によって + Vられる",
+    "y_nghia": "Được phát minh / Được sáng tác BỞI N",
+    "chu_y": "Dùng trong câu bị động chỉ vật để nhấn mạnh danh tính của tác giả vĩ đại, nhà khoa học đã tạo ra công trình, tác phẩm đó. LƯU Ý: Thường đi kèm các động từ như 発明します, 発見します, 書きます, 作ります.",
+    "vi_du": [
+      {
+        "nhat": "電話はグラハム・ベルによって発明されました。",
+        "viet": "Điện thoại được phát minh bởi Alexander Graham Bell."
+      },
+      {
+        "nhat": "この絵は有名な画家によって描かれました。",
+        "viet": "Bức tranh này được vẽ bởi một họa sĩ nổi tiếng."
+      }
+    ]
+  },
+  {
+    "stt": 50,
+    "mau_ngu_phap": "のは + Tính từ",
+    "phien_am": "no wa",
+    "cong_thuc": "Vる + のは + Tính từ",
+    "y_nghia": "Việc làm V thì...",
+    "chu_y": "Danh từ hóa hành động V bằng cách thêm の để biến cụm động từ thành chủ ngữ đứng trước trợ từ は. LƯU Ý: Các tính từ vế sau thường là: 難しい, 面白い, 楽しい, 危険な, 大変な.",
+    "vi_du": [
+      {
+        "nhat": "テニスをするのは面白いです。",
+        "viet": "Việc chơi tennis thì rất là thú vị."
+      },
+      {
+        "nhat": "夜一人で歩くのは危険です。",
+        "viet": "Việc đi bộ một mình vào ban đêm rất nguy hiểm."
+      }
+    ]
+  },
+  {
+    "stt": 51,
+    "mau_ngu_phap": "のが + Tính từ",
+    "phien_am": "no ga",
+    "cong_thuc": "Vる + のが + Tính từ",
+    "y_nghia": "Thích / Ghét / Giỏi / Kém việc làm V",
+    "chu_y": "Danh từ hóa cụm động từ đóng vai trò bổ ngữ cho các tính từ chỉ sở thích hoặc năng lực cá nhân đứng sau trợ từ が. LƯU Ý: Các tính từ vế sau luôn cố định là: 好き, 嫌い, 上手, 下手, 早い.",
+    "vi_du": [
+      {
+        "nhat": "私は花を育てるのが好きです。",
+        "viet": "Tôi thích việc trồng hoa."
+      },
+      {
+        "nhat": "彼は走るのが速いです。",
+        "viet": "Anh ấy chạy rất nhanh."
+      }
+    ]
+  },
+  {
+    "stt": 52,
+    "mau_ngu_phap": "のを忘れました",
+    "phien_am": "no o wasuremashita",
+    "cong_thuc": "Vる + のを + 忘れました",
+    "y_nghia": "Quên mất việc làm V mất rồi",
+    "chu_y": "Dùng để diễn tả việc người nói quên bẵng đi không thực hiện một nhiệm vụ, hành động đáng lẽ phải làm. LƯU Ý: Cụm Vる の thay thế cho danh từ mục tiêu của ngoại động từ 忘れます.",
+    "vi_du": [
+      {
+        "nhat": "牛乳を買うのを忘れました。",
+        "viet": "Tôi quên khuấy mất việc mua sữa rồi."
+      },
+      {
+        "nhat": "部屋の鍵をかけるのを忘れました。",
+        "viet": "Tôi quên mất việc khóa cửa phòng rồi."
+      }
+    ]
+  },
+  {
+    "stt": 53,
+    "mau_ngu_phap": "のを知っていますか",
+    "phien_am": "no o shitte imasu ka",
+    "cong_thuc": "V普通形 + のを + 知っていますか",
+    "y_nghia": "Bạn có biết việc... hay không?",
+    "chu_y": "Dùng để hỏi đối phương xem có nắm được thông tin, sự kiện vừa diễn ra được nhắc tới trong mệnh đề phụ hay không. LƯU Ý: Nếu người nghe trả lời không biết, bắt buộc phải dùng cụm: いいえ、知りませんでした.",
+    "vi_du": [
+      {
+        "nhat": "木村さんに赤ちゃんが生まれたのを知っていますか。",
+        "viet": "Bạn có biết việc chị Kimura vừa sinh em bé không?"
+      },
+      {
+        "nhat": "来週テストがあるのを知っていますか。",
+        "viet": "Bạn có biết chuyện tuần sau có bài kiểm tra không?"
+      }
+    ]
+  },
+  {
+    "stt": 54,
+    "mau_ngu_phap": "て / ないで / くて / で (Lý do)",
+    "phien_am": "te / naide / kute / de",
+    "cong_thuc": "Vて / Vないで / Aくて / naで + vế sau",
+    "y_nghia": "Vì... nên... (Nguyên nhân lý do cảm xúc/khả năng)",
+    "chu_y": "Nêu nguyên nhân tạo nên kết quả khách quan vế sau. Vế sau giới hạn ở tính từ cảm xúc, động từ khả năng hoặc sự việc ngoài ý chí. LƯU Ý: Tuyệt đối không dùng cấu trúc này khi vế sau chứa mệnh lệnh, nhờ vả, rủ rê hay ý chí.",
+    "vi_du": [
+      {
+        "nhat": "ニュースを聞いて、びっくりしました。",
+        "viet": "Vì nghe tin tức nên tôi đã giật mình ngạc nhiên."
+      },
+      {
+        "nhat": "話が複雑で、よくわかりませんでした。",
+        "viet": "Vì câu chuyện phức tạp nên tôi không hiểu rõ lắm."
+      }
+    ]
+  },
+  {
+    "stt": 55,
+    "mau_ngu_phap": "で (Thiên tai, Sự cố)",
+    "phien_am": "de",
+    "cong_thuc": "N + で",
+    "y_nghia": "Vì N (thiên tai, tai nạn, bệnh tật)... nên...",
+    "chu_y": "Danh từ N chỉ các sự cố khách quan không mong muốn gây ra một kết quả rắc rối ở vế sau câu. LƯU Ý: Vế sau cũng không dùng câu thể hiện ý chí con người.",
+    "vi_du": [
+      {
+        "nhat": "地震でビルが倒れました。",
+        "viet": "Vì động đất nên tòa nhà đã bị đổ."
+      },
+      {
+        "nhat": "病気で学校を休みました。",
+        "viet": "Vì bị bệnh nên đã nghỉ học."
+      }
+    ]
+  },
+  {
+    "stt": 56,
+    "mau_ngu_phap": "ので",
+    "phien_am": "node",
+    "cong_thuc": "普通形 / Aな [な] / N [な] + ので",
+    "y_nghia": "Bởi vì... nên... (Lý do khách quan, lịch sự)",
+    "chu_y": "Nêu lý do mang tính nhân quả một cách khách quan, nhẹ nhàng. Thường dùng khi giải thích lý do để xin phép hoặc từ chối lịch sự. LƯU Ý: Tính từ đuôi な và danh từ giữ nguyên な + ので. Lịch sự và mềm mỏng hơn cấu trúc から.",
+    "vi_du": [
+      {
+        "nhat": "用事があるので、お先に失礼します。",
+        "viet": "Vì có chút việc bận nên tôi xin phép về trước ạ."
+      },
+      {
+        "nhat": "気分が悪いので、少し休んでもいいですか。",
+        "viet": "Vì trong người thấy khó chịu, tôi xin nghỉ một chút được không ạ?"
+      }
+    ]
+  },
+  {
+    "stt": 57,
+    "mau_ngu_phap": "か (Lồng câu hỏi)",
+    "phien_am": "ka",
+    "cong_thuc": "Từ để hỏi + 普通形 (Aな/N bỏ だ) + か",
+    "y_nghia": "Lồng câu hỏi có từ nghi vấn làm mệnh đề phụ",
+    "chu_y": "Nhúng một câu hỏi chứa cụm từ như いつ, どこ, なに vào trong một câu lớn kết hợp với động từ như biết, quên, kiểm tra. LƯU Ý: Tính từ đuôi な và danh từ bỏ だ hoàn toàn trước chữ か.",
+    "vi_du": [
+      {
+        "nhat": "会議が何時に始まるか、知っていますか。",
+        "viet": "Bạn có biết cuộc họp bắt đầu lúc mấy giờ không?"
+      },
+      {
+        "nhat": "どこへ鍵を置いたか、忘れてしまいました。",
+        "viet": "Tôi quên mất tiêu là mình đã để chìa khóa ở đâu rồi."
+      }
+    ]
+  },
+  {
+    "stt": 58,
+    "mau_ngu_phap": "かどうか",
+    "phien_am": "ka douka",
+    "cong_thuc": "普通形 (Aな/N bỏ だ) + かどうか",
+    "y_nghia": "Có... hay không?",
+    "chu_y": "Nhúng một câu hỏi nghi vấn dạng Có/Không (Yes/No) làm mệnh đề bổ ngữ phụ trong câu. LƯU Ý: Cũng bỏ だ đối với danh từ và tính từ đuôi な trước chữ かどうか.",
+    "vi_du": [
+      {
+        "nhat": "明日雨が降るかどうか、わかりません。",
+        "viet": "Tôi không biết ngày mai trời có mưa hay không nữa."
+      },
+      {
+        "nhat": "間違いがないかどうか、確かめてください。",
+        "viet": "Xin hãy kiểm tra lại xem có lỗi sai nào hay không nhé."
+      }
+    ]
+  },
+  {
+    "stt": 59,
+    "mau_ngu_phap": "Vてみます",
+    "phien_am": "V-te mimasu",
+    "cong_thuc": "Vて + みます",
+    "y_nghia": "Thử làm V xem sao",
+    "chu_y": "Diễn tả hành động thực hiện thử nghiệm một việc gì đó để kiểm tra kết quả hoặc lấy trải nghiệm thực tế. LƯU Ý: Thường dùng dưới dạng ~てみたい (muốn thử) hoặc ~てください (hãy làm thử đi).",
+    "vi_du": [
+      {
+        "nhat": "日本の着物を一度着てみたいです。",
+        "viet": "Tôi muốn mặc thử trang phục Kimono của Nhật một lần xem sao."
+      },
+      {
+        "nhat": "おいしそうですね。食べてみます。",
+        "viet": "Trông ngon quá nhỉ. Tôi sẽ ăn thử xem."
+      }
+    ]
+  },
+  {
+    "stt": 60,
+    "mau_ngu_phap": "いただきます / くださいます / やります",
+    "phien_am": "itadakimasu / kudasaimasu / yarimasu",
+    "cong_thuc": "いただきます / くださいます / やります",
+    "y_nghia": "Nhận / Cho / Tặng (Hệ thống kính ngữ cho nhận)",
+    "chu_y": "いただきます: nhận từ người trên (khiêm nhường). くださいます: người bề trên tặng mình (tôn kính). やります: mình cho người dưới, vật nuôi, cây cối. LƯU Ý: Đây là hệ thống từ vựng thay thế cao cấp cho もらいます, くれます, あげます.",
+    "vi_du": [
+      {
+        "nhat": "社長に時計をいただきました。",
+        "viet": "Tôi đã được Giám đốc ban tặng chiếc đồng hồ."
+      },
+      {
+        "nhat": "先生が本をくださいました。",
+        "viet": "Thầy giáo đã chủ động cho tôi cuốn sách."
+      }
+    ]
+  },
+  {
+    "stt": 61,
+    "mau_ngu_phap": "Vて いただきます / くださいます / やります",
+    "phien_am": "V-te itadakimasu / kudasaimasu / yarimasu",
+    "cong_thuc": "Vて + いただきます / くださいます / やります",
+    "y_nghia": "Được người trên làm giúp hành động V / Làm V cho người dưới",
+    "chu_y": "Diễn tả hành động ban ơn giúp đỡ tương tự như cấu trúc cho nhận đồ vật ở trên. LƯU Ý: Vてくださいます biểu thị sự biết ơn sâu sắc hành động của bề trên.",
+    "vi_du": [
+      {
+        "nhat": "先生に文法を説明していただきました。",
+        "viet": "Tôi đã được thầy giáo giảng giải giúp cho phần ngữ pháp."
+      },
+      {
+        "nhat": "私は息子に飛行機の模型を作ってやりました。",
+        "viet": "Tôi đã làm cho đứa con trai cái mô hình máy bay."
+      }
+    ]
+  },
+  {
+    "stt": 62,
+    "mau_ngu_phap": "ために",
+    "phien_am": "tame ni",
+    "cong_thuc": "Vる / N の + ために",
+    "y_nghia": "Để làm V / Vì mục tiêu N",
+    "chu_y": "Diễn tả ý chí mạnh mẽ thực hiện hành động vế sau nhằm đạt được mục đích ở vế trước câu. LƯU Ý: Động từ đứng trước luôn là ngoại động từ hoặc động từ mang tính chủ ý, kiểm soát được của con người.",
+    "vi_du": [
+      {
+        "nhat": "自分の店を持つために、一生懸命貯金しています。",
+        "viet": "Để có được cửa hàng của riêng mình, tôi đang cố gắng tiết kiệm tiền."
+      },
+      {
+        "nhat": "家族のために、頑張って働きます。",
+        "viet": "Vì gia đình nhỏ của mình, tôi sẽ cố gắng làm việc chăm chỉ."
+      }
+    ]
+  },
+  {
+    "stt": 63,
+    "mau_ngu_phap": "のに [使います/便利です/かかります]",
+    "phien_am": "no ni",
+    "cong_thuc": "Vる + のに / N + に + [使います/便利です/かかります]",
+    "y_nghia": "Đánh giá mục đích phục vụ cho việc làm V / cho N",
+    "chu_y": "Dùng để nói về chức năng, đánh giá sự tiện lợi, thời gian hoặc chi phí cần thiết dùng cho công việc cụ thể. LƯU Ý: Vế sau hầu như chỉ đi với các từ cố định như 使う, 便利だ, 役に立つ, 時間がかかる, 必要だ.",
+    "vi_du": [
+      {
+        "nhat": "このハサミは花を切るのに使います。",
+        "viet": "Cây kéo này chuyên dùng để cắt hoa."
+      },
+      {
+        "nhat": "このカバンは旅行に便利です。",
+        "viet": "Chiếc cặp sách này rất tiện lợi cho những chuyến đi du lịch."
+      }
+    ]
+  },
+  {
+    "stt": 64,
+    "mau_ngu_phap": "そうです (Trông có vẻ)",
+    "phien_am": "sou desu",
+    "cong_thuc": "Vます [bỏ ます] / A [bỏ い] / na [bỏ な] + そうです",
+    "y_nghia": "Trông có vẻ... / Nhìn bề ngoài đoán là...",
+    "chu_y": "Đưa ra lời phỏng đoán trực quan ngay lập tức dựa trên diện mạo, hình ảnh đập vào mắt người nói. LƯU Ý: Đặc biệt: いい -> よさそうです. Phủ định tính từ: ~なさそうです.",
+    "vi_du": [
+      {
+        "nhat": "この料理はとてもおいしそうです。",
+        "viet": "Món ăn này trông có vẻ rất là ngon."
+      },
+      {
+        "nhat": "棚から荷物が落ちそうですよ。",
+        "viet": "Hành lý trông có vẻ sắp bị rơi khỏi kệ sách rồi kìa."
+      }
+    ]
+  },
+  {
+    "stt": 65,
+    "mau_ngu_phap": "Vて来ます",
+    "phien_am": "V-te kimasu",
+    "cong_thuc": "Vて + 来ます",
+    "y_nghia": "Đi làm việc V rồi sẽ quay trở lại",
+    "chu_y": "Diễn tả hành động rời đi địa điểm khác để làm một việc V gì đó, sau đó quay lại vị trí ban đầu nói chuyện. LƯU Ý: Cấu trúc quen thuộc trong câu chào đi ra ngoài: 行って来ます.",
+    "vi_du": [
+      {
+        "nhat": "ちょっとタバコを買って来ます。",
+        "viet": "Tôi đi mua bao thuốc lá một lát rồi quay lại ngay."
+      },
+      {
+        "nhat": "飲み物を買って来ますから、ここで待っていなさい。",
+        "viet": "Tôi đi mua đồ uống chút, hãy đợi ở đây nhé."
+      }
+    ]
+  },
+  {
+    "stt": 66,
+    "mau_ngu_phap": "すぎます",
+    "phien_am": "sugimasu",
+    "cong_thuc": "Vます [bỏ ます] / A [bỏ い] / na [bỏ な] + すぎます",
+    "y_nghia": "Quá... (vượt giới hạn tiêu cực)",
+    "chu_y": "Diễn tả mức độ của hành động hoặc tính chất vượt quá mức bình thường cần thiết, dẫn tới kết quả không tốt. LƯU Ý: Ghép lại tạo thành cụm động từ nhóm 2 có đuôi là すぎる.",
+    "vi_du": [
+      {
+        "nhat": "昨夜お酒を飲みすぎました。",
+        "viet": "Đêm hôm qua tôi đã uống quá nhiều rượu."
+      },
+      {
+        "nhat": "この部屋は私には狭すぎます。",
+        "viet": "Căn phòng này quá chật hẹp đối với bản thân tôi."
+      }
+    ]
+  },
+  {
+    "stt": 67,
+    "mau_ngu_phap": "やすいです / にくいです",
+    "phien_am": "yasui desu / nikui desu",
+    "cong_thuc": "Vます [bỏ ます] + やすいです / にくいです",
+    "y_nghia": "Dễ làm V / Khó làm V",
+    "chu_y": "Diễn tả đặc điểm, thuộc tính của sự vật tạo điều kiện thuận lợi hoặc gây khó khăn cho việc thực hiện hành động. LƯU Ý: Sau khi kết hợp, cụm này đóng vai trò ngữ pháp như một tính từ đuôi い.",
+    "vi_du": [
+      {
+        "nhat": "このペンはとても書きやすいです。",
+        "viet": "Cái bút mực này rất là dễ viết."
+      },
+      {
+        "nhat": "この町の道は狭くて歩きにくいです。",
+        "viet": "Đường phố của thị trấn này chật hẹp nên rất khó đi bộ."
+      }
+    ]
+  },
+  {
+    "stt": 68,
+    "mau_ngu_phap": "します (Biến đổi)",
+    "phien_am": "shimasu",
+    "cong_thuc": "Aく / naに / Nに + します",
+    "y_nghia": "Làm cho trở nên... / Biến đổi trạng thái N",
+    "chu_y": "Diễn tả hành động có chủ ý của con người tác động vào thế giới làm biến đổi đặc điểm hoặc bản chất của đối tượng. LƯU Ý: Tính từ đuôi い thay い thành く, đuôi な thêm に, Danh từ thêm に.",
+    "vi_du": [
+      {
+        "nhat": "ラジオの音を小さくします。",
+        "viet": "Tôi vặn nhỏ âm thanh của đài phát thanh lại."
+      },
+      {
+        "nhat": "部屋をきれいにしてください。",
+        "viet": "Xin hãy dọn dẹp phòng sạch sẽ giúp tôi."
+      }
+    ]
+  },
+  {
+    "stt": 69,
+    "mau_ngu_phap": "にします",
+    "phien_am": "ni shimasu",
+    "cong_thuc": "N + にします",
+    "y_nghia": "Quyết định chọn N / Lấy N",
+    "chu_y": "Dùng để biểu thị sự lựa chọn, đưa ra quyết định mua hàng hoặc gọi món ăn trong nhà hàng. LƯU Ý: Dùng rất nhiều trong hội thoại đời sống ăn uống, mua sắm.",
+    "vi_du": [
+      {
+        "nhat": "私はコーヒーにします。",
+        "viet": "Tôi quyết định chọn đồ uống là cà phê."
+      },
+      {
+        "nhat": "会議の日は来週の月曜日にします。",
+        "viet": "Ngày tổ chức cuộc họp tôi quyết định chọn thứ Hai tuần sau."
+      }
+    ]
+  },
+  {
+    "stt": 70,
+    "mau_ngu_phap": "場合は",
+    "phien_am": "baai wa",
+    "cong_thuc": "普通形 / Aな [な] / N [の] + 場合は",
+    "y_nghia": "Trong trường hợp... / Nếu xảy ra tình huống...",
+    "chu_y": "Dùng để giả định một tình huống khẩn cấp, sự cố đặc biệt có thể diễn ra và hướng dẫn giải pháp xử lý sau đó. LƯU Ý: Trang trọng hơn cấu trúc たら. Tính từ đuôi な giữ な, danh từ chuyển thành N の.",
+    "vi_du": [
+      {
+        "nhat": "火事の場合は、エレベーターを使わないでください。",
+        "viet": "Trong trường hợp xảy ra hỏa hoạn, tuyệt đối không được dùng thang máy."
+      },
+      {
+        "nhat": "遅れる場合は、必ず連絡してください。",
+        "viet": "Trong trường hợp đến muộn, bắt buộc phải liên lạc báo trước."
+      }
+    ]
+  },
+  {
+    "stt": 71,
+    "mau_ngu_phap": "のに (Nghịch lý)",
+    "phien_am": "noni",
+    "cong_thuc": "普通形 / Aな [な] / N [な] + のに",
+    "y_nghia": "Mặc dù... thế mà... / Tuy... nhưng lại...",
+    "chu_y": "Diễn tả mối quan hệ nghịch lý giữa hai vế câu. Vế sau đem lại kết quả bất ngờ, trái ngược hoàn toàn dự đoán thông thường. LƯU Ý: Chứa đựng cảm xúc bất bình, thất vọng, trách móc của người nói. Tính từ な và danh từ thêm な trước のに.",
+    "vi_du": [
+      {
+        "nhat": "一生懸命勉強したのに、不合格でした。",
+        "viet": "Mặc dù đã học hành rất chăm chỉ thế mà kết quả vẫn bị trượt."
+      },
+      {
+        "nhat": "約束したのに、彼は来ませんでした。",
+        "viet": "Đã hẹn ước rồi thế mà anh ta lại chẳng thèm đến."
+      }
+    ]
+  },
+  {
+    "stt": 72,
+    "mau_ngu_phap": "ところです",
+    "phien_am": "tokoro desu",
+    "cong_thuc": "Vる / Vている / Vた + ところです",
+    "y_nghia": "Sắp sửa làm / Đúng lúc đang làm / Vừa mới làm xong V",
+    "chu_y": "Nhấn mạnh chính xác mốc thời gian, lát cắt thời điểm thực tế của hành động vật lý đang ở giai đoạn nào. LƯU Ý: Hay đi kèm lần lượt với trạng từ: これから / ちょうど今 / たった今.",
+    "vi_du": [
+      {
+        "nhat": "これからご飯を食べるところです。",
+        "viet": "Bây giờ tôi chuẩn bị chuẩn bị ăn cơm đây."
+      },
+      {
+        "nhat": "たった今バスが出たところです。",
+        "viet": "Xe buýt vừa mới lăn bánh rời bến ngay tức khắc xong."
+      }
+    ]
+  },
+  {
+    "stt": 73,
+    "mau_ngu_phap": "ばかりです",
+    "phien_am": "bakari desu",
+    "cong_thuc": "Vた + ばかりです",
+    "y_nghia": "Vừa mới làm V xong",
+    "chu_y": "Diễn tả hành động vừa xảy ra dựa trên cảm nhận hoàn toàn mang tính chủ quan của người nói câu. LƯU Ý: Thời gian thực tế có thể đã trôi qua vài ngày, vài tháng nhưng người nói cảm thấy vẫn còn rất mới.",
+    "vi_du": [
+      {
+        "nhat": "さっき朝ご飯を食べたばかりですから、お腹がいっぱいです。",
+        "viet": "Vì lúc nãy tôi vừa mới ăn sáng xong nên giờ bụng vẫn no."
+      },
+      {
+        "nhat": "彼は先月日本へ来たばかりです。",
+        "viet": "Anh ấy vừa mới đặt chân đến Nhật vào tháng trước."
+      }
+    ]
+  },
+  {
+    "stt": 74,
+    "mau_ngu_phap": "はずです",
+    "phien_am": "hazu desu",
+    "cong_thuc": "普通形 / Aな [な] / N [の] + はずです",
+    "y_nghia": "Chắc chắn là... (Suy đoán logic)",
+    "chu_y": "Đưa ra phán đoán có mức độ tin cậy gần như 100% dựa trên các căn cứ khoa học, sự thật lý thuyết rõ ràng. LƯU Ý: Tính từ đuôi な giữ な, Danh từ dùng の. Phủ định mạnh: はずがありません (không đời nào).",
+    "vi_du": [
+      {
+        "nhat": "田中さんは10年も日本に住んでいたから、日本語が上手なはずです。",
+        "viet": "Anh Tanaka đã sống ở Nhật tận 10 năm nên chắc chắn tiếng Nhật rất giỏi."
+      },
+      {
+        "nhat": "今日は日曜日だから、銀行は休みのはずです。",
+        "viet": "Hôm nay là Chủ nhật nên ngân hàng chắc chắn là nghỉ rồi."
+      }
+    ]
+  },
+  {
+    "stt": 75,
+    "mau_ngu_phap": "そうです (Truyền đạt)",
+    "phien_am": "sou desu",
+    "cong_thuc": "普通形 + そうです",
+    "y_nghia": "Nghe nói là... / Nghe người ta bảo là...",
+    "chu_y": "Dùng để truyền đạt lại nguyên vẹn một nguồn tin tức mình nhận được từ người khác hoặc phương tiện truyền thông. LƯU Ý: Nguồn thông tin được đánh dấu bằng cụm ~によると (Theo như...). Không bao giờ dùng そうでした.",
+    "vi_du": [
+      {
+        "nhat": "天気予報によると、明日は雨が降るそうです。",
+        "viet": "Theo dự báo thời tiết, nghe nói ngày mai trời sẽ mưa."
+      },
+      {
+        "nhat": "田中さんは来月結婚するそうです。",
+        "viet": "Nghe người ta bảo anh Tanaka tháng sau sẽ kết hôn."
+      }
+    ]
+  },
+  {
+    "stt": 76,
+    "mau_ngu_phap": "ようです",
+    "phien_am": "you desu",
+    "cong_thuc": "普通形 / Aな [な] / N [の] + ようです",
+    "y_nghia": "Hình như là... / Có vẻ như là...",
+    "chu_y": "Đưa ra suy đoán chủ quan dựa trên những chứng cứ thực tế, hiện tượng mắt thấy tai nghe, ngửi thấy tại hiện trường. LƯU Ý: Tính từ đuôi な giữ な, Danh từ dùng の. Phân biệt với そうです (trông có vẻ) chỉ dùng thị giác đơn thuần nhìn lướt.",
+    "vi_du": [
+      {
+        "nhat": "隣の部屋で大きな音がしました。何かあったようです。",
+        "viet": "Phòng bên cạnh phát ra tiếng động lớn. Hình như có chuyện gì đó xảy ra rồi."
+      },
+      {
+        "nhat": "人がたくさん集まっていますね。事故のようです。",
+        "viet": "Mọi người đang tụ tập đông quá nhỉ. Có vẻ là một vụ tai nạn."
+      }
+    ]
+  },
+  {
+    "stt": 77,
+    "mau_ngu_phap": "がする",
+    "phien_am": "ga suru",
+    "cong_thuc": "N + がする",
+    "y_nghia": "Có mùi / Có vị / Phát ra âm thanh N",
+    "chu_y": "Diễn tả cảm giác tự nhiên của con người cảm nhận được thông qua các giác quan cơ thể (khứu giác, vị giác, thính giác). LƯU Ý: Danh từ N cố định giới hạn ở các từ như: 匂い (mùi), 味 (vị), 音 (tiếng động), 声 (tiếng người).",
+    "vi_du": [
+      {
+        "nhat": "台所からいい匂いがします。",
+        "viet": "Từ nhà bếp phát ra một mùi hương rất thơm."
+      },
+      {
+        "nhat": "隣の部屋から変な音がします。",
+        "viet": "Từ phòng bên cạnh phát ra âm thanh rất kỳ lạ."
+      }
+    ]
+  },
+  {
+    "stt": 78,
+    "mau_ngu_phap": "Thể sai khiến (使役形)",
+    "phien_am": "shiekikei",
+    "cong_thuc": "Thể sai khiến (使役形: Vせる / させる)",
+    "y_nghia": "Bắt ai đó làm / Cho phép ai đó làm việc gì",
+    "chu_y": "Diễn tả hành động của người bề trên bắt buộc, ra lệnh (ép buộc) hoặc cho phép, đồng ý (dung túng) người dưới làm việc. LƯU Ý: Tự động từ: người thực hiện đi với trợ từ を. Tha động từ: người thực hiện đi với trợ từ に.",
+    "vi_du": [
+      {
+        "nhat": "お母さんは子供に野菜を食べさせました。",
+        "viet": "Người mẹ bắt đứa con nhỏ phải ăn rau xanh."
+      },
+      {
+        "nhat": "先生は学生をグラウンドで走らせました。",
+        "viet": "Thầy giáo bắt học sinh chạy bộ trên sân trường."
+      }
+    ]
+  },
+  {
+    "stt": 79,
+    "mau_ngu_phap": "Vさせていただけませんか",
+    "phien_am": "V-sasete itadakemasenka",
+    "cong_thuc": "Vさせて + いただけませんか",
+    "y_nghia": "Xin vui lòng cho phép tôi làm việc V giúp có được không?",
+    "chu_y": "Dùng khi bản thân người nói muốn xin phép đối phương một cách cực kỳ tôn kính để tự mình thực hiện một hành động nào đó. LƯU Ý: Là mẫu câu xin phép kinh điển bậc nhất trong văn hóa công sở Nhật Bản.",
+    "vi_du": [
+      {
+        "nhat": "気分が悪いので、早く帰らせていただけませんか。",
+        "viet": "Vì trong người không khỏe, xin phép cho tôi được về sớm có được không ạ?"
+      },
+      {
+        "nhat": "その仕事は私にやらせていただけませんか。",
+        "viet": "Công việc đó xin hãy vui lòng cho phép tôi được làm thử có được không ạ?"
+      }
+    ]
+  },
+  {
+    "stt": 80,
+    "mau_ngu_phap": "お + Vます になります",
+    "phien_am": "o + V-masu ni narimasu",
+    "cong_thuc": "Tôn kính ngữ: お + Vます [bỏ ます] + になります",
+    "y_nghia": "Kính mời / Bề trên thực hiện hành động V",
+    "chu_y": "Dùng để thể hiện sự tôn trọng tối cao đối với hành động, trạng thái của người bề trên (cấp trên, khách hàng, thầy giáo). LƯU Ý: Tuyệt đối không dùng cho hành động của chính bản thân mình. Không áp dụng cho động từ có 1 âm tiết bỏ ます.",
+    "vi_du": [
+      {
+        "nhat": "社長はもうお帰りになりました。",
+        "viet": "Giám đốc đã đi về nhà từ trước rồi ạ."
+      },
+      {
+        "nhat": "先生、この新聞はお読みになりましたか。",
+        "viet": "Thưa thầy, thầy đã đọc tờ báo này chưa ạ?"
+      }
+    ]
+  },
+  {
+    "stt": 81,
+    "mau_ngu_phap": "お + Vます ください",
+    "phien_am": "o + V-masu kudasai",
+    "cong_thuc": "Tôn kính ngữ đặc biệt: お + Vます [bỏ ます] + ください",
+    "y_nghia": "Xin mời quý khách làm V (Lịch sự cao cấp)",
+    "chu_y": "Sử dụng các động từ kính ngữ đặc biệt như いらっしゃいます, 召し上がります hoặc cấu trúc お + Vます bỏ ます + ください để yêu cầu lịch sự. LƯU Ý: Thường thấy ở nhà hàng, khách sạn hoặc biển báo hướng dẫn trang trọng.",
+    "vi_du": [
+      {
+        "nhat": "どうぞこちらにお掛けください。",
+        "viet": "Xin kính mời quý khách ngồi vào ghế phía này ạ."
+      },
+      {
+        "nhat": "何を召し上がりますか。",
+        "viet": "Anh/chị kính dùng món ăn gì ạ?"
+      }
+    ]
+  },
+  {
+    "stt": 82,
+    "mau_ngu_phap": "お + Vます します / いたします",
+    "phien_am": "o + V-masu shimasu / itashimasu",
+    "cong_thuc": "Khiêm nhường ngữ: お + Vます [bỏ ます] + します / いたします",
+    "y_nghia": "Tôi xin phép được làm V giúp bề trên",
+    "chu_y": "Dùng khi người nói tự hạ thấp hành động của bản thân mình xuống nhằm nâng cao sự tôn kính đối với người nhận hành động. LƯU Ý: Dùng cho động từ nhóm 1 và nhóm 2. Với động từ nhóm 3 dạng danh động từ dùng: ご + N + します.",
+    "vi_du": [
+      {
+        "nhat": "重そうですね。お持ちしましょうか。",
+        "viet": "Trông có vẻ nặng quá nhỉ. Để tôi xin phép được cầm giúp anh/chị nhé."
+      },
+      {
+        "nhat": "今日の予定をご説明いたします。",
+        "viet": "Tôi xin phép được trình bày, giải thích lịch trình ngày hôm nay ạ."
+      }
+    ]
+  },
+  {
+    "stt": 83,
+    "mau_ngu_phap": "Khiêm nhường ngữ đặc biệt",
+    "phien_am": "kenjougo",
+    "cong_thuc": "Khiêm nhường ngữ đặc biệt (参ります / 申します / 存じております...)",
+    "y_nghia": "Tôi đi / Tôi tên là / Tôi biết (Khiêm nhường)",
+    "chu_y": "Sử dụng các động từ thay thế đặc biệt để nói về hành động của bản thân hoặc phe mình trước mặt khách hàng, bề trên. LƯU Ý: Gồm có: 参ります (đến/đi), 申します (nói/tên là), いたします (làm), 拝見します (xem), 存じております (biết).",
+    "vi_du": [
+      {
+        "nhat": "私はベトナムから参りました。リンと申します。",
+        "viet": "Tôi đến từ Việt Nam. Tôi tên là Linh ạ."
+      },
+      {
+        "nhat": "社長の奥様をよく存じております。",
+        "viet": "Tôi biết rất rõ về phu nhân của Giám đốc ạ."
+      }
+    ]
+  }
+]

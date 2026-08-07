@@ -31,7 +31,7 @@ import {
   processReview,
   getDueCards,
   getNextIntervals,
-  formatInterval,
+  formatCardInterval,
 } from '@/lib/srs';
 import { recordStudyActivity } from '@/lib/storage';
 
@@ -46,7 +46,7 @@ export function AnkiCardBadge({
   itemType: 'vocabulary' | 'kanji' | 'grammar';
 }) {
   const { srsCards } = useApp();
-  const card = srsCards.find((c) => c.itemId === itemId);
+  const card = srsCards.find((c) => c.cardId === itemId && c.deckType === itemType);
 
   if (!card || card.state === 'new') {
     return (
@@ -60,8 +60,7 @@ export function AnkiCardBadge({
   const stageLabels = {
     learning: 'Đang làm quen',
     review: 'Đang ôn tập',
-    mastered: 'Đã thành thạo',
-    forgotten: 'Đã quên (Học lại)',
+    relearning: 'Đã quên (Học lại)',
     new: 'Chưa học',
   };
 
@@ -69,7 +68,7 @@ export function AnkiCardBadge({
     <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-2xs select-none">
       <span className="w-2 h-2 rounded-full bg-emerald-500" />
       <span>
-        Anki SRS: {stageLabels[card.state]} · Lặp lại sau {formatInterval(card.interval)}
+        Anki SRS: {stageLabels[card.state as keyof typeof stageLabels]} · Lặp lại sau {formatCardInterval(card)}
       </span>
     </div>
   );
@@ -90,7 +89,7 @@ export function AnkiSRSControls({
   const { srsCards } = useApp();
   const currentCard = useMemo(() => {
     return (
-      srsCards.find((c) => c.itemId === itemId) ||
+      srsCards.find((c) => c.cardId === itemId && c.deckType === itemType) ||
       createSRSCard(itemId, itemType)
     );
   }, [srsCards, itemId, itemType]);
@@ -156,7 +155,7 @@ export function AnkiSRSControls({
 
 export function FlashcardPage() {
   const { vocabulary, kanji, grammar, isBookmarked, srsCards } = useApp();
-  const [activeDeck, setActiveDeck] = useState<'vocab' | 'kanji' | 'grammar' | 'saved' | null>(null);
+  const [activeDeck, setActiveDeck] = useState<'vocabN3' | 'vocabN4' | 'kanjiN3' | 'grammarN3' | 'grammarN4' | 'saved' | null>(null);
 
   // Persistent Anki Mode setting in localStorage (biến nhớ kể cả khi tắt web)
   const [ankiMode, setAnkiMode] = useState<boolean>(() => {
@@ -180,18 +179,37 @@ export function FlashcardPage() {
 
   const savedVocabulary = vocabulary.filter((v) => isBookmarked(v.id));
 
-  // Compute live Anki SRS due and mastered stats across the 3 decks
+  // Compute live Anki SRS due and mastered stats across the decks
   const dueCards = useMemo(() => getDueCards(srsCards), [srsCards]);
-  const vocabDueCount = useMemo(() => dueCards.filter((c) => c.itemType === 'vocabulary').length, [dueCards]);
-  const kanjiDueCount = useMemo(() => dueCards.filter((c) => c.itemType === 'kanji').length, [dueCards]);
-  const grammarDueCount = useMemo(() => dueCards.filter((c) => c.itemType === 'grammar').length, [dueCards]);
 
-  const vocabMasteredCount = useMemo(() => srsCards.filter((c) => c.itemType === 'vocabulary' && c.state === 'mastered').length, [srsCards]);
-  const kanjiMasteredCount = useMemo(() => srsCards.filter((c) => c.itemType === 'kanji' && c.state === 'mastered').length, [srsCards]);
-  const grammarMasteredCount = useMemo(() => srsCards.filter((c) => c.itemType === 'grammar' && c.state === 'mastered').length, [srsCards]);
+  const n3VocabIds = useMemo(() => new Set(vocabulary.filter(v => v.level !== 'N4').map(v => v.id)), [vocabulary]);
+  const n4VocabIds = useMemo(() => new Set(vocabulary.filter(v => v.level === 'N4').map(v => v.id)), [vocabulary]);
 
-  if (activeDeck === 'vocab' || activeDeck === 'saved') {
-    const activeItems = activeDeck === 'saved' ? savedVocabulary : vocabulary;
+  const n3GrammarIds = useMemo(() => new Set(grammar.filter(g => g.level !== 'N4').map(g => g.id)), [grammar]);
+  const n4GrammarIds = useMemo(() => new Set(grammar.filter(g => g.level === 'N4').map(g => g.id)), [grammar]);
+
+  const vocabN3DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'vocabulary' && n3VocabIds.has(c.cardId)).length, [dueCards, n3VocabIds]);
+  const vocabN4DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'vocabulary' && n4VocabIds.has(c.cardId)).length, [dueCards, n4VocabIds]);
+
+  const kanjiN3DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'kanji').length, [dueCards]);
+
+  const grammarN3DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'grammar' && n3GrammarIds.has(c.cardId)).length, [dueCards, n3GrammarIds]);
+  const grammarN4DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'grammar' && n4GrammarIds.has(c.cardId)).length, [dueCards, n4GrammarIds]);
+
+  const vocabN3MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'vocabulary' && c.intervalDays && c.intervalDays >= 21 && n3VocabIds.has(c.cardId)).length, [srsCards, n3VocabIds]);
+  const vocabN4MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'vocabulary' && c.intervalDays && c.intervalDays >= 21 && n4VocabIds.has(c.cardId)).length, [srsCards, n4VocabIds]);
+
+  const kanjiN3MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'kanji' && c.intervalDays && c.intervalDays >= 21).length, [srsCards]);
+
+  const grammarN3MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'grammar' && c.intervalDays && c.intervalDays >= 21 && n3GrammarIds.has(c.cardId)).length, [srsCards, n3GrammarIds]);
+  const grammarN4MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'grammar' && c.intervalDays && c.intervalDays >= 21 && n4GrammarIds.has(c.cardId)).length, [srsCards, n4GrammarIds]);
+
+  if (activeDeck === 'vocabN3' || activeDeck === 'vocabN4' || activeDeck === 'saved') {
+    let activeItems = vocabulary;
+    if (activeDeck === 'vocabN3') activeItems = vocabulary.filter(v => v.level !== 'N4');
+    if (activeDeck === 'vocabN4') activeItems = vocabulary.filter(v => v.level === 'N4');
+    if (activeDeck === 'saved') activeItems = savedVocabulary;
+
     return (
       <VocabFlashcardSession
         items={activeItems}
@@ -203,7 +221,7 @@ export function FlashcardPage() {
     );
   }
 
-  if (activeDeck === 'kanji') {
+  if (activeDeck === 'kanjiN3') {
     return (
       <KanjiFlashcardSession
         items={kanji}
@@ -214,10 +232,11 @@ export function FlashcardPage() {
     );
   }
 
-  if (activeDeck === 'grammar') {
+  if (activeDeck === 'grammarN3' || activeDeck === 'grammarN4') {
+    const activeItems = activeDeck === 'grammarN3' ? grammar.filter(g => g.level !== 'N4') : grammar.filter(g => g.level === 'N4');
     return (
       <GrammarFlashcardSession
-        items={grammar}
+        items={activeItems}
         preserveOrder={true}
         onExit={() => setActiveDeck(null)}
         ankiMode={ankiMode}
@@ -282,11 +301,11 @@ export function FlashcardPage() {
             <div className="space-y-0.5">
               <div className="text-xs font-semibold text-[var(--color-text)]">Từ Vựng (Vocab)</div>
               <div className="text-[11px] text-[var(--color-text-secondary)]">
-                Cần ôn hôm nay: <strong className="text-rose-500 font-bold">{vocabDueCount} thẻ</strong>
+                Cần ôn hôm nay: <strong className="text-rose-500 font-bold">{vocabN3DueCount + vocabN4DueCount} thẻ</strong>
               </div>
             </div>
             <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              {vocabMasteredCount} thuộc
+              {vocabN3MasteredCount + vocabN4MasteredCount} thuộc
             </span>
           </div>
 
@@ -294,11 +313,11 @@ export function FlashcardPage() {
             <div className="space-y-0.5">
               <div className="text-xs font-semibold text-[var(--color-text)]">Hán Tự (Kanji)</div>
               <div className="text-[11px] text-[var(--color-text-secondary)]">
-                Cần ôn hôm nay: <strong className="text-rose-500 font-bold">{kanjiDueCount} thẻ</strong>
+                Cần ôn hôm nay: <strong className="text-rose-500 font-bold">{kanjiN3DueCount} thẻ</strong>
               </div>
             </div>
             <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              {kanjiMasteredCount} thuộc
+              {kanjiN3MasteredCount} thuộc
             </span>
           </div>
 
@@ -306,110 +325,189 @@ export function FlashcardPage() {
             <div className="space-y-0.5">
               <div className="text-xs font-semibold text-[var(--color-text)]">Ngữ Pháp (Grammar)</div>
               <div className="text-[11px] text-[var(--color-text-secondary)]">
-                Cần ôn hôm nay: <strong className="text-rose-500 font-bold">{grammarDueCount} thẻ</strong>
+                Cần ôn hôm nay: <strong className="text-rose-500 font-bold">{grammarN3DueCount + grammarN4DueCount} thẻ</strong>
               </div>
             </div>
             <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              {grammarMasteredCount} thuộc
+              {grammarN3MasteredCount + grammarN4MasteredCount} thuộc
             </span>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-        {/* Vocabulary Deck */}
-        <button
-          onClick={() => setActiveDeck('vocab')}
-          className="
-            group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
-            hover:border-blue-500 hover:bg-[var(--color-accent-subtle)]/30
-            transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
-          "
-        >
-          <div className="flex items-center justify-between mb-3">
-            <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-500/15 text-[#1D63ED]">
-              Vocab Deck
-            </span>
-            <BookOpen size={20} className="text-[#1D63ED]" />
+      <div className="space-y-10 w-full">
+        {/* ============================================================
+            N4 DECKS
+            ============================================================ */}
+        <div>
+          <div className="flex items-center gap-3 mb-5">
+            <h2 className="text-lg font-bold text-[var(--color-text)] uppercase tracking-wider">Trình độ N4</h2>
+            <div className="flex-1 h-px bg-[var(--color-border)]/50"></div>
           </div>
-          <div className="text-lg font-bold text-[var(--color-text)] mb-1">
-            Complete N3 Vocabulary
-          </div>
-          <div className="text-sm text-[var(--color-text-secondary)]">
-            {vocabulary.length} từ vựng · {ankiMode ? `Anki SRS (${vocabDueCount} cần ôn)` : 'Tuần tự'}
-          </div>
-        </button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* N4 Vocabulary Deck */}
+            <button
+              onClick={() => setActiveDeck('vocabN4')}
+              className="
+                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
+                hover:border-purple-500 hover:bg-purple-500/5
+                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
+              "
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-400">
+                  Vocab Deck
+                </span>
+                <BookOpen size={20} className="text-purple-500" />
+              </div>
+              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
+                Từ vựng N4
+              </div>
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                {n4VocabIds.size} từ vựng · {ankiMode ? `Anki SRS (${vocabN4DueCount} cần ôn)` : 'Tuần tự'}
+              </div>
+            </button>
 
-        {/* Kanji Deck */}
-        <button
-          onClick={() => setActiveDeck('kanji')}
-          className="
-            group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
-            hover:border-amber-500 hover:bg-amber-500/5
-            transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
-          "
-        >
-          <div className="flex items-center justify-between mb-3">
-            <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400">
-              Kanji Deck
-            </span>
-            <Sparkles size={20} className="text-amber-500" />
+            {/* N4 Grammar Deck */}
+            <button
+              onClick={() => setActiveDeck('grammarN4')}
+              className="
+                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
+                hover:border-rose-500 hover:bg-rose-500/5
+                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
+              "
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-400">
+                  Grammar Deck
+                </span>
+                <Compass size={20} className="text-rose-500" />
+              </div>
+              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
+                Ngữ pháp N4
+              </div>
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                {n4GrammarIds.size} mẫu câu · {ankiMode ? `Anki SRS (${grammarN4DueCount} cần ôn)` : 'Tuần tự'}
+              </div>
+            </button>
           </div>
-          <div className="text-lg font-bold text-[var(--color-text)] mb-1">
-            Master N3 Kanji
-          </div>
-          <div className="text-sm text-[var(--color-text-secondary)]">
-            {kanji.length} hán tự · {ankiMode ? `Anki SRS (${kanjiDueCount} cần ôn)` : 'Tuần tự'}
-          </div>
-        </button>
+        </div>
 
-        {/* Grammar Deck */}
-        <button
-          onClick={() => setActiveDeck('grammar')}
-          className="
-            group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
-            hover:border-purple-500 hover:bg-purple-500/5
-            transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
-          "
-        >
-          <div className="flex items-center justify-between mb-3">
-            <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-400">
-              Grammar Deck
-            </span>
-            <Compass size={20} className="text-purple-500" />
+        {/* ============================================================
+            N3 DECKS
+            ============================================================ */}
+        <div>
+          <div className="flex items-center gap-3 mb-5">
+            <h2 className="text-lg font-bold text-[var(--color-text)] uppercase tracking-wider">Trình độ N3</h2>
+            <div className="flex-1 h-px bg-[var(--color-border)]/50"></div>
           </div>
-          <div className="text-lg font-bold text-[var(--color-text)] mb-1">
-            Master N3 Grammar
-          </div>
-          <div className="text-sm text-[var(--color-text-secondary)]">
-            {grammar.length} mẫu câu · {ankiMode ? `Anki SRS (${grammarDueCount} cần ôn)` : 'Tuần tự'}
-          </div>
-        </button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* N3 Vocabulary Deck */}
+            <button
+              onClick={() => setActiveDeck('vocabN3')}
+              className="
+                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
+                hover:border-blue-500 hover:bg-[var(--color-accent-subtle)]/30
+                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
+              "
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-500/15 text-[#1D63ED]">
+                  Vocab Deck
+                </span>
+                <BookOpen size={20} className="text-[#1D63ED]" />
+              </div>
+              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
+                Từ vựng N3
+              </div>
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                {n3VocabIds.size} từ vựng · {ankiMode ? `Anki SRS (${vocabN3DueCount} cần ôn)` : 'Tuần tự'}
+              </div>
+            </button>
 
-        {/* Saved Bookmarks Deck */}
-        <button
-          onClick={() => savedVocabulary.length > 0 && setActiveDeck('saved')}
-          disabled={savedVocabulary.length === 0}
-          className="
-            group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
-            hover:border-emerald-500 hover:bg-emerald-500/5
-            disabled:opacity-40 disabled:cursor-not-allowed
-            transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
-          "
-        >
-          <div className="flex items-center justify-between mb-3">
-            <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
-              Saved Deck
-            </span>
-            <BookmarkCheck size={20} className="text-emerald-500" />
+            {/* N3 Kanji Deck */}
+            <button
+              onClick={() => setActiveDeck('kanjiN3')}
+              className="
+                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
+                hover:border-amber-500 hover:bg-amber-500/5
+                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
+              "
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400">
+                  Kanji Deck
+                </span>
+                <Sparkles size={20} className="text-amber-500" />
+              </div>
+              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
+                Hán tự N3
+              </div>
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                {kanji.length} hán tự · {ankiMode ? `Anki SRS (${kanjiN3DueCount} cần ôn)` : 'Tuần tự'}
+              </div>
+            </button>
+
+            {/* N3 Grammar Deck */}
+            <button
+              onClick={() => setActiveDeck('grammarN3')}
+              className="
+                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
+                hover:border-emerald-500 hover:bg-emerald-500/5
+                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
+              "
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+                  Grammar Deck
+                </span>
+                <Compass size={20} className="text-emerald-500" />
+              </div>
+              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
+                Ngữ pháp N3
+              </div>
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                {n3GrammarIds.size} mẫu câu · {ankiMode ? `Anki SRS (${grammarN3DueCount} cần ôn)` : 'Tuần tự'}
+              </div>
+            </button>
           </div>
-          <div className="text-lg font-bold text-[var(--color-text)] mb-1">
-            Saved Bookmarks Deck
+        </div>
+
+        {/* ============================================================
+            OTHER DECKS
+            ============================================================ */}
+        <div>
+          <div className="flex items-center gap-3 mb-5">
+            <h2 className="text-lg font-bold text-[var(--color-text)] uppercase tracking-wider">Khác</h2>
+            <div className="flex-1 h-px bg-[var(--color-border)]/50"></div>
           </div>
-          <div className="text-sm text-[var(--color-text-secondary)]">
-            {savedVocabulary.length} thẻ đã lưu
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Saved Bookmarks Deck */}
+            <button
+              onClick={() => savedVocabulary.length > 0 && setActiveDeck('saved')}
+              disabled={savedVocabulary.length === 0}
+              className="
+                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
+                hover:border-emerald-500 hover:bg-emerald-500/5
+                disabled:opacity-40 disabled:cursor-not-allowed
+                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
+              "
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+                  Saved Deck
+                </span>
+                <BookmarkCheck size={20} className="text-emerald-500" />
+              </div>
+              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
+                Saved Bookmarks Deck
+              </div>
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                {savedVocabulary.length} thẻ đã lưu
+              </div>
+            </button>
           </div>
-        </button>
+        </div>
       </div>
     </div>
   );
@@ -418,7 +516,7 @@ export function FlashcardPage() {
 export function parseRelatedWords(rawText?: string) {
   if (!rawText) return [];
   const parts = rawText.split(/(?:[,;]|\r?\n)\s*(?=[^\(（【\[,;]+[\(（【\[])/);
-  const items: { word: string; reading: string; meaning: string; raw: string }[] = [];
+  const items: { word: string; reading: string; meaning: string; raw: string; type?: string; level?: string }[] = [];
 
   for (const part of parts) {
     const trimmed = part.trim().replace(/^[,;]\s*/, '');
@@ -478,7 +576,10 @@ export function VocabFlashcardSession({
   const total = shuffledItems.length;
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
-  const next = useCallback(() => {
+  const next = useCallback((isAnki?: any) => {
+    if (isAnki !== true) {
+      recordStudyActivity(1, 0, 1, 5, 'flashcard');
+    }
     if (index < total - 1) {
       setIndex((i) => i + 1);
       setFlipped(false);
@@ -493,13 +594,13 @@ export function VocabFlashcardSession({
 
   const handleAnkiRate = useCallback(
     (rating: Rating) => {
-      const existing = srsCards.find((c) => c.itemId === current.id);
+      const existing = srsCards.find((c) => c.cardId === current.id);
       const card = existing || createSRSCard(current.id, 'vocabulary');
       const isNew = card.state === 'new';
       const updated = processReview(card, rating);
       updateSRSCard(updated);
-      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10);
-      next();
+      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10, 'srs');
+      next(true);
     },
     [srsCards, current.id, updateSRSCard, next]
   );
@@ -835,7 +936,10 @@ function KanjiFlashcardSession({
   const total = items.length;
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
-  const next = useCallback(() => {
+  const next = useCallback((isAnki?: any) => {
+    if (isAnki !== true) {
+      recordStudyActivity(1, 0, 1, 5, 'flashcard');
+    }
     if (index < total - 1) {
       setIndex((i) => i + 1);
       setFlipped(false);
@@ -850,13 +954,13 @@ function KanjiFlashcardSession({
 
   const handleAnkiRate = useCallback(
     (rating: Rating) => {
-      const existing = srsCards.find((c) => c.itemId === current.id);
+      const existing = srsCards.find((c) => c.cardId === current.id);
       const card = existing || createSRSCard(current.id, 'kanji');
       const isNew = card.state === 'new';
       const updated = processReview(card, rating);
       updateSRSCard(updated);
-      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10);
-      next();
+      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10, 'srs');
+      next(true);
     },
     [srsCards, current.id, updateSRSCard, next]
   );
@@ -1300,7 +1404,10 @@ export function GrammarFlashcardSession({
   const total = shuffledItems.length;
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
-  const next = useCallback(() => {
+  const next = useCallback((isAnki?: any) => {
+    if (isAnki !== true) {
+      recordStudyActivity(1, 0, 1, 5, 'flashcard');
+    }
     if (index < total - 1) {
       setIndex((i) => i + 1);
       setFlipped(false);
@@ -1317,13 +1424,13 @@ export function GrammarFlashcardSession({
 
   const handleAnkiRate = useCallback(
     (rating: Rating) => {
-      const existing = srsCards.find((c) => c.itemId === current.id);
+      const existing = srsCards.find((c) => c.cardId === current.id);
       const card = existing || createSRSCard(current.id, 'grammar');
       const isNew = card.state === 'new';
       const updated = processReview(card, rating);
       updateSRSCard(updated);
-      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10);
-      next();
+      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10, 'srs');
+      next(true);
     },
     [srsCards, current.id, updateSRSCard, next]
   );

@@ -15,6 +15,8 @@ interface RawVocab {
   'Cách đọc (Phiên âm)'?: string;
   'Ý nghĩa'?: string;
   'Từ liên quan (Từ (Phiên âm): Nghĩa)'?: string;
+  phien_am?: string;
+  nghia?: string;
 }
 
 let _vocabCache: VocabItem[] | null = null;
@@ -22,17 +24,35 @@ let _vocabCache: VocabItem[] | null = null;
 export async function loadVocabulary(): Promise<VocabItem[]> {
   if (_vocabCache) return _vocabCache;
 
-  const res = await fetch('/data/all_vocab.json?t=' + Date.now());
-  const raw: RawVocab[] = await res.json();
+  const [resN3, resN4] = await Promise.all([
+    fetch('/data/all_vocab.json?t=' + Date.now()),
+    fetch('/data/vocabN4.json?t=' + Date.now()).catch(() => null)
+  ]);
 
-  _vocabCache = raw.map((item, index) => ({
-    id: `vocab-${index}`,
+  const rawN3: RawVocab[] = await resN3.json();
+  const rawN4: RawVocab[] = resN4 ? await resN4.json() : [];
+
+  const n3Vocab = rawN3.map((item, index) => ({
+    id: `vocab-n3-${index}`,
     kanji: item['Từ vựng'] || item.kanji || '',
-    hiragana: item['Cách đọc (Phiên âm)'] || item.hiragana || '',
-    meaning: item['Ý nghĩa'] || item.meaning || '',
-    type: item.type === 'compound' ? 'compound' : 'main',
+    hiragana: item['Cách đọc (Phiên âm)'] || item.hiragana || item.phien_am || '',
+    meaning: item['Ý nghĩa'] || item.meaning || item.nghia || '',
+    type: (item.type === 'compound' ? 'compound' : 'main') as 'main' | 'compound',
     relatedWords: item['Từ liên quan (Từ (Phiên âm): Nghĩa)'] || '',
+    level: 'N3',
   }));
+
+  const n4Vocab = rawN4.map((item, index) => ({
+    id: `vocab-n4-${index}`,
+    kanji: item['Từ vựng'] || item.kanji || '',
+    hiragana: item['Cách đọc (Phiên âm)'] || item.hiragana || item.phien_am || '',
+    meaning: item['Ý nghĩa'] || item.meaning || item.nghia || '',
+    type: (item.type === 'compound' ? 'compound' : 'main') as 'main' | 'compound',
+    relatedWords: item['Từ liên quan (Từ (Phiên âm): Nghĩa)'] || '',
+    level: 'N4',
+  }));
+
+  _vocabCache = [...n3Vocab, ...n4Vocab];
 
   return _vocabCache;
 }
@@ -118,6 +138,7 @@ interface RawGrammar {
   commonMistakes?: string;
   comparison?: string;
   lesson?: string;
+  level?: string;
 }
 
 let _grammarCache: GrammarItem[] | null = null;
@@ -125,10 +146,20 @@ let _grammarCache: GrammarItem[] | null = null;
 export async function loadGrammar(): Promise<GrammarItem[]> {
   if (_grammarCache && import.meta.env.PROD) return _grammarCache;
 
-  const res = await fetch('/data/grammar.json?t=' + Date.now());
-  const raw: RawGrammar[] = await res.json();
+  const [resN3, resN4] = await Promise.all([
+    fetch('/data/grammar.json?t=' + Date.now()),
+    fetch('/data/grammarN4.json?t=' + Date.now()).catch(() => null)
+  ]);
+  const rawN3: RawGrammar[] = await resN3.json();
+  const rawN4: RawGrammar[] = resN4 ? await resN4.json() : [];
+
+  const processedN3 = rawN3.map(item => ({ ...item, level: item.level || 'N3' }));
+  const processedN4 = rawN4.map(item => ({ ...item, level: item.level || 'N4' }));
+
+  const raw = [...processedN3, ...processedN4];
 
   _grammarCache = raw.map((item, index) => {
+    const level = item.level.toLowerCase();
     const pattern = item.mau_ngu_phap || item.pattern || `Grammar #${index + 1}`;
     const reading = item.phien_am || '';
     const meaning = item.y_nghia || item.meaning || '';
@@ -136,7 +167,8 @@ export async function loadGrammar(): Promise<GrammarItem[]> {
     const congThuc = item.cong_thuc || '';
     const structure = item.cong_thuc || item.structure || '';
     const nuance = item.nuance || item.chu_y || '';
-    const lesson = item.lesson || (item.bai !== undefined ? `Bài ${item.bai}` : 'N3 Grammar');
+    const defaultLesson = item.bai !== undefined ? `${level.toUpperCase()} - Bài ${item.bai}` : `${level.toUpperCase()} Grammar`;
+    const lesson = item.lesson || defaultLesson;
 
     const examples = (item.vi_du || item.examples || []).map((ex) => ({
       japanese: ex.nhat || ex.japanese || '',
@@ -145,7 +177,7 @@ export async function loadGrammar(): Promise<GrammarItem[]> {
     }));
 
     return {
-      id: `grammar-${item.bai || 0}-${item.stt || index}`,
+      id: `grammar-${level}-${item.bai || 0}-${item.stt || index}`,
       pattern,
       reading,
       meaning,
@@ -157,6 +189,7 @@ export async function loadGrammar(): Promise<GrammarItem[]> {
       comparison: item.comparison || '',
       examples,
       lesson,
+      level: item.level || 'N3',
     };
   });
 
