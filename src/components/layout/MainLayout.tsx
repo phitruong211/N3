@@ -82,6 +82,7 @@ export function MainLayout({ children }: MainLayoutProps) {
     srs: 'Ôn Tập SRS',
     quiz: 'Quiz',
     progress: 'Tiến Độ',
+    search: 'Tìm Kiếm',
     bookmarks: 'Đã Lưu',
     settings: 'Cài Đặt',
   };

@@ -210,6 +210,7 @@ export function FlashcardPage() {
     if (activeDeck === 'vocabN4') activeItems = vocabulary.filter(v => v.level === 'N4');
     if (activeDeck === 'saved') activeItems = savedVocabulary;
 
+    const deckLevel = activeDeck === 'vocabN4' ? 'N4' : activeDeck === 'vocabN3' ? 'N3' : undefined;
     return (
       <VocabFlashcardSession
         items={activeItems}
@@ -217,6 +218,7 @@ export function FlashcardPage() {
         onExit={() => setActiveDeck(null)}
         ankiMode={ankiMode}
         onToggleAnki={toggleAnkiMode}
+        deckLevel={deckLevel}
       />
     );
   }
@@ -556,6 +558,7 @@ export function VocabFlashcardSession({
   preserveOrder = true,
   ankiMode = true,
   onToggleAnki,
+  deckLevel,
 }: {
   items: VocabItem[];
   onExit: () => void;
@@ -563,6 +566,7 @@ export function VocabFlashcardSession({
   preserveOrder?: boolean;
   ankiMode?: boolean;
   onToggleAnki?: () => void;
+  deckLevel?: string;
 }) {
   const { srsCards, updateSRSCard } = useApp();
   const [index, setIndex] = useState(initialIndex || 0);
@@ -761,7 +765,7 @@ export function VocabFlashcardSession({
           {/* Top Left (Anchor): Lesson Pill & Anki Badge */}
           <div className="absolute top-8 left-10 flex flex-wrap items-center gap-2 select-none">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-bold bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] tracking-wide">
-              {current.lesson || 'N3 Vocab'}
+              {current.lesson || (deckLevel ? `${deckLevel} Vocab` : (current.level ? `${current.level} Vocab` : 'N3 Vocab'))}
             </div>
             {ankiMode && <AnkiCardBadge itemId={current.id} itemType="vocabulary" />}
           </div>
