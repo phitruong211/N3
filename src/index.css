@@ -353,3 +353,31 @@ html.font-large { font-size: 18px; }
                     radial-gradient(circle at 0% 100%, rgba(99, 102, 241, 0.04) 0%, transparent 50%);
 }
 
+/* ============================================================
+   Mobile Responsive Utilities
+   ============================================================ */
+
+/* Bottom sheet slide-up animation */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Safe area bottom padding for iOS devices */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

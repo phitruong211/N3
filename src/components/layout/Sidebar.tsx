@@ -1,10 +1,8 @@
 // ============================================================
 // Sidebar Navigation
 // ============================================================
-// Scaled & Clean Design:
-// - Header collapse toggle button (ChevronLeft icon in header next to logo)
-// - Scaled up icons (22px) and text (text-base font-bold, 16px)
-// - Deep rounded-2xl card touch targets (py-3 px-4) for every menu item
+// Desktop: Collapsible sidebar (left rail)
+// Mobile: Hidden — replaced by BottomNav component
 // ============================================================
 
 import React from 'react';
@@ -50,6 +48,8 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'settings', label: 'Settings', icon: <Settings size={22} />, group: 'System', shortcut: '' },
 ];
 
+export { NAV_ITEMS };
+
 export function Sidebar() {
   const {
     currentPage,
@@ -68,8 +68,9 @@ export function Sidebar() {
   return (
     <aside
       className={`
+        hidden md:flex
         shrink-0 sticky top-0 h-screen z-30
-        flex flex-col p-4
+        flex-col p-4
         bg-[#F3F4F6] dark:bg-[#0C0D0E] border-r border-gray-200/80 dark:border-[var(--color-border)]
         transition-[width] duration-200 ease-in-out
         ${collapsed ? 'w-20' : 'w-64'}

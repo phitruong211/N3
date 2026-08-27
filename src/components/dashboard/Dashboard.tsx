@@ -125,35 +125,35 @@ export function Dashboard() {
   }, [dueCards.length, setCurrentPage]);
 
   return (
-    <div className="w-full space-y-10 pb-24 pt-4 min-h-[calc(100vh-4rem)]">
+    <div className="w-full space-y-6 md:space-y-10 pt-2 md:pt-4">
       {/* ============================================================
           PAGE HEADER: Gentle, Soothing & Warm
           ============================================================ */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)]/60 pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--color-border)]/60 pb-4 md:pb-6">
         <div className="space-y-1">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)] text-xs font-semibold tracking-wide">
-            <Sparkles size={13} className="text-[var(--color-accent)]" />
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)] text-[10px] md:text-xs font-semibold tracking-wide">
+            <Sparkles size={11} className="text-[var(--color-accent)]" />
             <span>HỆ THỐNG THEO DÕI HỌC TẬP N3</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[var(--color-text)] tracking-tight font-sans">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--color-text)] tracking-tight font-sans">
             Tổng Quan Học Tập
           </h1>
-          <p className="text-sm text-[var(--color-text-secondary)] font-normal">
+          <p className="text-xs md:text-sm text-[var(--color-text-secondary)] font-normal hidden sm:block">
             Theo dõi chuỗi ngày học, số thẻ đã xem hôm nay và thông số tiến độ ghi nhớ SRS
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 shrink-0">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>{dueCards.length > 0 ? `CẦN ÔN: ${dueCards.length} THẺ` : 'ĐÃ ÔN HẾT THẺ HÔM NAY'}</span>
+        <div className="flex flex-wrap items-center gap-2 md:gap-3 shrink-0">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] md:text-xs font-semibold shadow-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>{dueCards.length > 0 ? `CẦN ÔN: ${dueCards.length} THẺ` : 'ĐÃ ÔN HẾT'}</span>
           </div>
           <button
             onClick={() => setCurrentPage(dueCards.length > 0 ? 'srs' : 'flashcards')}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1D63ED] hover:bg-blue-700 text-white font-semibold text-xs tracking-wide transition-colors shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1D63ED] hover:bg-blue-700 text-white font-semibold text-xs tracking-wide transition-colors shadow-xs cursor-pointer"
           >
             <span>Vào bài học</span>
-            <ArrowRight size={14} />
+            <ArrowRight size={13} />
           </button>
         </div>
       </div>
@@ -161,87 +161,91 @@ export function Dashboard() {
       {/* ============================================================
           SECTION 1: 4 THẺ CHỈ SỐ BÀI HỌC (Soothing Typography)
           ============================================================ */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
         {/* Metric 1: CHUỖI NGÀY HỌC */}
-        <div className="p-6 sm:p-7 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-amber-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
-              CHUỖI NGÀY HỌC
+        <div className="p-4 md:p-6 lg:p-7 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-amber-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
+          <div className="flex items-center justify-between mb-2 md:mb-4">
+            <span className="text-[10px] md:text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
+              CHUỖI NGÀY
             </span>
-            <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:scale-105 transition-transform">
-              <Flame size={20} />
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl md:rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <Flame size={16} className="md:hidden" />
+              <Flame size={20} className="hidden md:block" />
             </div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
-              {streak.current} <span className="text-lg font-normal text-[var(--color-text-secondary)]">ngày</span>
+            <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
+              {streak.current} <span className="text-sm md:text-lg font-normal text-[var(--color-text-secondary)]">ngày</span>
             </div>
-            <div className="text-xs font-medium text-amber-600 dark:text-amber-400 mt-2 flex items-center gap-1.5">
-              <span>Kỷ lục cao nhất: {streak.longest} ngày</span>
+            <div className="text-[10px] md:text-xs font-medium text-amber-600 dark:text-amber-400 mt-1 md:mt-2">
+              <span>KL: {streak.longest} ngày</span>
             </div>
           </div>
         </div>
 
         {/* Metric 2: ĐÃ HỌC HÔM NAY */}
-        <div className="p-6 sm:p-7 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-blue-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
-              ĐÃ HỌC HÔM NAY
+        <div className="p-4 md:p-6 lg:p-7 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-blue-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
+          <div className="flex items-center justify-between mb-2 md:mb-4">
+            <span className="text-[10px] md:text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
+              HÔM NAY
             </span>
-            <div className="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center group-hover:scale-105 transition-transform">
-              <Activity size={20} />
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl md:rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <Activity size={16} className="md:hidden" />
+              <Activity size={20} className="hidden md:block" />
             </div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
-              {todayStudy?.cardsReviewed || 0} <span className="text-lg font-normal text-[var(--color-text-secondary)]">thẻ</span>
+            <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
+              {todayStudy?.cardsReviewed || 0} <span className="text-sm md:text-lg font-normal text-[var(--color-text-secondary)]">thẻ</span>
             </div>
-            <div className="text-xs font-medium text-blue-600 dark:text-blue-400 mt-2 flex items-center gap-1.5">
-              <span>+{todayStudy?.newCardsLearned || 0} từ mới hôm nay</span>
+            <div className="text-[10px] md:text-xs font-medium text-blue-600 dark:text-blue-400 mt-1 md:mt-2">
+              <span>+{todayStudy?.newCardsLearned || 0} từ mới</span>
             </div>
           </div>
         </div>
 
         {/* Metric 3: CẦN ÔN HÔM NAY */}
-        <div className="p-6 sm:p-7 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-rose-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
-              CẦN ÔN HÔM NAY
+        <div className="p-4 md:p-6 lg:p-7 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-rose-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
+          <div className="flex items-center justify-between mb-2 md:mb-4">
+            <span className="text-[10px] md:text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
+              CẦN ÔN
             </span>
-            <div className={`w-10 h-10 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform ${
+            <div className={`w-8 h-8 md:w-10 md:h-10 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform ${
               dueCards.length > 0 ? 'bg-rose-500/10 text-rose-500' : 'bg-emerald-500/10 text-emerald-500'
             }`}>
-              {dueCards.length > 0 ? <Clock size={20} /> : <CheckCircle2 size={20} />}
+              {dueCards.length > 0 ? <Clock size={16} className="md:hidden" /> : <CheckCircle2 size={16} className="md:hidden" />}
+              {dueCards.length > 0 ? <Clock size={20} className="hidden md:block" /> : <CheckCircle2 size={20} className="hidden md:block" />}
             </div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
-              {dueCards.length} <span className="text-lg font-normal text-[var(--color-text-secondary)]">thẻ</span>
+            <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
+              {dueCards.length} <span className="text-sm md:text-lg font-normal text-[var(--color-text-secondary)]">thẻ</span>
             </div>
-            <div className={`text-xs font-medium mt-2 flex items-center gap-1.5 ${
+            <div className={`text-[10px] md:text-xs font-medium mt-1 md:mt-2 ${
               dueCards.length > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'
             }`}>
-              <span>{dueCards.length > 0 ? 'Sẵn sàng kiểm tra SRS' : 'Hoàn tất bài ôn hôm nay'}</span>
+              <span>{dueCards.length > 0 ? 'Sẵn sàng SRS' : 'Hoàn tất!'}</span>
             </div>
           </div>
         </div>
 
         {/* Metric 4: TỶ LỆ THUỘC BÀI */}
-        <div className="p-6 sm:p-7 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-emerald-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
-              TỔNG TỶ LỆ THUỘC BÀI
+        <div className="p-4 md:p-6 lg:p-7 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 hover:border-emerald-500/50 shadow-xs hover:shadow-sm transition-all duration-200 flex flex-col justify-between group">
+          <div className="flex items-center justify-between mb-2 md:mb-4">
+            <span className="text-[10px] md:text-xs font-semibold text-[var(--color-text-secondary)] tracking-wider">
+              THUỘC BÀI
             </span>
-            <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-105 transition-transform">
-              <TrendingUp size={20} />
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl md:rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <TrendingUp size={16} className="md:hidden" />
+              <TrendingUp size={20} className="hidden md:block" />
             </div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
+            <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--color-text)] tracking-tight font-sans">
               {Math.round((masteredCount / Math.max(srsCards.length, 1)) * 100)}%
             </div>
-            <div className="text-xs font-medium text-emerald-600 dark:text-emerald-400 mt-2 flex items-center gap-1.5">
-              <span>{masteredCount} / {srsCards.length} thẻ đã thành thạo</span>
+            <div className="text-[10px] md:text-xs font-medium text-emerald-600 dark:text-emerald-400 mt-1 md:mt-2">
+              <span>{masteredCount}/{srsCards.length} thẻ</span>
             </div>
           </div>
         </div>
@@ -250,40 +254,42 @@ export function Dashboard() {
       {/* ============================================================
           SECTION 1.5: TỶ LỆ HOÀN THÀNH N3 & N4 (NEW PROGRESS BARS)
           ============================================================ */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-6">
         {/* N4 Progress */}
-        <div className="p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs flex flex-col justify-center">
-          <div className="flex items-center justify-between mb-3">
+        <div className="p-4 md:p-6 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs flex flex-col justify-center">
+          <div className="flex items-center justify-between mb-2 md:mb-3">
             <div className="flex items-center gap-2">
-              <Trophy size={18} className="text-indigo-500" />
-              <h3 className="font-bold text-[var(--color-text)] tracking-wide">Tiến Độ N4</h3>
+              <Trophy size={15} className="text-indigo-500 md:hidden" />
+              <Trophy size={18} className="text-indigo-500 hidden md:block" />
+              <h3 className="text-sm md:text-base font-bold text-[var(--color-text)] tracking-wide">Tiến Độ N4</h3>
             </div>
-            <span className="text-lg font-black text-indigo-600 dark:text-indigo-400">{n4Progress}%</span>
+            <span className="text-base md:text-lg font-black text-indigo-600 dark:text-indigo-400">{n4Progress}%</span>
           </div>
-          <div className="w-full bg-[var(--color-surface-alt)] rounded-full h-3 mb-2 overflow-hidden border border-[var(--color-border)]/50">
-            <div className="bg-gradient-to-r from-indigo-500 to-indigo-400 h-3 rounded-full transition-all duration-1000 ease-out" style={{ width: `${n4Progress}%` }}></div>
+          <div className="w-full bg-[var(--color-surface-alt)] rounded-full h-2 md:h-3 mb-1.5 md:mb-2 overflow-hidden border border-[var(--color-border)]/50">
+            <div className="bg-gradient-to-r from-indigo-500 to-indigo-400 h-full rounded-full transition-all duration-1000 ease-out" style={{ width: `${n4Progress}%` }}></div>
           </div>
-          <div className="text-xs text-[var(--color-text-tertiary)] flex justify-between">
+          <div className="text-[10px] md:text-xs text-[var(--color-text-tertiary)] flex justify-between">
             <span>Đã thuộc: {n4Mastered}</span>
-            <span>Tổng cộng: {n4Total}</span>
+            <span>Tổng: {n4Total}</span>
           </div>
         </div>
 
         {/* N3 Progress */}
-        <div className="p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs flex flex-col justify-center">
-          <div className="flex items-center justify-between mb-3">
+        <div className="p-4 md:p-6 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs flex flex-col justify-center">
+          <div className="flex items-center justify-between mb-2 md:mb-3">
             <div className="flex items-center gap-2">
-              <Target size={18} className="text-purple-500" />
-              <h3 className="font-bold text-[var(--color-text)] tracking-wide">Tiến Độ N3</h3>
+              <Target size={15} className="text-purple-500 md:hidden" />
+              <Target size={18} className="text-purple-500 hidden md:block" />
+              <h3 className="text-sm md:text-base font-bold text-[var(--color-text)] tracking-wide">Tiến Độ N3</h3>
             </div>
-            <span className="text-lg font-black text-purple-600 dark:text-purple-400">{n3Progress}%</span>
+            <span className="text-base md:text-lg font-black text-purple-600 dark:text-purple-400">{n3Progress}%</span>
           </div>
-          <div className="w-full bg-[var(--color-surface-alt)] rounded-full h-3 mb-2 overflow-hidden border border-[var(--color-border)]/50">
-            <div className="bg-gradient-to-r from-purple-500 to-purple-400 h-3 rounded-full transition-all duration-1000 ease-out" style={{ width: `${n3Progress}%` }}></div>
+          <div className="w-full bg-[var(--color-surface-alt)] rounded-full h-2 md:h-3 mb-1.5 md:mb-2 overflow-hidden border border-[var(--color-border)]/50">
+            <div className="bg-gradient-to-r from-purple-500 to-purple-400 h-full rounded-full transition-all duration-1000 ease-out" style={{ width: `${n3Progress}%` }}></div>
           </div>
-          <div className="text-xs text-[var(--color-text-tertiary)] flex justify-between">
+          <div className="text-[10px] md:text-xs text-[var(--color-text-tertiary)] flex justify-between">
             <span>Đã thuộc: {n3Mastered}</span>
-            <span>Tổng cộng: {n3Total}</span>
+            <span>Tổng: {n3Total}</span>
           </div>
         </div>
       </div>
@@ -291,9 +297,9 @@ export function Dashboard() {
       {/* ============================================================
           SECTION 2: THÔNG SỐ TIẾN ĐỘ SRS & THAM SỐ KHÓA HỌC
           ============================================================ */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-8 items-start">
         {/* Left Column (col-span-7): Phân Bổ Ghi Nhớ Spaced Repetition */}
-        <div className="lg:col-span-7 p-7 sm:p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs space-y-6">
+        <div className="lg:col-span-7 p-4 md:p-7 lg:p-8 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs space-y-4 md:space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[var(--color-border)]/50 pb-4">
             <div>
               <h3 className="text-lg font-bold text-[var(--color-text)]">
@@ -347,7 +353,7 @@ export function Dashboard() {
           </div>
 
           {/* Soothing 4-stage data grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-4 pt-2">
             <div className="p-4 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/60">
               <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400">
                 <span className="w-2 h-2 rounded-full bg-blue-500" />
@@ -403,9 +409,9 @@ export function Dashboard() {
         </div>
 
         {/* Right Column (col-span-5): Thông Số Khóa Học N3 & Phím Tắt Thao Tác */}
-        <div className="lg:col-span-5 space-y-6">
+        <div className="lg:col-span-5 space-y-4 md:space-y-6">
           {/* Widget 1: Thông Số Học Phần Khóa Học N3 */}
-          <div className="p-7 sm:p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs space-y-5">
+          <div className="p-4 md:p-7 lg:p-8 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs space-y-3 md:space-y-5">
             <div className="flex items-center justify-between border-b border-[var(--color-border)]/50 pb-4">
               <h3 className="text-base font-bold text-[var(--color-text)] flex items-center gap-2">
                 <Layers size={18} className="text-blue-500" />
@@ -448,7 +454,7 @@ export function Dashboard() {
           </div>
 
           {/* Widget 2: Phím Tắt Thao Tác Nhanh */}
-          <div className="p-7 sm:p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs space-y-4">
+          <div className="hidden md:block p-4 md:p-7 lg:p-8 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs space-y-3 md:space-y-4">
             <div className="flex items-center justify-between border-b border-[var(--color-border)]/50 pb-4">
               <h3 className="text-base font-bold text-[var(--color-text)] flex items-center gap-2">
                 <Compass size={18} className="text-[var(--color-text-secondary)]" />
@@ -485,12 +491,12 @@ export function Dashboard() {
       {/* ============================================================
           SECTION 3: DAILY STUDY CHARTS (RECHARTS)
           ============================================================ */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 items-start">
         
         {/* Chart 1: Số thẻ đã ôn 7 ngày qua */}
-        <div className="p-7 sm:p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs">
-          <h3 className="text-lg font-bold text-[var(--color-text)] mb-6">Thẻ Đã Ôn (7 Ngày Qua)</h3>
-          <div className="h-64 w-full">
+        <div className="p-4 md:p-7 lg:p-8 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs">
+          <h3 className="text-sm md:text-lg font-bold text-[var(--color-text)] mb-3 md:mb-6">Thẻ Đã Ôn (7 Ngày Qua)</h3>
+          <div className="h-48 md:h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--color-border)" opacity={0.5} />
@@ -520,9 +526,9 @@ export function Dashboard() {
         </div>
 
         {/* Chart 2: Thời gian học 7 ngày qua */}
-        <div className="p-7 sm:p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs">
-          <h3 className="text-lg font-bold text-[var(--color-text)] mb-6">Thời Gian Học (7 Ngày Qua)</h3>
-          <div className="h-64 w-full">
+        <div className="p-4 md:p-7 lg:p-8 rounded-2xl md:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs">
+          <h3 className="text-sm md:text-lg font-bold text-[var(--color-text)] mb-3 md:mb-6">Thời Gian Học (7 Ngày Qua)</h3>
+          <div className="h-48 md:h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                 <defs>
