@@ -42,15 +42,21 @@ export async function loadVocabulary(): Promise<VocabItem[]> {
     level: 'N3',
   }));
 
-  const n4Vocab = rawN4.map((item, index) => ({
-    id: `vocab-n4-${index}`,
-    kanji: item['Từ vựng'] || item.kanji || '',
-    hiragana: item['Cách đọc (Phiên âm)'] || item.hiragana || item.phien_am || '',
-    meaning: item['Ý nghĩa'] || item.meaning || item.nghia || '',
-    type: (item.type === 'compound' ? 'compound' : 'main') as 'main' | 'compound',
-    relatedWords: item['Từ liên quan (Từ (Phiên âm): Nghĩa)'] || '',
-    level: 'N4',
-  }));
+
+  const n4Vocab = rawN4.map((item, index) => {
+    const rawHiragana = item['Cách đọc (Phiên âm)'] || item.hiragana || item.phien_am || '';
+    // Strip Sino-Vietnamese annotations like [GIAN HỢP], [CHẨN], etc.
+    const cleanHiragana = rawHiragana.replace(/\s*\[[^\]]*\]/g, '').trim();
+    return {
+      id: `vocab-n4-${index}`,
+      kanji: item['Từ vựng'] || item.kanji || '',
+      hiragana: cleanHiragana,
+      meaning: item['Ý nghĩa'] || item.meaning || item.nghia || '',
+      type: (item.type === 'compound' ? 'compound' : 'main') as 'main' | 'compound',
+      relatedWords: item['Từ liên quan (Từ (Phiên âm): Nghĩa)'] || '',
+      level: 'N4',
+    };
+  });
 
   _vocabCache = [...n3Vocab, ...n4Vocab];
 
