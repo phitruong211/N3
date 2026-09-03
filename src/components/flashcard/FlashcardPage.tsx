@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // Flashcard Mode — Full Screen, Keyboard-Driven
 // ============================================================
 // Principles:
@@ -1187,7 +1187,7 @@ export function VocabFlashcardSession({
 
       {/* Card area — flex-1, swipeable */}
       <div
-        className="flex-1 flex items-stretch px-3 py-2 sm:px-6 sm:py-4"
+        className="flex-1 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4"
         {...swipe}
       >
         <button
@@ -1566,7 +1566,7 @@ function KanjiFlashcardSession({
         </div>
       </div>
 
-      <div className="flex-1 flex items-stretch px-3 py-2 sm:px-6 sm:py-4" {...swipe}>
+      <div className="flex-1 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4" {...swipe}>
         <button
           onClick={flip}
           className={`
@@ -2005,7 +2005,7 @@ export function GrammarFlashcardSession({
       </div>
 
       {/* Card area — swipeable */}
-      <div className="flex-1 flex items-stretch px-3 py-2 sm:px-6 sm:py-4 overflow-hidden" {...swipe}>
+      <div className="flex-1 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4 overflow-hidden" {...swipe}>
         <div
           role="button"
           tabIndex={0}
