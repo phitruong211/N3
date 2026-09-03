@@ -25,6 +25,8 @@ const KEYS = {
   LAST_PAGE: 'n3_last_page',
   LAST_VOCAB_INDEX: 'n3_last_vocab_index',
   LAST_KANJI_INDEX: 'n3_last_kanji_index',
+  LAST_GRAMMAR_INDEX: 'n3_last_grammar_index',
+  LAST_ACTIVE_DECK: 'n3_last_active_deck',
 } as const;
 
 // --- Generic helpers ---
@@ -259,6 +261,38 @@ export function getLastVocabIndex(): number {
 
 export function setLastVocabIndex(index: number): void {
   localStorage.setItem(KEYS.LAST_VOCAB_INDEX, index.toString());
+}
+
+export function getLastKanjiIndex(): number {
+  return parseInt(localStorage.getItem(KEYS.LAST_KANJI_INDEX) || '0', 10);
+}
+
+export function setLastKanjiIndex(index: number): void {
+  localStorage.setItem(KEYS.LAST_KANJI_INDEX, index.toString());
+}
+
+export function getLastGrammarIndex(): number {
+  return parseInt(localStorage.getItem(KEYS.LAST_GRAMMAR_INDEX) || '0', 10);
+}
+
+export function setLastGrammarIndex(index: number): void {
+  localStorage.setItem(KEYS.LAST_GRAMMAR_INDEX, index.toString());
+}
+
+export type ActiveDeck = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'grammarN3' | 'grammarN4' | 'saved' | null;
+
+export function getLastActiveDeck(): ActiveDeck {
+  const val = localStorage.getItem(KEYS.LAST_ACTIVE_DECK);
+  const valid = ['vocabN3', 'vocabN4', 'kanjiN3', 'grammarN3', 'grammarN4', 'saved'];
+  return valid.includes(val || '') ? (val as ActiveDeck) : null;
+}
+
+export function setLastActiveDeck(deck: ActiveDeck): void {
+  if (deck === null) {
+    localStorage.removeItem(KEYS.LAST_ACTIVE_DECK);
+  } else {
+    localStorage.setItem(KEYS.LAST_ACTIVE_DECK, deck);
+  }
 }
 
 // --- Streak calculation ---
