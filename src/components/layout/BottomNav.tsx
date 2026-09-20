@@ -1,11 +1,12 @@
 import { useApp } from '@/hooks/useApp';
 import type { PageId } from '@/types';
-import { LayoutGrid, BookOpen, ScrollText, Languages, RotateCcw, Brain } from 'lucide-react';
+import { LayoutGrid, BookOpen, ScrollText, Languages, RotateCcw, Brain, Headphones } from 'lucide-react';
 
 const tabs: { id: PageId; label: string; shortLabel: string; icon: typeof BookOpen }[] = [
   { id: 'dashboard', label: 'Hôm nay', shortLabel: 'Hôm nay', icon: LayoutGrid },
   { id: 'vocabulary', label: 'Từ vựng', shortLabel: 'Từ', icon: BookOpen },
   { id: 'grammar', label: 'Ngữ pháp', shortLabel: 'Ngữ', icon: ScrollText },
+  { id: 'listening', label: 'Luyện nghe', shortLabel: 'Nghe', icon: Headphones },
   { id: 'kanji', label: 'Kanji', shortLabel: 'Kanji', icon: Languages },
   { id: 'srs', label: 'Ôn tập', shortLabel: 'Ôn tập', icon: RotateCcw },
   { id: 'anki', label: 'Anki', shortLabel: 'Anki', icon: Brain },

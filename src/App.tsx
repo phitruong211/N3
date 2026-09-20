@@ -17,6 +17,7 @@ const FlashcardPage = lazy(() => import('@/components/flashcard/FlashcardPage').
 const AnkiPage = lazy(() => import('@/components/flashcard/FlashcardPage').then((module) => ({ default: module.AnkiPage })));
 const SRSPage = lazy(() => import('@/components/srs/SRSPage').then((module) => ({ default: module.SRSPage })));
 const QuizPage = lazy(() => import('@/components/quiz/QuizPage').then((module) => ({ default: module.QuizPage })));
+const ListeningPage = lazy(() => import('@/components/listening/ListeningPage').then((module) => ({ default: module.ListeningPage })));
 const ProgressPage = lazy(() => import('@/components/progress/ProgressPage').then((module) => ({ default: module.ProgressPage })));
 const BookmarksPage = lazy(() => import('@/components/bookmarks/BookmarksPage').then((module) => ({ default: module.BookmarksPage })));
 const SettingsPage = lazy(() => import('@/components/settings/SettingsPage').then((module) => ({ default: module.SettingsPage })));
@@ -54,6 +55,7 @@ function AppContent() {
       case 'anki': return <AnkiPage />;
       case 'srs': return <SRSPage />;
       case 'quiz': return <QuizPage />;
+      case 'listening': return <ListeningPage />;
       case 'progress': return <ProgressPage />;
       case 'bookmarks': return <BookmarksPage />;
       case 'settings': return <SettingsPage />;

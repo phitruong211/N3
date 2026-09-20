@@ -1,6 +1,6 @@
 import { useApp } from '@/hooks/useApp';
 import type { PageId } from '@/types';
-import { LayoutGrid, BookOpen, ScrollText, Languages, RotateCcw, Layers, Brain, CircleHelp, ChartNoAxesCombined, Bookmark, Settings, Search, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { LayoutGrid, BookOpen, ScrollText, Languages, RotateCcw, Layers, Brain, CircleHelp, Headphones, ChartNoAxesCombined, Bookmark, Settings, Search, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 
 const groups: { label: string; items: { id: PageId; label: string; icon: typeof BookOpen; shortcut?: string }[] }[] = [
   { label: 'Học', items: [
@@ -11,6 +11,7 @@ const groups: { label: string; items: { id: PageId; label: string; icon: typeof 
     { id: 'srs', label: 'Ôn tập', icon: RotateCcw, shortcut: 'G S' },
   ] },
   { label: 'Luyện thêm', items: [
+    { id: 'listening', label: 'Luyện nghe', icon: Headphones, shortcut: 'G L' },
     { id: 'flashcards', label: 'Thẻ học', icon: Layers, shortcut: 'G F' },
     { id: 'anki', label: 'Anki', icon: Brain, shortcut: 'G A' },
     { id: 'quiz', label: 'Trắc nghiệm', icon: CircleHelp, shortcut: 'G Q' },

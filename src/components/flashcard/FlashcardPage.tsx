@@ -136,6 +136,21 @@ function CardJumpControl({
   );
 }
 
+function FullscreenToggle({ isFullscreen, onClick }: { isFullscreen: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      title={isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}
+      aria-label={isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}
+      className="flex shrink-0 items-center justify-center gap-2 min-h-10 min-w-10 px-2 sm:px-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] focus-ring cursor-pointer text-xs font-semibold"
+    >
+      {isFullscreen ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
+      <span className="hidden lg:inline">{isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</span>
+    </button>
+  );
+}
+
 // ============================================================
 // useSwipeGesture — Touch swipe for mobile navigation
 // ============================================================
@@ -929,7 +944,7 @@ export function VocabFlashcardSession({
       }`}
     >
       {/* Top bar — compact on mobile */}
-      <div className="flex items-center justify-between px-3 py-2 sm:px-8 sm:py-4 shrink-0">
+      <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-3 py-2 sm:px-8 sm:py-4 shrink-0">
         <div className="flex items-center gap-2">
           <button
             onClick={handleExit}
@@ -942,9 +957,9 @@ export function VocabFlashcardSession({
         </div>
 
         {/* Progress bar + jump */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex min-w-0 items-center justify-center gap-2 sm:gap-4">
           {ankiMode ? <span className="font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Thẻ {index + 1} / {total}</span> : <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />}
-          <div className="w-24 sm:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
+          <div className="hidden sm:block w-24 lg:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"
               style={{ width: `${((index + 1) / total) * 100}%` }}
@@ -952,15 +967,7 @@ export function VocabFlashcardSession({
           </div>
         </div>
 
-        <div className="hidden sm:flex items-center gap-2 text-xs text-[var(--color-text-tertiary)]">
-          {isFullscreen ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-border)] text-[var(--color-accent)] font-bold tracking-wide shadow-2xs animate-pulse">
-              <span>✦ TOÀN MÀN HÌNH</span>
-            </span>
-          ) : (
-            <span>Từ vựng</span>
-          )}
-        </div>
+        <FullscreenToggle isFullscreen={isFullscreen} onClick={toggleFullscreen} />
       </div>
 
       {/* Card area — flex-1, swipeable */}
@@ -987,27 +994,6 @@ export function VocabFlashcardSession({
               {current.lesson || `Từ vựng ${current.level}`}
             </div>
             {ankiMode && <AnkiCardBadge itemId={current.id} itemType="vocabulary" />}
-          </div>
-
-          {/* Fullscreen button */}
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
-            title={isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}
-            className={`
-              absolute bottom-3 right-3 sm:bottom-6 sm:right-6 z-20 p-2.5 rounded-xl
-              transition-all duration-200 cursor-pointer focus-ring
-              flex items-center gap-2 text-xs font-bold
-              ${
-                isFullscreen
-                  ? 'bg-[var(--color-accent-subtle)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-accent)] '
-                  : 'bg-[var(--color-surface-alt)]/80 hover:bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] hover:text-[var(--color-text)] backdrop-blur-xs shadow-2xs'
-              }
-            `}
-          >
-            {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-            <span className="hidden sm:inline">{isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</span>
           </div>
 
           {/* Swipe hint — mobile only */}
@@ -1089,21 +1075,9 @@ export function VocabFlashcardSession({
             </div>
           </>
         ) : !ankiMode ? (
-          /* Non-Anki mode: prev/next */
-          <div className="flex items-center justify-between gap-3">
-            <button
-              onClick={(e) => { e.stopPropagation(); prev(); }}
-              className="flex-1 flex items-center justify-center gap-1.5 px-4 py-3 sm:py-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] font-bold hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer text-sm"
-            >
-              ← Trước
-            </button>
+          /* Non-Anki mode: jump to a card; arrow keys and swipes navigate */
+          <div className="flex items-center justify-center min-h-10">
             <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
-            <button
-              onClick={(e) => { e.stopPropagation(); next(); }}
-              className="flex-1 flex items-center justify-center gap-1.5 px-4 py-3 sm:py-2 rounded-xl border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-bold hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer text-sm"
-            >
-              Tiếp →
-            </button>
           </div>
         ) : null}
 
@@ -1295,7 +1269,7 @@ function KanjiFlashcardSession({
           : 'bg-[var(--color-bg)]'
       }`}
     >
-      <div className="flex items-center justify-between px-3 py-2 sm:px-8 sm:py-4 shrink-0">
+      <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-3 py-2 sm:px-8 sm:py-4 shrink-0">
         <div className="flex items-center gap-2">
           <button
             onClick={handleExit}
@@ -1307,9 +1281,9 @@ function KanjiFlashcardSession({
 
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex min-w-0 items-center justify-center gap-2 sm:gap-4">
           {ankiMode ? <span className="font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Thẻ {index + 1} / {total}</span> : <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />}
-          <div className="w-24 sm:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
+          <div className="hidden sm:block w-24 lg:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"
               style={{ width: `${((index + 1) / total) * 100}%` }}
@@ -1317,15 +1291,7 @@ function KanjiFlashcardSession({
           </div>
         </div>
 
-        <div className="hidden sm:flex items-center gap-2 text-xs text-[var(--color-text-tertiary)]">
-          {isFullscreen ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-border)] text-[var(--color-accent)] font-bold tracking-wide shadow-2xs animate-pulse">
-              <span>✦ TOÀN MÀN HÌNH</span>
-            </span>
-          ) : (
-            <span>Kanji {current.level}</span>
-          )}
-        </div>
+        <FullscreenToggle isFullscreen={isFullscreen} onClick={toggleFullscreen} />
       </div>
 
       <div className="flex-1 min-h-0 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4" {...swipe.handlers}>
@@ -1347,22 +1313,6 @@ function KanjiFlashcardSession({
               <AnkiCardBadge itemId={current.id} itemType="kanji" />
             </div>
           )}
-
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
-            className={`
-              absolute bottom-3 right-3 sm:bottom-6 sm:right-6 z-20 p-2.5 rounded-xl
-              transition-all duration-200 cursor-pointer focus-ring flex items-center gap-2 text-xs font-bold
-              ${isFullscreen
-                ? 'bg-[var(--color-accent-subtle)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-accent)] '
-                : 'bg-[var(--color-surface-alt)]/80 hover:bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] backdrop-blur-xs shadow-2xs'}
-            `}
-          >
-            {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-            <span className="hidden sm:inline">{isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</span>
-          </div>
 
           {swipe.swipeDir && (
             <div className={`absolute top-1/2 -translate-y-1/2 pointer-events-none text-4xl font-bold opacity-30 ${swipe.swipeDir === 'left' ? 'right-4' : 'left-4'}`}>
@@ -1434,14 +1384,8 @@ function KanjiFlashcardSession({
             </div>
           </>
         ) : !ankiMode ? (
-          <div className="flex items-center justify-between gap-3">
-            <button onClick={(e) => { e.stopPropagation(); prev(); }} className="flex-1 flex items-center justify-center py-3 sm:py-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] font-bold text-sm transition-all cursor-pointer active:scale-95">
-              ← Trước
-            </button>
+          <div className="flex items-center justify-center min-h-10">
             <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
-            <button onClick={(e) => { e.stopPropagation(); next(); }} className="flex-1 flex items-center justify-center py-3 sm:py-2 rounded-xl border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-bold text-sm transition-all cursor-pointer active:scale-95">
-              Tiếp →
-            </button>
           </div>
         ) : null}
       </div>
@@ -1731,7 +1675,7 @@ export function GrammarFlashcardSession({
       }`}
     >
       {/* Top bar — compact on mobile */}
-      <div className="flex items-center justify-between px-3 py-2 sm:px-8 sm:py-4 shrink-0">
+      <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-3 py-2 sm:px-8 sm:py-4 shrink-0">
         <div className="flex items-center gap-2">
           <button
             onClick={handleExit}
@@ -1743,9 +1687,9 @@ export function GrammarFlashcardSession({
 
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex min-w-0 items-center justify-center gap-2 sm:gap-4">
           {ankiMode ? <span className="font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Thẻ {index + 1} / {total}</span> : <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />}
-          <div className="w-24 sm:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
+          <div className="hidden sm:block w-24 lg:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
               className="h-full rounded-full bg-[var(--color-grammar)] transition-all duration-300"
               style={{ width: `${((index + 1) / total) * 100}%` }}
@@ -1753,15 +1697,7 @@ export function GrammarFlashcardSession({
           </div>
         </div>
 
-        <div className="hidden sm:flex items-center gap-2 text-xs text-[var(--color-text-tertiary)]">
-          {isFullscreen ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-border)] text-[var(--color-accent)] font-bold tracking-wide shadow-2xs animate-pulse">
-              <span>✦ TOÀN MÀN HÌNH</span>
-            </span>
-          ) : (
-            <span>Ngữ pháp</span>
-          )}
-        </div>
+        <FullscreenToggle isFullscreen={isFullscreen} onClick={toggleFullscreen} />
       </div>
 
       {/* Card area — swipeable */}
@@ -1771,18 +1707,18 @@ export function GrammarFlashcardSession({
           tabIndex={0}
           onClick={flip}
           className={`
-            w-full flex flex-col items-center justify-center overflow-y-auto cursor-pointer transition-all duration-300
+            w-full flex flex-col items-center justify-start overflow-y-auto cursor-pointer transition-all duration-300
             focus-ring relative
             ${
               isFullscreen
                 ? 'max-w-4xl lg:max-w-5xl mx-auto max-h-[88vh] rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-5 sm:p-12'
-                : 'max-w-4xl lg:max-w-5xl mx-auto max-h-[82vh] rounded-2xl sm:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]  p-4 sm:p-12'
+                : 'max-w-4xl lg:max-w-5xl mx-auto max-h-[82vh] rounded-2xl sm:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] p-4 sm:p-12'
             }
           `}
           aria-label={flipped ? 'Đã hiện đáp án, chạm để xem câu hỏi' : 'Đang hiện câu hỏi, chạm để lật'}
         >
-          {/* Top Left (Anchor): Lesson Pill & Anki Card Badge */}
-          <div className="absolute top-3 left-3 sm:top-8 sm:left-10 flex flex-wrap items-center gap-2 select-none">
+          {/* Keep the lesson label in the scroll flow so long answers cannot overlap it. */}
+          <div className="self-start shrink-0 mb-5 sm:mb-6 flex flex-wrap items-center gap-2 select-none">
             <div className="inline-flex items-center px-2.5 py-1 rounded-full text-xs sm:text-sm font-bold bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] tracking-wide">
               {current.lesson || 'Ngữ pháp N3'}
             </div>
@@ -1801,30 +1737,6 @@ export function GrammarFlashcardSession({
             className="absolute top-6 right-8 p-2.5 rounded-full hover:bg-[var(--color-surface-alt)] transition-colors text-[var(--color-accent)] cursor-pointer"
           >
             <Volume2 size={20} />
-          </div>
-
-          {/* Fullscreen Icon */}
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleFullscreen();
-            }}
-            title={isFullscreen ? "Thoát toàn màn hình (Esc)" : "Toàn màn hình"}
-            className={`
-              absolute bottom-3 right-3 sm:bottom-6 sm:right-6 z-20 p-2.5 rounded-xl
-              transition-all duration-200 cursor-pointer focus-ring
-              flex items-center gap-2 text-xs font-bold
-              ${
-                isFullscreen
-                  ? 'bg-[var(--color-accent-subtle)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-accent)] '
-                  : 'bg-[var(--color-surface-alt)]/80 hover:bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] hover:text-[var(--color-text)] backdrop-blur-xs shadow-2xs'
-              }
-            `}
-          >
-            {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-            <span className="hidden sm:inline">{isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</span>
           </div>
 
           {/* Swipe hint */}
@@ -2009,14 +1921,8 @@ export function GrammarFlashcardSession({
             </div>
           </>
         ) : !ankiMode ? (
-          <div className="flex items-center justify-between gap-3">
-            <button onClick={(e) => { e.stopPropagation(); prev(); }} className="flex-1 flex items-center justify-center py-3 sm:py-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] font-bold text-sm transition-all cursor-pointer active:scale-95">
-              ← Trước
-            </button>
+          <div className="flex items-center justify-center min-h-10">
             <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
-            <button onClick={(e) => { e.stopPropagation(); next(); }} className="flex-1 flex items-center justify-center py-3 sm:py-2 rounded-xl border border-[var(--color-grammar)] bg-[var(--color-grammar)]/10 text-[var(--color-grammar)] font-bold text-sm transition-all cursor-pointer active:scale-95">
-              Tiếp →
-            </button>
           </div>
         ) : null}
 

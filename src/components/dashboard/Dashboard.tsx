@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useApp } from '@/hooks/useApp';
 import { getDueCards, formatDate } from '@/lib/srs';
 import { getStudyDays } from '@/lib/storage';
-import { ArrowRight, BookOpen, ScrollText, Languages, RotateCcw, Layers, ChartNoAxesCombined } from 'lucide-react';
+import { ArrowRight, BookOpen, ScrollText, Languages, RotateCcw, Layers, Headphones, ChartNoAxesCombined } from 'lucide-react';
 import { PageHeading } from '@/components/ui/StudyUI';
 import type { PageId } from '@/types';
 
@@ -14,6 +14,7 @@ export function Dashboard() {
     { page: 'vocabulary' as PageId, title: 'Từ vựng', subtitle: `${vocabulary.filter(item => item.level === 'N3').length} từ N3`, icon: BookOpen, tone: 'var(--color-accent)' },
     { page: 'grammar' as PageId, title: 'Ngữ pháp', subtitle: `${grammar.filter(item => item.level === 'N2').length} mẫu N2 · ${grammar.filter(item => item.level === 'N3').length} N3 · ${grammar.filter(item => item.level === 'N4').length} N4`, icon: ScrollText, tone: 'var(--color-grammar)' },
     { page: 'kanji' as PageId, title: 'Kanji', subtitle: `${kanji.filter(item => item.level === 'N3').length} N3 · ${kanji.filter(item => item.level === 'N2').length} N2`, icon: Languages, tone: 'var(--color-kanji)' },
+    { page: 'listening' as PageId, title: 'Luyện nghe', subtitle: 'Podcast N4 / N3 / N2 · nhiều chủ đề', icon: Headphones, tone: 'var(--color-success)' },
   ];
 
   return <div className="study-page space-y-8">
@@ -35,7 +36,7 @@ export function Dashboard() {
     </section>
     <section aria-labelledby="library-title" className="space-y-4">
       <div className="flex items-end justify-between gap-3"><div><p className="study-eyebrow">Khám phá</p><h2 id="library-title" className="text-xl font-semibold">Thư viện học</h2></div><span className="text-xs text-[var(--color-text-tertiary)]">N2 / N3 / N4</span></div>
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {cards.map(({ page, title, subtitle, icon: Icon, tone }) => <button key={page} onClick={() => setCurrentPage(page)} className="study-panel min-h-36 p-5 text-left cursor-pointer hover:border-[var(--color-border-strong)] transition-colors group">
           <div className="flex items-center justify-between"><Icon size={23} style={{ color: tone }} /><ArrowRight size={17} className="text-[var(--color-text-tertiary)] group-hover:translate-x-1 transition-transform" /></div>
           <h3 className="mt-5 text-lg font-semibold">{title}</h3><p className="mt-1 text-sm text-[var(--color-text-secondary)]">{subtitle}</p>

@@ -322,6 +322,7 @@ export type PageId =
   | 'anki'
   | 'srs'
   | 'quiz'
+  | 'listening'
   | 'progress'
   | 'search'
   | 'bookmarks'
