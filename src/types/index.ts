@@ -319,6 +319,7 @@ export type PageId =
   | 'kanji'
   | 'grammar'
   | 'flashcards'
+  | 'anki'
   | 'srs'
   | 'quiz'
   | 'progress'

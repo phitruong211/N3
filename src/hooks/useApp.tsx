@@ -60,7 +60,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [currentPage, _setCurrentPage] = useState<PageId>(() => {
     const saved = getLastPage();
-    const pages: PageId[] = ['dashboard', 'vocabulary', 'kanji', 'grammar', 'flashcards', 'srs', 'quiz', 'progress', 'bookmarks', 'settings'];
+    const pages: PageId[] = ['dashboard', 'vocabulary', 'kanji', 'grammar', 'flashcards', 'anki', 'srs', 'quiz', 'progress', 'bookmarks', 'settings'];
     return pages.includes(saved as PageId) ? saved as PageId : 'dashboard';
   });
   const [navigationTarget, setNavigationTarget] = useState<NavigationTarget | null>(null);

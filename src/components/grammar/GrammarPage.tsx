@@ -9,7 +9,7 @@ export function GrammarPage() {
   const { grammar, isBookmarked, toggleBookmark, navigationTarget, clearNavigationTarget } = useApp();
   const [query, setQuery] = useState('');
   const [savedOnly, setSavedOnly] = useState(false);
-  const [level, setLevel] = useState<'all' | 'N3' | 'N4'>('all');
+  const [level, setLevel] = useState<'all' | 'N2' | 'N3' | 'N4'>('all');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [flashcardMode, setFlashcardMode] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
@@ -30,7 +30,7 @@ export function GrammarPage() {
   }), [grammar, level, savedOnly, query, isBookmarked]);
   const current = filtered.find(item => item.id === selectedId) ?? filtered[0];
 
-  if (flashcardMode && filtered.length) return <GrammarFlashcardSession items={filtered} preserveOrder onExit={() => setFlashcardMode(false)} />;
+  if (flashcardMode && filtered.length) return <GrammarFlashcardSession items={filtered} preserveOrder progressLevel={level === 'all' ? 'N3' : level} onExit={() => setFlashcardMode(false)} />;
 
   return <div className="study-page">
     <PageHeading eyebrow="THƯ VIỆN" title="Ngữ pháp" subtitle={filtered.length + ' / ' + grammar.length + ' mẫu · Hiểu cách dùng qua ví dụ'}
@@ -43,7 +43,7 @@ export function GrammarPage() {
         {query && <button aria-label="Xóa tìm kiếm" onClick={() => setQuery('')}><X size={18}/></button>}
       </label>
       <div className="flex flex-wrap gap-2">
-        {(['all', 'N3', 'N4'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => setLevel(value)}>{value === 'all' ? 'Tất cả' : value}</button>)}
+        {(['all', 'N2', 'N3', 'N4'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => setLevel(value)}>{value === 'all' ? 'Tất cả' : value}</button>)}
         <button className={'study-button ' + (savedOnly ? 'study-button-primary' : '')} aria-pressed={savedOnly} onClick={() => setSavedOnly(!savedOnly)}>Đã lưu</button>
       </div>
     </div>
@@ -80,7 +80,7 @@ function GrammarDetail({ item, bookmarked, onBookmark }: { item: GrammarItem; bo
       <div className="divide-y divide-[var(--color-border)]">{item.vi_du.map((example, i) => <div key={i} className="py-3 first:pt-0 last:pb-0"><p className="font-jp break-words text-base text-[var(--color-text)]">{example.japanese}</p>{example.reading && <p className="font-jp mt-1 break-words text-xs text-[var(--color-text-tertiary)]">{example.reading}</p>}<p className="mt-1 break-words text-sm text-[var(--color-text-secondary)]">{example.meaning}</p></div>)}</div>
     </DetailSection>}
     {item.cac_cach_dung.length > 0 && <DetailSection title="Các cách dùng">{item.cac_cach_dung.map((usage, i) => <div key={i} className="mb-3 last:mb-0"><p className="font-jp font-semibold text-[var(--color-text)]">{usage.mau || usage.nghia}</p><p className="study-copy">{usage.nghia}{usage.giai_thich ? ' · ' + usage.giai_thich : ''}</p></div>)}</DetailSection>}
-    {item.so_sanh_n4_n5.length > 0 && <DetailSection title="So sánh N4 / N5">{item.so_sanh_n4_n5.map((comparison, i) => <div key={i} className="mb-3 last:mb-0"><p className="font-jp font-semibold text-[var(--color-text)]">{comparison.mau}</p><p className="study-copy">{comparison.khac_biet_chinh}</p></div>)}</DetailSection>}
+    {item.so_sanh_n4_n5.length > 0 && <DetailSection title="So sánh mẫu ngữ pháp">{item.so_sanh_n4_n5.map((comparison, i) => <div key={i} className="mb-3 last:mb-0"><p className="font-jp font-semibold text-[var(--color-text)]">{comparison.mau}</p><p className="study-copy">{comparison.khac_biet_chinh}</p></div>)}</DetailSection>}
     {item.canh_bao.length > 0 && <DetailSection title="Lưu ý">{item.canh_bao.map((warning, i) => <p className="study-copy mb-2 last:mb-0" key={i}>{warning}</p>)}</DetailSection>}
   </section>;
 }

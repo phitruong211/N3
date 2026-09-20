@@ -14,6 +14,7 @@ const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage
 const KanjiPage = lazy(() => import('@/components/kanji/KanjiPage').then((module) => ({ default: module.KanjiPage })));
 const GrammarPage = lazy(() => import('@/components/grammar/GrammarPage').then((module) => ({ default: module.GrammarPage })));
 const FlashcardPage = lazy(() => import('@/components/flashcard/FlashcardPage').then((module) => ({ default: module.FlashcardPage })));
+const AnkiPage = lazy(() => import('@/components/flashcard/FlashcardPage').then((module) => ({ default: module.AnkiPage })));
 const SRSPage = lazy(() => import('@/components/srs/SRSPage').then((module) => ({ default: module.SRSPage })));
 const QuizPage = lazy(() => import('@/components/quiz/QuizPage').then((module) => ({ default: module.QuizPage })));
 const ProgressPage = lazy(() => import('@/components/progress/ProgressPage').then((module) => ({ default: module.ProgressPage })));
@@ -50,6 +51,7 @@ function AppContent() {
       case 'kanji': return <KanjiPage />;
       case 'grammar': return <GrammarPage />;
       case 'flashcards': return <FlashcardPage />;
+      case 'anki': return <AnkiPage />;
       case 'srs': return <SRSPage />;
       case 'quiz': return <QuizPage />;
       case 'progress': return <ProgressPage />;

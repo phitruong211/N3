@@ -20,13 +20,18 @@ import { PageHeading } from '@/components/ui/StudyUI';
 export function SRSPage() {
   const { vocabulary, kanji, grammar, srsCards, updateSRSCard, setCurrentPage } = useApp();
   const [sessionCards, setSessionCards] = useState<SRSCard[] | null>(null);
+  const [clockTick, setClockTick] = useState(Date.now);
+  useEffect(() => {
+    const timer = window.setInterval(() => setClockTick(Date.now()), 30_000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   // Get or create SRS cards for all items
-  const dueCards = useMemo(() => getDueCards(srsCards).filter((card) => {
+  const dueCards = useMemo(() => getDueCards(srsCards, new Date(clockTick)).filter((card) => {
     if (card.deckType === 'vocabulary') return vocabulary.some((item) => item.id === card.cardId);
     if (card.deckType === 'kanji') return kanji.some((item) => item.id === card.cardId);
     return grammar.some((item) => item.id === card.cardId);
-  }), [srsCards, vocabulary, kanji, grammar]);
+  }), [srsCards, vocabulary, kanji, grammar, clockTick]);
 
   // Items that are completely new (never studied)
   const newItemCount = useMemo(() => {

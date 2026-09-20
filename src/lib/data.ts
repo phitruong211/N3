@@ -2,7 +2,7 @@
 // Data Layer — Process raw JSON into typed application data
 // ============================================================
 // Reads vocabN3.json (rich schema) + vocabN4.json (legacy flat)
-// Reads grammarN3.json (rich schema) + grammarN4.json (legacy flat)
+// Reads grammarN2.json + grammarN3.json (rich schema) + grammarN4.json (legacy flat)
 // ============================================================
 
 import type {
@@ -346,16 +346,17 @@ let _grammarCache: GrammarItem[] | null = null;
 export async function loadGrammar(): Promise<GrammarItem[]> {
   if (_grammarCache) return _grammarCache;
 
-  const [rawN3, rawN4] = await Promise.all([
+  const [rawN2, rawN3, rawN4] = await Promise.all([
+    fetchArray<RawGrammarN3>('/data/grammarN2.json'),
     fetchArray<RawGrammarN3>('/data/grammarN3.json'),
     fetchArray<RawGrammarN4>('/data/grammarN4.json'),
   ]);
 
-  // Process N3 grammar (new rich schema)
-  const n3Grammar: GrammarItem[] = rawN3.map((item, index) => {
+  // N2 and N3 share the same rich schema.
+  const normalizeRichGrammar = (items: RawGrammarN3[], level: 'N2' | 'N3'): GrammarItem[] => items.map((item, index) => {
     const bai = item.bai ?? 0;
     const stt = item.stt ?? index + 1;
-    const cap_do = item.cap_do || 'N3';
+    const cap_do = level;
     const mau_ngu_phap = item.mau_ngu_phap || '';
     const nghia_cot_loi = item.nghia_cot_loi || item.y_nghia || '';
     const giai_thich_toi_uu = item.giai_thich_toi_uu || item.chu_y || '';
@@ -367,7 +368,7 @@ export async function loadGrammar(): Promise<GrammarItem[]> {
     }));
 
     return {
-      id: `grammar-n3-${bai}-${stt}`,
+      id: `grammar-${level.toLowerCase()}-${bai}-${stt}`,
       numericId: item.id ?? index + 1,
       bai,
       stt,
@@ -394,10 +395,12 @@ export async function loadGrammar(): Promise<GrammarItem[]> {
       commonMistakes: '',
       comparison: (item.so_sanh_n4_n5 || []).map(c => `${c.mau}: ${c.khac_biet_chinh}`).join(' | '),
       examples,
-      lesson: `N3 - Bài ${bai}`,
+      lesson: `${level} - Bài ${bai}`,
       level: cap_do,
     };
   });
+  const n2Grammar = normalizeRichGrammar(rawN2, 'N2');
+  const n3Grammar = normalizeRichGrammar(rawN3, 'N3');
 
   // Process N4 grammar (legacy flat format)
   const n4Grammar: GrammarItem[] = rawN4.map((item, index) => {
@@ -446,6 +449,6 @@ export async function loadGrammar(): Promise<GrammarItem[]> {
     };
   });
 
-  _grammarCache = [...n3Grammar, ...n4Grammar];
+  _grammarCache = [...n2Grammar, ...n3Grammar, ...n4Grammar];
   return _grammarCache;
 }

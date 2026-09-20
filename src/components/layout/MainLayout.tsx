@@ -11,7 +11,7 @@ import { BottomNav } from './BottomNav';
 import { SearchModal } from '@/components/search/SearchModal';
 import { useApp } from '@/hooks/useApp';
 import type { PageId } from '@/types';
-import { Menu, Search, X, Layers, CircleHelp, ChartNoAxesCombined, Bookmark, Settings } from 'lucide-react';
+import { Menu, Search, X, Layers, Brain, CircleHelp, ChartNoAxesCombined, Bookmark, Settings } from 'lucide-react';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -67,6 +67,7 @@ export function MainLayout({ children }: MainLayoutProps) {
           g: 'grammar',
           s: 'srs',
           f: 'flashcards',
+          a: 'anki',
           q: 'quiz',
           p: 'progress',
           b: 'bookmarks',
@@ -92,6 +93,7 @@ export function MainLayout({ children }: MainLayoutProps) {
     kanji: 'Kanji',
     grammar: 'Ngữ pháp',
     flashcards: 'Thẻ học',
+    anki: 'Anki',
     srs: 'Ôn tập',
     quiz: 'Trắc nghiệm',
     progress: 'Tiến độ',
@@ -137,7 +139,7 @@ export function MainLayout({ children }: MainLayoutProps) {
           <div className="flex items-center justify-between mb-4"><h2 className="font-semibold">Trang khác</h2><button onClick={() => setMenuOpen(false)} className="study-button !w-10 !min-h-10 !p-0" aria-label="Đóng menu"><X size={18} /></button></div>
           <div className="grid grid-cols-2 gap-2">
             {([
-              ['flashcards', 'Thẻ học', Layers], ['quiz', 'Trắc nghiệm', CircleHelp],
+              ['flashcards', 'Thẻ học', Layers], ['anki', 'Anki', Brain], ['quiz', 'Trắc nghiệm', CircleHelp],
               ['progress', 'Tiến độ', ChartNoAxesCombined], ['bookmarks', 'Đã lưu', Bookmark], ['settings', 'Cài đặt', Settings],
             ] as const).map(([page, label, Icon]) => <button key={page} onClick={() => { setCurrentPage(page); setMenuOpen(false); }} className="study-button !justify-start"><Icon size={18} />{label}</button>)}
           </div>

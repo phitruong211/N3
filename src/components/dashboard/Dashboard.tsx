@@ -12,7 +12,7 @@ export function Dashboard() {
   const today = getStudyDays().find(day => day.date === formatDate(new Date()));
   const cards = [
     { page: 'vocabulary' as PageId, title: 'Từ vựng', subtitle: `${vocabulary.filter(item => item.level === 'N3').length} từ N3`, icon: BookOpen, tone: 'var(--color-accent)' },
-    { page: 'grammar' as PageId, title: 'Ngữ pháp', subtitle: `${grammar.filter(item => item.level === 'N3').length} mẫu N3`, icon: ScrollText, tone: 'var(--color-grammar)' },
+    { page: 'grammar' as PageId, title: 'Ngữ pháp', subtitle: `${grammar.filter(item => item.level === 'N2').length} mẫu N2 · ${grammar.filter(item => item.level === 'N3').length} N3 · ${grammar.filter(item => item.level === 'N4').length} N4`, icon: ScrollText, tone: 'var(--color-grammar)' },
     { page: 'kanji' as PageId, title: 'Kanji', subtitle: `${kanji.filter(item => item.level === 'N3').length} N3 · ${kanji.filter(item => item.level === 'N2').length} N2`, icon: Languages, tone: 'var(--color-kanji)' },
   ];
 

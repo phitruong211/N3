@@ -152,12 +152,25 @@ function processReviewState(card: SRSCard, rating: Rating): void {
 /**
  * Get all cards due for review today.
  */
-export function getDueCards(cards: SRSCard[]): SRSCard[] {
-  const now = new Date();
+export function getDueCards(cards: SRSCard[], now = new Date()): SRSCard[] {
   return cards.filter((card) => {
     if (card.state === 'new') return false;
     return new Date(card.dueDate) <= now;
   });
+}
+
+/** Due reviews come first, followed by cards that have never been studied. */
+export function getReadyAnkiItems<T extends { id: string }>(items: T[], cards: SRSCard[], deckType: DeckType): T[] {
+  const byId = new Map(cards.filter(card => card.deckType === deckType).map(card => [card.cardId, card]));
+  const now = Date.now();
+  const due: T[] = [];
+  const fresh: T[] = [];
+  for (const item of items) {
+    const card = byId.get(item.id);
+    if (!card || card.state === 'new') fresh.push(item);
+    else if (new Date(card.dueDate).getTime() <= now) due.push(item);
+  }
+  return [...due, ...fresh];
 }
 
 /**

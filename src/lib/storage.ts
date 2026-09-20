@@ -27,8 +27,10 @@ const KEYS = {
   LAST_KANJI_INDEX: 'n3_last_kanji_index',
   LAST_KANJI_N2_INDEX: 'n3_last_kanji_n2_index',
   LAST_GRAMMAR_INDEX: 'n3_last_grammar_index',
+  LAST_GRAMMAR_N2_INDEX: 'n3_last_grammar_n2_index',
+  LAST_GRAMMAR_N4_INDEX: 'n3_last_grammar_n4_index',
   LAST_ACTIVE_DECK: 'n3_last_active_deck',
-  ANKI_MODE: 'n3_anki_mode_enabled',
+  LAST_ACTIVE_ANKI_DECK: 'n3_last_active_anki_deck',
 } as const;
 
 // --- Generic helpers ---
@@ -275,36 +277,33 @@ export function setLastKanjiIndex(index: number, level: 'N2' | 'N3' = 'N3'): voi
   localStorage.setItem(level === 'N2' ? KEYS.LAST_KANJI_N2_INDEX : KEYS.LAST_KANJI_INDEX, index.toString());
 }
 
-export function getLastGrammarIndex(): number {
-  return parseInt(localStorage.getItem(KEYS.LAST_GRAMMAR_INDEX) || '0', 10);
+function grammarIndexKey(level: 'N2' | 'N3' | 'N4'): string {
+  return level === 'N2' ? KEYS.LAST_GRAMMAR_N2_INDEX : level === 'N4' ? KEYS.LAST_GRAMMAR_N4_INDEX : KEYS.LAST_GRAMMAR_INDEX;
 }
 
-export function setLastGrammarIndex(index: number): void {
-  localStorage.setItem(KEYS.LAST_GRAMMAR_INDEX, index.toString());
+export function getLastGrammarIndex(level: 'N2' | 'N3' | 'N4' = 'N3'): number {
+  return parseInt(localStorage.getItem(grammarIndexKey(level)) || '0', 10);
 }
 
-export type ActiveDeck = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'kanjiN2' | 'grammarN3' | 'grammarN4' | 'saved' | null;
+export function setLastGrammarIndex(index: number, level: 'N2' | 'N3' | 'N4' = 'N3'): void {
+  localStorage.setItem(grammarIndexKey(level), index.toString());
+}
 
-export function getLastActiveDeck(): ActiveDeck {
-  const val = localStorage.getItem(KEYS.LAST_ACTIVE_DECK);
-  const valid = ['vocabN3', 'vocabN4', 'kanjiN3', 'kanjiN2', 'grammarN3', 'grammarN4', 'saved'];
+export type ActiveDeck = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'kanjiN2' | 'grammarN2' | 'grammarN3' | 'grammarN4' | 'saved' | null;
+
+export function getLastActiveDeck(mode: 'flashcards' | 'anki' = 'flashcards'): ActiveDeck {
+  const val = localStorage.getItem(mode === 'anki' ? KEYS.LAST_ACTIVE_ANKI_DECK : KEYS.LAST_ACTIVE_DECK);
+  const valid = ['vocabN3', 'vocabN4', 'kanjiN3', 'kanjiN2', 'grammarN2', 'grammarN3', 'grammarN4', 'saved'];
   return valid.includes(val || '') ? (val as ActiveDeck) : null;
 }
 
-export function setLastActiveDeck(deck: ActiveDeck): void {
+export function setLastActiveDeck(deck: ActiveDeck, mode: 'flashcards' | 'anki' = 'flashcards'): void {
+  const key = mode === 'anki' ? KEYS.LAST_ACTIVE_ANKI_DECK : KEYS.LAST_ACTIVE_DECK;
   if (deck === null) {
-    localStorage.removeItem(KEYS.LAST_ACTIVE_DECK);
+    localStorage.removeItem(key);
   } else {
-    localStorage.setItem(KEYS.LAST_ACTIVE_DECK, deck);
+    localStorage.setItem(key, deck);
   }
-}
-
-export function getAnkiMode(): boolean {
-  return getJSON<boolean>(KEYS.ANKI_MODE, true);
-}
-
-export function setAnkiMode(enabled: boolean): void {
-  setJSON(KEYS.ANKI_MODE, enabled);
 }
 
 // --- Streak calculation ---

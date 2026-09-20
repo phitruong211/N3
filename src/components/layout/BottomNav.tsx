@@ -1,6 +1,6 @@
 import { useApp } from '@/hooks/useApp';
 import type { PageId } from '@/types';
-import { LayoutGrid, BookOpen, ScrollText, Languages, RotateCcw } from 'lucide-react';
+import { LayoutGrid, BookOpen, ScrollText, Languages, RotateCcw, Brain } from 'lucide-react';
 
 const tabs: { id: PageId; label: string; shortLabel: string; icon: typeof BookOpen }[] = [
   { id: 'dashboard', label: 'Hôm nay', shortLabel: 'Hôm nay', icon: LayoutGrid },
@@ -8,6 +8,7 @@ const tabs: { id: PageId; label: string; shortLabel: string; icon: typeof BookOp
   { id: 'grammar', label: 'Ngữ pháp', shortLabel: 'Ngữ', icon: ScrollText },
   { id: 'kanji', label: 'Kanji', shortLabel: 'Kanji', icon: Languages },
   { id: 'srs', label: 'Ôn tập', shortLabel: 'Ôn tập', icon: RotateCcw },
+  { id: 'anki', label: 'Anki', shortLabel: 'Anki', icon: Brain },
 ];
 
 export function BottomNav() {
