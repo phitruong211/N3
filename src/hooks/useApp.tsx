@@ -6,9 +6,9 @@
 // ============================================================
 
 import React, { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react';
-import type { VocabItem, KanjiItem, GrammarItem, PageId, AppSettings, SRSCard, Bookmark } from '@/types';
+import type { VocabItem, KanjiItem, GrammarItem, PageId, AppSettings, SRSCard, Bookmark, NavigationTarget } from '@/types';
 import { loadVocabulary, loadKanji, loadGrammar } from '@/lib/data';
-import { getSettings, saveSettings, applyTheme, getBookmarks, saveBookmarks, getSRSCards, saveSRSCards, upsertSRSCard, setLastPage, migrateV1 } from '@/lib/storage';
+import { getSettings, saveSettings, applyTheme, getBookmarks, saveBookmarks, getSRSCards, saveSRSCards, upsertSRSCard, setLastPage, getLastPage, migrateV1 } from '@/lib/storage';
 
 interface AppState {
   // <Data>                                 </Data>
@@ -16,10 +16,15 @@ interface AppState {
   kanji: KanjiItem[];
   grammar: GrammarItem[];
   loading: boolean;
+  loadError: string | null;
+  retryLoad: () => void;
 
   // Navigation
   currentPage: PageId;
   setCurrentPage: (page: PageId) => void;
+  navigationTarget: NavigationTarget | null;
+  selectSearchResult: (target: NavigationTarget) => void;
+  clearNavigationTarget: () => void;
 
   // Settings
   settings: AppSettings;
@@ -51,7 +56,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [kanji, setKanji] = useState<KanjiItem[]>([]);
   const [grammar, setGrammar] = useState<GrammarItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, _setCurrentPage] = useState<PageId>('dashboard');
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [loadAttempt, setLoadAttempt] = useState(0);
+  const [currentPage, _setCurrentPage] = useState<PageId>(() => {
+    const saved = getLastPage();
+    const pages: PageId[] = ['dashboard', 'vocabulary', 'kanji', 'grammar', 'flashcards', 'srs', 'quiz', 'progress', 'bookmarks', 'settings'];
+    return pages.includes(saved as PageId) ? saved as PageId : 'dashboard';
+  });
+  const [navigationTarget, setNavigationTarget] = useState<NavigationTarget | null>(null);
   const [settings, _setSettings] = useState<AppSettings>(getSettings());
   const [bookmarks, _setBookmarks] = useState<Bookmark[]>(getBookmarks());
   const [srsCards, _setSRSCards] = useState<SRSCard[]>(() => {
@@ -67,24 +79,33 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Load data on mount
   useEffect(() => {
+    let active = true;
+    setLoading(true);
+    setLoadError(null);
     Promise.all([loadVocabulary(), loadKanji(), loadGrammar()])
       .then(([v, k, g]) => {
+        if (!active) return;
         setVocabulary(v);
         setKanji(k);
         setGrammar(g);
         setLoading(false);
       })
       .catch((err) => {
+        if (!active) return;
         console.error('Failed to load data:', err);
+        setLoadError(err instanceof Error ? err.message : 'Không thể tải nội dung học.');
         setLoading(false);
       });
-  }, []);
+    return () => { active = false; };
+  }, [loadAttempt]);
+
+  const retryLoad = useCallback(() => setLoadAttempt((attempt) => attempt + 1), []);
 
   // Apply theme on settings change
   useEffect(() => {
     applyTheme(settings.theme);
-    document.documentElement.className = `${settings.theme} font-${settings.fontSize}`;
-  }, [settings.theme, settings.fontSize]);
+    document.documentElement.className = `${settings.theme} font-${settings.fontSize}${settings.reducedMotion ? ' reduced-motion' : ''}`;
+  }, [settings.theme, settings.fontSize, settings.reducedMotion]);
 
   // Global keyboard shortcuts
   useEffect(() => {
@@ -103,6 +124,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     _setCurrentPage(page);
     setLastPage(page);
   }, []);
+
+  const selectSearchResult = useCallback((target: NavigationTarget) => {
+    setNavigationTarget(target);
+    const page = target.type === 'vocabulary' ? 'vocabulary' : target.type;
+    _setCurrentPage(page);
+    setLastPage(page);
+  }, []);
+
+  const clearNavigationTarget = useCallback(() => setNavigationTarget(null), []);
 
   const updateSettings = useCallback((updates: Partial<AppSettings>) => {
     _setSettings((prev) => {
@@ -169,8 +199,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
         kanji,
         grammar,
         loading,
+        loadError,
+        retryLoad,
         currentPage,
         setCurrentPage,
+        navigationTarget,
+        selectSearchResult,
+        clearNavigationTarget,
         settings,
         updateSettings,
         bookmarks,

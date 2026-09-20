@@ -25,8 +25,10 @@ const KEYS = {
   LAST_PAGE: 'n3_last_page',
   LAST_VOCAB_INDEX: 'n3_last_vocab_index',
   LAST_KANJI_INDEX: 'n3_last_kanji_index',
+  LAST_KANJI_N2_INDEX: 'n3_last_kanji_n2_index',
   LAST_GRAMMAR_INDEX: 'n3_last_grammar_index',
   LAST_ACTIVE_DECK: 'n3_last_active_deck',
+  ANKI_MODE: 'n3_anki_mode_enabled',
 } as const;
 
 // --- Generic helpers ---
@@ -220,6 +222,7 @@ export function recordStudyActivity(
   const existing = days.find((d) => d.date === today);
 
   if (existing) {
+    const previousReviews = existing.cardsReviewed;
     existing.cardsReviewed += cardsReviewed;
     if (mode === 'flashcard') {
       existing.flashcardReviewed = (existing.flashcardReviewed || 0) + cardsReviewed;
@@ -227,8 +230,9 @@ export function recordStudyActivity(
       existing.srsReviewed = (existing.srsReviewed || 0) + cardsReviewed;
     }
     existing.newCardsLearned += newCardsLearned;
-    existing.accuracy =
-      (existing.accuracy + accuracy) / 2; // rolling average
+    existing.accuracy = existing.cardsReviewed > 0
+      ? (existing.accuracy * previousReviews + accuracy * cardsReviewed) / existing.cardsReviewed
+      : 0;
     existing.timeSpent += timeSpent;
   } else {
     days.push({
@@ -263,12 +267,12 @@ export function setLastVocabIndex(index: number): void {
   localStorage.setItem(KEYS.LAST_VOCAB_INDEX, index.toString());
 }
 
-export function getLastKanjiIndex(): number {
-  return parseInt(localStorage.getItem(KEYS.LAST_KANJI_INDEX) || '0', 10);
+export function getLastKanjiIndex(level: 'N2' | 'N3' = 'N3'): number {
+  return parseInt(localStorage.getItem(level === 'N2' ? KEYS.LAST_KANJI_N2_INDEX : KEYS.LAST_KANJI_INDEX) || '0', 10);
 }
 
-export function setLastKanjiIndex(index: number): void {
-  localStorage.setItem(KEYS.LAST_KANJI_INDEX, index.toString());
+export function setLastKanjiIndex(index: number, level: 'N2' | 'N3' = 'N3'): void {
+  localStorage.setItem(level === 'N2' ? KEYS.LAST_KANJI_N2_INDEX : KEYS.LAST_KANJI_INDEX, index.toString());
 }
 
 export function getLastGrammarIndex(): number {
@@ -279,11 +283,11 @@ export function setLastGrammarIndex(index: number): void {
   localStorage.setItem(KEYS.LAST_GRAMMAR_INDEX, index.toString());
 }
 
-export type ActiveDeck = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'grammarN3' | 'grammarN4' | 'saved' | null;
+export type ActiveDeck = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'kanjiN2' | 'grammarN3' | 'grammarN4' | 'saved' | null;
 
 export function getLastActiveDeck(): ActiveDeck {
   const val = localStorage.getItem(KEYS.LAST_ACTIVE_DECK);
-  const valid = ['vocabN3', 'vocabN4', 'kanjiN3', 'grammarN3', 'grammarN4', 'saved'];
+  const valid = ['vocabN3', 'vocabN4', 'kanjiN3', 'kanjiN2', 'grammarN3', 'grammarN4', 'saved'];
   return valid.includes(val || '') ? (val as ActiveDeck) : null;
 }
 
@@ -293,6 +297,14 @@ export function setLastActiveDeck(deck: ActiveDeck): void {
   } else {
     localStorage.setItem(KEYS.LAST_ACTIVE_DECK, deck);
   }
+}
+
+export function getAnkiMode(): boolean {
+  return getJSON<boolean>(KEYS.ANKI_MODE, true);
+}
+
+export function setAnkiMode(enabled: boolean): void {
+  setJSON(KEYS.ANKI_MODE, enabled);
 }
 
 // --- Streak calculation ---
@@ -316,19 +328,12 @@ export function calculateStreak(): { current: number; longest: number } {
   if (days[0].date !== today && days[0].date !== yesterday) {
     current = 0;
   } else {
+    const start = new Date();
+    if (days[0].date === yesterday) start.setDate(start.getDate() - 1);
     for (let i = 0; i < days.length; i++) {
-      const expected = formatDate(
-        new Date(Date.now() - i * 86400000)
-      );
-      // Allow starting from yesterday
-      if (i === 0 && days[0].date === yesterday) {
-        const expectedYesterday = yesterday;
-        if (days[0].date === expectedYesterday) {
-          streak++;
-          continue;
-        }
-      }
-      if (days[i]?.date === expected) {
+      const expectedDate = new Date(start);
+      expectedDate.setDate(start.getDate() - i);
+      if (days[i]?.date === formatDate(expectedDate)) {
         streak++;
       } else {
         break;

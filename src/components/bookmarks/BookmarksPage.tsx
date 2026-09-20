@@ -1,84 +1,33 @@
-// ============================================================
-// Bookmarks Page
-// ============================================================
-
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
+import { ArrowRight, BookmarkCheck, Trash2 } from 'lucide-react';
 import { useApp } from '@/hooks/useApp';
-import { BookmarkCheck, BookOpen, Languages, GraduationCap, Trash2 } from 'lucide-react';
+import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
+import type { Bookmark } from '@/types';
 
+const labels: Record<Bookmark['itemType'], string> = { vocabulary: 'Từ vựng', grammar: 'Ngữ pháp', kanji: 'Kanji' };
 export function BookmarksPage() {
-  const { bookmarks, vocabulary, kanji, grammar, toggleBookmark, setCurrentPage } = useApp();
-
-  const bookmarkItems = useMemo(() => {
-    return bookmarks.map((b) => {
-      let title = '';
-      let subtitle = '';
-      let icon = <BookOpen size={14} />;
-
-      if (b.itemType === 'vocabulary') {
-        const v = vocabulary.find((v) => v.id === b.itemId);
-        title = v?.kanji || b.itemId;
-        subtitle = v ? `${v.hiragana} — ${v.meaning}` : '';
-        icon = <BookOpen size={14} />;
-      } else if (b.itemType === 'kanji') {
-        const k = kanji.find((k) => k.id === b.itemId);
-        title = k?.kanji || b.itemId;
-        subtitle = k?.hanViet || '';
-        icon = <Languages size={14} />;
-      } else if (b.itemType === 'grammar') {
-        const g = grammar.find((g) => g.id === b.itemId);
-        title = g?.pattern || b.itemId;
-        subtitle = g?.meaning || '';
-        icon = <GraduationCap size={14} />;
-      }
-
-      return { ...b, title, subtitle, icon };
-    });
-  }, [bookmarks, vocabulary, kanji, grammar]);
-
-  return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold text-[var(--color-text)]">Bookmarks</h1>
-        <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-          {bookmarks.length} saved items
-        </p>
-      </div>
-
-      {bookmarkItems.length === 0 ? (
-        <div className="text-center py-16 text-sm text-[var(--color-text-tertiary)]">
-          <BookmarkCheck size={32} className="mx-auto mb-3 opacity-30" />
-          <p>No bookmarks yet.</p>
-          <p className="mt-1">Bookmark vocabulary, kanji, or grammar while studying.</p>
-        </div>
-      ) : (
-        <div className="space-y-1">
-          {bookmarkItems.map((item) => (
-            <div
-              key={item.itemId}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg bg-[var(--color-surface)] hover:bg-[var(--color-surface-hover)] transition-colors duration-150"
-            >
-              <span className="flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wider text-[var(--color-text-tertiary)] bg-[var(--color-surface-alt)] px-2 py-0.5 rounded shrink-0">
-                {item.icon}
-                {item.itemType}
-              </span>
-              <span className="font-jp text-sm font-medium text-[var(--color-text)]">
-                {item.title}
-              </span>
-              <span className="text-xs text-[var(--color-text-secondary)] flex-1 truncate">
-                {item.subtitle}
-              </span>
-              <button
-                onClick={() => toggleBookmark(item.itemId, item.itemType)}
-                className="p-1.5 rounded text-[var(--color-text-tertiary)] hover:text-[var(--color-error)] cursor-pointer transition-colors duration-150"
-                aria-label="Remove bookmark"
-              >
-                <Trash2 size={14} />
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  const { bookmarks, vocabulary, grammar, kanji, toggleBookmark, selectSearchResult, setCurrentPage } = useApp();
+  const items = useMemo(() => bookmarks.map(bookmark => {
+    const item = bookmark.itemType === 'vocabulary' ? vocabulary.find(value => value.id === bookmark.itemId)
+      : bookmark.itemType === 'grammar' ? grammar.find(value => value.id === bookmark.itemId)
+      : kanji.find(value => value.id === bookmark.itemId);
+    return { ...bookmark, title: item ? ('tu' in item ? item.tu : 'pattern' in item ? item.pattern : item.kanji) : bookmark.itemId,
+      detail: item ? ('meaning' in item ? item.meaning : item.hanViet) : '' };
+  }), [bookmarks, vocabulary, grammar, kanji]);
+  return <div className="study-page">
+    <PageHeading eyebrow="CÁ NHÂN" title="Đã lưu" subtitle={bookmarks.length + ' mục để học lại'} />
+    {!items.length ? <EmptyState title="Chưa lưu mục nào" detail="Chạm biểu tượng dấu trang khi học từ vựng, ngữ pháp hoặc kanji." action={<button className="study-button study-button-primary" onClick={() => setCurrentPage('vocabulary')}>Khám phá từ vựng →</button>} /> :
+      <div className="study-panel divide-y divide-[var(--color-border)] !p-0">
+        {items.map(item => <div key={item.itemType + item.itemId} className="flex min-w-0 items-center gap-2 p-3 sm:gap-4 sm:p-4">
+          <BookmarkCheck size={18} className="hidden shrink-0 text-[var(--color-accent)] sm:block"/>
+          <button className="min-w-0 flex-1 text-left focus-ring" onClick={() => selectSearchResult({ id: item.itemId, type: item.itemType })}>
+            <ContentBadge tone={item.itemType}>{labels[item.itemType]}</ContentBadge>
+            <p className="font-jp-serif mt-2 break-words text-lg font-semibold text-[var(--color-text)]">{item.title}</p>
+            <p className="mt-1 line-clamp-2 break-words text-sm text-[var(--color-text-secondary)]">{item.detail}</p>
+          </button>
+          <button className="study-button shrink-0" aria-label={'Mở ' + item.title} onClick={() => selectSearchResult({ id: item.itemId, type: item.itemType })}><ArrowRight size={18}/></button>
+          <button className="study-button shrink-0" aria-label={'Bỏ lưu ' + item.title} onClick={() => toggleBookmark(item.itemId, item.itemType)}><Trash2 size={18}/></button>
+        </div>)}
+      </div>}
+  </div>;
 }

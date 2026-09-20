@@ -1,227 +1,99 @@
-// ============================================================
-// Kanji Page
-// ============================================================
-// Principles:
-// - Progressive Disclosure: Grid overview → Detail on click
-// - Recognition over Recall: Hán Việt prominently displayed
-// - Cognitive Load Theory: One kanji detail at a time
-// ============================================================
-
-import React, { useState, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Bookmark, BookmarkCheck, Search, X } from 'lucide-react';
 import { useApp } from '@/hooks/useApp';
 import type { KanjiItem } from '@/types';
-import { Search, X, Bookmark, BookmarkCheck } from 'lucide-react';
+import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
 
 export function KanjiPage() {
-  const { kanji, isBookmarked, toggleBookmark, setCurrentPage } = useApp();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedKanji, setSelectedKanji] = useState<KanjiItem | null>(null);
-  const [filter, setFilter] = useState<'all' | 'bookmarked'>('all');
+  const { kanji, isBookmarked, toggleBookmark, setCurrentPage, navigationTarget, clearNavigationTarget } = useApp();
+  const [query, setQuery] = useState('');
+  const [level, setLevel] = useState<'all' | 'N3' | 'N2'>('all');
+  const [savedOnly, setSavedOnly] = useState(false);
+  const [selected, setSelected] = useState<KanjiItem | null>(null);
+  const detailRef = useRef<HTMLElement>(null);
+  const showDetail = () => {
+    if (window.innerWidth < 1024) requestAnimationFrame(() => detailRef.current?.scrollIntoView({ block: 'start' }));
+  };
 
-  const filtered = useMemo(() => {
-    let items = kanji;
-    if (filter === 'bookmarked') items = items.filter((k) => isBookmarked(k.id));
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      items = items.filter(
-        (k) =>
-          k.kanji.includes(q) ||
-          k.hanViet.toLowerCase().includes(q)
-      );
-    }
-    return items;
-  }, [kanji, filter, searchQuery, isBookmarked]);
+  useEffect(() => {
+    if (navigationTarget?.type !== 'kanji') return;
+    const target = kanji.find(item => item.id === navigationTarget.id);
+    setQuery(target?.kanji ?? '');
+    setLevel(target?.level ?? 'all');
+    setSavedOnly(false);
+    setSelected(target ?? null);
+    clearNavigationTarget();
+    if (window.innerWidth < 1024) requestAnimationFrame(() => detailRef.current?.scrollIntoView({ block: 'start' }));
+  }, [navigationTarget, kanji, clearNavigationTarget]);
 
-  return (
-    <div className="space-y-6 w-full">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold text-[var(--color-text)]">
-            Kanji
-          </h1>
-          <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-            {filtered.length} of {kanji.length} kanji · N3 Curriculum
-          </p>
-        </div>
-        <button
-          onClick={() => setCurrentPage('flashcards')}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-sm font-medium transition-colors cursor-pointer shadow-xs self-start sm:self-auto"
-        >
-          <span>Launch Kanji Flashcards →</span>
-        </button>
-      </div>
+  const filtered = useMemo(() => kanji.filter((item) =>
+    (level === 'all' || item.level === level) &&
+    (!savedOnly || isBookmarked(item.id)) &&
+    (!query.trim() || [item.kanji, item.hanViet, ...item.vocabulary.flatMap(word => [word.word, word.reading, word.hanViet || '', word.meaning])].join(' ').toLowerCase().includes(query.trim().toLowerCase()))
+  ), [kanji, level, savedOnly, query, isBookmarked]);
+  const current = filtered.find((item) => item.id === selected?.id) ?? filtered[0];
 
-      {/* Search + Filter */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-        <div className="flex-1 flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-xs">
-          <Search size={16} className="text-[var(--color-text-tertiary)] shrink-0" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search kanji by character or Hán Việt reading..."
-            className="flex-1 bg-transparent text-sm text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-tertiary)]"
-          />
-          {searchQuery && (
-            <button onClick={() => setSearchQuery('')} className="cursor-pointer text-[var(--color-text-tertiary)] hover:text-[var(--color-text)]">
-              <X size={14} />
-            </button>
-          )}
-        </div>
-        <div className="flex items-center gap-1 p-1 rounded-xl bg-[var(--color-surface-alt)] border border-[var(--color-border)] self-start sm:self-auto">
-          {(['all', 'bookmarked'] as const).map((f) => (
-            <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium capitalize transition-colors duration-150 cursor-pointer
-                ${filter === f
-                  ? 'bg-[var(--color-surface)] text-[var(--color-text)] shadow-sm'
-                  : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text)]'
-                }`}
-            >
-              {f === 'bookmarked' ? '★ Saved' : f}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* ============================================================
-          2-Column Apple Kanji Studio Workspace (lg:grid-cols-12)
-          ============================================================ */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column (7 Spans): Kanji Grid */}
-        <div className="lg:col-span-7">
-          <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-6 gap-3.5 w-full">
-            {filtered.map((item) => {
-              const active = (selectedKanji?.id || filtered[0]?.id) === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setSelectedKanji(item)}
-                  className={`
-                    group relative aspect-square flex flex-col items-center justify-center
-                    rounded-2xl border transition-all duration-150 cursor-pointer focus-ring shadow-xs
-                    ${active
-                      ? 'bg-[var(--color-accent-subtle)] border-[var(--color-accent)] ring-2 ring-[var(--color-accent)]/20'
-                      : 'bg-[var(--color-surface)] border-[var(--color-border)] hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-hover)]'
-                    }
-                  `}
-                >
-                  <span className="font-jp-serif text-4xl font-semibold text-[var(--color-text)]">
-                    {item.kanji}
-                  </span>
-                  <span className="text-xs font-medium text-[var(--color-text-secondary)] mt-1.5 truncate max-w-full px-1">
-                    {item.hanViet}
-                  </span>
-                  {isBookmarked(item.id) && (
-                    <span className="absolute top-2 right-2 text-[var(--color-warning)]">
-                      <BookmarkCheck size={14} />
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {filtered.length === 0 && (
-            <div className="text-center py-16 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] text-sm text-[var(--color-text-tertiary)]">
-              No kanji match your search or filter.
-            </div>
-          )}
-        </div>
-
-        {/* Right Column (5 Spans): Sticky Kanji Inspector & Study Panel */}
-        <div className="lg:col-span-5 sticky top-24 space-y-6">
-          {(() => {
-            const current = selectedKanji || filtered[0] || kanji[0];
-            if (!current) return null;
-            return (
-              <div className="p-7 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-sm space-y-7">
-                {/* Header */}
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-6">
-                    <div className="w-24 h-24 flex items-center justify-center rounded-2xl bg-[var(--color-surface-alt)] border border-[var(--color-border)]">
-                      <span className="font-jp-serif text-6xl font-semibold text-[var(--color-text)]">
-                        {current.kanji}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-semibold text-[var(--color-text)] tracking-tight">
-                        {current.hanViet}
-                      </div>
-                      <span className="inline-block mt-1 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)] bg-[var(--color-surface-alt)] px-2.5 py-0.5 rounded-full border border-[var(--color-border)]">
-                        N3 Level Kanji
-                      </span>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => toggleBookmark(current.id, 'kanji')}
-                    className="p-2.5 rounded-xl border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-colors cursor-pointer"
-                    title="Bookmark Kanji"
-                  >
-                    {isBookmarked(current.id) ? (
-                      <BookmarkCheck size={20} className="text-[var(--color-warning)]" />
-                    ) : (
-                      <Bookmark size={20} className="text-[var(--color-text-tertiary)]" />
-                    )}
-                  </button>
-                </div>
-
-                {/* Compound Vocabulary */}
-                {current.vocabulary.length > 0 ? (
-                  <div className="pt-4 border-t border-[var(--color-border)] space-y-3">
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
-                      Compound Vocabulary (Từ Ghép N3)
-                    </h3>
-                    <div className="divide-y divide-[var(--color-border)] border border-[var(--color-border)] rounded-xl overflow-hidden">
-                      {current.vocabulary.map((v, i) => (
-                        <div
-                          key={i}
-                          className="px-4 py-3 bg-[var(--color-surface)] flex items-baseline justify-between gap-4"
-                        >
-                          <span className="font-jp-serif text-base font-medium text-[var(--color-text)]">
-                            {v.word}
-                          </span>
-                          <span className="font-jp text-xs font-mono text-[var(--color-text-secondary)]">
-                            {v.reading}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="pt-4 border-t border-[var(--color-border)] text-xs text-[var(--color-text-tertiary)]">
-                    No compound vocabulary items listed for this Kanji.
-                  </div>
-                )}
-              </div>
-            );
-          })()}
-
-          {/* Kanji Studio Navigation Card */}
-          <div className="p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] space-y-4 shadow-xs">
-            <h3 className="text-sm font-semibold text-[var(--color-text)]">
-              Kanji Studio Ergonomics
-            </h3>
-            <div className="space-y-2.5 text-xs text-[var(--color-text-secondary)]">
-              <div className="flex items-center justify-between">
-                <span>Select Kanji Card</span>
-                <kbd className="kbd-shortcut">Click / Tap</kbd>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Toggle Bookmark</span>
-                <kbd className="kbd-shortcut">B</kbd>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Global Command Palette</span>
-                <kbd className="kbd-shortcut">⌘K / Ctrl+K</kbd>
-              </div>
-            </div>
-          </div>
-        </div>
+  return <div className="study-page">
+    <PageHeading eyebrow="THƯ VIỆN" title="Kanji" subtitle={filtered.length + ' / ' + kanji.length + ' chữ · N3 và N2'}
+      action={<button className="study-button study-button-primary" onClick={() => setCurrentPage('flashcards')}>Học bằng thẻ →</button>} />
+    <div className="flex flex-col gap-3 sm:flex-row">
+      <label className="study-input flex min-w-0 flex-1 items-center gap-2">
+        <Search size={18} aria-hidden="true" className="shrink-0" />
+        <span className="sr-only">Tìm kanji hoặc âm Hán Việt</span>
+        <input className="min-w-0 flex-1 bg-transparent outline-none" value={query} onChange={e => setQuery(e.target.value)} placeholder="Tìm chữ hoặc âm Hán Việt" />
+        {query && <button aria-label="Xóa tìm kiếm" onClick={() => setQuery('')}><X size={18}/></button>}
+      </label>
+      <div className="flex flex-wrap gap-2">
+        {(['all', 'N3', 'N2'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => { setLevel(value); setSelected(null); }}>{value === 'all' ? 'Tất cả' : `${value} · ${kanji.filter(item => item.level === value).length}`}</button>)}
+        <button className={'study-button ' + (savedOnly ? 'study-button-primary' : '')} aria-pressed={savedOnly} onClick={() => setSavedOnly(!savedOnly)}>Đã lưu</button>
       </div>
     </div>
-  );
+    {filtered.length === 0 ? <EmptyState title="Chưa có kanji phù hợp" detail="Thử từ khóa khác hoặc bỏ bộ lọc." action={<button className="study-button" onClick={() => { setQuery(''); setLevel('all'); setSavedOnly(false); }}>Xem tất cả</button>} /> :
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,1fr)]">
+        <div className="grid max-h-[320px] grid-cols-4 gap-2 overflow-y-auto sm:grid-cols-6 lg:max-h-none lg:overflow-visible xl:grid-cols-7">
+          {filtered.map(item => <button key={item.id} onClick={() => { setSelected(item); showDetail(); }} aria-label={`${item.kanji}, ${item.hanViet}, ${item.level}`} aria-pressed={current.id === item.id}
+            className={'relative flex aspect-square min-w-0 flex-col items-center justify-center rounded-xl border p-1 transition-colors focus-ring ' + (current.id === item.id ? 'border-[var(--color-kanji)] bg-[var(--color-surface-alt)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]')}>
+            <span className="absolute left-1 top-1 text-[9px] font-semibold text-[var(--color-text-tertiary)]">{item.level}</span>
+            <span className="font-jp-serif text-3xl leading-none text-[var(--color-text)] sm:text-4xl">{item.kanji}</span>
+            <span className="mt-1 max-w-full truncate text-[10px] text-[var(--color-text-secondary)] sm:text-xs">{item.hanViet}</span>
+            {isBookmarked(item.id) && <BookmarkCheck size={12} className="absolute right-1 top-1 text-[var(--color-kanji)]" aria-label="Đã lưu" />}
+          </button>)}
+        </div>
+        <section ref={detailRef} className="study-panel min-w-0 scroll-mt-16 lg:sticky lg:top-20" aria-label={'Chi tiết chữ ' + current.kanji}>
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <ContentBadge tone="kanji">KANJI {current.level}</ContentBadge>
+              <p className="font-jp-serif mt-4 text-7xl leading-none text-[var(--color-text)]">{current.kanji}</p>
+              <h2 className="mt-3 text-xl font-semibold text-[var(--color-text)]">{current.hanViet}</h2>
+              {(current.onyomi?.length || current.kunyomi?.length) ? <div className="mt-3 space-y-1 text-sm text-[var(--color-text-secondary)]">
+                {!!current.onyomi?.length && <p>Âm On: <span className="font-jp">{current.onyomi.join(' · ')}</span></p>}
+                {!!current.kunyomi?.length && <p>Âm Kun: <span className="font-jp">{current.kunyomi.join(' · ')}</span></p>}
+              </div> : null}
+            </div>
+            <button className="study-button shrink-0" aria-label={isBookmarked(current.id) ? 'Bỏ lưu kanji' : 'Lưu kanji'} onClick={() => toggleBookmark(current.id, 'kanji')}>
+              {isBookmarked(current.id) ? <BookmarkCheck size={19}/> : <Bookmark size={19}/>}
+            </button>
+          </div>
+          <div className="mt-7 border-t border-[var(--color-border)] pt-5">
+            <h3 className="study-eyebrow mb-3">TỪ GHÉP · CÁCH ĐỌC TRONG NGỮ CẢNH</h3>
+            {current.vocabulary.length ? <>
+              <div className="divide-y divide-[var(--color-border)]">
+                {current.vocabulary.slice(0, 3).map((word, i) => <WordRow key={i} word={word}/>)}
+              </div>
+              {current.vocabulary.length > 3 && <details className="mt-3 border-t border-[var(--color-border)] pt-3">
+                <summary className="cursor-pointer text-sm font-semibold text-[var(--color-kanji)]">Xem thêm {current.vocabulary.length - 3} từ</summary>
+                <div className="divide-y divide-[var(--color-border)]">{current.vocabulary.slice(3).map((word, i) => <WordRow key={i} word={word}/>)}</div>
+              </details>}
+            </> : <p className="text-sm text-[var(--color-text-secondary)]">Chưa có từ ghép trong dữ liệu.</p>}
+          </div>
+        </section>
+      </div>}
+  </div>;
+}
+
+function WordRow({ word }: { word: KanjiItem['vocabulary'][number] }) {
+  return <div className="grid gap-1 py-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:gap-4">
+    <div className="min-w-0"><p className="font-jp-serif break-words text-lg text-[var(--color-text)]">{word.word}</p><p className="font-jp text-sm text-[var(--color-text-secondary)]">{word.reading}</p>{word.hanViet && <p className="break-words text-xs font-medium text-[var(--color-kanji)]">Hán Việt: {word.hanViet}</p>}</div>
+    <p className="self-center break-words text-sm text-[var(--color-text-secondary)]">{word.meaning}</p>
+  </div>;
 }

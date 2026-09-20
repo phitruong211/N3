@@ -2,22 +2,113 @@
 // N3 Japanese Learning App — Type Definitions
 // ============================================================
 
-// --- Vocabulary ---
-export interface VocabItem {
-  id: string;
-  kanji: string;
-  hiragana: string;
-  meaning: string;
-  type: 'main' | 'compound';
-  relatedWords?: string;
-  lesson?: string;
-  level?: string;
+// ─── Vocabulary (New Rich Schema) ───────────────────────────
+
+export interface VerbPair {
+  tu: string;
+  phien_am: string;
+  quan_he: string;
 }
 
-// --- Kanji ---
+export interface VerbInfo {
+  nhom: number | null;
+  nhom_nhat: string | null;
+  tu_tha: string | null;
+  tro_tu_goi_y: string[];
+  cap_tuong_ung: VerbPair[];
+}
+
+export interface AlternateReading {
+  phien_am: string;
+  nghia: string[];
+  sac_thai: string | null;
+}
+
+export interface Variant {
+  tu: string;
+  phien_am: string;
+  ghi_chu?: string | null;
+}
+
+export interface RelatedWord {
+  tu: string;
+  phien_am: string;
+  han_viet?: string | null;
+  nghia: string | string[];
+  loai_quan_he?: string;
+  ghi_chu?: string | null;
+  du_lieu_goc?: Record<string, unknown>;
+}
+
+export interface VocabMetadata {
+  stt_goc: number | string | null;
+  cac_id_trung_lap: number[];
+}
+
+/** Legacy verb shape found in vocabN3.json `dong_tu.bien_the` */
+export interface LegacyVerbVariant {
+  tu: string;
+  phien_am: string;
+  tro_tu_goi_y?: string[];
+  nhom_dong_tu?: string;
+  tu_tha_dong_tu?: string;
+  cap_tu_tuong_ung?: VerbPair[];
+  ghi_chu_dac_biet?: string | null;
+}
+
+export interface VocabItem {
+  // Core identity
+  id: string;            // Generated runtime id (e.g. "vocab-n3-42")
+  numericId: number;     // Original JSON `id`
+  bai: number | null;
+  tu: string;            // Kanji / word
+  phien_am: string;      // Hiragana reading
+  han_viet: string | null;
+
+  // Meanings (always normalized to array)
+  nghia: string[];
+
+  // Classification
+  loai_tu: string[] | null;
+
+  // Verb-specific
+  dong_tu: VerbInfo | null;
+
+  // Alternate readings (same Kanji, different pronunciation)
+  cach_doc_khac: AlternateReading[];
+
+  // Written variants (different Kanji, same meaning)
+  bien_the: Variant[];
+
+  // Notes
+  ghi_chu: string | null;
+
+  // Related words
+  tu_lien_quan: RelatedWord[];
+
+  // Tags
+  tags: string[];
+
+  // Internal metadata — never render to user
+  metadata: VocabMetadata;
+
+  // ─── Backward-compatible derived fields ───
+  // These keep existing flashcard/SRS/quiz code working
+  kanji: string;         // alias for `tu`
+  hiragana: string;      // alias for `phien_am`
+  meaning: string;       // joined `nghia` array
+  type: 'main' | 'compound';
+  relatedWords: string;  // legacy flat string
+  lesson: string;
+  level: string;
+}
+
+// ─── Kanji ──────────────────────────────────────────────────
+
 export interface KanjiVocab {
   word: string;
   reading: string;
+  hanViet?: string;
   meaning: string;
 }
 
@@ -26,24 +117,28 @@ export interface KanjiItem {
   kanji: string;
   hanViet: string;
   vocabulary: KanjiVocab[];
+  level: 'N2' | 'N3';
+  onyomi?: string[];
+  kunyomi?: string[];
   lesson?: string;
 }
 
-// --- Grammar ---
-export interface GrammarItem {
-  id: string;
-  pattern: string;
-  reading?: string;
-  meaning: string;
-  structure: string;
-  congThuc?: string;
-  usage: string;
-  nuance: string;
-  commonMistakes: string;
-  comparison: string;
-  examples: GrammarExample[];
-  lesson?: string;
-  level?: string;
+// ─── Grammar (New Rich Schema) ──────────────────────────────
+
+export interface GrammarComparison {
+  mau: string;
+  cap_do_tham_khao: string;
+  khac_biet_chinh: string;
+}
+
+export interface GrammarUsageVariant {
+  mau?: string;
+  nghia: string;
+  giai_thich?: string;
+  goi_y?: string;
+  sac_thai?: string;
+  vai_tro?: string;
+  ghi_chu?: string;
 }
 
 export interface GrammarExample {
@@ -52,7 +147,50 @@ export interface GrammarExample {
   meaning: string;
 }
 
-// --- SRS (Spaced Repetition System) ---
+export interface GrammarItem {
+  // Core identity
+  id: string;           // Generated runtime id
+  numericId: number;    // Original JSON `id`
+  bai: number;
+  stt: number;
+  cap_do: string;
+
+  // Classification
+  nhom_chuc_nang: string;
+
+  // Content
+  mau_ngu_phap: string;
+  phien_am: string;
+  cong_thuc: string;
+
+  // Meaning & explanation
+  nghia_cot_loi: string;
+  giai_thich_toi_uu: string;
+
+  // Rich sections
+  so_sanh_n4_n5: GrammarComparison[];
+  cac_cach_dung: GrammarUsageVariant[];
+  canh_bao: string[];
+
+  // Examples
+  vi_du: GrammarExample[];
+
+  // ─── Backward-compatible derived fields ───
+  pattern: string;       // alias for mau_ngu_phap
+  reading: string;       // alias for phien_am
+  meaning: string;       // alias for nghia_cot_loi
+  structure: string;     // alias for cong_thuc
+  congThuc: string;
+  usage: string;         // alias for giai_thich_toi_uu
+  nuance: string;        // alias for giai_thich_toi_uu
+  commonMistakes: string;
+  comparison: string;
+  examples: GrammarExample[];
+  lesson: string;
+  level: string;
+}
+
+// ─── SRS (Spaced Repetition System) ─────────────────────────
 
 /**
  * Card states following Anki's model:
@@ -88,7 +226,8 @@ export interface SRSCard {
   lastReviewedAt: string | null;
 }
 
-// --- Quiz ---
+// ─── Quiz ───────────────────────────────────────────────────
+
 export type QuizType =
   | 'vocab-meaning'     // Show kanji → pick meaning
   | 'vocab-reading'     // Show kanji → pick reading
@@ -126,7 +265,8 @@ export interface QuizSession {
   accuracy: number;
 }
 
-// --- Progress ---
+// ─── Progress ───────────────────────────────────────────────
+
 export interface StudyDay {
   date: string; // YYYY-MM-DD
   cardsReviewed: number; // Legacy total
@@ -149,7 +289,8 @@ export interface ProgressStats {
   studyDays: StudyDay[];
 }
 
-// --- Bookmarks ---
+// ─── Bookmarks ──────────────────────────────────────────────
+
 export interface Bookmark {
   itemId: string;
   itemType: 'vocabulary' | 'kanji' | 'grammar';
@@ -157,7 +298,8 @@ export interface Bookmark {
   note?: string;
 }
 
-// --- Settings ---
+// ─── Settings ───────────────────────────────────────────────
+
 export type ThemeMode = 'light' | 'dark' | 'reading' | 'high-contrast';
 
 export interface AppSettings {
@@ -169,7 +311,8 @@ export interface AppSettings {
   reducedMotion: boolean;
 }
 
-// --- Navigation ---
+// ─── Navigation ─────────────────────────────────────────────
+
 export type PageId =
   | 'dashboard'
   | 'vocabulary'
@@ -183,11 +326,19 @@ export type PageId =
   | 'bookmarks'
   | 'settings';
 
-// --- Search ---
+// ─── Search ─────────────────────────────────────────────────
+
 export interface SearchResult {
   id: string;
   type: 'vocabulary' | 'kanji' | 'grammar';
   title: string;
   subtitle: string;
   matchField: string;
+}
+
+export type StudyItemType = SearchResult['type'];
+
+export interface NavigationTarget {
+  id: string;
+  type: StudyItemType;
 }

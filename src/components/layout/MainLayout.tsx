@@ -5,20 +5,40 @@
 // Mobile: top header + content + bottom nav
 // ============================================================
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Sidebar } from './Sidebar';
 import { BottomNav } from './BottomNav';
 import { SearchModal } from '@/components/search/SearchModal';
 import { useApp } from '@/hooks/useApp';
 import type { PageId } from '@/types';
+import { Menu, Search, X, Layers, CircleHelp, ChartNoAxesCombined, Bookmark, Settings } from 'lucide-react';
 
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
 export function MainLayout({ children }: MainLayoutProps) {
-  const { sidebarCollapsed, setCurrentPage, setSearchOpen, currentPage } = useApp();
+  const { setCurrentPage, setSearchOpen, currentPage } = useApp();
   const lastKeyRef = useRef<{ key: string; time: number }>({ key: '', time: 0 });
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuDialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const menuButton = menuButtonRef.current;
+    menuDialogRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); setMenuOpen(false); return; }
+      if (event.key !== 'Tab') return;
+      const buttons = menuDialogRef.current?.querySelectorAll<HTMLButtonElement>('button');
+      if (!buttons?.length) return;
+      if (event.shiftKey && document.activeElement === buttons[0]) { event.preventDefault(); buttons[buttons.length - 1].focus(); }
+      else if (!event.shiftKey && document.activeElement === buttons[buttons.length - 1]) { event.preventDefault(); buttons[0].focus(); }
+    };
+    window.addEventListener('keydown', handler);
+    return () => { window.removeEventListener('keydown', handler); menuButton?.focus(); };
+  }, [menuOpen]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -28,13 +48,6 @@ export function MainLayout({ children }: MainLayoutProps) {
         target.tagName === 'TEXTAREA' ||
         target.isContentEditable
       ) {
-        return;
-      }
-
-      // Ctrl+K / Cmd+K — Search
-      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setSearchOpen(true);
         return;
       }
 
@@ -70,21 +83,21 @@ export function MainLayout({ children }: MainLayoutProps) {
 
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [setCurrentPage, setSearchOpen]);
+  }, [setCurrentPage]);
 
   // Page title mapping for mobile header
   const pageTitles: Record<PageId, string> = {
-    dashboard: 'Tổng Quan',
-    vocabulary: 'Từ Vựng',
+    dashboard: 'Hôm nay',
+    vocabulary: 'Từ vựng',
     kanji: 'Kanji',
-    grammar: 'Ngữ Pháp',
-    flashcards: 'Flashcard',
-    srs: 'Ôn Tập SRS',
-    quiz: 'Quiz',
-    progress: 'Tiến Độ',
-    search: 'Tìm Kiếm',
-    bookmarks: 'Đã Lưu',
-    settings: 'Cài Đặt',
+    grammar: 'Ngữ pháp',
+    flashcards: 'Thẻ học',
+    srs: 'Ôn tập',
+    quiz: 'Trắc nghiệm',
+    progress: 'Tiến độ',
+    search: 'Tìm kiếm',
+    bookmarks: 'Đã lưu',
+    settings: 'Cài đặt',
   };
 
   return (
@@ -99,37 +112,37 @@ export function MainLayout({ children }: MainLayoutProps) {
         role="main"
       >
         {/* Mobile Top Header */}
-        <div className="md:hidden sticky top-0 z-30 flex items-center justify-between px-4 h-14 bg-white/95 dark:bg-[#0C0D0E]/95 backdrop-blur-md border-b border-gray-200/80 dark:border-[var(--color-border)]">
-          <div className="flex items-center gap-2">
-            <span className="font-jp-serif text-xl font-extrabold text-gray-900 dark:text-white">
-              N3
-            </span>
-            <span className="text-[10px] font-bold text-[#1D63ED] bg-[#DCEBFE] dark:bg-blue-950/60 px-2 py-0.5 rounded-md">
-              学習
-            </span>
-          </div>
-          <span className="text-sm font-bold text-gray-700 dark:text-gray-200">
+        <div className="md:hidden sticky top-0 z-30 flex items-center justify-between gap-2 px-4 h-14 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
+          <span className="font-jp-serif text-xl font-bold text-[var(--color-text)]" aria-label="Sổ học">学</span>
+          <span className="text-sm font-semibold text-[var(--color-text)] truncate">
             {pageTitles[currentPage] ?? 'N3 学習'}
           </span>
-          <button
-            onClick={() => setSearchOpen(true)}
-            className="p-2 rounded-xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer"
-            aria-label="Search"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-            </svg>
-          </button>
+          <div className="flex items-center">
+            <button onClick={() => setSearchOpen(true)} className="study-button !w-10 !min-h-10 !p-0 !border-0" aria-label="Tìm kiếm"><Search size={19} /></button>
+            <button ref={menuButtonRef} onClick={() => setMenuOpen(true)} className="study-button !w-10 !min-h-10 !p-0 !border-0" aria-label="Mở trang khác"><Menu size={19} /></button>
+          </div>
         </div>
 
         {/* Page content */}
-        <div className="max-w-full w-full mx-auto px-4 py-4 md:px-10 md:py-10 pb-24 md:pb-10">
+        <div className="max-w-full w-full mx-auto px-4 py-5 md:px-8 lg:px-12 md:py-9 pb-28 md:pb-10">
           {children}
         </div>
       </main>
 
       {/* Mobile bottom nav — hidden on desktop */}
       <BottomNav />
+
+      {menuOpen && <div className="md:hidden fixed inset-0 z-50 bg-black/35" onClick={() => setMenuOpen(false)}>
+        <div ref={menuDialogRef} className="absolute inset-x-0 bottom-0 rounded-t-2xl border-t border-[var(--color-border)] bg-[var(--color-surface)] p-5 pb-8 safe-area-inset-bottom" role="dialog" aria-modal="true" aria-label="Trang khác" onClick={(event) => event.stopPropagation()}>
+          <div className="flex items-center justify-between mb-4"><h2 className="font-semibold">Trang khác</h2><button onClick={() => setMenuOpen(false)} className="study-button !w-10 !min-h-10 !p-0" aria-label="Đóng menu"><X size={18} /></button></div>
+          <div className="grid grid-cols-2 gap-2">
+            {([
+              ['flashcards', 'Thẻ học', Layers], ['quiz', 'Trắc nghiệm', CircleHelp],
+              ['progress', 'Tiến độ', ChartNoAxesCombined], ['bookmarks', 'Đã lưu', Bookmark], ['settings', 'Cài đặt', Settings],
+            ] as const).map(([page, label, Icon]) => <button key={page} onClick={() => { setCurrentPage(page); setMenuOpen(false); }} className="study-button !justify-start"><Icon size={18} />{label}</button>)}
+          </div>
+        </div>
+      </div>}
 
       {/* Global search modal */}
       <SearchModal />

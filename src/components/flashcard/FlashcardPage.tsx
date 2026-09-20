@@ -8,29 +8,23 @@
 // ============================================================
 
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { ContentBadge, PageHeading } from '@/components/ui/StudyUI';
 import { useApp } from '@/hooks/useApp';
 import {
   X,
-  BookmarkCheck,
-  Sparkles,
-  BookOpen,
   Volume2,
   Maximize2,
   Minimize2,
-  Compass,
   Eye,
   EyeOff,
-  Clock,
   Brain,
-  CheckCircle2,
-  RotateCcw,
   Hash,
   ChevronsRight,
   Shuffle,
   ListOrdered,
   Play,
 } from 'lucide-react';
-import type { VocabItem, KanjiItem, GrammarItem, Rating, SRSCard } from '@/types';
+import type { VocabItem, KanjiItem, GrammarItem, Rating } from '@/types';
 import {
   createSRSCard,
   processReview,
@@ -48,6 +42,8 @@ import {
   setLastGrammarIndex,
   getLastActiveDeck,
   setLastActiveDeck,
+  getAnkiMode,
+  setAnkiMode as saveAnkiMode,
   type ActiveDeck,
 } from '@/lib/storage';
 
@@ -89,7 +85,7 @@ function CardJumpControl({
     return (
       <div className="flex items-center gap-2">
         <span className="text-xs font-mono text-[var(--color-text-tertiary)]">{label}</span>
-        <div className="flex items-center gap-1.5 bg-[var(--color-surface)] border-2 border-[var(--color-accent)] rounded-xl px-2 py-1 shadow-md">
+        <div className="flex items-center gap-1.5 bg-[var(--color-surface)] border-2 border-[var(--color-accent)] rounded-xl px-2 py-1 ">
           <Hash size={13} className="text-[var(--color-accent)] shrink-0" />
           <input
             ref={inputRef}
@@ -109,7 +105,7 @@ function CardJumpControl({
           <span className="text-xs text-[var(--color-text-tertiary)] font-mono">/ {total}</span>
           <button
             onMouseDown={(e) => { e.preventDefault(); commit(); }}
-            className="ml-1 p-1 rounded-lg bg-[var(--color-accent)] text-white hover:opacity-90 transition-opacity cursor-pointer"
+            className="ml-1 p-1 rounded-lg bg-[var(--color-accent)] text-[var(--color-text-inverse)] hover:opacity-90 transition-opacity cursor-pointer"
             title="Nhảy đến thẻ"
           >
             <ChevronsRight size={13} />
@@ -122,14 +118,14 @@ function CardJumpControl({
   return (
     <button
       onClick={openEdit}
-      title="Click để nhảy đến thẻ bất kỳ"
-      className="group flex items-center gap-2 font-mono font-semibold text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer transition-colors"
+      title="Chọn thẻ bất kỳ"
+      className="group flex shrink-0 items-center gap-2 whitespace-nowrap font-mono font-semibold text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer transition-colors sm:text-sm"
     >
       <span className="group-hover:underline underline-offset-2">
         {label} <span className="text-[var(--color-accent)]">{index + 1}</span>
         <span className="text-[var(--color-text-tertiary)]"> / {total}</span>
       </span>
-      <Hash size={13} className="opacity-0 group-hover:opacity-60 transition-opacity" />
+      <Hash size={13} className="hidden opacity-0 group-hover:opacity-60 transition-opacity sm:block" />
     </button>
   );
 }
@@ -182,7 +178,7 @@ function useSwipeGesture({
     }
   }, [onSwipeLeft, onSwipeRight, onSwipeUp, threshold]);
 
-  return { onTouchStart, onTouchMove, onTouchEnd, swipeDir };
+  return { handlers: { onTouchStart, onTouchMove, onTouchEnd }, swipeDir };
 }
 
 // ============================================================
@@ -207,10 +203,10 @@ function MobileAnkiControls({
   const intervals = useMemo(() => getNextIntervals(currentCard), [currentCard]);
 
   const btns: { rating: Rating; label: string; sub: string; cls: string }[] = [
-    { rating: 'again', label: '1 · Quên', sub: intervals.again, cls: 'bg-rose-500/10 border-rose-500/30 text-rose-600 dark:text-rose-400 active:bg-rose-500/25' },
-    { rating: 'hard',  label: '2 · Khó',  sub: intervals.hard,  cls: 'bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400 active:bg-amber-500/25' },
-    { rating: 'good',  label: '3 · Nhớ',  sub: intervals.good,  cls: 'bg-blue-500/10 border-blue-500/30 text-blue-600 dark:text-blue-400 active:bg-blue-500/25' },
-    { rating: 'easy',  label: '4 · Dễ',   sub: intervals.easy,  cls: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400 active:bg-emerald-500/25' },
+    { rating: 'again', label: '1 · Quên', sub: intervals.again, cls: 'bg-[var(--color-error-subtle)] border-[var(--color-error)] text-[var(--color-error)]' },
+    { rating: 'hard',  label: '2 · Khó',  sub: intervals.hard,  cls: 'bg-[var(--color-warning-subtle)] border-[var(--color-warning)] text-[var(--color-warning)]' },
+    { rating: 'good',  label: '3 · Nhớ',  sub: intervals.good,  cls: 'bg-[var(--color-accent-subtle)] border-[var(--color-accent)] text-[var(--color-accent)]' },
+    { rating: 'easy',  label: '4 · Dễ',   sub: intervals.easy,  cls: 'bg-[var(--color-success-subtle)] border-[var(--color-success)] text-[var(--color-success)]' },
   ];
 
   return (
@@ -241,9 +237,8 @@ export function AnkiCardBadge({
 
   if (!card || card.state === 'new') {
     return (
-      <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shadow-2xs select-none">
-        <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-        <span>Anki SRS: Thẻ mới (Chưa học)</span>
+      <div className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--color-accent)] select-none">
+        <span>Thẻ mới</span>
       </div>
     );
   }
@@ -256,10 +251,9 @@ export function AnkiCardBadge({
   };
 
   return (
-    <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-2xs select-none">
-      <span className="w-2 h-2 rounded-full bg-emerald-500" />
+    <div className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-success-subtle)] px-3 py-1 text-xs font-semibold text-[var(--color-success)] select-none">
       <span>
-        Anki SRS: {stageLabels[card.state as keyof typeof stageLabels]} · Lặp lại sau {formatCardInterval(card)}
+        {stageLabels[card.state as keyof typeof stageLabels]} · Ôn sau {formatCardInterval(card)}
       </span>
     </div>
   );
@@ -295,8 +289,8 @@ export function AnkiSRSControls({
           e.stopPropagation();
           onRate('again');
         }}
-        className="flex-1 min-w-[110px] py-3 px-3 rounded-2xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-600 dark:text-rose-400 font-semibold text-xs transition-all flex flex-col items-center gap-1 cursor-pointer focus-ring shadow-xs"
-        title="Phím 1: Học lại (Again)"
+        className="flex-1 min-w-[110px] py-3 px-3 rounded-2xl bg-[var(--color-error-subtle)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-error)] text-[var(--color-error)] font-semibold text-xs transition-all flex flex-col items-center gap-1 cursor-pointer focus-ring shadow-xs"
+        title="Phím 1: Học lại"
       >
         <span className="font-bold tracking-wider uppercase">1. Quên</span>
         <span className="text-[11px] font-mono opacity-80">{intervals.again}</span>
@@ -308,8 +302,8 @@ export function AnkiSRSControls({
           e.stopPropagation();
           onRate('hard');
         }}
-        className="flex-1 min-w-[110px] py-3 px-3 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-semibold text-xs transition-all flex flex-col items-center gap-1 cursor-pointer focus-ring shadow-xs"
-        title="Phím 2: Khó (Hard)"
+        className="flex-1 min-w-[110px] py-3 px-3 rounded-2xl bg-[var(--color-warning-subtle)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-warning)] text-[var(--color-warning)] font-semibold text-xs transition-all flex flex-col items-center gap-1 cursor-pointer focus-ring shadow-xs"
+        title="Phím 2: Khó"
       >
         <span className="font-bold tracking-wider uppercase">2. Khó</span>
         <span className="text-[11px] font-mono opacity-80">{intervals.hard}</span>
@@ -321,8 +315,8 @@ export function AnkiSRSControls({
           e.stopPropagation();
           onRate('good');
         }}
-        className="flex-1 min-w-[110px] py-3 px-3 rounded-2xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-600 dark:text-blue-400 font-semibold text-xs transition-all flex flex-col items-center gap-1 cursor-pointer focus-ring shadow-xs"
-        title="Phím 3: Nhớ (Good)"
+        className="flex-1 min-w-[110px] py-3 px-3 rounded-2xl bg-[var(--color-accent-subtle)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-accent)] text-[var(--color-accent)] font-semibold text-xs transition-all flex flex-col items-center gap-1 cursor-pointer focus-ring shadow-xs"
+        title="Phím 3: Nhớ"
       >
         <span className="font-bold tracking-wider uppercase">3. Nhớ</span>
         <span className="text-[11px] font-mono opacity-80">{intervals.good}</span>
@@ -334,8 +328,8 @@ export function AnkiSRSControls({
           e.stopPropagation();
           onRate('easy');
         }}
-        className="flex-1 min-w-[110px] py-3 px-3 rounded-2xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-semibold text-xs transition-all flex flex-col items-center gap-1 cursor-pointer focus-ring shadow-xs"
-        title="Phím 4: Thuộc (Easy)"
+        className="flex-1 min-w-[110px] py-3 px-3 rounded-2xl bg-[var(--color-success-subtle)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-success)] text-[var(--color-success)] font-semibold text-xs transition-all flex flex-col items-center gap-1 cursor-pointer focus-ring shadow-xs"
+        title="Phím 4: Thuộc"
       >
         <span className="font-bold tracking-wider uppercase">4. Dễ</span>
         <span className="text-[11px] font-mono opacity-80">{intervals.easy}</span>
@@ -347,7 +341,7 @@ export function AnkiSRSControls({
 // ============================================================
 // Shuffle Launch Modal
 // ============================================================
-type DeckKey = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'grammarN3' | 'grammarN4' | 'saved';
+type DeckKey = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'kanjiN2' | 'grammarN3' | 'grammarN4' | 'saved';
 
 interface ShuffleConfig {
   mode: 'sequential' | 'shuffle';
@@ -368,11 +362,30 @@ function ShuffleLaunchModal({
   const [mode, setMode] = useState<'sequential' | 'shuffle'>('sequential');
   const [rangeEnd, setRangeEnd] = useState(totalCards);
   const [inputVal, setInputVal] = useState(String(totalCards));
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const previousFocus = document.activeElement as HTMLElement | null;
+    dialogRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); onCancel(); return; }
+      if (event.key !== 'Tab') return;
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('button, input');
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => { window.removeEventListener('keydown', handleKey); previousFocus?.focus(); };
+  }, [onCancel]);
 
   const deckLabels: Record<DeckKey, string> = {
     vocabN3: 'Từ vựng N3',
     vocabN4: 'Từ vựng N4',
     kanjiN3: 'Hán tự N3',
+    kanjiN2: 'Hán tự N2',
     grammarN3: 'Ngữ pháp N3',
     grammarN4: 'Ngữ pháp N4',
     saved: 'Đã Lưu',
@@ -395,18 +408,19 @@ function ShuffleLaunchModal({
   return (
     <div
       className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+      role="presentation"
       style={{ background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(6px)' }}
       onClick={(e) => { if (e.target === e.currentTarget) onCancel(); }}
     >
-      <div className="w-full max-w-md rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-2xl p-8 flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-200">
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label={'Bắt đầu ' + deckLabels[deckKey]} className="w-full max-w-md rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-5 sm:p-8 flex flex-col gap-6">
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
             <div className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] mb-1">Bắt đầu học</div>
             <h2 className="text-xl font-bold text-[var(--color-text)]">{deckLabels[deckKey]}</h2>
-            <p className="text-sm text-[var(--color-text-secondary)] mt-0.5">{totalCards} thẻ trong deck</p>
+            <p className="text-sm text-[var(--color-text-secondary)] mt-0.5">{totalCards} thẻ trong bộ</p>
           </div>
-          <button onClick={onCancel} className="p-2 rounded-xl hover:bg-[var(--color-surface-alt)] text-[var(--color-text-tertiary)] transition-colors cursor-pointer">
+          <button onClick={onCancel} aria-label="Đóng" className="study-button">
             <X size={18} />
           </button>
         </div>
@@ -419,8 +433,8 @@ function ShuffleLaunchModal({
               onClick={() => setMode('sequential')}
               className={`flex flex-col items-center gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer ${
                 mode === 'sequential'
-                  ? 'border-blue-500 bg-blue-500/10 text-blue-600 dark:text-blue-400'
-                  : 'border-[var(--color-border)] bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)]'
+                  ? 'border-[var(--color-accent)] bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]'
+                  : 'border-[var(--color-border)] bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-strong)]'
               }`}
             >
               <ListOrdered size={22} />
@@ -433,13 +447,13 @@ function ShuffleLaunchModal({
               onClick={() => setMode('shuffle')}
               className={`flex flex-col items-center gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer ${
                 mode === 'shuffle'
-                  ? 'border-violet-500 bg-violet-500/10 text-violet-600 dark:text-violet-400'
-                  : 'border-[var(--color-border)] bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)]'
+                  ? 'border-[var(--color-accent)] bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]'
+                  : 'border-[var(--color-border)] bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-strong)]'
               }`}
             >
               <Shuffle size={22} />
               <div className="text-center">
-                <div className="font-bold text-sm">Shuffle</div>
+                <div className="font-bold text-sm">Ngẫu nhiên</div>
                 <div className="text-[11px] opacity-70 mt-0.5">Ngẫu nhiên 1–{rangeEnd}</div>
               </div>
             </button>
@@ -459,7 +473,7 @@ function ShuffleLaunchModal({
             max={totalCards}
             value={Math.min(Math.max(parseInt(inputVal)||1,1), totalCards)}
             onChange={(e) => handleRangeInput(e.target.value)}
-            className="w-full h-2 rounded-full accent-violet-500 cursor-pointer"
+            className="w-full h-2 rounded-full accent-[var(--color-accent)] cursor-pointer"
           />
           {/* Number input */}
           <div className="flex items-center gap-3">
@@ -470,7 +484,8 @@ function ShuffleLaunchModal({
               max={totalCards}
               value={inputVal}
               onChange={(e) => handleRangeInput(e.target.value)}
-              className="w-24 px-3 py-1.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-alt)] text-[var(--color-text)] text-sm font-mono font-bold text-center focus:outline-none focus:border-violet-500 transition-colors"
+              aria-label="Số thẻ muốn học"
+              className="study-input !w-24 text-center"
             />
             <button
               onClick={() => handleRangeInput(String(totalCards))}
@@ -482,16 +497,12 @@ function ShuffleLaunchModal({
         {/* Start button */}
         <button
           onClick={handleStart}
-          className={`w-full flex items-center justify-center gap-2.5 py-3.5 rounded-2xl font-bold text-sm text-white transition-all cursor-pointer shadow-sm hover:shadow-md active:scale-[0.98] ${
-            mode === 'shuffle'
-              ? 'bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700'
-              : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700'
-          }`}
+          className="study-button study-button-primary w-full"
         >
           {mode === 'shuffle' ? <Shuffle size={18} /> : <Play size={18} />}
           <span>
             {mode === 'shuffle'
-              ? `Shuffle ${Math.min(Math.max(parseInt(inputVal)||1,1), totalCards)} thẻ`
+              ? `Học ngẫu nhiên ${Math.min(Math.max(parseInt(inputVal)||1,1), totalCards)} thẻ`
               : `Bắt đầu ${Math.min(Math.max(parseInt(inputVal)||1,1), totalCards)} thẻ`
             }
           </span>
@@ -503,32 +514,23 @@ function ShuffleLaunchModal({
 
 export function FlashcardPage() {
   const { vocabulary, kanji, grammar, isBookmarked, srsCards } = useApp();
-  const [activeDeck, setActiveDeckState] = useState<any>(() => getLastActiveDeck());
+  const [activeDeck, setActiveDeckState] = useState<ActiveDeck>(() => getLastActiveDeck());
 
-  const setActiveDeck = useCallback((deck: any) => {
+  const setActiveDeck = useCallback((deck: ActiveDeck) => {
     setLastActiveDeck(deck);
     setActiveDeckState(deck);
   }, []);
 
-  const [pendingDeck, setPendingDeck] = useState<any>(null); // deck waiting for modal
+  const [pendingDeck, setPendingDeck] = useState<DeckKey | null>(null);
   const [shuffleConfig, setShuffleConfig] = useState<ShuffleConfig>({ mode: 'sequential', rangeEnd: 9999 });
 
   // Persistent Anki Mode setting in localStorage (biến nhớ kể cả khi tắt web)
-  const [ankiMode, setAnkiMode] = useState<boolean>(() => {
-    try {
-      const saved = localStorage.getItem('n3_anki_mode_enabled');
-      return saved !== null ? JSON.parse(saved) : true;
-    } catch {
-      return true;
-    }
-  });
+  const [ankiMode, setAnkiMode] = useState<boolean>(getAnkiMode);
 
   const toggleAnkiMode = useCallback(() => {
     setAnkiMode((prev) => {
       const next = !prev;
-      try {
-        localStorage.setItem('n3_anki_mode_enabled', JSON.stringify(next));
-      } catch {}
+      saveAnkiMode(next);
       return next;
     });
   }, []);
@@ -543,11 +545,14 @@ export function FlashcardPage() {
 
   const n3GrammarIds = useMemo(() => new Set(grammar.filter(g => g.level !== 'N4').map(g => g.id)), [grammar]);
   const n4GrammarIds = useMemo(() => new Set(grammar.filter(g => g.level === 'N4').map(g => g.id)), [grammar]);
+  const n3KanjiIds = useMemo(() => new Set(kanji.filter(k => k.level === 'N3').map(k => k.id)), [kanji]);
+  const n2KanjiIds = useMemo(() => new Set(kanji.filter(k => k.level === 'N2').map(k => k.id)), [kanji]);
 
   const vocabN3DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'vocabulary' && n3VocabIds.has(c.cardId)).length, [dueCards, n3VocabIds]);
   const vocabN4DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'vocabulary' && n4VocabIds.has(c.cardId)).length, [dueCards, n4VocabIds]);
 
-  const kanjiN3DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'kanji').length, [dueCards]);
+  const kanjiN3DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'kanji' && n3KanjiIds.has(c.cardId)).length, [dueCards, n3KanjiIds]);
+  const kanjiN2DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'kanji' && n2KanjiIds.has(c.cardId)).length, [dueCards, n2KanjiIds]);
 
   const grammarN3DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'grammar' && n3GrammarIds.has(c.cardId)).length, [dueCards, n3GrammarIds]);
   const grammarN4DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'grammar' && n4GrammarIds.has(c.cardId)).length, [dueCards, n4GrammarIds]);
@@ -555,7 +560,8 @@ export function FlashcardPage() {
   const vocabN3MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'vocabulary' && c.intervalDays && c.intervalDays >= 21 && n3VocabIds.has(c.cardId)).length, [srsCards, n3VocabIds]);
   const vocabN4MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'vocabulary' && c.intervalDays && c.intervalDays >= 21 && n4VocabIds.has(c.cardId)).length, [srsCards, n4VocabIds]);
 
-  const kanjiN3MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'kanji' && c.intervalDays && c.intervalDays >= 21).length, [srsCards]);
+  const kanjiN3MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'kanji' && c.intervalDays && c.intervalDays >= 21 && n3KanjiIds.has(c.cardId)).length, [srsCards, n3KanjiIds]);
+  const kanjiN2MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'kanji' && c.intervalDays && c.intervalDays >= 21 && n2KanjiIds.has(c.cardId)).length, [srsCards, n2KanjiIds]);
 
   const grammarN3MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'grammar' && c.intervalDays && c.intervalDays >= 21 && n3GrammarIds.has(c.cardId)).length, [srsCards, n3GrammarIds]);
   const grammarN4MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'grammar' && c.intervalDays && c.intervalDays >= 21 && n4GrammarIds.has(c.cardId)).length, [srsCards, n4GrammarIds]);
@@ -565,13 +571,14 @@ export function FlashcardPage() {
     if (deck === 'vocabN3') return vocabulary.filter(v => v.level !== 'N4');
     if (deck === 'vocabN4') return vocabulary.filter(v => v.level === 'N4');
     if (deck === 'saved') return savedVocabulary;
-    if (deck === 'kanjiN3') return kanji;
+    if (deck === 'kanjiN3') return kanji.filter(k => k.level === 'N3');
+    if (deck === 'kanjiN2') return kanji.filter(k => k.level === 'N2');
     if (deck === 'grammarN3') return grammar.filter(g => g.level !== 'N4');
     if (deck === 'grammarN4') return grammar.filter(g => g.level === 'N4');
     return [];
   };
 
-  const handleDeckClick = (deck: any) => {
+  const handleDeckClick = (deck: DeckKey) => {
     setPendingDeck(deck);
   };
 
@@ -597,7 +604,6 @@ export function FlashcardPage() {
       ? [...sliced].sort(() => Math.random() - 0.5)
       : sliced;
 
-    const deckLevel = activeDeck === 'vocabN4' ? 'N4' : activeDeck === 'vocabN3' ? 'N3' : undefined;
     const savedIdx = Math.min(getLastVocabIndex(), Math.max(0, activeItems.length - 1));
     return (
       <VocabFlashcardSession
@@ -608,28 +614,25 @@ export function FlashcardPage() {
         onExit={handleExit}
         ankiMode={ankiMode}
         onToggleAnki={toggleAnkiMode}
-        deckLevel={deckLevel}
-        shuffleMode={shuffleConfig.mode === 'shuffle'}
       />
     );
   }
 
-  if (activeDeck === 'kanjiN3') {
-    const rawItems = getItemsForDeck('kanjiN3') as KanjiItem[];
+  if (activeDeck === 'kanjiN3' || activeDeck === 'kanjiN2') {
+    const rawItems = getItemsForDeck(activeDeck) as KanjiItem[];
     const sliced = rawItems.slice(0, shuffleConfig.rangeEnd);
     const activeItems = shuffleConfig.mode === 'shuffle'
       ? [...sliced].sort(() => Math.random() - 0.5)
       : sliced;
-    const savedIdx = Math.min(getLastKanjiIndex(), Math.max(0, activeItems.length - 1));
+    const savedIdx = Math.min(getLastKanjiIndex(activeDeck === 'kanjiN2' ? 'N2' : 'N3'), Math.max(0, activeItems.length - 1));
     return (
       <KanjiFlashcardSession
-        key={`kanjiN3-${shuffleConfig.mode}-${shuffleConfig.rangeEnd}`}
+        key={`${activeDeck}-${shuffleConfig.mode}-${shuffleConfig.rangeEnd}`}
         items={activeItems}
         initialIndex={shuffleConfig.mode === 'shuffle' ? 0 : savedIdx}
         onExit={handleExit}
         ankiMode={ankiMode}
         onToggleAnki={toggleAnkiMode}
-        shuffleMode={shuffleConfig.mode === 'shuffle'}
       />
     );
   }
@@ -650,7 +653,6 @@ export function FlashcardPage() {
         onExit={handleExit}
         ankiMode={ankiMode}
         onToggleAnki={toggleAnkiMode}
-        shuffleMode={shuffleConfig.mode === 'shuffle'}
       />
     );
   }
@@ -658,282 +660,39 @@ export function FlashcardPage() {
   // Compute total for pending modal
   const pendingTotal = pendingDeck ? getItemsForDeck(pendingDeck).length : 0;
 
-  return (
-    <>
-    {pendingDeck && pendingTotal > 0 && (
-      <ShuffleLaunchModal
-        deckKey={pendingDeck}
-        totalCards={pendingTotal}
-        onStart={handleModalStart}
-        onCancel={handleModalCancel}
-      />
-    )}
-    <div className="space-y-8 w-full pb-20">
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-[var(--color-text)] tracking-tight font-sans">
-          Flashcards
-        </h1>
-        <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-          Học từ vựng, kanji và ngữ pháp với chế độ lặp lại ngắt quãng Anki SRS
-        </p>
-      </div>
-
-      {/* ============================================================
-          Anki SRS Spaced Repetition Control Banner (Soothing & Apple-like)
-          ============================================================ */}
-      <div className="p-6 sm:p-7 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70 shadow-xs space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)]/60 pb-4">
-          <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-semibold">
-              <Brain size={14} />
-              <span>CHẾ ĐỘ HỌC ANKI (SPACED REPETITION)</span>
-            </div>
-            <h2 className="text-lg sm:text-xl font-bold text-[var(--color-text)]">
-              Lặp lại ngắt quãng theo thời gian & độ nhớ
-            </h2>
-            <p className="text-xs sm:text-sm text-[var(--color-text-secondary)]">
-              Tự động nhắc lại từ vựng, kanji, ngữ pháp theo 4 mức độ nhớ (Quên, Khó, Nhớ, Dễ). Dữ liệu tiến độ được lưu vĩnh viễn trên trình duyệt kể cả khi tắt web.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3 shrink-0">
-            <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
-              Chế độ Anki:
-            </span>
-            <button
-              onClick={toggleAnkiMode}
-              className={`
-                inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs
-                ${
-                  ankiMode
-                    ? 'bg-emerald-500 text-white hover:bg-emerald-600'
-                    : 'bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-border)]'
-                }
-              `}
-            >
-              <span className={`w-2 h-2 rounded-full ${ankiMode ? 'bg-white animate-pulse' : 'bg-gray-400'}`} />
-              <span>{ankiMode ? 'ĐANG BẬT ANKI SRS' : 'ĐANG TẮT'}</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Live Anki Stats for 3 Decks */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-4 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/60 flex items-center justify-between">
-            <div className="space-y-0.5">
-              <div className="text-xs font-semibold text-[var(--color-text)]">Từ Vựng (Vocab)</div>
-              <div className="text-[11px] text-[var(--color-text-secondary)]">
-                Cần ôn hôm nay: <strong className="text-rose-500 font-bold">{vocabN3DueCount + vocabN4DueCount} thẻ</strong>
-              </div>
-            </div>
-            <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              {vocabN3MasteredCount + vocabN4MasteredCount} thuộc
-            </span>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/60 flex items-center justify-between">
-            <div className="space-y-0.5">
-              <div className="text-xs font-semibold text-[var(--color-text)]">Hán Tự (Kanji)</div>
-              <div className="text-[11px] text-[var(--color-text-secondary)]">
-                Cần ôn hôm nay: <strong className="text-rose-500 font-bold">{kanjiN3DueCount} thẻ</strong>
-              </div>
-            </div>
-            <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              {kanjiN3MasteredCount} thuộc
-            </span>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-[var(--color-surface-alt)]/50 border border-[var(--color-border)]/60 flex items-center justify-between">
-            <div className="space-y-0.5">
-              <div className="text-xs font-semibold text-[var(--color-text)]">Ngữ Pháp (Grammar)</div>
-              <div className="text-[11px] text-[var(--color-text-secondary)]">
-                Cần ôn hôm nay: <strong className="text-rose-500 font-bold">{grammarN3DueCount + grammarN4DueCount} thẻ</strong>
-              </div>
-            </div>
-            <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              {grammarN3MasteredCount + grammarN4MasteredCount} thuộc
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div className="space-y-10 w-full">
-        {/* ============================================================
-            N4 DECKS
-            ============================================================ */}
-        <div>
-          <div className="flex items-center gap-3 mb-5">
-            <h2 className="text-lg font-bold text-[var(--color-text)] uppercase tracking-wider">Trình độ N4</h2>
-            <div className="flex-1 h-px bg-[var(--color-border)]/50"></div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* N4 Vocabulary Deck */}
-            <button
-              onClick={() => handleDeckClick('vocabN4')}
-              className="
-                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
-                hover:border-purple-500 hover:bg-purple-500/5
-                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
-              "
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-400">
-                  Vocab Deck
-                </span>
-                <BookOpen size={20} className="text-purple-500" />
-              </div>
-              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
-                Từ vựng N4
-              </div>
-              <div className="text-sm text-[var(--color-text-secondary)]">
-                {n4VocabIds.size} từ vựng · {ankiMode ? `Anki SRS (${vocabN4DueCount} cần ôn)` : 'Tuần tự'}
-              </div>
-            </button>
-
-            {/* N4 Grammar Deck */}
-            <button
-              onClick={() => handleDeckClick('grammarN4')}
-              className="
-                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
-                hover:border-rose-500 hover:bg-rose-500/5
-                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
-              "
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-400">
-                  Grammar Deck
-                </span>
-                <Compass size={20} className="text-rose-500" />
-              </div>
-              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
-                Ngữ pháp N4
-              </div>
-              <div className="text-sm text-[var(--color-text-secondary)]">
-                {n4GrammarIds.size} mẫu câu · {ankiMode ? `Anki SRS (${grammarN4DueCount} cần ôn)` : 'Tuần tự'}
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* ============================================================
-            N3 DECKS
-            ============================================================ */}
-        <div>
-          <div className="flex items-center gap-3 mb-5">
-            <h2 className="text-lg font-bold text-[var(--color-text)] uppercase tracking-wider">Trình độ N3</h2>
-            <div className="flex-1 h-px bg-[var(--color-border)]/50"></div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* N3 Vocabulary Deck */}
-            <button
-              onClick={() => handleDeckClick('vocabN3')}
-              className="
-                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
-                hover:border-blue-500 hover:bg-[var(--color-accent-subtle)]/30
-                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
-              "
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-500/15 text-[#1D63ED]">
-                  Vocab Deck
-                </span>
-                <BookOpen size={20} className="text-[#1D63ED]" />
-              </div>
-              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
-                Từ vựng N3
-              </div>
-              <div className="text-sm text-[var(--color-text-secondary)]">
-                {n3VocabIds.size} từ vựng · {ankiMode ? `Anki SRS (${vocabN3DueCount} cần ôn)` : 'Tuần tự'}
-              </div>
-            </button>
-
-            {/* N3 Kanji Deck */}
-            <button
-              onClick={() => handleDeckClick('kanjiN3')}
-              className="
-                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
-                hover:border-amber-500 hover:bg-amber-500/5
-                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
-              "
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400">
-                  Kanji Deck
-                </span>
-                <Sparkles size={20} className="text-amber-500" />
-              </div>
-              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
-                Hán tự N3
-              </div>
-              <div className="text-sm text-[var(--color-text-secondary)]">
-                {kanji.length} hán tự · {ankiMode ? `Anki SRS (${kanjiN3DueCount} cần ôn)` : 'Tuần tự'}
-              </div>
-            </button>
-
-            {/* N3 Grammar Deck */}
-            <button
-              onClick={() => handleDeckClick('grammarN3')}
-              className="
-                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
-                hover:border-emerald-500 hover:bg-emerald-500/5
-                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
-              "
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
-                  Grammar Deck
-                </span>
-                <Compass size={20} className="text-emerald-500" />
-              </div>
-              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
-                Ngữ pháp N3
-              </div>
-              <div className="text-sm text-[var(--color-text-secondary)]">
-                {n3GrammarIds.size} mẫu câu · {ankiMode ? `Anki SRS (${grammarN3DueCount} cần ôn)` : 'Tuần tự'}
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* ============================================================
-            OTHER DECKS
-            ============================================================ */}
-        <div>
-          <div className="flex items-center gap-3 mb-5">
-            <h2 className="text-lg font-bold text-[var(--color-text)] uppercase tracking-wider">Khác</h2>
-            <div className="flex-1 h-px bg-[var(--color-border)]/50"></div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Saved Bookmarks Deck */}
-            <button
-              onClick={() => savedVocabulary.length > 0 && handleDeckClick('saved')}
-              disabled={savedVocabulary.length === 0}
-              className="
-                group p-6 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]/70
-                hover:border-emerald-500 hover:bg-emerald-500/5
-                disabled:opacity-40 disabled:cursor-not-allowed
-                transition-all duration-150 cursor-pointer text-left focus-ring shadow-xs hover:shadow-sm
-              "
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="inline-block text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
-                  Saved Deck
-                </span>
-                <BookmarkCheck size={20} className="text-emerald-500" />
-              </div>
-              <div className="text-lg font-bold text-[var(--color-text)] mb-1">
-                Saved Bookmarks Deck
-              </div>
-              <div className="text-sm text-[var(--color-text-secondary)]">
-                {savedVocabulary.length} thẻ đã lưu
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
+  const decks: {key: DeckKey; title: string; count: number; due: number; mastered: number; tone: 'vocabulary' | 'kanji' | 'grammar' | 'neutral'}[] = [
+    {key:'vocabN3', title:'Từ vựng N3', count:n3VocabIds.size, due:vocabN3DueCount, mastered:vocabN3MasteredCount, tone:'vocabulary'},
+    {key:'kanjiN3', title:'Kanji N3', count:n3KanjiIds.size, due:kanjiN3DueCount, mastered:kanjiN3MasteredCount, tone:'kanji'},
+    {key:'grammarN3', title:'Ngữ pháp N3', count:n3GrammarIds.size, due:grammarN3DueCount, mastered:grammarN3MasteredCount, tone:'grammar'},
+    {key:'vocabN4', title:'Từ vựng N4', count:n4VocabIds.size, due:vocabN4DueCount, mastered:vocabN4MasteredCount, tone:'vocabulary'},
+    {key:'grammarN4', title:'Ngữ pháp N4', count:n4GrammarIds.size, due:grammarN4DueCount, mastered:grammarN4MasteredCount, tone:'grammar'},
+    {key:'kanjiN2', title:'Kanji N2', count:n2KanjiIds.size, due:kanjiN2DueCount, mastered:kanjiN2MasteredCount, tone:'kanji'},
+    {key:'saved', title:'Từ đã lưu', count:savedVocabulary.length, due:0, mastered:0, tone:'neutral'},
+  ];
+  const renderDeck = ({key, ...deck}: (typeof decks)[number]) => <DeckCard key={key} {...deck} ankiMode={ankiMode} onClick={() => handleDeckClick(key)} />;
+  const {key: savedKey, ...savedDeck} = decks[6];
+  return <>
+    {pendingDeck && pendingTotal > 0 && <ShuffleLaunchModal deckKey={pendingDeck} totalCards={pendingTotal} onStart={handleModalStart} onCancel={handleModalCancel} />}
+    <div className="study-page">
+        <PageHeading eyebrow="LUYỆN TẬP" title="Thẻ học" subtitle="Chọn bộ thẻ, tự nhớ trước khi xem đáp án" />
+      <section className="study-panel flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div><h2 className="text-sm font-semibold text-[var(--color-text)]">Lặp lại ngắt quãng (Anki SRS)</h2><p className="study-copy mt-1">Khi bật, đánh giá mức độ nhớ để lên lịch ôn tiếp theo.</p></div>
+        <button role="switch" aria-checked={ankiMode} onClick={toggleAnkiMode} className={'study-button shrink-0 ' + (ankiMode ? 'study-button-primary' : '')}>{ankiMode ? 'Đang bật' : 'Đang tắt'}</button>
+      </section>
+      <section><h2 className="study-eyebrow mb-3">TRÌNH ĐỘ N3</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{decks.slice(0,3).map(renderDeck)}</div></section>
+      <section><h2 className="study-eyebrow mb-3">TRÌNH ĐỘ N4</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{decks.slice(3,5).map(renderDeck)}</div></section>
+      <section><h2 className="study-eyebrow mb-3">TRÌNH ĐỘ N2</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{decks.slice(5,6).map(renderDeck)}</div></section>
+      <section><h2 className="study-eyebrow mb-3">CỦA BẠN</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3"><DeckCard key={savedKey} {...savedDeck} ankiMode={ankiMode} disabled={!savedVocabulary.length} onClick={() => handleDeckClick('saved')} /></div></section>
     </div>
-    </>
-  );
+  </>;
+}
+function DeckCard({title,count,due,mastered,tone,ankiMode,disabled,onClick}: {title:string;count:number;due:number;mastered:number;tone:'vocabulary'|'kanji'|'grammar'|'neutral';ankiMode:boolean;disabled?:boolean;onClick:()=>void}) {
+  return <button disabled={disabled} onClick={onClick} className="study-panel group min-w-0 text-left transition-colors hover:border-[var(--color-border-strong)] focus-ring disabled:cursor-not-allowed disabled:opacity-50">
+    <ContentBadge tone={tone}>{title}</ContentBadge>
+    <p className="mt-4 text-2xl font-semibold text-[var(--color-text)]">{count} <span className="text-sm font-normal text-[var(--color-text-secondary)]">thẻ</span></p>
+    {ankiMode && tone !== 'neutral' && <p className="mt-2 text-xs text-[var(--color-text-secondary)]">{due} cần ôn · {mastered} đã nhớ</p>}
+    <p className="mt-4 text-sm font-semibold text-[var(--color-accent)]">Bắt đầu học →</p>
+  </button>;
 }
 
 export function parseRelatedWords(rawText?: string) {
@@ -979,8 +738,6 @@ export function VocabFlashcardSession({
   preserveOrder = true,
   ankiMode = true,
   onToggleAnki,
-  deckLevel,
-  shuffleMode = false,
 }: {
   items: VocabItem[];
   onExit: () => void;
@@ -988,12 +745,13 @@ export function VocabFlashcardSession({
   preserveOrder?: boolean;
   ankiMode?: boolean;
   onToggleAnki?: () => void;
-  deckLevel?: string;
-  shuffleMode?: boolean;
 }) {
   const { srsCards, updateSRSCard } = useApp();
   const [index, setIndex] = useState(initialIndex || 0);
   const [flipped, setFlipped] = useState(false);
+  const ratingLocked = useRef(false);
+  useEffect(() => { ratingLocked.current = false; }, [index]);
+  const reviewedRef = useRef<Set<number>>(new Set());
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [shuffledItems] = useState(() =>
     preserveOrder ? [...items] : [...items].sort(() => Math.random() - 0.5)
@@ -1009,8 +767,9 @@ export function VocabFlashcardSession({
   const total = shuffledItems.length;
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
-  const next = useCallback((isAnki?: any) => {
-    if (isAnki !== true) {
+  const next = useCallback((isAnki?: boolean) => {
+    if (isAnki !== true && flipped && !reviewedRef.current.has(index)) {
+      reviewedRef.current.add(index);
       recordStudyActivity(1, 0, 1, 5, 'flashcard');
     }
     if (index < total - 1) {
@@ -1019,7 +778,7 @@ export function VocabFlashcardSession({
       setLastVocabIndex(nextIdx);
       setFlipped(false);
     }
-  }, [index, total]);
+  }, [index, total, flipped]);
   const prev = useCallback(() => {
     if (index > 0) {
       const prevIdx = index - 1;
@@ -1037,15 +796,22 @@ export function VocabFlashcardSession({
 
   const handleAnkiRate = useCallback(
     (rating: Rating) => {
+      if (ratingLocked.current || !flipped) return;
+      ratingLocked.current = true;
       const existing = srsCards.find((c) => c.cardId === current.id);
       const card = existing || createSRSCard(current.id, 'vocabulary');
       const isNew = card.state === 'new';
       const updated = processReview(card, rating);
       updateSRSCard(updated);
       recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10, 'srs');
-      next(true);
+      if (index === total - 1) {
+        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+        onExit();
+      } else {
+        next(true);
+      }
     },
-    [srsCards, current.id, updateSRSCard, next]
+    [srsCards, current.id, updateSRSCard, next, index, total, onExit, flipped]
   );
 
   const toggleFullscreen = useCallback(() => {
@@ -1078,6 +844,9 @@ export function VocabFlashcardSession({
   // Keyboard controls including Anki keys 1, 2, 3, 4
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('input, textarea, select, [contenteditable="true"]')) return;
+      if (target.closest('button') && (e.key === ' ' || e.key === 'Enter')) return;
       switch (e.key) {
         case ' ':
           e.preventDefault();
@@ -1132,7 +901,7 @@ export function VocabFlashcardSession({
     <div
       className={`fixed inset-0 z-50 flex flex-col select-none transition-all duration-300 ${
         isFullscreen
-          ? 'bg-gradient-to-b from-[var(--color-bg)] via-[var(--color-surface-alt)]/40 to-[var(--color-bg)]'
+          ? 'bg-[var(--color-bg)]'
           : 'bg-[var(--color-bg)]'
       }`}
     >
@@ -1144,7 +913,7 @@ export function VocabFlashcardSession({
             className="flex items-center gap-2 text-sm font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer focus-ring px-3 py-2 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-all shadow-2xs"
           >
             <X size={18} />
-            <span className="hidden sm:inline">Exit (Esc)</span>
+            <span className="hidden sm:inline">Thoát (Esc)</span>
           </button>
 
           {onToggleAnki && (
@@ -1152,20 +921,20 @@ export function VocabFlashcardSession({
               onClick={onToggleAnki}
               className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-2xs ${
                 ankiMode
-                  ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30'
+                  ? 'bg-[var(--color-success-subtle)] text-[var(--color-success)] border border-[var(--color-border)]'
                   : 'bg-[var(--color-surface)] text-[var(--color-text-tertiary)] border border-[var(--color-border)]'
               }`}
             >
               <Brain size={15} />
               <span className="hidden sm:inline">{ankiMode ? 'Anki: BẬT' : 'Anki: TẮT'}</span>
-              <span className="sm:hidden">{ankiMode ? 'ON' : 'OFF'}</span>
+              <span className="sm:hidden">{ankiMode ? 'BẬT' : 'TẮT'}</span>
             </button>
           )}
         </div>
 
         {/* Progress bar + jump */}
         <div className="flex items-center gap-2 sm:gap-4">
-          <CardJumpControl index={index} total={total} label="Vocab" onJump={jumpTo} />
+          <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
           <div className="w-24 sm:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"
@@ -1176,37 +945,37 @@ export function VocabFlashcardSession({
 
         <div className="hidden sm:flex items-center gap-2 text-xs text-[var(--color-text-tertiary)]">
           {isFullscreen ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C9A84C]/15 border border-[#C9A84C]/40 text-[#C9A84C] font-bold tracking-wide shadow-2xs animate-pulse">
-              <span>✦ ZEN FULLSCREEN</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-border)] text-[var(--color-accent)] font-bold tracking-wide shadow-2xs animate-pulse">
+              <span>✦ TOÀN MÀN HÌNH</span>
             </span>
           ) : (
-            <span>Vocab Mode</span>
+            <span>Từ vựng</span>
           )}
         </div>
       </div>
 
       {/* Card area — flex-1, swipeable */}
       <div
-        className="flex-1 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4"
-        {...swipe}
+        className="flex-1 min-h-0 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4"
+        {...swipe.handlers}
       >
         <button
           onClick={flip}
           className={`
             w-full flex flex-col items-center justify-center cursor-pointer transition-all duration-300
-            focus-ring relative overflow-hidden
+            focus-ring relative overflow-y-auto
             ${
               isFullscreen
-                ? 'max-w-5xl lg:max-w-6xl mx-auto rounded-[2.5rem] bg-[var(--color-surface)] border-2 border-[#C9A84C]/45 shadow-[0_0_70px_rgba(201,168,76,0.18)] p-6 sm:p-16'
-                : 'max-w-4xl lg:max-w-5xl mx-auto rounded-2xl sm:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-lg p-5 sm:p-12'
+                ? 'max-w-4xl lg:max-w-5xl mx-auto rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-5 sm:p-12'
+                : 'max-w-4xl lg:max-w-5xl mx-auto rounded-2xl sm:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]  p-5 sm:p-12'
             }
           `}
-          aria-label={flipped ? 'Showing answer, click to show question' : 'Showing question, click to flip'}
+          aria-label={flipped ? 'Đã hiện đáp án, chạm để xem câu hỏi' : 'Đang hiện câu hỏi, chạm để lật'}
         >
           {/* Top Left: Lesson + Anki Badge */}
           <div className="absolute top-3 left-3 sm:top-8 sm:left-10 flex flex-wrap items-center gap-2 select-none">
             <div className="inline-flex items-center px-2.5 py-1 rounded-full text-xs sm:text-sm font-bold bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] tracking-wide">
-              {current.lesson || 'N3 Vocab'}
+              {current.lesson || `Từ vựng ${current.level}`}
             </div>
             {ankiMode && <AnkiCardBadge itemId={current.id} itemType="vocabulary" />}
           </div>
@@ -1216,20 +985,20 @@ export function VocabFlashcardSession({
             role="button"
             tabIndex={0}
             onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
-            title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+            title={isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}
             className={`
               absolute bottom-3 right-3 sm:bottom-6 sm:right-6 z-20 p-2.5 rounded-xl
               transition-all duration-200 cursor-pointer focus-ring
               flex items-center gap-2 text-xs font-bold
               ${
                 isFullscreen
-                  ? 'bg-[#C9A84C]/20 hover:bg-[#C9A84C]/30 border border-[#C9A84C]/50 text-[#C9A84C] shadow-md'
+                  ? 'bg-[var(--color-accent-subtle)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-accent)] '
                   : 'bg-[var(--color-surface-alt)]/80 hover:bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] hover:text-[var(--color-text)] backdrop-blur-xs shadow-2xs'
               }
             `}
           >
             {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-            <span className="hidden sm:inline">{isFullscreen ? 'Exit Fullscreen' : 'Fullscreen Focus'}</span>
+            <span className="hidden sm:inline">{isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</span>
           </div>
 
           {/* Swipe hint — mobile only */}
@@ -1242,15 +1011,15 @@ export function VocabFlashcardSession({
           {!flipped ? (
             <div className="text-center flex flex-col items-center justify-center my-auto gap-4 sm:gap-6">
               <div
-                className="font-jp-serif font-bold tracking-tight transition-all duration-300"
+                className="font-jp-serif font-bold tracking-tight transition-all duration-300 break-words max-w-full"
                 style={{
-                  fontSize: isFullscreen ? 'clamp(7.5rem, 22vw, 13rem)' : 'clamp(4.5rem, 18vw, 11rem)',
+                  fontSize: isFullscreen ? 'clamp(3rem, 14vw, 10rem)' : 'clamp(2.5rem, 13vw, 8rem)',
                   lineHeight: 1,
                   color: 'var(--color-text)',
                   textShadow: '0 2px 24px rgba(0,0,0,0.08)',
                 }}
               >
-                {current.kanji}
+                {current.kanji || current.hiragana}
               </div>
 
               <div className="mt-2 flex items-center justify-center gap-3 text-sm sm:text-base font-semibold text-[var(--color-text-secondary)] opacity-80 tracking-wide select-none">
@@ -1264,7 +1033,7 @@ export function VocabFlashcardSession({
                   <Volume2 size={22} />
                 </div>
                 <span>•</span>
-                <span className="hidden sm:inline">Click / Space to Flip</span>
+                <span className="hidden sm:inline">Chạm hoặc Space để lật</span>
                 <span className="sm:hidden text-xs">Chạm để lật • Vuốt ← →</span>
               </div>
             </div>
@@ -1285,11 +1054,12 @@ export function VocabFlashcardSession({
                 className="font-jp font-bold"
                 style={{
                   fontSize: 'clamp(1.3rem, 3.5vw, 2.2rem)',
-                  color: '#C9A84C',
+                  color: 'var(--color-accent)',
                 }}
               >
                 【{current.hiragana}】
               </div>
+              {current.han_viet && <div className="text-sm font-medium text-[var(--color-text-secondary)]">Hán Việt: {current.han_viet}</div>}
             </div>
           )}
         </button>
@@ -1299,10 +1069,10 @@ export function VocabFlashcardSession({
       <div className="px-3 pb-3 pt-2 sm:px-8 sm:py-5 border-t border-[var(--color-border)] shrink-0">
         {/* Desktop shortcut hints */}
         <div className="hidden md:flex items-center gap-6 text-xs text-[var(--color-text-tertiary)] font-mono mb-3">
-          <span>Space / Click = Flip</span>
-          <span>← / → = Previous / Next</span>
-          {ankiMode && <span>1 - 4 = Anki Rating</span>}
-          <span>Esc = Exit</span>
+          <span>Space / Chạm = Lật</span>
+          <span>← / → = Trước / Tiếp</span>
+          {ankiMode && <span>1 - 4 = Đánh giá</span>}
+          <span>Esc = Thoát</span>
         </div>
 
         {/* Anki controls */}
@@ -1318,8 +1088,8 @@ export function VocabFlashcardSession({
             </div>
           </>
         ) : ankiMode && !flipped ? (
-          <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-amber-600 dark:text-amber-400 font-semibold bg-amber-500/10 px-4 py-3 rounded-xl">
-            <span>💡 <span className="hidden sm:inline">Bấm Space / Click để lật thẻ · Bấm 1 - 4 để chọn độ nhớ Anki</span><span className="sm:hidden">Chạm để lật thẻ · Vuốt ← → chuyển</span></span>
+          <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-[var(--color-warning)] font-semibold bg-[var(--color-warning-subtle)] px-4 py-3 rounded-xl">
+            <span>💡 <span className="hidden sm:inline">Bấm Space hoặc chạm để lật thẻ · Bấm 1 - 4 để chọn độ nhớ Anki</span><span className="sm:hidden">Chạm để lật thẻ · Vuốt ← → chuyển</span></span>
           </div>
         ) : (
           /* Non-Anki mode: prev/next */
@@ -1330,7 +1100,7 @@ export function VocabFlashcardSession({
             >
               ← Trước
             </button>
-            <CardJumpControl index={index} total={total} label="Vocab" onJump={jumpTo} />
+            <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
             <button
               onClick={(e) => { e.stopPropagation(); next(); }}
               className="flex-1 flex items-center justify-center gap-1.5 px-4 py-3 sm:py-2 rounded-xl border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-bold hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer text-sm"
@@ -1349,7 +1119,7 @@ export function VocabFlashcardSession({
             >
               ← Trước
             </button>
-            <CardJumpControl index={index} total={total} label="Vocab" onJump={jumpTo} />
+            <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
             <button
               onClick={(e) => { e.stopPropagation(); next(); }}
               className="px-4 py-2 rounded-xl border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-bold hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer text-xs"
@@ -1369,49 +1139,52 @@ function KanjiFlashcardSession({
   initialIndex = 0,
   ankiMode = true,
   onToggleAnki,
-  shuffleMode = false,
 }: {
   items: KanjiItem[];
   onExit: () => void;
   initialIndex?: number;
   ankiMode?: boolean;
   onToggleAnki?: () => void;
-  shuffleMode?: boolean;
 }) {
   const { srsCards, updateSRSCard } = useApp();
+  const deckLevel = items[0]?.level ?? 'N3';
   const [index, setIndex] = useState(initialIndex || 0);
   const [flipped, setFlipped] = useState(false);
+  const ratingLocked = useRef(false);
+  useEffect(() => { ratingLocked.current = false; }, [index]);
+  const reviewedRef = useRef<Set<number>>(new Set());
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const jumpTo = useCallback((idx: number) => {
     setIndex(idx);
-    setLastKanjiIndex(idx);
+    setLastKanjiIndex(idx, deckLevel);
     setFlipped(false);
-  }, []);
+  }, [deckLevel]);
 
   const current = items[index];
   const total = items.length;
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
-  const next = useCallback((isAnki?: any) => {
-    if (isAnki !== true) {
+  const next = useCallback((isAnki?: boolean) => {
+    if (isAnki !== true && flipped && !reviewedRef.current.has(index)) {
+      reviewedRef.current.add(index);
       recordStudyActivity(1, 0, 1, 5, 'flashcard');
     }
     if (index < total - 1) {
       const nextIdx = index + 1;
       setIndex(nextIdx);
-      setLastKanjiIndex(nextIdx);
+      setLastKanjiIndex(nextIdx, deckLevel);
       setFlipped(false);
     }
-  }, [index, total]);
+  }, [index, total, flipped, deckLevel]);
   const prev = useCallback(() => {
     if (index > 0) {
       const prevIdx = index - 1;
       setIndex(prevIdx);
-      setLastKanjiIndex(prevIdx);
+      setLastKanjiIndex(prevIdx, deckLevel);
       setFlipped(false);
     }
-  }, [index]);
+  }, [index, deckLevel]);
 
   const swipe = useSwipeGesture({
     onSwipeLeft: () => next(),
@@ -1421,15 +1194,22 @@ function KanjiFlashcardSession({
 
   const handleAnkiRate = useCallback(
     (rating: Rating) => {
+      if (ratingLocked.current || !flipped) return;
+      ratingLocked.current = true;
       const existing = srsCards.find((c) => c.cardId === current.id);
       const card = existing || createSRSCard(current.id, 'kanji');
       const isNew = card.state === 'new';
       const updated = processReview(card, rating);
       updateSRSCard(updated);
       recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10, 'srs');
-      next(true);
+      if (index === total - 1) {
+        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+        onExit();
+      } else {
+        next(true);
+      }
     },
-    [srsCards, current.id, updateSRSCard, next]
+    [srsCards, current.id, updateSRSCard, next, index, total, onExit, flipped]
   );
 
   const toggleFullscreen = useCallback(() => {
@@ -1461,6 +1241,9 @@ function KanjiFlashcardSession({
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('input, textarea, select, [contenteditable="true"]')) return;
+      if (target.closest('button') && (e.key === ' ' || e.key === 'Enter')) return;
       switch (e.key) {
         case ' ':
           e.preventDefault();
@@ -1515,7 +1298,7 @@ function KanjiFlashcardSession({
     <div
       className={`fixed inset-0 z-50 flex flex-col select-none transition-all duration-300 ${
         isFullscreen
-          ? 'bg-gradient-to-b from-[var(--color-bg)] via-[var(--color-surface-alt)]/40 to-[var(--color-bg)]'
+          ? 'bg-[var(--color-bg)]'
           : 'bg-[var(--color-bg)]'
       }`}
     >
@@ -1526,7 +1309,7 @@ function KanjiFlashcardSession({
             className="flex items-center gap-2 text-sm font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer focus-ring px-3 py-2 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-all shadow-2xs"
           >
             <X size={18} />
-            <span className="hidden sm:inline">Exit (Esc)</span>
+            <span className="hidden sm:inline">Thoát (Esc)</span>
           </button>
 
           {onToggleAnki && (
@@ -1534,19 +1317,19 @@ function KanjiFlashcardSession({
               onClick={onToggleAnki}
               className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-2xs ${
                 ankiMode
-                  ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30'
+                  ? 'bg-[var(--color-success-subtle)] text-[var(--color-success)] border border-[var(--color-border)]'
                   : 'bg-[var(--color-surface)] text-[var(--color-text-tertiary)] border border-[var(--color-border)]'
               }`}
             >
               <Brain size={15} />
               <span className="hidden sm:inline">{ankiMode ? 'Anki: BẬT' : 'Anki: TẮT'}</span>
-              <span className="sm:hidden">{ankiMode ? 'ON' : 'OFF'}</span>
+              <span className="sm:hidden">{ankiMode ? 'BẬT' : 'TẮT'}</span>
             </button>
           )}
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4">
-          <CardJumpControl index={index} total={total} label="Kanji" onJump={jumpTo} />
+          <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
           <div className="w-24 sm:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"
@@ -1557,28 +1340,28 @@ function KanjiFlashcardSession({
 
         <div className="hidden sm:flex items-center gap-2 text-xs text-[var(--color-text-tertiary)]">
           {isFullscreen ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C9A84C]/15 border border-[#C9A84C]/40 text-[#C9A84C] font-bold tracking-wide shadow-2xs animate-pulse">
-              <span>✦ ZEN FULLSCREEN</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-border)] text-[var(--color-accent)] font-bold tracking-wide shadow-2xs animate-pulse">
+              <span>✦ TOÀN MÀN HÌNH</span>
             </span>
           ) : (
-            <span>Kanji Mode</span>
+            <span>Kanji {current.level}</span>
           )}
         </div>
       </div>
 
-      <div className="flex-1 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4" {...swipe}>
+      <div className="flex-1 min-h-0 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4" {...swipe.handlers}>
         <button
           onClick={flip}
           className={`
             w-full flex flex-col items-center justify-center cursor-pointer transition-all duration-300
-            focus-ring relative overflow-hidden
+            focus-ring relative overflow-y-auto
             ${
               isFullscreen
-                ? 'max-w-5xl lg:max-w-6xl mx-auto rounded-[2.5rem] bg-[var(--color-surface)] border-2 border-[#C9A84C]/45 shadow-[0_0_70px_rgba(201,168,76,0.18)] p-6 sm:p-16'
-                : 'max-w-4xl lg:max-w-5xl mx-auto rounded-2xl sm:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-lg p-5 sm:p-12'
+                ? 'max-w-4xl lg:max-w-5xl mx-auto rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-5 sm:p-12'
+                : 'max-w-4xl lg:max-w-5xl mx-auto rounded-2xl sm:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]  p-5 sm:p-12'
             }
           `}
-          aria-label={flipped ? 'Showing answer' : 'Showing question'}
+          aria-label={flipped ? 'Đang hiện đáp án' : 'Đang hiện câu hỏi'}
         >
           {ankiMode && (
             <div className="absolute top-3 left-3 sm:top-8 sm:left-10 flex items-center select-none">
@@ -1594,12 +1377,12 @@ function KanjiFlashcardSession({
               absolute bottom-3 right-3 sm:bottom-6 sm:right-6 z-20 p-2.5 rounded-xl
               transition-all duration-200 cursor-pointer focus-ring flex items-center gap-2 text-xs font-bold
               ${isFullscreen
-                ? 'bg-[#C9A84C]/20 hover:bg-[#C9A84C]/30 border border-[#C9A84C]/50 text-[#C9A84C] shadow-md'
+                ? 'bg-[var(--color-accent-subtle)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-accent)] '
                 : 'bg-[var(--color-surface-alt)]/80 hover:bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] backdrop-blur-xs shadow-2xs'}
             `}
           >
             {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-            <span className="hidden sm:inline">{isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}</span>
+            <span className="hidden sm:inline">{isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</span>
           </div>
 
           {swipe.swipeDir && (
@@ -1619,22 +1402,17 @@ function KanjiFlashcardSession({
                   textShadow: '0 2px 24px rgba(0,0,0,0.08)',
                 }}
               >
-                {current.kanji}
-              </div>
-              <div
-                className="uppercase font-extrabold"
-                style={{
-                  fontSize: 'clamp(1.1rem, 4vw, 2.2rem)',
-                  color: '#C9A84C',
-                  letterSpacing: '0.3em',
-                }}
-              >
-                {current.hanViet}
+                {current.kanji || current.hanViet || 'N/A'}
               </div>
               <div className="text-xs sm:hidden text-[var(--color-text-tertiary)]">Chạm để lật • Vuốt ← →</div>
             </div>
           ) : (
             <div className="text-center flex flex-col items-center justify-center gap-4 sm:gap-6 w-full max-w-xl my-auto">
+              <div className="text-xl font-bold text-[var(--color-kanji)]">{current.hanViet}</div>
+              {(current.onyomi?.length || current.kunyomi?.length) ? <div className="text-sm text-[var(--color-text-secondary)]">
+                {!!current.onyomi?.length && <p>Âm On: <span className="font-jp">{current.onyomi.join(' · ')}</span></p>}
+                {!!current.kunyomi?.length && <p>Âm Kun: <span className="font-jp">{current.kunyomi.join(' · ')}</span></p>}
+              </div> : null}
               {current.vocabulary && current.vocabulary.length > 0 ? (
                 <div className="flex flex-col items-center gap-4 w-full">
                   {current.vocabulary.slice(0, 3).map((v, i) => (
@@ -1643,10 +1421,11 @@ function KanjiFlashcardSession({
                         <span className="font-jp-serif font-bold" style={{ fontSize: 'clamp(1.4rem, 4vw, 2.2rem)', color: 'var(--color-text)' }}>
                           {v.word}
                         </span>
-                        <span className="font-jp font-bold" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: '#C9A84C' }}>
+                        <span className="font-jp font-bold" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: 'var(--color-accent)' }}>
                           【{v.reading}】
                         </span>
                       </div>
+                      {v.hanViet && <div className="text-xs font-medium text-[var(--color-kanji)]">Hán Việt: {v.hanViet}</div>}
                       {v.meaning && (
                         <div className="font-semibold" style={{ fontSize: 'clamp(0.9rem, 2.2vw, 1.3rem)', color: 'var(--color-text-secondary)' }}>
                           {v.meaning}
@@ -1656,7 +1435,7 @@ function KanjiFlashcardSession({
                   ))}
                 </div>
               ) : (
-                <div className="uppercase font-extrabold" style={{ fontSize: '2rem', color: '#C9A84C', letterSpacing: '0.3em' }}>
+                <div className="uppercase font-extrabold" style={{ fontSize: '2rem', color: 'var(--color-accent)', letterSpacing: '0.3em' }}>
                   {current.hanViet}
                 </div>
               )}
@@ -1667,10 +1446,10 @@ function KanjiFlashcardSession({
 
       <div className="px-3 pb-3 pt-2 sm:px-8 sm:py-5 border-t border-[var(--color-border)] shrink-0">
         <div className="hidden md:flex items-center gap-6 text-xs text-[var(--color-text-tertiary)] font-mono mb-3">
-          <span>Space / Click = Flip</span>
-          <span>← / → = Previous / Next</span>
-          {ankiMode && <span>1 - 4 = Anki Rating</span>}
-          <span>Esc = Exit</span>
+          <span>Space / Chạm = Lật</span>
+          <span>← / → = Trước / Tiếp</span>
+          {ankiMode && <span>1 - 4 = Đánh giá</span>}
+          <span>Esc = Thoát</span>
         </div>
 
         {ankiMode && flipped ? (
@@ -1683,8 +1462,8 @@ function KanjiFlashcardSession({
             </div>
           </>
         ) : ankiMode && !flipped ? (
-          <div className="flex items-center justify-center text-xs sm:text-sm text-amber-600 dark:text-amber-400 font-semibold bg-amber-500/10 px-4 py-3 rounded-xl">
-            💡 <span className="hidden sm:inline ml-1">Bấm Space / Click để lật thẻ · Bấm 1 - 4 để chọn độ nhớ Anki</span>
+          <div className="flex items-center justify-center text-xs sm:text-sm text-[var(--color-warning)] font-semibold bg-[var(--color-warning-subtle)] px-4 py-3 rounded-xl">
+            💡 <span className="hidden sm:inline ml-1">Bấm Space hoặc chạm để lật thẻ · Bấm 1 - 4 để chọn độ nhớ Anki</span>
             <span className="sm:hidden ml-1">Chạm để lật • Vuốt ← → chuyển</span>
           </div>
         ) : (
@@ -1692,7 +1471,7 @@ function KanjiFlashcardSession({
             <button onClick={(e) => { e.stopPropagation(); prev(); }} className="flex-1 flex items-center justify-center py-3 sm:py-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] font-bold text-sm transition-all cursor-pointer active:scale-95">
               ← Trước
             </button>
-            <CardJumpControl index={index} total={total} label="Kanji" onJump={jumpTo} />
+            <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
             <button onClick={(e) => { e.stopPropagation(); next(); }} className="flex-1 flex items-center justify-center py-3 sm:py-2 rounded-xl border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-bold text-sm transition-all cursor-pointer active:scale-95">
               Tiếp →
             </button>
@@ -1770,7 +1549,7 @@ function renderFormulaBlock(str?: string) {
             {/* Column 2: Plus sign centered */}
             <div
               className="font-extrabold text-lg sm:text-xl md:text-2xl select-none justify-self-center px-1"
-              style={{ color: '#C9A84C' }}
+              style={{ color: 'var(--color-accent)' }}
             >
               +
             </div>
@@ -1793,7 +1572,6 @@ export function GrammarFlashcardSession({
   preserveOrder = true,
   ankiMode = true,
   onToggleAnki,
-  shuffleMode = false,
 }: {
   items: GrammarItem[];
   onExit: () => void;
@@ -1801,11 +1579,13 @@ export function GrammarFlashcardSession({
   preserveOrder?: boolean;
   ankiMode?: boolean;
   onToggleAnki?: () => void;
-  shuffleMode?: boolean;
 }) {
   const { srsCards, updateSRSCard } = useApp();
   const [index, setIndex] = useState(initialIndex || 0);
   const [flipped, setFlipped] = useState(false);
+  const ratingLocked = useRef(false);
+  useEffect(() => { ratingLocked.current = false; }, [index]);
+  const reviewedRef = useRef<Set<number>>(new Set());
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [revealedExamples, setRevealedExamples] = useState<Record<number, boolean>>({});
   const [shuffledItems] = useState(() =>
@@ -1823,8 +1603,9 @@ export function GrammarFlashcardSession({
   const total = shuffledItems.length;
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
-  const next = useCallback((isAnki?: any) => {
-    if (isAnki !== true) {
+  const next = useCallback((isAnki?: boolean) => {
+    if (isAnki !== true && flipped && !reviewedRef.current.has(index)) {
+      reviewedRef.current.add(index);
       recordStudyActivity(1, 0, 1, 5, 'flashcard');
     }
     if (index < total - 1) {
@@ -1834,7 +1615,7 @@ export function GrammarFlashcardSession({
       setFlipped(false);
       setRevealedExamples({});
     }
-  }, [index, total]);
+  }, [index, total, flipped]);
   const prev = useCallback(() => {
     if (index > 0) {
       const prevIdx = index - 1;
@@ -1853,15 +1634,22 @@ export function GrammarFlashcardSession({
 
   const handleAnkiRate = useCallback(
     (rating: Rating) => {
+      if (ratingLocked.current || !flipped) return;
+      ratingLocked.current = true;
       const existing = srsCards.find((c) => c.cardId === current.id);
       const card = existing || createSRSCard(current.id, 'grammar');
       const isNew = card.state === 'new';
       const updated = processReview(card, rating);
       updateSRSCard(updated);
       recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10, 'srs');
-      next(true);
+      if (index === total - 1) {
+        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+        onExit();
+      } else {
+        next(true);
+      }
     },
-    [srsCards, current.id, updateSRSCard, next]
+    [srsCards, current.id, updateSRSCard, next, index, total, onExit, flipped]
   );
 
   const toggleExampleTranslation = useCallback((idx: number) => {
@@ -1898,6 +1686,9 @@ export function GrammarFlashcardSession({
   // Keyboard controls including Anki keys 1, 2, 3, 4
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('input, textarea, select, [contenteditable="true"]')) return;
+      if (target.closest('button') && (e.key === ' ' || e.key === 'Enter')) return;
       switch (e.key) {
         case ' ':
           e.preventDefault();
@@ -1952,7 +1743,7 @@ export function GrammarFlashcardSession({
     <div
       className={`fixed inset-0 z-50 flex flex-col select-none transition-all duration-300 ${
         isFullscreen
-          ? 'bg-gradient-to-b from-[var(--color-bg)] via-[var(--color-surface-alt)]/40 to-[var(--color-bg)]'
+          ? 'bg-[var(--color-bg)]'
           : 'bg-[var(--color-bg)]'
       }`}
     >
@@ -1964,7 +1755,7 @@ export function GrammarFlashcardSession({
             className="flex items-center gap-2 text-sm font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer focus-ring px-3 py-2 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-all shadow-2xs"
           >
             <X size={18} />
-            <span className="hidden sm:inline">Exit (Esc)</span>
+            <span className="hidden sm:inline">Thoát (Esc)</span>
           </button>
 
           {onToggleAnki && (
@@ -1972,22 +1763,22 @@ export function GrammarFlashcardSession({
               onClick={onToggleAnki}
               className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-2xs ${
                 ankiMode
-                  ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30'
+                  ? 'bg-[var(--color-success-subtle)] text-[var(--color-success)] border border-[var(--color-border)]'
                   : 'bg-[var(--color-surface)] text-[var(--color-text-tertiary)] border border-[var(--color-border)]'
               }`}
             >
               <Brain size={15} />
               <span className="hidden sm:inline">{ankiMode ? 'Anki: BẬT' : 'Anki: TẮT'}</span>
-              <span className="sm:hidden">{ankiMode ? 'ON' : 'OFF'}</span>
+              <span className="sm:hidden">{ankiMode ? 'BẬT' : 'TẮT'}</span>
             </button>
           )}
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4">
-          <CardJumpControl index={index} total={total} label="Grammar" onJump={jumpTo} />
+          <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
           <div className="w-24 sm:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
-              className="h-full rounded-full bg-purple-500 transition-all duration-300"
+              className="h-full rounded-full bg-[var(--color-grammar)] transition-all duration-300"
               style={{ width: `${((index + 1) / total) * 100}%` }}
             />
           </div>
@@ -1995,17 +1786,17 @@ export function GrammarFlashcardSession({
 
         <div className="hidden sm:flex items-center gap-2 text-xs text-[var(--color-text-tertiary)]">
           {isFullscreen ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C9A84C]/15 border border-[#C9A84C]/40 text-[#C9A84C] font-bold tracking-wide shadow-2xs animate-pulse">
-              <span>✦ ZEN FULLSCREEN</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-border)] text-[var(--color-accent)] font-bold tracking-wide shadow-2xs animate-pulse">
+              <span>✦ TOÀN MÀN HÌNH</span>
             </span>
           ) : (
-            <span>Grammar Mode</span>
+            <span>Ngữ pháp</span>
           )}
         </div>
       </div>
 
       {/* Card area — swipeable */}
-      <div className="flex-1 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4 overflow-hidden" {...swipe}>
+      <div className="flex-1 min-h-0 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4 overflow-hidden" {...swipe.handlers}>
         <div
           role="button"
           tabIndex={0}
@@ -2015,16 +1806,16 @@ export function GrammarFlashcardSession({
             focus-ring relative
             ${
               isFullscreen
-                ? 'max-w-5xl lg:max-w-6xl mx-auto max-h-[88vh] rounded-[2.5rem] bg-[var(--color-surface)] border-2 border-[#C9A84C]/45 shadow-[0_0_70px_rgba(201,168,76,0.18)] p-6 sm:p-16'
-                : 'max-w-4xl lg:max-w-5xl mx-auto max-h-[82vh] rounded-2xl sm:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-lg p-4 sm:p-12'
+                ? 'max-w-4xl lg:max-w-5xl mx-auto max-h-[88vh] rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-5 sm:p-12'
+                : 'max-w-4xl lg:max-w-5xl mx-auto max-h-[82vh] rounded-2xl sm:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]  p-4 sm:p-12'
             }
           `}
-          aria-label={flipped ? 'Showing answer, click to show question' : 'Showing question, click to flip'}
+          aria-label={flipped ? 'Đã hiện đáp án, chạm để xem câu hỏi' : 'Đang hiện câu hỏi, chạm để lật'}
         >
           {/* Top Left (Anchor): Lesson Pill & Anki Card Badge */}
           <div className="absolute top-3 left-3 sm:top-8 sm:left-10 flex flex-wrap items-center gap-2 select-none">
             <div className="inline-flex items-center px-2.5 py-1 rounded-full text-xs sm:text-sm font-bold bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] tracking-wide">
-              {current.lesson || 'N3 Grammar'}
+              {current.lesson || 'Ngữ pháp N3'}
             </div>
             {ankiMode && <AnkiCardBadge itemId={current.id} itemType="grammar" />}
           </div>
@@ -2051,20 +1842,20 @@ export function GrammarFlashcardSession({
               e.stopPropagation();
               toggleFullscreen();
             }}
-            title={isFullscreen ? "Exit Fullscreen (Esc)" : "Fullscreen"}
+            title={isFullscreen ? "Thoát toàn màn hình (Esc)" : "Toàn màn hình"}
             className={`
               absolute bottom-3 right-3 sm:bottom-6 sm:right-6 z-20 p-2.5 rounded-xl
               transition-all duration-200 cursor-pointer focus-ring
               flex items-center gap-2 text-xs font-bold
               ${
                 isFullscreen
-                  ? 'bg-[#C9A84C]/20 hover:bg-[#C9A84C]/30 border border-[#C9A84C]/50 text-[#C9A84C] shadow-md'
+                  ? 'bg-[var(--color-accent-subtle)] hover:bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-accent)] '
                   : 'bg-[var(--color-surface-alt)]/80 hover:bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] hover:text-[var(--color-text)] backdrop-blur-xs shadow-2xs'
               }
             `}
           >
             {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-            <span className="hidden sm:inline">{isFullscreen ? 'Exit Fullscreen' : 'Fullscreen Focus'}</span>
+            <span className="hidden sm:inline">{isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</span>
           </div>
 
           {/* Swipe hint */}
@@ -2086,7 +1877,7 @@ export function GrammarFlashcardSession({
                   textShadow: '0 2px 24px rgba(0,0,0,0.08)',
                 }}
               >
-                {current.pattern}
+                {current.pattern || current.reading || 'N/A'}
               </div>
 
               {/* 2. Phiên âm nhỏ ở dưới (màu vàng ánh kim #C9A84C, font-jp font-bold như Kanji/Vocab) */}
@@ -2095,7 +1886,7 @@ export function GrammarFlashcardSession({
                   className="font-jp font-bold tracking-wide"
                   style={{
                     fontSize: 'clamp(1.2rem, 2.8vw, 1.8rem)',
-                    color: '#C9A84C',
+                    color: 'var(--color-accent)',
                     textShadow: '0 1px 8px rgba(201,168,76,0.18)',
                   }}
                 >
@@ -2109,7 +1900,7 @@ export function GrammarFlashcardSession({
               {/* 1. CÔNG THỨC Ở ĐẦU */}
               {(current.congThuc || current.structure) && (
                 <div className="w-full p-3.5 sm:p-4 rounded-2xl bg-[var(--color-surface-alt)]/60 border border-[var(--color-border)] text-left sm:text-center shadow-2xs flex flex-col items-center">
-                  <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C9A84C] mb-2">
+                  <div className="text-[11px] font-extrabold uppercase tracking-widest text-[var(--color-accent)] mb-2">
                     Công thức / Cấu trúc
                   </div>
                   <div className="w-full flex justify-center">
@@ -2120,7 +1911,7 @@ export function GrammarFlashcardSession({
 
               {/* 2. DƯỚI LÀ Ý NGHĨA (nếu có nhiều nghĩa thì mỗi nghĩa xuống dòng) */}
               <div className="w-full space-y-2">
-                <div className="text-xs font-extrabold uppercase tracking-widest text-[#C9A84C]">
+                <div className="text-xs font-extrabold uppercase tracking-widest text-[var(--color-accent)]">
                   Ý nghĩa
                 </div>
                 <div className="flex flex-col gap-2.5 items-center">
@@ -2142,7 +1933,7 @@ export function GrammarFlashcardSession({
               {(current.usage || current.nuance) && (
                 <div className="w-full text-left">
                   <div className="p-4 rounded-2xl bg-[var(--color-surface-alt)]/60 border border-[var(--color-border)]">
-                    <div className="text-xs font-extrabold uppercase tracking-widest text-[#C9A84C] mb-1.5">
+                    <div className="text-xs font-extrabold uppercase tracking-widest text-[var(--color-accent)] mb-1.5">
                       Chú ý / Cách dùng
                     </div>
                     <div className="text-sm sm:text-base text-[var(--color-text)] leading-relaxed">
@@ -2178,7 +1969,7 @@ export function GrammarFlashcardSession({
               {/* 4. VÍ DỤ (Normal ẩn phần dịch, ấn con mắt hiển thị bản dịch) */}
               {current.examples && current.examples.length > 0 && (
                 <div className="w-full space-y-2 text-left mt-1">
-                  <div className="text-xs font-extrabold uppercase tracking-widest text-[#C9A84C] px-1">
+                  <div className="text-xs font-extrabold uppercase tracking-widest text-[var(--color-accent)] px-1">
                     Ví dụ (Ấn vào biểu tượng mắt để xem dịch)
                   </div>
                   <div className="grid grid-cols-1 gap-2.5">
@@ -2206,12 +1997,12 @@ export function GrammarFlashcardSession({
                                     toggleExampleTranslation(idx);
                                   }}
                                   title={isRevealed ? 'Ẩn bản dịch' : 'Xem bản dịch'}
-                                  className="p-1.5 rounded-lg text-[var(--color-text-tertiary)] hover:text-[#C9A84C] hover:bg-[var(--color-surface-alt)] transition-colors cursor-pointer"
+                                  className="p-1.5 rounded-lg text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] hover:bg-[var(--color-surface-alt)] transition-colors cursor-pointer"
                                 >
                                   {isRevealed ? <EyeOff size={17} /> : <Eye size={17} />}
                                 </button>
                               )}
-                              <div className="p-1.5 rounded-full text-[var(--color-text-tertiary)] group-hover/ex:text-[#C9A84C]">
+                              <div className="p-1.5 rounded-full text-[var(--color-text-tertiary)] group-hover/ex:text-[var(--color-accent)]">
                                 <Volume2 size={17} />
                               </div>
                             </div>
@@ -2240,10 +2031,10 @@ export function GrammarFlashcardSession({
       {/* Footer */}
       <div className="px-3 pb-3 pt-2 sm:px-8 sm:py-5 border-t border-[var(--color-border)] shrink-0">
         <div className="hidden md:flex items-center gap-6 text-xs text-[var(--color-text-tertiary)] font-mono mb-3">
-          <span>Space / Click = Flip</span>
-          <span>← / → = Previous / Next</span>
-          {ankiMode && <span>1 - 4 = Anki Rating</span>}
-          <span>Esc = Exit</span>
+          <span>Space / Chạm = Lật</span>
+          <span>← / → = Trước / Tiếp</span>
+          {ankiMode && <span>1 - 4 = Đánh giá</span>}
+          <span>Esc = Thoát</span>
         </div>
 
         {ankiMode && flipped ? (
@@ -2256,8 +2047,8 @@ export function GrammarFlashcardSession({
             </div>
           </>
         ) : ankiMode && !flipped ? (
-          <div className="flex items-center justify-center text-xs sm:text-sm text-amber-600 dark:text-amber-400 font-semibold bg-amber-500/10 px-4 py-3 rounded-xl">
-            💡 <span className="hidden sm:inline ml-1">Bấm Space / Click để lật thẻ · Bấm 1 - 4 để chọn độ nhớ Anki</span>
+          <div className="flex items-center justify-center text-xs sm:text-sm text-[var(--color-warning)] font-semibold bg-[var(--color-warning-subtle)] px-4 py-3 rounded-xl">
+            💡 <span className="hidden sm:inline ml-1">Bấm Space hoặc chạm để lật thẻ · Bấm 1 - 4 để chọn độ nhớ Anki</span>
             <span className="sm:hidden ml-1">Chạm để lật • Vuốt ← → chuyển</span>
           </div>
         ) : (
@@ -2265,8 +2056,8 @@ export function GrammarFlashcardSession({
             <button onClick={(e) => { e.stopPropagation(); prev(); }} className="flex-1 flex items-center justify-center py-3 sm:py-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] font-bold text-sm transition-all cursor-pointer active:scale-95">
               ← Trước
             </button>
-            <CardJumpControl index={index} total={total} label="Grammar" onJump={jumpTo} />
-            <button onClick={(e) => { e.stopPropagation(); next(); }} className="flex-1 flex items-center justify-center py-3 sm:py-2 rounded-xl border border-purple-500/40 bg-purple-500/10 text-purple-600 dark:text-purple-400 font-bold text-sm transition-all cursor-pointer active:scale-95">
+            <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
+            <button onClick={(e) => { e.stopPropagation(); next(); }} className="flex-1 flex items-center justify-center py-3 sm:py-2 rounded-xl border border-[var(--color-grammar)] bg-[var(--color-grammar)]/10 text-[var(--color-grammar)] font-bold text-sm transition-all cursor-pointer active:scale-95">
               Tiếp →
             </button>
           </div>
@@ -2277,8 +2068,8 @@ export function GrammarFlashcardSession({
             <button onClick={(e) => { e.stopPropagation(); prev(); }} className="px-4 py-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] font-bold text-xs transition-all cursor-pointer active:scale-95">
               ← Trước
             </button>
-            <CardJumpControl index={index} total={total} label="Grammar" onJump={jumpTo} />
-            <button onClick={(e) => { e.stopPropagation(); next(); }} className="px-4 py-2 rounded-xl border border-purple-500/40 bg-purple-500/10 text-purple-600 dark:text-purple-400 font-bold text-xs transition-all cursor-pointer active:scale-95">
+            <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
+            <button onClick={(e) => { e.stopPropagation(); next(); }} className="px-4 py-2 rounded-xl border border-[var(--color-grammar)] bg-[var(--color-grammar)]/10 text-[var(--color-grammar)] font-bold text-xs transition-all cursor-pointer active:scale-95">
               Tiếp →
             </button>
           </div>

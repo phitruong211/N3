@@ -9,11 +9,12 @@
 //   without streaks, points, or leaderboards
 // ============================================================
 
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useApp } from '@/hooks/useApp';
 import { generateVocabQuiz, generateKanjiQuiz } from '@/lib/quiz';
 import type { QuizQuestion, QuizType } from '@/types';
-import { CheckCircle, XCircle, ArrowRight, RotateCcw, Target } from 'lucide-react';
+import { CheckCircle, XCircle, RotateCcw, Target } from 'lucide-react';
+import { PageHeading } from '@/components/ui/StudyUI';
 
 export function QuizPage() {
   const { vocabulary, kanji } = useApp();
@@ -47,65 +48,30 @@ export function QuizPage() {
   }
 
   return (
-    <div className="space-y-8 w-full">
-      <div>
-        <h1 className="text-2xl font-semibold text-[var(--color-text)]">Quiz</h1>
-        <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-          Test your N3 knowledge with timed multiple-choice active recall quizzes
-        </p>
-      </div>
+    <div className="study-page">
+      <PageHeading eyebrow="LUYỆN TẬP" title="Trắc nghiệm" subtitle="Chọn đáp án để tự kiểm tra điều đã nhớ" />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
         <QuizTypeCard
-          title="Vocabulary → Meaning"
-          description="See kanji, choose the Vietnamese meaning"
+          title="Từ vựng → Nghĩa"
+          description="Nhìn từ Nhật, chọn nghĩa tiếng Việt"
           count={vocabulary.length}
           onClick={() => startQuiz('vocab-meaning')}
         />
         <QuizTypeCard
-          title="Vocabulary → Reading"
-          description="See kanji, choose the hiragana reading"
+          title="Từ vựng → Cách đọc"
+          description="Nhìn từ Nhật, chọn cách đọc hiragana"
           count={vocabulary.length}
           onClick={() => startQuiz('vocab-reading')}
         />
         <QuizTypeCard
           title="Kanji → Hán Việt"
-          description="See kanji, choose the Hán Việt reading"
+          description="Kanji N3/N2 · nhìn chữ, chọn âm Hán Việt"
           count={kanji.length}
           onClick={() => startQuiz('kanji-meaning')}
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-        <div className="p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] space-y-3 shadow-xs">
-          <h3 className="text-sm font-semibold text-[var(--color-text)]">
-            Cognitive Testing Principles (Active Recall)
-          </h3>
-          <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
-            Active recall through randomized multiple-choice quizzing strengthens neural pathways and prevents the illusion of competence. Quizzes are generated from your current N3 library with distractor options mathematically matched by length and difficulty.
-          </p>
-        </div>
-
-        <div className="p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] space-y-3 shadow-xs">
-          <h3 className="text-sm font-semibold text-[var(--color-text)]">
-            Quiz Ergonomics & Shortcuts
-          </h3>
-          <div className="space-y-2 text-xs text-[var(--color-text-secondary)]">
-            <div className="flex items-center justify-between">
-              <span>Select Answer Choice 1 – 4</span>
-              <kbd className="kbd-shortcut">1 / 2 / 3 / 4</kbd>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>Next Question / Continue</span>
-              <kbd className="kbd-shortcut">Enter / Space</kbd>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>Exit Active Quiz</span>
-              <kbd className="kbd-shortcut">Esc</kbd>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
@@ -126,13 +92,13 @@ function QuizTypeCard({
       onClick={onClick}
       className="
         p-5 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]
-        hover:border-[var(--color-accent)] hover:bg-[var(--color-accent-subtle)]
+        hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-hover)]
         transition-colors duration-150 cursor-pointer text-left focus-ring
       "
     >
       <div className="text-sm font-medium text-[var(--color-text)] mb-1">{title}</div>
       <div className="text-xs text-[var(--color-text-secondary)] mb-3">{description}</div>
-      <div className="text-xs text-[var(--color-text-tertiary)]">10 questions · {count} items</div>
+      <div className="text-xs text-[var(--color-text-tertiary)]">10 câu · {count} mục</div>
     </button>
   );
 }
@@ -159,30 +125,6 @@ function QuizSession({
   const current = questions[currentIndex];
   const isCorrect = selectedAnswer === current?.correctAnswer;
 
-  // Keyboard: 1-4 for options, Enter/Space for next
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (done) {
-        if (e.key === 'Escape') onFinish();
-        return;
-      }
-
-      if (!answered && current) {
-        const num = parseInt(e.key);
-        if (num >= 1 && num <= current.options.length) {
-          handleAnswer(current.options[num - 1]);
-        }
-      } else if (answered) {
-        if (e.key === ' ' || e.key === 'Enter') {
-          e.preventDefault();
-          handleNext();
-        }
-      }
-    };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, [answered, done, current, currentIndex]);
-
   const handleAnswer = useCallback(
     (answer: string) => {
       if (answered) return;
@@ -204,6 +146,23 @@ function QuizSession({
       setDone(true);
     }
   }, [currentIndex, questions.length]);
+
+  // Keyboard: 1-4 for options, Enter/Space for next
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { onFinish(); return; }
+      if (done) return;
+      if (!answered && current) {
+        const num = parseInt(e.key);
+        if (num >= 1 && num <= current.options.length) handleAnswer(current.options[num - 1]);
+      } else if (answered && (e.key === ' ' || e.key === 'Enter')) {
+        e.preventDefault();
+        handleNext();
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [answered, done, current, handleAnswer, handleNext, onFinish]);
 
   // Session summary (Peak-End Rule)
   if (done) {
@@ -228,14 +187,14 @@ function QuizSession({
         </div>
         <div className="space-y-1">
           <h2 className="text-3xl font-semibold text-[var(--color-text)] tracking-tight">
-            Quiz Complete!
+            Đã hoàn thành
           </h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
             {accuracy >= 80
-              ? 'Excellent mastery!'
+              ? 'Bạn đã nhớ rất tốt.'
               : accuracy >= 60
-              ? 'Good effort, keep drilling!'
-              : 'Keep practicing to reinforce active recall.'}
+              ? 'Tiếp tục ôn để nhớ chắc hơn.'
+              : 'Thử học lại các mục chưa nhớ.'}
           </p>
         </div>
         <div className="space-y-1">
@@ -243,22 +202,22 @@ function QuizSession({
             {accuracy}%
           </div>
           <div className="text-sm font-medium text-[var(--color-text-secondary)]">
-            {correctCount} of {questions.length} correct
+            {correctCount} / {questions.length} câu đúng
           </div>
         </div>
         <div className="flex gap-4 pt-4">
           <button
             onClick={onRetry}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--color-accent)] text-white text-sm font-medium hover:bg-[var(--color-accent-hover)] transition-colors cursor-pointer focus-ring shadow-sm"
+            className="study-button study-button-primary"
           >
             <RotateCcw size={16} />
-            <span>Try Again</span>
+            <span>Làm lại</span>
           </button>
           <button
             onClick={onFinish}
             className="px-6 py-3 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] transition-colors cursor-pointer focus-ring shadow-xs"
           >
-            Back to Quiz Library
+            Về chọn bài
           </button>
         </div>
       </div>
@@ -270,20 +229,20 @@ function QuizSession({
   return (
     <div className="fixed inset-0 z-50 bg-[var(--color-bg)] flex flex-col justify-between select-none overflow-y-auto">
       {/* Top bar */}
-      <div className="flex items-center justify-between px-8 py-6">
+      <div className="flex items-center justify-between gap-3 px-4 py-4 sm:px-8 sm:py-6">
         <button
           onClick={onFinish}
           className="flex items-center gap-2 text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer focus-ring px-3 py-1.5 rounded-lg border border-transparent hover:border-[var(--color-border)] transition-all"
         >
-          <span>Exit Quiz</span>
+          <span>Thoát</span>
         </button>
 
         {/* Progress bar */}
         <div className="flex items-center gap-4">
           <span className="text-xs font-mono font-medium text-[var(--color-text-secondary)]">
-            Question {currentIndex + 1} of {questions.length}
+            Câu {currentIndex + 1} / {questions.length}
           </span>
-          <div className="w-48 h-1.5 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
+          <div className="hidden w-32 h-1.5 rounded-full bg-[var(--color-surface-alt)] overflow-hidden sm:block">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"
               style={{
@@ -292,19 +251,19 @@ function QuizSession({
             />
           </div>
           <span className="text-xs font-mono font-medium text-[var(--color-success)]">
-            {correctCount} correct
+            {correctCount} đúng
           </span>
         </div>
 
         <div className="w-24 text-right text-xs text-[var(--color-text-tertiary)] hidden sm:block">
-          Active Recall Mode
+          Tự kiểm tra
         </div>
       </div>
 
       {/* Question canvas */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-6 max-w-2xl mx-auto w-full space-y-10">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 max-w-2xl mx-auto w-full space-y-8 sm:px-6">
         <div className="text-center space-y-3">
-          <div className="font-jp-serif text-5xl md:text-6xl font-semibold text-[var(--color-text)] tracking-tight">
+          <div className="font-jp-serif break-words text-4xl font-semibold text-[var(--color-text)] md:text-6xl">
             {current.prompt}
           </div>
           {current.promptSub && (
@@ -339,7 +298,7 @@ function QuizSession({
                 onClick={() => handleAnswer(option)}
                 disabled={answered}
                 className={`
-                  w-full flex items-center gap-4 px-5 py-4 rounded-2xl border
+                  w-full flex items-center gap-4 px-4 py-3 rounded-xl border sm:px-5 sm:py-4
                   text-left transition-all duration-150 shadow-xs
                   ${
                     answered
@@ -383,7 +342,7 @@ function QuizSession({
               }`}
             >
               <div>
-                <strong>{isCorrect ? '✓ Correct!' : '✗ Incorrect'}</strong> —{' '}
+                <strong>{isCorrect ? '✓ Đúng' : '✗ Chưa đúng'}</strong> —{' '}
                 <span className="text-[var(--color-text)] font-normal">
                   {current.explanation}
                 </span>
@@ -392,16 +351,12 @@ function QuizSession({
 
             <button
               onClick={handleNext}
-              className="
-                w-full py-4 rounded-2xl font-medium text-sm
-                bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]
-                transition-colors duration-150 cursor-pointer focus-ring shadow-sm flex items-center justify-center gap-2
-              "
+              className="study-button study-button-primary w-full"
             >
               <span>
                 {currentIndex < questions.length - 1
-                  ? 'Next Question'
-                  : 'See Results'}
+                  ? 'Câu tiếp theo'
+                  : 'Xem kết quả'}
               </span>
               <kbd className="text-[10px] bg-white/20 px-2 py-0.5 rounded font-mono">
                 Space / Enter
@@ -412,12 +367,12 @@ function QuizSession({
       </div>
 
       {/* Bottom shortcut bar */}
-      <div className="px-8 py-4 border-t border-[var(--color-border)]/60 bg-[var(--color-surface)]/50 text-center text-xs text-[var(--color-text-tertiary)]">
-        <span>Press <kbd className="kbd-shortcut">1-4</kbd> to select option</span>
+      <div className="px-4 py-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] text-center text-xs text-[var(--color-text-tertiary)]">
+        <span>Nhấn <kbd className="kbd-shortcut">1–4</kbd> để chọn</span>
         <span className="mx-2">·</span>
-        <span><kbd className="kbd-shortcut">Space</kbd> / <kbd className="kbd-shortcut">Enter</kbd> to continue</span>
+        <span><kbd className="kbd-shortcut">Space</kbd> / <kbd className="kbd-shortcut">Enter</kbd> để tiếp tục</span>
         <span className="mx-2">·</span>
-        <span><kbd className="kbd-shortcut">Esc</kbd> to exit</span>
+        <span><kbd className="kbd-shortcut">Esc</kbd> để thoát</span>
       </div>
     </div>
   );

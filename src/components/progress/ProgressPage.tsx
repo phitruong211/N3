@@ -26,18 +26,14 @@ export function ProgressPage() {
     return total > 0 ? Math.round((correct / total) * 100) : 0;
   }, [srsCards]);
 
-  const totalTime = useMemo(() => {
-    return studyDays.reduce((sum, d) => sum + d.timeSpent, 0);
-  }, [studyDays]);
-
   return (
-    <div className="space-y-8">
+    <div className="study-page">
       <div>
         <h1 className="text-2xl font-semibold text-[var(--color-text)]">
-          Progress
+          Tiến độ
         </h1>
         <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-          Track your learning journey
+          Nhìn lại nhịp học và những mục cần luyện thêm
         </p>
       </div>
 
@@ -45,27 +41,27 @@ export function ProgressPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatCard
           icon={<Flame size={18} className="text-[var(--color-warning)]" />}
-          label="Current Streak"
+          label="Học liên tiếp"
           value={`${streak.current}`}
-          unit="days"
+          unit="ngày"
         />
         <StatCard
           icon={<Target size={18} className="text-[var(--color-accent)]" />}
-          label="Accuracy"
+          label="Độ chính xác"
           value={`${totalAccuracy}`}
           unit="%"
         />
         <StatCard
           icon={<TrendingUp size={18} className="text-[var(--color-success)]" />}
-          label="Cards in SRS"
+          label="Thẻ trong SRS"
           value={`${srsCards.length}`}
-          unit="cards"
+          unit="thẻ"
         />
         <StatCard
           icon={<Calendar size={18} className="text-[var(--color-new)]" />}
-          label="Study Days"
+          label="Ngày đã học"
           value={`${studyDays.length}`}
-          unit="days"
+          unit="ngày"
         />
       </div>
 
@@ -73,26 +69,26 @@ export function ProgressPage() {
       <div className="p-6 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
         <h2 className="text-sm font-semibold text-[var(--color-text)] mb-4 flex items-center gap-2">
           <BarChart3 size={16} />
-          Mastery Distribution
+          Trạng thái ôn tập
         </h2>
 
         <div className="space-y-3">
-          <ProgressBar label="New" count={distribution.new} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-new)" />
-          <ProgressBar label="Learning" count={distribution.learning} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-learning)" />
-          <ProgressBar label="Review" count={distribution.review} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-review)" />
-          <ProgressBar label="Relearning" count={distribution.relearning} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-forgotten)" />
+          <ProgressBar label="Mới" count={distribution.new} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-new)" />
+          <ProgressBar label="Đang học" count={distribution.learning} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-learning)" />
+          <ProgressBar label="Đang ôn" count={distribution.review} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-review)" />
+          <ProgressBar label="Học lại" count={distribution.relearning} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-forgotten)" />
         </div>
 
         <div className="mt-4 pt-4 border-t border-[var(--color-border)] flex items-center justify-between text-xs text-[var(--color-text-tertiary)]">
-          <span>Not started: {(vocabulary.length + kanji.length) - srsCards.length}</span>
-          <span>Total items: {vocabulary.length + kanji.length}</span>
+          <span>Chưa bắt đầu: {Math.max(0, (vocabulary.length + kanji.length + grammar.length) - srsCards.length)}</span>
+          <span>Tổng mục: {vocabulary.length + kanji.length + grammar.length}</span>
         </div>
       </div>
 
       {/* Study heatmap */}
       <div className="p-6 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
         <h2 className="text-sm font-semibold text-[var(--color-text)] mb-4">
-          Study Activity
+          Ngày học
         </h2>
         <Heatmap studyDays={studyDays} />
       </div>
@@ -196,11 +192,11 @@ function Heatmap({ studyDays }: { studyDays: { date: string; cardsReviewed: numb
         ))}
       </div>
       <div className="flex items-center gap-2 mt-3 text-xs text-[var(--color-text-tertiary)]">
-        <span>Less</span>
+        <span>Ít</span>
         {levelColors.map((c, i) => (
           <div key={i} className={`w-3 h-3 rounded-sm ${c}`} />
         ))}
-        <span>More</span>
+        <span>Nhiều</span>
       </div>
     </div>
   );
@@ -240,7 +236,7 @@ function WeakItems({
   return (
     <div className="p-6 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
       <h2 className="text-sm font-semibold text-[var(--color-text)] mb-4">
-        Weak Items — Need More Practice
+        Từ cần luyện thêm
       </h2>
       <div className="space-y-2">
         {weak.map((item) => (
