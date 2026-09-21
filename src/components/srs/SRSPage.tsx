@@ -16,6 +16,7 @@ import { recordStudyActivity } from '@/lib/storage';
 import type { Rating, SRSCard, VocabItem, KanjiItem, GrammarItem } from '@/types';
 import { RotateCcw, CheckCircle, ArrowRight } from 'lucide-react';
 import { PageHeading } from '@/components/ui/StudyUI';
+import { ImportedDecks } from '@/components/flashcard/ImportedDecks';
 
 export function SRSPage() {
   const { vocabulary, kanji, grammar, srsCards, updateSRSCard, setCurrentPage } = useApp();
@@ -55,6 +56,7 @@ export function SRSPage() {
   return (
     <div className="study-page">
       <PageHeading eyebrow="HÔM NAY" title="Ôn tập" subtitle="Ôn đúng lúc để nhớ lâu hơn" />
+      <ImportedDecks />
 
       <div className="grid grid-cols-3 gap-2 sm:gap-4">
         {/* Due reviews */}

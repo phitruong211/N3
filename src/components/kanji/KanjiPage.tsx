@@ -59,7 +59,7 @@ export function KanjiPage() {
             {isBookmarked(item.id) && <BookmarkCheck size={12} className="absolute right-1 top-1 text-[var(--color-kanji)]" aria-label="Đã lưu" />}
           </button>)}
         </div>
-        <section ref={detailRef} className="study-panel min-w-0 scroll-mt-16 lg:sticky lg:top-20" aria-label={'Chi tiết chữ ' + current.kanji}>
+        <section ref={detailRef} className="study-panel min-w-0 scroll-mt-16 lg:sticky lg:top-6 lg:max-h-[calc(100dvh-3rem)] lg:overflow-y-auto" aria-label={'Chi tiết chữ ' + current.kanji}>
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
               <ContentBadge tone="kanji">KANJI {current.level}</ContentBadge>

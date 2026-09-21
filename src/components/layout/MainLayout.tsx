@@ -111,7 +111,7 @@ export function MainLayout({ children }: MainLayoutProps) {
 
       {/* Main content area */}
       <main
-        className="flex-1 min-w-0 min-h-screen overflow-x-hidden"
+        className="flex-1 min-w-0 min-h-screen overflow-x-clip"
         id="main-content"
         role="main"
       >
