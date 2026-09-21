@@ -185,11 +185,20 @@ const DEFAULT_SETTINGS: AppSettings = {
   showFurigana: true,
   autoPlayAudio: false,
   dailyGoal: 20,
+  ankiSessionMinutes: 0,
   reducedMotion: false,
 };
 
 export function getSettings(): AppSettings {
-  return getJSON<AppSettings>(KEYS.SETTINGS, DEFAULT_SETTINGS);
+  const stored = getJSON<Partial<AppSettings>>(KEYS.SETTINGS, {});
+  const requestedMinutes = Number(stored.ankiSessionMinutes);
+  return {
+    ...DEFAULT_SETTINGS,
+    ...stored,
+    ankiSessionMinutes: Number.isFinite(requestedMinutes)
+      ? Math.min(180, Math.max(0, Math.round(requestedMinutes)))
+      : DEFAULT_SETTINGS.ankiSessionMinutes,
+  };
 }
 
 export function saveSettings(settings: AppSettings): void {

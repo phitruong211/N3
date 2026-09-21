@@ -308,6 +308,8 @@ export interface AppSettings {
   showFurigana: boolean;
   autoPlayAudio: boolean;
   dailyGoal: number;
+  /** Maximum active minutes for an Anki session; 0 disables the limit. */
+  ankiSessionMinutes: number;
   reducedMotion: boolean;
 }
 

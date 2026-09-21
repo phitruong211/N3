@@ -160,17 +160,26 @@ export function getDueCards(cards: SRSCard[], now = new Date()): SRSCard[] {
 }
 
 /** Due reviews come first, followed by cards that have never been studied. */
-export function getReadyAnkiItems<T extends { id: string }>(items: T[], cards: SRSCard[], deckType: DeckType): T[] {
+export function getReadyAnkiItems<T extends { id: string }>(
+  items: T[],
+  cards: SRSCard[],
+  deckType: DeckType,
+  now = new Date()
+): T[] {
   const byId = new Map(cards.filter(card => card.deckType === deckType).map(card => [card.cardId, card]));
-  const now = Date.now();
-  const due: T[] = [];
+  const nowMs = now.getTime();
+  const due: { item: T; dueAt: number; sourceIndex: number }[] = [];
   const fresh: T[] = [];
-  for (const item of items) {
+  for (const [sourceIndex, item] of items.entries()) {
     const card = byId.get(item.id);
     if (!card || card.state === 'new') fresh.push(item);
-    else if (new Date(card.dueDate).getTime() <= now) due.push(item);
+    else {
+      const dueAt = new Date(card.dueDate).getTime();
+      if (Number.isFinite(dueAt) && dueAt <= nowMs) due.push({ item, dueAt, sourceIndex });
+    }
   }
-  return [...due, ...fresh];
+  due.sort((a, b) => a.dueAt - b.dueAt || a.sourceIndex - b.sourceIndex);
+  return [...due.map(({ item }) => item), ...fresh];
 }
 
 /**
@@ -252,6 +261,25 @@ export function formatCardInterval(card: SRSCard | null): string {
   if (interval < 30) return `${interval} ngày`;
   if (interval < 365) return `${Math.round(interval / 30)} tháng`;
   return `${(interval / 365).toFixed(1)} năm`;
+}
+
+/** Format the actual time remaining until a persisted due date. */
+export function formatTimeUntilDue(card: SRSCard | null, now = new Date()): string {
+  if (!card || card.state === 'new') return 'Chưa học';
+
+  const remainingMs = new Date(card.dueDate).getTime() - now.getTime();
+  if (!Number.isFinite(remainingMs) || remainingMs <= 0) return 'Đến hạn';
+
+  const remainingMinutes = Math.ceil(remainingMs / 60_000);
+  if (remainingMinutes < 60) return `${remainingMinutes}m`;
+
+  const remainingHours = Math.ceil(remainingMs / 3_600_000);
+  if (remainingHours < 24) return `${remainingHours}h`;
+
+  const remainingDays = Math.ceil(remainingMs / 86_400_000);
+  if (remainingDays < 30) return `${remainingDays} ngày`;
+  if (remainingDays < 365) return `${Math.ceil(remainingDays / 30)} tháng`;
+  return `${(remainingDays / 365).toFixed(1)} năm`;
 }
 
 export function formatInterval(interval: number): string {

@@ -31,8 +31,9 @@ import {
   getDueCards,
   getReadyAnkiItems,
   getNextIntervals,
-  formatCardInterval,
+  formatTimeUntilDue,
 } from '@/lib/srs';
+import { formatSessionTime, useActiveElapsedMinutes, useAnkiSessionTimer } from '@/hooks/useActiveElapsedMinutes';
 import {
   recordStudyActivity,
   getLastVocabIndex,
@@ -52,6 +53,13 @@ function EmptyAnkiSession({ onExit }: { onExit: () => void }) {
     <p className="study-copy max-w-md">Các thẻ trong bộ này đã được hẹn lịch. Hãy quay lại khi đến giờ ôn.</p>
     <button className="study-button study-button-primary" onClick={onExit}>Về danh sách bộ thẻ</button>
   </div>;
+}
+
+function AnkiSessionTime({ remainingSeconds, expired }: { remainingSeconds: number | null; expired: boolean }) {
+  if (remainingSeconds === null) return null;
+  return <span className={`font-mono text-xs font-semibold ${expired ? 'text-[var(--color-error)]' : 'text-[var(--color-text-secondary)]'}`}>
+    {expired ? 'Hết giờ · hoàn tất thẻ này' : `Còn ${formatSessionTime(remainingSeconds)}`}
+  </span>;
 }
 
 // ============================================================
@@ -255,7 +263,13 @@ export function AnkiCardBadge({
   itemType: 'vocabulary' | 'kanji' | 'grammar';
 }) {
   const { srsCards } = useApp();
+  const [now, setNow] = useState(() => new Date());
   const card = srsCards.find((c) => c.cardId === itemId && c.deckType === itemType);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 30_000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   if (!card || card.state === 'new') {
     return (
@@ -271,11 +285,12 @@ export function AnkiCardBadge({
     relearning: 'Đã quên (Học lại)',
     new: 'Chưa học',
   };
+  const dueText = formatTimeUntilDue(card, now);
 
   return (
     <div className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-success-subtle)] px-3 py-1 text-xs font-semibold text-[var(--color-success)] select-none">
       <span>
-        {stageLabels[card.state as keyof typeof stageLabels]} · Ôn sau {formatCardInterval(card)}
+        {stageLabels[card.state as keyof typeof stageLabels]} · {dueText === 'Đến hạn' ? dueText : `Còn ${dueText}`}
       </span>
     </div>
   );
@@ -771,17 +786,17 @@ export function VocabFlashcardSession({
   preserveOrder?: boolean;
   ankiMode?: boolean;
 }) {
-  const { srsCards, updateSRSCard } = useApp();
+  const { srsCards, updateSRSCard, settings } = useApp();
   const [index, setIndex] = useState(ankiMode ? 0 : initialIndex || 0);
   const [flipped, setFlipped] = useState(false);
   const ratingLocked = useRef(false);
-  useEffect(() => { ratingLocked.current = false; }, [index]);
   const reviewedRef = useRef<Set<number>>(new Set());
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [shuffledItems] = useState(() =>
     preserveOrder ? [...items] : [...items].sort(() => Math.random() - 0.5)
   );
   const [studyItems, setStudyItems] = useState(() => ankiMode ? getReadyAnkiItems(shuffledItems, srsCards, 'vocabulary') : shuffledItems);
+  useEffect(() => { ratingLocked.current = false; }, [index, studyItems]);
 
   const jumpTo = useCallback((idx: number) => {
     setIndex(idx);
@@ -791,6 +806,8 @@ export function VocabFlashcardSession({
 
   const current = studyItems[index];
   const total = studyItems.length;
+  const readCardElapsedMinutes = useActiveElapsedMinutes(current?.id);
+  const sessionTimer = useAnkiSessionTimer(ankiMode ? settings.ankiSessionMinutes : 0, 'vocabulary-session');
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
   const next = useCallback((isAnki?: boolean) => {
@@ -826,29 +843,24 @@ export function VocabFlashcardSession({
     (rating: Rating) => {
       if (ratingLocked.current || !flipped) return;
       ratingLocked.current = true;
-      const existing = srsCards.find((c) => c.cardId === current.id);
+      const existing = srsCards.find((c) => c.cardId === current.id && c.deckType === 'vocabulary');
       const card = existing || createSRSCard(current.id, 'vocabulary');
       const isNew = card.state === 'new';
       const updated = processReview(card, rating);
       updateSRSCard(updated);
-      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10, 'srs');
-      if (index === total - 1) {
-        const updatedCards = [...srsCards.filter(c => !(c.cardId === updated.cardId && c.deckType === updated.deckType)), updated];
-        const readyAgain = getReadyAnkiItems(shuffledItems, updatedCards, 'vocabulary');
-        if (readyAgain.length) {
-          setStudyItems(readyAgain);
-          setIndex(0);
-          setFlipped(false);
-          ratingLocked.current = false;
-        } else {
-          if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
-          onExit();
-        }
+      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, readCardElapsedMinutes(), 'srs');
+      const updatedCards = [...srsCards.filter(c => !(c.cardId === updated.cardId && c.deckType === updated.deckType)), updated];
+      const nextQueue = getReadyAnkiItems(shuffledItems, updatedCards, 'vocabulary');
+      if (nextQueue.length && !sessionTimer.isExpired()) {
+        setStudyItems(nextQueue);
+        setIndex(0);
+        setFlipped(false);
       } else {
-        next(true);
+        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+        onExit();
       }
     },
-    [srsCards, current?.id, updateSRSCard, next, index, total, onExit, flipped, shuffledItems]
+    [srsCards, current?.id, updateSRSCard, onExit, flipped, shuffledItems, readCardElapsedMinutes, sessionTimer]
   );
 
   const toggleFullscreen = useCallback(() => {
@@ -960,7 +972,7 @@ export function VocabFlashcardSession({
 
         {/* Progress bar + jump */}
         <div className="flex min-w-0 items-center justify-center gap-2 sm:gap-4">
-          {ankiMode ? <span className="font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Thẻ {index + 1} / {total}</span> : <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />}
+          {ankiMode ? <><span className="font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Còn {total} thẻ</span><AnkiSessionTime remainingSeconds={sessionTimer.remainingSeconds} expired={sessionTimer.expired}/></> : <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />}
           <div className="hidden sm:block w-24 lg:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"
@@ -1099,16 +1111,16 @@ function KanjiFlashcardSession({
   initialIndex?: number;
   ankiMode?: boolean;
 }) {
-  const { srsCards, updateSRSCard } = useApp();
+  const { srsCards, updateSRSCard, settings } = useApp();
   const deckLevel = items[0]?.level ?? 'N3';
   const [sourceItems] = useState(() => [...items]);
   const [studyItems, setStudyItems] = useState(() => ankiMode ? getReadyAnkiItems(sourceItems, srsCards, 'kanji') : sourceItems);
   const [index, setIndex] = useState(ankiMode ? 0 : initialIndex || 0);
   const [flipped, setFlipped] = useState(false);
   const ratingLocked = useRef(false);
-  useEffect(() => { ratingLocked.current = false; }, [index]);
   const reviewedRef = useRef<Set<number>>(new Set());
   const [isFullscreen, setIsFullscreen] = useState(false);
+  useEffect(() => { ratingLocked.current = false; }, [index, studyItems]);
 
   const jumpTo = useCallback((idx: number) => {
     setIndex(idx);
@@ -1118,6 +1130,8 @@ function KanjiFlashcardSession({
 
   const current = studyItems[index];
   const total = studyItems.length;
+  const readCardElapsedMinutes = useActiveElapsedMinutes(current?.id);
+  const sessionTimer = useAnkiSessionTimer(ankiMode ? settings.ankiSessionMinutes : 0, 'kanji-session');
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
   const next = useCallback((isAnki?: boolean) => {
@@ -1153,29 +1167,24 @@ function KanjiFlashcardSession({
     (rating: Rating) => {
       if (ratingLocked.current || !flipped) return;
       ratingLocked.current = true;
-      const existing = srsCards.find((c) => c.cardId === current.id);
+      const existing = srsCards.find((c) => c.cardId === current.id && c.deckType === 'kanji');
       const card = existing || createSRSCard(current.id, 'kanji');
       const isNew = card.state === 'new';
       const updated = processReview(card, rating);
       updateSRSCard(updated);
-      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10, 'srs');
-      if (index === total - 1) {
-        const updatedCards = [...srsCards.filter(c => !(c.cardId === updated.cardId && c.deckType === updated.deckType)), updated];
-        const readyAgain = getReadyAnkiItems(sourceItems, updatedCards, 'kanji');
-        if (readyAgain.length) {
-          setStudyItems(readyAgain);
-          setIndex(0);
-          setFlipped(false);
-          ratingLocked.current = false;
-        } else {
-          if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
-          onExit();
-        }
+      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, readCardElapsedMinutes(), 'srs');
+      const updatedCards = [...srsCards.filter(c => !(c.cardId === updated.cardId && c.deckType === updated.deckType)), updated];
+      const nextQueue = getReadyAnkiItems(sourceItems, updatedCards, 'kanji');
+      if (nextQueue.length && !sessionTimer.isExpired()) {
+        setStudyItems(nextQueue);
+        setIndex(0);
+        setFlipped(false);
       } else {
-        next(true);
+        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+        onExit();
       }
     },
-    [srsCards, current?.id, updateSRSCard, next, index, total, onExit, flipped, sourceItems]
+    [srsCards, current?.id, updateSRSCard, onExit, flipped, sourceItems, readCardElapsedMinutes, sessionTimer]
   );
 
   const toggleFullscreen = useCallback(() => {
@@ -1284,7 +1293,7 @@ function KanjiFlashcardSession({
         </div>
 
         <div className="flex min-w-0 items-center justify-center gap-2 sm:gap-4">
-          {ankiMode ? <span className="font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Thẻ {index + 1} / {total}</span> : <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />}
+          {ankiMode ? <><span className="font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Còn {total} thẻ</span><AnkiSessionTime remainingSeconds={sessionTimer.remainingSeconds} expired={sessionTimer.expired}/></> : <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />}
           <div className="hidden sm:block w-24 lg:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"
@@ -1493,11 +1502,10 @@ export function GrammarFlashcardSession({
   preserveOrder?: boolean;
   ankiMode?: boolean;
 }) {
-  const { srsCards, updateSRSCard } = useApp();
+  const { srsCards, updateSRSCard, settings } = useApp();
   const [index, setIndex] = useState(ankiMode ? 0 : initialIndex || 0);
   const [flipped, setFlipped] = useState(false);
   const ratingLocked = useRef(false);
-  useEffect(() => { ratingLocked.current = false; }, [index]);
   const reviewedRef = useRef<Set<number>>(new Set());
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [revealedExamples, setRevealedExamples] = useState<Record<number, boolean>>({});
@@ -1505,6 +1513,7 @@ export function GrammarFlashcardSession({
     preserveOrder ? [...items] : [...items].sort(() => Math.random() - 0.5)
   );
   const [studyItems, setStudyItems] = useState(() => ankiMode ? getReadyAnkiItems(shuffledItems, srsCards, 'grammar') : shuffledItems);
+  useEffect(() => { ratingLocked.current = false; }, [index, studyItems]);
 
   const jumpTo = useCallback((idx: number) => {
     setIndex(idx);
@@ -1515,6 +1524,8 @@ export function GrammarFlashcardSession({
 
   const current = studyItems[index];
   const total = studyItems.length;
+  const readCardElapsedMinutes = useActiveElapsedMinutes(current?.id);
+  const sessionTimer = useAnkiSessionTimer(ankiMode ? settings.ankiSessionMinutes : 0, 'grammar-session');
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
   const next = useCallback((isAnki?: boolean) => {
@@ -1552,30 +1563,25 @@ export function GrammarFlashcardSession({
     (rating: Rating) => {
       if (ratingLocked.current || !flipped) return;
       ratingLocked.current = true;
-      const existing = srsCards.find((c) => c.cardId === current.id);
+      const existing = srsCards.find((c) => c.cardId === current.id && c.deckType === 'grammar');
       const card = existing || createSRSCard(current.id, 'grammar');
       const isNew = card.state === 'new';
       const updated = processReview(card, rating);
       updateSRSCard(updated);
-      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, 10, 'srs');
-      if (index === total - 1) {
-        const updatedCards = [...srsCards.filter(c => !(c.cardId === updated.cardId && c.deckType === updated.deckType)), updated];
-        const readyAgain = getReadyAnkiItems(shuffledItems, updatedCards, 'grammar');
-        if (readyAgain.length) {
-          setStudyItems(readyAgain);
-          setIndex(0);
-          setFlipped(false);
-          setRevealedExamples({});
-          ratingLocked.current = false;
-        } else {
-          if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
-          onExit();
-        }
+      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, readCardElapsedMinutes(), 'srs');
+      const updatedCards = [...srsCards.filter(c => !(c.cardId === updated.cardId && c.deckType === updated.deckType)), updated];
+      const nextQueue = getReadyAnkiItems(shuffledItems, updatedCards, 'grammar');
+      if (nextQueue.length && !sessionTimer.isExpired()) {
+        setStudyItems(nextQueue);
+        setIndex(0);
+        setFlipped(false);
+        setRevealedExamples({});
       } else {
-        next(true);
+        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+        onExit();
       }
     },
-    [srsCards, current?.id, updateSRSCard, next, index, total, onExit, flipped, shuffledItems]
+    [srsCards, current?.id, updateSRSCard, onExit, flipped, shuffledItems, readCardElapsedMinutes, sessionTimer]
   );
 
   const toggleExampleTranslation = useCallback((idx: number) => {
@@ -1690,7 +1696,7 @@ export function GrammarFlashcardSession({
         </div>
 
         <div className="flex min-w-0 items-center justify-center gap-2 sm:gap-4">
-          {ankiMode ? <span className="font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Thẻ {index + 1} / {total}</span> : <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />}
+          {ankiMode ? <><span className="font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Còn {total} thẻ</span><AnkiSessionTime remainingSeconds={sessionTimer.remainingSeconds} expired={sessionTimer.expired}/></> : <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />}
           <div className="hidden sm:block w-24 lg:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
             <div
               className="h-full rounded-full bg-[var(--color-grammar)] transition-all duration-300"

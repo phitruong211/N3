@@ -13,13 +13,14 @@ import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react'
 import { useApp } from '@/hooks/useApp';
 import { createSRSCard, processReview, getDueCards, getNextIntervals } from '@/lib/srs';
 import { recordStudyActivity } from '@/lib/storage';
+import { formatSessionTime, useActiveElapsedMinutes, useAnkiSessionTimer } from '@/hooks/useActiveElapsedMinutes';
 import type { Rating, SRSCard, VocabItem, KanjiItem, GrammarItem } from '@/types';
 import { RotateCcw, CheckCircle, ArrowRight } from 'lucide-react';
 import { PageHeading } from '@/components/ui/StudyUI';
 import { ImportedDecks } from '@/components/flashcard/ImportedDecks';
 
 export function SRSPage() {
-  const { vocabulary, kanji, grammar, srsCards, updateSRSCard, setCurrentPage } = useApp();
+  const { vocabulary, kanji, grammar, srsCards, updateSRSCard, setCurrentPage, settings } = useApp();
   const [sessionCards, setSessionCards] = useState<SRSCard[] | null>(null);
   const [clockTick, setClockTick] = useState(Date.now);
   useEffect(() => {
@@ -36,7 +37,7 @@ export function SRSPage() {
 
   // Items that are completely new (never studied)
   const newItemCount = useMemo(() => {
-    const studied = new Set(srsCards.map((c) => c.cardId));
+    const studied = new Set(srsCards.filter((c) => c.deckType === 'vocabulary').map((c) => c.cardId));
     return vocabulary.filter((v) => !studied.has(v.id)).length;
   }, [vocabulary, srsCards]);
 
@@ -47,6 +48,7 @@ export function SRSPage() {
         vocabulary={vocabulary}
         kanji={kanji}
         grammar={grammar}
+        sessionMinutes={settings.ankiSessionMinutes}
         updateSRSCard={updateSRSCard}
         onFinish={() => setSessionCards(null)}
       />
@@ -103,7 +105,7 @@ export function SRSPage() {
         <button
           onClick={() => {
             // Add 10 new items to the SRS system
-            const studied = new Set(srsCards.map((c) => c.cardId));
+            const studied = new Set(srsCards.filter((c) => c.deckType === 'vocabulary').map((c) => c.cardId));
             const newItems = vocabulary
               .filter((v) => !studied.has(v.id))
               .slice(0, 10);
@@ -131,7 +133,6 @@ export function SRSPage() {
 interface SessionStats {
   total: number;
   correct: number;
-  startTime: number;
 }
 
 function SRSSession({
@@ -139,6 +140,7 @@ function SRSSession({
   vocabulary,
   kanji,
   grammar,
+  sessionMinutes,
   updateSRSCard,
   onFinish,
 }: {
@@ -146,6 +148,7 @@ function SRSSession({
   vocabulary: VocabItem[];
   kanji: KanjiItem[];
   grammar: GrammarItem[];
+  sessionMinutes: number;
   updateSRSCard: (card: SRSCard) => void;
   onFinish: () => void;
 }) {
@@ -155,10 +158,13 @@ function SRSSession({
   const ratingLocked = useRef(false);
   useEffect(() => { ratingLocked.current = false; }, [currentIndex]);
   const [sessionDone, setSessionDone] = useState(false);
+  const [elapsedMinutes, setElapsedMinutes] = useState<number | null>(null);
+  const [completedReviews, setCompletedReviews] = useState<number | null>(null);
+  const readSessionElapsedMinutes = useActiveElapsedMinutes('srs-session');
+  const sessionTimer = useAnkiSessionTimer(sessionMinutes, 'srs-session-limit');
   const [stats] = useState<SessionStats>({
     total: cards.length,
     correct: 0,
-    startTime: Date.now(),
   });
 
   const currentCard = queue[currentIndex];
@@ -187,22 +193,25 @@ function SRSSession({
       stats.correct++;
     }
 
-    if (currentIndex < queue.length - 1) {
+    const reviewedCount = currentIndex + 1;
+    if (currentIndex < queue.length - 1 && !sessionTimer.isExpired()) {
       setCurrentIndex((i) => i + 1);
       setRevealed(false);
     } else {
       // Session complete
-      const elapsed = Math.round((Date.now() - stats.startTime) / 60000);
+      const elapsed = readSessionElapsedMinutes();
       recordStudyActivity(
-        stats.total,
+        reviewedCount,
         0,
-        stats.total > 0 ? stats.correct / stats.total : 0,
+        reviewedCount > 0 ? stats.correct / reviewedCount : 0,
         elapsed,
         'srs'
       );
+      setCompletedReviews(reviewedCount);
+      setElapsedMinutes(elapsed);
       setSessionDone(true);
     }
-  }, [currentCard, currentIndex, queue.length, updateSRSCard, stats, revealed]);
+  }, [currentCard, currentIndex, queue.length, updateSRSCard, stats, revealed, readSessionElapsedMinutes, sessionTimer]);
 
   // Keyboard controls
   useEffect(() => {
@@ -233,8 +242,10 @@ function SRSSession({
 
   // Session complete summary (Peak-End Rule)
   if (sessionDone) {
-    const elapsed = Math.round((Date.now() - stats.startTime) / 60000);
-    const accuracy = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+    const elapsed = elapsedMinutes ?? readSessionElapsedMinutes();
+    const roundedElapsed = Math.round(elapsed);
+    const reviewedCount = completedReviews ?? stats.total;
+    const accuracy = reviewedCount > 0 ? Math.round((stats.correct / reviewedCount) * 100) : 0;
 
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-6">
@@ -252,7 +263,7 @@ function SRSSession({
 
         <div className="flex gap-6">
           <div className="text-center">
-            <div className="text-2xl font-semibold text-[var(--color-text)]">{stats.total}</div>
+            <div className="text-2xl font-semibold text-[var(--color-text)]">{reviewedCount}</div>
             <div className="text-xs text-[var(--color-text-tertiary)]">Đã ôn</div>
           </div>
           <div className="text-center">
@@ -260,7 +271,7 @@ function SRSSession({
             <div className="text-xs text-[var(--color-text-tertiary)]">Chính xác</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-semibold text-[var(--color-text)]">{elapsed || '< 1'}m</div>
+            <div className="text-2xl font-semibold text-[var(--color-text)]">{roundedElapsed || '< 1'}m</div>
             <div className="text-xs text-[var(--color-text-tertiary)]">Thời gian</div>
           </div>
         </div>
@@ -309,6 +320,9 @@ function SRSSession({
           <span className="text-xs font-mono font-medium text-[var(--color-text-secondary)]">
             Thẻ {currentIndex + 1} / {queue.length}
           </span>
+          {sessionTimer.remainingSeconds !== null && <span className={`text-xs font-mono font-semibold ${sessionTimer.expired ? 'text-[var(--color-error)]' : 'text-[var(--color-text-secondary)]'}`}>
+            {sessionTimer.expired ? 'Hết giờ · hoàn tất thẻ này' : `Còn ${formatSessionTime(sessionTimer.remainingSeconds)}`}
+          </span>}
           <div className="hidden w-32 h-1.5 rounded-full bg-[var(--color-surface-alt)] overflow-hidden sm:block">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"

@@ -42,6 +42,17 @@ export function SettingsPage() {
           <SettingToggle label="Giảm chuyển động" detail="Giảm hiệu ứng chuyển cảnh" checked={settings.reducedMotion} onChange={value => updateSettings({ reducedMotion: value })}/>
         </section>
         <section className="study-panel">
+          <h2 className="text-base font-semibold text-[var(--color-text)]">Thời gian phiên Anki</h2>
+          <p className="study-copy mt-1">Chỉ tính thời gian tab đang hoạt động. Khi hết giờ, bạn hoàn tất thẻ hiện tại rồi phiên sẽ kết thúc.</p>
+          <label className="mt-4 block text-sm font-semibold text-[var(--color-text)]">
+            Giới hạn tổng (phút)
+            <input type="number" min={0} max={180} step={1} className="study-input mt-2" value={settings.ankiSessionMinutes}
+              onChange={event => updateSettings({ ankiSessionMinutes: Math.min(180, Math.max(0, Number(event.target.value) || 0)) })}/>
+          </label>
+          <p className="study-copy mt-2">Nhập 0 để học không giới hạn. Tối đa 180 phút mỗi phiên.</p>
+          <div className="mt-3 flex flex-wrap gap-2">{[0, 10, 20, 30, 45, 60].map(minutes => <button key={minutes} className={'study-button ' + (settings.ankiSessionMinutes === minutes ? 'study-button-primary' : '')} onClick={() => updateSettings({ ankiSessionMinutes: minutes })}>{minutes === 0 ? 'Không giới hạn' : `${minutes}m`}</button>)}</div>
+        </section>
+        <section className="study-panel">
           <div className="flex items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><h2 className="text-base font-semibold">Xóa tiến độ</h2></div>
           <p className="study-copy mt-2">Xóa lịch ôn SRS, hoạt động học và mục đã lưu trên trình duyệt này. Không thể khôi phục sau khi xóa.</p>
           <button className="study-button mt-4 border-[var(--color-error)] text-[var(--color-error)]" onClick={handleReset}>
