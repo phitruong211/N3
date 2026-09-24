@@ -70,11 +70,11 @@ export function ImportedDecks() {
   const matching = active?.cards.filter(card => `${card.front} ${card.back} ${card.reading}`.toLowerCase().includes(search.toLowerCase())) || [];
   const due = (deck: ImportedDeck) => deck.cards.filter(card => !card.srs || Date.parse(card.srs.dueDate) <= Date.now()).length;
 
-  return <section className="study-panel space-y-5" aria-label="Bộ thẻ Anki của bạn">
+  return <section className="study-panel space-y-5" aria-label="Bộ thẻ của bạn">
     <div className="flex flex-wrap items-center justify-between gap-3">
-      <div><h2 className="font-semibold flex items-center gap-2"><Folder size={20}/>Bộ thẻ Anki của bạn</h2><p className="study-copy mt-1">Tạo thẻ thủ công hoặc nhập file. Dữ liệu được đồng bộ với tài khoản.</p></div>
+      <div><h2 className="font-semibold flex items-center gap-2"><Folder size={20}/>Bộ thẻ của bạn</h2><p className="study-copy mt-1">Tạo thẻ thủ công hoặc nhập file. Dữ liệu được đồng bộ với tài khoản.</p></div>
       <div className="flex flex-wrap gap-2"><button className="study-button" disabled={busy || !loaded} onClick={() => { setCreatingDeck(true); setPreview(null); setActiveId(null); setName('Bộ thẻ mới'); setMessage(''); }}><Plus size={17}/>Tạo bộ thủ công</button><button className="study-button study-button-primary" disabled={busy || !loaded} onClick={() => input.current?.click()}><Upload size={17}/>Import file</button></div>
-      <input ref={input} type="file" className="sr-only" aria-label="Chọn file nhập Anki" accept=".txt,.csv,.tsv,.json,.xlsx,.xls" disabled={busy} onChange={event => {
+      <input ref={input} type="file" className="sr-only" aria-label="Chọn file nhập bộ thẻ" accept=".txt,.csv,.tsv,.json,.xlsx,.xls" disabled={busy} onChange={event => {
         const file = event.target.files?.[0]; event.target.value = '';
         if (file) void operation(async () => { const result = await parseImportFile(file); setPreview(result); setCreatingDeck(false); setName(result.name); setActiveId(null); setQueue(null); setEditing(null); });
       }}/>
@@ -92,7 +92,7 @@ export function ImportedDecks() {
       <div className="flex gap-2"><button className="study-button study-button-primary" disabled={busy || !name.trim()} onClick={() => void operation(async () => {
         const deck: ImportedDeck = { id: crypto.randomUUID(), name: name.trim(), source: preview.source, format: preview.format, createdAt: new Date().toISOString(), cards: preview.cards };
         const saved = await save(deck); setPreview(null); open(saved); setMessage(`Đã tạo thư mục với ${saved.cards.length} thẻ.`);
-      })}>Tạo thư mục Anki</button><button className="study-button" disabled={busy} onClick={() => setPreview(null)}>Hủy</button></div>
+      })}>Tạo bộ thẻ</button><button className="study-button" disabled={busy} onClick={() => setPreview(null)}>Hủy</button></div>
     </div>}
     {creatingDeck && !preview && <form className="rounded-xl border border-[var(--color-border)] p-4 space-y-3" onSubmit={event => { event.preventDefault(); void operation(async () => {
       const deck: ImportedDeck = { id: crypto.randomUUID(), name: name.trim(), source: 'Tạo thủ công', format: 'Thủ công', createdAt: new Date().toISOString(), cards: [] };
