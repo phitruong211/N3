@@ -720,11 +720,10 @@ function DeckPage({ mode }: { mode: 'flashcards' | 'anki' }) {
     {pendingDeck && pendingTotal > 0 && <ShuffleLaunchModal deckKey={pendingDeck} totalCards={pendingTotal} onStart={handleModalStart} onCancel={handleModalCancel} />}
     <div className="study-page">
         <PageHeading eyebrow="LUYỆN TẬP" title={ankiMode ? 'Anki' : 'Thẻ học'} subtitle={ankiMode ? 'Học thẻ mới và thẻ đến hạn; đánh giá mức độ nhớ để lên lịch ôn lại' : 'Chọn bộ thẻ, tự nhớ trước khi xem đáp án'} />
-      <ImportedDecks />
       <section><h2 className="study-eyebrow mb-3">TRÌNH ĐỘ N3</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{decks.slice(0,3).map(renderDeck)}</div></section>
       <section><h2 className="study-eyebrow mb-3">TRÌNH ĐỘ N4</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{decks.slice(3,5).map(renderDeck)}</div></section>
       <section><h2 className="study-eyebrow mb-3">TRÌNH ĐỘ N2</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{decks.slice(5,7).map(renderDeck)}</div></section>
-      <section><h2 className="study-eyebrow mb-3">CỦA BẠN</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3"><DeckCard key={savedKey} {...savedDeck} ankiMode={ankiMode} disabled={!savedVocabulary.length} onClick={() => handleDeckClick('saved')} /></div></section>
+      <ImportedDecks leadingDeck={<DeckCard key={savedKey} {...savedDeck} ankiMode={ankiMode} disabled={!savedVocabulary.length} onClick={() => handleDeckClick('saved')} />} />
     </div>
   </>;
 }

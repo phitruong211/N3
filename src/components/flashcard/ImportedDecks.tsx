@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Folder, Plus, Upload } from 'lucide-react';
 import { useApp } from '@/hooks/useApp';
 import { kindLabels, parseImportFile } from '@/lib/ankiImport';
@@ -10,7 +10,7 @@ import { formatSessionTime, useActiveElapsedMinutes, useAnkiSessionTimer } from 
 import { recordStudyActivity } from '@/lib/storage';
 import type { Rating } from '@/types';
 
-export function ImportedDecks() {
+export function ImportedDecks({ leadingDeck }: { leadingDeck?: ReactNode }) {
   const { settings } = useApp();
   const [decks, setDecks] = useState<ImportedDeck[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -70,7 +70,8 @@ export function ImportedDecks() {
   const matching = active?.cards.filter(card => `${card.front} ${card.back} ${card.reading}`.toLowerCase().includes(search.toLowerCase())) || [];
   const due = (deck: ImportedDeck) => deck.cards.filter(card => !card.srs || Date.parse(card.srs.dueDate) <= Date.now()).length;
 
-  return <section className="study-panel space-y-5" aria-label="Bộ thẻ của bạn">
+  return <div className="space-y-6">
+    <section className="study-panel space-y-5" aria-label="Nạp và quản lý bộ thẻ">
     <div className="flex flex-wrap items-center justify-between gap-3">
       <div><h2 className="font-semibold flex items-center gap-2"><Folder size={20}/>Bộ thẻ của bạn</h2><p className="study-copy mt-1">Tạo thẻ thủ công hoặc nhập file. Dữ liệu được đồng bộ với tài khoản.</p></div>
       <div className="flex flex-wrap gap-2"><button className="study-button" disabled={busy || !loaded} onClick={() => { setCreatingDeck(true); setPreview(null); setActiveId(null); setName('Bộ thẻ mới'); setMessage(''); }}><Plus size={17}/>Tạo bộ thủ công</button><button className="study-button study-button-primary" disabled={busy || !loaded} onClick={() => input.current?.click()}><Upload size={17}/>Import file</button></div>
@@ -91,7 +92,7 @@ export function ImportedDecks() {
       <div className="space-y-2">{preview.cards.slice(0, 3).map(card => <div key={card.id} className="grid gap-2 sm:grid-cols-2 border-t border-[var(--color-border)] pt-2"><p className="whitespace-pre-wrap break-words">{card.front}</p><p className="whitespace-pre-wrap break-words">{card.back}</p></div>)}</div>
       <div className="flex gap-2"><button className="study-button study-button-primary" disabled={busy || !name.trim()} onClick={() => void operation(async () => {
         const deck: ImportedDeck = { id: crypto.randomUUID(), name: name.trim(), source: preview.source, format: preview.format, createdAt: new Date().toISOString(), cards: preview.cards };
-        const saved = await save(deck); setPreview(null); open(saved); setMessage(`Đã tạo thư mục với ${saved.cards.length} thẻ.`);
+        const saved = await save(deck); setPreview(null); setActiveId(null); setQueue(null); setEditing(null); setMessage(`Đã tạo bộ thẻ với ${saved.cards.length} thẻ.`);
       })}>Tạo bộ thẻ</button><button className="study-button" disabled={busy} onClick={() => setPreview(null)}>Hủy</button></div>
     </div>}
     {creatingDeck && !preview && <form className="rounded-xl border border-[var(--color-border)] p-4 space-y-3" onSubmit={event => { event.preventDefault(); void operation(async () => {
@@ -102,10 +103,6 @@ export function ImportedDecks() {
       <label className="block">Tên bộ thẻ<input autoFocus className="study-input mt-1" value={name} maxLength={120} required onChange={event => setName(event.target.value)}/></label>
       <div className="flex gap-2"><button className="study-button study-button-primary" disabled={busy || !name.trim()}>Tạo và thêm thẻ</button><button type="button" className="study-button" disabled={busy} onClick={() => setCreatingDeck(false)}>Hủy</button></div>
     </form>}
-    {!active && !preview && !creatingDeck && <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-      {decks.map(deck => <button key={deck.id} className="study-panel text-left" onClick={() => open(deck)}><h3 className="font-semibold break-words">{deck.name}</h3><p className="study-copy">{deck.cards.length} thẻ · {due(deck)} mới / đến hạn</p><p className="study-copy mt-2">Mở thư mục →</p></button>)}
-      {loaded && !decks.length && <p className="study-copy">Chưa có bộ thẻ riêng. Bạn có thể tạo thủ công hoặc nhập file để bắt đầu.</p>}
-    </div>}
     {active && <div className="space-y-4">
       <div className="flex flex-wrap gap-2 items-center"><button className="study-button" disabled={busy} onClick={() => { setActiveId(null); setQueue(null); setEditing(null); }}>← Các thư mục</button><h3 className="font-semibold break-words">{active.name}</h3></div>
       {queue === null ? <>
@@ -139,5 +136,14 @@ export function ImportedDecks() {
         </> : <p role="status">Đã hoàn thành lượt học. Lịch ôn của từng thẻ đã được lưu.</p>}
       </div>}
     </div>}
-  </section>;
+    </section>
+    {!active && !preview && !creatingDeck && <section aria-label="Các bộ thẻ của bạn">
+      <h2 className="study-eyebrow mb-3">CỦA BẠN</h2>
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        {leadingDeck}
+        {decks.map(deck => <button key={deck.id} className="study-panel text-left" onClick={() => open(deck)}><h3 className="font-semibold break-words">{deck.name}</h3><p className="study-copy">{deck.cards.length} thẻ · {due(deck)} mới / đến hạn</p><p className="study-copy mt-2">Mở bộ thẻ →</p></button>)}
+        {loaded && !decks.length && !leadingDeck && <p className="study-copy">Chưa có bộ thẻ riêng. Bạn có thể tạo thủ công hoặc nhập file để bắt đầu.</p>}
+      </div>
+    </section>}
+  </div>;
 }
