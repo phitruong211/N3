@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { Folder, Plus, Upload } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { ChevronLeft, ChevronRight, Folder, Maximize2, Minimize2, Plus, Upload, X } from 'lucide-react';
 import { useApp } from '@/hooks/useApp';
 import { kindLabels, parseImportFile } from '@/lib/ankiImport';
 import type { ImportedCard, ImportedDeck, ImportPreview } from '@/lib/ankiImport';
@@ -9,8 +9,9 @@ import { reviewCard } from '@/lib/api';
 import { formatSessionTime, useActiveElapsedMinutes, useAnkiSessionTimer } from '@/hooks/useActiveElapsedMinutes';
 import { recordStudyActivity } from '@/lib/storage';
 import type { Rating } from '@/types';
+import { ShuffleLaunchModal, type ShuffleConfig } from './ShuffleLaunchModal';
 
-export function ImportedDecks({ leadingDeck }: { leadingDeck?: ReactNode }) {
+export function ImportedDecks({ leadingDeck, mode = 'anki' }: { leadingDeck?: ReactNode; mode?: 'flashcards' | 'anki' }) {
   const { settings } = useApp();
   const [decks, setDecks] = useState<ImportedDeck[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -28,6 +29,8 @@ export function ImportedDecks({ leadingDeck }: { leadingDeck?: ReactNode }) {
   const [queue, setQueue] = useState<string[] | null>(null);
   const [sessionToken, setSessionToken] = useState(0);
   const [revealed, setRevealed] = useState(false);
+  const [pendingStudyId, setPendingStudyId] = useState<string | null>(null);
+  const [flashcardSession, setFlashcardSession] = useState<{ deckName: string; cards: ImportedCard[] } | null>(null);
   const input = useRef<HTMLInputElement>(null);
   const active = decks.find(deck => deck.id === activeId);
   const current = active?.cards.find(card => card.id === queue?.[0]);
@@ -69,8 +72,20 @@ export function ImportedDecks({ leadingDeck }: { leadingDeck?: ReactNode }) {
   }
   const matching = active?.cards.filter(card => `${card.front} ${card.back} ${card.reading}`.toLowerCase().includes(search.toLowerCase())) || [];
   const due = (deck: ImportedDeck) => deck.cards.filter(card => !card.srs || Date.parse(card.srs.dueDate) <= Date.now()).length;
+  const pendingStudyDeck = decks.find(deck => deck.id === pendingStudyId);
+
+  function launchImportedDeck(config: ShuffleConfig) {
+    if (!pendingStudyDeck) return;
+    const selected = pendingStudyDeck.cards.slice(0, config.rangeEnd);
+    const cards = config.mode === 'shuffle' ? [...selected].sort(() => Math.random() - 0.5) : selected;
+    setFlashcardSession({ deckName: pendingStudyDeck.name, cards });
+    setPendingStudyId(null);
+  }
+
+  if (flashcardSession) return <ImportedFlashcardSession deckName={flashcardSession.deckName} items={flashcardSession.cards} onExit={() => setFlashcardSession(null)}/>;
 
   return <div className="space-y-6">
+    {pendingStudyDeck && <ShuffleLaunchModal deckName={pendingStudyDeck.name} totalCards={pendingStudyDeck.cards.length} onStart={launchImportedDeck} onCancel={() => setPendingStudyId(null)}/>}
     <section className="study-panel space-y-5" aria-label="Nạp và quản lý bộ thẻ">
     <div className="flex flex-wrap items-center justify-between gap-3">
       <div><h2 className="font-semibold flex items-center gap-2"><Folder size={20}/>Bộ thẻ của bạn</h2><p className="study-copy mt-1">Tạo thẻ thủ công hoặc nhập file. Dữ liệu được đồng bộ với tài khoản.</p></div>
@@ -141,9 +156,81 @@ export function ImportedDecks({ leadingDeck }: { leadingDeck?: ReactNode }) {
       <h2 className="study-eyebrow mb-3">CỦA BẠN</h2>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {leadingDeck}
-        {decks.map(deck => <button key={deck.id} className="study-panel text-left" onClick={() => open(deck)}><h3 className="font-semibold break-words">{deck.name}</h3><p className="study-copy">{deck.cards.length} thẻ · {due(deck)} mới / đến hạn</p><p className="study-copy mt-2">Mở bộ thẻ →</p></button>)}
+        {decks.map(deck => <div key={deck.id} className="study-panel flex min-w-0 flex-col items-start text-left">
+          <button className="w-full min-w-0 text-left focus-ring disabled:cursor-not-allowed disabled:opacity-50" disabled={mode === 'flashcards' && !deck.cards.length} onClick={() => mode === 'flashcards' ? setPendingStudyId(deck.id) : open(deck)}>
+            <h3 className="font-semibold break-words">{deck.name}</h3><p className="study-copy">{deck.cards.length} thẻ · {due(deck)} mới / đến hạn</p><p className="mt-4 text-sm font-semibold text-[var(--color-accent)]">{mode === 'flashcards' ? 'Bắt đầu học →' : 'Mở bộ thẻ →'}</p>
+          </button>
+          {mode === 'flashcards' && <button className="study-button mt-4" onClick={() => open(deck)}>Quản lý bộ thẻ</button>}
+        </div>)}
         {loaded && !decks.length && !leadingDeck && <p className="study-copy">Chưa có bộ thẻ riêng. Bạn có thể tạo thủ công hoặc nhập file để bắt đầu.</p>}
       </div>
     </section>}
+  </div>;
+}
+
+function ImportedFlashcardSession({ deckName, items, onExit }: { deckName: string; items: ImportedCard[]; onExit: () => void }) {
+  const [index, setIndex] = useState(0);
+  const [flipped, setFlipped] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const reviewed = useRef<Set<number>>(new Set());
+  const current = items[index];
+  const total = items.length;
+
+  const recordCurrent = useCallback(() => {
+    if (!flipped || reviewed.current.has(index)) return;
+    reviewed.current.add(index);
+    recordStudyActivity(1, 0, 1, 5, 'flashcard');
+  }, [flipped, index]);
+  const next = useCallback(() => {
+    recordCurrent();
+    if (index < total - 1) { setIndex(value => value + 1); setFlipped(false); }
+  }, [index, total, recordCurrent]);
+  const previous = useCallback(() => {
+    recordCurrent();
+    if (index > 0) { setIndex(value => value - 1); setFlipped(false); }
+  }, [index, recordCurrent]);
+
+  useEffect(() => {
+    const handleKey = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement;
+      if (target.closest('input, textarea, select, [contenteditable="true"]')) return;
+      if (event.key === 'Escape') { event.preventDefault(); onExit(); }
+      else if (event.key === 'ArrowRight') { event.preventDefault(); next(); }
+      else if (event.key === 'ArrowLeft') { event.preventDefault(); previous(); }
+      else if (event.key === ' ') { event.preventDefault(); flipped ? next() : setFlipped(true); }
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [flipped, next, previous, onExit]);
+
+  if (!current) return null;
+  return <div className="fixed inset-0 z-50 flex flex-col select-none bg-[var(--color-bg)]">
+    <header className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-3 sm:px-8">
+      <button className="study-button" onClick={onExit}><X size={18}/><span className="hidden sm:inline">Thoát (Esc)</span></button>
+      <div className="flex min-w-0 flex-1 items-center justify-center gap-3">
+        <span className="shrink-0 font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Thẻ {index + 1} / {total}</span>
+        <div className="hidden h-2 w-24 overflow-hidden rounded-full bg-[var(--color-surface-alt)] sm:block lg:w-64"><div className="h-full rounded-full bg-[var(--color-accent)] transition-all" style={{ width: `${((index + 1) / total) * 100}%` }}/></div>
+      </div>
+      <button className="study-button" onClick={() => setIsFullscreen(value => !value)} aria-label={isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}>{isFullscreen ? <Minimize2 size={17}/> : <Maximize2 size={17}/>}<span className="hidden lg:inline">{isFullscreen ? 'Thu nhỏ' : 'Toàn màn hình'}</span></button>
+    </header>
+    <main className="flex min-h-0 flex-1 items-stretch justify-center overflow-y-auto p-3 sm:p-6">
+      <div role="button" tabIndex={0} onClick={() => setFlipped(value => !value)} onKeyDown={event => { if (event.key === 'Enter') setFlipped(value => !value); }} className={`relative flex w-full cursor-pointer flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 text-center focus-ring sm:p-12 ${isFullscreen ? 'max-w-5xl' : 'max-w-4xl'}`} aria-label={flipped ? 'Đã hiện đáp án, chạm để xem câu hỏi' : 'Đang hiện câu hỏi, chạm để lật'}>
+        <div className="flex flex-wrap items-center justify-between gap-2 text-left"><span className="rounded-full bg-[var(--color-surface-alt)] px-3 py-1 text-xs font-bold text-[var(--color-text-secondary)]">{deckName}</span><span className="text-xs font-semibold text-[var(--color-accent)]">{kindLabels[current.kind]}</span></div>
+        <div className="flex flex-1 flex-col items-center justify-center py-8">
+          {!flipped ? <p className="font-jp text-3xl font-semibold whitespace-pre-wrap break-words sm:text-5xl">{current.front}</p> : <div className="w-full max-w-3xl space-y-5">
+            <p className="font-jp text-xl text-[var(--color-text-secondary)] whitespace-pre-wrap break-words sm:text-2xl">{current.front}</p>
+            <div className="h-px bg-[var(--color-border)]"/>
+            <p className="text-2xl font-semibold whitespace-pre-wrap break-words sm:text-4xl">{current.back}</p>
+            {current.reading && <p className="font-jp text-lg text-[var(--color-accent)] whitespace-pre-wrap">{current.reading}</p>}
+            {current.notes && <div className="rounded-xl bg-[var(--color-surface-alt)] p-4 text-left" onClick={event => event.stopPropagation()}><p className="study-copy whitespace-pre-wrap">{current.notes}</p></div>}
+          </div>}
+        </div>
+        <p className="text-xs text-[var(--color-text-tertiary)]">{flipped ? 'Chạm để xem lại câu hỏi' : 'Chạm hoặc nhấn Space để lật thẻ'}</p>
+      </div>
+    </main>
+    <footer className="grid shrink-0 grid-cols-2 gap-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-3 sm:flex sm:justify-center sm:px-8">
+      <button className="study-button" disabled={index === 0} onClick={previous}><ChevronLeft size={18}/>Thẻ trước</button>
+      <button className="study-button study-button-primary" onClick={() => flipped ? next() : setFlipped(true)} disabled={flipped && index === total - 1}>{flipped ? <><span>{index === total - 1 ? 'Đã hết bộ thẻ' : 'Thẻ tiếp'}</span><ChevronRight size={18}/></> : 'Hiện đáp án'}</button>
+    </footer>
   </div>;
 }
