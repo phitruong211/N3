@@ -4,6 +4,7 @@ import { useApp } from '@/hooks/useApp';
 import { resetAllData } from '@/lib/storage';
 import type { ThemeMode } from '@/types';
 import { PageHeading } from '@/components/ui/StudyUI';
+import { useAuth } from '@/hooks/useAuth';
 
 const themes: { id: ThemeMode; label: string }[] = [
   { id: 'light', label: 'Sáng' }, { id: 'dark', label: 'Tối' },
@@ -13,6 +14,7 @@ const sizes = [{ id: 'small', label: 'Nhỏ' }, { id: 'medium', label: 'Vừa' }
 
 export function SettingsPage() {
   const { settings, updateSettings } = useApp();
+  const { user, signOut } = useAuth();
   const [confirmReset, setConfirmReset] = useState(false);
   const handleReset = () => {
     if (!confirmReset) { setConfirmReset(true); return; }
@@ -23,6 +25,11 @@ export function SettingsPage() {
     <PageHeading eyebrow="CÁ NHÂN" title="Cài đặt" subtitle="Chỉnh cách đọc và học phù hợp với bạn" />
     <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)]">
       <div className="space-y-6">
+        <section className="study-panel">
+          <h2 className="text-base font-semibold text-[var(--color-text)]">Tài khoản</h2>
+          <p className="study-copy mt-1">{user?.displayName} · {user?.email}</p>
+          <button className="study-button mt-4" onClick={() => void signOut()}>Đăng xuất</button>
+        </section>
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Giao diện</h2>
           <p className="study-copy mt-1">Chọn màu nền và độ tương phản.</p>
@@ -68,7 +75,7 @@ export function SettingsPage() {
           <p className="font-jp-serif mt-2 text-5xl text-[var(--color-text)]">準備</p>
           <p className="mt-3 text-sm text-[var(--color-text-secondary)]">sự chuẩn bị</p>
         </div>
-        <p className="study-copy mt-4">Tiến độ được lưu trong bộ nhớ cục bộ của trình duyệt này.</p>
+        <p className="study-copy mt-4">Cài đặt và các bộ thẻ Anki được đồng bộ với tài khoản của bạn.</p>
       </section>
     </div>
   </div>;

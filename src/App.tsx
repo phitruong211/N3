@@ -8,6 +8,8 @@
 import React, { Suspense, lazy } from 'react';
 import { AppProvider, useApp } from '@/hooks/useApp';
 import { MainLayout } from '@/components/layout/MainLayout';
+import { AuthProvider, useAuth } from '@/hooks/useAuth';
+import { AuthPage } from '@/components/auth/AuthPage';
 
 const Dashboard = lazy(() => import('@/components/dashboard/Dashboard').then((module) => ({ default: module.Dashboard })));
 const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage').then((module) => ({ default: module.VocabularyPage })));
@@ -74,8 +76,14 @@ function AppContent() {
 
 export default function App() {
   return (
-    <AppProvider>
-      <AppContent />
-    </AppProvider>
+    <AuthProvider><AuthGate /></AuthProvider>
   );
+}
+
+function AuthGate() {
+  const { user, loading, restoreError, retryRestore } = useAuth();
+  if (loading) return <div className="flex min-h-screen items-center justify-center bg-[var(--color-bg)]"><p className="study-copy">Đang khôi phục phiên đăng nhập…</p></div>;
+  if (!user && restoreError) return <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-6 bg-[var(--color-bg)]"><p className="study-copy max-w-md text-center" role="alert">{restoreError}</p><button className="study-button study-button-primary" onClick={retryRestore}>Thử kết nối lại</button></div>;
+  if (!user) return <AuthPage />;
+  return <AppProvider><AppContent /></AppProvider>;
 }

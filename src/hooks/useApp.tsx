@@ -9,6 +9,7 @@ import React, { createContext, useContext, useEffect, useState, useCallback, typ
 import type { VocabItem, KanjiItem, GrammarItem, PageId, AppSettings, SRSCard, Bookmark, NavigationTarget } from '@/types';
 import { loadVocabulary, loadKanji, loadGrammar } from '@/lib/data';
 import { getSettings, saveSettings, applyTheme, getBookmarks, saveBookmarks, getSRSCards, saveSRSCards, upsertSRSCard, setLastPage, getLastPage, migrateV1 } from '@/lib/storage';
+import { getRemoteSettings, patchRemoteSettings } from '@/lib/api';
 
 interface AppState {
   // <Data>                                 </Data>
@@ -99,6 +100,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return () => { active = false; };
   }, [loadAttempt]);
 
+  useEffect(() => {
+    getRemoteSettings().then(remote => { _setSettings(remote); saveSettings(remote); }).catch(console.error);
+  }, []);
+
   const retryLoad = useCallback(() => setLoadAttempt((attempt) => attempt + 1), []);
 
   // Apply theme on settings change
@@ -138,6 +143,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     _setSettings((prev) => {
       const next = { ...prev, ...updates };
       saveSettings(next);
+      void patchRemoteSettings(updates).catch(console.error);
       return next;
     });
   }, []);

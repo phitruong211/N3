@@ -4,7 +4,8 @@ import { useApp } from '@/hooks/useApp';
 import { kindLabels, parseImportFile } from '@/lib/ankiImport';
 import type { ImportedCard, ImportedDeck, ImportPreview } from '@/lib/ankiImport';
 import { loadImportedDecks, writeImportedDeck } from '@/lib/ankiStorage';
-import { createSRSCard, getNextIntervals, processReview } from '@/lib/srs';
+import { createSRSCard, getNextIntervals } from '@/lib/srs';
+import { reviewCard } from '@/lib/api';
 import { formatSessionTime, useActiveElapsedMinutes, useAnkiSessionTimer } from '@/hooks/useActiveElapsedMinutes';
 import { recordStudyActivity } from '@/lib/storage';
 import type { Rating } from '@/types';
@@ -33,17 +34,19 @@ export function ImportedDecks() {
   const sessionTimer = useAnkiSessionTimer(settings.ankiSessionMinutes, sessionToken, queue !== null);
   const readCardElapsedMinutes = useActiveElapsedMinutes(`${sessionToken}:${current?.id || 'idle'}`);
 
-  useEffect(() => { loadImportedDecks().then(setDecks).catch(() => setError('Không đọc được bộ thẻ đã lưu. Hãy tải lại trang.')).finally(() => setLoaded(true)); }, []);
+  useEffect(() => { loadImportedDecks().then(setDecks).catch((reason) => setError(reason instanceof Error ? reason.message : 'Không tải được bộ thẻ từ máy chủ.')).finally(() => setLoaded(true)); }, []);
 
   async function operation(action: () => Promise<void>) {
     if (lock.current) return;
     lock.current = true; setBusy(true); setError(''); setMessage('');
-    try { await action(); } catch (reason) { setError(reason instanceof Error ? reason.message : 'Không lưu được thay đổi. Hãy kiểm tra dung lượng trình duyệt và thử lại.'); }
+    try { await action(); } catch (reason) { setError(reason instanceof Error ? reason.message : 'Không lưu được thay đổi lên máy chủ.'); }
     finally { lock.current = false; setBusy(false); }
   }
-  async function save(deck: ImportedDeck) {
-    await writeImportedDeck(deck);
-    setDecks(previous => [...previous.filter(item => item.id !== deck.id), deck]);
+  async function save(deck: ImportedDeck): Promise<ImportedDeck> {
+    const saved = await writeImportedDeck(deck);
+    setDecks(previous => [...previous.filter(item => item.id !== deck.id && item.id !== saved.id), saved]);
+    if (activeId === deck.id && saved.id !== deck.id) setActiveId(saved.id);
+    return saved;
   }
   function open(deck: ImportedDeck) { setActiveId(deck.id); setName(deck.name); setSearch(''); setLimit(50); setEditing(null); setQueue(null); setCreatingDeck(false); setMessage(''); }
   function start(dueOnly: boolean) {
@@ -56,8 +59,8 @@ export function ImportedDecks() {
     if (!active || !current || !revealed) return;
     void operation(async () => {
       const original = current.srs || createSRSCard(current.id, current.kind === 'general' ? 'vocabulary' : current.kind);
-      const srs = processReview(original, rating);
-      await save({ ...active, cards: active.cards.map(card => card.id === current.id ? { ...card, srs } : card) });
+      const srs = await reviewCard(current.id, rating, Math.round(readCardElapsedMinutes() * 60_000));
+      setDecks(previous => previous.map(deck => deck.id === active.id ? { ...deck, cards: deck.cards.map(card => card.id === current.id ? { ...card, srs: { ...srs, deckType: card.kind === 'general' ? 'vocabulary' : card.kind } } : card) } : deck));
       recordStudyActivity(1, original.state === 'new' ? 1 : 0, rating === 'again' ? 0 : 1, readCardElapsedMinutes(), 'srs');
       if (sessionTimer.isExpired()) { setQueue(null); setMessage('Đã hết thời gian phiên. Lịch của thẻ vừa học đã được lưu.'); }
       else setQueue(previous => previous!.slice(1));
@@ -69,7 +72,7 @@ export function ImportedDecks() {
 
   return <section className="study-panel space-y-5" aria-label="Bộ thẻ Anki của bạn">
     <div className="flex flex-wrap items-center justify-between gap-3">
-      <div><h2 className="font-semibold flex items-center gap-2"><Folder size={20}/>Bộ thẻ Anki của bạn</h2><p className="study-copy mt-1">Tạo thẻ thủ công hoặc nhập file. Dữ liệu được lưu trong trình duyệt này.</p></div>
+      <div><h2 className="font-semibold flex items-center gap-2"><Folder size={20}/>Bộ thẻ Anki của bạn</h2><p className="study-copy mt-1">Tạo thẻ thủ công hoặc nhập file. Dữ liệu được đồng bộ với tài khoản.</p></div>
       <div className="flex flex-wrap gap-2"><button className="study-button" disabled={busy || !loaded} onClick={() => { setCreatingDeck(true); setPreview(null); setActiveId(null); setName('Bộ thẻ mới'); setMessage(''); }}><Plus size={17}/>Tạo bộ thủ công</button><button className="study-button study-button-primary" disabled={busy || !loaded} onClick={() => input.current?.click()}><Upload size={17}/>Import file</button></div>
       <input ref={input} type="file" className="sr-only" aria-label="Chọn file nhập Anki" accept=".txt,.csv,.tsv,.json,.xlsx,.xls" disabled={busy} onChange={event => {
         const file = event.target.files?.[0]; event.target.value = '';
@@ -88,12 +91,12 @@ export function ImportedDecks() {
       <div className="space-y-2">{preview.cards.slice(0, 3).map(card => <div key={card.id} className="grid gap-2 sm:grid-cols-2 border-t border-[var(--color-border)] pt-2"><p className="whitespace-pre-wrap break-words">{card.front}</p><p className="whitespace-pre-wrap break-words">{card.back}</p></div>)}</div>
       <div className="flex gap-2"><button className="study-button study-button-primary" disabled={busy || !name.trim()} onClick={() => void operation(async () => {
         const deck: ImportedDeck = { id: crypto.randomUUID(), name: name.trim(), source: preview.source, format: preview.format, createdAt: new Date().toISOString(), cards: preview.cards };
-        await save(deck); setPreview(null); open(deck); setMessage(`Đã tạo thư mục với ${deck.cards.length} thẻ.`);
+        const saved = await save(deck); setPreview(null); open(saved); setMessage(`Đã tạo thư mục với ${saved.cards.length} thẻ.`);
       })}>Tạo thư mục Anki</button><button className="study-button" disabled={busy} onClick={() => setPreview(null)}>Hủy</button></div>
     </div>}
     {creatingDeck && !preview && <form className="rounded-xl border border-[var(--color-border)] p-4 space-y-3" onSubmit={event => { event.preventDefault(); void operation(async () => {
       const deck: ImportedDeck = { id: crypto.randomUUID(), name: name.trim(), source: 'Tạo thủ công', format: 'Thủ công', createdAt: new Date().toISOString(), cards: [] };
-      await save(deck); open(deck); setEditing({ id: crypto.randomUUID(), front: '', back: '', reading: '', notes: '', kind: 'general' }); setMessage('Đã tạo bộ thẻ. Hãy thêm thẻ đầu tiên.');
+      const saved = await save(deck); open(saved); setEditing({ id: crypto.randomUUID(), front: '', back: '', reading: '', notes: '', kind: 'general' }); setMessage('Đã tạo bộ thẻ. Hãy thêm thẻ đầu tiên.');
     }); }}>
       <h3 className="font-semibold">Tạo bộ thẻ thủ công</h3>
       <label className="block">Tên bộ thẻ<input autoFocus className="study-input mt-1" value={name} maxLength={120} required onChange={event => setName(event.target.value)}/></label>
