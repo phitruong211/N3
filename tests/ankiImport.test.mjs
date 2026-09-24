@@ -2,7 +2,23 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { utils, write } from 'xlsx';
-import { parseTextImport, parseExcelImport, parseImportFile } from '../src/lib/ankiImport.ts';
+import { defaultDeckTemplate, normalizeDeckTemplate, parseTextImport, parseExcelImport, parseImportFile } from '../src/lib/ankiImport.ts';
+
+test('deck templates use safe defaults and discard unsupported values', () => {
+  assert.deepEqual(normalizeDeckTemplate(null), defaultDeckTemplate());
+  const normalized = normalizeDeckTemplate({
+    front: { fields: ['front', 'script', 'reading'], showDeckName: false },
+    back: { fields: ['back'], showFront: false },
+    style: { theme: 'unsafe-css', fontScale: 'huge', alignment: 'left' },
+    study: { orientation: 'back-first' },
+  });
+  assert.deepEqual(normalized.front.fields, ['front', 'reading']);
+  assert.equal(normalized.front.showDeckName, false);
+  assert.equal(normalized.style.theme, 'paper');
+  assert.equal(normalized.style.fontScale, 'large');
+  assert.equal(normalized.style.alignment, 'left');
+  assert.equal(normalized.study.orientation, 'back-first');
+});
 
 test('CSV preserves quoted separators, newlines and escaped quotes', () => {
   const result = parseTextImport('front,back\r\n"猫,犬","mèo\n#chó ""nhỏ"""', 'cards.csv');

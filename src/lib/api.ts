@@ -108,7 +108,7 @@ export async function patchRemoteSettings(updates: Partial<AppSettings>): Promis
 }
 
 export type ApiCardKind = 'VOCABULARY' | 'KANJI' | 'GRAMMAR' | 'GENERAL';
-export interface ApiDeckSummary { id: string; name: string; description: string | null; sourceType: string; sourceName: string | null; importFormat: string | null; visibility: string; cardCount: number; createdAt: string; updatedAt: string }
+export interface ApiDeckSummary { id: string; name: string; description: string | null; sourceType: string; sourceName: string | null; importFormat: string | null; visibility: string; cardCount: number; position: number; templateConfig: Record<string, unknown>; createdAt: string; updatedAt: string }
 export interface ApiCard { id: string; deckId: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; position: number; externalId: string | null; extraData: Record<string, unknown>; createdAt: string; updatedAt: string }
 export interface ApiDeck { deck: ApiDeckSummary; cards: ApiCard[] }
 export interface ApiQueueCard { cardId: string; deckId: string; deckName: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; progress: ApiProgress | null }
@@ -119,9 +119,12 @@ export const getDeck = (id: string) => apiRequest<ApiDeck>(`/decks/${id}`);
 export const createDeck = (body: unknown) => apiRequest<ApiDeck>('/decks', { method: 'POST', body: JSON.stringify(body) });
 export const updateDeck = (id: string, body: unknown) => apiRequest<ApiDeckSummary>(`/decks/${id}`, { method: 'PATCH', body: JSON.stringify(body) });
 export const removeDeck = (id: string) => apiRequest<void>(`/decks/${id}`, { method: 'DELETE' });
+export const reorderDecks = (deckIds: string[]) => apiRequest<ApiDeckSummary[]>('/decks/reorder', { method: 'PUT', body: JSON.stringify({ deckIds }) });
 export const addCard = (deckId: string, body: unknown) => apiRequest<ApiCard>(`/decks/${deckId}/cards`, { method: 'POST', body: JSON.stringify(body) });
 export const updateCard = (id: string, body: unknown) => apiRequest<ApiCard>(`/cards/${id}`, { method: 'PATCH', body: JSON.stringify(body) });
 export const removeCard = (id: string) => apiRequest<void>(`/cards/${id}`, { method: 'DELETE' });
+export const reorderCards = (deckId: string, cardIds: string[]) => apiRequest<ApiCard[]>(`/decks/${deckId}/cards/reorder`, { method: 'PUT', body: JSON.stringify({ cardIds }) });
+export const moveCards = (cardIds: string[], targetDeckId: string, targetPosition?: number) => apiRequest<ApiCard[]>('/cards/move', { method: 'POST', body: JSON.stringify({ cardIds, targetDeckId, targetPosition }) });
 export const getDeckProgress = (deckId: string) => apiRequest<ApiQueueCard[]>(`/anki/decks/${deckId}/cards`);
 export async function reviewCard(cardId: string, rating: Rating, responseTimeMs?: number): Promise<SRSCard> {
   const result = await apiRequest<{ cardId: string; progress: ApiProgress }>(`/anki/cards/${cardId}/reviews`, {

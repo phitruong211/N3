@@ -1,10 +1,51 @@
 import type { SRSCard } from '../types';
 
 export type ImportedKind = 'vocabulary' | 'kanji' | 'grammar' | 'general';
+export type CardField = 'front' | 'back' | 'reading' | 'notes' | 'kind' | 'deckName';
+export type CardTheme = 'paper' | 'blue' | 'dark' | 'system';
+export type CardOrientation = 'front-first' | 'back-first' | 'mixed';
+export interface DeckTemplateConfig {
+  version: 1;
+  front: { fields: CardField[]; showDeckName: boolean };
+  back: { fields: CardField[]; showFront: boolean };
+  style: { theme: CardTheme; fontScale: 'small' | 'medium' | 'large' | 'xlarge'; alignment: 'left' | 'center' };
+  study: { orientation: CardOrientation };
+}
 export interface ImportedCard { id: string; front: string; back: string; reading: string; notes: string; kind: ImportedKind; srs?: SRSCard }
-export interface ImportedDeck { id: string; name: string; source: string; format: string; createdAt: string; cards: ImportedCard[] }
+export interface ImportedDeck { id: string; name: string; source: string; format: string; createdAt: string; position: number; template: DeckTemplateConfig; cards: ImportedCard[] }
 export interface ImportPreview { name: string; source: string; format: string; cards: ImportedCard[]; skipped: number }
 export const kindLabels: Record<ImportedKind, string> = { vocabulary: 'Từ vựng', kanji: 'Kanji', grammar: 'Ngữ pháp', general: 'Thẻ tổng hợp' };
+export const defaultDeckTemplate = (): DeckTemplateConfig => ({
+  version: 1,
+  front: { fields: ['front', 'reading'], showDeckName: true },
+  back: { fields: ['back', 'reading', 'notes'], showFront: true },
+  style: { theme: 'paper', fontScale: 'large', alignment: 'center' },
+  study: { orientation: 'front-first' },
+});
+
+export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
+  const fallback = defaultDeckTemplate();
+  if (!value || typeof value !== 'object') return fallback;
+  const config = value as Partial<DeckTemplateConfig>;
+  const allowedFields: CardField[] = ['front', 'back', 'reading', 'notes', 'kind', 'deckName'];
+  const fields = (candidate: unknown, defaults: CardField[]) => Array.isArray(candidate)
+    ? candidate.filter((field): field is CardField => allowedFields.includes(field as CardField)).slice(0, 6)
+    : defaults;
+  const themes: CardTheme[] = ['paper', 'blue', 'dark', 'system'];
+  const scales: DeckTemplateConfig['style']['fontScale'][] = ['small', 'medium', 'large', 'xlarge'];
+  const orientations: CardOrientation[] = ['front-first', 'back-first', 'mixed'];
+  return {
+    version: 1,
+    front: { fields: fields(config.front?.fields, fallback.front.fields), showDeckName: typeof config.front?.showDeckName === 'boolean' ? config.front.showDeckName : fallback.front.showDeckName },
+    back: { fields: fields(config.back?.fields, fallback.back.fields), showFront: typeof config.back?.showFront === 'boolean' ? config.back.showFront : fallback.back.showFront },
+    style: {
+      theme: themes.includes(config.style?.theme as CardTheme) ? config.style!.theme : fallback.style.theme,
+      fontScale: scales.includes(config.style?.fontScale as DeckTemplateConfig['style']['fontScale']) ? config.style!.fontScale : fallback.style.fontScale,
+      alignment: config.style?.alignment === 'left' ? 'left' : 'center',
+    },
+    study: { orientation: orientations.includes(config.study?.orientation as CardOrientation) ? config.study!.orientation : fallback.study.orientation },
+  };
+}
 
 const text = (value: unknown): string => Array.isArray(value) ? value.map(text).filter(Boolean).join('\n') : typeof value === 'string' || typeof value === 'number' ? String(value).trim() : '';
 const normalize = (value: string) => value.replace(/^\uFEFF/, '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/[\s_-]/g, '');
