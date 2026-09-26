@@ -1,3 +1,4 @@
+import { useLearningStorage } from '@/hooks/useApp';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Bookmark, Check, ExternalLink, Headphones, RefreshCw, RotateCcw, Search, Volume2, X } from 'lucide-react';
 import { PageHeading } from '@/components/ui/StudyUI';
@@ -27,10 +28,7 @@ const STORAGE_KEY = 'nhat-listening-v1';
 const PAGE_SIZE = 24;
 const REMOTE_CATALOGUE = 'https://raw.githubusercontent.com/phitruong211/N3/main/public/data/listening.json';
 
-function readPractice(): PracticeMap {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') as PracticeMap; }
-  catch { return {}; }
-}
+
 
 function formatDuration(seconds: number) {
   if (!seconds) return '';
@@ -54,6 +52,8 @@ function mixSources(episodes: Episode[]) {
 }
 
 export function ListeningPage() {
+  const { getJSON, setJSON } = useLearningStorage();
+  const readPractice = () => getJSON<PracticeMap>(STORAGE_KEY, {});
   const [section, setSection] = useState<'library' | 'exam'>('library');
   const [catalogue, setCatalogue] = useState<Catalogue | null>(null);
   const [loadError, setLoadError] = useState(false);
@@ -79,13 +79,13 @@ export function ListeningPage() {
       setCatalogue(current => !current || data.updatedAt > current.updatedAt ? data : current);
       setLoadError(false);
     };
-    fetch(`${import.meta.env.BASE_URL}data/listening.json`).then(response => {
+    const local = fetch(`${import.meta.env.BASE_URL}data/listening.json`).then(response => {
       if (!response.ok) throw new Error('Local catalogue unavailable');
       return response.json();
     }).then(accept).catch(() => { if (active) setLoadError(true); });
     // The scheduled feed sync commits this file daily. Reading it directly also updates
     // deployments that do not rebuild when GitHub Actions commits a catalogue change.
-    fetch(`${REMOTE_CATALOGUE}?t=${Math.floor(Date.now() / 3600000)}`)
+    void local.then(() => active ? fetch(`${REMOTE_CATALOGUE}?t=${Math.floor(Date.now() / 3600000)}`) : Promise.reject(new Error("Unmounted")))
       .then(response => { if (!response.ok) throw new Error('Remote catalogue unavailable'); return response.json(); })
       .then(accept).catch(() => {});
     return () => { active = false; };
@@ -94,7 +94,7 @@ export function ListeningPage() {
   const updatePractice = (id: string, patch: Partial<Practice>) => {
     setPractice(previous => {
       const next = { ...previous, [id]: { ...previous[id], ...patch } };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      setJSON(STORAGE_KEY, next);
       return next;
     });
   };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AlertTriangle } from 'lucide-react';
 import { useApp } from '@/hooks/useApp';
-import { resetAllData } from '@/lib/storage';
+import { useLearningStorage } from '@/hooks/useApp';
 import type { ThemeMode } from '@/types';
 import { PageHeading } from '@/components/ui/StudyUI';
 import { useAuth } from '@/hooks/useAuth';
@@ -13,22 +13,23 @@ const themes: { id: ThemeMode; label: string }[] = [
 const sizes = [{ id: 'small', label: 'Nhỏ' }, { id: 'medium', label: 'Vừa' }, { id: 'large', label: 'Lớn' }] as const;
 
 export function SettingsPage() {
-  const { settings, updateSettings } = useApp();
-  const { user, signOut } = useAuth();
+  const { resetAllData } = useLearningStorage();
+  const { settings, updateSettings, settingsSync } = useApp();
+  const { user, signOut, requestAuth } = useAuth();
   const [confirmReset, setConfirmReset] = useState(false);
   const handleReset = () => {
     if (!confirmReset) { setConfirmReset(true); return; }
-    resetAllData();
-    window.location.reload();
+    if (resetAllData()) window.location.reload();
   };
   return <div className="study-page">
     <PageHeading eyebrow="CÁ NHÂN" title="Cài đặt" subtitle="Chỉnh cách đọc và học phù hợp với bạn" />
+    {user && <div role="status" className="study-copy">{settingsSync.pending ? "Đang đồng bộ cài đặt…" : settingsSync.error ? <><span role="alert">{settingsSync.error} Cài đặt vẫn được giữ trên thiết bị.</span> <button className="study-button" onClick={()=>void settingsSync.retry()}>Thử lưu lại</button></> : "Cài đặt đã đồng bộ"}</div>}
     <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)]">
       <div className="space-y-6">
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Tài khoản</h2>
-          <p className="study-copy mt-1">{user?.displayName} · {user?.email}</p>
-          <button className="study-button mt-4" onClick={() => void signOut()}>Đăng xuất</button>
+          <p className="study-copy mt-1">{user ? `${user.displayName} · ${user.email}` : 'Bạn đang học thử trên thiết bị này.'}</p>
+          <button className="study-button mt-4" onClick={() => user ? void signOut() : requestAuth()}>{user ? 'Đăng xuất' : 'Đăng nhập / Đăng ký'}</button>
         </section>
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Giao diện</h2>
@@ -46,6 +47,8 @@ export function SettingsPage() {
         <section className="study-panel">
           <h2 className="mb-3 text-base font-semibold text-[var(--color-text)]">Khi học</h2>
           <SettingToggle label="Hiện Furigana" detail="Hiện cách đọc hiragana khi học" checked={settings.showFurigana} onChange={value => updateSettings({ showFurigana: value })}/>
+          <SettingToggle label="Tự phát âm" detail="Đọc thẻ khi bắt đầu học nếu trình duyệt hỗ trợ" checked={settings.autoPlayAudio} onChange={value=>updateSettings({autoPlayAudio:value})}/>
+          <label className="block py-3">Mục tiêu mỗi ngày (thẻ)<input className="study-input" type="number" min={1} max={1000} value={settings.dailyGoal} onChange={e=>updateSettings({dailyGoal:Math.max(1,Math.min(1000,Math.round(Number(e.target.value)||1)))})}/></label>
           <SettingToggle label="Giảm chuyển động" detail="Giảm hiệu ứng chuyển cảnh" checked={settings.reducedMotion} onChange={value => updateSettings({ reducedMotion: value })}/>
         </section>
         <section className="study-panel">
@@ -60,8 +63,8 @@ export function SettingsPage() {
           <div className="mt-3 flex flex-wrap gap-2">{[0, 10, 20, 30, 45, 60].map(minutes => <button key={minutes} className={'study-button ' + (settings.ankiSessionMinutes === minutes ? 'study-button-primary' : '')} onClick={() => updateSettings({ ankiSessionMinutes: minutes })}>{minutes === 0 ? 'Không giới hạn' : `${minutes}m`}</button>)}</div>
         </section>
         <section className="study-panel">
-          <div className="flex items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><h2 className="text-base font-semibold">Xóa tiến độ</h2></div>
-          <p className="study-copy mt-2">Xóa lịch ôn SRS, hoạt động học và mục đã lưu trên trình duyệt này. Không thể khôi phục sau khi xóa.</p>
+          <div className="flex items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><h2 className="text-base font-semibold">Xóa dữ liệu trên thiết bị</h2></div>
+          <p className="study-copy mt-2">Xóa lịch ôn, hoạt động học, mục đã lưu, dữ liệu nghe và cài đặt trên thiết bị của phiên hiện tại. Tiến độ đã đồng bộ sẽ được tải lại từ tài khoản. Không xóa dữ liệu của tài khoản khác, dữ liệu Guest khi đang đăng nhập hoặc bộ thẻ trên máy chủ.</p>
           <button className="study-button mt-4 border-[var(--color-error)] text-[var(--color-error)]" onClick={handleReset}>
             {confirmReset ? 'Xác nhận xóa toàn bộ dữ liệu' : 'Xóa dữ liệu học'}
           </button>
@@ -75,7 +78,7 @@ export function SettingsPage() {
           <p className="font-jp-serif mt-2 text-5xl text-[var(--color-text)]">準備</p>
           <p className="mt-3 text-sm text-[var(--color-text-secondary)]">sự chuẩn bị</p>
         </div>
-        <p className="study-copy mt-4">Cài đặt và các bộ thẻ Anki được đồng bộ với tài khoản của bạn.</p>
+        <p className="study-copy mt-4">{user ? 'Cài đặt, bộ thẻ, dấu trang và tiến độ ôn được đồng bộ với tài khoản. Lịch sử nghe vẫn lưu trên thiết bị.' : 'Cài đặt và tiến độ học thử chỉ lưu trên thiết bị này, chưa đồng bộ vào tài khoản.'}</p>
       </section>
     </div>
   </div>;

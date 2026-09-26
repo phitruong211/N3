@@ -1,13 +1,14 @@
 import { useMemo } from 'react';
 import { useApp } from '@/hooks/useApp';
 import { getDueCards, formatDate } from '@/lib/srs';
-import { getStudyDays } from '@/lib/storage';
+import { useLearningStorage } from '@/hooks/useApp';
 import { ArrowRight, BookOpen, ScrollText, Languages, RotateCcw, Layers, Headphones, ChartNoAxesCombined } from 'lucide-react';
 import { PageHeading } from '@/components/ui/StudyUI';
 import type { PageId } from '@/types';
 
 export function Dashboard() {
-  const { vocabulary, grammar, kanji, srsCards, setCurrentPage } = useApp();
+  const { getStudyDays } = useLearningStorage();
+  const { vocabulary, grammar, kanji, srsCards, setCurrentPage, settings } = useApp();
   const due = useMemo(() => getDueCards(srsCards).length, [srsCards]);
   const today = getStudyDays().find(day => day.date === formatDate(new Date()));
   const cards = [
@@ -44,7 +45,7 @@ export function Dashboard() {
       </div>
     </section>
     <section className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center border-t border-[var(--color-border)] pt-6" aria-label="Tiến độ hôm nay">
-      <div><p className="study-eyebrow">Hôm nay</p><p className="mt-1 text-sm text-[var(--color-text-secondary)]"><strong className="text-[var(--color-text)]">{today?.cardsReviewed ?? 0}</strong> thẻ đã học · <strong className="text-[var(--color-text)]">{due}</strong> thẻ còn đến hạn</p></div>
+      <div><p className="study-eyebrow">Hôm nay</p><p className="mt-1 text-sm text-[var(--color-text-secondary)]"><strong className="text-[var(--color-text)]">{today?.cardsReviewed ?? 0}</strong> thẻ đã học / mục tiêu {settings.dailyGoal} · <strong className="text-[var(--color-text)]">{due}</strong> thẻ còn đến hạn</p></div>
       <button onClick={() => setCurrentPage('progress')} className="study-button"><ChartNoAxesCombined size={17} /> Xem tiến độ</button>
     </section>
   </div>;

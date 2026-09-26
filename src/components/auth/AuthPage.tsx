@@ -3,9 +3,9 @@ import { ArrowRight, Eye, EyeOff, LoaderCircle, BookOpen, LogIn, UserPlus } from
 import { useAuth } from '@/hooks/useAuth';
 import './auth.css';
 
-export function AuthPage() {
-  const { signIn, signUp } = useAuth();
-  const [mode, setMode] = useState<'login' | 'register'>('login');
+export function AuthPage({ initialMode = 'login', compact = false }: { initialMode?: 'login' | 'register'; compact?: boolean }) {
+  const { signIn, signUp, enterGuest, setPrompt } = useAuth();
+  const [mode, setMode] = useState<'login' | 'register'>(initialMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -24,14 +24,14 @@ export function AuthPage() {
     finally { setBusy(false); }
   }
 
-  return <main className="auth-page">
-    <section className="auth-story" aria-label="Học tiếng Nhật mỗi ngày">
+  return <main className={compact ? "auth-page auth-page-compact" : "auth-page"}>
+    {!compact && <section className="auth-story" aria-label="Học tiếng Nhật mỗi ngày">
       <div className="auth-brand"><span lang="ja">学</span><div>N3 学習<small>TIẾNG NHẬT · MỖI NGÀY</small></div></div>
       <div className="auth-editorial"><p className="auth-eyebrow">MỘT CHÚT MỖI NGÀY</p><h1>Những bước nhỏ.<br/><em>Một hành trình lớn.</em></h1><p className="auth-description">Từ những từ vựng đầu tiên đến một thế giới mới.<br/>Tiếp tục hành trình tiếng Nhật theo nhịp của bạn.</p>
         <div className="auth-art"><div className="auth-orbit" aria-hidden="true"/><div className="auth-card"><div className="auth-card-label"><span>TỪ VỰNG HÔM NAY</span><span>01 / 一</span></div><p className="auth-kanji" lang="ja">一歩</p><p className="auth-reading" lang="ja">いっぽ <span>· ippo</span></p><div className="auth-card-footer">Một bước chân.<ArrowRight size={20} aria-hidden="true"/></div><span className="auth-stamp" lang="ja" aria-hidden="true">日々</span></div><span className="auth-caption" lang="ja" aria-hidden="true">千里の道も一歩から</span></div>
       </div>
       <div className="auth-story-footer"><span>Học chậm mà chắc. Nhớ lâu hơn.</span><span lang="ja">一日一歩。</span></div>
-    </section>
+    </section>}
     <section className="auth-form-side" aria-label="Tài khoản">
     <div className="auth-welcome">KHÔNG GIAN HỌC TẬP CỦA BẠN <span>✳</span></div>
     <div className="auth-form-wrap">
@@ -46,6 +46,7 @@ export function AuthPage() {
         {error && <p role="alert" className="text-sm text-[var(--color-error)]">{error}</p>}
         <button className="auth-submit" disabled={busy}>{busy ? <><LoaderCircle className="auth-spinner" size={19}/>Đang kết nối…</> : <>{mode === 'login' ? 'Đăng nhập' : 'Tạo tài khoản'}<ArrowRight size={19}/></>}</button>
       </form>
+      <button type="button" className="study-button w-full mt-4" disabled={busy && !compact} onClick={() => compact ? setPrompt(null) : enterGuest()}>{compact ? 'Tiếp tục học thử' : 'Khám phá với tư cách khách'}</button>
       <div className="auth-benefits"><BookOpen size={17} aria-hidden="true"/><span>Bộ thẻ cá nhân</span><span aria-hidden="true">·</span><span>Ôn tập theo nhịp của bạn</span></div>
     </div>
     <footer className="auth-bottom"><span>N3 学習</span><span>Mỗi ngày, gần hơn một chút.</span></footer>

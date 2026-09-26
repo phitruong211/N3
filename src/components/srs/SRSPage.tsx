@@ -1,3 +1,4 @@
+import { useCardAudio } from '@/hooks/useCardAudio';
 // ============================================================
 // Spaced Repetition Review Mode
 // ============================================================
@@ -12,7 +13,7 @@
 import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useApp } from '@/hooks/useApp';
 import { createSRSCard, processReview, getDueCards, getNextIntervals } from '@/lib/srs';
-import { recordStudyActivity } from '@/lib/storage';
+import { useLearningStorage } from '@/hooks/useApp';
 import { formatSessionTime, useActiveElapsedMinutes, useAnkiSessionTimer } from '@/hooks/useActiveElapsedMinutes';
 import type { Rating, SRSCard, VocabItem, KanjiItem, GrammarItem } from '@/types';
 import { RotateCcw, CheckCircle, ArrowRight } from 'lucide-react';
@@ -152,6 +153,7 @@ function SRSSession({
   updateSRSCard: (card: SRSCard) => void;
   onFinish: () => void;
 }) {
+  const { recordStudyActivity } = useLearningStorage();
   const [queue] = useState<SRSCard[]>(() => [...cards]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
@@ -168,6 +170,7 @@ function SRSSession({
   });
 
   const currentCard = queue[currentIndex];
+  const readCardMinutes = useActiveElapsedMinutes(currentCard?.cardId);
   const studyItem = useMemo(() => {
     if (!currentCard) return null;
     if (currentCard.deckType === 'vocabulary') {
@@ -182,12 +185,14 @@ function SRSSession({
     return item ? { prompt: item.pattern, reading: item.meaning, meaning: item.structure || item.usage } : null;
   }, [currentCard, vocabulary, kanji, grammar]);
 
+  useCardAudio(studyItem?.prompt, !sessionDone);
   const handleRate = useCallback((rating: Rating) => {
     if (!currentCard || ratingLocked.current || !revealed) return;
     ratingLocked.current = true;
 
     const updated = processReview(currentCard, rating);
     updateSRSCard(updated);
+    recordStudyActivity(1, currentCard.state === 'new' ? 1 : 0, rating === 'again' ? 0 : 1, readCardMinutes(), 'srs');
 
     if (rating !== 'again') {
       stats.correct++;
@@ -200,18 +205,11 @@ function SRSSession({
     } else {
       // Session complete
       const elapsed = readSessionElapsedMinutes();
-      recordStudyActivity(
-        reviewedCount,
-        0,
-        reviewedCount > 0 ? stats.correct / reviewedCount : 0,
-        elapsed,
-        'srs'
-      );
       setCompletedReviews(reviewedCount);
       setElapsedMinutes(elapsed);
       setSessionDone(true);
     }
-  }, [currentCard, currentIndex, queue.length, updateSRSCard, stats, revealed, readSessionElapsedMinutes, sessionTimer]);
+  }, [readCardMinutes, recordStudyActivity, currentCard, currentIndex, queue.length, updateSRSCard, stats, revealed, readSessionElapsedMinutes, sessionTimer]);
 
   // Keyboard controls
   useEffect(() => {

@@ -8,7 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:guest": "node tests/guestFlow.browser.mjs",
+    "test:integration": "node tests/srsIntegration.browser.mjs",
+    "test:scale": "node tests/srsScale.api.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -30,6 +33,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
     "oxlint": "^1.75.0",
+    "playwright": "^1.63.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.2.0"

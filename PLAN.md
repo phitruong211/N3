@@ -1,23 +1,33 @@
-# Kế hoạch triển khai “Sổ học”
+# Hoàn thiện SRS 1.1
 
-## Tóm tắt
-Thiết kế lại toàn bộ giao diện theo [đặc tả](docs/superpowers/specs/2026-09-19-japanese-learning-redesign-design.md), giữ JSON, ID, SRS và tiến độ. Dùng một bộ token và thành phần nhỏ, rồi thay từng màn theo thứ tự luồng học.
+Người dùng yêu cầu đối chiếu và hoàn thiện toàn bộ SRS, cả N3 và japanese-server; quyền triển khai toàn bộ đã được cấp. Mục tiêu 17–22 thay thế các giới hạn as-built tương ứng ở 1–16. Không bổ sung thanh toán/admin hoặc tính năng ngoài SRS.
 
-## Hiện trạng và tác động
-- `src/index.css` có token nhưng các trang còn mã màu, radius và bóng riêng; desktop/mobile có hai cấu trúc điều hướng khác nhau.
-- `AppProvider` là nguồn trạng thái trong phiên, `localStorage` lưu tiến độ; không đổi định dạng hay lịch ôn. Bộ lọc và mục đang chọn vẫn thuộc từng trang.
-- Dữ liệu N3 giàu trường, N4 đơn giản hơn; kanji không có âm đọc riêng. UI chỉ hiện thông tin có thật.
-- Home còn biểu đồ và nhiều khối chỉ số; phiên học có ba biến thể flashcard trong file lớn. Tách vỏ/điều khiển chung khi bảo toàn hành vi.
+## Thiết kế và tác động
 
-## Thực hiện
-1. `src/index.css`, `src/components/ui/*`: bộ màu 4 theme, chữ Nhật/Việt, spacing và các phần chung có nhu cầu lặp lại; dọn CSS cũ tương ứng.
-2. `src/components/layout/*`, `src/App.tsx`: điều hướng chính và phụ, tab mobile năm đích, header/tìm kiếm, vỏ phiên học và loading/error cùng ngôn ngữ.
-3. `src/components/dashboard/Dashboard.tsx`: Home tập trung CTA ôn và ba thư viện; chuyển phân tích chi tiết sang `ProgressPage.tsx` nếu cần.
-4. `src/components/vocabulary/*`, `grammar/*`, `kanji/*`: thứ bậc Nhật → cách đọc/nghĩa, dữ liệu thứ cấp thu gọn, lọc/tìm rõ, bố cục mobile không tràn ngang.
-5. `src/components/flashcard/*`, `srs/*`, `quiz/*`: giảm nhiễu khi học, front/back rõ, điều khiển/keyboard/touch ổn định, không thay lịch SRS.
-6. `src/components/search/*`, `progress/*`, `bookmarks/*`, `settings/*`: dùng hệ thống chung, tiếng Việt, empty/focus/điều hướng đúng mục.
+Giữ endpoint cũ để tương thích; frontend mới dùng danh sách metadata phân trang, trang card có bộ lọc, import có khóa idempotency. Bộ tích hợp chỉ đọc ánh xạ sang CardView chung; deck ảo bookmark không có quyền sửa. Mỗi thao tác card cập nhật qua API riêng, không ghi lại toàn deck gây mất nội dung/progress khi phân trang. Import có mapping/preview/lý do bỏ qua, metadata nguồn riêng. P3 lưu dữ liệu học tích hợp theo chủ sở hữu với revision và consent chuyển Guest; không ghi đè xung đột hoặc xóa bản Guest trước server xác nhận.
 
-## Kiểm tra
-- `npm run build`, `npm run lint`, `git diff --check`.
-- Kiểm tra Home, ba thư viện, Flashcard/SRS/Quiz, Tìm kiếm, Tiến độ, Đã lưu, Cài đặt ở 320/375/768 px và desktop; bốn theme, trường trống, chữ Nhật/nghĩa dài, keyboard/focus, trạng thái rỗng và tải lỗi.
-- Xác nhận bookmark, thẻ SRS và cài đặt vẫn giữ sau reload; không thay JSON hoặc xóa các thay đổi trước đây của người dùng.
+## Phân công theo plan-mode
+
+- Agent backend_decks: BE pagination/import transaction/idempotency/metadata/CORS và tests; migration V3.
+- Agent learning_sync: BE P3 + modules FE riêng; migration V4, revision/consent/conflict tests.
+- Agent import_parser: parser mapping/dedup/metadata/worker + preview editor/tests.
+- Root: frontend card model/deck management/import flow, sync integration, môi trường Java/DB, kiểm chứng E2E và ma trận SRS.
+
+## Theo dõi
+
+- [x] Audit yêu cầu hiện có/mục tiêu và lập ma trận bằng chứng.
+- [x] API deck/card phân trang và import idempotent toàn vẹn.
+- [x] CardView/DeckSummary và danh sách/chi tiết/học thống nhất, empty/filter/order/edit.
+- [x] Import hai nút + !, rules/mẫu/mapping/preview/kết quả, tạo thủ công >=1 thẻ hoặc chọn bộ trống.
+- [x] P3 đồng bộ/Guest consent/idempotent conflict và migration legacy có chủ đích.
+- [x] Cài đặt lỗi/retry/dailyGoal/autoPlay; đo thời gian foreground; sửa các khoảng trống mục16.
+- [x] Java21/backend tests/DB migration, FE test/build/lint, browser E2E, ownership và 20k workload.
+- [x] Báo cáo SRS theo mã, phân biệt đã kiểm chứng và giới hạn môi trường.
+
+## Kiểm chứng
+
+Unit parser/storage/scheduler; Spring integration ownership/paging/import rollback/retry/sync revision/Guest retry; browser real frontend+backend, guest no API, file mapping/import, card CRUD/filter/paging, review persistence, account A/B sync and consent. Kiểm tra mobile và trạng thái lỗi. Không coi fixture là xác nhận DB thật.
+
+## Kết quả
+
+Đã hoàn thiện các luồng P1–P3 và kiểm chứng local; xem `docs/srs-verification.md` để phân biệt bằng chứng tự động, kiểm tra mã và giới hạn production/browser/audio. Các agent đã dừng do hạn mức sau khi bàn giao mã; root hoàn tất tích hợp và kiểm thử.

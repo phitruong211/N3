@@ -141,8 +141,8 @@ button, input, select, textarea { font: inherit; }
 .animate-slide-up { animation: slide-up .2s ease-out both; }
 
 /* Shared learning surfaces. */
-.study-page { display: grid; gap: 24px; width: 100%; max-width: 1400px; margin-inline: auto; padding-bottom: 2rem; }
-.study-panel { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; padding: clamp(16px, 2.5vw, 24px); }
+.study-page { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; width: 100%; max-width: 1400px; margin-inline: auto; padding-bottom: 2rem; }
+.study-panel { min-width: 0; overflow-wrap: anywhere; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; padding: clamp(16px, 2.5vw, 24px); }
 .study-eyebrow { color: var(--color-text-tertiary); font-size: .7rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
 .study-title { color: var(--color-text); font-size: clamp(1.65rem, 3vw, 2.2rem); font-weight: 600; letter-spacing: -.035em; line-height: 1.2; }
 .study-subtitle { color: var(--color-text-secondary); font-size: .9rem; }

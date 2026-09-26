@@ -1,6 +1,6 @@
 import { useApp } from '@/hooks/useApp';
 import type { PageId } from '@/types';
-import { LayoutGrid, BookOpen, ScrollText, Languages, RotateCcw, Layers, Brain, CircleHelp, Headphones, ChartNoAxesCombined, Bookmark, Settings, Search, PanelLeftClose, PanelLeftOpen, LogOut } from 'lucide-react';
+import { LayoutGrid, BookOpen, ScrollText, Languages, RotateCcw, Layers, Brain, CircleHelp, Headphones, ChartNoAxesCombined, Bookmark, Settings, Search, PanelLeftClose, PanelLeftOpen, LogOut, LogIn } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 
 const groups: { label: string; items: { id: PageId; label: string; icon: typeof BookOpen; shortcut?: string }[] }[] = [
@@ -26,7 +26,7 @@ const groups: { label: string; items: { id: PageId; label: string; icon: typeof 
 
 export function Sidebar() {
   const { currentPage, setCurrentPage, setSearchOpen, sidebarCollapsed, setSidebarCollapsed } = useApp();
-  const { user, signOut } = useAuth();
+  const { user, signOut, requestAuth } = useAuth();
   return (
     <aside className={`hidden md:flex sticky top-0 h-screen shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] transition-[width] duration-150 ${sidebarCollapsed ? 'w-20' : 'w-60'}`} aria-label="Điều hướng chính">
       <div className="flex items-center justify-between px-4 py-6 border-b border-[var(--color-border)]">
@@ -59,8 +59,8 @@ export function Sidebar() {
         ))}
       </nav>
       <div className="border-t border-[var(--color-border)] p-3">
-        {!sidebarCollapsed && <p className="truncate px-2 pb-2 text-xs text-[var(--color-text-tertiary)]" title={user?.email}>{user?.displayName}</p>}
-        <button className={`study-button w-full ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} title="Đăng xuất" onClick={() => void signOut()}><LogOut size={17}/>{!sidebarCollapsed && 'Đăng xuất'}</button>
+        {!sidebarCollapsed && <p className="truncate px-2 pb-2 text-xs text-[var(--color-text-tertiary)]" title={user?.email}>{user?.displayName || 'Khách · lưu trên thiết bị'}</p>}
+        <button className={`study-button w-full ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} title={user ? 'Đăng xuất' : 'Đăng nhập'} onClick={() => user ? void signOut() : requestAuth()}>{user ? <LogOut size={17}/> : <LogIn size={17}/>}<span className={sidebarCollapsed ? 'sr-only' : undefined}>{user ? 'Đăng xuất' : 'Đăng nhập'}</span></button>
       </div>
     </aside>
   );

@@ -9,3 +9,28 @@
 @media(max-width:1000px) and (min-width:761px){.auth-story,.auth-form-side{padding-inline:30px}.auth-editorial h1{font-size:31px}.auth-kanji{font-size:80px}.auth-art{padding-right:20px}}
 @media(max-width:760px){.auth-page{grid-template-columns:1fr}.auth-story{padding:25px 24px;border-right:0;border-bottom:1px solid #233c3510}.auth-brand{font-size:20px}.auth-brand>span{width:36px;height:39px;font-size:23px}.auth-editorial{padding:25px 0 0}.auth-editorial>.auth-eyebrow,.auth-art,.auth-description,.auth-story-footer{display:none}.auth-editorial h1{font-size:26px;letter-spacing:-1px}.auth-editorial h1 br{display:none}.auth-editorial h1 em{display:block}.auth-form-side{padding:18px 24px 24px}.auth-welcome{display:none}.auth-form-wrap{padding:20px 0 45px;max-width:420px}.auth-heading h2{font-size:30px}.auth-form .study-input{font-size:16px}.auth-bottom{max-width:420px;width:100%;margin-inline:auto}}
 @media(prefers-reduced-motion:reduce){.auth-page *{animation:none!important;transition:none!important}}
+
+.guest-auth-dialog {
+  width: min(620px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  margin: auto;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+.guest-auth-dialog::backdrop { background: rgb(0 0 0 / 45%); }
+.auth-page.auth-page-compact { display: block; min-height: 0; background: transparent; }
+.auth-page-compact .auth-form-side { min-height: 0; padding: 24px 0 0; }
+.auth-page-compact .auth-form-wrap { width: 100%; max-width: none; margin: 0; padding: 0; animation: none; }
+.auth-page-compact .auth-welcome, .auth-page-compact .auth-bottom, .auth-page-compact .auth-heading { display: none; }
+
+.auth-page.auth-page-compact {
+  --color-text: inherit; --color-text-secondary: inherit; --color-text-tertiary: inherit;
+  --color-accent: inherit; --color-border: inherit; --color-surface: inherit; --color-error: inherit;
+  color: var(--color-text);
+}
+
+.auth-page-compact .auth-form [role="alert"] { color: #aa4130; }

@@ -8,10 +8,14 @@
 import React, { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react';
 import type { VocabItem, KanjiItem, GrammarItem, PageId, AppSettings, SRSCard, Bookmark, NavigationTarget } from '@/types';
 import { loadVocabulary, loadKanji, loadGrammar } from '@/lib/data';
-import { getSettings, saveSettings, applyTheme, getBookmarks, saveBookmarks, getSRSCards, saveSRSCards, upsertSRSCard, setLastPage, getLastPage, migrateV1 } from '@/lib/storage';
-import { getRemoteSettings, patchRemoteSettings } from '@/lib/api';
+import type { LearningStorage } from '@/lib/storage';
+import { useAuth } from '@/hooks/useAuth';
+import { useLearningSync } from './useLearningSync';
+import { useSettingsSync } from './useSettingsSync';
 
 interface AppState {
+  storage: LearningStorage;
+  learningSync: ReturnType<typeof useLearningSync>;
   // <Data>                                 </Data>
   vocabulary: VocabItem[];
   kanji: KanjiItem[];
@@ -29,6 +33,7 @@ interface AppState {
 
   // Settings
   settings: AppSettings;
+  settingsSync: ReturnType<typeof useSettingsSync>;
   updateSettings: (updates: Partial<AppSettings>) => void;
 
   // Bookmarks
@@ -53,6 +58,8 @@ interface AppState {
 const AppContext = createContext<AppState | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
+  const { storage, user, resumePage, rememberPage } = useAuth();
+  const { getSettings, applyTheme, getBookmarks, saveBookmarks, getSRSCards, saveSRSCards, upsertSRSCard, setLastPage, getLastPage, migrateV1 } = storage;
   const [vocabulary, setVocabulary] = useState<VocabItem[]>([]);
   const [kanji, setKanji] = useState<KanjiItem[]>([]);
   const [grammar, setGrammar] = useState<GrammarItem[]>([]);
@@ -60,7 +67,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [currentPage, _setCurrentPage] = useState<PageId>(() => {
-    const saved = getLastPage();
+    const saved = resumePage || getLastPage();
     const pages: PageId[] = ['dashboard', 'vocabulary', 'kanji', 'grammar', 'flashcards', 'anki', 'srs', 'quiz', 'listening', 'progress', 'bookmarks', 'settings'];
     return pages.includes(saved as PageId) ? saved as PageId : 'dashboard';
   });
@@ -77,6 +84,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   });
   const [searchOpen, setSearchOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  const learningSync = useLearningSync(storage, Boolean(user), state => { _setBookmarks(state.bookmarks); _setSRSCards(state.srsCards); });
 
   // Load data on mount
   useEffect(() => {
@@ -100,9 +109,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return () => { active = false; };
   }, [loadAttempt]);
 
-  useEffect(() => {
-    getRemoteSettings().then(remote => { _setSettings(remote); saveSettings(remote); }).catch(console.error);
-  }, []);
+  useEffect(() => { rememberPage(currentPage); }, [currentPage, rememberPage]);
 
   const retryLoad = useCallback(() => setLoadAttempt((attempt) => attempt + 1), []);
 
@@ -110,7 +117,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     applyTheme(settings.theme);
     document.documentElement.className = `${settings.theme} font-${settings.fontSize}${settings.reducedMotion ? ' reduced-motion' : ''}`;
-  }, [settings.theme, settings.fontSize, settings.reducedMotion]);
+  }, [settings.theme, settings.fontSize, settings.reducedMotion, applyTheme]);
 
   // Global keyboard shortcuts
   useEffect(() => {
@@ -128,30 +135,24 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const setCurrentPage = useCallback((page: PageId) => {
     _setCurrentPage(page);
     setLastPage(page);
-  }, []);
+  }, [setLastPage]);
 
   const selectSearchResult = useCallback((target: NavigationTarget) => {
     setNavigationTarget(target);
     const page = target.type === 'vocabulary' ? 'vocabulary' : target.type;
     _setCurrentPage(page);
     setLastPage(page);
-  }, []);
+  }, [setLastPage]);
 
   const clearNavigationTarget = useCallback(() => setNavigationTarget(null), []);
 
-  const updateSettings = useCallback((updates: Partial<AppSettings>) => {
-    _setSettings((prev) => {
-      const next = { ...prev, ...updates };
-      saveSettings(next);
-      void patchRemoteSettings(updates).catch(console.error);
-      return next;
-    });
-  }, []);
+  const settingsSync = useSettingsSync(storage, Boolean(user), _setSettings);
+  const updateSettings = settingsSync.change;
 
   const toggleBookmark = useCallback(
     (itemId: string, itemType: 'vocabulary' | 'kanji' | 'grammar') => {
       _setBookmarks((prev) => {
-        const index = prev.findIndex((b) => b.itemId === itemId);
+        const index = prev.findIndex((b) => b.itemId === itemId && b.itemType === itemType);
         let next: Bookmark[];
         if (index >= 0) {
           next = prev.filter((_, i) => i !== index);
@@ -162,7 +163,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         return next;
       });
     },
-    []
+    [saveBookmarks]
   );
 
   const isBookmarked = useCallback(
@@ -180,7 +181,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     saveSRSCards('vocabulary', vocab);
     saveSRSCards('kanji', kanji);
     saveSRSCards('grammar', grammar);
-  }, []);
+  }, [saveSRSCards]);
 
   const updateSRSCard = useCallback((card: SRSCard) => {
     _setSRSCards((prev) => {
@@ -196,11 +197,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     });
     // Immediately save to storage (Single Source of Truth)
     upsertSRSCard(card);
-  }, []);
+  }, [upsertSRSCard]);
 
   return (
     <AppContext.Provider
       value={{
+        storage,
+        learningSync,
         vocabulary,
         kanji,
         grammar,
@@ -213,6 +216,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         selectSearchResult,
         clearNavigationTarget,
         settings,
+        settingsSync,
         updateSettings,
         bookmarks,
         toggleBookmark,
@@ -236,3 +240,5 @@ export function useApp(): AppState {
   if (!ctx) throw new Error('useApp must be used within AppProvider');
   return ctx;
 }
+
+export function useLearningStorage() { return useApp().storage; }

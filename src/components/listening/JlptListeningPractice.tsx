@@ -1,3 +1,4 @@
+import { useLearningStorage } from '@/hooks/useApp';
 import { useRef, useState } from 'react';
 import { Check, Headphones, RotateCcw, Volume2 } from 'lucide-react';
 import { examItems, type ExamLevel } from './examData';
@@ -5,12 +6,11 @@ import { examItems, type ExamLevel } from './examData';
 type Scores = Record<string, number>;
 const STORAGE_KEY = 'nhat-jlpt-listening-scores-v1';
 
-function readScores(): Scores {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') as Scores; }
-  catch { return {}; }
-}
+
 
 export function JlptListeningPractice() {
+  const { getJSON, setJSON } = useLearningStorage();
+  const readScores = () => getJSON<Scores>(STORAGE_KEY, {});
   const [level, setLevel] = useState<ExamLevel>('N4');
   const [selectedId, setSelectedId] = useState('n4-station');
   const [answers, setAnswers] = useState<Record<number, number>>({});
@@ -39,7 +39,7 @@ export function JlptListeningPractice() {
     if (Object.keys(answers).length !== item.questions.length) return;
     const next = { ...scores, [item.id]: Math.max(scores[item.id] ?? 0, correct) };
     setScores(next);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    setJSON(STORAGE_KEY, next);
     setSubmitted(true);
   };
   const retry = () => {

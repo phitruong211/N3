@@ -1,3 +1,4 @@
+import { useCardAudio } from '@/hooks/useCardAudio';
 // ============================================================
 // Flashcard Mode — Full Screen, Keyboard-Driven
 // ============================================================
@@ -8,8 +9,7 @@
 // ============================================================
 
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { ContentBadge, PageHeading } from '@/components/ui/StudyUI';
-import { ImportedDecks } from './ImportedDecks';
+import { UnifiedDeckPage } from './UnifiedDeckPage';
 import { useApp } from '@/hooks/useApp';
 import {
   X,
@@ -20,32 +20,17 @@ import {
   EyeOff,
   Hash,
   ChevronsRight,
-  Shuffle,
-  ListOrdered,
-  Play,
 } from 'lucide-react';
-import type { VocabItem, KanjiItem, GrammarItem, Rating } from '@/types';
+import type { VocabItem, GrammarItem, Rating } from '@/types';
 import {
   createSRSCard,
   processReview,
-  getDueCards,
   getReadyAnkiItems,
   getNextIntervals,
   formatTimeUntilDue,
 } from '@/lib/srs';
 import { formatSessionTime, useActiveElapsedMinutes, useAnkiSessionTimer } from '@/hooks/useActiveElapsedMinutes';
-import {
-  recordStudyActivity,
-  getLastVocabIndex,
-  setLastVocabIndex,
-  getLastKanjiIndex,
-  setLastKanjiIndex,
-  getLastGrammarIndex,
-  setLastGrammarIndex,
-  getLastActiveDeck,
-  setLastActiveDeck,
-  type ActiveDeck,
-} from '@/lib/storage';
+import { useLearningStorage } from '@/hooks/useApp';
 
 function EmptyAnkiSession({ onExit }: { onExit: () => void }) {
   return <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 bg-[var(--color-bg)] p-6 text-center">
@@ -378,178 +363,6 @@ export function AnkiSRSControls({
 // ============================================================
 // Shuffle Launch Modal
 // ============================================================
-type DeckKey = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'kanjiN2' | 'grammarN2' | 'grammarN3' | 'grammarN4' | 'saved';
-
-interface ShuffleConfig {
-  mode: 'sequential' | 'shuffle';
-  rangeEnd: number; // 1-based, inclusive
-}
-
-function ShuffleLaunchModal({
-  deckKey,
-  totalCards,
-  onStart,
-  onCancel,
-}: {
-  deckKey: DeckKey;
-  totalCards: number;
-  onStart: (config: ShuffleConfig) => void;
-  onCancel: () => void;
-}) {
-  const [mode, setMode] = useState<'sequential' | 'shuffle'>('sequential');
-  const [rangeEnd, setRangeEnd] = useState(totalCards);
-  const [inputVal, setInputVal] = useState(String(totalCards));
-  const dialogRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const previousFocus = document.activeElement as HTMLElement | null;
-    dialogRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
-    const handleKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') { event.preventDefault(); onCancel(); return; }
-      if (event.key !== 'Tab') return;
-      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('button, input');
-      if (!focusable?.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => { window.removeEventListener('keydown', handleKey); previousFocus?.focus(); };
-  }, [onCancel]);
-
-  const deckLabels: Record<DeckKey, string> = {
-    vocabN3: 'Từ vựng N3',
-    vocabN4: 'Từ vựng N4',
-    kanjiN3: 'Hán tự N3',
-    kanjiN2: 'Hán tự N2',
-    grammarN2: 'Ngữ pháp N2',
-    grammarN3: 'Ngữ pháp N3',
-    grammarN4: 'Ngữ pháp N4',
-    saved: 'Đã Lưu',
-  };
-
-  const handleRangeInput = (val: string) => {
-    setInputVal(val);
-    const n = parseInt(val, 10);
-    if (!isNaN(n) && n >= 1 && n <= totalCards) {
-      setRangeEnd(n);
-    }
-  };
-
-  const handleStart = () => {
-    const n = parseInt(inputVal, 10);
-    const safeEnd = isNaN(n) || n < 1 ? 1 : Math.min(n, totalCards);
-    onStart({ mode, rangeEnd: safeEnd });
-  };
-
-  return (
-    <div
-      className="fixed inset-0 z-[60] flex items-center justify-center p-4"
-      role="presentation"
-      style={{ background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(6px)' }}
-      onClick={(e) => { if (e.target === e.currentTarget) onCancel(); }}
-    >
-      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label={'Bắt đầu ' + deckLabels[deckKey]} className="w-full max-w-md rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-5 sm:p-8 flex flex-col gap-6">
-        {/* Header */}
-        <div className="flex items-start justify-between">
-          <div>
-            <div className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] mb-1">Bắt đầu học</div>
-            <h2 className="text-xl font-bold text-[var(--color-text)]">{deckLabels[deckKey]}</h2>
-            <p className="text-sm text-[var(--color-text-secondary)] mt-0.5">{totalCards} thẻ trong bộ</p>
-          </div>
-          <button onClick={onCancel} aria-label="Đóng" className="study-button">
-            <X size={18} />
-          </button>
-        </div>
-
-        {/* Mode selection */}
-        <div className="space-y-3">
-          <div className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">Chế độ</div>
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              onClick={() => setMode('sequential')}
-              className={`flex flex-col items-center gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer ${
-                mode === 'sequential'
-                  ? 'border-[var(--color-accent)] bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]'
-                  : 'border-[var(--color-border)] bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-strong)]'
-              }`}
-            >
-              <ListOrdered size={22} />
-              <div className="text-center">
-                <div className="font-bold text-sm">Tuần tự</div>
-                <div className="text-[11px] opacity-70 mt-0.5">Từ 1 → {rangeEnd}</div>
-              </div>
-            </button>
-            <button
-              onClick={() => setMode('shuffle')}
-              className={`flex flex-col items-center gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer ${
-                mode === 'shuffle'
-                  ? 'border-[var(--color-accent)] bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]'
-                  : 'border-[var(--color-border)] bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-strong)]'
-              }`}
-            >
-              <Shuffle size={22} />
-              <div className="text-center">
-                <div className="font-bold text-sm">Ngẫu nhiên</div>
-                <div className="text-[11px] opacity-70 mt-0.5">Ngẫu nhiên 1–{rangeEnd}</div>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* Range selector */}
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <div className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">Phạm vi thẻ</div>
-            <span className="text-xs font-mono text-[var(--color-text-secondary)]">1 → <strong className="text-[var(--color-text)]">{Math.min(Math.max(parseInt(inputVal)||1,1), totalCards)}</strong> / {totalCards}</span>
-          </div>
-          {/* Slider */}
-          <input
-            type="range"
-            min={1}
-            max={totalCards}
-            value={Math.min(Math.max(parseInt(inputVal)||1,1), totalCards)}
-            onChange={(e) => handleRangeInput(e.target.value)}
-            className="w-full h-2 rounded-full accent-[var(--color-accent)] cursor-pointer"
-          />
-          {/* Number input */}
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-[var(--color-text-secondary)]">Đến thẻ thứ</span>
-            <input
-              type="number"
-              min={1}
-              max={totalCards}
-              value={inputVal}
-              onChange={(e) => handleRangeInput(e.target.value)}
-              aria-label="Số thẻ muốn học"
-              className="study-input !w-24 text-center"
-            />
-            <button
-              onClick={() => handleRangeInput(String(totalCards))}
-              className="text-xs text-[var(--color-text-tertiary)] hover:text-[var(--color-text)] underline cursor-pointer transition-colors"
-            >Tất cả</button>
-          </div>
-        </div>
-
-        {/* Start button */}
-        <button
-          onClick={handleStart}
-          className="study-button study-button-primary w-full"
-        >
-          {mode === 'shuffle' ? <Shuffle size={18} /> : <Play size={18} />}
-          <span>
-            {mode === 'shuffle'
-              ? `Học ngẫu nhiên ${Math.min(Math.max(parseInt(inputVal)||1,1), totalCards)} thẻ`
-              : `Bắt đầu ${Math.min(Math.max(parseInt(inputVal)||1,1), totalCards)} thẻ`
-            }
-          </span>
-        </button>
-      </div>
-    </div>
-  );
-}
-
 export function FlashcardPage() {
   return <DeckPage mode="flashcards" />;
 }
@@ -558,184 +371,7 @@ export function AnkiPage() {
   return <DeckPage mode="anki" />;
 }
 
-function DeckPage({ mode }: { mode: 'flashcards' | 'anki' }) {
-  const ankiMode = mode === 'anki';
-  const { vocabulary, kanji, grammar, isBookmarked, srsCards } = useApp();
-  const [clockTick, setClockTick] = useState(Date.now);
-  useEffect(() => {
-    const timer = window.setInterval(() => setClockTick(Date.now()), 30_000);
-    return () => window.clearInterval(timer);
-  }, []);
-  const [activeDeck, setActiveDeckState] = useState<ActiveDeck>(() => getLastActiveDeck(mode));
-
-  const setActiveDeck = useCallback((deck: ActiveDeck) => {
-    setLastActiveDeck(deck, mode);
-    setActiveDeckState(deck);
-  }, [mode]);
-
-  const [pendingDeck, setPendingDeck] = useState<DeckKey | null>(null);
-  const [shuffleConfig, setShuffleConfig] = useState<ShuffleConfig>({ mode: 'sequential', rangeEnd: 9999 });
-
-  const savedVocabulary = vocabulary.filter((v) => isBookmarked(v.id));
-
-  // Compute live Anki SRS due and mastered stats across the decks
-  const dueCards = useMemo(() => getDueCards(srsCards, new Date(clockTick)), [srsCards, clockTick]);
-
-  const n3VocabIds = useMemo(() => new Set(vocabulary.filter(v => v.level !== 'N4').map(v => v.id)), [vocabulary]);
-  const n4VocabIds = useMemo(() => new Set(vocabulary.filter(v => v.level === 'N4').map(v => v.id)), [vocabulary]);
-
-  const n2GrammarIds = useMemo(() => new Set(grammar.filter(g => g.level === 'N2').map(g => g.id)), [grammar]);
-  const n3GrammarIds = useMemo(() => new Set(grammar.filter(g => g.level === 'N3').map(g => g.id)), [grammar]);
-  const n4GrammarIds = useMemo(() => new Set(grammar.filter(g => g.level === 'N4').map(g => g.id)), [grammar]);
-  const n3KanjiIds = useMemo(() => new Set(kanji.filter(k => k.level === 'N3').map(k => k.id)), [kanji]);
-  const n2KanjiIds = useMemo(() => new Set(kanji.filter(k => k.level === 'N2').map(k => k.id)), [kanji]);
-
-  const vocabN3DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'vocabulary' && n3VocabIds.has(c.cardId)).length, [dueCards, n3VocabIds]);
-  const vocabN4DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'vocabulary' && n4VocabIds.has(c.cardId)).length, [dueCards, n4VocabIds]);
-
-  const kanjiN3DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'kanji' && n3KanjiIds.has(c.cardId)).length, [dueCards, n3KanjiIds]);
-  const kanjiN2DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'kanji' && n2KanjiIds.has(c.cardId)).length, [dueCards, n2KanjiIds]);
-
-  const grammarN2DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'grammar' && n2GrammarIds.has(c.cardId)).length, [dueCards, n2GrammarIds]);
-  const grammarN3DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'grammar' && n3GrammarIds.has(c.cardId)).length, [dueCards, n3GrammarIds]);
-  const grammarN4DueCount = useMemo(() => dueCards.filter((c) => c.deckType === 'grammar' && n4GrammarIds.has(c.cardId)).length, [dueCards, n4GrammarIds]);
-
-  const vocabN3MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'vocabulary' && c.intervalDays && c.intervalDays >= 21 && n3VocabIds.has(c.cardId)).length, [srsCards, n3VocabIds]);
-  const vocabN4MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'vocabulary' && c.intervalDays && c.intervalDays >= 21 && n4VocabIds.has(c.cardId)).length, [srsCards, n4VocabIds]);
-
-  const kanjiN3MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'kanji' && c.intervalDays && c.intervalDays >= 21 && n3KanjiIds.has(c.cardId)).length, [srsCards, n3KanjiIds]);
-  const kanjiN2MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'kanji' && c.intervalDays && c.intervalDays >= 21 && n2KanjiIds.has(c.cardId)).length, [srsCards, n2KanjiIds]);
-
-  const grammarN2MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'grammar' && c.intervalDays && c.intervalDays >= 21 && n2GrammarIds.has(c.cardId)).length, [srsCards, n2GrammarIds]);
-  const grammarN3MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'grammar' && c.intervalDays && c.intervalDays >= 21 && n3GrammarIds.has(c.cardId)).length, [srsCards, n3GrammarIds]);
-  const grammarN4MasteredCount = useMemo(() => srsCards.filter((c) => c.deckType === 'grammar' && c.intervalDays && c.intervalDays >= 21 && n4GrammarIds.has(c.cardId)).length, [srsCards, n4GrammarIds]);
-
-  // Helper: get raw items for a deck
-  const getItemsForDeck = (deck: DeckKey) => {
-    if (deck === 'vocabN3') return vocabulary.filter(v => v.level !== 'N4');
-    if (deck === 'vocabN4') return vocabulary.filter(v => v.level === 'N4');
-    if (deck === 'saved') return savedVocabulary;
-    if (deck === 'kanjiN3') return kanji.filter(k => k.level === 'N3');
-    if (deck === 'kanjiN2') return kanji.filter(k => k.level === 'N2');
-    if (deck === 'grammarN2') return grammar.filter(g => g.level === 'N2');
-    if (deck === 'grammarN3') return grammar.filter(g => g.level === 'N3');
-    if (deck === 'grammarN4') return grammar.filter(g => g.level === 'N4');
-    return [];
-  };
-
-  const handleDeckClick = (deck: DeckKey) => {
-    setPendingDeck(deck);
-  };
-
-  const handleModalStart = (config: ShuffleConfig) => {
-    setShuffleConfig(config);
-    setActiveDeck(pendingDeck);
-    setPendingDeck(null);
-  };
-
-  const handleModalCancel = () => {
-    setPendingDeck(null);
-  };
-
-  const handleExit = () => {
-    setActiveDeck(null);
-    setShuffleConfig({ mode: 'sequential', rangeEnd: 9999 });
-  };
-
-  if (activeDeck === 'vocabN3' || activeDeck === 'vocabN4' || activeDeck === 'saved') {
-    let rawItems = getItemsForDeck(activeDeck) as VocabItem[];
-    const sliced = rawItems.slice(0, shuffleConfig.rangeEnd);
-    const activeItems = shuffleConfig.mode === 'shuffle'
-      ? [...sliced].sort(() => Math.random() - 0.5)
-      : sliced;
-
-    const savedIdx = Math.min(getLastVocabIndex(), Math.max(0, activeItems.length - 1));
-    return (
-      <VocabFlashcardSession
-        key={`${activeDeck}-${shuffleConfig.mode}-${shuffleConfig.rangeEnd}`}
-        items={activeItems}
-        preserveOrder={true}
-        initialIndex={shuffleConfig.mode === 'shuffle' ? 0 : savedIdx}
-        onExit={handleExit}
-        ankiMode={ankiMode}
-      />
-    );
-  }
-
-  if (activeDeck === 'kanjiN3' || activeDeck === 'kanjiN2') {
-    const rawItems = getItemsForDeck(activeDeck) as KanjiItem[];
-    const sliced = rawItems.slice(0, shuffleConfig.rangeEnd);
-    const activeItems = shuffleConfig.mode === 'shuffle'
-      ? [...sliced].sort(() => Math.random() - 0.5)
-      : sliced;
-    const savedIdx = Math.min(getLastKanjiIndex(activeDeck === 'kanjiN2' ? 'N2' : 'N3'), Math.max(0, activeItems.length - 1));
-    return (
-      <KanjiFlashcardSession
-        key={`${activeDeck}-${shuffleConfig.mode}-${shuffleConfig.rangeEnd}`}
-        items={activeItems}
-        initialIndex={shuffleConfig.mode === 'shuffle' ? 0 : savedIdx}
-        onExit={handleExit}
-        ankiMode={ankiMode}
-      />
-    );
-  }
-
-  if (activeDeck === 'grammarN2' || activeDeck === 'grammarN3' || activeDeck === 'grammarN4') {
-    const rawItems = getItemsForDeck(activeDeck) as GrammarItem[];
-    const sliced = rawItems.slice(0, shuffleConfig.rangeEnd);
-    const activeItems = shuffleConfig.mode === 'shuffle'
-      ? [...sliced].sort(() => Math.random() - 0.5)
-      : sliced;
-    const progressLevel = activeDeck === 'grammarN2' ? 'N2' : activeDeck === 'grammarN4' ? 'N4' : 'N3';
-    const savedIdx = Math.min(getLastGrammarIndex(progressLevel), Math.max(0, activeItems.length - 1));
-    return (
-      <GrammarFlashcardSession
-        key={`${activeDeck}-${shuffleConfig.mode}-${shuffleConfig.rangeEnd}`}
-        items={activeItems}
-        preserveOrder={true}
-        initialIndex={shuffleConfig.mode === 'shuffle' ? 0 : savedIdx}
-        progressLevel={progressLevel}
-        onExit={handleExit}
-        ankiMode={ankiMode}
-      />
-    );
-  }
-
-  // Compute total for pending modal
-  const pendingTotal = pendingDeck ? getItemsForDeck(pendingDeck).length : 0;
-
-  const decks: {key: DeckKey; title: string; count: number; due: number; mastered: number; tone: 'vocabulary' | 'kanji' | 'grammar' | 'neutral'}[] = [
-    {key:'vocabN3', title:'Từ vựng N3', count:n3VocabIds.size, due:vocabN3DueCount, mastered:vocabN3MasteredCount, tone:'vocabulary'},
-    {key:'kanjiN3', title:'Kanji N3', count:n3KanjiIds.size, due:kanjiN3DueCount, mastered:kanjiN3MasteredCount, tone:'kanji'},
-    {key:'grammarN3', title:'Ngữ pháp N3', count:n3GrammarIds.size, due:grammarN3DueCount, mastered:grammarN3MasteredCount, tone:'grammar'},
-    {key:'vocabN4', title:'Từ vựng N4', count:n4VocabIds.size, due:vocabN4DueCount, mastered:vocabN4MasteredCount, tone:'vocabulary'},
-    {key:'grammarN4', title:'Ngữ pháp N4', count:n4GrammarIds.size, due:grammarN4DueCount, mastered:grammarN4MasteredCount, tone:'grammar'},
-    {key:'kanjiN2', title:'Kanji N2', count:n2KanjiIds.size, due:kanjiN2DueCount, mastered:kanjiN2MasteredCount, tone:'kanji'},
-    {key:'grammarN2', title:'Ngữ pháp N2', count:n2GrammarIds.size, due:grammarN2DueCount, mastered:grammarN2MasteredCount, tone:'grammar'},
-    {key:'saved', title:'Từ đã lưu', count:savedVocabulary.length, due:0, mastered:0, tone:'neutral'},
-  ];
-  const renderDeck = ({key, ...deck}: (typeof decks)[number]) => <DeckCard key={key} {...deck} ankiMode={ankiMode} onClick={() => handleDeckClick(key)} />;
-  const {key: savedKey, ...savedDeck} = decks[7];
-  return <>
-    {pendingDeck && pendingTotal > 0 && <ShuffleLaunchModal deckKey={pendingDeck} totalCards={pendingTotal} onStart={handleModalStart} onCancel={handleModalCancel} />}
-    <div className="study-page">
-        <PageHeading eyebrow="LUYỆN TẬP" title={ankiMode ? 'Anki' : 'Thẻ học'} subtitle={ankiMode ? 'Học thẻ mới và thẻ đến hạn; đánh giá mức độ nhớ để lên lịch ôn lại' : 'Chọn bộ thẻ, tự nhớ trước khi xem đáp án'} />
-      <section><h2 className="study-eyebrow mb-3">TRÌNH ĐỘ N3</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{decks.slice(0,3).map(renderDeck)}</div></section>
-      <section><h2 className="study-eyebrow mb-3">TRÌNH ĐỘ N4</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{decks.slice(3,5).map(renderDeck)}</div></section>
-      <section><h2 className="study-eyebrow mb-3">TRÌNH ĐỘ N2</h2><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{decks.slice(5,7).map(renderDeck)}</div></section>
-      <ImportedDecks mode={mode} leadingDeck={<DeckCard key={savedKey} {...savedDeck} ankiMode={ankiMode} disabled={!savedVocabulary.length} onClick={() => handleDeckClick('saved')} />} />
-    </div>
-  </>;
-}
-function DeckCard({title,count,due,mastered,tone,ankiMode,disabled,onClick}: {title:string;count:number;due:number;mastered:number;tone:'vocabulary'|'kanji'|'grammar'|'neutral';ankiMode:boolean;disabled?:boolean;onClick:()=>void}) {
-  return <button disabled={disabled} onClick={onClick} className="study-panel group min-w-0 text-left transition-colors hover:border-[var(--color-border-strong)] focus-ring disabled:cursor-not-allowed disabled:opacity-50">
-    <ContentBadge tone={tone}>{title}</ContentBadge>
-    <p className="mt-4 text-2xl font-semibold text-[var(--color-text)]">{count} <span className="text-sm font-normal text-[var(--color-text-secondary)]">thẻ</span></p>
-    {ankiMode && tone !== 'neutral' && <p className="mt-2 text-xs text-[var(--color-text-secondary)]">{due} cần ôn · {mastered} đã nhớ</p>}
-    <p className="mt-4 text-sm font-semibold text-[var(--color-accent)]">Bắt đầu học →</p>
-  </button>;
-}
-
+function DeckPage({ mode }: { mode: 'flashcards' | 'anki' }) { return <UnifiedDeckPage mode={mode}/>; }
 export function parseRelatedWords(rawText?: string) {
   if (!rawText) return [];
   const parts = rawText.split(/(?:[,;]|\r?\n)\s*(?=[^\(（【\[,;]+[\(（【\[])/);
@@ -774,7 +410,7 @@ export function speakJapanese(text?: string) {
 
 export function VocabFlashcardSession({
   items,
-  onExit,
+  onExit: exitSession,
   initialIndex = 0,
   preserveOrder = true,
   ankiMode = false,
@@ -785,6 +421,7 @@ export function VocabFlashcardSession({
   preserveOrder?: boolean;
   ankiMode?: boolean;
 }) {
+  const { recordStudyActivity, setLastVocabIndex } = useLearningStorage();
   const { srsCards, updateSRSCard, settings } = useApp();
   const [index, setIndex] = useState(ankiMode ? 0 : initialIndex || 0);
   const [flipped, setFlipped] = useState(false);
@@ -801,19 +438,28 @@ export function VocabFlashcardSession({
     setIndex(idx);
     if (!ankiMode) setLastVocabIndex(idx);
     setFlipped(false);
-  }, [ankiMode]);
+  }, [setLastVocabIndex, ankiMode]);
 
   const current = studyItems[index];
+  useCardAudio(current?.phien_am || current?.tu);
   const total = studyItems.length;
   const readCardElapsedMinutes = useActiveElapsedMinutes(current?.id);
   const sessionTimer = useAnkiSessionTimer(ankiMode ? settings.ankiSessionMinutes : 0, 'vocabulary-session');
+
+  const onExit = useCallback(() => {
+    if (!ankiMode && flipped && current && !reviewedRef.current.has(index)) {
+      reviewedRef.current.add(index);
+      recordStudyActivity(1, 0, 1, readCardElapsedMinutes(), 'flashcard');
+    }
+    exitSession();
+  }, [ankiMode, flipped, current, index, recordStudyActivity, readCardElapsedMinutes, exitSession]);
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
   const next = useCallback((isAnki?: boolean) => {
     if (ankiMode && !isAnki) return;
     if (isAnki !== true && flipped && !reviewedRef.current.has(index)) {
       reviewedRef.current.add(index);
-      recordStudyActivity(1, 0, 1, 5, 'flashcard');
+      recordStudyActivity(1, 0, 1, readCardElapsedMinutes(), 'flashcard');
     }
     if (index < total - 1) {
       const nextIdx = index + 1;
@@ -821,7 +467,7 @@ export function VocabFlashcardSession({
       if (!ankiMode) setLastVocabIndex(nextIdx);
       setFlipped(false);
     }
-  }, [index, total, flipped, ankiMode]);
+  }, [readCardElapsedMinutes, setLastVocabIndex, recordStudyActivity, index, total, flipped, ankiMode]);
   const prev = useCallback(() => {
     if (ankiMode) return;
     if (index > 0) {
@@ -830,7 +476,7 @@ export function VocabFlashcardSession({
       setLastVocabIndex(prevIdx);
       setFlipped(false);
     }
-  }, [index, ankiMode]);
+  }, [setLastVocabIndex, index, ankiMode]);
 
   const swipe = useSwipeGesture({
     onSwipeLeft: () => next(),
@@ -859,7 +505,7 @@ export function VocabFlashcardSession({
         onExit();
       }
     },
-    [srsCards, current?.id, updateSRSCard, onExit, flipped, shuffledItems, readCardElapsedMinutes, sessionTimer]
+    [recordStudyActivity, srsCards, current?.id, updateSRSCard, onExit, flipped, shuffledItems, readCardElapsedMinutes, sessionTimer]
   );
 
   const toggleFullscreen = useCallback(() => {
@@ -1099,314 +745,6 @@ export function VocabFlashcardSession({
   );
 }
 
-function KanjiFlashcardSession({
-  items,
-  onExit,
-  initialIndex = 0,
-  ankiMode = false,
-}: {
-  items: KanjiItem[];
-  onExit: () => void;
-  initialIndex?: number;
-  ankiMode?: boolean;
-}) {
-  const { srsCards, updateSRSCard, settings } = useApp();
-  const deckLevel = items[0]?.level ?? 'N3';
-  const [sourceItems] = useState(() => [...items]);
-  const [studyItems, setStudyItems] = useState(() => ankiMode ? getReadyAnkiItems(sourceItems, srsCards, 'kanji') : sourceItems);
-  const [index, setIndex] = useState(ankiMode ? 0 : initialIndex || 0);
-  const [flipped, setFlipped] = useState(false);
-  const ratingLocked = useRef(false);
-  const reviewedRef = useRef<Set<number>>(new Set());
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  useEffect(() => { ratingLocked.current = false; }, [index, studyItems]);
-
-  const jumpTo = useCallback((idx: number) => {
-    setIndex(idx);
-    if (!ankiMode) setLastKanjiIndex(idx, deckLevel);
-    setFlipped(false);
-  }, [deckLevel, ankiMode]);
-
-  const current = studyItems[index];
-  const total = studyItems.length;
-  const readCardElapsedMinutes = useActiveElapsedMinutes(current?.id);
-  const sessionTimer = useAnkiSessionTimer(ankiMode ? settings.ankiSessionMinutes : 0, 'kanji-session');
-
-  const flip = useCallback(() => setFlipped((f) => !f), []);
-  const next = useCallback((isAnki?: boolean) => {
-    if (ankiMode && !isAnki) return;
-    if (isAnki !== true && flipped && !reviewedRef.current.has(index)) {
-      reviewedRef.current.add(index);
-      recordStudyActivity(1, 0, 1, 5, 'flashcard');
-    }
-    if (index < total - 1) {
-      const nextIdx = index + 1;
-      setIndex(nextIdx);
-      if (!ankiMode) setLastKanjiIndex(nextIdx, deckLevel);
-      setFlipped(false);
-    }
-  }, [index, total, flipped, deckLevel, ankiMode]);
-  const prev = useCallback(() => {
-    if (ankiMode) return;
-    if (index > 0) {
-      const prevIdx = index - 1;
-      setIndex(prevIdx);
-      setLastKanjiIndex(prevIdx, deckLevel);
-      setFlipped(false);
-    }
-  }, [index, deckLevel, ankiMode]);
-
-  const swipe = useSwipeGesture({
-    onSwipeLeft: () => next(),
-    onSwipeRight: () => prev(),
-    onSwipeUp: () => flip(),
-  });
-
-  const handleAnkiRate = useCallback(
-    (rating: Rating) => {
-      if (ratingLocked.current || !flipped) return;
-      ratingLocked.current = true;
-      const existing = srsCards.find((c) => c.cardId === current.id && c.deckType === 'kanji');
-      const card = existing || createSRSCard(current.id, 'kanji');
-      const isNew = card.state === 'new';
-      const updated = processReview(card, rating);
-      updateSRSCard(updated);
-      recordStudyActivity(1, isNew ? 1 : 0, rating === 'again' ? 0 : 1, readCardElapsedMinutes(), 'srs');
-      const updatedCards = [...srsCards.filter(c => !(c.cardId === updated.cardId && c.deckType === updated.deckType)), updated];
-      const nextQueue = getReadyAnkiItems(sourceItems, updatedCards, 'kanji');
-      if (nextQueue.length && !sessionTimer.isExpired()) {
-        setStudyItems(nextQueue);
-        setIndex(0);
-        setFlipped(false);
-      } else {
-        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
-        onExit();
-      }
-    },
-    [srsCards, current?.id, updateSRSCard, onExit, flipped, sourceItems, readCardElapsedMinutes, sessionTimer]
-  );
-
-  const toggleFullscreen = useCallback(() => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {});
-      setIsFullscreen(true);
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen().catch(() => {});
-      }
-      setIsFullscreen(false);
-    }
-  }, []);
-
-  const handleExit = useCallback(() => {
-    if (document.fullscreenElement) {
-      document.exitFullscreen().catch(() => {});
-    }
-    onExit();
-  }, [onExit]);
-
-  useEffect(() => {
-    const onFsChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-    document.addEventListener('fullscreenchange', onFsChange);
-    return () => document.removeEventListener('fullscreenchange', onFsChange);
-  }, []);
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest('input, textarea, select, [contenteditable="true"]')) return;
-      if (target.closest('button') && e.key === 'Enter') return;
-      switch (e.key) {
-        case ' ':
-          e.preventDefault();
-          if (e.repeat) return;
-          if (!flipped) flip();
-          else if (ankiMode) handleAnkiRate('good');
-          else next();
-          break;
-        case '=':
-        case 'ArrowRight':
-          e.preventDefault();
-          next();
-          break;
-        case 'ArrowLeft':
-          e.preventDefault();
-          prev();
-          break;
-        case 'Escape':
-          e.preventDefault();
-          handleExit();
-          break;
-        case '1':
-          if (ankiMode && flipped) {
-            e.preventDefault();
-            handleAnkiRate('again');
-          }
-          break;
-        case '2':
-          if (ankiMode && flipped) {
-            e.preventDefault();
-            handleAnkiRate('hard');
-          }
-          break;
-        case '3':
-          if (ankiMode && flipped) {
-            e.preventDefault();
-            handleAnkiRate('good');
-          }
-          break;
-        case '4':
-          if (ankiMode && flipped) {
-            e.preventDefault();
-            handleAnkiRate('easy');
-          }
-          break;
-      }
-    };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, [flip, next, prev, handleExit, ankiMode, flipped, handleAnkiRate]);
-
-  if (!current) return <EmptyAnkiSession onExit={onExit} />;
-
-  return (
-    <div
-      className={`fixed inset-0 z-50 flex flex-col select-none transition-all duration-300 ${
-        isFullscreen
-          ? 'bg-[var(--color-bg)]'
-          : 'bg-[var(--color-bg)]'
-      }`}
-    >
-      <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-3 py-2 sm:px-8 sm:py-4 shrink-0">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={handleExit}
-            className="flex items-center gap-2 text-sm font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer focus-ring px-3 py-2 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] transition-all shadow-2xs"
-          >
-            <X size={18} />
-            <span className="hidden sm:inline">Thoát (Esc)</span>
-          </button>
-
-        </div>
-
-        <div className="flex min-w-0 items-center justify-center gap-2 sm:gap-4">
-          {ankiMode ? <><span className="font-mono text-xs font-semibold text-[var(--color-text-secondary)]">Còn {total} thẻ</span><AnkiSessionTime remainingSeconds={sessionTimer.remainingSeconds} expired={sessionTimer.expired}/></> : <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />}
-          <div className="hidden sm:block w-24 lg:w-64 h-2 rounded-full bg-[var(--color-surface-alt)] overflow-hidden">
-            <div
-              className="h-full rounded-full bg-[var(--color-accent)] transition-all duration-300"
-              style={{ width: `${((index + 1) / total) * 100}%` }}
-            />
-          </div>
-        </div>
-
-        <FullscreenToggle isFullscreen={isFullscreen} onClick={toggleFullscreen} />
-      </div>
-
-      <div className="flex-1 min-h-0 flex items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4" {...swipe.handlers}>
-        <button
-          onClick={flip}
-          className={`
-            w-full flex flex-col items-center justify-center cursor-pointer transition-all duration-300
-            focus-ring relative overflow-y-auto
-            ${
-              isFullscreen
-                ? 'max-w-4xl lg:max-w-5xl mx-auto rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-5 sm:p-12'
-                : 'max-w-4xl lg:max-w-5xl mx-auto rounded-2xl sm:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)]  p-5 sm:p-12'
-            }
-          `}
-          aria-label={flipped ? 'Đang hiện đáp án' : 'Đang hiện câu hỏi'}
-        >
-          {ankiMode && (
-            <div className="absolute top-3 left-3 sm:top-8 sm:left-10 flex items-center select-none">
-              <AnkiCardBadge itemId={current.id} itemType="kanji" />
-            </div>
-          )}
-
-          {swipe.swipeDir && (
-            <div className={`absolute top-1/2 -translate-y-1/2 pointer-events-none text-4xl font-bold opacity-30 ${swipe.swipeDir === 'left' ? 'right-4' : 'left-4'}`}>
-              {swipe.swipeDir === 'left' ? '→' : '←'}
-            </div>
-          )}
-
-          {!flipped ? (
-            <div className="text-center flex flex-col items-center gap-4 sm:gap-6 my-auto">
-              <div
-                className="font-jp-serif font-bold tracking-tight transition-all duration-300"
-                style={{
-                  fontSize: isFullscreen ? 'clamp(7.5rem, 22vw, 13rem)' : 'clamp(4.5rem, 18vw, 11rem)',
-                  lineHeight: 1,
-                  color: 'var(--color-text)',
-                  textShadow: '0 2px 24px rgba(0,0,0,0.08)',
-                }}
-              >
-                {current.kanji || current.hanViet || 'N/A'}
-              </div>
-              <div className="text-xs sm:hidden text-[var(--color-text-tertiary)]">Chạm để lật • Vuốt ← →</div>
-            </div>
-          ) : (
-            <div className="text-center flex flex-col items-center justify-center gap-4 sm:gap-6 w-full max-w-xl my-auto">
-              <div className="text-xl font-bold text-[var(--color-kanji)]">{current.hanViet}</div>
-              {(current.onyomi?.length || current.kunyomi?.length) ? <div className="text-sm text-[var(--color-text-secondary)]">
-                {!!current.onyomi?.length && <p>Âm On: <span className="font-jp">{current.onyomi.join(' · ')}</span></p>}
-                {!!current.kunyomi?.length && <p>Âm Kun: <span className="font-jp">{current.kunyomi.join(' · ')}</span></p>}
-              </div> : null}
-              {current.vocabulary && current.vocabulary.length > 0 ? (
-                <div className="flex flex-col items-center gap-4 w-full">
-                  {current.vocabulary.slice(0, 3).map((v, i) => (
-                    <div key={i} className="flex flex-col items-center gap-1">
-                      <div className="flex items-baseline gap-3 justify-center flex-wrap">
-                        <span className="font-jp-serif font-bold" style={{ fontSize: 'clamp(1.4rem, 4vw, 2.2rem)', color: 'var(--color-text)' }}>
-                          {v.word}
-                        </span>
-                        <span className="font-jp font-bold" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: 'var(--color-accent)' }}>
-                          【{v.reading}】
-                        </span>
-                      </div>
-                      {v.hanViet && <div className="text-xs font-medium text-[var(--color-kanji)]">Hán Việt: {v.hanViet}</div>}
-                      {v.meaning && (
-                        <div className="font-semibold" style={{ fontSize: 'clamp(0.9rem, 2.2vw, 1.3rem)', color: 'var(--color-text-secondary)' }}>
-                          {v.meaning}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="uppercase font-extrabold" style={{ fontSize: '2rem', color: 'var(--color-accent)', letterSpacing: '0.3em' }}>
-                  {current.hanViet}
-                </div>
-              )}
-            </div>
-          )}
-        </button>
-      </div>
-
-      <div className="px-3 pb-3 pt-2 sm:px-8 sm:py-5 border-t border-[var(--color-border)] shrink-0">
-        {ankiMode && flipped ? (
-          <>
-            <div className="sm:hidden">
-              <MobileAnkiControls itemId={current.id} itemType="kanji" onRate={handleAnkiRate} />
-            </div>
-            <div className="hidden sm:flex justify-center">
-              <AnkiSRSControls itemId={current.id} itemType="kanji" onRate={handleAnkiRate} />
-            </div>
-          </>
-        ) : !ankiMode ? (
-          <div className="flex items-center justify-center min-h-10">
-            <CardJumpControl index={index} total={total} label="Thẻ" onJump={jumpTo} />
-          </div>
-        ) : null}
-      </div>
-    </div>
-  );
-}
-
-// ============================================================
-// Fullscreen Grammar Flashcard Session
-// ============================================================
-
 function formatMeanings(str?: string): string[] {
   if (!str) return [];
   let parts = str.split(/(?:\r?\n)+|\s*\/\s*(?=\d+[.)）])/g);
@@ -1488,7 +826,7 @@ function renderFormulaBlock(str?: string) {
 
 export function GrammarFlashcardSession({
   items,
-  onExit,
+  onExit: exitSession,
   initialIndex = 0,
   progressLevel = 'N3',
   preserveOrder = true,
@@ -1501,6 +839,7 @@ export function GrammarFlashcardSession({
   preserveOrder?: boolean;
   ankiMode?: boolean;
 }) {
+  const { recordStudyActivity, setLastGrammarIndex } = useLearningStorage();
   const { srsCards, updateSRSCard, settings } = useApp();
   const [index, setIndex] = useState(ankiMode ? 0 : initialIndex || 0);
   const [flipped, setFlipped] = useState(false);
@@ -1519,19 +858,28 @@ export function GrammarFlashcardSession({
     if (!ankiMode) setLastGrammarIndex(idx, progressLevel);
     setFlipped(false);
     setRevealedExamples({});
-  }, [progressLevel, ankiMode]);
+  }, [setLastGrammarIndex, progressLevel, ankiMode]);
 
   const current = studyItems[index];
+  useCardAudio(current?.reading || current?.pattern);
   const total = studyItems.length;
   const readCardElapsedMinutes = useActiveElapsedMinutes(current?.id);
   const sessionTimer = useAnkiSessionTimer(ankiMode ? settings.ankiSessionMinutes : 0, 'grammar-session');
+
+  const onExit = useCallback(() => {
+    if (!ankiMode && flipped && current && !reviewedRef.current.has(index)) {
+      reviewedRef.current.add(index);
+      recordStudyActivity(1, 0, 1, readCardElapsedMinutes(), 'flashcard');
+    }
+    exitSession();
+  }, [ankiMode, flipped, current, index, recordStudyActivity, readCardElapsedMinutes, exitSession]);
 
   const flip = useCallback(() => setFlipped((f) => !f), []);
   const next = useCallback((isAnki?: boolean) => {
     if (ankiMode && !isAnki) return;
     if (isAnki !== true && flipped && !reviewedRef.current.has(index)) {
       reviewedRef.current.add(index);
-      recordStudyActivity(1, 0, 1, 5, 'flashcard');
+      recordStudyActivity(1, 0, 1, readCardElapsedMinutes(), 'flashcard');
     }
     if (index < total - 1) {
       const nextIdx = index + 1;
@@ -1540,7 +888,7 @@ export function GrammarFlashcardSession({
       setFlipped(false);
       setRevealedExamples({});
     }
-  }, [index, total, flipped, progressLevel, ankiMode]);
+  }, [readCardElapsedMinutes, setLastGrammarIndex, recordStudyActivity, index, total, flipped, progressLevel, ankiMode]);
   const prev = useCallback(() => {
     if (ankiMode) return;
     if (index > 0) {
@@ -1550,7 +898,7 @@ export function GrammarFlashcardSession({
       setFlipped(false);
       setRevealedExamples({});
     }
-  }, [index, progressLevel, ankiMode]);
+  }, [setLastGrammarIndex, index, progressLevel, ankiMode]);
 
   const swipe = useSwipeGesture({
     onSwipeLeft: () => next(),
@@ -1580,7 +928,7 @@ export function GrammarFlashcardSession({
         onExit();
       }
     },
-    [srsCards, current?.id, updateSRSCard, onExit, flipped, shuffledItems, readCardElapsedMinutes, sessionTimer]
+    [recordStudyActivity, srsCards, current?.id, updateSRSCard, onExit, flipped, shuffledItems, readCardElapsedMinutes, sessionTimer]
   );
 
   const toggleExampleTranslation = useCallback((idx: number) => {

@@ -9,7 +9,9 @@ import React, { Suspense, lazy } from 'react';
 import { AppProvider, useApp } from '@/hooks/useApp';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { AuthProvider, useAuth } from '@/hooks/useAuth';
+import { hasSession } from '@/lib/api';
 import { AuthPage } from '@/components/auth/AuthPage';
+import { AuthDialog, SessionNotices } from '@/components/auth/AuthDialog';
 
 const Dashboard = lazy(() => import('@/components/dashboard/Dashboard').then((module) => ({ default: module.Dashboard })));
 const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage').then((module) => ({ default: module.VocabularyPage })));
@@ -25,9 +27,9 @@ const BookmarksPage = lazy(() => import('@/components/bookmarks/BookmarksPage').
 const SettingsPage = lazy(() => import('@/components/settings/SettingsPage').then((module) => ({ default: module.SettingsPage })));
 
 function AppContent() {
-  const { currentPage, loading, loadError, retryLoad } = useApp();
+  const { currentPage, loading, loadError, retryLoad, learningSync } = useApp();
 
-  if (loading) {
+  if (loading || !learningSync.initialized) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-[var(--color-bg)]">
         <div className="text-center space-y-3">
@@ -67,6 +69,7 @@ function AppContent() {
 
   return (
     <MainLayout>
+      <SessionNotices />
       <Suspense fallback={<div className="py-16 text-center text-sm text-[var(--color-text-secondary)]" role="status">Đang mở bài học…</div>}>
         {renderPage()}
       </Suspense>
@@ -81,9 +84,9 @@ export default function App() {
 }
 
 function AuthGate() {
-  const { user, loading, restoreError, retryRestore } = useAuth();
+  const { user, mode, loading, restoreError, retryRestore, sessionKey } = useAuth();
   if (loading) return <div className="flex min-h-screen items-center justify-center bg-[var(--color-bg)]"><p className="study-copy">Đang khôi phục phiên đăng nhập…</p></div>;
-  if (!user && restoreError) return <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-6 bg-[var(--color-bg)]"><p className="study-copy max-w-md text-center" role="alert">{restoreError}</p><button className="study-button study-button-primary" onClick={retryRestore}>Thử kết nối lại</button></div>;
-  if (!user) return <AuthPage />;
-  return <AppProvider><AppContent /></AppProvider>;
+  if (!user && restoreError && hasSession()) return <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-6 bg-[var(--color-bg)]"><p className="study-copy max-w-md text-center" role="alert">{restoreError}</p><button className="study-button study-button-primary" onClick={retryRestore}>Thử kết nối lại</button></div>;
+  if (mode === 'unauthenticated') return <AuthPage />;
+  return <><AppProvider key={sessionKey}><AppContent /></AppProvider><AuthDialog /></>;
 }

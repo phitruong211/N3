@@ -10,14 +10,15 @@
 import React, { useMemo } from 'react';
 import { useApp } from '@/hooks/useApp';
 import { getStateDistribution, formatDate } from '@/lib/srs';
-import { calculateStreak, getStudyDays } from '@/lib/storage';
+import { useLearningStorage } from '@/hooks/useApp';
 import { Flame, Target, TrendingUp, Calendar, BarChart3 } from 'lucide-react';
 
 export function ProgressPage() {
+  const { calculateStreak, getStudyDays } = useLearningStorage();
   const { srsCards, vocabulary, kanji, grammar } = useApp();
   const distribution = useMemo(() => getStateDistribution(srsCards), [srsCards]);
-  const streak = useMemo(() => calculateStreak(), []);
-  const studyDays = useMemo(() => getStudyDays(), []);
+  const streak = calculateStreak();
+  const studyDays = getStudyDays();
 
   const totalAccuracy = useMemo(() => {
     if (srsCards.length === 0) return 0;

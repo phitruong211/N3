@@ -3,8 +3,8 @@ import type { AppSettings, Rating, SRSCard } from '@/types';
 // In development Vite proxies this relative URL to Spring Boot. Deployments can
 // override it with VITE_API_URL when the API is hosted on a different origin.
 const API_URL = (import.meta.env?.VITE_API_URL || '/api/v1').replace(/\/$/, '');
-const ACCESS_TOKEN_KEY = 'n3_access_token';
-const REFRESH_TOKEN_KEY = 'n3_refresh_token';
+const ACCESS_TOKEN_KEY = 'auth:access_token';
+const REFRESH_TOKEN_KEY = 'auth:refresh_token';
 
 export interface ApiUser {
   id: string;
@@ -28,15 +28,39 @@ export class ApiError extends Error {
   }
 }
 
-function saveTokens(response: AuthResponse) {
+const SESSION_KEY = 'auth:session_id';
+let verifiedSession: string | null = null;
+
+function migrateTokens() {
+  const legacyRefresh = localStorage.getItem('n3_refresh_token');
+  if (!localStorage.getItem(REFRESH_TOKEN_KEY) && legacyRefresh) {
+    const legacyAccess = localStorage.getItem('n3_access_token');
+    if (legacyAccess) localStorage.setItem(ACCESS_TOKEN_KEY, legacyAccess);
+    localStorage.setItem(REFRESH_TOKEN_KEY, legacyRefresh);
+  }
+  // Never combine the old account's access token with a newer refresh token.
+  localStorage.removeItem('n3_access_token');
+  localStorage.removeItem('n3_refresh_token');
+  if (localStorage.getItem(REFRESH_TOKEN_KEY) && !localStorage.getItem(SESSION_KEY)) localStorage.setItem(SESSION_KEY, crypto.randomUUID());
+}
+export function sessionIdentity(): string | null { migrateTokens(); return localStorage.getItem(SESSION_KEY); }
+export function isSessionStorageKey(key: string | null): boolean { return key === null || key === SESSION_KEY; }
+export function invalidateApiSession(): void { verifiedSession = null; }
+function notifySessionExpired() {
+  if (typeof window !== 'undefined') window.dispatchEvent(new Event('auth-session-expired'));
+}
+function saveTokens(response: AuthResponse, newSession = false) {
   localStorage.setItem(ACCESS_TOKEN_KEY, response.accessToken);
   localStorage.setItem(REFRESH_TOKEN_KEY, response.refreshToken);
+  if (newSession) localStorage.setItem(SESSION_KEY, crypto.randomUUID());
 }
-
-export function hasSession(): boolean { return Boolean(localStorage.getItem(REFRESH_TOKEN_KEY)); }
+export function hasSession(): boolean { migrateTokens(); return Boolean(localStorage.getItem(REFRESH_TOKEN_KEY)); }
 export function clearSession(): void {
-  localStorage.removeItem(ACCESS_TOKEN_KEY);
-  localStorage.removeItem(REFRESH_TOKEN_KEY);
+  verifiedSession = null;
+  for (const key of [ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, SESSION_KEY, 'n3_access_token', 'n3_refresh_token']) localStorage.removeItem(key);
+}
+function assertSession(identity: string | null) {
+  if (sessionIdentity() !== identity) throw new ApiError(401, 'Phiên đã thay đổi. Vui lòng thực hiện lại thao tác.');
 }
 
 async function parseError(response: Response): Promise<ApiError> {
@@ -44,62 +68,94 @@ async function parseError(response: Response): Promise<ApiError> {
   return new ApiError(response.status, body.message || `Yêu cầu thất bại (${response.status})`, body.fieldErrors);
 }
 
-let refreshPromise: Promise<boolean> | null = null;
-async function refreshAccessToken(): Promise<boolean> {
-  if (refreshPromise) return refreshPromise;
-  refreshPromise = (async () => {
+let refreshFlight: { identity: string | null; promise: Promise<boolean> } | null = null;
+async function refreshAccessToken(identity: string | null): Promise<boolean> {
+  assertSession(identity);
+  if (refreshFlight?.identity === identity) return refreshFlight.promise;
+  const promise = (async () => {
     const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
     if (!refreshToken) return false;
     const response = await fetch(`${API_URL}/auth/refresh`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      method: 'POST', signal: AbortSignal.timeout(30_000), headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ refreshToken, deviceName: navigator.userAgent.slice(0, 200) }),
     });
-    if (response.status === 401) { clearSession(); return false; }
+    assertSession(identity);
+    if (response.status === 401) { clearSession(); notifySessionExpired(); return false; }
     if (!response.ok) throw await parseError(response);
-    saveTokens(await response.json() as AuthResponse);
+    const tokens = await response.json() as AuthResponse;
+    assertSession(identity);
+    saveTokens(tokens);
     return true;
-  })().finally(() => { refreshPromise = null; });
-  return refreshPromise;
+  })();
+  const flight = { identity, promise };
+  refreshFlight = flight;
+  try { return await promise; } finally { if (refreshFlight === flight) refreshFlight = null; }
 }
 
 export async function apiRequest<T>(path: string, init: RequestInit = {}, retry = true): Promise<T> {
+  const identity = sessionIdentity();
+  const publicAuth = ['/auth/login', '/auth/register', '/auth/logout', '/auth/refresh'].includes(path);
+  if (!publicAuth && path !== '/auth/me' && (!identity || verifiedSession !== identity)) {
+    throw new ApiError(401, 'Đăng nhập để lưu và đồng bộ bộ thẻ của bạn');
+  }
+  if (path === '/auth/me' && !hasSession()) throw new ApiError(401, 'Chưa có phiên đăng nhập.');
   const headers = new Headers(init.headers);
+  headers.delete('Authorization');
   if (init.body && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
   const token = localStorage.getItem(ACCESS_TOKEN_KEY);
-  if (token) headers.set('Authorization', `Bearer ${token}`);
+  if (token && !publicAuth) headers.set('Authorization', `Bearer ${token}`);
+  const timeout = AbortSignal.timeout(90_000);
+  const signal = init.signal ? AbortSignal.any([init.signal, timeout]) : timeout;
   let response: Response;
   try {
-    response = await fetch(`${API_URL}${path}`, { ...init, headers });
+    response = await fetch(`${API_URL}${path}`, { ...init, headers, signal });
   } catch {
+    if (timeout.aborted) throw new ApiError(0, 'Máy chủ phản hồi quá lâu. Bản nháp vẫn được giữ; hãy thử lại.');
     throw new ApiError(0, 'Không thể kết nối máy chủ. Hãy kiểm tra backend đang chạy ở cổng 8080.');
   }
+  init.signal?.throwIfAborted();
+  assertSession(identity);
   if (response.status === 401 && retry && (path === '/auth/me' || !path.startsWith('/auth/'))) {
-    if (await refreshAccessToken()) return apiRequest<T>(path, init, false);
+    if (await refreshAccessToken(identity)) return apiRequest<T>(path, init, false);
   }
-  if (!response.ok) throw await parseError(response);
+  if (response.status === 401 && !publicAuth && !retry) { clearSession(); notifySessionExpired(); }
+  if (!response.ok) { const error = await parseError(response); assertSession(identity); throw error; }
   if (response.status === 204) return undefined as T;
-  return response.json() as Promise<T>;
+  const body = await response.json() as T;
+  init.signal?.throwIfAborted();
+  assertSession(identity);
+  return body;
 }
 
-export async function login(email: string, password: string): Promise<ApiUser> {
+export async function login(email: string, password: string, signal?: AbortSignal): Promise<ApiUser> {
+  const identity = sessionIdentity();
   const response = await apiRequest<AuthResponse>('/auth/login', {
-    method: 'POST', body: JSON.stringify({ email, password, deviceName: navigator.userAgent.slice(0, 200) }),
+    method: 'POST', signal, body: JSON.stringify({ email, password, deviceName: navigator.userAgent.slice(0, 200) }),
   });
-  saveTokens(response); return response.user;
+  signal?.throwIfAborted();
+  assertSession(identity);
+  saveTokens(response, true); verifiedSession = sessionIdentity(); return response.user;
 }
 
-export async function register(email: string, password: string, displayName: string): Promise<ApiUser> {
+export async function register(email: string, password: string, displayName: string, signal?: AbortSignal): Promise<ApiUser> {
+  const identity = sessionIdentity();
   const response = await apiRequest<AuthResponse>('/auth/register', {
-    method: 'POST', body: JSON.stringify({ email, password, displayName, deviceName: navigator.userAgent.slice(0, 200) }),
+    method: 'POST', signal, body: JSON.stringify({ email, password, displayName, deviceName: navigator.userAgent.slice(0, 200) }),
   });
-  saveTokens(response); return response.user;
+  signal?.throwIfAborted();
+  assertSession(identity);
+  saveTokens(response, true); verifiedSession = sessionIdentity(); return response.user;
 }
 
-export async function currentUser(): Promise<ApiUser> { return apiRequest('/auth/me'); }
+export async function currentUser(): Promise<ApiUser> { const identity = sessionIdentity(); const user = await apiRequest<ApiUser>('/auth/me'); assertSession(identity); verifiedSession = identity; return user; }
 export async function logout(): Promise<void> {
   const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
-  try { if (refreshToken) await apiRequest('/auth/logout', { method: 'POST', body: JSON.stringify({ refreshToken }) }); }
-  finally { clearSession(); }
+  // Clear synchronously; a late refresh cannot resurrect this session.
+  clearSession();
+  if (refreshToken) {
+    const response = await fetch(`${API_URL}/auth/logout`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ refreshToken }) });
+    if (!response.ok) throw await parseError(response);
+  }
 }
 
 export async function getRemoteSettings(): Promise<AppSettings> { return apiRequest('/users/me/settings'); }
