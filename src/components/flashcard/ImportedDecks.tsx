@@ -38,6 +38,16 @@ import {
 import { importedCardView, type CardView } from "@/lib/cards";
 import { StudySession } from "./StudySession";
 import { DeckCustomizeDialog } from "./CardPresentation";
+import { ContentBadge } from "@/components/ui/StudyUI";
+import {
+  GripVertical,
+  HelpCircle,
+  MoreVertical,
+  PenLine,
+  Plus,
+  Upload,
+  X,
+} from "lucide-react";
 const blankCard = (): ImportedCard => ({
   id: crypto.randomUUID(),
   front: "",
@@ -65,7 +75,7 @@ export function ImportedDecks({
   const initial = useRef(draft?.mode === mode ? draft : null).current;
   const [decks, setDecks] = useState<Page<PersonalDeck>>(emptyPage);
   const [deckPage, setDeckPage] = useState(0);
-  const [sort, setSort] = useState("updatedAt,desc");
+  const sort = "position,asc";
   const [active, setActive] = useState<PersonalDeck | null>(null);
   const [cards, setCards] = useState<Page<PersonalCard>>(emptyPage);
   const [page, setPage] = useState(0);
@@ -83,6 +93,9 @@ export function ImportedDecks({
   const [allowEmpty, setAllowEmpty] = useState(initial?.allowEmpty ?? false);
   const seed = useRef(initial?.importSeed ?? crypto.randomUUID());
   const [rules, setRules] = useState(false);
+  const [creatorError, setCreatorError] = useState("");
+  const [draggingDeckId, setDraggingDeckId] = useState<string | null>(null);
+  const [dropDeckId, setDropDeckId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -93,12 +106,7 @@ export function ImportedDecks({
   const [selected, setSelected] = useState<string[]>([]);
   const [targets, setTargets] = useState<PersonalDeck[]>([]);
   const [target, setTarget] = useState("");
-  const [customizing, setCustomizing] = useState(false);
-  const [result, setResult] = useState<{
-    deck: PersonalDeck;
-    skipped: number;
-    issues: string[];
-  } | null>(null);
+  const [customizing, setCustomizing] = useState<PersonalDeck | null>(null);
   const [launch, setLaunch] = useState<PersonalDeck | null>(null);
   const [range, setRange] = useState(50);
   const [shuffle, setShuffle] = useState(false);
@@ -220,7 +228,8 @@ export function ImportedDecks({
     setPreview(null);
     setCreating(false);
     setDraft(null);
-    setResult(null);
+    setCreatorError("");
+    setRules(false);
     seed.current = crypto.randomUUID();
   }
   async function refreshActive() {
@@ -246,9 +255,17 @@ export function ImportedDecks({
       all.push(...(await listDeckPage(p, "position,asc")).content);
     return all;
   }
-  async function create(manual = false) {
+  async function create(manual = false, createEmpty = false) {
+    if (!name.trim()) {
+      setCreatorError("Nhập tên bộ thẻ trước khi tạo.");
+      return;
+    }
     if (!requireAccount()) return;
-    const list = manual ? (allowEmpty ? [] : manualCards) : preview!.cards;
+    const list = manual
+      ? createEmpty || allowEmpty
+        ? []
+        : manualCards
+      : preview!.cards;
     if (
       !allowEmpty &&
       manual &&
@@ -288,17 +305,66 @@ export function ImportedDecks({
         ([reason, count]) => `${count} dòng: ${reason}`,
       );
       closeDraft();
-      setResult({ deck: metadata, skipped, issues });
       setActive(null);
+      setDeckPage(Math.floor(Math.max(0, decks.totalElements) / 20));
+      setDecks((current) => ({
+        ...current,
+        content: [...current.content, metadata],
+        totalElements: current.totalElements + 1,
+      }));
       setReload((v) => v + 1);
-      setMessage(`Đã tạo bộ thẻ với ${metadata.cardCount} thẻ.`);
-      if (manual) {
-        open(metadata);
-        setMessage(
-          metadata.cardCount
-            ? "Đã tạo bộ thẻ."
-            : "Bộ trống đã tạo. Chọn Thêm thẻ để bắt đầu.",
-        );
+      setMessage(
+        manual
+          ? `Đã tạo “${metadata.name}”. Mở menu ba chấm để thêm thẻ.`
+          : `Đã tạo “${metadata.name}” với ${metadata.cardCount} thẻ${skipped ? `; bỏ qua ${skipped} dòng (${issues.join(", ")})` : ""}.`,
+      );
+    });
+  }
+
+  function openCreator() {
+    closeDraft();
+    setCreating(true);
+    setActive(null);
+    setName("");
+    setManualCards([blankCard()]);
+    setAllowEmpty(true);
+  }
+
+  function chooseImport() {
+    if (!name.trim()) {
+      setCreatorError("Nhập tên bộ thẻ trước khi chọn file import.");
+      return;
+    }
+    setCreatorError("");
+    input.current?.click();
+  }
+
+  async function dropDeck(sourceId: string, targetId: string) {
+    if (sourceId === targetId || busy) return;
+    const previous = decks;
+    const visible = [...decks.content];
+    const from = visible.findIndex((deck) => deck.id === sourceId);
+    const to = visible.findIndex((deck) => deck.id === targetId);
+    if (from < 0 || to < 0) return;
+    const [moved] = visible.splice(from, 1);
+    visible.splice(to, 0, moved);
+    setDecks((current) => ({ ...current, content: visible }));
+    setDraggingDeckId(null);
+    setDropDeckId(null);
+    await operation(async () => {
+      try {
+        const all = await allDecks();
+        const sourceIndex = all.findIndex((deck) => deck.id === sourceId);
+        const targetIndex = all.findIndex((deck) => deck.id === targetId);
+        if (sourceIndex < 0 || targetIndex < 0)
+          throw new Error("Không tìm thấy bộ thẻ để sắp xếp.");
+        const [item] = all.splice(sourceIndex, 1);
+        all.splice(targetIndex, 0, item);
+        await reorderDecks(all.map((deck) => deck.id));
+        setMessage("Đã lưu thứ tự bộ thẻ.");
+      } catch (reason) {
+        setDecks(previous);
+        throw reason;
       }
     });
   }
@@ -369,18 +435,6 @@ export function ImportedDecks({
       setLaunch(null);
     });
   }
-  async function shiftDeck(id: string, delta: number) {
-    await operation(async () => {
-      const all = await allDecks();
-      const index = all.findIndex((d) => d.id === id);
-      const next = index + delta;
-      if (next < 0 || next >= all.length) return;
-      [all[index], all[next]] = [all[next], all[index]];
-      await reorderDecks(all.map((d) => d.id));
-      setSort("position,asc");
-      setReload((v) => v + 1);
-    });
-  }
   async function shiftCard(id: string, delta: number) {
     if (!active) return;
     await operation(async () => {
@@ -437,41 +491,17 @@ export function ImportedDecks({
       />
     );
   return (
-    <section className="study-panel space-y-5" aria-label="Bộ thẻ của bạn">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-xl font-semibold">Bộ thẻ của bạn</h2>
-        <div className="flex flex-wrap gap-2">
-          <button
-            className="study-button"
-            disabled={busy}
-            onClick={() => {
-              closeDraft();
-              setCreating(true);
-              setActive(null);
-              setName("Bộ thẻ mới");
-              setManualCards([blankCard()]);
-              setAllowEmpty(false);
-            }}
-          >
-            Tạo bộ thủ công
-          </button>
-          <button
-            className="study-button study-button-primary"
-            disabled={busy}
-            onClick={() => input.current?.click()}
-          >
-            Import
-          </button>
-          <button
-            className="study-button !px-4"
-            aria-label="Quy tắc nhập tệp"
-            aria-expanded={rules}
-            aria-controls="import-rules"
-            onClick={() => setRules((v) => !v)}
-          >
-            !
-          </button>
+    <section className="space-y-5" aria-label="Bộ thẻ của bạn">
+      <div className="flex items-end justify-between gap-3">
+        <div>
+          <p className="study-eyebrow">CỦA BẠN</p>
+          <h2 className="mt-1 text-xl font-semibold">Bộ thẻ của bạn</h2>
         </div>
+        {user && decks.totalElements > 1 && (
+          <p className="hidden text-xs text-[var(--color-text-tertiary)] sm:block">
+            Kéo tay cầm ⋮⋮ để đổi thứ tự
+          </p>
+        )}
       </div>
       <input
         ref={input}
@@ -483,47 +513,21 @@ export function ImportedDecks({
           const file = e.target.files?.[0];
           e.target.value = "";
           if (!file) return;
-          closeDraft();
           setActive(null);
+          setCreating(true);
+          setCreatorError("");
           parser.current = new AbortController();
           void operation(async () => {
             try {
               const p = await parseImportFile(file, parser.current!.signal);
               setPreview(p);
-              setName(p.name);
+              setName((current) => current.trim() || p.name);
             } finally {
               parser.current = null;
             }
           });
         }}
       />
-      {rules && (
-        <div
-          id="import-rules"
-          className="rounded-xl bg-[var(--color-surface-alt)] p-4 space-y-3"
-        >
-          <p>
-            TXT/CSV/TSV/JSON/XLSX/XLS · tối đa 20 MB và 20.000 thẻ. Bắt buộc mặt
-            trước/mặt sau; tùy chọn reading, note, type, tags. Nhận tiêu đề
-            Anh/Việt; có thể đổi ánh xạ cột và chọn sheet Excel trước khi tạo.
-          </p>
-          <p>
-            Dòng thiếu nội dung, quá dài hoặc trùng cặp mặt trước/mặt sau sẽ
-            được báo trong preview. Tên file/sheet giữ trong nguồn, không sửa
-            ghi chú.
-          </p>
-          <pre className="overflow-auto text-sm">
-            front,back,reading,note,type{`\n`}勉強,Việc học,べんきょう,Ôn bài
-            6,VOCABULARY
-          </pre>
-          <button className="study-button" onClick={() => download("csv")}>
-            Tải mẫu CSV
-          </button>{" "}
-          <button className="study-button" onClick={() => download("json")}>
-            Tải mẫu JSON
-          </button>
-        </div>
-      )}
       {busy && (
         <p role="status">
           Đang xử lý…{" "}
@@ -550,150 +554,6 @@ export function ImportedDecks({
         </div>
       )}
       {message && <p role="status">{message}</p>}
-      {preview && (
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Xem trước: {preview.source}</h3>
-          <p className="study-copy">
-            Bản nháp giữ khi đăng nhập tại đây; tải lại hoặc đóng trang có thể
-            cần chọn lại tệp.
-          </p>
-          <label className="block">
-            Tên thư mục
-            <input
-              className="study-input mt-1"
-              value={name}
-              maxLength={200}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <ImportPreviewEditor preview={preview} onChange={setPreview} />
-          <div className="flex gap-2">
-            <button
-              className="study-button study-button-primary"
-              disabled={busy || !name.trim() || !preview.cards.length}
-              onClick={() => void create()}
-            >
-              Tạo bộ thẻ
-            </button>
-            <button
-              className="study-button"
-              disabled={busy}
-              onClick={closeDraft}
-            >
-              Hủy
-            </button>
-          </div>
-        </div>
-      )}
-      {creating && (
-        <form
-          className="space-y-4"
-          onSubmit={(e) => {
-            e.preventDefault();
-            void create(true);
-          }}
-        >
-          <h3>Tạo bộ thẻ thủ công</h3>
-          <label className="block">
-            Tên bộ thẻ
-            <input
-              className="study-input"
-              maxLength={200}
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <label className="flex gap-2">
-            <input
-              type="checkbox"
-              checked={allowEmpty}
-              onChange={(e) => setAllowEmpty(e.target.checked)}
-            />
-            Tạo bộ trống
-          </label>
-          {allowEmpty ? (
-            <p className="study-copy">
-              Bộ trống chưa thể học. Bạn cần thêm thẻ sau khi tạo.
-            </p>
-          ) : (
-            <>
-              {manualCards.map((c, i) => (
-                <div key={c.id} className="space-y-2">
-                  <CardFields
-                    card={c}
-                    onChange={(card) =>
-                      setManualCards((items) =>
-                        items.map((v, n) => (n === i ? card : v)),
-                      )
-                    }
-                  />
-                  {manualCards.length > 1 && (
-                    <button
-                      type="button"
-                      className="study-button"
-                      onClick={() =>
-                        setManualCards((items) =>
-                          items.filter((_, n) => n !== i),
-                        )
-                      }
-                    >
-                      Bỏ thẻ {i + 1}
-                    </button>
-                  )}
-                </div>
-              ))}
-              <button
-                type="button"
-                className="study-button"
-                onClick={() =>
-                  setManualCards((items) => [...items, blankCard()])
-                }
-              >
-                Thêm một thẻ
-              </button>
-            </>
-          )}
-          <div className="flex gap-2">
-            <button
-              className="study-button study-button-primary"
-              disabled={busy || !name.trim()}
-            >
-              Tạo và thêm thẻ
-            </button>
-            <button type="button" className="study-button" onClick={closeDraft}>
-              Hủy
-            </button>
-          </div>
-        </form>
-      )}
-      {result && (
-        <section
-          className="rounded-xl border border-[var(--color-border)] p-4 space-y-3"
-          aria-label="Kết quả import"
-        >
-          <h3>Đã tạo {result.deck.name}</h3>
-          <p>
-            {result.deck.cardCount} thẻ được tạo · {result.skipped} dòng bỏ qua
-          </p>
-          {result.issues.map((issue) => (
-            <p key={issue} className="study-copy">
-              {issue}
-            </p>
-          ))}
-          <button className="study-button" onClick={() => open(result.deck)}>
-            Quản lý bộ
-          </button>{" "}
-          {result.deck.cardCount > 0 && (
-            <button
-              className="study-button study-button-primary"
-              onClick={() => chooseStudy(result.deck)}
-            >
-              Bắt đầu học
-            </button>
-          )}
-        </section>
-      )}
       {launch && (
         <div
           className="rounded-xl border border-[var(--color-border)] p-4 space-y-3"
@@ -792,7 +652,7 @@ export function ImportedDecks({
             </button>
             <button
               className="study-button"
-              onClick={() => setCustomizing(true)}
+              onClick={() => setCustomizing(active)}
             >
               Tùy chỉnh
             </button>
@@ -1052,123 +912,302 @@ export function ImportedDecks({
           />
         </div>
       )}
-      {!active && !preview && !creating && (
-        <>
-          {leadingDeck}
-          {!user ? (
-            <p className="study-copy">
-              Đăng nhập khi tạo bộ hoặc để quản lý các bộ thẻ cá nhân của bạn.
-            </p>
-          ) : (
-            <>
-              <label className="block">
-                Sắp xếp
-                <select
-                  className="study-input !w-auto"
-                  value={sort}
-                  onChange={(e) => {
-                    setSort(e.target.value);
-                    setDeckPage(0);
-                  }}
-                >
-                  <option value="updatedAt,desc">Cập nhật mới nhất</option>
-                  <option value="name,asc">Tên A–Z</option>
-                  <option value="position,asc">Thứ tự tùy chỉnh</option>
-                </select>
-              </label>
-              {loading ? (
-                <p role="status">Đang tải bộ thẻ…</p>
-              ) : decks.content.length ? (
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {decks.content.map((d) => (
-                    <article
-                      key={d.id}
-                      className="rounded-xl border border-[var(--color-border)] p-4 space-y-3"
-                    >
-                      <p className="study-eyebrow">
-                        {d.sourceType === "MANUAL" ? "Tạo thủ công" : "Import"}
-                      </p>
-                      <h3 className="text-lg font-semibold break-words">
-                        {d.name}
-                      </h3>
-                      <p>
-                        {d.cardCount} thẻ · {d.newCount} mới · {d.dueCount} đến
-                        hạn
-                      </p>
-                      {!d.cardCount && (
-                        <p className="study-copy">
-                          Chưa có thẻ. Mở Quản lý để thêm thẻ.
-                        </p>
-                      )}
-                      <div className="flex flex-wrap gap-2">
-                        <button
-                          className="study-button"
-                          onClick={() => open(d)}
-                        >
-                          Quản lý
-                        </button>
-                        {d.cardCount > 0 && (
-                          <button
-                            className="study-button study-button-primary"
-                            onClick={() => chooseStudy(d)}
-                          >
-                            Bắt đầu học
-                          </button>
-                        )}
-                        <button
-                          className="study-button"
-                          disabled={busy}
-                          aria-label={`Đưa bộ ${d.name} lên`}
-                          onClick={() => void shiftDeck(d.id, -1)}
-                        >
-                          ↑
-                        </button>
-                        <button
-                          className="study-button"
-                          disabled={busy}
-                          aria-label={`Đưa bộ ${d.name} xuống`}
-                          onClick={() => void shiftDeck(d.id, 1)}
-                        >
-                          ↓
-                        </button>
-                      </div>
-                    </article>
-                  ))}
+      {!active && (
+        <div className="space-y-4">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {creating || preview ? (
+              <section className="study-panel relative space-y-4 border-dashed sm:col-span-2 xl:col-span-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="study-eyebrow">BỘ THẺ MỚI</p>
+                    <h3 className="mt-1 text-lg font-semibold">
+                      {preview
+                        ? "Kiểm tra dữ liệu import"
+                        : "Bạn muốn tạo bộ thế nào?"}
+                    </h3>
+                  </div>
+                  <button
+                    type="button"
+                    className="rounded-full p-2 text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-text)]"
+                    aria-label="Đóng form tạo bộ thẻ"
+                    onClick={closeDraft}
+                  >
+                    <X size={18} />
+                  </button>
                 </div>
-              ) : (
-                <p className="study-copy">
-                  Chưa có bộ thẻ. Tạo thủ công hoặc Import để bắt đầu.
-                </p>
-              )}
-              <Pagination
-                value={deckPage}
-                pages={decks.totalPages}
-                total={decks.totalElements}
-                onChange={setDeckPage}
-              />
-            </>
+                <label className="block max-w-xl">
+                  Tên bộ thẻ <span aria-hidden="true">*</span>
+                  <input
+                    className="study-input mt-1"
+                    autoFocus
+                    maxLength={200}
+                    value={name}
+                    aria-invalid={!!creatorError}
+                    onChange={(event) => {
+                      setName(event.target.value);
+                      if (event.target.value.trim()) setCreatorError("");
+                    }}
+                    placeholder="Ví dụ: Từ vựng N3 bài 1"
+                  />
+                </label>
+                {creatorError && (
+                  <p role="alert" className="text-sm text-[var(--color-error)]">
+                    {creatorError}
+                  </p>
+                )}
+                {preview ? (
+                  <>
+                    <ImportPreviewEditor
+                      preview={preview}
+                      onChange={setPreview}
+                    />
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        className="study-button study-button-primary"
+                        disabled={busy || !preview.cards.length}
+                        onClick={() => void create(false)}
+                      >
+                        Tạo bộ thẻ
+                      </button>
+                      <button
+                        type="button"
+                        className="study-button"
+                        disabled={busy}
+                        onClick={chooseImport}
+                      >
+                        Chọn file khác
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <button
+                      type="button"
+                      className="group flex min-h-28 items-center gap-4 rounded-xl border border-[var(--color-border)] p-4 text-left transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-alt)]"
+                      disabled={busy}
+                      onClick={() => void create(true, true)}
+                    >
+                      <span className="rounded-full bg-[var(--color-surface-alt)] p-3 text-[var(--color-accent)]">
+                        <PenLine size={21} />
+                      </span>
+                      <span>
+                        <strong className="block">Tạo thủ công</strong>
+                        <span className="study-copy">
+                          Tạo bộ trống rồi thêm từng thẻ
+                        </span>
+                      </span>
+                    </button>
+                    <div className="relative">
+                      <button
+                        type="button"
+                        className="flex min-h-28 w-full items-center gap-4 rounded-xl border border-[var(--color-border)] p-4 text-left transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-alt)]"
+                        disabled={busy}
+                        onClick={chooseImport}
+                      >
+                        <span className="rounded-full bg-[var(--color-surface-alt)] p-3 text-[var(--color-accent)]">
+                          <Upload size={21} />
+                        </span>
+                        <span>
+                          <strong className="block">Import file</strong>
+                          <span className="study-copy">
+                            TXT, CSV, TSV, JSON hoặc Excel
+                          </span>
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        className="absolute right-2 top-2 rounded-full p-2 text-[var(--color-text-tertiary)] hover:bg-[var(--color-surface)] hover:text-[var(--color-text)]"
+                        aria-label="Hướng dẫn import"
+                        aria-expanded={rules}
+                        onClick={() => setRules((value) => !value)}
+                      >
+                        <HelpCircle size={17} />
+                      </button>
+                      {rules && (
+                        <div className="absolute right-0 top-11 z-20 w-[min(22rem,calc(100vw-3rem))] rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-sm shadow-xl">
+                          <p>
+                            Tệp tối đa 20 MB và 20.000 thẻ. Cần mặt trước, mặt
+                            sau; có thể thêm cách đọc, ghi chú, loại và tag.
+                          </p>
+                          <div className="mt-3 flex gap-2">
+                            <button
+                              className="study-button"
+                              onClick={() => download("csv")}
+                            >
+                              Mẫu CSV
+                            </button>
+                            <button
+                              className="study-button"
+                              onClick={() => download("json")}
+                            >
+                              Mẫu JSON
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </section>
+            ) : (
+              <button
+                type="button"
+                className="group flex min-h-52 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-[var(--color-border)] bg-transparent p-5 text-center transition-all hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-alt)]"
+                onClick={openCreator}
+              >
+                <span className="grid size-11 place-items-center rounded-full bg-[var(--color-surface-alt)] text-[var(--color-accent)] transition-transform group-hover:scale-105">
+                  <Plus size={24} />
+                </span>
+                <span className="font-semibold">Tạo bộ mới</span>
+              </button>
+            )}
+
+            {leadingDeck}
+
+            {user &&
+              decks.content.map((deck) => {
+                const badge = personalDeckBadge(deck);
+                const isDragging = draggingDeckId === deck.id;
+                const isDropTarget = dropDeckId === deck.id;
+                return (
+                  <article
+                    key={deck.id}
+                    className={`study-panel relative flex min-h-52 flex-col transition-[transform,border-color,opacity,box-shadow] duration-200 ${isDragging ? "opacity-45" : ""} ${isDropTarget ? "-translate-y-0.5 border-[var(--color-accent)] shadow-lg" : ""}`}
+                    onDragOver={(event) => {
+                      if (!draggingDeckId || draggingDeckId === deck.id) return;
+                      event.preventDefault();
+                      setDropDeckId(deck.id);
+                    }}
+                    onDragLeave={(event) => {
+                      if (
+                        !event.currentTarget.contains(
+                          event.relatedTarget as Node,
+                        )
+                      )
+                        setDropDeckId(null);
+                    }}
+                    onDrop={(event) => {
+                      event.preventDefault();
+                      if (draggingDeckId)
+                        void dropDeck(draggingDeckId, deck.id);
+                    }}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <ContentBadge tone={badge.tone}>
+                        {badge.label}
+                      </ContentBadge>
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          draggable={!busy}
+                          className="cursor-grab rounded-full p-2 text-[var(--color-text-tertiary)] hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-text)] active:cursor-grabbing"
+                          aria-label={`Kéo để sắp xếp bộ ${deck.name}`}
+                          onDragStart={(event) => {
+                            event.dataTransfer.effectAllowed = "move";
+                            event.dataTransfer.setData("text/plain", deck.id);
+                            setDraggingDeckId(deck.id);
+                          }}
+                          onDragEnd={() => {
+                            setDraggingDeckId(null);
+                            setDropDeckId(null);
+                          }}
+                        >
+                          <GripVertical size={18} />
+                        </button>
+                        <details className="relative">
+                          <summary
+                            className="list-none cursor-pointer rounded-full p-2 text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-text)] [&::-webkit-details-marker]:hidden"
+                            aria-label={`Thao tác với bộ ${deck.name}`}
+                          >
+                            <MoreVertical size={18} />
+                          </summary>
+                          <div className="absolute right-0 top-10 z-20 min-w-36 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-1.5 shadow-xl">
+                            <button
+                              className="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-[var(--color-surface-alt)]"
+                              onClick={() => open(deck)}
+                            >
+                              Quản lý
+                            </button>
+                            <button
+                              className="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-[var(--color-surface-alt)]"
+                              onClick={() => setCustomizing(deck)}
+                            >
+                              Tùy chỉnh
+                            </button>
+                          </div>
+                        </details>
+                      </div>
+                    </div>
+                    <h3 className="mt-5 break-words text-base font-semibold">
+                      {deck.name}
+                    </h3>
+                    <p className="mt-3 flex items-baseline gap-1.5">
+                      <strong className="text-4xl font-semibold tracking-tight">
+                        {deck.cardCount}
+                      </strong>
+                      <span className="study-copy">thẻ</span>
+                    </p>
+                    <p className="mt-1 text-xs text-[var(--color-text-tertiary)]">
+                      {deck.newCount} mới · {deck.dueCount} đến hạn
+                    </p>
+                    <button
+                      type="button"
+                      className={`mt-auto pt-5 text-left text-sm font-semibold ${deck.cardCount ? "text-[var(--color-accent)] hover:underline" : "cursor-default text-[var(--color-text-tertiary)]"}`}
+                      disabled={!deck.cardCount}
+                      onClick={() => chooseStudy(deck)}
+                    >
+                      {deck.cardCount ? "Bắt đầu học →" : "Chưa có thẻ"}
+                    </button>
+                  </article>
+                );
+              })}
+          </div>
+
+          {!user && (
+            <p className="study-copy">
+              Bạn có thể bắt đầu tạo bộ; hệ thống sẽ yêu cầu đăng nhập khi lưu.
+            </p>
           )}
-        </>
+          {user && loading && <p role="status">Đang tải bộ thẻ…</p>}
+          {user && !loading && !decks.content.length && (
+            <p className="study-copy">
+              Chưa có bộ cá nhân. Chọn “Tạo bộ mới” để bắt đầu.
+            </p>
+          )}
+          {user && (
+            <Pagination
+              value={deckPage}
+              pages={decks.totalPages}
+              total={decks.totalElements}
+              onChange={setDeckPage}
+            />
+          )}
+        </div>
       )}
-      {customizing && active && (
+      {customizing && (
         <DeckCustomizeDialog
           deck={{
-            id: active.id,
-            name: active.name,
-            source: active.sourceName || "",
-            format: active.importFormat || "",
-            position: active.position,
-            createdAt: active.createdAt,
-            template: normalizeDeckTemplate(active.templateConfig),
-            cards: cards.content.map(asImported),
+            id: customizing.id,
+            name: customizing.name,
+            source: customizing.sourceName || "",
+            format: customizing.importFormat || "",
+            position: customizing.position,
+            createdAt: customizing.createdAt,
+            template: normalizeDeckTemplate(customizing.templateConfig),
+            cards:
+              active?.id === customizing.id
+                ? cards.content.map(asImported)
+                : [],
           }}
           busy={busy}
-          onCancel={() => setCustomizing(false)}
+          onCancel={() => setCustomizing(null)}
           onSave={(template) =>
             void operation(async () => {
-              await updateDeck(active.id, { templateConfig: template });
-              await refreshActive();
-              setCustomizing(false);
+              await updateDeck(customizing.id, { templateConfig: template });
+              if (active?.id === customizing.id) await refreshActive();
+              else setReload((value) => value + 1);
+              setCustomizing(null);
             })
           }
         />
@@ -1176,6 +1215,21 @@ export function ImportedDecks({
     </section>
   );
 }
+
+function personalDeckBadge(deck: PersonalDeck): {
+  label: string;
+  tone: "neutral" | "vocabulary" | "grammar" | "kanji";
+} {
+  const text = `${deck.name} ${deck.sourceName || ""}`.toLocaleLowerCase("vi");
+  if (/từ vựng|tu vung|vocab|vocabulary/.test(text))
+    return { label: "Từ vựng", tone: "vocabulary" };
+  if (/ngữ pháp|ngu phap|grammar/.test(text))
+    return { label: "Ngữ pháp", tone: "grammar" };
+  if (/kanji|hán tự|han tu/.test(text))
+    return { label: "Kanji", tone: "kanji" };
+  return { label: "Của bạn", tone: "neutral" };
+}
+
 function Pagination({
   value,
   pages,

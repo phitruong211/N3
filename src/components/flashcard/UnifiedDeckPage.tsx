@@ -9,6 +9,7 @@ import {
 import { defaultDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { StudySession } from "./StudySession";
 import { ImportedDecks } from "./ImportedDecks";
+import { ContentBadge } from "@/components/ui/StudyUI";
 
 export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
   const { vocabulary, kanji, grammar, bookmarks, srsCards } = useApp();
@@ -109,6 +110,44 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
       const p = progress(c);
       return p && p.state !== "new" && Date.parse(p.dueDate) <= Date.now();
     }).length;
+    if (deck.id === "saved") {
+      const canStudy = eligible(deck.cards).length > 0;
+      return (
+        <article key={deck.id} className="study-panel flex min-h-52 flex-col">
+          <ContentBadge>Đã lưu</ContentBadge>
+          <h3 className="mt-5 text-base font-semibold">{deck.name}</h3>
+          <p
+            className={`mt-3 flex items-baseline gap-1.5 ${deck.cards.length ? "" : "text-[var(--color-text-tertiary)]"}`}
+          >
+            <strong className="text-4xl font-semibold tracking-tight">
+              {deck.cards.length}
+            </strong>
+            <span className="text-sm">thẻ</span>
+          </p>
+          <p className="mt-1 text-xs text-[var(--color-text-tertiary)]">
+            {fresh} mới · {due} đến hạn
+          </p>
+          <button
+            className={`mt-auto pt-5 text-left text-sm font-semibold ${
+              canStudy
+                ? "text-[var(--color-accent)] hover:underline"
+                : "cursor-default text-[var(--color-text-tertiary)]"
+            }`}
+            disabled={!canStudy}
+            onClick={() => {
+              setPending(deck);
+              setLimit(Math.min(20, eligible(deck.cards).length));
+            }}
+          >
+            {deck.cards.length
+              ? canStudy
+                ? "Bắt đầu học →"
+                : "Chưa có thẻ đến hạn"
+              : "Chưa có thẻ"}
+          </button>
+        </article>
+      );
+    }
     return (
       <article key={deck.id} className="study-panel space-y-3">
         <p className="study-eyebrow">

@@ -75,14 +75,22 @@ try {
     [],
   );
   await button("Tạo bộ thẻ").click();
-  await page.getByRole("region", { name: "Kết quả import" }).waitFor();
+  await page
+    .getByText("Đã tạo “integration” với 2 thẻ; bỏ qua 1 dòng", {
+      exact: false,
+    })
+    .waitFor();
   let listing = await api("/decks?page=0&size=20");
   assert.equal(listing.status, 200);
   assert.equal(listing.data.content.length, 1);
   const deck = listing.data.content[0];
   assert.equal(deck.cardCount, 2);
   assert.equal(deck.newCount, 2);
-  await button("Quản lý bộ").click();
+  const personalDeck = page.locator("article").filter({
+    has: page.getByRole("heading", { name: "integration", exact: true }),
+  });
+  await personalDeck.locator("summary").click();
+  await personalDeck.getByRole("button", { name: "Quản lý" }).click();
   await page.getByText("Ghi chú gốc", { exact: true }).waitFor();
   const first = (await api(`/decks/${deck.id}/cards?page=0&size=1`)).data;
   assert.equal(first.totalElements, 2);
@@ -111,7 +119,7 @@ try {
     .filter({
       has: page.getByRole("heading", { name: "integration", exact: true }),
     })
-    .getByRole("button", { name: "Bắt đầu học", exact: true })
+    .getByRole("button", { name: /^Bắt đầu học/ })
     .click();
   await button("Bắt đầu phiên").click();
   await page
@@ -214,7 +222,8 @@ try {
   assert.equal((await api("/users/me/learning")).data.bookmarks.length, 2);
   await nav("Thẻ học");
   await page.setViewportSize({ width: 375, height: 812 });
-  await page.getByRole("button", { name: "Quy tắc nhập tệp" }).click();
+  await button("Tạo bộ mới").click();
+  await page.getByRole("button", { name: "Hướng dẫn import" }).click();
   assert.equal(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
@@ -222,7 +231,7 @@ try {
     true,
   );
   assert.ok(
-    await button("Import").evaluate(
+    await page.getByRole("button", { name: /^Import file/ }).evaluate(
       (el) => el.getBoundingClientRect().right <= innerWidth,
     ),
   );
