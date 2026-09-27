@@ -326,6 +326,7 @@ try {
   failLogin = false;
   await signIn("a@example.com");
   await page.getByRole("dialog").waitFor({ state: "detached" });
+  await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
   await nav("Thẻ học");
   await page.getByLabel("Tên bộ thẻ").waitFor();
   assert.equal(await page.getByLabel("Tên bộ thẻ").inputValue(), "Guest draft");
@@ -408,6 +409,8 @@ try {
   await page.getByLabel("Tên bộ thẻ").fill("B manual");
   await page.getByRole("button", { name: /^Tạo thủ công/ }).click();
   await signIn("b@example.com", true);
+  await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
+  await nav("Thẻ học");
   await page.getByLabel("Tên bộ thẻ").waitFor();
   assert.equal(
     await page.getByLabel("Tên bộ thẻ").inputValue(),

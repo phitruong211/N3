@@ -106,7 +106,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     finally { if (authRequest.current === controller) authRequest.current = null; }
     controller.signal.throwIfAborted();
     if (attempt !== generation.current) throw new Error('Phiên đã thay đổi. Vui lòng đăng nhập lại.');
-    setResumePage(guest ? pageRef.current : null);
+    setResumePage('dashboard');
     // P3 / FR-GUEST-07,08: connect consent + idempotent server migration here only after the sync API exists.
     const guestStorage = createLearningStorage('guest');
     setGuestNotice(guestStorage.getBookmarks().length > 0 || guestStorage.getStudyDays().length > 0 || (['vocabulary', 'kanji', 'grammar'] as const).some(type => guestStorage.getSRSCards(type).length > 0) || ['nhat-listening-v1', 'nhat-jlpt-listening-scores-v1'].some(key => Object.keys(guestStorage.getJSON(key, {})).length > 0));

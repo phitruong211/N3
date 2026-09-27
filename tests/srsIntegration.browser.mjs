@@ -64,6 +64,7 @@ try {
     .getByRole("button", { name: "Tạo tài khoản", exact: true })
     .click();
   await dialog.waitFor({ state: "detached" });
+  await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
   await page.getByLabel("Tôi xác nhận dữ liệu này thuộc về tôi").check();
   await button("Chuyển dữ liệu vào tài khoản").click();
   await page.getByText(/Đã chuyển 1 dấu trang/).waitFor();
@@ -74,6 +75,7 @@ try {
     ),
     [],
   );
+  await nav("Thẻ học");
   await button("Tạo bộ thẻ").click();
   await page
     .getByText("Đã tạo “integration” với 2 thẻ; bỏ qua 1 dòng", {
