@@ -46,7 +46,7 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
         {error && <p role="alert" className="text-sm text-[var(--color-error)]">{error}</p>}
         <button className="auth-submit" disabled={busy}>{busy ? <><LoaderCircle className="auth-spinner" size={19}/>Đang kết nối…</> : <>{mode === 'login' ? 'Đăng nhập' : 'Tạo tài khoản'}<ArrowRight size={19}/></>}</button>
       </form>
-      <button type="button" className="study-button w-full mt-4" disabled={busy && !compact} onClick={() => compact ? setPrompt(null) : enterGuest()}>{compact ? 'Tiếp tục học thử' : 'Khám phá với tư cách khách'}</button>
+      <button type="button" className="study-button w-full mt-4" disabled={busy && !compact} onClick={() => compact ? setPrompt(null) : enterGuest()}>{compact ? 'Tiếp tục học thử' : 'Học thử'}</button>
       <div className="auth-benefits"><BookOpen size={17} aria-hidden="true"/><span>Bộ thẻ cá nhân</span><span aria-hidden="true">·</span><span>Ôn tập theo nhịp của bạn</span></div>
     </div>
     <footer className="auth-bottom"><span>N3 学習</span><span>Mỗi ngày, gần hơn một chút.</span></footer>

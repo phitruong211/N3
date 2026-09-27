@@ -183,7 +183,7 @@ async function signIn(email, register = false) {
 }
 try {
   await page.goto(baseURL);
-  await button("Khám phá với tư cách khách").click();
+  await button("Học thử").click();
   await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
   assert.equal(calls.length, 0);
   assert.equal(await button("Đăng xuất").count(), 0);
@@ -192,6 +192,8 @@ try {
   const guestBookmarks = await stored("guest:n3_bookmarks");
   assert.equal(guestBookmarks.length, 1);
   await page.reload();
+  await button("Học thử").click();
+  await nav("Từ vựng");
   await button("Bỏ lưu từ").waitFor();
   assert.deepEqual(await stored("guest:n3_bookmarks"), guestBookmarks);
   await button("Tìm kiếm").click();
@@ -318,11 +320,13 @@ try {
     null,
   );
   assert.equal(createCount(), 0);
-  // Signing in from the general header also preserves an in-progress preview.
+  // Signing in from Settings also preserves an in-progress preview.
+  await nav("Cài đặt");
   await button("Đăng nhập / Đăng ký").click();
   failLogin = false;
   await signIn("a@example.com");
   await page.getByRole("dialog").waitFor({ state: "detached" });
+  await nav("Thẻ học");
   await page.getByLabel("Tên bộ thẻ").waitFor();
   assert.equal(await page.getByLabel("Tên bộ thẻ").inputValue(), "Guest draft");
   assert.equal(
@@ -395,6 +399,7 @@ try {
   await button("Lưu từ").click();
   assert.equal((await stored("user:A:n3_bookmarks")).length, 1);
   await button("Đăng xuất").click();
+  await button("Học thử").click();
   await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
   assert.deepEqual(await stored("guest:n3_bookmarks"), guestBookmarks);
   await nav("Thẻ học");
@@ -420,12 +425,13 @@ try {
   await other.goto(baseURL);
   await other.getByRole("button", { name: "Đăng xuất", exact: true }).click();
   await page
-    .getByRole("button", { name: "Đăng nhập / Đăng ký", exact: true })
+    .getByRole("button", { name: "Học thử", exact: true })
     .waitFor();
   assert.equal(await button("Đăng xuất").count(), 0);
   await other.close();
   // Mobile preview/auth: no horizontal overflow and the form remains usable.
   await page.setViewportSize({ width: 375, height: 812 });
+  await button("Học thử").click();
   await button("Mở trang khác").click();
   await page
     .getByRole("dialog", { name: "Trang khác" })

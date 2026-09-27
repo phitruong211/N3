@@ -39,7 +39,7 @@ async function api(path, options = {}) {
 }
 try {
   await page.goto(base);
-  await button("Khám phá với tư cách khách").click();
+  await button("Học thử").click();
   await nav("Từ vựng");
   await button("Lưu từ").click();
   await nav("Thẻ học");

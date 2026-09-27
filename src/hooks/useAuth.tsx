@@ -29,13 +29,14 @@ interface AuthState {
   sessionKey: string;
 }
 const AuthContext = createContext<AuthState | null>(null);
-const GUEST_KEY = 'guest:session';
-function isGuestSession() { try { return sessionStorage.getItem(GUEST_KEY) === 'true'; } catch { return false; } }
-function rememberGuest() { try { sessionStorage.setItem(GUEST_KEY, 'true'); } catch { /* Guest remains usable in memory. */ } }
+function startUnauthenticated() {
+  try { sessionStorage.removeItem('guest:session'); } catch { /* Ignore unavailable session storage. */ }
+  return false;
+}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<ApiUser | null>(null);
-  const [guest, setGuest] = useState(isGuestSession);
+  const [guest, setGuest] = useState(startUnauthenticated);
   const [loading, setLoading] = useState(true);
   const [restoreError, setRestoreError] = useState<string | null>(null);
   const [restoreAttempt, setRestoreAttempt] = useState(0);
@@ -56,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       generation.current++;
       authRequest.current?.abort();
       invalidateApiSession();
-      setUser(null); setDraft(null); setPrompt(null); setResumePage(null); setGuestNotice(false);
+      setUser(null); setGuest(false); setDraft(null); setPrompt(null); setResumePage(null); setGuestNotice(false);
       setLoading(true); setRestoreAttempt(value => value + 1);
     };
     const handleStorage = (event: StorageEvent) => { if (isSessionStorageKey(event.key)) changed(); };
@@ -109,12 +110,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // P3 / FR-GUEST-07,08: connect consent + idempotent server migration here only after the sync API exists.
     const guestStorage = createLearningStorage('guest');
     setGuestNotice(guestStorage.getBookmarks().length > 0 || guestStorage.getStudyDays().length > 0 || (['vocabulary', 'kanji', 'grammar'] as const).some(type => guestStorage.getSRSCards(type).length > 0) || ['nhat-listening-v1', 'nhat-jlpt-listening-scores-v1'].some(key => Object.keys(guestStorage.getJSON(key, {})).length > 0));
-    setUser(account); setSessionKey(sessionIdentity()!); setPrompt(null); setRestoreError(null);
+    setUser(account); setGuest(false); setSessionKey(sessionIdentity()!); setPrompt(null); setRestoreError(null);
   }
   function enterGuest() {
     // Never discard a recoverable authenticated session just to enter Guest.
     if (hasSession()) return;
-    invalidateApiSession(); rememberGuest(); setGuest(true); setResumePage('dashboard'); setPrompt(null);
+    invalidateApiSession(); setGuest(true); setResumePage('dashboard'); setPrompt(null);
     createLearningStorage('guest').setLastPage('dashboard');
   }
   async function signOut() {
@@ -122,8 +123,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     authRequest.current?.abort();
     const pending = logout();
     setUser(null); setDraft(null); setPrompt(null); setGuestNotice(false); setRestoreError(null);
-    rememberGuest(); setGuest(true); setResumePage('dashboard'); setSessionKey(`guest:${generation.current}`);
-    createLearningStorage('guest').setLastPage('dashboard');
+    setGuest(false); setResumePage(null); setSessionKey(`unauthenticated:${generation.current}`);
     try { await pending; } catch { if (attempt !== generation.current || hasSession()) return; setRestoreError('Đã đăng xuất trên thiết bị. Chưa thể thu hồi phiên trên máy chủ do lỗi kết nối.'); }
   }
   return <AuthContext.Provider value={{ user, mode: user ? 'authenticated' : guest ? 'guest' : 'unauthenticated', loading, restoreError,

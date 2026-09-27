@@ -33,7 +33,7 @@ export function AuthDialog() {
 }
 
 export function SessionNotices() {
-  const { mode, requestAuth, restoreError } = useAuth();
+  const { restoreError } = useAuth();
   const [storageError, setStorageError] = useState(false);
   useEffect(() => {
     const failed = () => setStorageError(true);
@@ -41,10 +41,6 @@ export function SessionNotices() {
     return () => window.removeEventListener('learning-storage-error', failed);
   }, []);
   return <div className="space-y-3 mb-5">
-    {mode === 'guest' && <div className="study-panel flex flex-wrap items-center justify-between gap-3 !p-4">
-      <p className="study-copy"><strong>Đang học thử.</strong> Tiến độ được lưu trên trình duyệt này, chưa đồng bộ nhiều thiết bị.</p>
-      <button className="study-button" onClick={requestAuth}>Đăng nhập / Đăng ký</button>
-    </div>}
     <AccountLearningStatus />
     {hasLegacyLearningData() && <p className="study-copy" role="note">Dữ liệu học phiên bản cũ vẫn được giữ trên thiết bị. Vì chưa xác định được chủ sở hữu, dữ liệu này chưa tự chuyển vào Guest hoặc tài khoản.</p>}
     {storageError && <p role="alert" className="text-[var(--color-error)]">Không lưu được dữ liệu trên thiết bị. Hãy kiểm tra dung lượng trình duyệt; thay đổi vừa rồi có thể chưa được lưu.</p>}
