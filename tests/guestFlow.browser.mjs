@@ -363,7 +363,6 @@ try {
   const personalNames = async () =>
     personalCards.locator("h3").allTextContents();
   assert.deepEqual(await personalNames(), [
-    "Thẻ đã lưu",
     "Guest draft",
     "Ngữ pháp cá nhân",
   ]);
@@ -384,7 +383,6 @@ try {
   await dropTarget.dispatchEvent("drop", { dataTransfer });
   await page.getByText("Đã lưu thứ tự bộ thẻ.", { exact: true }).waitFor();
   assert.deepEqual(await personalNames(), [
-    "Thẻ đã lưu",
     "Ngữ pháp cá nhân",
     "Guest draft",
   ]);
@@ -392,7 +390,6 @@ try {
   await nav("Thẻ học");
   await page.getByRole("heading", { name: "Bộ thẻ của bạn" }).waitFor();
   assert.deepEqual(await personalNames(), [
-    "Thẻ đã lưu",
     "Ngữ pháp cá nhân",
     "Guest draft",
   ]);

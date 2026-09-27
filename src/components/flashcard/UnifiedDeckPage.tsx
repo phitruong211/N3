@@ -270,7 +270,10 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
           {decks.map(tile)}
         </div>
       </section>
-      <ImportedDecks mode={mode} leadingDeck={tile(saved)} />
+      <ImportedDecks
+        mode={mode}
+        leadingDeck={saved.cards.length ? tile(saved) : undefined}
+      />
     </div>
   );
 }
