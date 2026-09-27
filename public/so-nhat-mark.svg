@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">SỔ NHẬT</title>
+  <circle cx="32" cy="14" r="7" fill="#b7523e"/>
+  <path d="M7.5 19.5c8.6-1.8 16.2.1 24.5 6.1v29.1c-7.7-5.2-15.6-7.1-24.5-5.2z" fill="#fffefa" stroke="#233c35" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M56.5 19.5c-8.6-1.8-16.2.1-24.5 6.1v29.1c7.7-5.2 15.6-7.1 24.5-5.2z" fill="#fffefa" stroke="#233c35" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M32 25.6v29.1" stroke="#233c35" stroke-width="3" stroke-linecap="round"/>
+  <text x="19.5" y="39.5" fill="#233c35" font-family="'Noto Serif JP','Hiragino Mincho ProN',serif" font-size="15" font-weight="700" text-anchor="middle">あ</text>
+  <path d="M39 31.5h10M39 37h10M39 42.5h7" stroke="#233c35" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

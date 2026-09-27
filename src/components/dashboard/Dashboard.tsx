@@ -19,7 +19,7 @@ export function Dashboard() {
   ];
 
   return <div className="study-page space-y-8">
-    <PageHeading eyebrow="SỔ NHẬT · N2 / N3 / N4" title="Hôm nay học gì?" subtitle="Một phiên ngắn, tập trung vào điều cần nhớ." />
+    <PageHeading eyebrow="SỔ NHẬT" title="Hôm nay học gì?" subtitle="Một phiên ngắn, tập trung vào điều cần nhớ." />
     <section className="study-panel p-6 sm:p-8 lg:p-10 relative overflow-hidden" aria-labelledby="next-study-title">
       <div className="absolute inset-y-0 left-0 w-1 bg-[var(--color-accent)]" />
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">

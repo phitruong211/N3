@@ -117,7 +117,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       >
         {/* Mobile Top Header */}
         <div className="md:hidden sticky top-0 z-30 flex items-center justify-between gap-2 px-4 h-14 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
-          <img src="/so-nhat-logo.png" alt="SỔ NHẬT" className="h-9 w-9 object-contain" />
+          <img src="/so-nhat-mark.svg" alt="SỔ NHẬT" className="h-10 w-10 object-contain" />
           <span className="text-sm font-semibold text-[var(--color-text)] truncate">
             {pageTitles[currentPage] ?? 'SỔ NHẬT'}
           </span>

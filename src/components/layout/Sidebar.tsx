@@ -29,10 +29,10 @@ export function Sidebar() {
   const { user, signOut, requestAuth } = useAuth();
   return (
     <aside className={`hidden md:flex sticky top-0 h-screen shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] transition-[width] duration-150 ${sidebarCollapsed ? 'w-20' : 'w-60'}`} aria-label="Điều hướng chính">
-      <div className="flex items-center justify-between px-4 py-6 border-b border-[var(--color-border)]">
+      <div className="flex items-center justify-between gap-3 px-4 py-5 border-b border-[var(--color-border)]">
         <button onClick={() => setCurrentPage('dashboard')} className="flex min-w-0 items-center gap-2 text-left cursor-pointer" aria-label="Về trang Hôm nay">
-          <img src="/so-nhat-logo.png" alt="" className="h-9 w-9 shrink-0 object-contain" />
-          {!sidebarCollapsed && <span className="font-bold tracking-wide text-[var(--color-text)]">SỔ NHẬT <span className="block text-[10px] font-medium tracking-normal text-[var(--color-text-secondary)]">N2 · N3 · N4</span></span>}
+          <img src="/so-nhat-mark.svg" alt="" className="h-12 w-12 shrink-0 object-contain" />
+          {!sidebarCollapsed && <span className="whitespace-nowrap text-xl font-bold tracking-wide text-[var(--color-text)]">SỔ NHẬT</span>}
         </button>
         <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} className="study-button !min-h-9 !w-9 !p-0" aria-label={sidebarCollapsed ? 'Mở rộng menu' : 'Thu gọn menu'}>
           {sidebarCollapsed ? <PanelLeftOpen size={17} /> : <PanelLeftClose size={17} />}
