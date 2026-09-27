@@ -25,6 +25,12 @@ test('CSV preserves quoted separators, newlines and escaped quotes', () => {
   assert.equal(result.cards[0].front, '猫,犬');
   assert.equal(result.cards[0].back, 'mèo\n#chó "nhỏ"');
 });
+test('JSON and CSV map Hán Việt aliases into a dedicated field', () => {
+  const json = parseTextImport('[{"front":"勉強","back":"Việc học","reading":"べんきょう","hanViet":"Miễn Cường"}]', 'cards.json');
+  assert.equal(json.cards[0].hanViet, 'Miễn Cường');
+  const csv = parseTextImport('front,back,Hán Việt\n日本,Nhật Bản,Nhật Bản', 'cards.csv');
+  assert.equal(csv.cards[0].hanViet, 'Nhật Bản');
+});
 test('Anki text directives, BOM, headers and skipped rows', () => {
   const result = parseTextImport('\uFEFF#separator:Tab\n#html:false\nMặt trước\tMặt sau\n猫\tmèo\nbad\t', 'cards.txt');
   assert.equal(result.cards.length, 1); assert.equal(result.skipped, 1);

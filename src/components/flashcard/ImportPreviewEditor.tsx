@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { remapImportPreview, type ImportField, type ImportPreview, type ImportTable } from '../../lib/ankiImport';
 
-const fields: [ImportField, string][] = [['front', 'Mặt trước *'], ['back', 'Mặt sau *'], ['reading', 'Cách đọc'], ['notes', 'Ghi chú'], ['kind', 'Loại thẻ'], ['tags', 'Tags']];
+const fields: [ImportField, string][] = [['front', 'Mặt trước *'], ['back', 'Mặt sau *'], ['reading', 'Cách đọc'], ['hanViet', 'Hán Việt'], ['notes', 'Ghi chú'], ['kind', 'Loại thẻ'], ['tags', 'Tags']];
 /** Local mapping and sheet editor. onChange returns the complete replacement preview; no API calls. */
 export default function ImportPreviewEditor({ preview, onChange }: { preview: ImportPreview; onChange: (preview: ImportPreview) => void }) {
   const [error, setError] = useState('');
@@ -37,7 +37,7 @@ export default function ImportPreviewEditor({ preview, onChange }: { preview: Im
     <p className="font-medium">{preview.cards.length} thẻ hợp lệ · {preview.skipped} dòng bỏ qua · {preview.duplicates || 0} dòng trùng</p>
     <p className="text-xs text-slate-500">Mẫu {Math.min(10, preview.cards.length)}/{preview.cards.length} thẻ. Giữ bản đầu khi trùng cặp mặt trước / mặt sau.</p>
     <div className="space-y-2">{preview.cards.slice(0, 10).map((card, i) => <div key={card.id} className="rounded-lg border border-slate-200 p-3 text-sm whitespace-pre-wrap break-words">
-      <strong>{i + 1}. {card.front}</strong><p>{card.back}</p>{card.reading && <p>{card.reading}</p>}{card.notes && <p className="text-slate-500">Ghi chú: {card.notes}</p>}
+      <strong>{i + 1}. {card.front}</strong><p>{card.back}</p>{card.reading && <p>{card.reading}</p>}{card.hanViet && <p className="text-slate-500">Hán Việt: {card.hanViet}</p>}{card.notes && <p className="text-slate-500">Ghi chú: {card.notes}</p>}
       <p className="text-xs text-slate-500">{card.kind}{card.tags?.length ? ` · ${card.tags.join(', ')}` : ''}{card.sourceSheet ? ` · Sheet: ${card.sourceSheet}` : ''}</p>
       {card.extraData && <pre className="whitespace-pre-wrap text-xs">{JSON.stringify(card.extraData, null, 2)}</pre>}
     </div>)}</div>

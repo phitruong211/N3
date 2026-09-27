@@ -167,7 +167,7 @@ export type ApiCardKind = 'VOCABULARY' | 'KANJI' | 'GRAMMAR' | 'GENERAL';
 export interface ApiDeckSummary { id: string; name: string; description: string | null; sourceType: string; sourceName: string | null; importFormat: string | null; visibility: string; cardCount: number; position: number; templateConfig: Record<string, unknown>; createdAt: string; updatedAt: string }
 export interface ApiCard { id: string; deckId: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; position: number; externalId: string | null; extraData: Record<string, unknown>; createdAt: string; updatedAt: string }
 export interface ApiDeck { deck: ApiDeckSummary; cards: ApiCard[] }
-export interface ApiQueueCard { cardId: string; deckId: string; deckName: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; progress: ApiProgress | null }
+export interface ApiQueueCard { cardId: string; deckId: string; deckName: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; extraData: Record<string, unknown>; progress: ApiProgress | null }
 export interface ApiProgress { state: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'; easeFactor: number; intervalMinutes?: number; intervalDays?: number; dueAt: string; repetitions: number; lapses: number; lastReviewedAt: string | null }
 
 export const listDecks = () => apiRequest<ApiDeckSummary[]>('/decks');

@@ -47,7 +47,7 @@ try {
     name: "integration.csv",
     mimeType: "text/csv",
     buffer: Buffer.from(
-      "front,back,reading,note,type,tags\n猫,Con mèo,ねこ,Ghi chú gốc,VOCABULARY,animal\n犬,Con chó,いぬ,Ghi chú khác,VOCABULARY,animal\n猫,Con mèo,ねこ,trùng,VOCABULARY,animal",
+      "front,back,reading,han_viet,note,type,tags\n猫,Con mèo,ねこ,Mão,Ghi chú gốc,VOCABULARY,animal\n犬,Con chó,いぬ,Khuyển,Ghi chú khác,VOCABULARY,animal\n猫,Con mèo,ねこ,Mão,trùng,VOCABULARY,animal",
     ),
   });
   await button("Tạo bộ thẻ").click();
@@ -94,10 +94,12 @@ try {
   await personalDeck.locator("summary").click();
   await personalDeck.getByRole("button", { name: "Quản lý" }).click();
   await page.getByText("Ghi chú gốc", { exact: true }).waitFor();
+  await page.getByText("Hán Việt: Mão", { exact: true }).waitFor();
   const first = (await api(`/decks/${deck.id}/cards?page=0&size=1`)).data;
   assert.equal(first.totalElements, 2);
   assert.equal(first.content.length, 1);
   const card = first.content[0];
+  assert.equal(card.extraData.hanViet, "Mão");
   const review = await api(`/anki/cards/${card.id}/reviews`, {
     method: "POST",
     body: { cardId: card.id, rating: "GOOD", responseTimeMs: 1200 },

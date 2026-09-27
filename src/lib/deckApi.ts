@@ -58,6 +58,7 @@ export function cardRequest(card: ImportedCard, position?: number) {
     tags: card.tags || [],
     extraData: {
       ...card.extraData,
+      hanViet: card.hanViet.trim(),
       ...(card.sourceRef ? { sourceRef: card.sourceRef } : {}),
       ...(card.sourceSheet ? { sourceSheet: card.sourceSheet } : {}),
     },
@@ -94,11 +95,15 @@ export function creationBody(
   };
 }
 export function asImported(card: PersonalCard): ImportedCard {
+  const hanViet = ["hanViet", "han_viet", "hanTu", "han_tu"]
+    .map((key) => card.extraData?.[key])
+    .find((value) => typeof value === "string");
   return {
     id: card.id,
     front: card.front,
     back: card.back,
     reading: card.reading || "",
+    hanViet: typeof hanViet === "string" ? hanViet : "",
     notes: card.notes || "",
     kind: card.kind.toLowerCase() as ImportedCard["kind"],
     tags: card.tags || [],

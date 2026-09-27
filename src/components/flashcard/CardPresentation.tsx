@@ -11,6 +11,7 @@ const fieldLabels: Record<CardField, string> = {
   front: "Mặt trước",
   back: "Mặt sau",
   reading: "Cách đọc",
+  hanViet: "Hán Việt",
   notes: "Ghi chú",
   kind: "Loại thẻ",
   deckName: "Tên bộ thẻ",
@@ -59,13 +60,15 @@ export function CardFace({
                 ? "rounded-xl bg-black/5 p-4 text-base"
                 : field === "reading"
                   ? "font-jp text-lg text-[var(--color-accent)]"
+                  : field === "hanViet"
+                    ? "text-base font-medium text-[var(--color-kanji)]"
                   : field === "kind" || field === "deckName"
                     ? "text-xs font-bold uppercase tracking-wide opacity-70"
                     : `${sizes[template.style.fontScale]} font-semibold whitespace-pre-wrap break-words`
             }
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
-            {value}
+            {field === "hanViet" ? `Hán Việt: ${value}` : value}
           </div>
         );
       })}
@@ -101,6 +104,7 @@ export function DeckCustomizeDialog({
     front: "日本語を勉強する",
     back: "Học tiếng Nhật",
     reading: "にほんごをべんきょうする",
+    hanViet: "Nhật Bản Ngữ · Miễn Cường",
     notes: "Ghi chú sẽ xuất hiện ở đây.",
     kind: "vocabulary" as const,
   };
@@ -108,6 +112,7 @@ export function DeckCustomizeDialog({
     "front",
     "back",
     "reading",
+    "hanViet",
     "notes",
     "kind",
     "deckName",

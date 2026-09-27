@@ -1,7 +1,7 @@
 import type { SRSCard } from '../types';
 
 export type ImportedKind = 'vocabulary' | 'kanji' | 'grammar' | 'general';
-export type CardField = 'front' | 'back' | 'reading' | 'notes' | 'kind' | 'deckName';
+export type CardField = 'front' | 'back' | 'reading' | 'hanViet' | 'notes' | 'kind' | 'deckName';
 export type CardTheme = 'paper' | 'blue' | 'dark' | 'system';
 export type CardOrientation = 'front-first' | 'back-first' | 'mixed';
 export interface DeckTemplateConfig {
@@ -11,14 +11,14 @@ export interface DeckTemplateConfig {
   style: { theme: CardTheme; fontScale: 'small' | 'medium' | 'large' | 'xlarge'; alignment: 'left' | 'center' };
   study: { orientation: CardOrientation };
 }
-export interface ImportedCard { id: string; front: string; back: string; reading: string; notes: string; kind: ImportedKind; tags?: string[]; sourceRef?: string; sourceSheet?: string; extraData?: Record<string, string>; srs?: SRSCard }
+export interface ImportedCard { id: string; front: string; back: string; reading: string; hanViet: string; notes: string; kind: ImportedKind; tags?: string[]; sourceRef?: string; sourceSheet?: string; extraData?: Record<string, string>; srs?: SRSCard }
 export interface ImportedDeck { id: string; name: string; source: string; format: string; createdAt: string; position: number; template: DeckTemplateConfig; cards: ImportedCard[] }
 export interface ImportPreview { name: string; source: string; format: string; cards: ImportedCard[]; skipped: number; tables?: ImportTable[]; issues?: ImportIssue[]; duplicates?: number }
 export const kindLabels: Record<ImportedKind, string> = { vocabulary: 'Từ vựng', kanji: 'Kanji', grammar: 'Ngữ pháp', general: 'Thẻ tổng hợp' };
 export const defaultDeckTemplate = (): DeckTemplateConfig => ({
   version: 1,
   front: { fields: ['front', 'reading'], showDeckName: true },
-  back: { fields: ['back', 'reading', 'notes'], showFront: true },
+  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: true },
   style: { theme: 'paper', fontScale: 'large', alignment: 'center' },
   study: { orientation: 'front-first' },
 });
@@ -27,7 +27,7 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
   const fallback = defaultDeckTemplate();
   if (!value || typeof value !== 'object') return fallback;
   const config = value as Partial<DeckTemplateConfig>;
-  const allowedFields: CardField[] = ['front', 'back', 'reading', 'notes', 'kind', 'deckName'];
+  const allowedFields: CardField[] = ['front', 'back', 'reading', 'hanViet', 'notes', 'kind', 'deckName'];
   const fields = (candidate: unknown, defaults: CardField[]) => Array.isArray(candidate)
     ? candidate.filter((field): field is CardField => allowedFields.includes(field as CardField)).slice(0, 6)
     : defaults;
@@ -47,15 +47,15 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
   };
 }
 
-export type ImportField = 'front' | 'back' | 'reading' | 'notes' | 'kind' | 'tags';
+export type ImportField = 'front' | 'back' | 'reading' | 'hanViet' | 'notes' | 'kind' | 'tags';
 export interface ImportTable { id: string; name: string; rows: string[][]; hasHeader: boolean; selected: boolean; mapping: Partial<Record<ImportField, number>>; extraColumns: number[]; inferredKind?: ImportedKind }
 export interface ImportIssue { row: number; sheet: string; reason: string }
 const text = (value: unknown): string => (Array.isArray(value) ? value.map(text).filter(Boolean).join('\n') : typeof value === 'object' && value !== null ? JSON.stringify(value) : value == null ? '' : String(value)).replace(/\r\n?/g, '\n').trim().normalize('NFC');
 const normalize = (value: string) => value.replace(/^\uFEFF/, '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/[\s_-]/g, '');
 const keys: Record<ImportField, string[]> = {
  front: ['front','mat truoc','question','cau hoi','word','tu','tu vung','kanji','tu_chinh','pattern','mau_ngu_phap'],
- back: ['back','mat sau','answer','dap an','meaning','nghia','y nghia','nghia_cot_loi','han_viet','hanViet'],
- reading: ['reading','phien_am','hiragana','cach doc'], notes: ['notes','note','ghi_chu'], kind: ['kind','type','loai'], tags: ['tags','tag','nhan'],
+ back: ['back','mat sau','answer','dap an','meaning','nghia','y nghia','nghia_cot_loi'],
+ reading: ['reading','phien_am','hiragana','cach doc'], hanViet: ['hanViet','han_viet','han viet','hán việt','hanTu','han_tu','han tu','hán tự'], notes: ['notes','note','ghi_chu'], kind: ['kind','type','loai'], tags: ['tags','tag','nhan'],
 };
 function table(rows: string[][], name: string, json = false): ImportTable {
  const header = rows[0] || [];
@@ -64,6 +64,7 @@ function table(rows: string[][], name: string, json = false): ImportTable {
   const index = keys[field].map(key => header.findIndex(cell => normalize(key) === normalize(cell))).find(i => i >= 0) ?? -1;
   if (index >= 0) mapping[field] = index;
  }
+ if (mapping.back === undefined && mapping.hanViet !== undefined) mapping.back = mapping.hanViet;
  const hasHeader = json || (mapping.front !== undefined && mapping.back !== undefined);
  const normalized = header.map(normalize);
  const inferredKind: ImportedKind = normalized.some(k => ['maunguphap','pattern','congthuc'].includes(k)) ? 'grammar' : normalized.some(k => ['tuchinh','onyomi','kunyomi'].includes(k)) || (normalized.includes('kanji') && !normalized.includes('hiragana')) ? 'kanji' : normalized.some(k => ['word','tu','phienam','reading','hiragana'].includes(k)) ? 'vocabulary' : 'general';
@@ -78,10 +79,10 @@ export function remapImportPreview(preview: ImportPreview, tables: ImportTable[]
   for (let index = start; index < tab.rows.length; index++) {
    const row = tab.rows[index];
    const pick = (field: ImportField) => text(row[tab.mapping[field] ?? -1]);
-   const front = pick('front'), back = pick('back'), reading = pick('reading'), notes = pick('notes');
+   const front = pick('front'), back = pick('back'), reading = pick('reading'), hanViet = pick('hanViet'), notes = pick('notes');
    const fail = (reason: string) => issues.push({ row: index + 1, sheet: tab.name, reason });
    if (!front || !back) { fail('Thiếu mặt trước hoặc mặt sau'); continue; }
-   if (front.length > 20000 || back.length > 20000 || notes.length > 20000 || reading.length > 10000) { fail('Vượt giới hạn trường: front/back/note 20.000, reading 10.000 ký tự'); continue; }
+   if (front.length > 20000 || back.length > 20000 || notes.length > 20000 || reading.length > 10000 || hanViet.length > 10000) { fail('Vượt giới hạn trường: front/back/note 20.000, reading/hanViet 10.000 ký tự'); continue; }
    const kindText = pick('kind').toLowerCase();
    const aliases: Record<string, ImportedKind> = { vocabulary: 'vocabulary', vocab: 'vocabulary', tuvung: 'vocabulary', kanji: 'kanji', grammar: 'grammar', nguphap: 'grammar', general: 'general' };
    const kind = kindText ? aliases[normalize(kindText)] : tab.inferredKind || 'general';
@@ -92,7 +93,7 @@ export function remapImportPreview(preview: ImportPreview, tables: ImportTable[]
    const pair = JSON.stringify([front.replace(/\s+/g, ' '), back.replace(/\s+/g, ' ')]);
    if (seen.has(pair)) { duplicates++; fail('Trùng cặp mặt trước / mặt sau'); continue; }
    seen.add(pair);
-   cards.push({ id: crypto.randomUUID(), front, back, reading, notes, kind, tags, sourceRef: preview.source, ...(tab.name ? { sourceSheet: tab.name } : {}), ...(Object.keys(extraData).length ? { extraData } : {}) });
+   cards.push({ id: crypto.randomUUID(), front, back, reading, hanViet, notes, kind, tags, sourceRef: preview.source, ...(tab.name ? { sourceSheet: tab.name } : {}), ...(Object.keys(extraData).length ? { extraData } : {}) });
   }
  }
  return { ...preview, tables, cards, skipped: issues.length, issues, duplicates };

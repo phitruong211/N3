@@ -53,6 +53,7 @@ const blankCard = (): ImportedCard => ({
   front: "",
   back: "",
   reading: "",
+  hanViet: "",
   notes: "",
   kind: "general",
   tags: [],
@@ -394,6 +395,10 @@ export function ImportedDecks({
             front: c.front,
             back: c.back,
             reading: c.reading || "",
+            hanViet:
+              (["hanViet", "han_viet", "hanTu", "han_tu"]
+                .map((key) => c.extraData?.[key])
+                .find((value) => typeof value === "string") as string) || "",
             note: c.notes || "",
             type: c.kind,
             tags: [],
@@ -450,13 +455,14 @@ export function ImportedDecks({
   function download(format: "csv" | "json") {
     const text =
       format === "csv"
-        ? "front,back,reading,note,type,tags\n勉強,Việc học,べんきょう,Ôn bài 6,VOCABULARY,học tập\n"
+        ? "front,back,reading,hanViet,note,type,tags\n勉強,Việc học,べんきょう,Miễn Cường,Ôn bài 6,VOCABULARY,học tập\n"
         : JSON.stringify(
             [
               {
                 front: "勉強",
                 back: "Việc học",
                 reading: "べんきょう",
+                han_viet: "Miễn Cường",
                 note: "Ôn bài 6",
                 type: "VOCABULARY",
                 tags: ["học tập"],
@@ -843,6 +849,11 @@ export function ImportedDecks({
                     <p className="font-jp break-words">{c.front}</p>
                     <p className="whitespace-pre-wrap break-words">{c.back}</p>
                     {c.reading && <p className="study-copy">{c.reading}</p>}
+                    {asImported(c).hanViet && (
+                      <p className="study-copy">
+                        Hán Việt: {asImported(c).hanViet}
+                      </p>
+                    )}
                     {c.notes && (
                       <p className="study-copy whitespace-pre-wrap">
                         {c.notes}
@@ -1028,7 +1039,8 @@ export function ImportedDecks({
                         <div className="absolute right-0 top-11 z-20 w-[min(22rem,calc(100vw-3rem))] rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-sm shadow-xl">
                           <p>
                             Tệp tối đa 20 MB và 20.000 thẻ. Cần mặt trước, mặt
-                            sau; có thể thêm cách đọc, ghi chú, loại và tag.
+                            sau; có thể thêm cách đọc, Hán Việt, ghi chú, loại và
+                            tag.
                           </p>
                           <div className="mt-3 flex gap-2">
                             <button
@@ -1272,13 +1284,13 @@ function CardFields({
 }) {
   return (
     <div className="grid gap-3 sm:grid-cols-2">
-      {(["front", "back", "reading", "notes"] as const).map((key, i) => (
+      {(["front", "back", "reading", "hanViet", "notes"] as const).map((key, i) => (
         <label key={key}>
-          {["Mặt trước", "Mặt sau", "Cách đọc", "Ghi chú"][i]}
+          {["Mặt trước", "Mặt sau", "Cách đọc", "Hán Việt", "Ghi chú"][i]}
           <textarea
             className="study-input mt-1"
-            required={i < 2}
-            maxLength={key === "reading" ? 10000 : 20000}
+            required={key === "front" || key === "back"}
+            maxLength={key === "reading" || key === "hanViet" ? 10000 : 20000}
             value={card[key]}
             onChange={(e) => onChange({ ...card, [key]: e.target.value })}
           />
