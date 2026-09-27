@@ -26,10 +26,12 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
   const [shuffle, setShuffle] = useState(false);
   const [orientation, setOrientation] =
     useState<DeckTemplateConfig["study"]["orientation"]>("front-first");
+  const levelOrder = ["N3", "N4", "N2"] as const;
   const decks = [
     ...["N3", "N4"].map((level) => ({
       id: `vocab${level}`,
       name: `Từ vựng ${level}`,
+      level,
       cards: vocabulary
         .filter((v) => (v.level || "N3") === level)
         .map((v, i) => vocabularyCard(v, `vocab${level}`, i)),
@@ -37,6 +39,7 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
     ...["N3", "N2"].map((level) => ({
       id: `kanji${level}`,
       name: `Kanji ${level}`,
+      level,
       cards: kanji
         .filter((v) => v.level === level)
         .map((v, i) => kanjiCard(v, `kanji${level}`, i)),
@@ -44,6 +47,7 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
     ...["N3", "N4", "N2"].map((level) => ({
       id: `grammar${level}`,
       name: `Ngữ pháp ${level}`,
+      level,
       cards: grammar
         .filter((v) => v.level === level)
         .map((v, i) => grammarCard(v, `grammar${level}`, i)),
@@ -279,8 +283,23 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
       )}
       <section>
         <h2 className="study-eyebrow mb-3">BỘ THẺ CÓ SẴN</h2>
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {decks.map(tile)}
+        <div className="space-y-7">
+          {levelOrder.map((level) => (
+            <section key={level} aria-labelledby={`deck-level-${level}`}>
+              <div className="mb-3 flex items-center gap-3">
+                <h3
+                  id={`deck-level-${level}`}
+                  className="text-sm font-semibold text-[var(--color-text-secondary)]"
+                >
+                  Trình độ {level}
+                </h3>
+                <span className="h-px flex-1 bg-[var(--color-border)]" />
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {decks.filter((deck) => deck.level === level).map(tile)}
+              </div>
+            </section>
+          ))}
         </div>
       </section>
       <ImportedDecks
