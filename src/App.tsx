@@ -33,7 +33,7 @@ function AppContent() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-[var(--color-bg)]">
         <div className="text-center space-y-3">
-          <div className="font-jp-serif text-3xl text-[var(--color-text)]">N3 学習</div>
+          <div className="flex items-center justify-center gap-3 text-2xl font-bold tracking-wide text-[var(--color-text)]"><img src="/so-nhat-logo.png" alt="" className="h-12 w-12 object-contain" />SỔ NHẬT</div>
           <div className="text-sm text-[var(--color-text-tertiary)]">Đang tải nội dung học…</div>
         </div>
       </div>

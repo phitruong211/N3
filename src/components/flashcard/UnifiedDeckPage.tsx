@@ -148,13 +148,22 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
         </article>
       );
     }
+    const badge = deck.id.startsWith("vocab")
+      ? { label: "Từ vựng", tone: "vocabulary" as const }
+      : deck.id.startsWith("kanji")
+        ? { label: "Kanji", tone: "kanji" as const }
+        : { label: "Ngữ pháp", tone: "grammar" as const };
+    const canStudy = eligible(deck.cards).length > 0;
     return (
-      <article key={deck.id} className="study-panel space-y-3">
-        <p className="study-eyebrow">
-          {deck.id === "saved" ? "DẤU TRANG · CHỈ ĐỌC" : "CÓ SẴN · CHỈ ĐỌC"}
-        </p>
-        <h3 className="text-xl font-semibold">{deck.name}</h3>
-        <p className="study-copy">
+      <article key={deck.id} className="study-panel flex min-h-52 flex-col">
+        <div className="flex flex-wrap items-center gap-2">
+          <ContentBadge tone={badge.tone}>{badge.label}</ContentBadge>
+          <span className="study-pill text-[var(--color-text-tertiary)]">
+            Chỉ đọc
+          </span>
+        </div>
+        <h3 className="mt-5 text-xl font-semibold">{deck.name}</h3>
+        <p className="study-copy mt-3">
           {deck.cards.length} thẻ · {fresh} mới · {due} đến hạn
         </p>
         {!deck.cards.length && (
@@ -163,8 +172,12 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
           </p>
         )}
         <button
-          className="study-button study-button-primary"
-          disabled={!eligible(deck.cards).length}
+          className={`mt-auto pt-5 text-left text-sm font-semibold ${
+            canStudy
+              ? "text-[var(--color-accent)] hover:underline"
+              : "cursor-default text-[var(--color-text-tertiary)]"
+          }`}
+          disabled={!canStudy}
           onClick={() => {
             setPending(deck);
             setLimit(Math.min(20, eligible(deck.cards).length));
@@ -173,7 +186,7 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
           {deck.cards.length
             ? mode === "anki" && !fresh && !due
               ? "Chưa có thẻ đến hạn"
-              : "Bắt đầu học"
+              : "Bắt đầu học →"
             : "Chưa có thẻ"}
         </button>
       </article>

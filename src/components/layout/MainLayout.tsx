@@ -117,9 +117,9 @@ export function MainLayout({ children }: MainLayoutProps) {
       >
         {/* Mobile Top Header */}
         <div className="md:hidden sticky top-0 z-30 flex items-center justify-between gap-2 px-4 h-14 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
-          <span className="font-jp-serif text-xl font-bold text-[var(--color-text)]" aria-label="Sổ học">学</span>
+          <img src="/so-nhat-logo.png" alt="SỔ NHẬT" className="h-9 w-9 object-contain" />
           <span className="text-sm font-semibold text-[var(--color-text)] truncate">
-            {pageTitles[currentPage] ?? 'N3 学習'}
+            {pageTitles[currentPage] ?? 'SỔ NHẬT'}
           </span>
           <div className="flex items-center">
             <button onClick={() => setSearchOpen(true)} className="study-button !w-10 !min-h-10 !p-0 !border-0" aria-label="Tìm kiếm"><Search size={19} /></button>

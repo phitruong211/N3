@@ -26,7 +26,7 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
 
   return <main className={compact ? "auth-page auth-page-compact" : "auth-page"}>
     {!compact && <section className="auth-story" aria-label="Học tiếng Nhật mỗi ngày">
-      <div className="auth-brand"><span lang="ja">学</span><div>N3 学習<small>TIẾNG NHẬT · MỖI NGÀY</small></div></div>
+      <div className="auth-brand"><img src="/so-nhat-logo.png" alt=""/><div>SỔ NHẬT<small>HỌC TIẾNG NHẬT MỖI NGÀY</small></div></div>
       <div className="auth-editorial"><p className="auth-eyebrow">MỘT CHÚT MỖI NGÀY</p><h1>Những bước nhỏ.<br/><em>Một hành trình lớn.</em></h1><p className="auth-description">Từ những từ vựng đầu tiên đến một thế giới mới.<br/>Tiếp tục hành trình tiếng Nhật theo nhịp của bạn.</p>
         <div className="auth-art"><div className="auth-orbit" aria-hidden="true"/><div className="auth-card"><div className="auth-card-label"><span>TỪ VỰNG HÔM NAY</span><span>01 / 一</span></div><p className="auth-kanji" lang="ja">一歩</p><p className="auth-reading" lang="ja">いっぽ <span>· ippo</span></p><div className="auth-card-footer">Một bước chân.<ArrowRight size={20} aria-hidden="true"/></div><span className="auth-stamp" lang="ja" aria-hidden="true">日々</span></div><span className="auth-caption" lang="ja" aria-hidden="true">千里の道も一歩から</span></div>
       </div>
@@ -49,7 +49,7 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
       <button type="button" className="study-button w-full mt-4" disabled={busy && !compact} onClick={() => compact ? setPrompt(null) : enterGuest()}>{compact ? 'Tiếp tục học thử' : 'Học thử'}</button>
       <div className="auth-benefits"><BookOpen size={17} aria-hidden="true"/><span>Bộ thẻ cá nhân</span><span aria-hidden="true">·</span><span>Ôn tập theo nhịp của bạn</span></div>
     </div>
-    <footer className="auth-bottom"><span>N3 学習</span><span>Mỗi ngày, gần hơn một chút.</span></footer>
+    <footer className="auth-bottom"><span>SỔ NHẬT</span><span>Bước nhỏ, hành trình lớn.</span></footer>
     </section>
   </main>;
 }

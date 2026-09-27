@@ -1253,6 +1253,7 @@ function Pagination({
   total: number;
   onChange: (n: number) => void;
 }) {
+  if (pages <= 1) return null;
   return (
     <div className="flex items-center justify-between gap-2">
       <button

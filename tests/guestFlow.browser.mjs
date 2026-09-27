@@ -247,7 +247,7 @@ try {
     .filter({
       has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }),
     })
-    .getByRole("button", { name: "Bắt đầu học", exact: true })
+    .getByRole("button", { name: "Bắt đầu học →", exact: true })
     .click();
   await page.getByLabel("Số thẻ", { exact: true }).fill("1");
   await button("Bắt đầu").click();
