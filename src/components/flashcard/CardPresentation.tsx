@@ -32,12 +32,14 @@ export function CardFace({
   fields,
   template,
   compact = false,
+  immersivePrimary = false,
 }: {
   card: ImportedCard;
   deckName: string;
   fields: CardField[];
   template: DeckTemplateConfig;
   compact?: boolean;
+  immersivePrimary?: boolean;
 }) {
   const sizes = {
     small: "text-lg",
@@ -64,7 +66,7 @@ export function CardFace({
                     ? "text-base font-medium text-[var(--color-kanji)]"
                   : field === "kind" || field === "deckName"
                     ? "text-xs font-bold uppercase tracking-wide opacity-70"
-                    : `${sizes[template.style.fontScale]} font-semibold whitespace-pre-wrap break-words`
+                : `${immersivePrimary && index === 0 ? "text-5xl sm:text-7xl lg:text-8xl" : sizes[template.style.fontScale]} font-semibold whitespace-pre-wrap break-words`
             }
           >
             <span className="sr-only">{fieldLabels[field]}: </span>

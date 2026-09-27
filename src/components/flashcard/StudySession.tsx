@@ -11,6 +11,7 @@ import { defaultDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
 import { CardFace } from "./CardPresentation";
+import { Maximize2, Minimize2, X } from "lucide-react";
 
 export function StudySession({
   cards,
@@ -57,6 +58,7 @@ export function StudySession({
         ? progressToSrs(current.id, initialProgress[current.id]!)
         : undefined
     : undefined;
+  const sessionRef = useRef<HTMLElement>(null);
   const [fullscreen, setFullscreen] = useState(false);
   const type =
     current?.type === "KANJI"
@@ -86,7 +88,12 @@ export function StudySession({
   }, [current, flipped, elapsed, recordStudyActivity]);
   function finish() {
     if (mode === "flashcards") recordView();
-    setDone(true);
+    if (document.fullscreenElement) void document.exitFullscreen();
+    onExit();
+  }
+  async function toggleFullscreen() {
+    if (!document.fullscreenElement) await sessionRef.current?.requestFullscreen();
+    else await document.exitFullscreen();
   }
   const next = useCallback(() => {
     if (mode !== "flashcards" || busy) return;
@@ -151,6 +158,11 @@ export function StudySession({
     return () => window.speechSynthesis.cancel();
   }, [current, settings.autoPlayAudio, done]);
   useEffect(() => {
+    const syncFullscreen = () => setFullscreen(!!document.fullscreenElement);
+    document.addEventListener("fullscreenchange", syncFullscreen);
+    return () => document.removeEventListener("fullscreenchange", syncFullscreen);
+  }, []);
+  useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (done || busy) return;
       if (
@@ -186,7 +198,7 @@ export function StudySession({
   });
   if (done || !current)
     return (
-      <div className="study-panel text-center space-y-5 py-16">
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-5 bg-[var(--color-bg)] p-6 text-center">
         <h2 className="text-2xl font-semibold">Đã hoàn thành</h2>
         <p>
           {stats.count} thẻ ·{" "}
@@ -212,53 +224,71 @@ export function StudySession({
   ).filter((field) => settings.showFurigana || field !== "reading");
   return (
     <section
-      className={
-        fullscreen
-          ? "fixed inset-0 z-50 overflow-auto bg-[var(--color-bg)] p-5"
-          : "study-panel space-y-5"
-      }
+      ref={sessionRef}
+      className="fixed inset-0 z-50 flex min-h-0 flex-col bg-[var(--color-bg)] select-none"
       aria-label="Phiên học thẻ"
     >
-      <header className="flex flex-wrap justify-between gap-3 mb-5">
+      <header className="grid shrink-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-3 py-2 sm:px-8 sm:py-4">
         <button className="study-button" disabled={busy} onClick={finish}>
-          Kết thúc phiên
+          <X size={18} />
+          <span className="hidden sm:inline">Thoát (Esc)</span>
         </button>
-        <p>
-          {deckName} · {index + 1}/{cards.length}
-        </p>
+        <div className="flex min-w-0 items-center justify-center gap-3 sm:gap-5">
+          <p className="truncate text-xs font-semibold text-[var(--color-text-secondary)] sm:text-sm">
+            {deckName} · <span className="text-[var(--color-accent)]">{index + 1}</span>/{cards.length}
+          </p>
+          <div className="hidden h-2 w-28 overflow-hidden rounded-full bg-[var(--color-surface-alt)] sm:block lg:w-64">
+            <div
+              className="h-full rounded-full bg-[var(--color-accent)] transition-[width] duration-300"
+              style={{ width: `${((index + 1) / cards.length) * 100}%` }}
+            />
+          </div>
+        </div>
         <button
-          className="study-button"
-          onClick={() => setFullscreen((v) => !v)}
+          className="study-button !min-h-10 !px-3"
+          onClick={() => void toggleFullscreen()}
+          aria-label={fullscreen ? "Thoát toàn màn hình" : "Toàn màn hình"}
         >
-          {fullscreen ? "Thu nhỏ" : "Toàn màn hình"}
+          {fullscreen ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
+          <span className="hidden lg:inline">
+            {fullscreen ? "Thoát toàn màn hình" : "Toàn màn hình"}
+          </span>
         </button>
       </header>
       {timer.remainingSeconds !== null && (
-        <p className="study-copy">
+        <p className="shrink-0 px-4 text-center text-xs text-[var(--color-text-secondary)]">
           {timer.expired
             ? "Hết giờ · hoàn tất thẻ hiện tại"
             : `Còn ${formatSessionTime(timer.remainingSeconds)}`}
         </p>
       )}
-      <button
-        className={`w-full min-h-80 rounded-xl border border-[var(--color-border)] p-8 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
-        disabled={busy}
-        aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
-        onClick={() => setFlipped((v) => (mode === "anki" ? true : !v))}
-      >
-        <CardFace
-          card={presentationCard(current)}
-          deckName={deckName}
-          fields={fields}
-          template={template}
-        />
-      </button>
+      <div className="flex min-h-0 flex-1 items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4">
+        <button
+          className={`relative flex w-full max-w-5xl cursor-pointer flex-col items-center justify-center overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 transition-colors sm:rounded-3xl sm:p-12 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
+          disabled={busy}
+          aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
+          onClick={() => setFlipped((v) => (mode === "anki" ? true : !v))}
+        >
+          <CardFace
+            card={presentationCard(current)}
+            deckName={deckName}
+            fields={fields}
+            template={template}
+            immersivePrimary={!flipped}
+          />
+          {!flipped && (
+            <span className="absolute bottom-5 text-xs text-[var(--color-text-tertiary)] sm:hidden">
+              Chạm để lật thẻ
+            </span>
+          )}
+        </button>
+      </div>
       {error && (
-        <p role="alert" className="text-[var(--color-error)]">
+        <p role="alert" className="shrink-0 px-4 text-center text-[var(--color-error)]">
           {error}
         </p>
       )}
-      <div className="flex flex-wrap justify-center gap-3 mt-5">
+      <div className="flex min-h-16 shrink-0 flex-wrap items-center justify-center gap-3 border-t border-[var(--color-border)] px-3 py-3 sm:px-8">
         {mode === "anki" ? (
           flipped ? (
             (["again", "hard", "good", "easy"] as Rating[]).map((rating, i) => (

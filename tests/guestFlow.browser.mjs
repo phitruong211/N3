@@ -249,8 +249,8 @@ try {
     })
     .getByRole("button", { name: "Bắt đầu học →", exact: true })
     .click();
-  await page.getByLabel("Số thẻ", { exact: true }).fill("1");
-  await button("Bắt đầu").click();
+  await page.getByLabel("Số thẻ nhập trực tiếp", { exact: true }).fill("1");
+  await button("Bắt đầu 1 thẻ").click();
   await page
     .getByRole("button", { name: "Hiện đáp án", exact: true })
     .first()

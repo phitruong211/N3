@@ -10,6 +10,7 @@ import { defaultDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { StudySession } from "./StudySession";
 import { ImportedDecks } from "./ImportedDecks";
 import { ContentBadge } from "@/components/ui/StudyUI";
+import { ListOrdered, Play, Shuffle, X } from "lucide-react";
 
 export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
   const { vocabulary, kanji, grammar, bookmarks, srsCards } = useApp();
@@ -24,8 +25,6 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
   } | null>(null);
   const [limit, setLimit] = useState(20);
   const [shuffle, setShuffle] = useState(false);
-  const [orientation, setOrientation] =
-    useState<DeckTemplateConfig["study"]["orientation"]>("front-first");
   const levelOrder = ["N3", "N4", "N2"] as const;
   const decks = [
     ...["N3", "N4"].map((level) => ({
@@ -102,7 +101,6 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
       }
     }
     const template = defaultDeckTemplate();
-    template.study.orientation = orientation;
     setSession({ name: pending.name, cards, template });
     setPending(null);
   }
@@ -218,68 +216,135 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
         </p>
       </header>
       {pending && (
-        <section
-          className="study-panel space-y-4"
-          aria-label="Thiết lập phiên học"
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/55 p-4 backdrop-blur-sm"
+          role="presentation"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setPending(null);
+          }}
         >
-          <h2 className="text-xl font-semibold">{pending.name}</h2>
-          <label className="block">
-            Số thẻ{" "}
-            <input
-              className="study-input"
-              type="number"
-              min={1}
-              max={eligible(pending.cards).length}
-              value={limit}
-              onChange={(e) =>
-                setLimit(
-                  Math.max(
-                    1,
-                    Math.min(
-                      eligible(pending.cards).length,
-                      Number(e.target.value),
-                    ),
-                  ),
-                )
-              }
-            />
-          </label>
-          {mode === "flashcards" && (
-            <label className="flex gap-2">
+          <section
+            className="w-full max-w-lg space-y-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-2xl sm:p-7"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Bắt đầu ${pending.name}`}
+          >
+            <header className="flex items-start justify-between gap-4">
+              <div>
+                <p className="study-eyebrow mb-1">BẮT ĐẦU HỌC</p>
+                <h2 className="text-2xl font-semibold">{pending.name}</h2>
+                <p className="study-copy mt-1">
+                  {eligible(pending.cards).length} thẻ có thể học
+                </p>
+              </div>
+              <button
+                className="study-button !h-10 !min-h-10 !w-10 !p-0"
+                aria-label="Đóng"
+                onClick={() => setPending(null)}
+              >
+                <X size={18} />
+              </button>
+            </header>
+
+            {mode === "flashcards" && (
+              <fieldset>
+                <legend className="mb-3 text-sm font-semibold">
+                  Thứ tự học
+                </legend>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    aria-pressed={!shuffle}
+                    className={`rounded-xl border-2 p-4 text-left transition-colors ${
+                      !shuffle
+                        ? "border-[var(--color-accent)] bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]"
+                        : "border-[var(--color-border)] hover:border-[var(--color-border-strong)]"
+                    }`}
+                    onClick={() => setShuffle(false)}
+                  >
+                    <ListOrdered size={21} />
+                    <strong className="mt-3 block text-sm">Theo thứ tự</strong>
+                    <span className="mt-1 block text-xs opacity-70">
+                      Học lần lượt từ đầu bộ
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    aria-pressed={shuffle}
+                    className={`rounded-xl border-2 p-4 text-left transition-colors ${
+                      shuffle
+                        ? "border-[var(--color-accent)] bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]"
+                        : "border-[var(--color-border)] hover:border-[var(--color-border-strong)]"
+                    }`}
+                    onClick={() => setShuffle(true)}
+                  >
+                    <Shuffle size={21} />
+                    <strong className="mt-3 block text-sm">Ngẫu nhiên</strong>
+                    <span className="mt-1 block text-xs opacity-70">
+                      Trộn thẻ trong phạm vi chọn
+                    </span>
+                  </button>
+                </div>
+              </fieldset>
+            )}
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between gap-3">
+                <label htmlFor="study-card-limit" className="text-sm font-semibold">
+                  Số thẻ muốn học
+                </label>
+                <span className="text-sm text-[var(--color-text-secondary)]">
+                  {limit}/{eligible(pending.cards).length}
+                </span>
+              </div>
               <input
-                type="checkbox"
-                checked={shuffle}
-                onChange={(e) => setShuffle(e.target.checked)}
+                id="study-card-limit"
+                className="w-full accent-[var(--color-accent)]"
+                type="range"
+                min={1}
+                max={eligible(pending.cards).length}
+                value={limit}
+                onChange={(event) => setLimit(Number(event.target.value))}
               />
-              Xáo trộn
-            </label>
-          )}
-          <label className="block">
-            Mặt bắt đầu{" "}
-            <select
-              className="study-input"
-              value={orientation}
-              onChange={(e) =>
-                setOrientation(e.target.value as typeof orientation)
-              }
-            >
-              <option value="front-first">Mặt trước</option>
-              <option value="back-first">Mặt sau</option>
-              <option value="mixed">Luân phiên</option>
-            </select>
-          </label>
-          <div className="flex gap-3">
+              <div className="flex items-center gap-3">
+                <input
+                  className="study-input !w-24 text-center"
+                  aria-label="Số thẻ nhập trực tiếp"
+                  type="number"
+                  min={1}
+                  max={eligible(pending.cards).length}
+                  value={limit}
+                  onChange={(event) =>
+                    setLimit(
+                      Math.max(
+                        1,
+                        Math.min(
+                          eligible(pending.cards).length,
+                          Number(event.target.value) || 1,
+                        ),
+                      ),
+                    )
+                  }
+                />
+                <button
+                  type="button"
+                  className="text-sm font-semibold text-[var(--color-accent)] hover:underline"
+                  onClick={() => setLimit(eligible(pending.cards).length)}
+                >
+                  Chọn tất cả
+                </button>
+              </div>
+            </div>
+
             <button
-              className="study-button study-button-primary"
+              className="study-button study-button-primary w-full"
               onClick={launch}
             >
-              Bắt đầu
+              {shuffle ? <Shuffle size={18} /> : <Play size={18} />}
+              {shuffle ? `Học ngẫu nhiên ${limit} thẻ` : `Bắt đầu ${limit} thẻ`}
             </button>
-            <button className="study-button" onClick={() => setPending(null)}>
-              Hủy
-            </button>
-          </div>
-        </section>
+          </section>
+        </div>
       )}
       <section>
         <h2 className="study-eyebrow mb-3">BỘ THẺ CÓ SẴN</h2>
