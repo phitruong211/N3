@@ -12,6 +12,7 @@ import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
 import { CardFace } from "./CardPresentation";
 import { Maximize2, Minimize2, Shuffle, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const SWIPE_THRESHOLD = 50;
 
@@ -23,6 +24,20 @@ function fisherYates<T>(items: readonly T[]): T[] {
   }
   return shuffled;
 }
+
+const cardMotion = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 88 : -88,
+    opacity: 0,
+    scale: 0.985,
+  }),
+  center: { x: 0, opacity: 1, scale: 1 },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -88 : 88,
+    opacity: 0,
+    scale: 0.985,
+  }),
+};
 
 export function StudySession({
   cards,
@@ -51,11 +66,7 @@ export function StudySession({
   const [stats, setStats] = useState({ count: 0, correct: 0, minutes: 0 });
   const viewed = useRef(new Set<string>());
   const lock = useRef(false);
-  const touchStart = useRef<{ x: number; y: number } | null>(null);
-  const suppressTapUntil = useRef(0);
-  const swipeTimer = useRef<number | null>(null);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [swipeAnimating, setSwipeAnimating] = useState(false);
+  const [slideDirection, setSlideDirection] = useState(1);
   const current = sessionCards[index];
   const elapsed = useActiveElapsedMinutes(
     current ? `${current.type}:${current.id}` : null,
@@ -117,6 +128,7 @@ export function StudySession({
     if (mode !== "flashcards" || busy) return;
     if (direction === "previous" && index === 0) return;
     recordView();
+    setSlideDirection(direction === "next" ? 1 : -1);
     if (direction === "next" && index + 1 >= sessionCards.length)
       setDone(true);
     else {
@@ -124,14 +136,8 @@ export function StudySession({
       setFlipped(false);
     }
   }, [mode, busy, index, recordView, sessionCards.length]);
-  const next = useCallback(() => {
-    if (swipeAnimating) return;
-    moveCard("next");
-  }, [moveCard, swipeAnimating]);
-  const previous = useCallback(() => {
-    if (swipeAnimating) return;
-    moveCard("previous");
-  }, [moveCard, swipeAnimating]);
+  const next = useCallback(() => moveCard("next"), [moveCard]);
+  const previous = useCallback(() => moveCard("previous"), [moveCard]);
   function toggleShuffle() {
     const currentId = current?.id;
     const nextCards = shuffled ? [...cards] : fisherYates(cards);
@@ -141,24 +147,6 @@ export function StudySession({
     setSessionCards(nextCards);
     setIndex(Math.max(0, nextIndex));
     setShuffled((value) => !value);
-  }
-  function animateSwipe(direction: "next" | "previous") {
-    if (
-      mode !== "flashcards" ||
-      busy ||
-      swipeAnimating ||
-      (direction === "previous" && index === 0)
-    ) {
-      setDragOffset(0);
-      return;
-    }
-    setSwipeAnimating(true);
-    setDragOffset(direction === "next" ? -96 : 96);
-    swipeTimer.current = window.setTimeout(() => {
-      setSwipeAnimating(false);
-      setDragOffset(0);
-      moveCard(direction);
-    }, 140);
   }
   async function rate(rating: Rating) {
     if (lock.current || !current || !state || !flipped) return;
@@ -218,12 +206,6 @@ export function StudySession({
     document.addEventListener("fullscreenchange", syncFullscreen);
     return () => document.removeEventListener("fullscreenchange", syncFullscreen);
   }, []);
-  useEffect(
-    () => () => {
-      if (swipeTimer.current !== null) window.clearTimeout(swipeTimer.current);
-    },
-    [],
-  );
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (done || busy) return;
@@ -333,64 +315,46 @@ export function StudySession({
             : `Còn ${formatSessionTime(timer.remainingSeconds)}`}
         </p>
       )}
-      <div className="flex min-h-0 flex-1 items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4">
-        <button
-          className={`relative flex w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center justify-center overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 transition-[transform,opacity,background-color,border-color] duration-150 sm:rounded-3xl sm:p-12 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
-          style={{
-            transform: `translateX(${dragOffset}px)`,
-            opacity: swipeAnimating ? 0.82 : 1,
-          }}
-          disabled={busy}
-          aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
-          onTouchStart={(event) => {
-            if (mode !== "flashcards" || event.touches.length !== 1) return;
-            touchStart.current = {
-              x: event.touches[0].clientX,
-              y: event.touches[0].clientY,
-            };
-          }}
-          onTouchMove={(event) => {
-            if (!touchStart.current || event.touches.length !== 1) return;
-            const dx = event.touches[0].clientX - touchStart.current.x;
-            const dy = event.touches[0].clientY - touchStart.current.y;
-            if (Math.abs(dx) > Math.abs(dy))
-              setDragOffset(Math.max(-120, Math.min(120, dx)));
-          }}
-          onTouchEnd={(event) => {
-            if (!touchStart.current || mode !== "flashcards") return;
-            const touch = event.changedTouches[0];
-            const dx = touch.clientX - touchStart.current.x;
-            const dy = touch.clientY - touchStart.current.y;
-            touchStart.current = null;
-            if (Math.abs(dx) >= SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
-              suppressTapUntil.current = Date.now() + 500;
-              animateSwipe(dx < 0 ? "next" : "previous");
-            } else {
-              setDragOffset(0);
+      <div className="relative flex min-h-0 flex-1 items-stretch justify-center overflow-hidden px-3 py-2 sm:px-6 sm:py-4">
+        <AnimatePresence initial={false} custom={slideDirection} mode="popLayout">
+          <motion.button
+            key={`${current.type}:${current.id}`}
+            custom={slideDirection}
+            variants={cardMotion}
+            initial={mode === "flashcards" ? "enter" : false}
+            animate="center"
+            exit={mode === "flashcards" ? "exit" : undefined}
+            transition={settings.reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 390, damping: 34, mass: 0.72 }}
+            drag={mode === "flashcards" ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.22}
+            dragMomentum={false}
+            whileDrag={settings.reducedMotion ? undefined : { scale: 0.985 }}
+            onDragEnd={(_, info) => {
+              if (info.offset.x <= -SWIPE_THRESHOLD) moveCard("next");
+              else if (info.offset.x >= SWIPE_THRESHOLD) moveCard("previous");
+            }}
+            className={`relative flex h-full w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center justify-center overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 sm:rounded-3xl sm:p-12 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
+            disabled={busy}
+            aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
+            onTap={() =>
+              setFlipped((value) => (mode === "anki" ? true : !value))
             }
-          }}
-          onTouchCancel={() => {
-            touchStart.current = null;
-            setDragOffset(0);
-          }}
-          onClick={() => {
-            if (Date.now() < suppressTapUntil.current) return;
-            setFlipped((value) => (mode === "anki" ? true : !value));
-          }}
-        >
-          <CardFace
-            card={presentationCard(current)}
-            deckName={deckName}
-            fields={fields}
-            template={template}
-            immersivePrimary={!flipped}
-          />
-          {!flipped && (
-            <span className="absolute bottom-5 text-xs text-[var(--color-text-tertiary)] sm:hidden">
-              Chạm để lật · Vuốt để chuyển thẻ
-            </span>
-          )}
-        </button>
+          >
+            <CardFace
+              card={presentationCard(current)}
+              deckName={deckName}
+              fields={fields}
+              template={template}
+              immersivePrimary={!flipped}
+            />
+            {!flipped && (
+              <span className="absolute bottom-5 text-xs text-[var(--color-text-tertiary)] sm:hidden">
+                Chạm để lật · Vuốt để chuyển thẻ
+              </span>
+            )}
+          </motion.button>
+        </AnimatePresence>
       </div>
       {error && (
         <p role="alert" className="shrink-0 px-4 text-center text-[var(--color-error)]">
