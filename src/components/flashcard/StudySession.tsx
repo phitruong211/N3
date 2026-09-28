@@ -113,21 +113,25 @@ export function StudySession({
     if (!document.fullscreenElement) await sessionRef.current?.requestFullscreen();
     else await document.exitFullscreen();
   }
-  const next = useCallback(() => {
-    if (mode !== "flashcards" || busy || swipeAnimating) return;
+  const moveCard = useCallback((direction: "next" | "previous") => {
+    if (mode !== "flashcards" || busy) return;
+    if (direction === "previous" && index === 0) return;
     recordView();
-    if (index + 1 >= sessionCards.length) setDone(true);
+    if (direction === "next" && index + 1 >= sessionCards.length)
+      setDone(true);
     else {
-      setIndex((i) => i + 1);
+      setIndex((i) => i + (direction === "next" ? 1 : -1));
       setFlipped(false);
     }
-  }, [mode, busy, swipeAnimating, recordView, index, sessionCards.length]);
+  }, [mode, busy, index, recordView, sessionCards.length]);
+  const next = useCallback(() => {
+    if (swipeAnimating) return;
+    moveCard("next");
+  }, [moveCard, swipeAnimating]);
   const previous = useCallback(() => {
-    if (mode !== "flashcards" || busy || swipeAnimating || index === 0) return;
-    recordView();
-    setIndex((i) => i - 1);
-    setFlipped(false);
-  }, [mode, busy, swipeAnimating, index, recordView]);
+    if (swipeAnimating) return;
+    moveCard("previous");
+  }, [moveCard, swipeAnimating]);
   function toggleShuffle() {
     const currentId = current?.id;
     const nextCards = shuffled ? [...cards] : fisherYates(cards);
@@ -153,8 +157,7 @@ export function StudySession({
     swipeTimer.current = window.setTimeout(() => {
       setSwipeAnimating(false);
       setDragOffset(0);
-      if (direction === "next") next();
-      else previous();
+      moveCard(direction);
     }, 140);
   }
   async function rate(rating: Rating) {
@@ -384,7 +387,7 @@ export function StudySession({
           />
           {!flipped && (
             <span className="absolute bottom-5 text-xs text-[var(--color-text-tertiary)] sm:hidden">
-              Chạm để lật thẻ
+              Chạm để lật · Vuốt để chuyển thẻ
             </span>
           )}
         </button>
