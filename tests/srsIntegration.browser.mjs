@@ -125,7 +125,6 @@ try {
     })
     .getByRole("button", { name: /^Bắt đầu học/ })
     .click();
-  await button("Bắt đầu phiên").click();
   await page
     .getByRole("button", { name: "Hiện đáp án", exact: true })
     .first()

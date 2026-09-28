@@ -108,11 +108,6 @@ export function ImportedDecks({
   const [targets, setTargets] = useState<PersonalDeck[]>([]);
   const [target, setTarget] = useState("");
   const [customizing, setCustomizing] = useState<PersonalDeck | null>(null);
-  const [launch, setLaunch] = useState<PersonalDeck | null>(null);
-  const [range, setRange] = useState(50);
-  const [shuffle, setShuffle] = useState(false);
-  const [orientation, setOrientation] =
-    useState<DeckTemplateConfig["study"]["orientation"]>("front-first");
   const [session, setSession] = useState<{
     cards: CardView[];
     deck: PersonalDeck;
@@ -369,23 +364,14 @@ export function ImportedDecks({
       }
     });
   }
-  function chooseStudy(deck: PersonalDeck) {
-    setLaunch(deck);
-    setRange(Math.min(deck.cardCount, 50));
-    setOrientation(
-      normalizeDeckTemplate(deck.templateConfig).study.orientation,
-    );
-  }
-  async function startStudy() {
-    if (!launch) return;
-    const deck = launch;
+  async function startStudy(deck: PersonalDeck) {
     await operation(async () => {
       let views: CardView[] = [];
       const progress: Record<string, ApiProgress | null> = {};
       if (mode === "anki") {
         const queue = await dueQueue(
           deck.id,
-          Math.min(200, Math.max(1, range)),
+          Math.min(200, Math.max(1, deck.cardCount)),
         );
         views = queue.map((c, i) => {
           progress[c.cardId] = c.progress;
@@ -407,8 +393,7 @@ export function ImportedDecks({
           };
         });
       } else {
-        const count = Math.min(deck.cardCount, Math.max(1, range));
-        for (let p = 0; views.length < count; p++) {
+        for (let p = 0; views.length < deck.cardCount; p++) {
           const batch = await cardPage(deck.id, p, "", "", "", 200);
           views.push(
             ...batch.content.map((c, i) =>
@@ -422,22 +407,13 @@ export function ImportedDecks({
           );
           if (p + 1 >= batch.totalPages) break;
         }
-        views = views.slice(0, count);
-        if (shuffle)
-          for (let i = views.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [views[i], views[j]] = [views[j], views[i]];
-          }
       }
       if (!views.length) {
         setMessage("Chưa có thẻ đến hạn hoặc thẻ mới trong bộ này.");
-        setLaunch(null);
         return;
       }
       const template = normalizeDeckTemplate(deck.templateConfig);
-      template.study.orientation = orientation;
       setSession({ cards: views, deck, template, progress });
-      setLaunch(null);
     });
   }
   async function shiftCard(id: string, delta: number) {
@@ -560,67 +536,6 @@ export function ImportedDecks({
         </div>
       )}
       {message && <p role="status">{message}</p>}
-      {launch && (
-        <div
-          className="rounded-xl border border-[var(--color-border)] p-4 space-y-3"
-          aria-label="Thiết lập phiên học"
-        >
-          <h3>Học {launch.name}</h3>
-          <label>
-            Số thẻ (tối đa{" "}
-            {mode === "anki"
-              ? Math.min(200, launch.cardCount)
-              : launch.cardCount}
-            )
-            <input
-              className="study-input"
-              type="number"
-              min={1}
-              max={
-                mode === "anki"
-                  ? Math.min(200, launch.cardCount)
-                  : launch.cardCount
-              }
-              value={range}
-              onChange={(e) => setRange(Number(e.target.value))}
-            />
-          </label>
-          {mode === "flashcards" && (
-            <label className="flex gap-2">
-              <input
-                type="checkbox"
-                checked={shuffle}
-                onChange={(e) => setShuffle(e.target.checked)}
-              />
-              Xáo trộn
-            </label>
-          )}
-          <label>
-            Hướng học
-            <select
-              className="study-input"
-              value={orientation}
-              onChange={(e) =>
-                setOrientation(e.target.value as typeof orientation)
-              }
-            >
-              <option value="front-first">Mặt trước → mặt sau</option>
-              <option value="back-first">Mặt sau → mặt trước</option>
-              <option value="mixed">Trộn hai chiều</option>
-            </select>
-          </label>
-          <button
-            className="study-button study-button-primary"
-            disabled={busy || range < 1}
-            onClick={() => void startStudy()}
-          >
-            Bắt đầu phiên
-          </button>{" "}
-          <button className="study-button" onClick={() => setLaunch(null)}>
-            Hủy
-          </button>
-        </div>
-      )}
       {active && !creating && !preview && (
         <div className="space-y-4">
           <button
@@ -697,7 +612,8 @@ export function ImportedDecks({
             {active.cardCount > 0 && (
               <button
                 className="study-button"
-                onClick={() => chooseStudy(active)}
+                disabled={busy}
+                onClick={() => void startStudy(active)}
               >
                 Bắt đầu học
               </button>
@@ -1167,7 +1083,7 @@ export function ImportedDecks({
                       type="button"
                       className={`mt-auto pt-5 text-left text-sm font-semibold ${deck.cardCount ? "text-[var(--color-accent)] hover:underline" : "cursor-default text-[var(--color-text-tertiary)]"}`}
                       disabled={!deck.cardCount}
-                      onClick={() => chooseStudy(deck)}
+                      onClick={() => void startStudy(deck)}
                     >
                       {deck.cardCount ? "Bắt đầu học →" : "Chưa có thẻ"}
                     </button>

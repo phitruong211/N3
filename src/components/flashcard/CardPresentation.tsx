@@ -296,26 +296,6 @@ export function DeckCustomizeDialog({
                   <option value="left">Trái</option>
                 </select>
               </label>
-              <label>
-                Hướng học
-                <select
-                  className="study-input mt-1"
-                  value={template.study.orientation}
-                  onChange={(event) =>
-                    setTemplate((previous) => ({
-                      ...previous,
-                      study: {
-                        orientation: event.target
-                          .value as DeckTemplateConfig["study"]["orientation"],
-                      },
-                    }))
-                  }
-                >
-                  <option value="front-first">Mặt trước → mặt sau</option>
-                  <option value="back-first">Mặt sau → mặt trước</option>
-                  <option value="mixed">Trộn hai chiều</option>
-                </select>
-              </label>
             </div>
           </div>
           <div className="lg:sticky lg:top-0 lg:self-start">

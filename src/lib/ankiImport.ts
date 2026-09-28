@@ -3,13 +3,11 @@ import type { SRSCard } from '../types';
 export type ImportedKind = 'vocabulary' | 'kanji' | 'grammar' | 'general';
 export type CardField = 'front' | 'back' | 'reading' | 'hanViet' | 'notes' | 'kind' | 'deckName';
 export type CardTheme = 'paper' | 'blue' | 'dark' | 'system';
-export type CardOrientation = 'front-first' | 'back-first' | 'mixed';
 export interface DeckTemplateConfig {
   version: 1;
   front: { fields: CardField[]; showDeckName: boolean };
   back: { fields: CardField[]; showFront: boolean };
   style: { theme: CardTheme; fontScale: 'small' | 'medium' | 'large' | 'xlarge'; alignment: 'left' | 'center' };
-  study: { orientation: CardOrientation };
 }
 export interface ImportedCard { id: string; front: string; back: string; reading: string; hanViet: string; notes: string; kind: ImportedKind; tags?: string[]; sourceRef?: string; sourceSheet?: string; extraData?: Record<string, string>; srs?: SRSCard }
 export interface ImportedDeck { id: string; name: string; source: string; format: string; createdAt: string; position: number; template: DeckTemplateConfig; cards: ImportedCard[] }
@@ -20,7 +18,6 @@ export const defaultDeckTemplate = (): DeckTemplateConfig => ({
   front: { fields: ['front', 'reading'], showDeckName: true },
   back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: true },
   style: { theme: 'paper', fontScale: 'large', alignment: 'center' },
-  study: { orientation: 'front-first' },
 });
 
 export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
@@ -33,7 +30,6 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
     : defaults;
   const themes: CardTheme[] = ['paper', 'blue', 'dark', 'system'];
   const scales: DeckTemplateConfig['style']['fontScale'][] = ['small', 'medium', 'large', 'xlarge'];
-  const orientations: CardOrientation[] = ['front-first', 'back-first', 'mixed'];
   return {
     version: 1,
     front: { fields: fields(config.front?.fields, fallback.front.fields), showDeckName: typeof config.front?.showDeckName === 'boolean' ? config.front.showDeckName : fallback.front.showDeckName },
@@ -43,7 +39,6 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
       fontScale: scales.includes(config.style?.fontScale as DeckTemplateConfig['style']['fontScale']) ? config.style!.fontScale : fallback.style.fontScale,
       alignment: config.style?.alignment === 'left' ? 'left' : 'center',
     },
-    study: { orientation: orientations.includes(config.study?.orientation as CardOrientation) ? config.study!.orientation : fallback.study.orientation },
   };
 }
 

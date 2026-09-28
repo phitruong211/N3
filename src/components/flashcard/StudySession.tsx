@@ -11,7 +11,18 @@ import { defaultDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
 import { CardFace } from "./CardPresentation";
-import { Maximize2, Minimize2, X } from "lucide-react";
+import { Maximize2, Minimize2, Shuffle, X } from "lucide-react";
+
+const SWIPE_THRESHOLD = 50;
+
+function fisherYates<T>(items: readonly T[]): T[] {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 export function StudySession({
   cards,
@@ -30,6 +41,8 @@ export function StudySession({
 }) {
   const { settings, srsCards, updateSRSCard } = useApp();
   const { recordStudyActivity } = useLearningStorage();
+  const [sessionCards, setSessionCards] = useState(() => [...cards]);
+  const [shuffled, setShuffled] = useState(false);
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -38,7 +51,12 @@ export function StudySession({
   const [stats, setStats] = useState({ count: 0, correct: 0, minutes: 0 });
   const viewed = useRef(new Set<string>());
   const lock = useRef(false);
-  const current = cards[index];
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const suppressTapUntil = useRef(0);
+  const swipeTimer = useRef<number | null>(null);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [swipeAnimating, setSwipeAnimating] = useState(false);
+  const current = sessionCards[index];
   const elapsed = useActiveElapsedMinutes(
     current ? `${current.type}:${current.id}` : null,
   );
@@ -96,14 +114,49 @@ export function StudySession({
     else await document.exitFullscreen();
   }
   const next = useCallback(() => {
-    if (mode !== "flashcards" || busy) return;
+    if (mode !== "flashcards" || busy || swipeAnimating) return;
     recordView();
-    if (index + 1 >= cards.length) setDone(true);
+    if (index + 1 >= sessionCards.length) setDone(true);
     else {
       setIndex((i) => i + 1);
       setFlipped(false);
     }
-  }, [mode, busy, recordView, index, cards.length]);
+  }, [mode, busy, swipeAnimating, recordView, index, sessionCards.length]);
+  const previous = useCallback(() => {
+    if (mode !== "flashcards" || busy || swipeAnimating || index === 0) return;
+    recordView();
+    setIndex((i) => i - 1);
+    setFlipped(false);
+  }, [mode, busy, swipeAnimating, index, recordView]);
+  function toggleShuffle() {
+    const currentId = current?.id;
+    const nextCards = shuffled ? [...cards] : fisherYates(cards);
+    const nextIndex = currentId
+      ? nextCards.findIndex((card) => card.id === currentId)
+      : 0;
+    setSessionCards(nextCards);
+    setIndex(Math.max(0, nextIndex));
+    setShuffled((value) => !value);
+  }
+  function animateSwipe(direction: "next" | "previous") {
+    if (
+      mode !== "flashcards" ||
+      busy ||
+      swipeAnimating ||
+      (direction === "previous" && index === 0)
+    ) {
+      setDragOffset(0);
+      return;
+    }
+    setSwipeAnimating(true);
+    setDragOffset(direction === "next" ? -96 : 96);
+    swipeTimer.current = window.setTimeout(() => {
+      setSwipeAnimating(false);
+      setDragOffset(0);
+      if (direction === "next") next();
+      else previous();
+    }, 140);
+  }
   async function rate(rating: Rating) {
     if (lock.current || !current || !state || !flipped) return;
     lock.current = true;
@@ -126,7 +179,7 @@ export function StudySession({
         correct: s.correct + (rating === "again" ? 0 : 1),
         minutes: s.minutes + minutes,
       }));
-      if (index + 1 >= cards.length || timer.isExpired()) setDone(true);
+      if (index + 1 >= sessionCards.length || timer.isExpired()) setDone(true);
       else {
         setIndex((i) => i + 1);
         setFlipped(false);
@@ -162,6 +215,12 @@ export function StudySession({
     document.addEventListener("fullscreenchange", syncFullscreen);
     return () => document.removeEventListener("fullscreenchange", syncFullscreen);
   }, []);
+  useEffect(
+    () => () => {
+      if (swipeTimer.current !== null) window.clearTimeout(swipeTimer.current);
+    },
+    [],
+  );
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (done || busy) return;
@@ -178,6 +237,9 @@ export function StudySession({
       } else if (mode === "flashcards" && e.key === "ArrowRight") {
         e.preventDefault();
         next();
+      } else if (mode === "flashcards" && e.key === "ArrowLeft") {
+        e.preventDefault();
+        previous();
       } else if (e.key === " ") {
         e.preventDefault();
         if (!flipped) setFlipped(true);
@@ -210,17 +272,10 @@ export function StudySession({
         </button>
       </div>
     );
-  const reversed =
-    template.study.orientation === "back-first" ||
-    (template.study.orientation === "mixed" && index % 2 === 1);
   const fields = (
     flipped
-      ? reversed
-        ? template.front.fields
-        : template.back.fields
-      : reversed
-        ? template.back.fields
-        : template.front.fields
+      ? template.back.fields
+      : template.front.fields
   ).filter((field) => settings.showFurigana || field !== "reading");
   return (
     <section
@@ -235,25 +290,38 @@ export function StudySession({
         </button>
         <div className="flex min-w-0 items-center justify-center gap-3 sm:gap-5">
           <p className="truncate text-xs font-semibold text-[var(--color-text-secondary)] sm:text-sm">
-            {deckName} · <span className="text-[var(--color-accent)]">{index + 1}</span>/{cards.length}
+            {deckName} · <span className="text-[var(--color-accent)]">{index + 1}</span>/{sessionCards.length}
           </p>
           <div className="hidden h-2 w-28 overflow-hidden rounded-full bg-[var(--color-surface-alt)] sm:block lg:w-64">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-[width] duration-300"
-              style={{ width: `${((index + 1) / cards.length) * 100}%` }}
+              style={{ width: `${((index + 1) / sessionCards.length) * 100}%` }}
             />
           </div>
         </div>
-        <button
-          className="study-button !min-h-10 !px-3"
-          onClick={() => void toggleFullscreen()}
-          aria-label={fullscreen ? "Thoát toàn màn hình" : "Toàn màn hình"}
-        >
-          {fullscreen ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
-          <span className="hidden lg:inline">
-            {fullscreen ? "Thoát toàn màn hình" : "Toàn màn hình"}
-          </span>
-        </button>
+        <div className="flex items-center gap-2">
+          {mode === "flashcards" && (
+            <button
+              className={`study-button !min-h-10 !px-3 ${shuffled ? "study-button-primary" : ""}`}
+              aria-label="Xáo trộn"
+              aria-pressed={shuffled}
+              onClick={toggleShuffle}
+            >
+              <Shuffle size={17} />
+              <span className="hidden sm:inline">Xáo trộn</span>
+            </button>
+          )}
+          <button
+            className="study-button !min-h-10 !px-3"
+            onClick={() => void toggleFullscreen()}
+            aria-label={fullscreen ? "Thoát toàn màn hình" : "Toàn màn hình"}
+          >
+            {fullscreen ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
+            <span className="hidden lg:inline">
+              {fullscreen ? "Thoát toàn màn hình" : "Toàn màn hình"}
+            </span>
+          </button>
+        </div>
       </header>
       {timer.remainingSeconds !== null && (
         <p className="shrink-0 px-4 text-center text-xs text-[var(--color-text-secondary)]">
@@ -264,10 +332,48 @@ export function StudySession({
       )}
       <div className="flex min-h-0 flex-1 items-stretch justify-center px-3 py-2 sm:px-6 sm:py-4">
         <button
-          className={`relative flex w-full max-w-5xl cursor-pointer flex-col items-center justify-center overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 transition-colors sm:rounded-3xl sm:p-12 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
+          className={`relative flex w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center justify-center overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 transition-[transform,opacity,background-color,border-color] duration-150 sm:rounded-3xl sm:p-12 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
+          style={{
+            transform: `translateX(${dragOffset}px)`,
+            opacity: swipeAnimating ? 0.82 : 1,
+          }}
           disabled={busy}
           aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
-          onClick={() => setFlipped((v) => (mode === "anki" ? true : !v))}
+          onTouchStart={(event) => {
+            if (mode !== "flashcards" || event.touches.length !== 1) return;
+            touchStart.current = {
+              x: event.touches[0].clientX,
+              y: event.touches[0].clientY,
+            };
+          }}
+          onTouchMove={(event) => {
+            if (!touchStart.current || event.touches.length !== 1) return;
+            const dx = event.touches[0].clientX - touchStart.current.x;
+            const dy = event.touches[0].clientY - touchStart.current.y;
+            if (Math.abs(dx) > Math.abs(dy))
+              setDragOffset(Math.max(-120, Math.min(120, dx)));
+          }}
+          onTouchEnd={(event) => {
+            if (!touchStart.current || mode !== "flashcards") return;
+            const touch = event.changedTouches[0];
+            const dx = touch.clientX - touchStart.current.x;
+            const dy = touch.clientY - touchStart.current.y;
+            touchStart.current = null;
+            if (Math.abs(dx) >= SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+              suppressTapUntil.current = Date.now() + 500;
+              animateSwipe(dx < 0 ? "next" : "previous");
+            } else {
+              setDragOffset(0);
+            }
+          }}
+          onTouchCancel={() => {
+            touchStart.current = null;
+            setDragOffset(0);
+          }}
+          onClick={() => {
+            if (Date.now() < suppressTapUntil.current) return;
+            setFlipped((value) => (mode === "anki" ? true : !value));
+          }}
         >
           <CardFace
             card={presentationCard(current)}
@@ -313,13 +419,9 @@ export function StudySession({
         ) : (
           <>
             <button
-              className="study-button"
+              className="study-button hidden sm:inline-flex"
               disabled={!index}
-              onClick={() => {
-                recordView();
-                setIndex((i) => i - 1);
-                setFlipped(false);
-              }}
+              onClick={previous}
             >
               Thẻ trước
             </button>
@@ -329,13 +431,13 @@ export function StudySession({
                 className="study-input !w-24"
                 type="number"
                 min={1}
-                max={cards.length}
+                max={sessionCards.length}
                 value={index + 1}
                 onChange={(e) => {
                   recordView();
                   setIndex(
                     Math.min(
-                      cards.length - 1,
+                      sessionCards.length - 1,
                       Math.max(0, Number(e.target.value) - 1),
                     ),
                   );
@@ -344,11 +446,11 @@ export function StudySession({
               />
             </label>
             <button
-              className="study-button study-button-primary"
+              className="study-button study-button-primary hidden sm:inline-flex"
               onClick={() => (flipped ? next() : setFlipped(true))}
             >
               {flipped
-                ? index + 1 === cards.length
+                ? index + 1 === sessionCards.length
                   ? "Hoàn thành"
                   : "Thẻ tiếp"
                 : "Hiện đáp án"}

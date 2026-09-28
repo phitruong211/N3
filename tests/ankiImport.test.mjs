@@ -17,7 +17,7 @@ test('deck templates use safe defaults and discard unsupported values', () => {
   assert.equal(normalized.style.theme, 'paper');
   assert.equal(normalized.style.fontScale, 'large');
   assert.equal(normalized.style.alignment, 'left');
-  assert.equal(normalized.study.orientation, 'back-first');
+  assert.equal('study' in normalized, false);
 });
 
 test('CSV preserves quoted separators, newlines and escaped quotes', () => {

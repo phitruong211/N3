@@ -10,21 +10,14 @@ import { defaultDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { StudySession } from "./StudySession";
 import { ImportedDecks } from "./ImportedDecks";
 import { ContentBadge } from "@/components/ui/StudyUI";
-import { ListOrdered, Play, Shuffle, X } from "lucide-react";
 
 export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
   const { vocabulary, kanji, grammar, bookmarks, srsCards } = useApp();
-  const [pending, setPending] = useState<{
-    name: string;
-    cards: CardView[];
-  } | null>(null);
   const [session, setSession] = useState<{
     name: string;
     cards: CardView[];
     template: DeckTemplateConfig;
   } | null>(null);
-  const [limit, setLimit] = useState(20);
-  const [shuffle, setShuffle] = useState(false);
   const levelOrder = ["N3", "N4", "N2"] as const;
   const decks = [
     ...["N3", "N4"].map((level) => ({
@@ -90,19 +83,12 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
             );
           });
   }
-  function launch() {
-    if (!pending) return;
-    let cards = eligible(pending.cards).slice(0, limit);
-    if (shuffle && mode === "flashcards") {
-      cards = [...cards];
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-      }
-    }
-    const template = defaultDeckTemplate();
-    setSession({ name: pending.name, cards, template });
-    setPending(null);
+  function launch(deck: { name: string; cards: CardView[] }) {
+    setSession({
+      name: deck.name,
+      cards: eligible(deck.cards),
+      template: defaultDeckTemplate(),
+    });
   }
   function tile(deck: typeof saved) {
     const fresh = deck.cards.filter(
@@ -136,10 +122,7 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
                 : "cursor-default text-[var(--color-text-tertiary)]"
             }`}
             disabled={!canStudy}
-            onClick={() => {
-              setPending(deck);
-              setLimit(Math.min(20, eligible(deck.cards).length));
-            }}
+            onClick={() => launch(deck)}
           >
             {deck.cards.length
               ? canStudy
@@ -180,10 +163,7 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
               : "cursor-default text-[var(--color-text-tertiary)]"
           }`}
           disabled={!canStudy}
-          onClick={() => {
-            setPending(deck);
-            setLimit(Math.min(20, eligible(deck.cards).length));
-          }}
+          onClick={() => launch(deck)}
         >
           {deck.cards.length
             ? mode === "anki" && !fresh && !due
@@ -215,137 +195,6 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
           Chọn bộ thẻ để học. Tiến độ ôn được lưu riêng với nội dung thẻ.
         </p>
       </header>
-      {pending && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/55 p-4 backdrop-blur-sm"
-          role="presentation"
-          onClick={(event) => {
-            if (event.target === event.currentTarget) setPending(null);
-          }}
-        >
-          <section
-            className="w-full max-w-lg space-y-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-2xl sm:p-7"
-            role="dialog"
-            aria-modal="true"
-            aria-label={`Bắt đầu ${pending.name}`}
-          >
-            <header className="flex items-start justify-between gap-4">
-              <div>
-                <p className="study-eyebrow mb-1">BẮT ĐẦU HỌC</p>
-                <h2 className="text-2xl font-semibold">{pending.name}</h2>
-                <p className="study-copy mt-1">
-                  {eligible(pending.cards).length} thẻ có thể học
-                </p>
-              </div>
-              <button
-                className="study-button !h-10 !min-h-10 !w-10 !p-0"
-                aria-label="Đóng"
-                onClick={() => setPending(null)}
-              >
-                <X size={18} />
-              </button>
-            </header>
-
-            {mode === "flashcards" && (
-              <fieldset>
-                <legend className="mb-3 text-sm font-semibold">
-                  Thứ tự học
-                </legend>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    aria-pressed={!shuffle}
-                    className={`rounded-xl border-2 p-4 text-left transition-colors ${
-                      !shuffle
-                        ? "border-[var(--color-accent)] bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]"
-                        : "border-[var(--color-border)] hover:border-[var(--color-border-strong)]"
-                    }`}
-                    onClick={() => setShuffle(false)}
-                  >
-                    <ListOrdered size={21} />
-                    <strong className="mt-3 block text-sm">Theo thứ tự</strong>
-                    <span className="mt-1 block text-xs opacity-70">
-                      Học lần lượt từ đầu bộ
-                    </span>
-                  </button>
-                  <button
-                    type="button"
-                    aria-pressed={shuffle}
-                    className={`rounded-xl border-2 p-4 text-left transition-colors ${
-                      shuffle
-                        ? "border-[var(--color-accent)] bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]"
-                        : "border-[var(--color-border)] hover:border-[var(--color-border-strong)]"
-                    }`}
-                    onClick={() => setShuffle(true)}
-                  >
-                    <Shuffle size={21} />
-                    <strong className="mt-3 block text-sm">Ngẫu nhiên</strong>
-                    <span className="mt-1 block text-xs opacity-70">
-                      Trộn thẻ trong phạm vi chọn
-                    </span>
-                  </button>
-                </div>
-              </fieldset>
-            )}
-
-            <div className="space-y-3">
-              <div className="flex items-center justify-between gap-3">
-                <label htmlFor="study-card-limit" className="text-sm font-semibold">
-                  Số thẻ muốn học
-                </label>
-                <span className="text-sm text-[var(--color-text-secondary)]">
-                  {limit}/{eligible(pending.cards).length}
-                </span>
-              </div>
-              <input
-                id="study-card-limit"
-                className="w-full accent-[var(--color-accent)]"
-                type="range"
-                min={1}
-                max={eligible(pending.cards).length}
-                value={limit}
-                onChange={(event) => setLimit(Number(event.target.value))}
-              />
-              <div className="flex items-center gap-3">
-                <input
-                  className="study-input !w-24 text-center"
-                  aria-label="Số thẻ nhập trực tiếp"
-                  type="number"
-                  min={1}
-                  max={eligible(pending.cards).length}
-                  value={limit}
-                  onChange={(event) =>
-                    setLimit(
-                      Math.max(
-                        1,
-                        Math.min(
-                          eligible(pending.cards).length,
-                          Number(event.target.value) || 1,
-                        ),
-                      ),
-                    )
-                  }
-                />
-                <button
-                  type="button"
-                  className="text-sm font-semibold text-[var(--color-accent)] hover:underline"
-                  onClick={() => setLimit(eligible(pending.cards).length)}
-                >
-                  Chọn tất cả
-                </button>
-              </div>
-            </div>
-
-            <button
-              className="study-button study-button-primary w-full"
-              onClick={launch}
-            >
-              {shuffle ? <Shuffle size={18} /> : <Play size={18} />}
-              {shuffle ? `Học ngẫu nhiên ${limit} thẻ` : `Bắt đầu ${limit} thẻ`}
-            </button>
-          </section>
-        </div>
-      )}
       <section>
         <h2 className="study-eyebrow mb-3">BỘ THẺ CÓ SẴN</h2>
         <div className="space-y-7">
