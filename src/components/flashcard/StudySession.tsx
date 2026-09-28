@@ -54,7 +54,7 @@ export function StudySession({
   initialProgress?: Record<string, ApiProgress | null>;
   onExit: () => void;
 }) {
-  const { settings, srsCards, updateSRSCard } = useApp();
+  const { settings, srsCards, updateSRSCard, learningSync } = useApp();
   const { recordStudyActivity } = useLearningStorage();
   const [sessionCards, setSessionCards] = useState(() => [...cards]);
   const [shuffled, setShuffled] = useState(false);
@@ -120,6 +120,7 @@ export function StudySession({
   }, [current, flipped, elapsed, recordStudyActivity]);
   function finish() {
     if (mode === "flashcards") recordView();
+    queueMicrotask(() => void learningSync.flush().catch(() => {}));
     if (document.fullscreenElement) void document.exitFullscreen();
     onExit();
   }
@@ -280,7 +281,7 @@ export function StudySession({
           {stats.count ? Math.round((stats.correct / stats.count) * 100) : 0}%
           chính xác · {stats.minutes.toFixed(1)} phút
         </p>
-        <button className="study-button study-button-primary" onClick={onExit}>
+        <button className="study-button study-button-primary" onClick={finish}>
           Về danh sách bộ thẻ
         </button>
       </div>

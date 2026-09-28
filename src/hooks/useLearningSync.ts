@@ -7,6 +7,9 @@ import {
   type LearningSnapshot,
 } from "@/lib/learningSync";
 
+const SYNC_DEBOUNCE_MS = 5_000;
+const SYNC_MAX_WAIT_MS = 30_000;
+
 export function readLearning(storage: LearningStorage): LearningData {
   return {
     bookmarks: storage.getBookmarks(),
@@ -149,19 +152,32 @@ export function useLearningSync(
     alive.current = true;
     if (!enabled) return;
     void load();
-    let timer: ReturnType<typeof setTimeout>;
+    let debounceTimer: ReturnType<typeof setTimeout> | undefined;
+    let maxWaitTimer: ReturnType<typeof setTimeout> | undefined;
+    const clearTimers = () => {
+      if (debounceTimer) clearTimeout(debounceTimer);
+      if (maxWaitTimer) clearTimeout(maxWaitTimer);
+      debounceTimer = undefined;
+      maxWaitTimer = undefined;
+    };
+    const flushScheduledChanges = () => {
+      clearTimers();
+      if (!paused.current) void flush().catch(() => {});
+    };
     const unsubscribe = storage.subscribeLearning(() => {
       storage.setJSON("learning_dirty", true);
       setStatus((s) => (s === "error" ? s : "pending"));
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        if (!paused.current) void flush().catch(() => {});
-      }, 500);
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(flushScheduledChanges, SYNC_DEBOUNCE_MS);
+      maxWaitTimer ??= setTimeout(
+        flushScheduledChanges,
+        SYNC_MAX_WAIT_MS,
+      );
     });
     return () => {
       alive.current = false;
       loadVersion.current++;
-      clearTimeout(timer);
+      clearTimers();
       unsubscribe();
     };
   }, [enabled, storage, load, flush]);
@@ -205,6 +221,7 @@ export function useLearningSync(
     conflict,
     retry: load,
     reloadServer,
+    flush,
     apply,
     beforeTransfer,
     afterTransfer,
