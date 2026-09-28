@@ -59,6 +59,7 @@ export function StudySession({
   const [sessionCards, setSessionCards] = useState(() => [...cards]);
   const [shuffled, setShuffled] = useState(false);
   const [index, setIndex] = useState(0);
+  const [jumpValue, setJumpValue] = useState("1");
   const [flipped, setFlipped] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -148,6 +149,28 @@ export function StudySession({
     setIndex(Math.max(0, nextIndex));
     setShuffled((value) => !value);
   }
+  function commitJump() {
+    if (!jumpValue.trim()) {
+      setJumpValue(String(index + 1));
+      return;
+    }
+    const requested = Number.parseInt(jumpValue, 10);
+    if (!Number.isFinite(requested)) {
+      setJumpValue(String(index + 1));
+      return;
+    }
+    const nextIndex = Math.min(
+      sessionCards.length - 1,
+      Math.max(0, requested - 1),
+    );
+    if (nextIndex !== index) {
+      recordView();
+      setSlideDirection(nextIndex > index ? 1 : -1);
+      setIndex(nextIndex);
+      setFlipped(false);
+    }
+    setJumpValue(String(nextIndex + 1));
+  }
   async function rate(rating: Rating) {
     if (lock.current || !current || !state || !flipped) return;
     lock.current = true;
@@ -201,6 +224,9 @@ export function StudySession({
     window.speechSynthesis.speak(speech);
     return () => window.speechSynthesis.cancel();
   }, [current, settings.autoPlayAudio, done]);
+  useEffect(() => {
+    setJumpValue(String(index + 1));
+  }, [index]);
   useEffect(() => {
     const syncFullscreen = () => setFullscreen(!!document.fullscreenElement);
     document.addEventListener("fullscreenchange", syncFullscreen);
@@ -396,19 +422,22 @@ export function StudySession({
               Đến thẻ{" "}
               <input
                 className="study-input !w-24"
-                type="number"
-                min={1}
-                max={sessionCards.length}
-                value={index + 1}
-                onChange={(e) => {
-                  recordView();
-                  setIndex(
-                    Math.min(
-                      sessionCards.length - 1,
-                      Math.max(0, Number(e.target.value) - 1),
-                    ),
-                  );
-                  setFlipped(false);
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                aria-label="Số thứ tự thẻ muốn mở"
+                value={jumpValue}
+                onChange={(event) => {
+                  if (/^\d*$/.test(event.target.value))
+                    setJumpValue(event.target.value);
+                }}
+                onBlur={commitJump}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") event.currentTarget.blur();
+                  if (event.key === "Escape") {
+                    event.preventDefault();
+                    setJumpValue(String(index + 1));
+                  }
                 }}
               />
             </label>
