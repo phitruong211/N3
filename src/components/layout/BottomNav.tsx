@@ -21,7 +21,7 @@ export function BottomNav() {
         const active = currentPage === tab.id;
         return <button key={tab.id} onClick={() => setCurrentPage(tab.id)} aria-label={tab.label} aria-current={active ? 'page' : undefined}
           className={`flex flex-1 min-w-0 min-h-15 flex-col items-center justify-center gap-0.5 rounded-lg text-[9px] tracking-tight font-semibold cursor-pointer ${active ? 'text-[var(--color-accent)] bg-[var(--color-accent-subtle)]' : 'text-[var(--color-text-secondary)]'}`}>
-          <Icon size={19} strokeWidth={active ? 2.2 : 1.8} /><span className="whitespace-nowrap min-[400px]:hidden">{tab.shortLabel}</span><span className="hidden whitespace-nowrap min-[400px]:inline">{tab.label}</span>
+          <Icon size={19} strokeWidth={active ? 2.2 : 1.8} /><span className="whitespace-nowrap sm:hidden">{tab.shortLabel}</span><span className="hidden whitespace-nowrap sm:inline">{tab.label}</span>
         </button>;
       })}
     </nav>
