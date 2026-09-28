@@ -60,7 +60,7 @@ export function StudySession({
   const [shuffled, setShuffled] = useState(false);
   const [index, setIndex] = useState(0);
   const [jumpValue, setJumpValue] = useState("1");
-  const [flipped, setFlipped] = useState(false);
+  const [revealedCardKey, setRevealedCardKey] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
@@ -69,6 +69,8 @@ export function StudySession({
   const lock = useRef(false);
   const [slideDirection, setSlideDirection] = useState(1);
   const current = sessionCards[index];
+  const currentCardKey = current ? `${current.type}:${current.id}` : null;
+  const flipped = currentCardKey !== null && revealedCardKey === currentCardKey;
   const elapsed = useActiveElapsedMinutes(
     current ? `${current.type}:${current.id}` : null,
   );
@@ -134,7 +136,7 @@ export function StudySession({
       setDone(true);
     else {
       setIndex((i) => i + (direction === "next" ? 1 : -1));
-      setFlipped(false);
+      setRevealedCardKey(null);
     }
   }, [mode, busy, index, recordView, sessionCards.length]);
   const next = useCallback(() => moveCard("next"), [moveCard]);
@@ -167,7 +169,7 @@ export function StudySession({
       recordView();
       setSlideDirection(nextIndex > index ? 1 : -1);
       setIndex(nextIndex);
-      setFlipped(false);
+      setRevealedCardKey(null);
     }
     setJumpValue(String(nextIndex + 1));
   }
@@ -196,7 +198,7 @@ export function StudySession({
       if (index + 1 >= sessionCards.length || timer.isExpired()) setDone(true);
       else {
         setIndex((i) => i + 1);
-        setFlipped(false);
+        setRevealedCardKey(null);
       }
     } catch (reason) {
       setError(
@@ -253,7 +255,7 @@ export function StudySession({
         previous();
       } else if (e.key === " ") {
         e.preventDefault();
-        if (!flipped) setFlipped(true);
+        if (!flipped) setRevealedCardKey(currentCardKey);
         else if (mode === "flashcards") next();
       } else if (
         mode === "anki" &&
@@ -364,7 +366,11 @@ export function StudySession({
             disabled={busy}
             aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
             onTap={() =>
-              setFlipped((value) => (mode === "anki" ? true : !value))
+              setRevealedCardKey((value) =>
+                mode === "anki" || value !== currentCardKey
+                  ? currentCardKey
+                  : null,
+              )
             }
           >
             <CardFace
@@ -404,7 +410,7 @@ export function StudySession({
           ) : (
             <button
               className="study-button study-button-primary"
-              onClick={() => setFlipped(true)}
+              onClick={() => setRevealedCardKey(currentCardKey)}
             >
               Hiện đáp án
             </button>
@@ -418,7 +424,7 @@ export function StudySession({
             >
               Thẻ trước
             </button>
-            <label className="study-copy">
+            <label className="study-copy inline-flex shrink-0 items-center whitespace-nowrap">
               Đến thẻ{" "}
               <input
                 className="study-input !w-24"
@@ -442,8 +448,10 @@ export function StudySession({
               />
             </label>
             <button
-              className="study-button study-button-primary hidden sm:inline-flex"
-              onClick={() => (flipped ? next() : setFlipped(true))}
+              className="study-button study-button-primary hidden w-32 shrink-0 whitespace-nowrap sm:inline-flex"
+              onClick={() =>
+                flipped ? next() : setRevealedCardKey(currentCardKey)
+              }
             >
               {flipped
                 ? index + 1 === sessionCards.length
