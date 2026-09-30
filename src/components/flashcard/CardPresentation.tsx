@@ -59,7 +59,7 @@ export function CardFace({
             key={`${field}-${index}`}
             className={
               field === "notes"
-                ? "rounded-xl bg-black/5 p-4 text-base"
+                ? "whitespace-pre-wrap break-words rounded-xl bg-black/5 p-4 text-base"
                 : field === "reading"
                   ? "font-jp text-lg text-[var(--color-accent)]"
                   : field === "hanViet"

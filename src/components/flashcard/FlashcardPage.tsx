@@ -549,7 +549,6 @@ export function VocabFlashcardSession({
           else if (ankiMode) handleAnkiRate('good');
           else next();
           break;
-        case '=':
         case 'ArrowRight':
           e.preventDefault();
           if (!ankiMode) next();
@@ -976,7 +975,6 @@ export function GrammarFlashcardSession({
           else if (ankiMode) handleAnkiRate('good');
           else next();
           break;
-        case '=':
         case 'ArrowRight':
           e.preventDefault();
           next();
