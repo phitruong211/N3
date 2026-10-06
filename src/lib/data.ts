@@ -2,7 +2,7 @@
 // Data Layer — Process raw JSON into typed application data
 // ============================================================
 // Reads vocabN3.json (rich schema) + vocabN4.json (legacy flat)
-// Reads grammarN2.json + grammarN3.json (rich schema) + grammarN4.json (legacy flat)
+// Reads grammarN2.json (rich schema) + grammarN3.json and grammarN4.json (card schema)
 // ============================================================
 
 import type {
@@ -11,6 +11,7 @@ import type {
   GrammarComparison, GrammarUsageVariant, GrammarExample,
   LegacyVerbVariant,
 } from '../types';
+import { normalizeGrammarCard, type GrammarCardData } from './grammarData';
 
 // ─── Helpers ────────────────────────────────────────────────
 
@@ -320,27 +321,6 @@ interface RawGrammarN3 {
   chu_y?: string;
 }
 
-interface RawGrammarN4 {
-  bai?: number;
-  stt?: number;
-  mau_ngu_phap?: string;
-  pattern?: string;
-  phien_am?: string;
-  cong_thuc?: string;
-  y_nghia?: string;
-  meaning?: string;
-  chu_y?: string;
-  usage?: string;
-  nuance?: string;
-  structure?: string;
-  vi_du?: { nhat?: string; japanese?: string; viet?: string; meaning?: string; reading?: string }[];
-  examples?: { japanese: string; reading: string; meaning: string }[];
-  commonMistakes?: string;
-  comparison?: string;
-  lesson?: string;
-  level?: string;
-}
-
 let _grammarCache: GrammarItem[] | null = null;
 
 export async function loadGrammar(): Promise<GrammarItem[]> {
@@ -348,11 +328,11 @@ export async function loadGrammar(): Promise<GrammarItem[]> {
 
   const [rawN2, rawN3, rawN4] = await Promise.all([
     fetchArray<RawGrammarN3>('/data/grammarN2.json'),
-    fetchArray<RawGrammarN3>('/data/grammarN3.json'),
-    fetchArray<RawGrammarN4>('/data/grammarN4.json'),
+    fetchArray<GrammarCardData>('/data/grammarN3.json'),
+    fetchArray<GrammarCardData>('/data/grammarN4.json'),
   ]);
 
-  // N2 and N3 share the same rich schema.
+  // N2 retains the rich schema.
   const normalizeRichGrammar = (items: RawGrammarN3[], level: 'N2' | 'N3'): GrammarItem[] => items.map((item, index) => {
     const bai = item.bai ?? 0;
     const stt = item.stt ?? index + 1;
@@ -400,54 +380,10 @@ export async function loadGrammar(): Promise<GrammarItem[]> {
     };
   });
   const n2Grammar = normalizeRichGrammar(rawN2, 'N2');
-  const n3Grammar = normalizeRichGrammar(rawN3, 'N3');
+  const n3Grammar = rawN3.map((item, index) => normalizeGrammarCard(item, 'N3', index));
 
-  // Process N4 grammar (legacy flat format)
-  const n4Grammar: GrammarItem[] = rawN4.map((item, index) => {
-    const bai = typeof item.bai === 'number' ? item.bai : 0;
-    const stt = typeof item.stt === 'number' ? item.stt : index + 1;
-    const mau_ngu_phap = item.mau_ngu_phap || item.pattern || '';
-    const nghia_cot_loi = item.y_nghia || item.meaning || '';
-    const giai_thich_toi_uu = item.chu_y || item.usage || '';
-
-    const examples: GrammarExample[] = (item.vi_du || item.examples || []).map(ex => ({
-      japanese: ex.nhat || ex.japanese || '',
-      reading: ex.reading || '',
-      meaning: ex.viet || ex.meaning || '',
-    }));
-
-    return {
-      id: `grammar-n4-${bai}-${stt}`,
-      numericId: 1000 + index,
-      bai,
-      stt,
-      cap_do: 'N4',
-      nhom_chuc_nang: '',
-      mau_ngu_phap,
-      phien_am: item.phien_am || '',
-      cong_thuc: item.cong_thuc || '',
-      nghia_cot_loi,
-      giai_thich_toi_uu,
-      so_sanh_n4_n5: [],
-      cac_cach_dung: [],
-      canh_bao: [],
-      vi_du: examples,
-
-      // Backward-compatible
-      pattern: mau_ngu_phap,
-      reading: item.phien_am || '',
-      meaning: nghia_cot_loi,
-      structure: item.cong_thuc || item.structure || '',
-      congThuc: item.cong_thuc || '',
-      usage: giai_thich_toi_uu,
-      nuance: item.nuance || item.chu_y || '',
-      commonMistakes: item.commonMistakes || '',
-      comparison: item.comparison || '',
-      examples,
-      lesson: `N4 - Bài ${bai}`,
-      level: 'N4',
-    };
-  });
+  // N3 and N4 use the supplied card schema.
+  const n4Grammar: GrammarItem[] = rawN4.map((item, index) => normalizeGrammarCard(item, 'N4', index));
 
   _grammarCache = [...n2Grammar, ...n3Grammar, ...n4Grammar];
   return _grammarCache;

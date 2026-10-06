@@ -75,7 +75,7 @@ export function grammarCard(
     id: item.id,
     deckId,
     front: item.pattern,
-    back: [item.meaning, item.structure, item.usage ? `【Cách dùng】\n${item.usage}` : ""].filter(Boolean).join("\n\n"),
+    back: item.cardBack ?? [item.meaning, item.structure, item.usage ? `【Cách dùng】\n${item.usage}` : ""].filter(Boolean).join("\n\n"),
     reading: item.reading,
     note: [
       ...(item.cac_cach_dung || []).map(variant => [variant.mau, variant.nghia, variant.giai_thich, variant.goi_y, variant.sac_thai, variant.vai_tro, variant.ghi_chu].filter(Boolean).join("\n")),
@@ -84,7 +84,7 @@ export function grammarCard(
     ].filter(Boolean).join("\n\n") || undefined,
     type: "GRAMMAR",
     extraData: { examples: JSON.stringify(item.examples) },
-    tags: [item.level],
+    tags: item.tags || [item.level],
     source: "BUILT_IN",
     sourceRef: item.id,
     position,

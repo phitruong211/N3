@@ -148,6 +148,8 @@ export interface GrammarExample {
 }
 
 export interface GrammarItem {
+  cardBack?: string;
+  tags?: string[];
   // Core identity
   id: string;           // Generated runtime id
   numericId: number;    // Original JSON `id`
