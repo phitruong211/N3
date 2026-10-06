@@ -26,6 +26,29 @@ function fieldValue(
   return card[field];
 }
 
+function GrammarBack({ value, compact }: { value: string; compact: boolean }) {
+  return (
+    <div className={`space-y-5 text-left font-normal leading-relaxed ${compact ? "text-sm" : "text-base sm:text-lg"}`}>
+      {value.replace(/\r\n?/g, "\n").trim().split(/\n\s*\n/).map((block, index) => (
+        <div key={index} className={index === 0 ? "text-lg font-semibold sm:text-xl" : "border-t border-current/10 pt-4"}>
+          {block.split("\n").map((line, lineIndex) => (
+            <div
+              key={lineIndex}
+              className={/^【.*】$/.test(line.trim())
+                ? "mb-2 text-xs font-semibold tracking-wide opacity-60"
+                : line.trim().startsWith("→")
+                  ? "mt-1 text-sm font-normal opacity-75 sm:text-base"
+                  : "font-jp whitespace-pre-wrap break-words"}
+            >
+              {line}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function CardFace({
   card,
   deckName,
@@ -41,6 +64,7 @@ export function CardFace({
   compact?: boolean;
   immersivePrimary?: boolean;
 }) {
+  const grammarAnswer = card.kind === "grammar" && fields.includes("back");
   const sizes = {
     small: "text-lg",
     medium: "text-2xl",
@@ -49,11 +73,14 @@ export function CardFace({
   };
   return (
     <div
-      className={`w-full space-y-4 ${template.style.alignment === "left" ? "text-left" : "text-center"} ${compact ? "!text-base" : ""}`}
+      className={`w-full space-y-4 ${grammarAnswer ? "mx-auto max-w-3xl text-left" : template.style.alignment === "left" ? "text-left" : "text-center"} ${compact ? "!text-base" : ""}`}
     >
       {fields.map((field, index) => {
         const value = fieldValue(field, card, deckName);
         if (!value) return null;
+        if (grammarAnswer && field === "back") {
+          return <GrammarBack key={`${field}-${index}`} value={value} compact={compact} />;
+        }
         return (
           <div
             key={`${field}-${index}`}
@@ -66,7 +93,7 @@ export function CardFace({
                     ? "text-base font-medium text-[var(--color-kanji)]"
                   : field === "kind" || field === "deckName"
                     ? "text-xs font-bold uppercase tracking-wide opacity-70"
-                : `${immersivePrimary && index === 0 ? "text-5xl sm:text-7xl lg:text-8xl" : sizes[template.style.fontScale]} font-semibold whitespace-pre-wrap break-words`
+                : `${immersivePrimary && index === 0 ? "text-5xl sm:text-7xl lg:text-8xl" : sizes[template.style.fontScale]} font-jp whitespace-pre-wrap break-words`
             }
           >
             <span className="sr-only">{fieldLabels[field]}: </span>

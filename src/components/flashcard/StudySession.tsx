@@ -363,7 +363,7 @@ export function StudySession({
               if (info.offset.x <= -SWIPE_THRESHOLD) moveCard("next");
               else if (info.offset.x >= SWIPE_THRESHOLD) moveCard("previous");
             }}
-            className={`relative flex h-full w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center justify-center overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 sm:rounded-3xl sm:p-12 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
+            className={`relative flex h-full w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center ${flipped && current.type === "GRAMMAR" ? "justify-start" : "justify-center"} overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 sm:rounded-3xl sm:p-12 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
             disabled={busy}
             aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
             onTap={() =>
