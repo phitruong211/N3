@@ -182,6 +182,7 @@ export function ImportedDecks({
     selected: string;
   } | null>(null);
   const input = useRef<HTMLInputElement>(null);
+  const jsonGuide = useRef<HTMLDetailsElement>(null);
   const lock = useRef(false);
   const parser = useRef<AbortController | null>(null);
   const mounted = useRef(true);
@@ -1050,6 +1051,23 @@ export function ImportedDecks({
                             sau; có thể thêm cách đọc, Hán Việt, ghi chú, loại và
                             tag.
                           </p>
+                          <p className="mt-2 text-xs text-[var(--color-text-secondary)]">
+                            JSON: danh sách thẻ có front và back; dùng reading cho phiên âm, type cho loại thẻ và tags để chia bài học.
+                          </p>
+                          <button
+                            type="button"
+                            className="mt-3 text-sm font-semibold text-[var(--color-accent)] underline underline-offset-4 focus-ring"
+                            onClick={() => {
+                              setRules(false);
+                              const guide = jsonGuide.current;
+                              if (!guide) return;
+                              guide.open = true;
+                              guide.scrollIntoView({ block: "nearest" });
+                              guide.querySelector("summary")?.focus();
+                            }}
+                          >
+                            Xem cấu trúc JSON và giải thích từng trường
+                          </button>
                           <div className="mt-3 flex gap-2">
                             <button
                               className="study-button"
@@ -1068,7 +1086,7 @@ export function ImportedDecks({
                       )}
                     </div>
                   </div>
-                  <details className="mt-4 rounded-xl border border-[var(--color-border)] p-4">
+                  <details ref={jsonGuide} className="mt-4 rounded-xl border border-[var(--color-border)] p-4">
                     <summary className="cursor-pointer text-sm font-semibold text-[var(--color-accent)]">
                       Hướng dẫn cấu trúc file JSON · xem mẫu và các trường
                     </summary>
