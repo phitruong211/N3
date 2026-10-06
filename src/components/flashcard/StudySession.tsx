@@ -290,7 +290,7 @@ export function StudySession({
     flipped
       ? template.back.fields
       : template.front.fields
-  ).filter((field) => settings.showFurigana || field !== "reading");
+  ).filter((field) => (flipped ? settings.showFuriganaBack : settings.showFuriganaFront) || field !== "reading");
   return (
     <section
       ref={sessionRef}

@@ -54,7 +54,7 @@ export function useSettingsSync(
       generation.current++;
       const next = { ...storage.getSettings(), ...updates };
       storage.saveSettings(next);
-      current.current(next);
+      current.current(storage.getSettings());
       if (enabled) {
         storage.setJSON("settings_pending", {
           ...storage.getJSON("settings_pending", {}),
@@ -76,7 +76,7 @@ export function useSettingsSync(
         ...storage.getJSON("settings_pending", {}),
       };
       storage.saveSettings(next);
-      current.current(next);
+      current.current(storage.getSettings());
       await flush();
     } catch (e) {
       if (alive.current)

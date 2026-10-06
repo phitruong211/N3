@@ -46,7 +46,8 @@ export function SettingsPage() {
         </section>
         <section className="study-panel">
           <h2 className="mb-3 text-base font-semibold text-[var(--color-text)]">Khi học</h2>
-          <SettingToggle label="Hiện Furigana" detail="Hiện cách đọc hiragana khi học" checked={settings.showFurigana} onChange={value => updateSettings({ showFurigana: value })}/>
+          <SettingToggle label="Phiên âm mặt trước" detail="Hiện cách đọc hiragana trước khi lật thẻ" checked={settings.showFuriganaFront} onChange={value => updateSettings({ showFuriganaFront: value })}/>
+          <SettingToggle label="Phiên âm mặt sau" detail="Hiện cách đọc hiragana sau khi lật thẻ" checked={settings.showFuriganaBack} onChange={value => updateSettings({ showFuriganaBack: value })}/>
           <SettingToggle label="Tự phát âm" detail="Đọc thẻ khi bắt đầu học nếu trình duyệt hỗ trợ" checked={settings.autoPlayAudio} onChange={value=>updateSettings({autoPlayAudio:value})}/>
           <label className="block py-3">Mục tiêu mỗi ngày (thẻ)<input className="study-input" type="number" min={1} max={1000} value={settings.dailyGoal} onChange={e=>updateSettings({dailyGoal:Math.max(1,Math.min(1000,Math.round(Number(e.target.value)||1)))})}/></label>
           <SettingToggle label="Giảm chuyển động" detail="Giảm hiệu ứng chuyển cảnh" checked={settings.reducedMotion} onChange={value => updateSettings({ reducedMotion: value })}/>
@@ -74,9 +75,14 @@ export function SettingsPage() {
       <section className="study-panel lg:sticky lg:top-20">
         <p className="study-eyebrow">XEM TRƯỚC</p>
         <div className="mt-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-6 text-center">
-          {settings.showFurigana && <p className="font-jp text-sm text-[var(--color-text-secondary)]">じゅんび</p>}
+          <p className="study-eyebrow mb-2">Mặt trước</p>
+          {settings.showFuriganaFront && <p className="font-jp text-sm text-[var(--color-text-secondary)]">じゅんび</p>}
           <p className="font-jp-serif mt-2 text-5xl text-[var(--color-text)]">準備</p>
-          <p className="mt-3 text-sm text-[var(--color-text-secondary)]">sự chuẩn bị</p>
+          <div className="mt-5 border-t border-[var(--color-border)] pt-4">
+            <p className="study-eyebrow mb-2">Mặt sau</p>
+            {settings.showFuriganaBack && <p className="font-jp text-sm text-[var(--color-text-secondary)]">じゅんび</p>}
+            <p className="mt-3 text-sm text-[var(--color-text-secondary)]">sự chuẩn bị</p>
+          </div>
         </div>
         <p className="study-copy mt-4">{user ? 'Cài đặt, bộ thẻ, dấu trang và tiến độ ôn được đồng bộ với tài khoản. Lịch sử nghe vẫn lưu trên thiết bị.' : 'Cài đặt và tiến độ học thử chỉ lưu trên thiết bị này, chưa đồng bộ vào tài khoản.'}</p>
       </section>

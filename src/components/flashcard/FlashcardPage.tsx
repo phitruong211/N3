@@ -674,6 +674,9 @@ export function VocabFlashcardSession({
               >
                 {current.kanji || current.hiragana}
               </div>
+              {settings.showFuriganaFront && current.hiragana && (
+                <p className="font-jp text-xl text-[var(--color-accent)]">{current.hiragana}</p>
+              )}
 
               <div className="mt-2 flex items-center justify-center gap-3 text-sm sm:text-base font-semibold text-[var(--color-text-secondary)] opacity-80 tracking-wide select-none">
                 <div
@@ -703,7 +706,7 @@ export function VocabFlashcardSession({
                 {current.meaning}
               </div>
 
-              <div
+              {settings.showFuriganaBack && current.hiragana && <div
                 className="font-jp font-bold"
                 style={{
                   fontSize: 'clamp(1.3rem, 3.5vw, 2.2rem)',
@@ -711,7 +714,7 @@ export function VocabFlashcardSession({
                 }}
               >
                 【{current.hiragana}】
-              </div>
+              </div>}
               {current.han_viet && <div className="text-sm font-medium text-[var(--color-text-secondary)]">Hán Việt: {current.han_viet}</div>}
             </div>
           )}
@@ -1115,7 +1118,7 @@ export function GrammarFlashcardSession({
               </div>
 
               {/* 2. Phiên âm nhỏ ở dưới (màu vàng ánh kim #C9A84C, font-jp font-bold như Kanji/Vocab) */}
-              {current.reading && (
+              {settings.showFuriganaFront && current.reading && (
                 <div
                   className="font-jp font-bold tracking-wide"
                   style={{
@@ -1241,7 +1244,7 @@ export function GrammarFlashcardSession({
                               </div>
                             </div>
                           </div>
-                          {ex.reading && (
+                          {settings.showFuriganaBack && ex.reading && (
                             <div className="font-jp text-xs text-[var(--color-text-tertiary)]">
                               {ex.reading}
                             </div>

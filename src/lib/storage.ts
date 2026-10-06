@@ -210,6 +210,8 @@ export function createLearningStorage(scope: StorageScope) {
     theme: 'light',
     fontSize: 'medium',
     showFurigana: true,
+    showFuriganaFront: true,
+    showFuriganaBack: true,
     autoPlayAudio: false,
     dailyGoal: 20,
     ankiSessionMinutes: 0,
@@ -222,6 +224,8 @@ export function createLearningStorage(scope: StorageScope) {
     return {
       ...DEFAULT_SETTINGS,
       ...stored,
+      showFuriganaFront: typeof stored.showFuriganaFront === 'boolean' ? stored.showFuriganaFront : (stored.showFurigana ?? true),
+      showFuriganaBack: typeof stored.showFuriganaBack === 'boolean' ? stored.showFuriganaBack : (stored.showFurigana ?? true),
       ankiSessionMinutes: Number.isFinite(requestedMinutes)
         ? Math.min(180, Math.max(0, Math.round(requestedMinutes)))
         : DEFAULT_SETTINGS.ankiSessionMinutes,

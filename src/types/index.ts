@@ -306,6 +306,8 @@ export interface AppSettings {
   theme: ThemeMode;
   fontSize: 'small' | 'medium' | 'large';
   showFurigana: boolean;
+  showFuriganaFront: boolean;
+  showFuriganaBack: boolean;
   autoPlayAudio: boolean;
   dailyGoal: number;
   /** Maximum active minutes for an Anki session; 0 disables the limit. */

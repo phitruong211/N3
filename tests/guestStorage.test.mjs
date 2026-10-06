@@ -12,6 +12,23 @@ beforeEach(() => {
 });
 const bookmark = id => ({ itemId: id, itemType: 'vocabulary', createdAt: '2026-09-26' });
 
+test('furigana preferences migrate the old toggle and persist all four side combinations', () => {
+  const storage = createLearningStorage('guest');
+  for (const legacy of [false, true]) {
+    storage.saveSettings({ showFurigana: legacy });
+    assert.equal(storage.getSettings().showFuriganaFront, legacy);
+    assert.equal(storage.getSettings().showFuriganaBack, legacy);
+  }
+  for (const front of [false, true]) {
+    for (const back of [false, true]) {
+      storage.saveSettings({ ...storage.getSettings(), showFuriganaFront: front, showFuriganaBack: back });
+      const restored = createLearningStorage('guest').getSettings();
+      assert.equal(restored.showFuriganaFront, front);
+      assert.equal(restored.showFuriganaBack, back);
+    }
+  }
+});
+
 test('Guest, A and B keep separate bookmarks, SRS, progress, settings and listening data', () => {
   const guest = createLearningStorage('guest');
   const a = createLearningStorage('user:A');

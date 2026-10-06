@@ -48,6 +48,35 @@ import {
   Upload,
   X,
 } from "lucide-react";
+const jsonImportExample = [
+  {
+    front: "勉強",
+    back: "Việc học",
+    reading: "べんきょう",
+    han_viet: "Miễn Cường",
+    note: "Ôn bài 6",
+    type: "VOCABULARY",
+    tags: ["N3", "từ vựng", "bài 6"],
+  },
+  {
+    front: "～たびに",
+    back: "Mỗi lần… thì…\n\nV thể từ điển + たびに\nN + の + たびに\n\n【Cách dùng】\nSự việc ở vế sau lặp lại mỗi lần vế trước xảy ra.\n\n【Ví dụ】\nこの歌を聞くたびに、学生時代を思い出します。\n→ Mỗi lần nghe bài hát này, tôi lại nhớ thời sinh viên.",
+    reading: "～たびに",
+    han_viet: null,
+    note: "",
+    type: "GRAMMAR",
+    tags: ["N3", "ngữ pháp", "bài 7"],
+  },
+];
+const jsonImportFields = [
+  ["front", "Bắt buộc", "Mặt trước: từ, Kanji hoặc mẫu ngữ pháp."],
+  ["back", "Bắt buộc", "Mặt sau: nghĩa; với ngữ pháp có thể thêm công thức, cách dùng và ví dụ."],
+  ["reading", "Tùy chọn", "Phiên âm hiragana. Có thể bật/tắt riêng từng mặt trong Cài đặt → Khi học."],
+  ["han_viet", "Tùy chọn", "Âm Hán Việt; dùng null hoặc chuỗi rỗng nếu không có."],
+  ["note", "Tùy chọn", "Ghi chú thêm hoặc nguồn tài liệu; không cần lặp lại mặt sau."],
+  ["type", "Nên có", "VOCABULARY (từ vựng), KANJI, GRAMMAR (ngữ pháp) hoặc GENERAL (tổng hợp)."],
+  ["tags", "Tùy chọn", 'Danh sách nhãn, ví dụ ["N3", "ngữ pháp", "bài 7"]. Tag “bài 7” giúp lọc theo bài học.'],
+];
 const blankCard = (): ImportedCard => ({
   id: crypto.randomUUID(),
   front: "",
@@ -497,21 +526,7 @@ export function ImportedDecks({
     const text =
       format === "csv"
         ? "front,back,reading,hanViet,note,type,tags\n勉強,Việc học,べんきょう,Miễn Cường,Ôn bài 6,VOCABULARY,học tập\n"
-        : JSON.stringify(
-            [
-              {
-                front: "勉強",
-                back: "Việc học",
-                reading: "べんきょう",
-                han_viet: "Miễn Cường",
-                note: "Ôn bài 6",
-                type: "VOCABULARY",
-                tags: ["học tập"],
-              },
-            ],
-            null,
-            2,
-          );
+        : JSON.stringify(jsonImportExample, null, 2);
     const url = URL.createObjectURL(
       new Blob([text], {
         type: format === "csv" ? "text/csv;charset=utf-8" : "application/json",
@@ -984,6 +999,7 @@ export function ImportedDecks({
                     </div>
                   </>
                 ) : (
+                  <>
                   <div className="grid gap-3 sm:grid-cols-2">
                     <button
                       type="button"
@@ -1052,6 +1068,31 @@ export function ImportedDecks({
                       )}
                     </div>
                   </div>
+                  <details className="mt-4 rounded-xl border border-[var(--color-border)] p-4">
+                    <summary className="cursor-pointer text-sm font-semibold text-[var(--color-accent)]">
+                      Hướng dẫn cấu trúc file JSON · xem mẫu và các trường
+                    </summary>
+                    <div className="mt-4 space-y-4 text-sm leading-relaxed">
+                      <p>Tạo file đuôi <code>.json</code>, lưu bằng UTF-8. Toàn bộ file là một danh sách <code>[…]</code>; mỗi thẻ là một đối tượng <code>{"{…}"}</code>, ngăn cách bằng dấu phẩy. Mẫu dưới đây có một thẻ từ vựng và một thẻ ngữ pháp.</p>
+                      <pre className="max-h-80 overflow-auto rounded-lg bg-[var(--color-surface-alt)] p-3 text-left text-xs leading-6"><code>{JSON.stringify(jsonImportExample, null, 2)}</code></pre>
+                      <dl className="divide-y divide-[var(--color-border)]">
+                        {jsonImportFields.map(([field, required, description]) => (
+                          <div key={field} className="py-3">
+                            <dt className="flex flex-wrap items-center gap-2"><code className="font-semibold">{field}</code><span className="text-xs text-[var(--color-text-secondary)]">{required}</span></dt>
+                            <dd className="mt-1 text-[var(--color-text-secondary)]">{description}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                      <ul className="list-disc space-y-2 pl-5 text-[var(--color-text-secondary)]">
+                        <li><code>front</code> và <code>back</code> phải có nội dung. Các trường chữ dùng dấu nháy kép; <code>tags</code> là danh sách chuỗi.</li>
+                        <li>Trong <code>back</code>, dùng <code>{"\\n"}</code> để xuống dòng và <code>{"\\n\\n"}</code> để tách đoạn. Nếu cần dấu nháy kép trong nội dung, viết <code>{'\\"'}</code>.</li>
+                        <li>Không thêm chú thích hoặc dấu phẩy sau thẻ/trường cuối cùng. Nếu sao chép từ chat, chỉ lấy phần JSON, bỏ dấu bao Markdown.</li>
+                        <li>Tệp tối đa 20 MB và 20.000 thẻ. Sau khi chọn file, kiểm tra bản xem trước và loại thẻ trước khi lưu bộ thẻ.</li>
+                      </ul>
+                      <button type="button" className="study-button" onClick={() => download("json")}>Tải file JSON mẫu</button>
+                    </div>
+                  </details>
+                  </>
                 )}
               </section>
             ) : (
