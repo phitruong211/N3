@@ -346,7 +346,7 @@ export function StudySession({
       )}
       <div className="relative flex min-h-0 flex-1 items-stretch justify-center overflow-hidden px-3 py-2 sm:px-6 sm:py-4">
         <AnimatePresence initial={false} custom={slideDirection} mode="popLayout">
-          <motion.button
+          <motion.div
             key={`${current.type}:${current.id}`}
             custom={slideDirection}
             variants={cardMotion}
@@ -363,10 +363,18 @@ export function StudySession({
               if (info.offset.x <= -SWIPE_THRESHOLD) moveCard("next");
               else if (info.offset.x >= SWIPE_THRESHOLD) moveCard("previous");
             }}
-            className={`relative flex h-full w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center ${flipped && current.type === "GRAMMAR" ? "justify-start" : "justify-center"} overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 sm:rounded-3xl sm:p-12 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
-            disabled={busy}
+            className={`relative flex h-full w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center ${flipped && (current.type === "GRAMMAR" || current.extraData?.examples) ? "justify-start" : "justify-center"} overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 sm:rounded-3xl sm:p-12 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
+            role="button"
+            tabIndex={0}
+            aria-disabled={busy}
+            onKeyDown={event => {
+              if (event.key === "Enter" && event.target === event.currentTarget) {
+                event.preventDefault();
+                if (!busy) setRevealedCardKey(value => mode === "anki" || value !== currentCardKey ? currentCardKey : null);
+              }
+            }}
             aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
-            onTap={() =>
+            onTap={() => !busy &&
               setRevealedCardKey((value) =>
                 mode === "anki" || value !== currentCardKey
                   ? currentCardKey
@@ -380,13 +388,14 @@ export function StudySession({
               fields={fields}
               template={template}
               immersivePrimary={!flipped}
+              showExampleReadings={settings.showFuriganaBack}
             />
             {!flipped && (
               <span className="absolute bottom-5 text-xs text-[var(--color-text-tertiary)] sm:hidden">
                 Chạm để lật · Vuốt để chuyển thẻ
               </span>
             )}
-          </motion.button>
+          </motion.div>
         </AnimatePresence>
       </div>
       {error && (

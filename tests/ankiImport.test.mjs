@@ -2,7 +2,25 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { utils, write } from 'xlsx';
-import { defaultDeckTemplate, normalizeDeckTemplate, parseTextImport, parseExcelImport, parseImportFile, remapImportPreview } from '../src/lib/ankiImport.ts';
+import { defaultDeckTemplate, normalizeDeckTemplate, parseTextImport, parseExcelImport, parseImportFile, remapImportPreview, parseCardExamples } from '../src/lib/ankiImport.ts';
+
+test('structured examples survive JSON import, remapping and API extra data serialization', () => {
+  const examples = [{ japanese: '雨が降るたびに、道がぬれます。', reading: 'あめがふるたびに、みちがぬれます。', meaning: 'Mỗi lần trời mưa, đường lại ướt.' }, { japanese: '日本語を勉強します。', meaning: 'Tôi học tiếng Nhật.' }];
+  const preview = parseTextImport(JSON.stringify([{ front: '～たびに', back: 'Mỗi lần', type: 'GRAMMAR', examples }]), 'cards.json');
+  assert.equal(preview.skipped, 0);
+  const remapped = remapImportPreview(preview, preview.tables);
+  const restored = JSON.parse(JSON.stringify(remapped.cards[0].extraData));
+  assert.deepEqual(parseCardExamples(restored.examples), [examples[0], { ...examples[1], reading: '' }]);
+});
+
+test('invalid examples are reported rather than silently lost', () => {
+  for (const examples of [{ japanese: '猫', meaning: 'Mèo' }, [{ japanese: '猫' }], [{ japanese: 123, meaning: 'Mèo' }]]) {
+    const preview = parseTextImport(JSON.stringify([{ front: '猫', back: 'Mèo', examples }]), 'cards.json');
+    assert.equal(preview.cards.length, 0);
+    assert.equal(preview.skipped, 1);
+  }
+  assert.deepEqual(parseCardExamples(undefined), []);
+});
 
 test('deck templates use safe defaults and discard unsupported values', () => {
   assert.deepEqual(normalizeDeckTemplate(null), defaultDeckTemplate());

@@ -14,6 +14,7 @@ export interface CardView {
   source: CardSource;
   sourceRef?: string;
   position: number;
+  extraData?: Record<string, string>;
 }
 export interface DeckSummary {
   id: string;
@@ -79,11 +80,11 @@ export function grammarCard(
     note: [
       item.structure,
       item.usage,
-      ...item.examples.map((e) => `${e.japanese}\n${e.meaning}`),
     ]
       .filter(Boolean)
       .join("\n"),
     type: "GRAMMAR",
+    extraData: { examples: JSON.stringify(item.examples) },
     tags: [item.level],
     source: "BUILT_IN",
     sourceRef: item.id,
@@ -108,6 +109,7 @@ export function importedCardView(
     tags: card.tags || [],
     source,
     sourceRef: card.sourceRef,
+    extraData: card.extraData,
     position,
   };
 }
@@ -120,5 +122,6 @@ export function presentationCard(card: CardView): ImportedCard {
     hanViet: card.hanViet || "",
     notes: card.note || "",
     kind: card.type.toLowerCase() as ImportedCard["kind"],
+    extraData: card.extraData,
   };
 }

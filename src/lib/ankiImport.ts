@@ -42,7 +42,19 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
   };
 }
 
-export type ImportField = 'front' | 'back' | 'reading' | 'hanViet' | 'notes' | 'kind' | 'tags';
+export type ImportField = 'front' | 'back' | 'reading' | 'hanViet' | 'notes' | 'kind' | 'tags' | 'examples';
+export interface CardExample { japanese: string; reading: string; meaning: string }
+export function parseCardExamples(value: unknown): CardExample[] {
+ if (value == null || value === '') return [];
+ const parsed: unknown = typeof value === 'string' ? JSON.parse(value) : value;
+ if (!Array.isArray(parsed) || parsed.length > 100) throw new Error('examples phải là danh sách, tối đa 100 ví dụ.');
+ return parsed.map(example => {
+  if (!example || typeof example !== 'object' || Array.isArray(example)) throw new Error('Mỗi ví dụ phải là một đối tượng.');
+  const entry = example as Record<string, unknown>;
+  if (typeof entry.japanese !== 'string' || !entry.japanese.trim() || typeof entry.meaning !== 'string' || !entry.meaning.trim() || (entry.reading != null && typeof entry.reading !== 'string')) throw new Error('Ví dụ cần japanese và meaning; reading là chuỗi tùy chọn.');
+  return { japanese: entry.japanese.trim(), reading: typeof entry.reading === 'string' ? entry.reading.trim() : '', meaning: entry.meaning.trim() };
+ });
+}
 export interface ImportTable { id: string; name: string; rows: string[][]; hasHeader: boolean; selected: boolean; mapping: Partial<Record<ImportField, number>>; extraColumns: number[]; inferredKind?: ImportedKind }
 export interface ImportIssue { row: number; sheet: string; reason: string }
 const text = (value: unknown): string => (Array.isArray(value) ? value.map(text).filter(Boolean).join('\n') : typeof value === 'object' && value !== null ? JSON.stringify(value) : value == null ? '' : String(value)).replace(/\r\n?/g, '\n').trim().normalize('NFC');
@@ -50,7 +62,7 @@ const normalize = (value: string) => value.replace(/^\uFEFF/, '').trim().toLower
 const keys: Record<ImportField, string[]> = {
  front: ['front','mat truoc','question','cau hoi','word','tu','tu vung','kanji','tu_chinh','pattern','mau_ngu_phap'],
  back: ['back','mat sau','answer','dap an','meaning','nghia','y nghia','nghia_cot_loi'],
- reading: ['reading','phien_am','hiragana','cach doc'], hanViet: ['hanViet','han_viet','han viet','hán việt','hanTu','han_tu','han tu','hán tự'], notes: ['notes','note','ghi_chu'], kind: ['kind','type','loai'], tags: ['tags','tag','nhan'],
+ reading: ['reading','phien_am','hiragana','cach doc'], hanViet: ['hanViet','han_viet','han viet','hán việt','hanTu','han_tu','han tu','hán tự'], notes: ['notes','note','ghi_chu'], kind: ['kind','type','loai'], tags: ['tags','tag','nhan'], examples: ['examples'],
 };
 function table(rows: string[][], name: string, json = false): ImportTable {
  const header = rows[0] || [];
@@ -84,6 +96,10 @@ export function remapImportPreview(preview: ImportPreview, tables: ImportTable[]
    if (!kind) { fail('Loại thẻ không hợp lệ'); continue; }
    const tags = pick('tags').split(/[,;\n]/).map(t => t.trim()).filter(Boolean);
    const extraData = Object.fromEntries(tab.extraColumns.filter(i => !Object.values(tab.mapping).includes(i)).map(i => [tab.hasHeader ? tab.rows[0][i] || `Cột ${i + 1}` : `Cột ${i + 1}`, text(row[i])]));
+   try {
+    const examples = parseCardExamples(pick('examples'));
+    if (examples.length) extraData.examples = JSON.stringify(examples);
+   } catch (error) { fail(error instanceof Error ? error.message : 'examples không hợp lệ'); continue; }
    if (tags.length > 100 || tags.some(t => t.length > 100) || JSON.stringify(extraData).length > 20000) { fail('Tags hoặc dữ liệu mở rộng vượt giới hạn'); continue; }
    const pair = JSON.stringify([front.replace(/\s+/g, ' '), back.replace(/\s+/g, ' ')]);
    if (seen.has(pair)) { duplicates++; fail('Trùng cặp mặt trước / mặt sau'); continue; }
@@ -120,7 +136,10 @@ export function parseTextImport(input: string, filename: string): ImportPreview 
   const records = Array.isArray(parsed) ? parsed : parsed && typeof parsed === 'object' ? ['cards','data','items','vocabulary','kanji','grammar'].map(k => (parsed as Record<string, unknown>)[k]).find(Array.isArray) as unknown[] | undefined : undefined;
   if (!records) throw new Error('JSON cần chứa danh sách thẻ (mảng hoặc trường cards/data/items).');
   const header = [...new Set(records.flatMap(r => r && typeof r === 'object' && !Array.isArray(r) ? Object.keys(r) : []))];
-  tab = table([header, ...records.map(r => header.map(k => text(r && typeof r === 'object' && !Array.isArray(r) ? (r as Record<string, unknown>)[k] : '')))], '', true); format = 'JSON';
+  tab = table([header, ...records.map(r => header.map(k => {
+   const value = r && typeof r === 'object' && !Array.isArray(r) ? (r as Record<string, unknown>)[k] : '';
+   return k === 'examples' && value != null ? JSON.stringify(value) : text(value);
+  }))], '', true); format = 'JSON';
  } else {
   const lines = clean.split(/\r?\n/), directives: string[] = [];
   while (lines[0]?.startsWith('#')) directives.push(lines.shift()!);

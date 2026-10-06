@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { ArrowDown, ArrowUp, GripVertical, X } from "lucide-react";
-import { defaultDeckTemplate, kindLabels } from "@/lib/ankiImport";
+import { ArrowDown, ArrowUp, GripVertical, X, Eye, EyeOff } from "lucide-react";
+import { defaultDeckTemplate, kindLabels, parseCardExamples } from "@/lib/ankiImport";
 import type {
   CardField,
   DeckTemplateConfig,
@@ -26,12 +26,43 @@ function fieldValue(
   return card[field];
 }
 
+function ExampleMeaning({ meaning, label }: { meaning: string; label: string }) {
+  const [visible, setVisible] = useState(false);
+  return <div className="mt-2 text-sm font-normal sm:text-base">
+    <button type="button" className="study-button !min-h-8 !px-2 !py-1 !text-xs"
+      aria-label={`${visible ? "Ẩn" : "Hiện"} nghĩa ${label}`} aria-expanded={visible}
+      onPointerDown={event => event.stopPropagation()}
+      onKeyDown={event => event.stopPropagation()}
+      onClick={event => { event.stopPropagation(); setVisible(value => !value); }}>
+      {visible ? <EyeOff size={16} /> : <Eye size={16} />}
+      {visible ? "Ẩn nghĩa" : "Hiện nghĩa"}
+    </button>
+    {visible && <p className="mt-2 whitespace-pre-wrap break-words opacity-75">{meaning}</p>}
+  </div>;
+}
+
+function Examples({ value, showReading }: { value: unknown; showReading: boolean }) {
+  let examples;
+  try { examples = parseCardExamples(value); } catch { return null; }
+  if (!examples.length) return null;
+  return <div className="space-y-3 border-t border-current/10 pt-4 text-left">
+    <p className="text-xs font-semibold opacity-60">Ví dụ · bấm mắt để xem nghĩa</p>
+    {examples.map((example, index) => <div key={index} className="rounded-xl bg-black/5 p-4">
+      <p lang="ja" className="font-jp whitespace-pre-wrap break-words text-base leading-relaxed sm:text-lg">{index + 1}. {example.japanese}</p>
+      {showReading && example.reading && <p lang="ja" className="font-jp mt-1 text-sm text-[var(--color-accent)]">{example.reading}</p>}
+      <ExampleMeaning meaning={example.meaning} label={`ví dụ ${index + 1}`} />
+    </div>)}
+  </div>;
+}
+
 function GrammarBack({ value, compact }: { value: string; compact: boolean }) {
   return (
     <div className={`space-y-5 text-left font-normal leading-relaxed ${compact ? "text-sm" : "text-base sm:text-lg"}`}>
       {value.replace(/\r\n?/g, "\n").trim().split(/\n\s*\n/).map((block, index) => (
         <div key={index} className={index === 0 ? "text-lg font-semibold sm:text-xl" : "border-t border-current/10 pt-4"}>
-          {block.split("\n").map((line, lineIndex) => (
+          {block.split("\n").map((line, lineIndex) => line.trim().startsWith("→") ? (
+            <ExampleMeaning key={lineIndex} meaning={line.trim().slice(1).trim()} label={`ví dụ ${index + 1}`} />
+          ) : (
             <div
               key={lineIndex}
               className={/^【.*】$/.test(line.trim())
@@ -56,6 +87,7 @@ export function CardFace({
   template,
   compact = false,
   immersivePrimary = false,
+  showExampleReadings = true,
 }: {
   card: ImportedCard;
   deckName: string;
@@ -63,6 +95,7 @@ export function CardFace({
   template: DeckTemplateConfig;
   compact?: boolean;
   immersivePrimary?: boolean;
+  showExampleReadings?: boolean;
 }) {
   const grammarAnswer = card.kind === "grammar" && fields.includes("back");
   const sizes = {
@@ -101,6 +134,7 @@ export function CardFace({
           </div>
         );
       })}
+      {fields.includes("back") && <Examples key={card.id} value={card.extraData?.examples} showReading={showExampleReadings} />}
     </div>
   );
 }

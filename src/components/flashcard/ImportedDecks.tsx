@@ -60,7 +60,8 @@ const jsonImportExample = [
   },
   {
     front: "～たびに",
-    back: "Mỗi lần… thì…\n\nV thể từ điển + たびに\nN + の + たびに\n\n【Cách dùng】\nSự việc ở vế sau lặp lại mỗi lần vế trước xảy ra.\n\n【Ví dụ】\nこの歌を聞くたびに、学生時代を思い出します。\n→ Mỗi lần nghe bài hát này, tôi lại nhớ thời sinh viên.",
+    back: "Mỗi lần… thì…\n\nV thể từ điển + たびに\nN + の + たびに\n\n【Cách dùng】\nSự việc ở vế sau lặp lại mỗi lần vế trước xảy ra.",
+    examples: [{ japanese: "この歌を聞くたびに、学生時代を思い出します。", reading: "このうたをきくたびに、がくせいじだいをおもいだします。", meaning: "Mỗi lần nghe bài hát này, tôi lại nhớ thời sinh viên." }],
     reading: "～たびに",
     han_viet: null,
     note: "",
@@ -76,6 +77,7 @@ const jsonImportFields = [
   ["note", "Tùy chọn", "Ghi chú thêm hoặc nguồn tài liệu; không cần lặp lại mặt sau."],
   ["type", "Nên có", "VOCABULARY (từ vựng), KANJI, GRAMMAR (ngữ pháp) hoặc GENERAL (tổng hợp)."],
   ["tags", "Tùy chọn", 'Danh sách nhãn, ví dụ ["N3", "ngữ pháp", "bài 7"]. Tag “bài 7” giúp lọc theo bài học.'],
+  ["examples", "Tùy chọn", "Danh sách ví dụ. Mỗi ví dụ có japanese (câu tiếng Nhật), meaning (bản dịch) bắt buộc và reading (phiên âm) tùy chọn. Nghĩa ban đầu được ẩn; bấm biểu tượng mắt để hiện hoặc ẩn lại. Không cần chép ví dụ vào back."],
 ];
 const blankCard = (): ImportedCard => ({
   id: crypto.randomUUID(),
@@ -453,6 +455,7 @@ export function ImportedDecks({
               .map((key) => c.extraData?.[key])
               .find((value) => typeof value === "string") as string) || "",
           note: c.notes || "",
+          extraData: c.extraData as Record<string, string>,
           type: c.kind,
           tags: [],
           source: deck.sourceType === "MANUAL" ? "MANUAL" : "IMPORT",

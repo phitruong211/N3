@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { remapImportPreview, type ImportField, type ImportPreview, type ImportTable } from '../../lib/ankiImport';
 
-const fields: [ImportField, string][] = [['front', 'Mặt trước *'], ['back', 'Mặt sau *'], ['reading', 'Cách đọc'], ['hanViet', 'Hán Việt'], ['notes', 'Ghi chú'], ['kind', 'Loại thẻ'], ['tags', 'Tags']];
+const fields: [ImportField, string][] = [['front', 'Mặt trước *'], ['back', 'Mặt sau *'], ['reading', 'Cách đọc'], ['hanViet', 'Hán Việt'], ['notes', 'Ghi chú'], ['kind', 'Loại thẻ'], ['tags', 'Tags'], ['examples', 'Ví dụ (JSON)']];
 /** Local mapping and sheet editor. onChange returns the complete replacement preview; no API calls. */
 export default function ImportPreviewEditor({ preview, onChange }: { preview: ImportPreview; onChange: (preview: ImportPreview) => void }) {
   const [error, setError] = useState('');
