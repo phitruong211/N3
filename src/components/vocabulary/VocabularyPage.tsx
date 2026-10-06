@@ -2,7 +2,9 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { Bookmark, BookmarkCheck, Search, Volume2, X } from 'lucide-react';
 import { useApp } from '@/hooks/useApp';
 import type { VocabItem } from '@/types';
-import { VocabFlashcardSession, speakJapanese } from '@/components/flashcard/FlashcardPage';
+import { speakJapanese } from '@/components/flashcard/FlashcardPage';
+import { StudySession } from '@/components/flashcard/StudySession';
+import { vocabularyCard } from '@/lib/cards';
 import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
 
 export function VocabularyPage() {
@@ -59,7 +61,7 @@ export function VocabularyPage() {
     return () => window.removeEventListener('keydown', handler);
   }, [focusMode, current, filtered, focusIndex, toggleBookmark, select]);
 
-  if (focusMode && current) return <VocabFlashcardSession items={filtered} initialIndex={focusIndex} preserveOrder onExit={() => setFocusMode(false)} />;
+  if (focusMode && current) return <StudySession cards={filtered.map((item, index) => vocabularyCard(item, `library-vocab-${level}`, index))} deckName={`Từ vựng · ${level === 'all' ? 'Tất cả' : level}`} initialIndex={focusIndex} mode="flashcards" onExit={() => setFocusMode(false)} />;
 
   return <div className="study-page">
     <PageHeading eyebrow="THƯ VIỆN" title="Từ vựng" subtitle={filtered.length + ' / ' + vocabulary.length + ' từ · Đọc, nghe và nhớ nghĩa'}

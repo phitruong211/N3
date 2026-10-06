@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useApp } from "@/hooks/useApp";
 import {
   vocabularyCard,
@@ -19,7 +19,7 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
     template: DeckTemplateConfig;
   } | null>(null);
   const levelOrder = ["N3", "N4", "N2"] as const;
-  const decks = [
+  const decks = useMemo(() => [
     ...["N3", "N4"].map((level) => ({
       id: `vocab${level}`,
       name: `Từ vựng ${level}`,
@@ -44,7 +44,7 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
         .filter((v) => v.level === level)
         .map((v, i) => grammarCard(v, `grammar${level}`, i)),
     })),
-  ];
+  ], [vocabulary, kanji, grammar]);
   const saved = {
     id: "saved",
     name: "Thẻ đã lưu",

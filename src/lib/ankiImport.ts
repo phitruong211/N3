@@ -6,7 +6,7 @@ export type CardTheme = 'paper' | 'blue' | 'dark' | 'system';
 export interface DeckTemplateConfig {
   version: 1;
   front: { fields: CardField[]; showDeckName: boolean };
-  back: { fields: CardField[]; showFront: boolean };
+  back: { fields: CardField[]; showFront: boolean; showExamples: boolean };
   style: { theme: CardTheme; fontScale: 'small' | 'medium' | 'large' | 'xlarge'; alignment: 'left' | 'center' };
 }
 export interface ImportedCard { id: string; front: string; back: string; reading: string; hanViet: string; notes: string; kind: ImportedKind; tags?: string[]; sourceRef?: string; sourceSheet?: string; extraData?: Record<string, string>; srs?: SRSCard }
@@ -16,7 +16,7 @@ export const kindLabels: Record<ImportedKind, string> = { vocabulary: 'Từ vự
 export const defaultDeckTemplate = (): DeckTemplateConfig => ({
   version: 1,
   front: { fields: ['front', 'reading'], showDeckName: true },
-  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: true },
+  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: true, showExamples: true },
   style: { theme: 'paper', fontScale: 'large', alignment: 'center' },
 });
 
@@ -33,7 +33,7 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
   return {
     version: 1,
     front: { fields: fields(config.front?.fields, fallback.front.fields), showDeckName: typeof config.front?.showDeckName === 'boolean' ? config.front.showDeckName : fallback.front.showDeckName },
-    back: { fields: fields(config.back?.fields, fallback.back.fields), showFront: typeof config.back?.showFront === 'boolean' ? config.back.showFront : fallback.back.showFront },
+    back: { fields: fields(config.back?.fields, fallback.back.fields), showFront: typeof config.back?.showFront === 'boolean' ? config.back.showFront : fallback.back.showFront, showExamples: typeof config.back?.showExamples === 'boolean' ? config.back.showExamples : true },
     style: {
       theme: themes.includes(config.style?.theme as CardTheme) ? config.style!.theme : fallback.style.theme,
       fontScale: scales.includes(config.style?.fontScale as DeckTemplateConfig['style']['fontScale']) ? config.style!.fontScale : fallback.style.fontScale,

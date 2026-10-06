@@ -39,9 +39,10 @@ export const cardPage = (
   type = "",
   state = "",
   size = 50,
+  includeProgress = true,
 ) =>
   apiRequest<Page<PersonalCard>>(
-    `/decks/${id}/cards?page=${page}&size=${size}&query=${encodeURIComponent(query)}&type=${type}&state=${state}`,
+    `/decks/${id}/cards?page=${page}&size=${size}&query=${encodeURIComponent(query)}&type=${type}&state=${state}&includeProgress=${includeProgress}`,
   );
 export const deckCardIds = (id: string) =>
   apiRequest<string[]>(`/decks/${id}/card-ids`);

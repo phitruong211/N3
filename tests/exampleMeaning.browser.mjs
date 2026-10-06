@@ -14,7 +14,7 @@ const server = await createServer({
         const learningSync = {flush:async()=>{}};
         const recordStudyActivity = ()=>{};
         export const useApp = ()=>({settings,srsCards:[],updateSRSCard:()=>{},learningSync});
-        export const useLearningStorage = ()=>({recordStudyActivity});
+        export const useLearningStorage = ()=>({recordStudyActivity,getJSON:(key,fallback)=>JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback)),setJSON:(key,value)=>localStorage.setItem(key,JSON.stringify(value))});
       `;
     },
   }],
@@ -25,7 +25,8 @@ const cards = [1, 2].map(index => ({
   extraData: { examples: JSON.stringify([{ japanese: '日本語を勉強します。', reading: 'にほんごをべんきょうします。', meaning: 'Tôi học tiếng Nhật.' }]) },
 }));
 server.middlewares.use(async (request, response, next) => {
-  if (request.url !== '/__example-test__') return next();
+  if (!request.url?.startsWith('/__example-test__')) return next();
+  const builtin = request.url.includes('builtin=1');
   const html = await server.transformIndexHtml(request.url, `
     <html><body><div id="root"></div><script type="module">
       import React from 'react';
@@ -33,7 +34,7 @@ server.middlewares.use(async (request, response, next) => {
       import {StudySession} from '/src/components/flashcard/StudySession.tsx';
       import '/src/index.css';
       createRoot(document.getElementById('root')).render(React.createElement(StudySession, {
-        cards: ${JSON.stringify(cards)}, deckName:'Fixture', mode:'flashcards', onExit:()=>{}
+        cards: ${JSON.stringify(cards.map(card => ({ ...card, source: builtin ? 'BUILT_IN' : card.source })))}, deckName:'Fixture', mode:'flashcards', onExit:()=>{}, onTemplateChange:${builtin ? 'undefined' : 'async config=>{window.savedTemplate=config;}'}
       }));
     </script></body></html>`);
   response.setHeader('Content-Type', 'text/html');
@@ -70,8 +71,28 @@ try {
   await page.locator('div[role="button"][aria-label="Hiện đáp án"]').click();
   await show().waitFor();
   assert.equal(await translation.count(), 0);
+  await page.getByRole('button', { name: 'Tùy chỉnh thẻ', exact: true }).click();
+  await page.getByRole('dialog', { name: 'Tùy chỉnh bộ thẻ' }).waitFor();
+  await page.getByRole('group', { name: 'Mặt trước', exact: true }).getByLabel('Cách đọc', { exact: true }).uncheck();
+  await page.getByRole('button', { name: 'Lưu tùy chỉnh', exact: true }).click();
+  await page.getByRole('dialog', { name: 'Tùy chỉnh bộ thẻ' }).waitFor({ state: 'detached' });
+  assert.deepEqual(await page.evaluate(() => window.savedTemplate.front.fields), ['front']);
+  assert.equal(await page.getByRole('button', { name: 'Đã hiện đáp án', exact: true }).count(), 1);
+  await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/__example-test__?builtin=1`);
+  await page.getByRole('button', { name: 'Tùy chỉnh thẻ', exact: true }).click();
+  await page.getByLabel('Cỡ chữ', { exact: true }).selectOption('small');
+  await page.getByRole('group', { name: 'Mặt sau', exact: true }).getByLabel('Hiện ví dụ', { exact: true }).uncheck();
+  await page.getByRole('button', { name: 'Lưu tùy chỉnh', exact: true }).click();
+  await page.getByRole('dialog', { name: 'Tùy chỉnh bộ thẻ' }).waitFor({ state: 'detached' });
+  await page.reload();
+  await page.getByRole('button', { name: 'Tùy chỉnh thẻ', exact: true }).click();
+  assert.equal(await page.getByLabel('Cỡ chữ', { exact: true }).inputValue(), 'small');
+  assert.equal(await page.getByRole('group', { name: 'Mặt sau', exact: true }).getByLabel('Hiện ví dụ', { exact: true }).isChecked(), false);
+  await page.getByRole('button', { name: 'Hủy', exact: true }).click();
+  await page.locator('div[role="button"][aria-label="Hiện đáp án"]').click();
+  assert.equal(await show().count(), 0);
   assert.deepEqual(errors, []);
-  console.log('PASS: mouse, keyboard and touch toggle translation without flipping; next card resets hidden state.');
+  console.log('PASS: translation controls, imported template save, built-in customization persistence and example visibility.');
 } finally {
   await browser?.close();
   await server.close();

@@ -55,9 +55,10 @@ function Examples({ value, showReading }: { value: unknown; showReading: boolean
   </div>;
 }
 
-function GrammarBack({ value, compact }: { value: string; compact: boolean }) {
+function GrammarBack({ value, compact, fontScale }: { value: string; compact: boolean; fontScale: DeckTemplateConfig['style']['fontScale'] }) {
+  const sizes = { small: "text-sm sm:text-base", medium: "text-base sm:text-lg", large: "text-lg sm:text-xl", xlarge: "text-xl sm:text-2xl" };
   return (
-    <div className={`space-y-5 text-left font-normal leading-relaxed ${compact ? "text-sm" : "text-base sm:text-lg"}`}>
+    <div className={`space-y-5 text-left font-normal leading-relaxed ${compact ? "text-sm" : sizes[fontScale]}`}>
       {value.replace(/\r\n?/g, "\n").trim().split(/\n\s*\n/).map((block, index) => (
         <div key={index} className={index === 0 ? "text-lg font-semibold sm:text-xl" : "border-t border-current/10 pt-4"}>
           {block.split("\n").map((line, lineIndex) => line.trim().startsWith("→") ? (
@@ -104,6 +105,7 @@ export function CardFace({
     large: "text-3xl sm:text-5xl",
     xlarge: "text-4xl sm:text-6xl",
   };
+  const immersiveSizes = { small: "text-3xl sm:text-5xl", medium: "text-4xl sm:text-6xl", large: "text-5xl sm:text-7xl lg:text-8xl", xlarge: "text-6xl sm:text-8xl lg:text-9xl" };
   return (
     <div
       className={`w-full space-y-4 ${grammarAnswer ? "mx-auto max-w-3xl text-left" : template.style.alignment === "left" ? "text-left" : "text-center"} ${compact ? "!text-base" : ""}`}
@@ -112,7 +114,7 @@ export function CardFace({
         const value = fieldValue(field, card, deckName);
         if (!value) return null;
         if (grammarAnswer && field === "back") {
-          return <GrammarBack key={`${field}-${index}`} value={value} compact={compact} />;
+          return <GrammarBack key={`${field}-${index}`} value={value} compact={compact} fontScale={template.style.fontScale} />;
         }
         return (
           <div
@@ -126,7 +128,7 @@ export function CardFace({
                     ? "text-base font-medium text-[var(--color-kanji)]"
                   : field === "kind" || field === "deckName"
                     ? "text-xs font-bold uppercase tracking-wide opacity-70"
-                : `${immersivePrimary && index === 0 ? "text-5xl sm:text-7xl lg:text-8xl" : sizes[template.style.fontScale]} font-jp whitespace-pre-wrap break-words`
+                : `${immersivePrimary && index === 0 ? immersiveSizes[template.style.fontScale] : sizes[template.style.fontScale]} font-jp whitespace-pre-wrap break-words`
             }
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
@@ -134,7 +136,7 @@ export function CardFace({
           </div>
         );
       })}
-      {fields.includes("back") && <Examples key={card.id} value={card.extraData?.examples} showReading={showExampleReadings} />}
+      {fields.includes("back") && template.back.showExamples !== false && <Examples key={card.id} value={card.extraData?.examples} showReading={showExampleReadings} />}
     </div>
   );
 }
@@ -142,11 +144,13 @@ export function CardFace({
 export function DeckCustomizeDialog({
   deck,
   busy,
+  error,
   onCancel,
   onSave,
 }: {
   deck: ImportedDeck;
   busy: boolean;
+  error?: string;
   onCancel: () => void;
   onSave: (template: DeckTemplateConfig) => void;
 }) {
@@ -245,6 +249,10 @@ export function DeckCustomizeDialog({
                   {side === "front" ? "Mặt trước" : "Mặt sau"}
                 </legend>
                 <div className="space-y-2">
+                  {side === "back" && <label className="flex items-center gap-3">
+                    <input type="checkbox" checked={template.back.showExamples} onChange={event => setTemplate(previous => ({ ...previous, back: { ...previous.back, showExamples: event.target.checked } }))} />
+                    <span>Hiện ví dụ</span>
+                  </label>}
                   {candidates.map((field) => (
                     <label key={field} className="flex items-center gap-3">
                       <input
@@ -321,6 +329,7 @@ export function DeckCustomizeDialog({
                 <select
                   className="study-input mt-1"
                   value={template.style.fontScale}
+                  aria-label="Cỡ chữ"
                   onChange={(event) =>
                     setTemplate((previous) => ({
                       ...previous,
@@ -404,6 +413,7 @@ export function DeckCustomizeDialog({
           >
             Khôi phục mặc định
           </button>
+          {error && <p role="alert" className="w-full text-sm text-[var(--color-error)]">{error}</p>}
           <button className="study-button" disabled={busy} onClick={onCancel}>
             Hủy
           </button>

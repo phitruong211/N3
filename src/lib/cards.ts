@@ -75,14 +75,13 @@ export function grammarCard(
     id: item.id,
     deckId,
     front: item.pattern,
-    back: item.meaning,
+    back: [item.meaning, item.structure, item.usage ? `【Cách dùng】\n${item.usage}` : ""].filter(Boolean).join("\n\n"),
     reading: item.reading,
     note: [
-      item.structure,
-      item.usage,
-    ]
-      .filter(Boolean)
-      .join("\n"),
+      ...(item.cac_cach_dung || []).map(variant => [variant.mau, variant.nghia, variant.giai_thich, variant.goi_y, variant.sac_thai, variant.vai_tro, variant.ghi_chu].filter(Boolean).join("\n")),
+      ...(item.so_sanh_n4_n5 || []).map(comparison => `${comparison.mau} (${comparison.cap_do_tham_khao})\n${comparison.khac_biet_chinh}`),
+      ...(item.canh_bao || []),
+    ].filter(Boolean).join("\n\n") || undefined,
     type: "GRAMMAR",
     extraData: { examples: JSON.stringify(item.examples) },
     tags: [item.level],

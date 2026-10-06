@@ -7,11 +7,11 @@ import {
 } from "@/hooks/useActiveElapsedMinutes";
 import { createSRSCard, getNextIntervals, processReview } from "@/lib/srs";
 import { progressToSrs, reviewCard, type ApiProgress } from "@/lib/api";
-import { defaultDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
+import { defaultDeckTemplate, normalizeDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
-import { CardFace } from "./CardPresentation";
-import { Maximize2, Minimize2, Shuffle, X } from "lucide-react";
+import { CardFace, DeckCustomizeDialog } from "./CardPresentation";
+import { Maximize2, Minimize2, Shuffle, X, Settings2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const SWIPE_THRESHOLD = 50;
@@ -43,9 +43,11 @@ export function StudySession({
   cards,
   deckName,
   mode,
-  template = defaultDeckTemplate(),
+  template: initialTemplate = defaultDeckTemplate(),
   initialProgress = {},
   onExit,
+  onTemplateChange,
+  initialIndex = 0,
 }: {
   cards: CardView[];
   deckName: string;
@@ -53,12 +55,19 @@ export function StudySession({
   template?: DeckTemplateConfig;
   initialProgress?: Record<string, ApiProgress | null>;
   onExit: () => void;
+  onTemplateChange?: (template: DeckTemplateConfig) => Promise<void> | void;
+  initialIndex?: number;
 }) {
   const { settings, srsCards, updateSRSCard, learningSync } = useApp();
-  const { recordStudyActivity } = useLearningStorage();
+  const { recordStudyActivity, getJSON, setJSON } = useLearningStorage();
+  const templateKey = `study_template_${cards[0]?.source === "BUILT_IN" ? deckName : cards[0]?.deckId || deckName}`;
+  const [template, setTemplate] = useState(() => cards[0]?.source === "BUILT_IN"
+    ? normalizeDeckTemplate(getJSON(templateKey, initialTemplate)) : initialTemplate);
+  const [customizing, setCustomizing] = useState(false);
+  const [savingTemplate, setSavingTemplate] = useState(false);
   const [sessionCards, setSessionCards] = useState(() => [...cards]);
   const [shuffled, setShuffled] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(() => Math.max(0, Math.min(cards.length - 1, initialIndex)));
   const [jumpValue, setJumpValue] = useState("1");
   const [revealedCardKey, setRevealedCardKey] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -286,11 +295,12 @@ export function StudySession({
         </button>
       </div>
     );
-  const fields = (
+  const sideFields = (
     flipped
       ? template.back.fields
       : template.front.fields
   ).filter((field) => (flipped ? settings.showFuriganaBack : settings.showFuriganaFront) || field !== "reading");
+  const fields = flipped && template.back.showFront && !sideFields.includes("front") ? ["front" as const, ...sideFields] : sideFields;
   return (
     <section
       ref={sessionRef}
@@ -314,6 +324,9 @@ export function StudySession({
           </div>
         </div>
         <div className="flex items-center gap-2">
+          <button className="study-button !min-h-10 !px-3" disabled={busy} aria-label="Tùy chỉnh thẻ" onClick={() => { setError(""); setCustomizing(true); }}>
+            <Settings2 size={17} /><span className="hidden sm:inline">Tùy chỉnh</span>
+          </button>
           {mode === "flashcards" && (
             <button
               className={`study-button !min-h-10 !px-3 ${shuffled ? "study-button-primary" : ""}`}
@@ -403,6 +416,23 @@ export function StudySession({
           {error}
         </p>
       )}
+      {customizing && <DeckCustomizeDialog
+        deck={{ id: cards[0]?.deckId || "study", name: deckName, source: "Phiên học", format: "", createdAt: "", position: 0, template, cards: [presentationCard(current)] }}
+        busy={savingTemplate}
+        error={error}
+        onCancel={() => setCustomizing(false)}
+        onSave={async next => {
+          setSavingTemplate(true);
+          try {
+            if (onTemplateChange) await onTemplateChange(next);
+            else setJSON(templateKey, next);
+            setTemplate(next);
+            setCustomizing(false);
+            setError("");
+          } catch (reason) { setError(reason instanceof Error ? reason.message : "Không lưu được tùy chỉnh"); }
+          finally { setSavingTemplate(false); }
+        }}
+      />}
       <div className="flex min-h-16 shrink-0 flex-wrap items-center justify-center gap-3 border-t border-[var(--color-border)] px-3 py-3 sm:px-8">
         {mode === "anki" ? (
           flipped ? (

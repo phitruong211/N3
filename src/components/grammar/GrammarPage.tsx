@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Bookmark, BookmarkCheck, Search, X } from 'lucide-react';
 import { useApp } from '@/hooks/useApp';
 import type { GrammarItem } from '@/types';
-import { GrammarFlashcardSession } from '@/components/flashcard/FlashcardPage';
+import { StudySession } from '@/components/flashcard/StudySession';
+import { grammarCard } from '@/lib/cards';
 import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
 
 export function GrammarPage() {
@@ -30,7 +31,7 @@ export function GrammarPage() {
   }), [grammar, level, savedOnly, query, isBookmarked]);
   const current = filtered.find(item => item.id === selectedId) ?? filtered[0];
 
-  if (flashcardMode && filtered.length) return <GrammarFlashcardSession items={filtered} preserveOrder progressLevel={level === 'all' ? 'N3' : level} onExit={() => setFlashcardMode(false)} />;
+  if (flashcardMode && filtered.length) return <StudySession cards={filtered.map((item, index) => grammarCard(item, `library-grammar-${level}`, index))} deckName={`Ngữ pháp · ${level === 'all' ? 'Tất cả' : level}`} mode="flashcards" onExit={() => setFlashcardMode(false)} />;
 
   return <div className="study-page">
     <PageHeading eyebrow="THƯ VIỆN" title="Ngữ pháp" subtitle={filtered.length + ' / ' + grammar.length + ' mẫu · Hiểu cách dùng qua ví dụ'}

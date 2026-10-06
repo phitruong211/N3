@@ -37,6 +37,7 @@ import {
 } from "@/lib/deckApi";
 import { importedCardView, type CardView } from "@/lib/cards";
 import { StudySession } from "./StudySession";
+import { loadStudyPages } from "@/lib/loadStudyPages";
 import { DeckCustomizeDialog } from "./CardPresentation";
 import { ContentBadge } from "@/components/ui/StudyUI";
 import {
@@ -463,20 +464,15 @@ export function ImportedDecks({
         };
       });
     } else {
-      for (let p = 0; views.length < deck.cardCount; p++) {
-        const batch = await cardPage(deck.id, p, "", "", "", 200);
-        views.push(
-          ...batch.content.map((c, i) =>
+      const loaded = await loadStudyPages(p => cardPage(deck.id, p, "", "", "", 200, false));
+      views = loaded.map((c, i) =>
             importedCardView(
               asImported(c),
               deck.id,
               deck.sourceType === "MANUAL" ? "MANUAL" : "IMPORT",
-              p * 200 + i,
+              i,
             ),
-          ),
-        );
-        if (p + 1 >= batch.totalPages) break;
-      }
+          );
     }
     return {
       views,
@@ -550,6 +546,11 @@ export function ImportedDecks({
         mode={mode}
         template={session.template}
         initialProgress={session.progress}
+        onTemplateChange={async template => {
+          await updateDeck(session.deck.id, { templateConfig: template });
+          setSession(previous => previous ? { ...previous, template } : previous);
+          setReload(value => value + 1);
+        }}
         onExit={() => {
           setSession(null);
           void refreshActive();
