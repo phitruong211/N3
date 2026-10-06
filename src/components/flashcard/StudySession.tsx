@@ -374,7 +374,7 @@ export function StudySession({
               }
             }}
             aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
-            onTap={() => !busy &&
+            onClick={() => !busy &&
               setRevealedCardKey((value) =>
                 mode === "anki" || value !== currentCardKey
                   ? currentCardKey
