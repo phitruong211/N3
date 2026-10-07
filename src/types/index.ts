@@ -116,8 +116,9 @@ export interface KanjiItem {
   id: string;
   kanji: string;
   hanViet: string;
+  meaning?: string;
   vocabulary: KanjiVocab[];
-  level: 'N2' | 'N3';
+  level: 'N2' | 'N3' | 'N4';
   onyomi?: string[];
   kunyomi?: string[];
   lesson?: string;

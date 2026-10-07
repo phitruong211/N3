@@ -66,7 +66,7 @@ test('invalid files fail explicitly', async () => {
   await assert.rejects(parseImportFile(new File(['binary'], 'image.png')));
 });
 test('existing vocabulary, kanji and grammar schemas are detected', async () => {
-  for (const [file, kind] of [['vocabN3.json', 'vocabulary'], ['kanjiN3_vocab_full.json', 'kanji'], ['kanjiN2.json', 'kanji'], ['grammarN3.json', 'grammar']]) {
+  for (const [file, kind] of [['vocabN3.json', 'vocabulary'], ['kanjiN3_vocab_full.json', 'kanji'], ['kanjiN4.json', 'kanji'], ['kanjiN2.json', 'kanji'], ['grammarN2.json', 'grammar'], ['grammarN3.json', 'grammar']]) {
     const result = parseTextImport(await readFile(new URL(`../public/data/${file}`, import.meta.url), 'utf8'), file);
     assert.ok(result.cards.length > 0); assert.equal(result.cards[0].kind, kind); assert.equal(result.skipped, result.duplicates);
   }

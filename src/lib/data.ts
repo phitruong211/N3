@@ -2,13 +2,12 @@
 // Data Layer — Process raw JSON into typed application data
 // ============================================================
 // Reads vocabN3.json (rich schema) + vocabN4.json (legacy flat)
-// Reads grammarN2.json (rich schema) + grammarN3.json and grammarN4.json (card schema)
+// Reads the built-in vocabulary, Kanji and grammar datasets.
 // ============================================================
 
 import type {
   VocabItem, KanjiItem, GrammarItem,
   VerbInfo, AlternateReading, Variant, RelatedWord, VocabMetadata,
-  GrammarComparison, GrammarUsageVariant, GrammarExample,
   LegacyVerbVariant,
 } from '../types';
 import { normalizeGrammarCard, type GrammarCardData } from './grammarData';
@@ -245,11 +244,36 @@ interface RawKanjiN2File {
   data?: RawKanjiN2[];
 }
 
+interface RawKanjiN4Card {
+  front?: string;
+  back?: string;
+  reading?: string;
+  han_viet?: string | null;
+  note?: string;
+  type?: string;
+}
+
+function splitKanjiReading(raw: string, label: 'On' | 'Kun'): string[] {
+  const match = raw.match(new RegExp(`${label}:\\s*([^/]+)`));
+  if (!match) return [];
+  return match[1].split(/[、,・]/).map(value => value.trim()).filter(value => value && value !== 'なし');
+}
+
+function relatedWordsFromNote(note = ''): RawKanjiVocab[] {
+  const words: RawKanjiVocab[] = [];
+  note.split(/\r?\n/).slice(1).forEach(line => {
+    const match = line.trim().match(/^(.+?)（([^）]+)）:\s*(.+)$/);
+    if (match) words.push({ word: match[1], reading: match[2], meaning: match[3] });
+  });
+  return words;
+}
+
 export async function loadKanji(): Promise<KanjiItem[]> {
   if (_kanjiCache) return _kanjiCache;
 
-  const [raw, n2Response] = await Promise.all([
+  const [raw, rawN4, n2Response] = await Promise.all([
     fetchArray<RawKanji>('/data/kanjiN3_vocab_full.json'),
+    fetchArray<RawKanjiN4Card>('/data/kanjiN4.json'),
     fetch('/data/kanjiN2.json'),
   ]);
   if (!n2Response.ok) throw new Error(`Could not load /data/kanjiN2.json: ${n2Response.status}`);
@@ -293,33 +317,27 @@ export async function loadKanji(): Promise<KanjiItem[]> {
     })).filter((word) => word.word),
   }));
 
-  _kanjiCache = [...n3Kanji, ...n2Kanji];
+  const n4Kanji: KanjiItem[] = rawN4.filter(item => item.type === 'KANJI' && item.front).map(item => ({
+    id: `kanji-n4-${encodeURIComponent(item.front || '')}`,
+    kanji: item.front || '',
+    hanViet: item.han_viet || '',
+    meaning: item.back || '',
+    level: 'N4',
+    onyomi: splitKanjiReading(item.reading || '', 'On'),
+    kunyomi: splitKanjiReading(item.reading || '', 'Kun'),
+    vocabulary: relatedWordsFromNote(item.note).map(word => ({
+      word: word.word || '',
+      reading: word.reading || '',
+      meaning: word.meaning || '',
+    })),
+  }));
+
+  _kanjiCache = [...n3Kanji, ...n4Kanji, ...n2Kanji];
 
   return _kanjiCache;
 }
 
 // ─── Grammar ────────────────────────────────────────────────
-
-interface RawGrammarN3 {
-  id?: number;
-  bai?: number;
-  stt?: number;
-  cap_do?: string;
-  nhom_chuc_nang?: string;
-  mau_ngu_phap?: string;
-  phien_am?: string;
-  cong_thuc?: string;
-  nghia_cot_loi?: string;
-  giai_thich_toi_uu?: string;
-  so_sanh_n4_n5?: GrammarComparison[];
-  cac_cach_dung?: GrammarUsageVariant[];
-  canh_bao?: string[];
-  vi_du?: { nhat?: string; viet?: string }[];
-
-  // Legacy fields (grammarN4 or old grammar.json)
-  y_nghia?: string;
-  chu_y?: string;
-}
 
 let _grammarCache: GrammarItem[] | null = null;
 
@@ -327,62 +345,13 @@ export async function loadGrammar(): Promise<GrammarItem[]> {
   if (_grammarCache) return _grammarCache;
 
   const [rawN2, rawN3, rawN4] = await Promise.all([
-    fetchArray<RawGrammarN3>('/data/grammarN2.json'),
+    fetchArray<GrammarCardData>('/data/grammarN2.json'),
     fetchArray<GrammarCardData>('/data/grammarN3.json'),
     fetchArray<GrammarCardData>('/data/grammarN4.json'),
   ]);
-
-  // N2 retains the rich schema.
-  const normalizeRichGrammar = (items: RawGrammarN3[], level: 'N2' | 'N3'): GrammarItem[] => items.map((item, index) => {
-    const bai = item.bai ?? 0;
-    const stt = item.stt ?? index + 1;
-    const cap_do = level;
-    const mau_ngu_phap = item.mau_ngu_phap || '';
-    const nghia_cot_loi = item.nghia_cot_loi || item.y_nghia || '';
-    const giai_thich_toi_uu = item.giai_thich_toi_uu || item.chu_y || '';
-
-    const examples: GrammarExample[] = (item.vi_du || []).map(ex => ({
-      japanese: ex.nhat || '',
-      reading: '',
-      meaning: ex.viet || '',
-    }));
-
-    return {
-      id: `grammar-${level.toLowerCase()}-${bai}-${stt}`,
-      numericId: item.id ?? index + 1,
-      bai,
-      stt,
-      cap_do,
-      nhom_chuc_nang: item.nhom_chuc_nang || '',
-      mau_ngu_phap,
-      phien_am: item.phien_am || '',
-      cong_thuc: item.cong_thuc || '',
-      nghia_cot_loi,
-      giai_thich_toi_uu,
-      so_sanh_n4_n5: item.so_sanh_n4_n5 || [],
-      cac_cach_dung: item.cac_cach_dung || [],
-      canh_bao: item.canh_bao || [],
-      vi_du: examples,
-
-      // Backward-compatible
-      pattern: mau_ngu_phap,
-      reading: item.phien_am || '',
-      meaning: nghia_cot_loi,
-      structure: item.cong_thuc || '',
-      congThuc: item.cong_thuc || '',
-      usage: giai_thich_toi_uu,
-      nuance: giai_thich_toi_uu,
-      commonMistakes: '',
-      comparison: (item.so_sanh_n4_n5 || []).map(c => `${c.mau}: ${c.khac_biet_chinh}`).join(' | '),
-      examples,
-      lesson: `${level} - Bài ${bai}`,
-      level: cap_do,
-    };
-  });
-  const n2Grammar = normalizeRichGrammar(rawN2, 'N2');
+  const n2Grammar = rawN2.map((item, index) => normalizeGrammarCard(item, 'N2', index));
   const n3Grammar = rawN3.map((item, index) => normalizeGrammarCard(item, 'N3', index));
 
-  // N3 and N4 use the supplied card schema.
   const n4Grammar: GrammarItem[] = rawN4.map((item, index) => normalizeGrammarCard(item, 'N4', index));
 
   _grammarCache = [...n2Grammar, ...n3Grammar, ...n4Grammar];

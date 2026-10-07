@@ -54,7 +54,7 @@ export function kanjiCard(
     id: item.id,
     deckId,
     front: item.kanji,
-    back: item.hanViet,
+    back: [item.hanViet, item.meaning].filter(Boolean).join(" · "),
     reading: [...(item.onyomi || []), ...(item.kunyomi || [])].join("・"),
     note: item.vocabulary
       .map((v) => `${v.word} ${v.reading} — ${v.meaning}`)

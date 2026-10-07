@@ -7,7 +7,7 @@ import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
 export function KanjiPage() {
   const { kanji, isBookmarked, toggleBookmark, setCurrentPage, navigationTarget, clearNavigationTarget } = useApp();
   const [query, setQuery] = useState('');
-  const [level, setLevel] = useState<'all' | 'N3' | 'N2'>('all');
+  const [level, setLevel] = useState<'all' | 'N3' | 'N4' | 'N2'>('all');
   const [savedOnly, setSavedOnly] = useState(false);
   const [selected, setSelected] = useState<KanjiItem | null>(null);
   const detailRef = useRef<HTMLElement>(null);
@@ -34,7 +34,7 @@ export function KanjiPage() {
   const current = filtered.find((item) => item.id === selected?.id) ?? filtered[0];
 
   return <div className="study-page">
-    <PageHeading eyebrow="THƯ VIỆN" title="Kanji" subtitle={filtered.length + ' / ' + kanji.length + ' chữ · N3 và N2'}
+    <PageHeading eyebrow="THƯ VIỆN" title="Kanji" subtitle={filtered.length + ' / ' + kanji.length + ' chữ · N3, N4 và N2'}
       action={<button className="study-button study-button-primary" onClick={() => setCurrentPage('flashcards')}>Học bằng thẻ →</button>} />
     <div className="flex flex-col gap-3 sm:flex-row">
       <label className="study-input flex min-w-0 flex-1 items-center gap-2">
@@ -44,7 +44,7 @@ export function KanjiPage() {
         {query && <button aria-label="Xóa tìm kiếm" onClick={() => setQuery('')}><X size={18}/></button>}
       </label>
       <div className="flex flex-wrap gap-2">
-        {(['all', 'N3', 'N2'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => { setLevel(value); setSelected(null); }}>{value === 'all' ? 'Tất cả' : `${value} · ${kanji.filter(item => item.level === value).length}`}</button>)}
+        {(['all', 'N3', 'N4', 'N2'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => { setLevel(value); setSelected(null); }}>{value === 'all' ? 'Tất cả' : `${value} · ${kanji.filter(item => item.level === value).length}`}</button>)}
         <button className={'study-button ' + (savedOnly ? 'study-button-primary' : '')} aria-pressed={savedOnly} onClick={() => setSavedOnly(!savedOnly)}>Đã lưu</button>
       </div>
     </div>
@@ -65,6 +65,7 @@ export function KanjiPage() {
               <ContentBadge tone="kanji">KANJI {current.level}</ContentBadge>
               <p className="font-jp-serif mt-4 text-7xl leading-none text-[var(--color-text)]">{current.kanji}</p>
               <h2 className="mt-3 text-xl font-semibold text-[var(--color-text)]">{current.hanViet}</h2>
+              {current.meaning && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{current.meaning}</p>}
               {(current.onyomi?.length || current.kunyomi?.length) ? <div className="mt-3 space-y-1 text-sm text-[var(--color-text-secondary)]">
                 {!!current.onyomi?.length && <p>Âm On: <span className="font-jp">{current.onyomi.join(' · ')}</span></p>}
                 {!!current.kunyomi?.length && <p>Âm Kun: <span className="font-jp">{current.kunyomi.join(' · ')}</span></p>}

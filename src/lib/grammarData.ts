@@ -10,7 +10,7 @@ export interface GrammarCardData {
 }
 
 /** Adapt the card JSON without losing its original back or example readings. */
-export function normalizeGrammarCard(item: GrammarCardData, level: 'N3' | 'N4', index: number): GrammarItem {
+export function normalizeGrammarCard(item: GrammarCardData, level: 'N2' | 'N3' | 'N4', index: number): GrammarItem {
   const sections = item.back.split(/【([^】]+)】\s*/);
   const meaning = sections[0].trim();
   const content = new Map<string, string>();

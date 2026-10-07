@@ -1,0 +1,5570 @@
+[
+  {
+    "front": "言",
+    "back": "nói; lời nói",
+    "reading": "On: ゲン、ゴン / Kun: いう、こと",
+    "han_viet": "Ngôn",
+    "note": "Từ liên quan:\n言う（いう）: nói\n言葉（ことば）: từ; lời nói",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "言う",
+    "back": "nói",
+    "reading": "いう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 言（Ngôn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "言葉",
+    "back": "từ; lời nói",
+    "reading": "ことば",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 言（Ngôn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "手",
+    "back": "tay; bàn tay",
+    "reading": "On: シュ / Kun: て、た",
+    "han_viet": "Thủ",
+    "note": "Từ liên quan:\n手紙（てがみ）: thư\n上手（じょうず）: giỏi; khéo",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "手紙",
+    "back": "thư",
+    "reading": "てがみ",
+    "han_viet": "Thủ Chỉ",
+    "note": "Từ liên quan của Kanji 手（Thủ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "上手",
+    "back": "giỏi; khéo",
+    "reading": "じょうず",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 手（Thủ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "自",
+    "back": "tự mình; bản thân",
+    "reading": "On: ジ、シ / Kun: みずから",
+    "han_viet": "Tự",
+    "note": "Từ liên quan:\n自分（じぶん）: bản thân\n自転車（じてんしゃ）: xe đạp",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "自分",
+    "back": "bản thân",
+    "reading": "じぶん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 自（Tự）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "自転車",
+    "back": "xe đạp",
+    "reading": "じてんしゃ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 自（Tự）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "者",
+    "back": "người; người làm việc gì đó",
+    "reading": "On: シャ / Kun: もの",
+    "han_viet": "Giả",
+    "note": "Từ liên quan:\n医者（いしゃ）: bác sĩ\n作者（さくしゃ）: tác giả",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "医者",
+    "back": "bác sĩ",
+    "reading": "いしゃ",
+    "han_viet": "Y Giả",
+    "note": "Từ liên quan của Kanji 者（Giả）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "作者",
+    "back": "tác giả",
+    "reading": "さくしゃ",
+    "han_viet": "Tác Giả",
+    "note": "Từ liên quan của Kanji 者（Giả）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "事",
+    "back": "việc; sự việc",
+    "reading": "On: ジ、ズ / Kun: こと",
+    "han_viet": "Sự",
+    "note": "Từ liên quan:\n仕事（しごと）: công việc\n食事（しょくじ）: bữa ăn",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "仕事",
+    "back": "công việc",
+    "reading": "しごと",
+    "han_viet": "Sĩ Sự",
+    "note": "Từ liên quan của Kanji 事（Sự）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "食事",
+    "back": "bữa ăn",
+    "reading": "しょくじ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 事（Sự）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "思",
+    "back": "nghĩ; suy nghĩ",
+    "reading": "On: シ / Kun: おもう",
+    "han_viet": "Tư",
+    "note": "Từ liên quan:\n思う（おもう）: nghĩ\n思い出（おもいで）: kỷ niệm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "思う",
+    "back": "nghĩ",
+    "reading": "おもう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 思（Tư）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "思い出",
+    "back": "kỷ niệm",
+    "reading": "おもいで",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 思（Tư）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "会",
+    "back": "gặp; hội; cuộc gặp",
+    "reading": "On: カイ、エ / Kun: あう",
+    "han_viet": "Hội",
+    "note": "Từ liên quan:\n会う（あう）: gặp\n会社（かいしゃ）: công ty",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "会う",
+    "back": "gặp",
+    "reading": "あう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 会（Hội）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "会社",
+    "back": "công ty",
+    "reading": "かいしゃ",
+    "han_viet": "Hội Xã",
+    "note": "Từ liên quan của Kanji 会（Hội）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "家",
+    "back": "nhà; gia đình",
+    "reading": "On: カ、ケ / Kun: いえ、や",
+    "han_viet": "Gia",
+    "note": "Từ liên quan:\n家族（かぞく）: gia đình\n家（いえ）: nhà",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "家族",
+    "back": "gia đình",
+    "reading": "かぞく",
+    "han_viet": "Gia Tộc",
+    "note": "Từ liên quan của Kanji 家（Gia）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "家",
+    "back": "nhà",
+    "reading": "いえ",
+    "han_viet": "Gia",
+    "note": "Từ liên quan của Kanji 家（Gia）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "的",
+    "back": "mang tính…; mục tiêu",
+    "reading": "On: テキ / Kun: まと",
+    "han_viet": "Đích",
+    "note": "Từ liên quan:\n目的（もくてき）: mục đích\n具体的（ぐたいてき）: cụ thể",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "目的",
+    "back": "mục đích",
+    "reading": "もくてき",
+    "han_viet": "Mục Đích",
+    "note": "Từ liên quan của Kanji 的（Đích）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "具体的",
+    "back": "cụ thể",
+    "reading": "ぐたいてき",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 的（Đích）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "方",
+    "back": "phương hướng; phía; người (lịch sự)",
+    "reading": "On: ホウ / Kun: かた",
+    "han_viet": "Phương",
+    "note": "Từ liên quan:\n方（かた）: người; vị\n夕方（ゆうがた）: chiều tối",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "方",
+    "back": "người; vị",
+    "reading": "かた",
+    "han_viet": "Phương",
+    "note": "Từ liên quan của Kanji 方（Phương）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "夕方",
+    "back": "chiều tối",
+    "reading": "ゆうがた",
+    "han_viet": "Tịch Phương",
+    "note": "Từ liên quan của Kanji 方（Phương）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "地",
+    "back": "đất; địa điểm",
+    "reading": "On: チ、ジ / Kun: つち",
+    "han_viet": "Địa",
+    "note": "Từ liên quan:\n地図（ちず）: bản đồ\n地下（ちか）: dưới lòng đất",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "地図",
+    "back": "bản đồ",
+    "reading": "ちず",
+    "han_viet": "Địa Đồ",
+    "note": "Từ liên quan của Kanji 地（Địa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "地下",
+    "back": "dưới lòng đất",
+    "reading": "ちか",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 地（Địa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "目",
+    "back": "mắt; mục; thứ tự",
+    "reading": "On: モク、ボク / Kun: め、ま",
+    "han_viet": "Mục",
+    "note": "Từ liên quan:\n目（め）: mắt\n目的（もくてき）: mục đích",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "目",
+    "back": "mắt",
+    "reading": "め",
+    "han_viet": "Mục",
+    "note": "Từ liên quan của Kanji 目（Mục）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "場",
+    "back": "nơi; địa điểm",
+    "reading": "On: ジョウ / Kun: ば",
+    "han_viet": "Trường",
+    "note": "Từ liên quan:\n場所（ばしょ）: địa điểm\n工場（こうじょう）: nhà máy",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "場所",
+    "back": "địa điểm",
+    "reading": "ばしょ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 場（Trường）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "工場",
+    "back": "nhà máy",
+    "reading": "こうじょう",
+    "han_viet": "Công Trường",
+    "note": "Từ liên quan của Kanji 場（Trường）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "代",
+    "back": "đời; thế hệ; thay thế",
+    "reading": "On: ダイ、タイ / Kun: かわる、かえる、よ",
+    "han_viet": "Đại",
+    "note": "Từ liên quan:\n時代（じだい）: thời đại\n代わり（かわり）: thay thế",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "時代",
+    "back": "thời đại",
+    "reading": "じだい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 代（Đại）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "代わり",
+    "back": "thay thế",
+    "reading": "かわり",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 代（Đại）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "私",
+    "back": "tôi; riêng tư",
+    "reading": "On: シ / Kun: わたし、わたくし",
+    "han_viet": "Tư",
+    "note": "Từ liên quan:\n私（わたし）: tôi\n私立（しりつ）: tư lập",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "私",
+    "back": "tôi",
+    "reading": "わたし",
+    "han_viet": "Tư",
+    "note": "Từ liên quan của Kanji 私（Tư）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "私立",
+    "back": "tư lập",
+    "reading": "しりつ",
+    "han_viet": "Tư Lập",
+    "note": "Từ liên quan của Kanji 私（Tư）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "立",
+    "back": "đứng; dựng; thành lập",
+    "reading": "On: リツ、リュウ / Kun: たつ、たてる",
+    "han_viet": "Lập",
+    "note": "Từ liên quan:\n立つ（たつ）: đứng\n立てる（たてる）: dựng; làm cho đứng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "立つ",
+    "back": "đứng",
+    "reading": "たつ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 立（Lập）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "立てる",
+    "back": "dựng; làm cho đứng",
+    "reading": "たてる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 立（Lập）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "物",
+    "back": "vật; đồ vật",
+    "reading": "On: ブツ、モツ / Kun: もの",
+    "han_viet": "Vật",
+    "note": "Từ liên quan:\n買い物（かいもの）: mua sắm\n食べ物（たべもの）: đồ ăn",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "買い物",
+    "back": "mua sắm",
+    "reading": "かいもの",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 物（Vật）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "食べ物",
+    "back": "đồ ăn",
+    "reading": "たべもの",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 物（Vật）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "田",
+    "back": "ruộng",
+    "reading": "On: デン / Kun: た",
+    "han_viet": "Điền",
+    "note": "Từ liên quan:\n田舎（いなか）: nông thôn\n田んぼ（たんぼ）: ruộng lúa",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "田舎",
+    "back": "nông thôn",
+    "reading": "いなか",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 田（Điền）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "田んぼ",
+    "back": "ruộng lúa",
+    "reading": "たんぼ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 田（Điền）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "体",
+    "back": "cơ thể; thể",
+    "reading": "On: タイ、テイ / Kun: からだ",
+    "han_viet": "Thể",
+    "note": "Từ liên quan:\n体（からだ）: cơ thể\n体育（たいいく）: thể dục",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "体",
+    "back": "cơ thể",
+    "reading": "からだ",
+    "han_viet": "Thể",
+    "note": "Từ liên quan của Kanji 体（Thể）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "体育",
+    "back": "thể dục",
+    "reading": "たいいく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 体（Thể）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "動",
+    "back": "chuyển động; hoạt động",
+    "reading": "On: ドウ / Kun: うごく、うごかす",
+    "han_viet": "Động",
+    "note": "Từ liên quan:\n動く（うごく）: chuyển động\n動物（どうぶつ）: động vật",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "動く",
+    "back": "chuyển động",
+    "reading": "うごく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 動（Động）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "動物",
+    "back": "động vật",
+    "reading": "どうぶつ",
+    "han_viet": "Động Vật",
+    "note": "Từ liên quan của Kanji 動（Động）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "社",
+    "back": "công ty; xã; đền Thần đạo",
+    "reading": "On: シャ / Kun: やしろ",
+    "han_viet": "Xã",
+    "note": "Từ liên quan:\n会社（かいしゃ）: công ty\n社会（しゃかい）: xã hội",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "社会",
+    "back": "xã hội",
+    "reading": "しゃかい",
+    "han_viet": "Xã Hội",
+    "note": "Từ liên quan của Kanji 社（Xã）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "知",
+    "back": "biết; hiểu biết",
+    "reading": "On: チ / Kun: しる",
+    "han_viet": "Tri",
+    "note": "Từ liên quan:\n知る（しる）: biết\n知らせる（しらせる）: báo cho biết",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "知る",
+    "back": "biết",
+    "reading": "しる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 知（Tri）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "知らせる",
+    "back": "báo cho biết",
+    "reading": "しらせる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 知（Tri）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "理",
+    "back": "lý; lý do; nguyên lý",
+    "reading": "On: リ",
+    "han_viet": "Lý",
+    "note": "Từ liên quan:\n料理（りょうり）: món ăn; nấu ăn\n理由（りゆう）: lý do",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "料理",
+    "back": "món ăn; nấu ăn",
+    "reading": "りょうり",
+    "han_viet": "Liệu Lý",
+    "note": "Từ liên quan của Kanji 理（Lý）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "理由",
+    "back": "lý do",
+    "reading": "りゆう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 理（Lý）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "同",
+    "back": "giống; cùng",
+    "reading": "On: ドウ / Kun: おなじ",
+    "han_viet": "Đồng",
+    "note": "Từ liên quan:\n同じ（おなじ）: giống nhau\n同時（どうじ）: đồng thời",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "同じ",
+    "back": "giống nhau",
+    "reading": "おなじ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 同（Đồng）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "同時",
+    "back": "đồng thời",
+    "reading": "どうじ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 同（Đồng）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "心",
+    "back": "tim; lòng; tâm",
+    "reading": "On: シン / Kun: こころ",
+    "han_viet": "Tâm",
+    "note": "Từ liên quan:\n心（こころ）: tâm; lòng\n安心（あんしん）: yên tâm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "心",
+    "back": "tâm; lòng",
+    "reading": "こころ",
+    "han_viet": "Tâm",
+    "note": "Từ liên quan của Kanji 心（Tâm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "安心",
+    "back": "yên tâm",
+    "reading": "あんしん",
+    "han_viet": "An Tâm",
+    "note": "Từ liên quan của Kanji 心（Tâm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "発",
+    "back": "phát; xuất phát; phát ra",
+    "reading": "On: ハツ、ホツ",
+    "han_viet": "Phát",
+    "note": "Từ liên quan:\n出発（しゅっぱつ）: khởi hành\n発音（はつおん）: phát âm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "出発",
+    "back": "khởi hành",
+    "reading": "しゅっぱつ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 発（Phát）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "発音",
+    "back": "phát âm",
+    "reading": "はつおん",
+    "han_viet": "Phát Âm",
+    "note": "Từ liên quan của Kanji 発（Phát）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "作",
+    "back": "làm; tạo ra; tác phẩm",
+    "reading": "On: サク、サ / Kun: つくる",
+    "han_viet": "Tác",
+    "note": "Từ liên quan:\n作る（つくる）: làm; chế tạo\n作品（さくひん）: tác phẩm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "作る",
+    "back": "làm; chế tạo",
+    "reading": "つくる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 作（Tác）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "作品",
+    "back": "tác phẩm",
+    "reading": "さくひん",
+    "han_viet": "Tác Phẩm",
+    "note": "Từ liên quan của Kanji 作（Tác）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "新",
+    "back": "mới",
+    "reading": "On: シン / Kun: あたらしい、あらた",
+    "han_viet": "Tân",
+    "note": "Từ liên quan:\n新しい（あたらしい）: mới\n新聞（しんぶん）: báo",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "新しい",
+    "back": "mới",
+    "reading": "あたらしい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 新（Tân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "新聞",
+    "back": "báo",
+    "reading": "しんぶん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 新（Tân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "世",
+    "back": "thế giới; đời; thế hệ",
+    "reading": "On: セイ、セ / Kun: よ",
+    "han_viet": "Thế",
+    "note": "Từ liên quan:\n世界（せかい）: thế giới\n世話（せわ）: chăm sóc; giúp đỡ",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "世界",
+    "back": "thế giới",
+    "reading": "せかい",
+    "han_viet": "Thế Giới",
+    "note": "Từ liên quan của Kanji 世（Thế）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "世話",
+    "back": "chăm sóc; giúp đỡ",
+    "reading": "せわ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 世（Thế）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "度",
+    "back": "mức độ; lần; độ",
+    "reading": "On: ド、ト / Kun: たび",
+    "han_viet": "Độ",
+    "note": "Từ liên quan:\n今度（こんど）: lần này; lần tới\n一度（いちど）: một lần",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "今度",
+    "back": "lần này; lần tới",
+    "reading": "こんど",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 度（Độ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "一度",
+    "back": "một lần",
+    "reading": "いちど",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 度（Độ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "明",
+    "back": "sáng; rõ",
+    "reading": "On: メイ、ミョウ / Kun: あかるい、あける、あく",
+    "han_viet": "Minh",
+    "note": "Từ liên quan:\n明るい（あかるい）: sáng; vui vẻ\n説明（せつめい）: giải thích",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "明るい",
+    "back": "sáng; vui vẻ",
+    "reading": "あかるい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 明（Minh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "説明",
+    "back": "giải thích",
+    "reading": "せつめい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 明（Minh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "力",
+    "back": "sức; lực",
+    "reading": "On: リョク、リキ / Kun: ちから",
+    "han_viet": "Lực",
+    "note": "Từ liên quan:\n力（ちから）: sức lực\n努力（どりょく）: nỗ lực",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "力",
+    "back": "sức lực",
+    "reading": "ちから",
+    "han_viet": "Lực",
+    "note": "Từ liên quan của Kanji 力（Lực）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "努力",
+    "back": "nỗ lực",
+    "reading": "どりょく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 力（Lực）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "意",
+    "back": "ý; ý nghĩa; ý định",
+    "reading": "On: イ",
+    "han_viet": "Ý",
+    "note": "Từ liên quan:\n意味（いみ）: ý nghĩa\n注意（ちゅうい）: chú ý",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "意味",
+    "back": "ý nghĩa",
+    "reading": "いみ",
+    "han_viet": "Ý Vị",
+    "note": "Từ liên quan của Kanji 意（Ý）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "注意",
+    "back": "chú ý",
+    "reading": "ちゅうい",
+    "han_viet": "Chú Ý",
+    "note": "Từ liên quan của Kanji 意（Ý）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "用",
+    "back": "dùng; công dụng; việc cần làm",
+    "reading": "On: ヨウ / Kun: もちいる",
+    "han_viet": "Dụng",
+    "note": "Từ liên quan:\n用事（ようじ）: việc cần làm\n用意（ようい）: chuẩn bị",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "用事",
+    "back": "việc cần làm",
+    "reading": "ようじ",
+    "han_viet": "Dụng Sự",
+    "note": "Từ liên quan của Kanji 用（Dụng）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "用意",
+    "back": "chuẩn bị",
+    "reading": "ようい",
+    "han_viet": "Dụng Ý",
+    "note": "Từ liên quan của Kanji 用（Dụng）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "主",
+    "back": "chủ; chính; chủ yếu",
+    "reading": "On: シュ、ス / Kun: ぬし、おも",
+    "han_viet": "Chủ",
+    "note": "Từ liên quan:\n主人（しゅじん）: chồng; chủ nhà\n主に（おもに）: chủ yếu",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "主人",
+    "back": "chồng; chủ nhà",
+    "reading": "しゅじん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 主（Chủ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "主に",
+    "back": "chủ yếu",
+    "reading": "おもに",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 主（Chủ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "通",
+    "back": "thông; đi qua; đi lại",
+    "reading": "On: ツウ、ツ / Kun: とおる、とおす、かよう",
+    "han_viet": "Thông",
+    "note": "Từ liên quan:\n通る（とおる）: đi qua\n通う（かよう）: đi lại thường xuyên",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "通る",
+    "back": "đi qua",
+    "reading": "とおる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 通（Thông）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "通う",
+    "back": "đi lại thường xuyên",
+    "reading": "かよう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 通（Thông）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "文",
+    "back": "văn; câu; văn bản",
+    "reading": "On: ブン、モン / Kun: ふみ",
+    "han_viet": "Văn",
+    "note": "Từ liên quan:\n文章（ぶんしょう）: đoạn văn; bài viết\n文化（ぶんか）: văn hóa",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "文章",
+    "back": "đoạn văn; bài viết",
+    "reading": "ぶんしょう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 文（Văn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "文化",
+    "back": "văn hóa",
+    "reading": "ぶんか",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 文（Văn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "屋",
+    "back": "nhà; cửa hàng",
+    "reading": "On: オク / Kun: や",
+    "han_viet": "Ốc",
+    "note": "Từ liên quan:\n部屋（へや）: phòng\n本屋（ほんや）: hiệu sách",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "部屋",
+    "back": "phòng",
+    "reading": "へや",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 屋（Ốc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "本屋",
+    "back": "hiệu sách",
+    "reading": "ほんや",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 屋（Ốc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "業",
+    "back": "nghiệp; nghề; công việc",
+    "reading": "On: ギョウ、ゴウ / Kun: わざ",
+    "han_viet": "Nghiệp",
+    "note": "Từ liên quan:\n授業（じゅぎょう）: giờ học\n卒業（そつぎょう）: tốt nghiệp",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "授業",
+    "back": "giờ học",
+    "reading": "じゅぎょう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 業（Nghiệp）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "卒業",
+    "back": "tốt nghiệp",
+    "reading": "そつぎょう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 業（Nghiệp）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "持",
+    "back": "cầm; giữ; mang",
+    "reading": "On: ジ / Kun: もつ",
+    "han_viet": "Trì",
+    "note": "Từ liên quan:\n持つ（もつ）: cầm; mang; có\n気持ち（きもち）: cảm xúc; tâm trạng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "持つ",
+    "back": "cầm; mang; có",
+    "reading": "もつ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 持（Trì）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "気持ち",
+    "back": "cảm xúc; tâm trạng",
+    "reading": "きもち",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 持（Trì）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "道",
+    "back": "đường; đạo; cách",
+    "reading": "On: ドウ、トウ / Kun: みち",
+    "han_viet": "Đạo",
+    "note": "Từ liên quan:\n道（みち）: đường\n水道（すいどう）: nước máy",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "道",
+    "back": "đường",
+    "reading": "みち",
+    "han_viet": "Đạo",
+    "note": "Từ liên quan của Kanji 道（Đạo）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "水道",
+    "back": "nước máy",
+    "reading": "すいどう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 道（Đạo）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "身",
+    "back": "thân; cơ thể; bản thân",
+    "reading": "On: シン / Kun: み",
+    "han_viet": "Thân",
+    "note": "Từ liên quan:\n身体（しんたい）: cơ thể\n身近（みぢか）: gần gũi",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "身体",
+    "back": "cơ thể",
+    "reading": "しんたい",
+    "han_viet": "Thân Thể",
+    "note": "Từ liên quan của Kanji 身（Thân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "身近",
+    "back": "gần gũi",
+    "reading": "みぢか",
+    "han_viet": "Thân Cận",
+    "note": "Từ liên quan của Kanji 身（Thân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "不",
+    "back": "không; bất-",
+    "reading": "On: フ、ブ",
+    "han_viet": "Bất",
+    "note": "Từ liên quan:\n不便（ふべん）: bất tiện\n不安（ふあん）: bất an",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "不便",
+    "back": "bất tiện",
+    "reading": "ふべん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 不（Bất）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "不安",
+    "back": "bất an",
+    "reading": "ふあん",
+    "han_viet": "Bất An",
+    "note": "Từ liên quan của Kanji 不（Bất）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "口",
+    "back": "miệng; cửa; lối",
+    "reading": "On: コウ、ク / Kun: くち",
+    "han_viet": "Khẩu",
+    "note": "Từ liên quan:\n入口（いりぐち）: lối vào\n出口（でぐち）: lối ra",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "入口",
+    "back": "lối vào",
+    "reading": "いりぐち",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 口（Khẩu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "出口",
+    "back": "lối ra",
+    "reading": "でぐち",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 口（Khẩu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "多",
+    "back": "nhiều",
+    "reading": "On: タ / Kun: おおい",
+    "han_viet": "Đa",
+    "note": "Từ liên quan:\n多い（おおい）: nhiều\n多分（たぶん）: có lẽ",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "多い",
+    "back": "nhiều",
+    "reading": "おおい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 多（Đa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "多分",
+    "back": "có lẽ",
+    "reading": "たぶん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 多（Đa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "野",
+    "back": "cánh đồng; hoang dã",
+    "reading": "On: ヤ / Kun: の",
+    "han_viet": "Dã",
+    "note": "Từ liên quan:\n野菜（やさい）: rau\n野球（やきゅう）: bóng chày",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "野菜",
+    "back": "rau",
+    "reading": "やさい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 野（Dã）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "野球",
+    "back": "bóng chày",
+    "reading": "やきゅう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 野（Dã）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "考",
+    "back": "nghĩ; cân nhắc",
+    "reading": "On: コウ / Kun: かんがえる",
+    "han_viet": "Khảo",
+    "note": "Từ liên quan:\n考える（かんがえる）: suy nghĩ\n考え（かんがえ）: ý nghĩ",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "考える",
+    "back": "suy nghĩ",
+    "reading": "かんがえる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 考（Khảo）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "考え",
+    "back": "ý nghĩ",
+    "reading": "かんがえ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 考（Khảo）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "開",
+    "back": "mở",
+    "reading": "On: カイ / Kun: ひらく、あく、あける",
+    "han_viet": "Khai",
+    "note": "Từ liên quan:\n開ける（あける）: mở\n開く（ひらく）: mở; tổ chức",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "開ける",
+    "back": "mở",
+    "reading": "あける",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 開（Khai）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "開く",
+    "back": "mở; tổ chức",
+    "reading": "ひらく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 開（Khai）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "教",
+    "back": "dạy; giáo",
+    "reading": "On: キョウ / Kun: おしえる、おそわる",
+    "han_viet": "Giáo",
+    "note": "Từ liên quan:\n教える（おしえる）: dạy\n教室（きょうしつ）: phòng học",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "教える",
+    "back": "dạy",
+    "reading": "おしえる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 教（Giáo）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "教室",
+    "back": "phòng học",
+    "reading": "きょうしつ",
+    "han_viet": "Giáo Thất",
+    "note": "Từ liên quan của Kanji 教（Giáo）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "近",
+    "back": "gần",
+    "reading": "On: キン / Kun: ちかい",
+    "han_viet": "Cận",
+    "note": "Từ liên quan:\n近い（ちかい）: gần\n最近（さいきん）: gần đây",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "近い",
+    "back": "gần",
+    "reading": "ちかい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 近（Cận）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "最近",
+    "back": "gần đây",
+    "reading": "さいきん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 近（Cận）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "以",
+    "back": "lấy; từ; trở lên/xuống",
+    "reading": "On: イ",
+    "han_viet": "Dĩ",
+    "note": "Từ liên quan:\n以上（いじょう）: trở lên\n以下（いか）: trở xuống",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "以上",
+    "back": "trở lên",
+    "reading": "いじょう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 以（Dĩ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "以下",
+    "back": "trở xuống",
+    "reading": "いか",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 以（Dĩ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "問",
+    "back": "hỏi; vấn đề",
+    "reading": "On: モン / Kun: とう、とい",
+    "han_viet": "Vấn",
+    "note": "Từ liên quan:\n問題（もんだい）: vấn đề\n質問（しつもん）: câu hỏi",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "問題",
+    "back": "vấn đề",
+    "reading": "もんだい",
+    "han_viet": "Vấn Đề",
+    "note": "Từ liên quan của Kanji 問（Vấn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "質問",
+    "back": "câu hỏi",
+    "reading": "しつもん",
+    "han_viet": "Chất Vấn",
+    "note": "Từ liên quan của Kanji 問（Vấn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "正",
+    "back": "đúng; chính",
+    "reading": "On: セイ、ショウ / Kun: ただしい、ただす、まさ",
+    "han_viet": "Chính",
+    "note": "Từ liên quan:\n正しい（ただしい）: đúng\n正月（しょうがつ）: Tết; năm mới",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "正しい",
+    "back": "đúng",
+    "reading": "ただしい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 正（Chính）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "正月",
+    "back": "Tết; năm mới",
+    "reading": "しょうがつ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 正（Chính）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "真",
+    "back": "thật; chân thật",
+    "reading": "On: シン / Kun: ま",
+    "han_viet": "Chân",
+    "note": "Từ liên quan:\n写真（しゃしん）: ảnh\n真ん中（まんなか）: chính giữa",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "写真",
+    "back": "ảnh",
+    "reading": "しゃしん",
+    "han_viet": "Tả Chân",
+    "note": "Từ liên quan của Kanji 真（Chân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "真ん中",
+    "back": "chính giữa",
+    "reading": "まんなか",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 真（Chân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "味",
+    "back": "vị; hương vị; ý nghĩa",
+    "reading": "On: ミ / Kun: あじ、あじわう",
+    "han_viet": "Vị",
+    "note": "Từ liên quan:\n味（あじ）: vị; hương vị\n意味（いみ）: ý nghĩa",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "味",
+    "back": "vị; hương vị",
+    "reading": "あじ",
+    "han_viet": "Vị",
+    "note": "Từ liên quan của Kanji 味（Vị）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "界",
+    "back": "giới; ranh giới; thế giới",
+    "reading": "On: カイ",
+    "han_viet": "Giới",
+    "note": "Từ liên quan:\n世界（せかい）: thế giới\n世界中（せかいじゅう）: khắp thế giới",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "世界中",
+    "back": "khắp thế giới",
+    "reading": "せかいじゅう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 界（Giới）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "無",
+    "back": "không có; vô-",
+    "reading": "On: ム、ブ / Kun: ない",
+    "han_viet": "Vô",
+    "note": "Từ liên quan:\n無理（むり）: quá sức; không thể\n無料（むりょう）: miễn phí",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "無理",
+    "back": "quá sức; không thể",
+    "reading": "むり",
+    "han_viet": "Vô Lý",
+    "note": "Từ liên quan của Kanji 無（Vô）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "無料",
+    "back": "miễn phí",
+    "reading": "むりょう",
+    "han_viet": "Vô Liệu",
+    "note": "Từ liên quan của Kanji 無（Vô）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "少",
+    "back": "ít; một chút",
+    "reading": "On: ショウ / Kun: すくない、すこし",
+    "han_viet": "Thiểu",
+    "note": "Từ liên quan:\n少ない（すくない）: ít\n少し（すこし）: một chút",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "少ない",
+    "back": "ít",
+    "reading": "すくない",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 少（Thiểu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "少し",
+    "back": "một chút",
+    "reading": "すこし",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 少（Thiểu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "海",
+    "back": "biển",
+    "reading": "On: カイ / Kun: うみ",
+    "han_viet": "Hải",
+    "note": "Từ liên quan:\n海（うみ）: biển\n海外（かいがい）: nước ngoài",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "海",
+    "back": "biển",
+    "reading": "うみ",
+    "han_viet": "Hải",
+    "note": "Từ liên quan của Kanji 海（Hải）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "海外",
+    "back": "nước ngoài",
+    "reading": "かいがい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 海（Hải）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "切",
+    "back": "cắt; quan trọng",
+    "reading": "On: セツ、サイ / Kun: きる、きれる",
+    "han_viet": "Thiết",
+    "note": "Từ liên quan:\n切る（きる）: cắt\n大切（たいせつ）: quan trọng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "切る",
+    "back": "cắt",
+    "reading": "きる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 切（Thiết）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "大切",
+    "back": "quan trọng",
+    "reading": "たいせつ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 切（Thiết）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "重",
+    "back": "nặng; quan trọng; chồng lên",
+    "reading": "On: ジュウ、チョウ / Kun: おもい、かさねる、かさなる",
+    "han_viet": "Trọng",
+    "note": "Từ liên quan:\n重い（おもい）: nặng\n体重（たいじゅう）: cân nặng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "重い",
+    "back": "nặng",
+    "reading": "おもい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 重（Trọng）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "体重",
+    "back": "cân nặng",
+    "reading": "たいじゅう",
+    "han_viet": "Thể Trọng",
+    "note": "Từ liên quan của Kanji 重（Trọng）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "集",
+    "back": "tụ; tập hợp",
+    "reading": "On: シュウ / Kun: あつまる、あつめる",
+    "han_viet": "Tập",
+    "note": "Từ liên quan:\n集まる（あつまる）: tụ tập\n集める（あつめる）: thu thập",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "集まる",
+    "back": "tụ tập",
+    "reading": "あつまる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 集（Tập）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "集める",
+    "back": "thu thập",
+    "reading": "あつめる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 集（Tập）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "員",
+    "back": "thành viên; nhân viên",
+    "reading": "On: イン",
+    "han_viet": "Viên",
+    "note": "Từ liên quan:\n店員（てんいん）: nhân viên cửa hàng\n会社員（かいしゃいん）: nhân viên công ty",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "店員",
+    "back": "nhân viên cửa hàng",
+    "reading": "てんいん",
+    "han_viet": "Điếm Viên",
+    "note": "Từ liên quan của Kanji 員（Viên）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "会社員",
+    "back": "nhân viên công ty",
+    "reading": "かいしゃいん",
+    "han_viet": "Hội Xã Viên",
+    "note": "Từ liên quan của Kanji 員（Viên）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "公",
+    "back": "công; công cộng",
+    "reading": "On: コウ / Kun: おおやけ",
+    "han_viet": "Công",
+    "note": "Từ liên quan:\n公園（こうえん）: công viên\n公共（こうきょう）: công cộng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "公園",
+    "back": "công viên",
+    "reading": "こうえん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 公（Công）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "公共",
+    "back": "công cộng",
+    "reading": "こうきょう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 公（Công）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "画",
+    "back": "tranh; hình; kế hoạch",
+    "reading": "On: ガ、カク / Kun: えがく",
+    "han_viet": "Họa",
+    "note": "Từ liên quan:\n映画（えいが）: phim\n計画（けいかく）: kế hoạch",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "映画",
+    "back": "phim",
+    "reading": "えいが",
+    "han_viet": "Ánh Họa",
+    "note": "Từ liên quan của Kanji 画（Họa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "計画",
+    "back": "kế hoạch",
+    "reading": "けいかく",
+    "han_viet": "Kế Họa",
+    "note": "Từ liên quan của Kanji 画（Họa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "死",
+    "back": "chết",
+    "reading": "On: シ / Kun: しぬ",
+    "han_viet": "Tử",
+    "note": "Từ liên quan:\n死ぬ（しぬ）: chết\n死亡（しぼう）: tử vong",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "死ぬ",
+    "back": "chết",
+    "reading": "しぬ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 死（Tử）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "死亡",
+    "back": "tử vong",
+    "reading": "しぼう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 死（Tử）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "安",
+    "back": "yên; rẻ",
+    "reading": "On: アン / Kun: やすい",
+    "han_viet": "An",
+    "note": "Từ liên quan:\n安い（やすい）: rẻ\n安心（あんしん）: yên tâm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "安い",
+    "back": "rẻ",
+    "reading": "やすい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 安（An）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "親",
+    "back": "cha mẹ; thân; thân thiết",
+    "reading": "On: シン / Kun: おや、したしい",
+    "han_viet": "Thân",
+    "note": "Từ liên quan:\n親（おや）: cha mẹ\n両親（りょうしん）: cha mẹ",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "親",
+    "back": "cha mẹ",
+    "reading": "おや",
+    "han_viet": "Thân",
+    "note": "Từ liên quan của Kanji 親（Thân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "両親",
+    "back": "cha mẹ",
+    "reading": "りょうしん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 親（Thân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "強",
+    "back": "mạnh; ép",
+    "reading": "On: キョウ、ゴウ / Kun: つよい、しいる",
+    "han_viet": "Cường",
+    "note": "Từ liên quan:\n強い（つよい）: mạnh\n勉強（べんきょう）: học tập",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "強い",
+    "back": "mạnh",
+    "reading": "つよい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 強（Cường）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "勉強",
+    "back": "học tập",
+    "reading": "べんきょう",
+    "han_viet": "Miễn Cường",
+    "note": "Từ liên quan của Kanji 強（Cường）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "使",
+    "back": "dùng; sai khiến",
+    "reading": "On: シ / Kun: つかう",
+    "han_viet": "Sử",
+    "note": "Từ liên quan:\n使う（つかう）: dùng\n大使館（たいしかん）: đại sứ quán",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "使う",
+    "back": "dùng",
+    "reading": "つかう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 使（Sử）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "大使館",
+    "back": "đại sứ quán",
+    "reading": "たいしかん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 使（Sử）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "朝",
+    "back": "buổi sáng; triều",
+    "reading": "On: チョウ / Kun: あさ",
+    "han_viet": "Triều",
+    "note": "Từ liên quan:\n朝（あさ）: buổi sáng\n今朝（けさ）: sáng nay",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "朝",
+    "back": "buổi sáng",
+    "reading": "あさ",
+    "han_viet": "Triều",
+    "note": "Từ liên quan của Kanji 朝（Triều）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "今朝",
+    "back": "sáng nay",
+    "reading": "けさ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 朝（Triều）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "題",
+    "back": "đề; chủ đề",
+    "reading": "On: ダイ",
+    "han_viet": "Đề",
+    "note": "Từ liên quan:\n問題（もんだい）: vấn đề\n宿題（しゅくだい）: bài tập về nhà",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "宿題",
+    "back": "bài tập về nhà",
+    "reading": "しゅくだい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 題（Đề）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "仕",
+    "back": "phục vụ; làm việc",
+    "reading": "On: シ / Kun: つかえる",
+    "han_viet": "Sĩ",
+    "note": "Từ liên quan:\n仕事（しごと）: công việc\n仕方（しかた）: cách làm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "仕方",
+    "back": "cách làm",
+    "reading": "しかた",
+    "han_viet": "Sĩ Phương",
+    "note": "Từ liên quan của Kanji 仕（Sĩ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "京",
+    "back": "kinh đô",
+    "reading": "On: キョウ、ケイ、キン / Kun: みやこ",
+    "han_viet": "Kinh",
+    "note": "Từ liên quan:\n東京（とうきょう）: Tokyo\n京都（きょうと）: Kyoto",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "東京",
+    "back": "Tokyo",
+    "reading": "とうきょう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 京（Kinh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "京都",
+    "back": "Kyoto",
+    "reading": "きょうと",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 京（Kinh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "足",
+    "back": "chân; đủ",
+    "reading": "On: ソク / Kun: あし、たりる、たす",
+    "han_viet": "Túc",
+    "note": "Từ liên quan:\n足（あし）: chân\n足りる（たりる）: đủ",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "足",
+    "back": "chân",
+    "reading": "あし",
+    "han_viet": "Túc",
+    "note": "Từ liên quan của Kanji 足（Túc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "足りる",
+    "back": "đủ",
+    "reading": "たりる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 足（Túc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "品",
+    "back": "phẩm; hàng hóa",
+    "reading": "On: ヒン、ホン / Kun: しな",
+    "han_viet": "Phẩm",
+    "note": "Từ liên quan:\n品物（しなもの）: hàng hóa\n食品（しょくひん）: thực phẩm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "品物",
+    "back": "hàng hóa",
+    "reading": "しなもの",
+    "han_viet": "Phẩm Vật",
+    "note": "Từ liên quan của Kanji 品（Phẩm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "食品",
+    "back": "thực phẩm",
+    "reading": "しょくひん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 品（Phẩm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "着",
+    "back": "mặc; đến; bám vào",
+    "reading": "On: チャク、ジャク / Kun: きる、きせる、つく、つける",
+    "han_viet": "Trứ",
+    "note": "Từ liên quan:\n着る（きる）: mặc\n到着（とうちゃく）: đến nơi",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "着る",
+    "back": "mặc",
+    "reading": "きる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 着（Trứ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "到着",
+    "back": "đến nơi",
+    "reading": "とうちゃく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 着（Trứ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "別",
+    "back": "khác; phân biệt; riêng",
+    "reading": "On: ベツ / Kun: わかれる",
+    "han_viet": "Biệt",
+    "note": "Từ liên quan:\n別（べつ）: khác; riêng\n特別（とくべつ）: đặc biệt",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "別",
+    "back": "khác; riêng",
+    "reading": "べつ",
+    "han_viet": "Biệt",
+    "note": "Từ liên quan của Kanji 別（Biệt）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "特別",
+    "back": "đặc biệt",
+    "reading": "とくべつ",
+    "han_viet": "Đặc Biệt",
+    "note": "Từ liên quan của Kanji 別（Biệt）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "音",
+    "back": "âm thanh",
+    "reading": "On: オン、イン / Kun: おと、ね",
+    "han_viet": "Âm",
+    "note": "Từ liên quan:\n音（おと）: âm thanh\n発音（はつおん）: phát âm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "音",
+    "back": "âm thanh",
+    "reading": "おと",
+    "han_viet": "Âm",
+    "note": "Từ liên quan của Kanji 音（Âm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "元",
+    "back": "gốc; nguyên; ban đầu",
+    "reading": "On: ゲン、ガン / Kun: もと",
+    "han_viet": "Nguyên",
+    "note": "Từ liên quan:\n元気（げんき）: khỏe\n元（もと）: gốc; trước đây",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "元気",
+    "back": "khỏe",
+    "reading": "げんき",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 元（Nguyên）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "元",
+    "back": "gốc; trước đây",
+    "reading": "もと",
+    "han_viet": "Nguyên",
+    "note": "Từ liên quan của Kanji 元（Nguyên）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "特",
+    "back": "đặc biệt",
+    "reading": "On: トク",
+    "han_viet": "Đặc",
+    "note": "Từ liên quan:\n特別（とくべつ）: đặc biệt\n特に（とくに）: đặc biệt là",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "特に",
+    "back": "đặc biệt là",
+    "reading": "とくに",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 特（Đặc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "風",
+    "back": "gió; phong cách",
+    "reading": "On: フウ、フ / Kun: かぜ、かざ",
+    "han_viet": "Phong",
+    "note": "Từ liên quan:\n風（かぜ）: gió\n台風（たいふう）: bão",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "風",
+    "back": "gió",
+    "reading": "かぜ",
+    "han_viet": "Phong",
+    "note": "Từ liên quan của Kanji 風（Phong）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "台風",
+    "back": "bão",
+    "reading": "たいふう",
+    "han_viet": "Đài Phong",
+    "note": "Từ liên quan của Kanji 風（Phong）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "夜",
+    "back": "đêm",
+    "reading": "On: ヤ / Kun: よ、よる",
+    "han_viet": "Dạ",
+    "note": "Từ liên quan:\n夜（よる）: ban đêm\n今夜（こんや）: tối nay",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "夜",
+    "back": "ban đêm",
+    "reading": "よる",
+    "han_viet": "Dạ",
+    "note": "Từ liên quan của Kanji 夜（Dạ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "今夜",
+    "back": "tối nay",
+    "reading": "こんや",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 夜（Dạ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "空",
+    "back": "trời; không; trống",
+    "reading": "On: クウ / Kun: そら、あく、あける、から",
+    "han_viet": "Không",
+    "note": "Từ liên quan:\n空（そら）: bầu trời\n空港（くうこう）: sân bay",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "空",
+    "back": "bầu trời",
+    "reading": "そら",
+    "han_viet": "Không",
+    "note": "Từ liên quan của Kanji 空（Không）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "空港",
+    "back": "sân bay",
+    "reading": "くうこう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 空（Không）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "有",
+    "back": "có; hữu",
+    "reading": "On: ユウ、ウ / Kun: ある",
+    "han_viet": "Hữu",
+    "note": "Từ liên quan:\n有名（ゆうめい）: nổi tiếng\n有る（ある）: có",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "有名",
+    "back": "nổi tiếng",
+    "reading": "ゆうめい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 有（Hữu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "有る",
+    "back": "có",
+    "reading": "ある",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 有（Hữu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "起",
+    "back": "dậy; xảy ra; khởi",
+    "reading": "On: キ / Kun: おきる、おこる、おこす",
+    "han_viet": "Khởi",
+    "note": "Từ liên quan:\n起きる（おきる）: thức dậy\n起こす（おこす）: đánh thức; gây ra",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "起きる",
+    "back": "thức dậy",
+    "reading": "おきる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 起（Khởi）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "起こす",
+    "back": "đánh thức; gây ra",
+    "reading": "おこす",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 起（Khởi）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "運",
+    "back": "vận; vận chuyển; vận động",
+    "reading": "On: ウン / Kun: はこぶ",
+    "han_viet": "Vận",
+    "note": "Từ liên quan:\n運転（うんてん）: lái xe\n運動（うんどう）: vận động",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "運転",
+    "back": "lái xe",
+    "reading": "うんてん",
+    "han_viet": "Vận Chuyển",
+    "note": "Từ liên quan của Kanji 運（Vận）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "運動",
+    "back": "vận động",
+    "reading": "うんどう",
+    "han_viet": "Vận Động",
+    "note": "Từ liên quan của Kanji 運（Vận）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "料",
+    "back": "liệu; phí; nguyên liệu",
+    "reading": "On: リョウ",
+    "han_viet": "Liệu",
+    "note": "Từ liên quan:\n料理（りょうり）: nấu ăn; món ăn\n料金（りょうきん）: phí",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "料金",
+    "back": "phí",
+    "reading": "りょうきん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 料（Liệu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "楽",
+    "back": "vui; thoải mái; âm nhạc",
+    "reading": "On: ガク、ラク / Kun: たのしい、たのしむ",
+    "han_viet": "Lạc / Nhạc",
+    "note": "Từ liên quan:\n楽しい（たのしい）: vui\n音楽（おんがく）: âm nhạc",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "楽しい",
+    "back": "vui",
+    "reading": "たのしい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 楽（Lạc / Nhạc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "音楽",
+    "back": "âm nhạc",
+    "reading": "おんがく",
+    "han_viet": "Âm Lạc",
+    "note": "Từ liên quan của Kanji 楽（Lạc / Nhạc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "色",
+    "back": "màu sắc",
+    "reading": "On: ショク、シキ / Kun: いろ",
+    "han_viet": "Sắc",
+    "note": "Từ liên quan:\n色（いろ）: màu sắc\n景色（けしき）: phong cảnh",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "色",
+    "back": "màu sắc",
+    "reading": "いろ",
+    "han_viet": "Sắc",
+    "note": "Từ liên quan của Kanji 色（Sắc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "景色",
+    "back": "phong cảnh",
+    "reading": "けしき",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 色（Sắc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "帰",
+    "back": "trở về; quay lại",
+    "reading": "On: キ / Kun: かえる、かえす",
+    "han_viet": "Quy",
+    "note": "Từ liên quan:\n帰る（かえる）: trở về\n帰国（きこく）: về nước",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "帰る",
+    "back": "trở về",
+    "reading": "かえる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 帰（Quy）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "帰国",
+    "back": "về nước",
+    "reading": "きこく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 帰（Quy）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "歩",
+    "back": "đi bộ; bước",
+    "reading": "On: ホ、ブ、フ / Kun: あるく、あゆむ",
+    "han_viet": "Bộ",
+    "note": "Từ liên quan:\n歩く（あるく）: đi bộ\n散歩（さんぽ）: đi dạo",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "歩く",
+    "back": "đi bộ",
+    "reading": "あるく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 歩（Bộ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "散歩",
+    "back": "đi dạo",
+    "reading": "さんぽ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 歩（Bộ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "悪",
+    "back": "xấu; ác",
+    "reading": "On: アク、オ / Kun: わるい",
+    "han_viet": "Ác",
+    "note": "Từ liên quan:\n悪い（わるい）: xấu; tệ\n最悪（さいあく）: tệ nhất",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "悪い",
+    "back": "xấu; tệ",
+    "reading": "わるい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 悪（Ác）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "最悪",
+    "back": "tệ nhất",
+    "reading": "さいあく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 悪（Ác）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "広",
+    "back": "rộng",
+    "reading": "On: コウ / Kun: ひろい、ひろがる、ひろげる",
+    "han_viet": "Quảng",
+    "note": "Từ liên quan:\n広い（ひろい）: rộng\n広場（ひろば）: quảng trường",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "広い",
+    "back": "rộng",
+    "reading": "ひろい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 広（Quảng）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "広場",
+    "back": "quảng trường",
+    "reading": "ひろば",
+    "han_viet": "Quảng Trường",
+    "note": "Từ liên quan của Kanji 広（Quảng）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "店",
+    "back": "cửa hàng",
+    "reading": "On: テン / Kun: みせ",
+    "han_viet": "Điếm",
+    "note": "Từ liên quan:\n店（みせ）: cửa hàng\n店員（てんいん）: nhân viên cửa hàng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "店",
+    "back": "cửa hàng",
+    "reading": "みせ",
+    "han_viet": "Điếm",
+    "note": "Từ liên quan của Kanji 店（Điếm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "町",
+    "back": "thị trấn; phố",
+    "reading": "On: チョウ / Kun: まち",
+    "han_viet": "Đinh",
+    "note": "Từ liên quan:\n町（まち）: thị trấn; khu phố\n町中（まちなか）: trong phố",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "町",
+    "back": "thị trấn; khu phố",
+    "reading": "まち",
+    "han_viet": "Đinh",
+    "note": "Từ liên quan của Kanji 町（Đinh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "町中",
+    "back": "trong phố",
+    "reading": "まちなか",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 町（Đinh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "住",
+    "back": "sống; cư trú",
+    "reading": "On: ジュウ / Kun: すむ、すまう",
+    "han_viet": "Trú",
+    "note": "Từ liên quan:\n住む（すむ）: sống; cư trú\n住所（じゅうしょ）: địa chỉ",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "住む",
+    "back": "sống; cư trú",
+    "reading": "すむ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 住（Trú）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "住所",
+    "back": "địa chỉ",
+    "reading": "じゅうしょ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 住（Trú）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "売",
+    "back": "bán",
+    "reading": "On: バイ / Kun: うる、うれる",
+    "han_viet": "Mại",
+    "note": "Từ liên quan:\n売る（うる）: bán\n売店（ばいてん）: quầy hàng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "売る",
+    "back": "bán",
+    "reading": "うる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 売（Mại）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "売店",
+    "back": "quầy hàng",
+    "reading": "ばいてん",
+    "han_viet": "Mại Điếm",
+    "note": "Từ liên quan của Kanji 売（Mại）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "待",
+    "back": "đợi; chờ",
+    "reading": "On: タイ / Kun: まつ",
+    "han_viet": "Đãi",
+    "note": "Từ liên quan:\n待つ（まつ）: đợi\n招待（しょうたい）: mời",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "待つ",
+    "back": "đợi",
+    "reading": "まつ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 待（Đãi）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "招待",
+    "back": "mời",
+    "reading": "しょうたい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 待（Đãi）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "古",
+    "back": "cũ; cổ",
+    "reading": "On: コ / Kun: ふるい",
+    "han_viet": "Cổ",
+    "note": "Từ liên quan:\n古い（ふるい）: cũ\n中古（ちゅうこ）: đồ cũ",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "古い",
+    "back": "cũ",
+    "reading": "ふるい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 古（Cổ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "中古",
+    "back": "đồ cũ",
+    "reading": "ちゅうこ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 古（Cổ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "始",
+    "back": "bắt đầu",
+    "reading": "On: シ / Kun: はじめる、はじまる",
+    "han_viet": "Thủy",
+    "note": "Từ liên quan:\n始める（はじめる）: bắt đầu\n始まる（はじまる）: bắt đầu",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "始める",
+    "back": "bắt đầu",
+    "reading": "はじめる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 始（Thủy）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "始まる",
+    "back": "bắt đầu",
+    "reading": "はじまる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 始（Thủy）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "終",
+    "back": "kết thúc",
+    "reading": "On: シュウ / Kun: おわる、おえる",
+    "han_viet": "Chung",
+    "note": "Từ liên quan:\n終わる（おわる）: kết thúc\n終える（おえる）: hoàn thành",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "終わる",
+    "back": "kết thúc",
+    "reading": "おわる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 終（Chung）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "終える",
+    "back": "hoàn thành",
+    "reading": "おえる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 終（Chung）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "計",
+    "back": "đo; tính; kế hoạch",
+    "reading": "On: ケイ / Kun: はかる",
+    "han_viet": "Kế",
+    "note": "Từ liên quan:\n時計（とけい）: đồng hồ\n計画（けいかく）: kế hoạch",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "時計",
+    "back": "đồng hồ",
+    "reading": "とけい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 計（Kế）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "院",
+    "back": "viện",
+    "reading": "On: イン",
+    "han_viet": "Viện",
+    "note": "Từ liên quan:\n病院（びょういん）: bệnh viện\n入院（にゅういん）: nhập viện",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "病院",
+    "back": "bệnh viện",
+    "reading": "びょういん",
+    "han_viet": "Bệnh Viện",
+    "note": "Từ liên quan của Kanji 院（Viện）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "入院",
+    "back": "nhập viện",
+    "reading": "にゅういん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 院（Viện）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "送",
+    "back": "gửi; tiễn; đưa",
+    "reading": "On: ソウ / Kun: おくる",
+    "han_viet": "Tống",
+    "note": "Từ liên quan:\n送る（おくる）: gửi; tiễn\n放送（ほうそう）: phát sóng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "送る",
+    "back": "gửi; tiễn",
+    "reading": "おくる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 送（Tống）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "放送",
+    "back": "phát sóng",
+    "reading": "ほうそう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 送（Tống）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "族",
+    "back": "tộc; gia đình; nhóm",
+    "reading": "On: ゾク",
+    "han_viet": "Tộc",
+    "note": "Từ liên quan:\n家族（かぞく）: gia đình\n水族館（すいぞくかん）: thủy cung",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "水族館",
+    "back": "thủy cung",
+    "reading": "すいぞくかん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 族（Tộc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "映",
+    "back": "chiếu; phản chiếu",
+    "reading": "On: エイ / Kun: うつる、うつす、はえる",
+    "han_viet": "Ánh",
+    "note": "Từ liên quan:\n映画（えいが）: phim\n映る（うつる）: được chiếu; phản chiếu",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "映る",
+    "back": "được chiếu; phản chiếu",
+    "reading": "うつる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 映（Ánh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "買",
+    "back": "mua",
+    "reading": "On: バイ / Kun: かう",
+    "han_viet": "Mãi",
+    "note": "Từ liên quan:\n買う（かう）: mua\n買い物（かいもの）: mua sắm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "買う",
+    "back": "mua",
+    "reading": "かう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 買（Mãi）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "病",
+    "back": "bệnh",
+    "reading": "On: ビョウ、ヘイ / Kun: やむ、やまい",
+    "han_viet": "Bệnh",
+    "note": "Từ liên quan:\n病院（びょういん）: bệnh viện\n病気（びょうき）: bệnh; ốm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "病気",
+    "back": "bệnh; ốm",
+    "reading": "びょうき",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 病（Bệnh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "早",
+    "back": "sớm; nhanh",
+    "reading": "On: ソウ、サッ / Kun: はやい、はやまる、はやめる",
+    "han_viet": "Tảo",
+    "note": "Từ liên quan:\n早い（はやい）: sớm; nhanh\n早く（はやく）: sớm; nhanh chóng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "早い",
+    "back": "sớm; nhanh",
+    "reading": "はやい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 早（Tảo）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "早く",
+    "back": "sớm; nhanh chóng",
+    "reading": "はやく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 早（Tảo）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "質",
+    "back": "chất; chất lượng; hỏi",
+    "reading": "On: シツ、シチ、チ",
+    "han_viet": "Chất",
+    "note": "Từ liên quan:\n質問（しつもん）: câu hỏi\n品質（ひんしつ）: chất lượng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "品質",
+    "back": "chất lượng",
+    "reading": "ひんしつ",
+    "han_viet": "Phẩm Chất",
+    "note": "Từ liên quan của Kanji 質（Chất）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "台",
+    "back": "đài; bệ; máy (lượng từ)",
+    "reading": "On: ダイ、タイ",
+    "han_viet": "Đài",
+    "note": "Từ liên quan:\n台所（だいどころ）: nhà bếp\n台風（たいふう）: bão",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "台所",
+    "back": "nhà bếp",
+    "reading": "だいどころ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 台（Đài）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "室",
+    "back": "phòng",
+    "reading": "On: シツ / Kun: むろ",
+    "han_viet": "Thất",
+    "note": "Từ liên quan:\n教室（きょうしつ）: phòng học\n洋室（ようしつ）: phòng kiểu phương Tây",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "洋室",
+    "back": "phòng kiểu phương Tây",
+    "reading": "ようしつ",
+    "han_viet": "Dương Thất",
+    "note": "Từ liên quan của Kanji 室（Thất）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "可",
+    "back": "có thể; cho phép",
+    "reading": "On: カ",
+    "han_viet": "Khả",
+    "note": "Từ liên quan:\n可能（かのう）: có thể; khả năng\n許可（きょか）: cho phép",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "可能",
+    "back": "có thể; khả năng",
+    "reading": "かのう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 可（Khả）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "許可",
+    "back": "cho phép",
+    "reading": "きょか",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 可（Khả）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "建",
+    "back": "xây dựng",
+    "reading": "On: ケン、コン / Kun: たてる、たつ",
+    "han_viet": "Kiến",
+    "note": "Từ liên quan:\n建てる（たてる）: xây\n建物（たてもの）: tòa nhà",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "建てる",
+    "back": "xây",
+    "reading": "たてる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 建（Kiến）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "建物",
+    "back": "tòa nhà",
+    "reading": "たてもの",
+    "han_viet": "Kiến Vật",
+    "note": "Từ liên quan của Kanji 建（Kiến）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "転",
+    "back": "chuyển; xoay; ngã",
+    "reading": "On: テン / Kun: ころがる、ころぶ",
+    "han_viet": "Chuyển",
+    "note": "Từ liên quan:\n運転（うんてん）: lái xe\n自転車（じてんしゃ）: xe đạp",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "医",
+    "back": "y; y học",
+    "reading": "On: イ",
+    "han_viet": "Y",
+    "note": "Từ liên quan:\n医者（いしゃ）: bác sĩ\n医学（いがく）: y học",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "医学",
+    "back": "y học",
+    "reading": "いがく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 医（Y）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "止",
+    "back": "dừng; ngăn",
+    "reading": "On: シ / Kun: とまる、とめる",
+    "han_viet": "Chỉ",
+    "note": "Từ liên quan:\n止まる（とまる）: dừng lại\n止める（とめる）: dừng; ngăn",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "止まる",
+    "back": "dừng lại",
+    "reading": "とまる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 止（Chỉ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "止める",
+    "back": "dừng; ngăn",
+    "reading": "とめる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 止（Chỉ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "字",
+    "back": "chữ; ký tự",
+    "reading": "On: ジ / Kun: あざ",
+    "han_viet": "Tự",
+    "note": "Từ liên quan:\n漢字（かんじ）: chữ Hán\n文字（もじ）: chữ; ký tự",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "漢字",
+    "back": "chữ Hán",
+    "reading": "かんじ",
+    "han_viet": "Hán Tự",
+    "note": "Từ liên quan của Kanji 字（Tự）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "文字",
+    "back": "chữ; ký tự",
+    "reading": "もじ",
+    "han_viet": "Văn Tự",
+    "note": "Từ liên quan của Kanji 字（Tự）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "工",
+    "back": "công; kỹ thuật; thợ",
+    "reading": "On: コウ、ク、グ",
+    "han_viet": "Công",
+    "note": "Từ liên quan:\n工場（こうじょう）: nhà máy\n工事（こうじ）: công trình; thi công",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "工事",
+    "back": "công trình; thi công",
+    "reading": "こうじ",
+    "han_viet": "Công Sự",
+    "note": "Từ liên quan của Kanji 工（Công）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "急",
+    "back": "gấp; vội",
+    "reading": "On: キュウ / Kun: いそぐ",
+    "han_viet": "Cấp",
+    "note": "Từ liên quan:\n急ぐ（いそぐ）: vội\n急に（きゅうに）: đột nhiên",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "急ぐ",
+    "back": "vội",
+    "reading": "いそぐ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 急（Cấp）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "急に",
+    "back": "đột nhiên",
+    "reading": "きゅうに",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 急（Cấp）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "図",
+    "back": "hình; bản đồ; kế hoạch",
+    "reading": "On: ズ、ト / Kun: はかる",
+    "han_viet": "Đồ",
+    "note": "Từ liên quan:\n地図（ちず）: bản đồ\n図書館（としょかん）: thư viện",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "図書館",
+    "back": "thư viện",
+    "reading": "としょかん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 図（Đồ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "黒",
+    "back": "đen",
+    "reading": "On: コク / Kun: くろ、くろい",
+    "han_viet": "Hắc",
+    "note": "Từ liên quan:\n黒い（くろい）: đen\n黒（くろ）: màu đen",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "黒い",
+    "back": "đen",
+    "reading": "くろい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 黒（Hắc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "黒",
+    "back": "màu đen",
+    "reading": "くろ",
+    "han_viet": "Hắc",
+    "note": "Từ liên quan của Kanji 黒（Hắc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "花",
+    "back": "hoa",
+    "reading": "On: カ / Kun: はな",
+    "han_viet": "Hoa",
+    "note": "Từ liên quan:\n花（はな）: hoa\n花見（はなみ）: ngắm hoa",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "花",
+    "back": "hoa",
+    "reading": "はな",
+    "han_viet": "Hoa",
+    "note": "Từ liên quan của Kanji 花（Hoa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "花見",
+    "back": "ngắm hoa",
+    "reading": "はなみ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 花（Hoa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "英",
+    "back": "Anh; xuất sắc",
+    "reading": "On: エイ",
+    "han_viet": "Anh",
+    "note": "Từ liên quan:\n英語（えいご）: tiếng Anh\n英国（えいこく）: nước Anh",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "英語",
+    "back": "tiếng Anh",
+    "reading": "えいご",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 英（Anh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "英国",
+    "back": "nước Anh",
+    "reading": "えいこく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 英（Anh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "走",
+    "back": "chạy",
+    "reading": "On: ソウ / Kun: はしる",
+    "han_viet": "Tẩu",
+    "note": "Từ liên quan:\n走る（はしる）: chạy",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "走る",
+    "back": "chạy",
+    "reading": "はしる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 走（Tẩu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "青",
+    "back": "xanh; xanh lam",
+    "reading": "On: セイ、ショウ / Kun: あお、あおい",
+    "han_viet": "Thanh",
+    "note": "Từ liên quan:\n青い（あおい）: xanh\n青（あお）: màu xanh",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "青い",
+    "back": "xanh",
+    "reading": "あおい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 青（Thanh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "青",
+    "back": "màu xanh",
+    "reading": "あお",
+    "han_viet": "Thanh",
+    "note": "Từ liên quan của Kanji 青（Thanh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "答",
+    "back": "trả lời; đáp án",
+    "reading": "On: トウ / Kun: こたえる、こたえ",
+    "han_viet": "Đáp",
+    "note": "Từ liên quan:\n答える（こたえる）: trả lời\n答え（こたえ）: đáp án",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "答える",
+    "back": "trả lời",
+    "reading": "こたえる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 答（Đáp）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "答え",
+    "back": "đáp án",
+    "reading": "こたえ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 答（Đáp）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "紙",
+    "back": "giấy",
+    "reading": "On: シ / Kun: かみ",
+    "han_viet": "Chỉ",
+    "note": "Từ liên quan:\n紙（かみ）: giấy\n手紙（てがみ）: thư",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "紙",
+    "back": "giấy",
+    "reading": "かみ",
+    "han_viet": "Chỉ",
+    "note": "Từ liên quan của Kanji 紙（Chỉ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "歌",
+    "back": "bài hát; hát",
+    "reading": "On: カ / Kun: うた、うたう",
+    "han_viet": "Ca",
+    "note": "Từ liên quan:\n歌（うた）: bài hát\n歌う（うたう）: hát",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "歌",
+    "back": "bài hát",
+    "reading": "うた",
+    "han_viet": "Ca",
+    "note": "Từ liên quan của Kanji 歌（Ca）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "歌う",
+    "back": "hát",
+    "reading": "うたう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 歌（Ca）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "注",
+    "back": "chú ý; rót; ghi chú",
+    "reading": "On: チュウ / Kun: そそぐ",
+    "han_viet": "Chú",
+    "note": "Từ liên quan:\n注意（ちゅうい）: chú ý\n注文（ちゅうもん）: gọi món; đặt hàng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "注文",
+    "back": "gọi món; đặt hàng",
+    "reading": "ちゅうもん",
+    "han_viet": "Chú Văn",
+    "note": "Từ liên quan của Kanji 注（Chú）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "赤",
+    "back": "đỏ",
+    "reading": "On: セキ、シャク / Kun: あか、あかい",
+    "han_viet": "Xích",
+    "note": "Từ liên quan:\n赤い（あかい）: đỏ\n赤（あか）: màu đỏ",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "赤い",
+    "back": "đỏ",
+    "reading": "あかい",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 赤（Xích）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "赤",
+    "back": "màu đỏ",
+    "reading": "あか",
+    "han_viet": "Xích",
+    "note": "Từ liên quan của Kanji 赤（Xích）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "春",
+    "back": "mùa xuân",
+    "reading": "On: シュン / Kun: はる",
+    "han_viet": "Xuân",
+    "note": "Từ liên quan:\n春（はる）: mùa xuân",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "春",
+    "back": "mùa xuân",
+    "reading": "はる",
+    "han_viet": "Xuân",
+    "note": "Từ liên quan của Kanji 春（Xuân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "館",
+    "back": "tòa nhà; quán",
+    "reading": "On: カン / Kun: やかた",
+    "han_viet": "Quán",
+    "note": "Từ liên quan:\n図書館（としょかん）: thư viện\n映画館（えいがかん）: rạp chiếu phim",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "映画館",
+    "back": "rạp chiếu phim",
+    "reading": "えいがかん",
+    "han_viet": "Ánh Họa Quán",
+    "note": "Từ liên quan của Kanji 館（Quán）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "旅",
+    "back": "du lịch; hành trình",
+    "reading": "On: リョ / Kun: たび",
+    "han_viet": "Lữ",
+    "note": "Từ liên quan:\n旅行（りょこう）: du lịch\n旅（たび）: chuyến đi",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "旅行",
+    "back": "du lịch",
+    "reading": "りょこう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 旅（Lữ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "旅",
+    "back": "chuyến đi",
+    "reading": "たび",
+    "han_viet": "Lữ",
+    "note": "Từ liên quan của Kanji 旅（Lữ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "験",
+    "back": "kiểm nghiệm; kinh nghiệm",
+    "reading": "On: ケン、ゲン",
+    "han_viet": "Nghiệm",
+    "note": "Từ liên quan:\n試験（しけん）: kỳ thi\n経験（けいけん）: kinh nghiệm",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "試験",
+    "back": "kỳ thi",
+    "reading": "しけん",
+    "han_viet": "Thí Nghiệm",
+    "note": "Từ liên quan của Kanji 験（Nghiệm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "経験",
+    "back": "kinh nghiệm",
+    "reading": "けいけん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 験（Nghiệm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "写",
+    "back": "sao chép; chụp; phản chiếu",
+    "reading": "On: シャ / Kun: うつす、うつる",
+    "han_viet": "Tả",
+    "note": "Từ liên quan:\n写真（しゃしん）: ảnh\n写す（うつす）: chép; chụp",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "写す",
+    "back": "chép; chụp",
+    "reading": "うつす",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 写（Tả）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "去",
+    "back": "rời đi; quá khứ",
+    "reading": "On: キョ、コ / Kun: さる",
+    "han_viet": "Khứ",
+    "note": "Từ liên quan:\n去年（きょねん）: năm ngoái\n過去（かこ）: quá khứ",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "去年",
+    "back": "năm ngoái",
+    "reading": "きょねん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 去（Khứ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "過去",
+    "back": "quá khứ",
+    "reading": "かこ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 去（Khứ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "研",
+    "back": "mài; nghiên cứu",
+    "reading": "On: ケン / Kun: とぐ",
+    "han_viet": "Nghiên",
+    "note": "Từ liên quan:\n研究（けんきゅう）: nghiên cứu\n研修（けんしゅう）: đào tạo; tu nghiệp",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "研究",
+    "back": "nghiên cứu",
+    "reading": "けんきゅう",
+    "han_viet": "Nghiên Cứu",
+    "note": "Từ liên quan của Kanji 研（Nghiên）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "研修",
+    "back": "đào tạo; tu nghiệp",
+    "reading": "けんしゅう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 研（Nghiên）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "飲",
+    "back": "uống",
+    "reading": "On: イン / Kun: のむ",
+    "han_viet": "Ẩm",
+    "note": "Từ liên quan:\n飲む（のむ）: uống\n飲み物（のみもの）: đồ uống",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "飲む",
+    "back": "uống",
+    "reading": "のむ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 飲（Ẩm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "飲み物",
+    "back": "đồ uống",
+    "reading": "のみもの",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 飲（Ẩm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "肉",
+    "back": "thịt",
+    "reading": "On: ニク",
+    "han_viet": "Nhục",
+    "note": "Từ liên quan:\n肉（にく）: thịt\n牛肉（ぎゅうにく）: thịt bò",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "肉",
+    "back": "thịt",
+    "reading": "にく",
+    "han_viet": "Nhục",
+    "note": "Từ liên quan của Kanji 肉（Nhục）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "牛肉",
+    "back": "thịt bò",
+    "reading": "ぎゅうにく",
+    "han_viet": "Ngưu Nhục",
+    "note": "Từ liên quan của Kanji 肉（Nhục）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "服",
+    "back": "quần áo; phục",
+    "reading": "On: フク",
+    "han_viet": "Phục",
+    "note": "Từ liên quan:\n服（ふく）: quần áo\n洋服（ようふく）: quần áo kiểu phương Tây",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "服",
+    "back": "quần áo",
+    "reading": "ふく",
+    "han_viet": "Phục",
+    "note": "Từ liên quan của Kanji 服（Phục）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "洋服",
+    "back": "quần áo kiểu phương Tây",
+    "reading": "ようふく",
+    "han_viet": "Dương Phục",
+    "note": "Từ liên quan của Kanji 服（Phục）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "銀",
+    "back": "bạc; ngân hàng",
+    "reading": "On: ギン / Kun: しろがね",
+    "han_viet": "Ngân",
+    "note": "Từ liên quan:\n銀行（ぎんこう）: ngân hàng\n銀（ぎん）: bạc",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "銀行",
+    "back": "ngân hàng",
+    "reading": "ぎんこう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 銀（Ngân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "銀",
+    "back": "bạc",
+    "reading": "ぎん",
+    "han_viet": "Ngân",
+    "note": "Từ liên quan của Kanji 銀（Ngân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "茶",
+    "back": "trà",
+    "reading": "On: チャ、サ",
+    "han_viet": "Trà",
+    "note": "Từ liên quan:\nお茶（おちゃ）: trà\n茶色（ちゃいろ）: màu nâu",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "お茶",
+    "back": "trà",
+    "reading": "おちゃ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 茶（Trà）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "茶色",
+    "back": "màu nâu",
+    "reading": "ちゃいろ",
+    "han_viet": "Trà Sắc",
+    "note": "Từ liên quan của Kanji 茶（Trà）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "究",
+    "back": "nghiên cứu đến cùng",
+    "reading": "On: キュウ / Kun: きわめる",
+    "han_viet": "Cứu",
+    "note": "Từ liên quan:\n研究（けんきゅう）: nghiên cứu",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "洋",
+    "back": "phương Tây; đại dương",
+    "reading": "On: ヨウ",
+    "han_viet": "Dương",
+    "note": "Từ liên quan:\n洋服（ようふく）: quần áo kiểu Tây\n洋室（ようしつ）: phòng kiểu Tây",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "兄",
+    "back": "anh trai",
+    "reading": "On: ケイ、キョウ / Kun: あに",
+    "han_viet": "Huynh",
+    "note": "Từ liên quan:\n兄（あに）: anh trai\nお兄さん（おにいさん）: anh trai; anh",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "兄",
+    "back": "anh trai",
+    "reading": "あに",
+    "han_viet": "Huynh",
+    "note": "Từ liên quan của Kanji 兄（Huynh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "お兄さん",
+    "back": "anh trai; anh",
+    "reading": "おにいさん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 兄（Huynh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "秋",
+    "back": "mùa thu",
+    "reading": "On: シュウ / Kun: あき",
+    "han_viet": "Thu",
+    "note": "Từ liên quan:\n秋（あき）: mùa thu",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "秋",
+    "back": "mùa thu",
+    "reading": "あき",
+    "han_viet": "Thu",
+    "note": "Từ liên quan của Kanji 秋（Thu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "堂",
+    "back": "tòa nhà; sảnh",
+    "reading": "On: ドウ",
+    "han_viet": "Đường",
+    "note": "Từ liên quan:\n食堂（しょくどう）: nhà ăn; hội quán ăn\n講堂（こうどう）: giảng đường",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "食堂",
+    "back": "nhà ăn; hội quán ăn",
+    "reading": "しょくどう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 堂（Đường）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "講堂",
+    "back": "giảng đường",
+    "reading": "こうどう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 堂（Đường）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "週",
+    "back": "tuần",
+    "reading": "On: シュウ",
+    "han_viet": "Chu",
+    "note": "Từ liên quan:\n一週間（いっしゅうかん）: một tuần\n毎週（まいしゅう）: hàng tuần",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "一週間",
+    "back": "một tuần",
+    "reading": "いっしゅうかん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 週（Chu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "毎週",
+    "back": "hàng tuần",
+    "reading": "まいしゅう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 週（Chu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "習",
+    "back": "học; luyện tập",
+    "reading": "On: シュウ、ジュ / Kun: ならう",
+    "han_viet": "Tập",
+    "note": "Từ liên quan:\n習う（ならう）: học\n練習（れんしゅう）: luyện tập",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "習う",
+    "back": "học",
+    "reading": "ならう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 習（Tập）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "練習",
+    "back": "luyện tập",
+    "reading": "れんしゅう",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 習（Tập）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "試",
+    "back": "thử; thi",
+    "reading": "On: シ / Kun: こころみる、ためす",
+    "han_viet": "Thí",
+    "note": "Từ liên quan:\n試験（しけん）: kỳ thi\n試す（ためす）: thử",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "試す",
+    "back": "thử",
+    "reading": "ためす",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 試（Thí）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "夏",
+    "back": "mùa hè",
+    "reading": "On: カ、ゲ / Kun: なつ",
+    "han_viet": "Hạ",
+    "note": "Từ liên quan:\n夏（なつ）: mùa hè\n夏休み（なつやすみ）: nghỉ hè",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "夏",
+    "back": "mùa hè",
+    "reading": "なつ",
+    "han_viet": "Hạ",
+    "note": "Từ liên quan của Kanji 夏（Hạ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "夏休み",
+    "back": "nghỉ hè",
+    "reading": "なつやすみ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 夏（Hạ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "弟",
+    "back": "em trai",
+    "reading": "On: テイ、ダイ、デ / Kun: おとうと",
+    "han_viet": "Đệ",
+    "note": "Từ liên quan:\n弟（おとうと）: em trai",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "弟",
+    "back": "em trai",
+    "reading": "おとうと",
+    "han_viet": "Đệ",
+    "note": "Từ liên quan của Kanji 弟（Đệ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "鳥",
+    "back": "chim",
+    "reading": "On: チョウ / Kun: とり",
+    "han_viet": "Điểu",
+    "note": "Từ liên quan:\n鳥（とり）: chim",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "鳥",
+    "back": "chim",
+    "reading": "とり",
+    "han_viet": "Điểu",
+    "note": "Từ liên quan của Kanji 鳥（Điểu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "犬",
+    "back": "chó",
+    "reading": "On: ケン / Kun: いぬ",
+    "han_viet": "Khuyển",
+    "note": "Từ liên quan:\n犬（いぬ）: chó",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "犬",
+    "back": "chó",
+    "reading": "いぬ",
+    "han_viet": "Khuyển",
+    "note": "Từ liên quan của Kanji 犬（Khuyển）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "夕",
+    "back": "buổi chiều; tối",
+    "reading": "On: セキ / Kun: ゆう",
+    "han_viet": "Tịch",
+    "note": "Từ liên quan:\n夕方（ゆうがた）: chiều tối\n夕食（ゆうしょく）: bữa tối",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "夕食",
+    "back": "bữa tối",
+    "reading": "ゆうしょく",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 夕（Tịch）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "魚",
+    "back": "cá",
+    "reading": "On: ギョ / Kun: うお、さかな",
+    "han_viet": "Ngư",
+    "note": "Từ liên quan:\n魚（さかな）: cá\n金魚（きんぎょ）: cá vàng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "魚",
+    "back": "cá",
+    "reading": "さかな",
+    "han_viet": "Ngư",
+    "note": "Từ liên quan của Kanji 魚（Ngư）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "金魚",
+    "back": "cá vàng",
+    "reading": "きんぎょ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 魚（Ngư）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "借",
+    "back": "mượn",
+    "reading": "On: シャク / Kun: かりる",
+    "han_viet": "Tá",
+    "note": "Từ liên quan:\n借りる（かりる）: mượn",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "借りる",
+    "back": "mượn",
+    "reading": "かりる",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 借（Tá）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "飯",
+    "back": "cơm; bữa ăn",
+    "reading": "On: ハン / Kun: めし",
+    "han_viet": "Phạn",
+    "note": "Từ liên quan:\nご飯（ごはん）: cơm; bữa ăn\n朝ご飯（あさごはん）: bữa sáng",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "ご飯",
+    "back": "cơm; bữa ăn",
+    "reading": "ごはん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 飯（Phạn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "朝ご飯",
+    "back": "bữa sáng",
+    "reading": "あさごはん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 飯（Phạn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "駅",
+    "back": "nhà ga",
+    "reading": "On: エキ",
+    "han_viet": "Dịch",
+    "note": "Từ liên quan:\n駅（えき）: nhà ga\n駅前（えきまえ）: trước nhà ga",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "駅",
+    "back": "nhà ga",
+    "reading": "えき",
+    "han_viet": "Dịch",
+    "note": "Từ liên quan của Kanji 駅（Dịch）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "駅前",
+    "back": "trước nhà ga",
+    "reading": "えきまえ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 駅（Dịch）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "昼",
+    "back": "ban ngày; buổi trưa",
+    "reading": "On: チュウ / Kun: ひる",
+    "han_viet": "Trú",
+    "note": "Từ liên quan:\n昼（ひる）: buổi trưa\n昼ご飯（ひるごはん）: bữa trưa",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "昼",
+    "back": "buổi trưa",
+    "reading": "ひる",
+    "han_viet": "Trú",
+    "note": "Từ liên quan của Kanji 昼（Trú）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "昼ご飯",
+    "back": "bữa trưa",
+    "reading": "ひるごはん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 昼（Trú）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "冬",
+    "back": "mùa đông",
+    "reading": "On: トウ / Kun: ふゆ",
+    "han_viet": "Đông",
+    "note": "Từ liên quan:\n冬（ふゆ）: mùa đông\n冬休み（ふゆやすみ）: nghỉ đông",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "冬",
+    "back": "mùa đông",
+    "reading": "ふゆ",
+    "han_viet": "Đông",
+    "note": "Từ liên quan của Kanji 冬（Đông）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "冬休み",
+    "back": "nghỉ đông",
+    "reading": "ふゆやすみ",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 冬（Đông）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "姉",
+    "back": "chị gái",
+    "reading": "On: シ / Kun: あね",
+    "han_viet": "Tỉ",
+    "note": "Từ liên quan:\n姉（あね）: chị gái\nお姉さん（おねえさん）: chị; chị gái",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "姉",
+    "back": "chị gái",
+    "reading": "あね",
+    "han_viet": "Tỉ",
+    "note": "Từ liên quan của Kanji 姉（Tỉ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "お姉さん",
+    "back": "chị; chị gái",
+    "reading": "おねえさん",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 姉（Tỉ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "曜",
+    "back": "thứ trong tuần; ánh sáng",
+    "reading": "On: ヨウ",
+    "han_viet": "Diệu",
+    "note": "Từ liên quan:\n曜日（ようび）: thứ trong tuần\n月曜日（げつようび）: thứ Hai",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "曜日",
+    "back": "thứ trong tuần",
+    "reading": "ようび",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 曜（Diệu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "月曜日",
+    "back": "thứ Hai",
+    "reading": "げつようび",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 曜（Diệu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "漢",
+    "back": "Hán; Trung Hoa",
+    "reading": "On: カン",
+    "han_viet": "Hán",
+    "note": "Từ liên quan:\n漢字（かんじ）: chữ Hán\n漢語（かんご）: từ Hán",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "漢語",
+    "back": "từ Hán",
+    "reading": "かんご",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 漢（Hán）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "牛",
+    "back": "bò",
+    "reading": "On: ギュウ / Kun: うし",
+    "han_viet": "Ngưu",
+    "note": "Từ liên quan:\n牛（うし）: bò\n牛肉（ぎゅうにく）: thịt bò",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "牛",
+    "back": "bò",
+    "reading": "うし",
+    "han_viet": "Ngưu",
+    "note": "Từ liên quan của Kanji 牛（Ngưu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "妹",
+    "back": "em gái",
+    "reading": "On: マイ / Kun: いもうと",
+    "han_viet": "Muội",
+    "note": "Từ liên quan:\n妹（いもうと）: em gái",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "妹",
+    "back": "em gái",
+    "reading": "いもうと",
+    "han_viet": "Muội",
+    "note": "Từ liên quan của Kanji 妹（Muội）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "貸",
+    "back": "cho mượn; cho vay",
+    "reading": "On: タイ / Kun: かす",
+    "han_viet": "Thải",
+    "note": "Từ liên quan:\n貸す（かす）: cho mượn\n貸し出す（かしだす）: cho mượn; cho thuê",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  },
+  {
+    "front": "貸す",
+    "back": "cho mượn",
+    "reading": "かす",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 貸（Thải）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "貸し出す",
+    "back": "cho mượn; cho thuê",
+    "reading": "かしだす",
+    "han_viet": null,
+    "note": "Từ liên quan của Kanji 貸（Thải）",
+    "type": "VOCABULARY",
+    "tags": [
+      "kanji N4",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "勉",
+    "back": "cố gắng; chuyên cần",
+    "reading": "On: ベン",
+    "han_viet": "Miễn",
+    "note": "Từ liên quan:\n勉強（べんきょう）: học tập",
+    "type": "KANJI",
+    "tags": [
+      "N4",
+      "kanji"
+    ]
+  }
+]

@@ -32,7 +32,7 @@ const KEYS = {
   LAST_ACTIVE_ANKI_DECK: 'n3_last_active_anki_deck',
 } as const;
 
-export type ActiveDeck = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'kanjiN2' | 'grammarN2' | 'grammarN3' | 'grammarN4' | 'saved' | null;
+export type ActiveDeck = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'kanjiN4' | 'kanjiN2' | 'grammarN2' | 'grammarN3' | 'grammarN4' | 'saved' | null;
 
 export type StorageScope = 'guest' | `user:${string}`;
 
@@ -333,7 +333,7 @@ export function createLearningStorage(scope: StorageScope) {
 
   function getLastActiveDeck(mode: 'flashcards' | 'anki' = 'flashcards'): ActiveDeck {
     const val = localStorage.getItem(mode === 'anki' ? KEYS.LAST_ACTIVE_ANKI_DECK : KEYS.LAST_ACTIVE_DECK);
-    const valid = ['vocabN3', 'vocabN4', 'kanjiN3', 'kanjiN2', 'grammarN2', 'grammarN3', 'grammarN4', 'saved'];
+    const valid = ['vocabN3', 'vocabN4', 'kanjiN3', 'kanjiN4', 'kanjiN2', 'grammarN2', 'grammarN3', 'grammarN4', 'saved'];
     return valid.includes(val || '') ? (val as ActiveDeck) : null;
   }
 

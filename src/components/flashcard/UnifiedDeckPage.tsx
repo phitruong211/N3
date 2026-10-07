@@ -28,7 +28,7 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
         .filter((v) => (v.level || "N3") === level)
         .map((v, i) => vocabularyCard(v, `vocab${level}`, i)),
     })),
-    ...["N3", "N2"].map((level) => ({
+    ...["N3", "N4", "N2"].map((level) => ({
       id: `kanji${level}`,
       name: `Kanji ${level}`,
       level,
