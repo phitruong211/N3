@@ -3,42 +3,51 @@ import type { SRSCard } from '../types';
 export type ImportedKind = 'vocabulary' | 'kanji' | 'grammar' | 'general';
 export type CardField = 'front' | 'back' | 'reading' | 'hanViet' | 'notes' | 'kind' | 'deckName';
 export type CardTheme = 'paper' | 'blue' | 'dark' | 'system';
+export interface CardSideStyle {
+  theme: CardTheme;
+  fontScale: 'small' | 'medium' | 'large' | 'xlarge';
+  alignment: 'left' | 'center';
+}
 export interface DeckTemplateConfig {
-  version: 1;
-  front: { fields: CardField[]; showDeckName: boolean };
-  back: { fields: CardField[]; showFront: boolean; showExamples: boolean };
-  style: { theme: CardTheme; fontScale: 'small' | 'medium' | 'large' | 'xlarge'; alignment: 'left' | 'center' };
+  version: 2;
+  front: { fields: CardField[]; showDeckName: boolean; style: CardSideStyle };
+  back: { fields: CardField[]; showFront: boolean; showExamples: boolean; style: CardSideStyle };
 }
 export interface ImportedCard { id: string; front: string; back: string; reading: string; hanViet: string; notes: string; kind: ImportedKind; tags?: string[]; sourceRef?: string; sourceSheet?: string; extraData?: Record<string, string>; srs?: SRSCard }
 export interface ImportedDeck { id: string; name: string; source: string; format: string; createdAt: string; position: number; template: DeckTemplateConfig; cards: ImportedCard[] }
 export interface ImportPreview { name: string; source: string; format: string; cards: ImportedCard[]; skipped: number; tables?: ImportTable[]; issues?: ImportIssue[]; duplicates?: number }
 export const kindLabels: Record<ImportedKind, string> = { vocabulary: 'Từ vựng', kanji: 'Kanji', grammar: 'Ngữ pháp', general: 'Thẻ tổng hợp' };
 export const defaultDeckTemplate = (): DeckTemplateConfig => ({
-  version: 1,
-  front: { fields: ['front', 'reading'], showDeckName: true },
-  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: true, showExamples: true },
-  style: { theme: 'paper', fontScale: 'large', alignment: 'center' },
+  version: 2,
+  front: { fields: ['front', 'reading'], showDeckName: true, style: { theme: 'paper', fontScale: 'large', alignment: 'center' } },
+  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: true, showExamples: true, style: { theme: 'paper', fontScale: 'large', alignment: 'center' } },
 });
 
 export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
   const fallback = defaultDeckTemplate();
   if (!value || typeof value !== 'object') return fallback;
-  const config = value as Partial<DeckTemplateConfig>;
+  const config = value as Record<string, unknown>;
+  const frontConfig = config.front && typeof config.front === 'object' ? config.front as Record<string, unknown> : {};
+  const backConfig = config.back && typeof config.back === 'object' ? config.back as Record<string, unknown> : {};
+  const legacyStyle = config.style && typeof config.style === 'object' ? config.style as Record<string, unknown> : {};
   const allowedFields: CardField[] = ['front', 'back', 'reading', 'hanViet', 'notes', 'kind', 'deckName'];
   const fields = (candidate: unknown, defaults: CardField[]) => Array.isArray(candidate)
     ? candidate.filter((field): field is CardField => allowedFields.includes(field as CardField)).slice(0, 6)
     : defaults;
   const themes: CardTheme[] = ['paper', 'blue', 'dark', 'system'];
-  const scales: DeckTemplateConfig['style']['fontScale'][] = ['small', 'medium', 'large', 'xlarge'];
+  const scales: CardSideStyle['fontScale'][] = ['small', 'medium', 'large', 'xlarge'];
+  const style = (candidate: unknown, defaults: CardSideStyle): CardSideStyle => {
+    const source = candidate && typeof candidate === 'object' ? candidate as Record<string, unknown> : legacyStyle;
+    return {
+      theme: themes.includes(source.theme as CardTheme) ? source.theme as CardTheme : defaults.theme,
+      fontScale: scales.includes(source.fontScale as CardSideStyle['fontScale']) ? source.fontScale as CardSideStyle['fontScale'] : defaults.fontScale,
+      alignment: source.alignment === 'left' ? 'left' : 'center',
+    };
+  };
   return {
-    version: 1,
-    front: { fields: fields(config.front?.fields, fallback.front.fields), showDeckName: typeof config.front?.showDeckName === 'boolean' ? config.front.showDeckName : fallback.front.showDeckName },
-    back: { fields: fields(config.back?.fields, fallback.back.fields), showFront: typeof config.back?.showFront === 'boolean' ? config.back.showFront : fallback.back.showFront, showExamples: typeof config.back?.showExamples === 'boolean' ? config.back.showExamples : true },
-    style: {
-      theme: themes.includes(config.style?.theme as CardTheme) ? config.style!.theme : fallback.style.theme,
-      fontScale: scales.includes(config.style?.fontScale as DeckTemplateConfig['style']['fontScale']) ? config.style!.fontScale : fallback.style.fontScale,
-      alignment: config.style?.alignment === 'left' ? 'left' : 'center',
-    },
+    version: 2,
+    front: { fields: fields(frontConfig.fields, fallback.front.fields), showDeckName: typeof frontConfig.showDeckName === 'boolean' ? frontConfig.showDeckName : fallback.front.showDeckName, style: style(frontConfig.style, fallback.front.style) },
+    back: { fields: fields(backConfig.fields, fallback.back.fields), showFront: typeof backConfig.showFront === 'boolean' ? backConfig.showFront : fallback.back.showFront, showExamples: typeof backConfig.showExamples === 'boolean' ? backConfig.showExamples : true, style: style(backConfig.style, fallback.back.style) },
   };
 }
 

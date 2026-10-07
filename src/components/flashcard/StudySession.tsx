@@ -301,6 +301,8 @@ export function StudySession({
       : template.front.fields
   ).filter((field) => (flipped ? settings.showFuriganaBack : settings.showFuriganaFront) || field !== "reading");
   const fields = flipped && template.back.showFront && !sideFields.includes("front") ? ["front" as const, ...sideFields] : sideFields;
+  const activeSide = flipped ? "back" : "front";
+  const activeStyle = template[activeSide].style;
   return (
     <section
       ref={sessionRef}
@@ -376,7 +378,7 @@ export function StudySession({
               if (info.offset.x <= -SWIPE_THRESHOLD) moveCard("next");
               else if (info.offset.x >= SWIPE_THRESHOLD) moveCard("previous");
             }}
-            className={`relative flex h-full w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center ${flipped && (current.type === "GRAMMAR" || current.extraData?.examples) ? "justify-start" : "justify-center"} overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 sm:rounded-3xl sm:p-12 ${template.style.theme === "dark" ? "bg-slate-900 text-white" : template.style.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
+            className={`relative flex h-full w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center ${flipped && (current.type === "GRAMMAR" || current.extraData?.examples) ? "justify-start" : "justify-center"} overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 sm:rounded-3xl sm:p-12 ${activeStyle.theme === "dark" ? "bg-slate-900 text-white" : activeStyle.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
             role="button"
             tabIndex={0}
             aria-disabled={busy}
@@ -400,6 +402,7 @@ export function StudySession({
               deckName={deckName}
               fields={fields}
               template={template}
+              side={activeSide}
               immersivePrimary={!flipped}
               showExampleReadings={settings.showFuriganaBack}
             />

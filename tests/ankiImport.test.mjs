@@ -32,10 +32,19 @@ test('deck templates use safe defaults and discard unsupported values', () => {
   });
   assert.deepEqual(normalized.front.fields, ['front', 'reading']);
   assert.equal(normalized.front.showDeckName, false);
-  assert.equal(normalized.style.theme, 'paper');
-  assert.equal(normalized.style.fontScale, 'large');
-  assert.equal(normalized.style.alignment, 'left');
+  assert.deepEqual(normalized.front.style, { theme: 'paper', fontScale: 'large', alignment: 'left' });
+  assert.deepEqual(normalized.back.style, { theme: 'paper', fontScale: 'large', alignment: 'left' });
   assert.equal('study' in normalized, false);
+});
+
+test('deck templates keep independent front and back presentation settings', () => {
+  const normalized = normalizeDeckTemplate({
+    version: 2,
+    front: { fields: ['front'], style: { theme: 'blue', fontScale: 'xlarge', alignment: 'center' } },
+    back: { fields: ['back'], style: { theme: 'dark', fontScale: 'small', alignment: 'left' } },
+  });
+  assert.deepEqual(normalized.front.style, { theme: 'blue', fontScale: 'xlarge', alignment: 'center' });
+  assert.deepEqual(normalized.back.style, { theme: 'dark', fontScale: 'small', alignment: 'left' });
 });
 
 test('CSV preserves quoted separators, newlines and escaped quotes', () => {

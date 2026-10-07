@@ -55,7 +55,7 @@ function Examples({ value, showReading }: { value: unknown; showReading: boolean
   </div>;
 }
 
-function GrammarBack({ value, compact, fontScale }: { value: string; compact: boolean; fontScale: DeckTemplateConfig['style']['fontScale'] }) {
+function GrammarBack({ value, compact, fontScale }: { value: string; compact: boolean; fontScale: DeckTemplateConfig['back']['style']['fontScale'] }) {
   const sizes = { small: "text-sm sm:text-base", medium: "text-base sm:text-lg", large: "text-lg sm:text-xl", xlarge: "text-xl sm:text-2xl" };
   return (
     <div className={`space-y-5 text-left font-normal leading-relaxed ${compact ? "text-sm" : sizes[fontScale]}`}>
@@ -86,6 +86,7 @@ export function CardFace({
   deckName,
   fields,
   template,
+  side,
   compact = false,
   immersivePrimary = false,
   showExampleReadings = true,
@@ -94,11 +95,13 @@ export function CardFace({
   deckName: string;
   fields: CardField[];
   template: DeckTemplateConfig;
+  side: 'front' | 'back';
   compact?: boolean;
   immersivePrimary?: boolean;
   showExampleReadings?: boolean;
 }) {
   const grammarAnswer = card.kind === "grammar" && fields.includes("back");
+  const style = template[side].style;
   const sizes = {
     small: "text-lg",
     medium: "text-2xl",
@@ -108,13 +111,13 @@ export function CardFace({
   const immersiveSizes = { small: "text-3xl sm:text-5xl", medium: "text-4xl sm:text-6xl", large: "text-5xl sm:text-7xl lg:text-8xl", xlarge: "text-6xl sm:text-8xl lg:text-9xl" };
   return (
     <div
-      className={`w-full space-y-4 ${grammarAnswer ? "mx-auto max-w-3xl text-left" : template.style.alignment === "left" ? "text-left" : "text-center"} ${compact ? "!text-base" : ""}`}
+      className={`w-full space-y-4 ${grammarAnswer ? "mx-auto max-w-3xl text-left" : style.alignment === "left" ? "text-left" : "text-center"} ${compact ? "!text-base" : ""}`}
     >
       {fields.map((field, index) => {
         const value = fieldValue(field, card, deckName);
         if (!value) return null;
         if (grammarAnswer && field === "back") {
-          return <GrammarBack key={`${field}-${index}`} value={value} compact={compact} fontScale={template.style.fontScale} />;
+          return <GrammarBack key={`${field}-${index}`} value={value} compact={compact} fontScale={style.fontScale} />;
         }
         return (
           <div
@@ -128,7 +131,7 @@ export function CardFace({
                     ? "text-base font-medium text-[var(--color-kanji)]"
                   : field === "kind" || field === "deckName"
                     ? "text-xs font-bold uppercase tracking-wide opacity-70"
-                : `${immersivePrimary && index === 0 ? immersiveSizes[template.style.fontScale] : sizes[template.style.fontScale]} font-jp whitespace-pre-wrap break-words`
+                : `${immersivePrimary && index === 0 ? immersiveSizes[style.fontScale] : sizes[style.fontScale]} font-jp whitespace-pre-wrap break-words`
             }
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
@@ -206,10 +209,12 @@ export function DeckCustomizeDialog({
     fields.splice(target, 0, field);
     updateFields(side, fields);
   };
+  const activeSide = previewBack ? "back" : "front";
+  const activeStyle = template[activeSide].style;
   const themeClass =
-    template.style.theme === "dark"
+    activeStyle.theme === "dark"
       ? "bg-slate-900 text-white"
-      : template.style.theme === "blue"
+      : activeStyle.theme === "blue"
         ? "bg-blue-50 text-slate-900"
         : "bg-[var(--color-surface)] text-[var(--color-text)]";
   return (
@@ -301,19 +306,24 @@ export function DeckCustomizeDialog({
                 )}
               </fieldset>
             ))}
-            <div className="grid gap-3 sm:grid-cols-2">
+            <fieldset className="rounded-xl border border-[var(--color-border)] p-4">
+              <legend className="px-2 font-semibold">Kiểu {previewBack ? "mặt sau" : "mặt trước"}</legend>
+              <p className="mb-3 text-xs text-[var(--color-text-tertiary)]">Chuyển mặt ở khung xem trước để chỉnh riêng từng mặt.</p>
+              <div className="grid gap-3 sm:grid-cols-2">
               <label>
                 Chủ đề
                 <select
                   className="study-input mt-1"
-                  value={template.style.theme}
+                  value={activeStyle.theme}
                   onChange={(event) =>
                     setTemplate((previous) => ({
                       ...previous,
-                      style: {
-                        ...previous.style,
-                        theme: event.target
-                          .value as DeckTemplateConfig["style"]["theme"],
+                      [activeSide]: {
+                        ...previous[activeSide],
+                        style: {
+                          ...previous[activeSide].style,
+                          theme: event.target.value as DeckTemplateConfig[typeof activeSide]["style"]["theme"],
+                        },
                       },
                     }))
                   }
@@ -328,15 +338,17 @@ export function DeckCustomizeDialog({
                 Cỡ chữ
                 <select
                   className="study-input mt-1"
-                  value={template.style.fontScale}
-                  aria-label="Cỡ chữ"
+                  value={activeStyle.fontScale}
+                  aria-label={`Cỡ chữ ${previewBack ? "mặt sau" : "mặt trước"}`}
                   onChange={(event) =>
                     setTemplate((previous) => ({
                       ...previous,
-                      style: {
-                        ...previous.style,
-                        fontScale: event.target
-                          .value as DeckTemplateConfig["style"]["fontScale"],
+                      [activeSide]: {
+                        ...previous[activeSide],
+                        style: {
+                          ...previous[activeSide].style,
+                          fontScale: event.target.value as DeckTemplateConfig[typeof activeSide]["style"]["fontScale"],
+                        },
                       },
                     }))
                   }
@@ -351,13 +363,16 @@ export function DeckCustomizeDialog({
                 Căn chữ
                 <select
                   className="study-input mt-1"
-                  value={template.style.alignment}
+                  value={activeStyle.alignment}
                   onChange={(event) =>
                     setTemplate((previous) => ({
                       ...previous,
-                      style: {
-                        ...previous.style,
-                        alignment: event.target.value as "left" | "center",
+                      [activeSide]: {
+                        ...previous[activeSide],
+                        style: {
+                          ...previous[activeSide].style,
+                          alignment: event.target.value as "left" | "center",
+                        },
                       },
                     }))
                   }
@@ -366,7 +381,8 @@ export function DeckCustomizeDialog({
                   <option value="left">Trái</option>
                 </select>
               </label>
-            </div>
+              </div>
+            </fieldset>
           </div>
           <div className="lg:sticky lg:top-0 lg:self-start">
             <div
@@ -379,6 +395,7 @@ export function DeckCustomizeDialog({
                   previewBack ? template.back.fields : template.front.fields
                 }
                 template={template}
+                side={activeSide}
               />
             </div>
             <div className="mt-3 grid grid-cols-2 gap-2">
