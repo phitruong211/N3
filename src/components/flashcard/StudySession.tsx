@@ -48,6 +48,8 @@ export function StudySession({
   onExit,
   onTemplateChange,
   initialIndex = 0,
+  onPositionChange,
+  onComplete,
 }: {
   cards: CardView[];
   deckName: string;
@@ -57,6 +59,8 @@ export function StudySession({
   onExit: () => void;
   onTemplateChange?: (template: DeckTemplateConfig) => Promise<void> | void;
   initialIndex?: number;
+  onPositionChange?: (cardId: string) => void;
+  onComplete?: () => void;
 }) {
   const { settings, srsCards, updateSRSCard, learningSync } = useApp();
   const { recordStudyActivity, getJSON, setJSON } = useLearningStorage();
@@ -129,6 +133,10 @@ export function StudySession({
   }, [current, flipped, elapsed, recordStudyActivity]);
   function finish() {
     if (mode === "flashcards") recordView();
+    if (mode === "flashcards") {
+      if (done) onComplete?.();
+      else if (current) onPositionChange?.(current.id);
+    }
     queueMicrotask(() => void learningSync.flush().catch(() => {}));
     if (document.fullscreenElement) void document.exitFullscreen();
     onExit();
@@ -142,13 +150,16 @@ export function StudySession({
     if (direction === "previous" && index === 0) return;
     recordView();
     setSlideDirection(direction === "next" ? 1 : -1);
-    if (direction === "next" && index + 1 >= sessionCards.length)
+    if (direction === "next" && index + 1 >= sessionCards.length) {
       setDone(true);
-    else {
-      setIndex((i) => i + (direction === "next" ? 1 : -1));
+      onComplete?.();
+    } else {
+      const nextIndex = index + (direction === "next" ? 1 : -1);
+      setIndex(nextIndex);
+      onPositionChange?.(sessionCards[nextIndex].id);
       setRevealedCardKey(null);
     }
-  }, [mode, busy, index, recordView, sessionCards.length]);
+  }, [mode, busy, index, recordView, sessionCards, onComplete, onPositionChange]);
   const next = useCallback(() => moveCard("next"), [moveCard]);
   const previous = useCallback(() => moveCard("previous"), [moveCard]);
   function toggleShuffle() {
@@ -179,6 +190,7 @@ export function StudySession({
       recordView();
       setSlideDirection(nextIndex > index ? 1 : -1);
       setIndex(nextIndex);
+      onPositionChange?.(sessionCards[nextIndex].id);
       setRevealedCardKey(null);
     }
     setJumpValue(String(nextIndex + 1));

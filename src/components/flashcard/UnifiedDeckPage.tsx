@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useApp } from "@/hooks/useApp";
+import { useApp, useLearningStorage } from "@/hooks/useApp";
 import {
   vocabularyCard,
   kanjiCard,
@@ -10,13 +10,17 @@ import { defaultDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { StudySession } from "./StudySession";
 import { ImportedDecks } from "./ImportedDecks";
 import { ContentBadge } from "@/components/ui/StudyUI";
+import { builtInDeckResumeKey, resolveResumeIndex } from "@/lib/studyResume";
 
 export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
   const { vocabulary, kanji, grammar, bookmarks, srsCards } = useApp();
+  const { getJSON, setJSON } = useLearningStorage();
   const [session, setSession] = useState<{
+    id: string;
     name: string;
     cards: CardView[];
     template: DeckTemplateConfig;
+    initialIndex: number;
   } | null>(null);
   const levelOrder = ["N3", "N4", "N2"] as const;
   const decks = useMemo(() => [
@@ -83,11 +87,17 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
             );
           });
   }
-  function launch(deck: { name: string; cards: CardView[] }) {
+  function launch(deck: { id: string; name: string; cards: CardView[] }) {
+    const cards = eligible(deck.cards);
+    const resumeCardId = mode === "flashcards"
+      ? getJSON<string | null>(builtInDeckResumeKey(deck.id), null)
+      : null;
     setSession({
+      id: deck.id,
       name: deck.name,
-      cards: eligible(deck.cards),
+      cards,
       template: defaultDeckTemplate(),
+      initialIndex: resolveResumeIndex(cards, resumeCardId),
     });
   }
   function tile(deck: typeof saved) {
@@ -181,6 +191,11 @@ export function UnifiedDeckPage({ mode }: { mode: "flashcards" | "anki" }) {
         deckName={session.name}
         template={session.template}
         mode={mode}
+        initialIndex={session.initialIndex}
+        onPositionChange={mode === "flashcards" ? cardId =>
+          setJSON(builtInDeckResumeKey(session.id), cardId) : undefined}
+        onComplete={mode === "flashcards" ? () =>
+          setJSON(builtInDeckResumeKey(session.id), null) : undefined}
         onExit={() => setSession(null)}
       />
     );
