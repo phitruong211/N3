@@ -243,18 +243,36 @@ export function DeckCustomizeDialog({
             <X size={20} />
           </button>
         </div>
+        <div className="mb-5 grid grid-cols-2 gap-2 rounded-xl bg-[var(--color-surface-alt)] p-1" role="tablist" aria-label="Chọn mặt thẻ để tùy chỉnh">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={!previewBack}
+            className={!previewBack ? "study-button study-button-primary" : "study-button border-transparent bg-transparent"}
+            onClick={() => setPreviewBack(false)}
+          >
+            Mặt trước
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={previewBack}
+            className={previewBack ? "study-button study-button-primary" : "study-button border-transparent bg-transparent"}
+            onClick={() => setPreviewBack(true)}
+          >
+            Mặt sau
+          </button>
+        </div>
         <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr]">
           <div className="space-y-5">
-            {(["front", "back"] as const).map((side) => (
-              <fieldset
-                key={side}
-                className="rounded-xl border border-[var(--color-border)] p-4"
-              >
-                <legend className="px-2 font-semibold">
-                  {side === "front" ? "Mặt trước" : "Mặt sau"}
-                </legend>
+              <fieldset className="rounded-xl border border-[var(--color-border)] p-4">
+                <legend className="px-2 font-semibold">Nội dung {previewBack ? "mặt sau" : "mặt trước"}</legend>
                 <div className="space-y-2">
-                  {side === "back" && <label className="flex items-center gap-3">
+                  {activeSide === "back" && <label className="flex items-center gap-3">
+                    <input type="checkbox" checked={template.back.showFront} onChange={event => setTemplate(previous => ({ ...previous, back: { ...previous.back, showFront: event.target.checked } }))} />
+                    <span>Lặp lại câu hỏi trên mặt sau</span>
+                  </label>}
+                  {activeSide === "back" && <label className="flex items-center gap-3">
                     <input type="checkbox" checked={template.back.showExamples} onChange={event => setTemplate(previous => ({ ...previous, back: { ...previous.back, showExamples: event.target.checked } }))} />
                     <span>Hiện ví dụ</span>
                   </label>}
@@ -262,16 +280,16 @@ export function DeckCustomizeDialog({
                     <label key={field} className="flex items-center gap-3">
                       <input
                         type="checkbox"
-                        checked={template[side].fields.includes(field)}
-                        onChange={() => toggleField(side, field)}
+                        checked={template[activeSide].fields.includes(field)}
+                        onChange={() => toggleField(activeSide, field)}
                       />
                       <span>{fieldLabels[field]}</span>
                     </label>
                   ))}
                 </div>
-                {template[side].fields.length > 1 && (
+                {template[activeSide].fields.length > 1 && (
                   <div className="mt-3 space-y-1 border-t border-[var(--color-border)] pt-3">
-                    {template[side].fields.map((field, index) => (
+                    {template[activeSide].fields.map((field, index) => (
                       <div
                         key={field}
                         className="flex items-center justify-between rounded-lg bg-[var(--color-surface-alt)] px-3 py-2"
@@ -284,7 +302,7 @@ export function DeckCustomizeDialog({
                           <button
                             className="study-button !p-1.5"
                             disabled={index === 0}
-                            onClick={() => shiftField(side, index, -1)}
+                            onClick={() => shiftField(activeSide, index, -1)}
                             aria-label={`Đưa ${fieldLabels[field]} lên`}
                           >
                             <ArrowUp size={14} />
@@ -292,9 +310,9 @@ export function DeckCustomizeDialog({
                           <button
                             className="study-button !p-1.5"
                             disabled={
-                              index === template[side].fields.length - 1
+                              index === template[activeSide].fields.length - 1
                             }
-                            onClick={() => shiftField(side, index, 1)}
+                            onClick={() => shiftField(activeSide, index, 1)}
                             aria-label={`Đưa ${fieldLabels[field]} xuống`}
                           >
                             <ArrowDown size={14} />
@@ -305,7 +323,6 @@ export function DeckCustomizeDialog({
                   </div>
                 )}
               </fieldset>
-            ))}
             <fieldset className="rounded-xl border border-[var(--color-border)] p-4">
               <legend className="px-2 font-semibold">Kiểu {previewBack ? "mặt sau" : "mặt trước"}</legend>
               <p className="mb-3 text-xs text-[var(--color-text-tertiary)]">Chuyển mặt ở khung xem trước để chỉnh riêng từng mặt.</p>
@@ -397,28 +414,6 @@ export function DeckCustomizeDialog({
                 template={template}
                 side={activeSide}
               />
-            </div>
-            <div className="mt-3 grid grid-cols-2 gap-2">
-              <button
-                className={
-                  !previewBack
-                    ? "study-button study-button-primary"
-                    : "study-button"
-                }
-                onClick={() => setPreviewBack(false)}
-              >
-                Mặt trước
-              </button>
-              <button
-                className={
-                  previewBack
-                    ? "study-button study-button-primary"
-                    : "study-button"
-                }
-                onClick={() => setPreviewBack(true)}
-              >
-                Mặt sau
-              </button>
             </div>
           </div>
         </div>

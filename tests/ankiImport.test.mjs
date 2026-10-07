@@ -39,12 +39,19 @@ test('deck templates use safe defaults and discard unsupported values', () => {
 
 test('deck templates keep independent front and back presentation settings', () => {
   const normalized = normalizeDeckTemplate({
-    version: 2,
+    version: 3,
     front: { fields: ['front'], style: { theme: 'blue', fontScale: 'xlarge', alignment: 'center' } },
-    back: { fields: ['back'], style: { theme: 'dark', fontScale: 'small', alignment: 'left' } },
+    back: { fields: ['back'], showFront: true, style: { theme: 'dark', fontScale: 'small', alignment: 'left' } },
   });
   assert.deepEqual(normalized.front.style, { theme: 'blue', fontScale: 'xlarge', alignment: 'center' });
   assert.deepEqual(normalized.back.style, { theme: 'dark', fontScale: 'small', alignment: 'left' });
+  assert.equal(normalized.back.showFront, true);
+});
+
+test('legacy templates stop repeating the question on the answer side', () => {
+  const legacy = normalizeDeckTemplate({ version: 2, back: { fields: ['back'], showFront: true } });
+  assert.equal(legacy.back.showFront, false);
+  assert.equal(defaultDeckTemplate().back.showFront, false);
 });
 
 test('CSV preserves quoted separators, newlines and escaped quotes', () => {

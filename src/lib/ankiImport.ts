@@ -9,7 +9,7 @@ export interface CardSideStyle {
   alignment: 'left' | 'center';
 }
 export interface DeckTemplateConfig {
-  version: 2;
+  version: 3;
   front: { fields: CardField[]; showDeckName: boolean; style: CardSideStyle };
   back: { fields: CardField[]; showFront: boolean; showExamples: boolean; style: CardSideStyle };
 }
@@ -18,15 +18,16 @@ export interface ImportedDeck { id: string; name: string; source: string; format
 export interface ImportPreview { name: string; source: string; format: string; cards: ImportedCard[]; skipped: number; tables?: ImportTable[]; issues?: ImportIssue[]; duplicates?: number }
 export const kindLabels: Record<ImportedKind, string> = { vocabulary: 'Từ vựng', kanji: 'Kanji', grammar: 'Ngữ pháp', general: 'Thẻ tổng hợp' };
 export const defaultDeckTemplate = (): DeckTemplateConfig => ({
-  version: 2,
+  version: 3,
   front: { fields: ['front', 'reading'], showDeckName: true, style: { theme: 'paper', fontScale: 'large', alignment: 'center' } },
-  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: true, showExamples: true, style: { theme: 'paper', fontScale: 'large', alignment: 'center' } },
+  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: false, showExamples: true, style: { theme: 'paper', fontScale: 'large', alignment: 'center' } },
 });
 
 export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
   const fallback = defaultDeckTemplate();
   if (!value || typeof value !== 'object') return fallback;
   const config = value as Record<string, unknown>;
+  const version = typeof config.version === 'number' ? config.version : 1;
   const frontConfig = config.front && typeof config.front === 'object' ? config.front as Record<string, unknown> : {};
   const backConfig = config.back && typeof config.back === 'object' ? config.back as Record<string, unknown> : {};
   const legacyStyle = config.style && typeof config.style === 'object' ? config.style as Record<string, unknown> : {};
@@ -45,9 +46,9 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
     };
   };
   return {
-    version: 2,
+    version: 3,
     front: { fields: fields(frontConfig.fields, fallback.front.fields), showDeckName: typeof frontConfig.showDeckName === 'boolean' ? frontConfig.showDeckName : fallback.front.showDeckName, style: style(frontConfig.style, fallback.front.style) },
-    back: { fields: fields(backConfig.fields, fallback.back.fields), showFront: typeof backConfig.showFront === 'boolean' ? backConfig.showFront : fallback.back.showFront, showExamples: typeof backConfig.showExamples === 'boolean' ? backConfig.showExamples : true, style: style(backConfig.style, fallback.back.style) },
+    back: { fields: fields(backConfig.fields, fallback.back.fields), showFront: version >= 3 && typeof backConfig.showFront === 'boolean' ? backConfig.showFront : false, showExamples: typeof backConfig.showExamples === 'boolean' ? backConfig.showExamples : true, style: style(backConfig.style, fallback.back.style) },
   };
 }
 
