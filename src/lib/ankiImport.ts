@@ -6,6 +6,9 @@ export type CardTheme = 'paper' | 'blue' | 'dark' | 'system';
 export interface CardSideStyle {
   theme: CardTheme;
   fontScale: 'small' | 'medium' | 'large' | 'xlarge';
+  fontSize: number;
+  bold: boolean;
+  italic: boolean;
   alignment: 'left' | 'center';
 }
 export interface DeckTemplateConfig {
@@ -17,10 +20,16 @@ export interface ImportedCard { id: string; front: string; back: string; reading
 export interface ImportedDeck { id: string; name: string; source: string; format: string; createdAt: string; position: number; template: DeckTemplateConfig; cards: ImportedCard[] }
 export interface ImportPreview { name: string; source: string; format: string; cards: ImportedCard[]; skipped: number; tables?: ImportTable[]; issues?: ImportIssue[]; duplicates?: number }
 export const kindLabels: Record<ImportedKind, string> = { vocabulary: 'Từ vựng', kanji: 'Kanji', grammar: 'Ngữ pháp', general: 'Thẻ tổng hợp' };
+export const CARD_FONT_PRESETS: Record<CardSideStyle['fontScale'], number> = {
+  small: 20,
+  medium: 24,
+  large: 30,
+  xlarge: 36,
+};
 export const defaultDeckTemplate = (): DeckTemplateConfig => ({
   version: 3,
-  front: { fields: ['front', 'reading'], showDeckName: true, style: { theme: 'paper', fontScale: 'large', alignment: 'center' } },
-  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: false, showExamples: true, style: { theme: 'paper', fontScale: 'large', alignment: 'center' } },
+  front: { fields: ['front', 'reading'], showDeckName: true, style: { theme: 'paper', fontScale: 'large', fontSize: CARD_FONT_PRESETS.large, bold: false, italic: false, alignment: 'center' } },
+  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: false, showExamples: true, style: { theme: 'paper', fontScale: 'large', fontSize: CARD_FONT_PRESETS.large, bold: false, italic: false, alignment: 'center' } },
 });
 
 export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
@@ -39,9 +48,16 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
   const scales: CardSideStyle['fontScale'][] = ['small', 'medium', 'large', 'xlarge'];
   const style = (candidate: unknown, defaults: CardSideStyle): CardSideStyle => {
     const source = candidate && typeof candidate === 'object' ? candidate as Record<string, unknown> : legacyStyle;
+    const fontScale = scales.includes(source.fontScale as CardSideStyle['fontScale']) ? source.fontScale as CardSideStyle['fontScale'] : defaults.fontScale;
+    const requestedFontSize = typeof source.fontSize === 'number' && Number.isFinite(source.fontSize)
+      ? Math.round(source.fontSize)
+      : CARD_FONT_PRESETS[fontScale];
     return {
       theme: themes.includes(source.theme as CardTheme) ? source.theme as CardTheme : defaults.theme,
-      fontScale: scales.includes(source.fontScale as CardSideStyle['fontScale']) ? source.fontScale as CardSideStyle['fontScale'] : defaults.fontScale,
+      fontScale,
+      fontSize: Math.max(12, Math.min(72, requestedFontSize)),
+      bold: source.bold === true,
+      italic: source.italic === true,
       alignment: source.alignment === 'left' ? 'left' : 'center',
     };
   };

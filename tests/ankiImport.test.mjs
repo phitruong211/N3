@@ -32,20 +32,35 @@ test('deck templates use safe defaults and discard unsupported values', () => {
   });
   assert.deepEqual(normalized.front.fields, ['front', 'reading']);
   assert.equal(normalized.front.showDeckName, false);
-  assert.deepEqual(normalized.front.style, { theme: 'paper', fontScale: 'large', alignment: 'left' });
-  assert.deepEqual(normalized.back.style, { theme: 'paper', fontScale: 'large', alignment: 'left' });
+  assert.deepEqual(normalized.front.style, { theme: 'paper', fontScale: 'large', fontSize: 30, bold: false, italic: false, alignment: 'left' });
+  assert.deepEqual(normalized.back.style, { theme: 'paper', fontScale: 'large', fontSize: 30, bold: false, italic: false, alignment: 'left' });
   assert.equal('study' in normalized, false);
 });
 
 test('deck templates keep independent front and back presentation settings', () => {
   const normalized = normalizeDeckTemplate({
     version: 3,
-    front: { fields: ['front'], style: { theme: 'blue', fontScale: 'xlarge', alignment: 'center' } },
-    back: { fields: ['back'], showFront: true, style: { theme: 'dark', fontScale: 'small', alignment: 'left' } },
+    front: { fields: ['front'], style: { theme: 'blue', fontScale: 'xlarge', fontSize: 42, bold: true, italic: false, alignment: 'center' } },
+    back: { fields: ['back'], showFront: true, style: { theme: 'dark', fontScale: 'small', fontSize: 18, bold: false, italic: true, alignment: 'left' } },
   });
-  assert.deepEqual(normalized.front.style, { theme: 'blue', fontScale: 'xlarge', alignment: 'center' });
-  assert.deepEqual(normalized.back.style, { theme: 'dark', fontScale: 'small', alignment: 'left' });
+  assert.deepEqual(normalized.front.style, { theme: 'blue', fontScale: 'xlarge', fontSize: 42, bold: true, italic: false, alignment: 'center' });
+  assert.deepEqual(normalized.back.style, { theme: 'dark', fontScale: 'small', fontSize: 18, bold: false, italic: true, alignment: 'left' });
   assert.equal(normalized.back.showFront, true);
+});
+
+test('numeric card text size is bounded and legacy presets receive their matching size', () => {
+  const bounded = normalizeDeckTemplate({
+    front: { style: { fontScale: 'medium', fontSize: 200, bold: 'yes', italic: true } },
+    back: { style: { fontScale: 'small', fontSize: 4, bold: true, italic: 'yes' } },
+  });
+  assert.equal(bounded.front.style.fontSize, 72);
+  assert.equal(bounded.back.style.fontSize, 12);
+  assert.equal(bounded.front.style.bold, false);
+  assert.equal(bounded.front.style.italic, true);
+  assert.equal(bounded.back.style.bold, true);
+  assert.equal(bounded.back.style.italic, false);
+  const legacy = normalizeDeckTemplate({ front: { style: { fontScale: 'medium' } } });
+  assert.equal(legacy.front.style.fontSize, 24);
 });
 
 test('legacy templates stop repeating the question on the answer side', () => {

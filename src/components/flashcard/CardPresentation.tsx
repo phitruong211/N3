@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
-import { ArrowDown, ArrowUp, GripVertical, X, Eye, EyeOff } from "lucide-react";
-import { defaultDeckTemplate, kindLabels, parseCardExamples } from "@/lib/ankiImport";
+import { useState, useRef, useEffect, type CSSProperties } from "react";
+import { ArrowDown, ArrowUp, Bold, Eye, EyeOff, GripVertical, Italic, Minus, Plus, X } from "lucide-react";
+import { CARD_FONT_PRESETS, defaultDeckTemplate, kindLabels, parseCardExamples } from "@/lib/ankiImport";
 import type {
   CardField,
   DeckTemplateConfig,
@@ -16,12 +16,15 @@ const fieldLabels: Record<CardField, string> = {
   kind: "Loại thẻ",
   deckName: "Tên bộ thẻ",
 };
-const cardTextSizes: Record<DeckTemplateConfig['front']['style']['fontScale'], string> = {
-  small: "text-xl",
-  medium: "text-2xl",
-  large: "text-3xl",
-  xlarge: "text-4xl",
-};
+const clampFontSize = (value: number) => Math.max(12, Math.min(72, Math.round(value)));
+
+function cardTextStyle(style: DeckTemplateConfig['front']['style']): CSSProperties {
+  return {
+    fontSize: `${style.fontSize}px`,
+    fontWeight: style.bold ? 700 : 400,
+    fontStyle: style.italic ? "italic" : "normal",
+  };
+}
 function fieldValue(
   field: CardField,
   card: ImportedCard,
@@ -61,9 +64,10 @@ function Examples({ value, showReading }: { value: unknown; showReading: boolean
   </div>;
 }
 
-function GrammarBack({ value, compact, fontScale }: { value: string; compact: boolean; fontScale: DeckTemplateConfig['back']['style']['fontScale'] }) {
+function GrammarBack({ value, compact, style }: { value: string; compact: boolean; style: DeckTemplateConfig['back']['style'] }) {
+  const textStyle = compact ? undefined : cardTextStyle(style);
   return (
-    <div className={`space-y-5 text-left font-normal leading-relaxed ${compact ? "text-sm" : cardTextSizes[fontScale]}`}>
+    <div className={`space-y-5 text-left font-normal leading-relaxed ${compact ? "text-sm" : ""}`} style={textStyle}>
       {value.replace(/\r\n?/g, "\n").trim().split(/\n\s*\n/).map((block, index) => (
         <div key={index} className={index === 0 ? "" : "border-t border-current/10 pt-4"}>
           {block.split("\n").map((line, lineIndex) => line.trim().startsWith("→") ? (
@@ -76,6 +80,7 @@ function GrammarBack({ value, compact, fontScale }: { value: string; compact: bo
                 : line.trim().startsWith("→")
                   ? "mt-1 text-sm font-normal opacity-75 sm:text-base"
                   : "font-jp whitespace-pre-wrap break-words"}
+              style={/^【.*】$/.test(line.trim()) ? undefined : textStyle}
             >
               {line}
             </div>
@@ -113,7 +118,7 @@ export function CardFace({
         const value = fieldValue(field, card, deckName);
         if (!value) return null;
         if (grammarAnswer && field === "back") {
-          return <GrammarBack key={`${field}-${index}`} value={value} compact={compact} fontScale={style.fontScale} />;
+          return <GrammarBack key={`${field}-${index}`} value={value} compact={compact} style={style} />;
         }
         return (
           <div
@@ -127,8 +132,9 @@ export function CardFace({
                     ? "text-base font-medium text-[var(--color-kanji)]"
                   : field === "kind" || field === "deckName"
                     ? "text-xs font-bold uppercase tracking-wide opacity-70"
-                : `${cardTextSizes[style.fontScale]} font-jp whitespace-pre-wrap break-words`
+                : "font-jp whitespace-pre-wrap break-words"
             }
+            style={field === "front" || field === "back" ? cardTextStyle(style) : undefined}
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
             {field === "hanViet" ? `Hán Việt: ${value}` : value}
@@ -207,6 +213,16 @@ export function DeckCustomizeDialog({
   };
   const activeSide = previewBack ? "back" : "front";
   const activeStyle = template[activeSide].style;
+  const activePreset = (Object.entries(CARD_FONT_PRESETS) as Array<[DeckTemplateConfig[typeof activeSide]["style"]["fontScale"], number]>)
+    .find(([, size]) => size === activeStyle.fontSize)?.[0] || "custom";
+  const updateActiveStyle = (changes: Partial<DeckTemplateConfig[typeof activeSide]["style"]>) =>
+    setTemplate((previous) => ({
+      ...previous,
+      [activeSide]: {
+        ...previous[activeSide],
+        style: { ...previous[activeSide].style, ...changes },
+      },
+    }));
   const themeClass =
     activeStyle.theme === "dark"
       ? "bg-slate-900 text-white"
@@ -348,30 +364,78 @@ export function DeckCustomizeDialog({
                 </select>
               </label>
               <label>
-                Cỡ chữ
+                Cỡ chữ nhanh
                 <select
                   className="study-input mt-1"
-                  value={activeStyle.fontScale}
-                  aria-label={`Cỡ chữ ${previewBack ? "mặt sau" : "mặt trước"}`}
-                  onChange={(event) =>
-                    setTemplate((previous) => ({
-                      ...previous,
-                      [activeSide]: {
-                        ...previous[activeSide],
-                        style: {
-                          ...previous[activeSide].style,
-                          fontScale: event.target.value as DeckTemplateConfig[typeof activeSide]["style"]["fontScale"],
-                        },
-                      },
-                    }))
-                  }
+                  value={activePreset}
+                  aria-label={`Cỡ chữ nhanh ${previewBack ? "mặt sau" : "mặt trước"}`}
+                  onChange={(event) => {
+                    if (event.target.value === "custom") return;
+                    const fontScale = event.target.value as DeckTemplateConfig[typeof activeSide]["style"]["fontScale"];
+                    updateActiveStyle({ fontScale, fontSize: CARD_FONT_PRESETS[fontScale] });
+                  }}
                 >
                   <option value="small">Nhỏ</option>
                   <option value="medium">Vừa</option>
                   <option value="large">Lớn</option>
                   <option value="xlarge">Rất lớn</option>
+                  <option value="custom">Tùy chỉnh</option>
                 </select>
               </label>
+              <label>
+                Cỡ chữ chính xác (px)
+                <span className="mt-1 flex overflow-hidden rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] focus-within:ring-2 focus-within:ring-[var(--color-accent)]">
+                  <button
+                    type="button"
+                    className="grid min-h-11 w-11 shrink-0 place-items-center border-r border-[var(--color-border)] hover:bg-[var(--color-surface-hover)]"
+                    aria-label="Giảm cỡ chữ"
+                    onClick={() => updateActiveStyle({ fontSize: clampFontSize(activeStyle.fontSize - 1) })}
+                  >
+                    <Minus size={17} />
+                  </button>
+                  <input
+                    type="number"
+                    min="12"
+                    max="72"
+                    step="1"
+                    className="min-w-0 flex-1 bg-transparent px-3 text-center outline-none"
+                    value={activeStyle.fontSize}
+                    aria-label={`Cỡ chữ chính xác ${previewBack ? "mặt sau" : "mặt trước"}`}
+                    onChange={(event) => {
+                      if (!Number.isNaN(event.target.valueAsNumber)) updateActiveStyle({ fontSize: clampFontSize(event.target.valueAsNumber) });
+                    }}
+                  />
+                  <button
+                    type="button"
+                    className="grid min-h-11 w-11 shrink-0 place-items-center border-l border-[var(--color-border)] hover:bg-[var(--color-surface-hover)]"
+                    aria-label="Tăng cỡ chữ"
+                    onClick={() => updateActiveStyle({ fontSize: clampFontSize(activeStyle.fontSize + 1) })}
+                  >
+                    <Plus size={17} />
+                  </button>
+                </span>
+              </label>
+              <div className="sm:col-span-2">
+                <span className="mb-1 block">Kiểu chữ</span>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    aria-pressed={activeStyle.bold}
+                    className={activeStyle.bold ? "study-button study-button-primary" : "study-button"}
+                    onClick={() => updateActiveStyle({ bold: !activeStyle.bold })}
+                  >
+                    <Bold size={18} /> In đậm
+                  </button>
+                  <button
+                    type="button"
+                    aria-pressed={activeStyle.italic}
+                    className={activeStyle.italic ? "study-button study-button-primary" : "study-button"}
+                    onClick={() => updateActiveStyle({ italic: !activeStyle.italic })}
+                  >
+                    <Italic size={18} /> In nghiêng
+                  </button>
+                </div>
+              </div>
               <label>
                 Căn chữ
                 <select
