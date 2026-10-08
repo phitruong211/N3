@@ -17,10 +17,10 @@ const fieldLabels: Record<CardField, string> = {
   deckName: "Tên bộ thẻ",
 };
 const cardTextSizes: Record<DeckTemplateConfig['front']['style']['fontScale'], string> = {
-  small: "text-lg",
+  small: "text-xl",
   medium: "text-2xl",
-  large: "text-3xl sm:text-5xl",
-  xlarge: "text-4xl sm:text-6xl",
+  large: "text-3xl",
+  xlarge: "text-4xl",
 };
 function fieldValue(
   field: CardField,
@@ -65,7 +65,7 @@ function GrammarBack({ value, compact, fontScale }: { value: string; compact: bo
   return (
     <div className={`space-y-5 text-left font-normal leading-relaxed ${compact ? "text-sm" : cardTextSizes[fontScale]}`}>
       {value.replace(/\r\n?/g, "\n").trim().split(/\n\s*\n/).map((block, index) => (
-        <div key={index} className={index === 0 ? "font-semibold" : "border-t border-current/10 pt-4"}>
+        <div key={index} className={index === 0 ? "" : "border-t border-current/10 pt-4"}>
           {block.split("\n").map((line, lineIndex) => line.trim().startsWith("→") ? (
             <ExampleMeaning key={lineIndex} meaning={line.trim().slice(1).trim()} label={`ví dụ ${index + 1}`} />
           ) : (
