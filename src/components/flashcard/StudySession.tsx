@@ -415,7 +415,6 @@ export function StudySession({
               fields={fields}
               template={template}
               side={activeSide}
-              immersivePrimary={!flipped}
               showExampleReadings={settings.showFuriganaBack}
             />
             {!flipped && (

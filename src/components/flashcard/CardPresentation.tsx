@@ -16,6 +16,12 @@ const fieldLabels: Record<CardField, string> = {
   kind: "Loại thẻ",
   deckName: "Tên bộ thẻ",
 };
+const cardTextSizes: Record<DeckTemplateConfig['front']['style']['fontScale'], string> = {
+  small: "text-lg",
+  medium: "text-2xl",
+  large: "text-3xl sm:text-5xl",
+  xlarge: "text-4xl sm:text-6xl",
+};
 function fieldValue(
   field: CardField,
   card: ImportedCard,
@@ -56,11 +62,10 @@ function Examples({ value, showReading }: { value: unknown; showReading: boolean
 }
 
 function GrammarBack({ value, compact, fontScale }: { value: string; compact: boolean; fontScale: DeckTemplateConfig['back']['style']['fontScale'] }) {
-  const sizes = { small: "text-sm sm:text-base", medium: "text-base sm:text-lg", large: "text-lg sm:text-xl", xlarge: "text-xl sm:text-2xl" };
   return (
-    <div className={`space-y-5 text-left font-normal leading-relaxed ${compact ? "text-sm" : sizes[fontScale]}`}>
+    <div className={`space-y-5 text-left font-normal leading-relaxed ${compact ? "text-sm" : cardTextSizes[fontScale]}`}>
       {value.replace(/\r\n?/g, "\n").trim().split(/\n\s*\n/).map((block, index) => (
-        <div key={index} className={index === 0 ? "text-lg font-semibold sm:text-xl" : "border-t border-current/10 pt-4"}>
+        <div key={index} className={index === 0 ? "font-semibold" : "border-t border-current/10 pt-4"}>
           {block.split("\n").map((line, lineIndex) => line.trim().startsWith("→") ? (
             <ExampleMeaning key={lineIndex} meaning={line.trim().slice(1).trim()} label={`ví dụ ${index + 1}`} />
           ) : (
@@ -88,7 +93,6 @@ export function CardFace({
   template,
   side,
   compact = false,
-  immersivePrimary = false,
   showExampleReadings = true,
 }: {
   card: ImportedCard;
@@ -97,18 +101,10 @@ export function CardFace({
   template: DeckTemplateConfig;
   side: 'front' | 'back';
   compact?: boolean;
-  immersivePrimary?: boolean;
   showExampleReadings?: boolean;
 }) {
   const grammarAnswer = card.kind === "grammar" && fields.includes("back");
   const style = template[side].style;
-  const sizes = {
-    small: "text-lg",
-    medium: "text-2xl",
-    large: "text-3xl sm:text-5xl",
-    xlarge: "text-4xl sm:text-6xl",
-  };
-  const immersiveSizes = { small: "text-3xl sm:text-5xl", medium: "text-4xl sm:text-6xl", large: "text-5xl sm:text-7xl lg:text-8xl", xlarge: "text-6xl sm:text-8xl lg:text-9xl" };
   return (
     <div
       className={`w-full space-y-4 ${grammarAnswer ? "mx-auto max-w-3xl text-left" : style.alignment === "left" ? "text-left" : "text-center"} ${compact ? "!text-base" : ""}`}
@@ -131,7 +127,7 @@ export function CardFace({
                     ? "text-base font-medium text-[var(--color-kanji)]"
                   : field === "kind" || field === "deckName"
                     ? "text-xs font-bold uppercase tracking-wide opacity-70"
-                : `${immersivePrimary && index === 0 ? immersiveSizes[style.fontScale] : sizes[style.fontScale]} font-jp whitespace-pre-wrap break-words`
+                : `${cardTextSizes[style.fontScale]} font-jp whitespace-pre-wrap break-words`
             }
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
