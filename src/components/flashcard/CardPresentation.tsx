@@ -78,6 +78,45 @@ function Examples({ value, showReading }: { value: unknown; showReading: boolean
   </div>;
 }
 
+type KanjiVocabularyEntry = { word: string; reading: string; meaning: string };
+
+function parseKanjiVocabulary(value: unknown): KanjiVocabularyEntry[] {
+  if (!value) return [];
+  try {
+    const parsed: unknown = typeof value === "string" ? JSON.parse(value) : value;
+    if (!Array.isArray(parsed) || parsed.length > 100) return [];
+    return parsed.flatMap((entry) => {
+      if (!entry || typeof entry !== "object" || Array.isArray(entry)) return [];
+      const item = entry as Record<string, unknown>;
+      if (typeof item.word !== "string" || typeof item.reading !== "string" || typeof item.meaning !== "string") return [];
+      const word = item.word.trim();
+      const reading = item.reading.trim();
+      const meaning = item.meaning.trim();
+      return word && meaning ? [{ word, reading, meaning }] : [];
+    });
+  } catch {
+    return [];
+  }
+}
+
+function KanjiVocabulary({ value, showReading }: { value: unknown; showReading: boolean }) {
+  const entries = parseKanjiVocabulary(value);
+  if (!entries.length) return null;
+  return (
+    <div className="mx-auto w-fit max-w-full space-y-2 text-left">
+      {entries.map((entry, index) => (
+        <div key={`${entry.word}-${entry.reading}-${index}`} className="grid grid-cols-[auto_auto_minmax(0,1fr)] items-baseline gap-x-2">
+          <span lang="ja" className="furigana-text font-jp whitespace-nowrap text-lg leading-loose">
+            {showReading && entry.reading ? <ruby>{entry.word}<rt>{entry.reading}</rt></ruby> : entry.word}
+          </span>
+          <span aria-hidden="true">—</span>
+          <span className="min-w-0 break-words">{entry.meaning}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function GrammarBack({ value, reading, storedSegments, showReading, compact, style }: { value: string; reading: string; storedSegments?: unknown; showReading: boolean; compact: boolean; style: DeckTemplateConfig['back']['style'] }) {
   const textStyle = compact ? undefined : cardTextStyle(style);
   const hasExplicitFurigana = parseStoredFurigana(storedSegments).some((segment) => segment.reading);
@@ -137,6 +176,9 @@ export function CardFace({
       {fields.map((field, index) => {
         const value = fieldValue(field, card, deckName, side);
         if (!value) return null;
+        const kanjiVocabulary = field === "notes" && card.kind === "kanji"
+          ? parseKanjiVocabulary(card.extraData?.kanjiVocabulary)
+          : [];
         if (field === "reading" && (fields.includes("front") || fields.includes("back"))) return null;
         if (grammarAnswer && field === "back") {
           return <GrammarBack key={`${field}-${index}`} value={value} reading={card.backReading} storedSegments={card.extraData?.backFuriganaSegments} showReading={fields.includes("reading")} compact={compact} style={style} />;
@@ -162,7 +204,7 @@ export function CardFace({
             style={isCardText ? cardTextStyle(style) : undefined}
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
-            {field === "hanViet" ? `Hán Việt: ${value}` : isCardText ? (
+            {kanjiVocabulary.length ? <KanjiVocabulary value={kanjiVocabulary} showReading={showExampleReadings} /> : field === "hanViet" ? `Hán Việt: ${value}` : isCardText ? (
               <FuriganaText text={value} reading={cardReading} storedSegments={storedSegments} show={showFurigana} />
             ) : value}
           </div>

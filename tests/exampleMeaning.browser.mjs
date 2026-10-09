@@ -27,6 +27,13 @@ const cards = [1, 2].map(index => ({
 server.middlewares.use(async (request, response, next) => {
   if (!request.url?.startsWith('/__example-test__')) return next();
   const builtin = request.url.includes('builtin=1');
+  const kanji = request.url.includes('kanji=1');
+  const kanjiCards = [{
+    id:'kanji-1', deckId:'kanjiN2', front:'閥', back:'PHIỆT', reading:'バツ', type:'KANJI', tags:['N2'], source:'BUILT_IN', position:0,
+    note:'閥 ばつ — bè đảng; phe cánh\n党閥 とうばつ — Đảng phái; bè cánh',
+    extraData:{kanjiVocabulary:JSON.stringify([{word:'閥',reading:'ばつ',meaning:'bè đảng; phe cánh'},{word:'党閥',reading:'とうばつ',meaning:'Đảng phái; bè cánh'}])}
+  }];
+  const fixtureCards = kanji ? kanjiCards : cards.map(card => ({ ...card, source: builtin ? 'BUILT_IN' : card.source }));
   const html = await server.transformIndexHtml(request.url, `
     <html><body><div id="root"></div><script type="module">
       import React from 'react';
@@ -34,7 +41,7 @@ server.middlewares.use(async (request, response, next) => {
       import {StudySession} from '/src/components/flashcard/StudySession.tsx';
       import '/src/index.css';
       createRoot(document.getElementById('root')).render(React.createElement(StudySession, {
-        cards: ${JSON.stringify(cards.map(card => ({ ...card, source: builtin ? 'BUILT_IN' : card.source })))}, deckName:'Fixture', mode:'flashcards', onExit:()=>{}, onTemplateChange:${builtin ? 'undefined' : 'async config=>{window.savedTemplate=config;}'}
+        cards: ${JSON.stringify(fixtureCards)}, deckName:'Fixture', mode:'flashcards', onExit:()=>{}, onTemplateChange:${builtin || kanji ? 'undefined' : 'async config=>{window.savedTemplate=config;}'}
       }));
     </script></body></html>`);
   response.setHeader('Content-Type', 'text/html');
@@ -93,8 +100,12 @@ try {
   await page.getByRole('button', { name: 'Hủy', exact: true }).click();
   await page.locator('div[role="button"][aria-label="Hiện đáp án"]').click();
   assert.equal(await show().count(), 0);
+  await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/__example-test__?kanji=1`);
+  await page.locator('div[role="button"][aria-label="Hiện đáp án"]').click();
+  assert.deepEqual(await page.locator('ruby').allTextContents(), ['閥ばつ', '党閥とうばつ']);
+  assert.deepEqual(await page.locator('ruby rt').allTextContents(), ['ばつ', 'とうばつ']);
   assert.deepEqual(errors, []);
-  console.log('PASS: translation controls, imported template save, built-in customization persistence and example visibility.');
+  console.log('PASS: translation controls, imported template save, built-in customization persistence, examples and Kanji back-side ruby.');
 } finally {
   await browser?.close();
   await server.close();

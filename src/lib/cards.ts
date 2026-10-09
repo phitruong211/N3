@@ -61,6 +61,7 @@ export function kanjiCard(
       .map((v) => `${v.word} ${v.reading} — ${v.meaning}`)
       .join("\n"),
     type: "KANJI",
+    extraData: { kanjiVocabulary: JSON.stringify(item.vocabulary) },
     tags: [item.level],
     source: "BUILT_IN",
     sourceRef: item.id,
