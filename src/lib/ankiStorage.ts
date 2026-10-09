@@ -8,7 +8,7 @@ function cardFromApi(card: ApiCard, progress?: ApiQueueCard): ImportedCard {
   const kind = fromApiKind(card.kind);
   const srs = progress?.progress ? progressToSrs(card.id, progress.progress) : undefined;
   const hanViet = ["hanViet", "han_viet", "hanTu", "han_tu"].map(key => card.extraData?.[key]).find(value => typeof value === "string");
-  return { id: card.id, front: card.front, back: card.back, reading: card.reading || '', notes: card.notes || '',
+  return { id: card.id, front: card.front, back: card.back, reading: card.reading || '', backReading: typeof card.extraData?.backReading === 'string' ? card.extraData.backReading : '', notes: card.notes || '',
     hanViet: typeof hanViet === "string" ? hanViet : '', kind, extraData: card.extraData as Record<string, string>,
     srs: srs ? { ...srs, deckType: kind === 'general' ? 'vocabulary' : kind } : undefined };
 }
@@ -23,9 +23,12 @@ async function deckFromApi(response: ApiDeck): Promise<ImportedDeck> {
 }
 
 function cardBody(card: ImportedCard, position: number) {
+  const extraData = { ...card.extraData };
+  if (card.backReading.trim()) extraData.backReading = card.backReading.trim();
+  else delete extraData.backReading;
   return { front: card.front, back: card.back, reading: card.reading || null, notes: card.notes || null,
     kind: toApiKind(card.kind), position, externalId: card.id,
-    extraData: { ...card.extraData, hanViet: card.hanViet.trim() } };
+    extraData: { ...extraData, hanViet: card.hanViet.trim() } };
 }
 
 function cardUpdateBody(card: ImportedCard, position: number) {

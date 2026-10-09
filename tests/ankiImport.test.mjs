@@ -32,19 +32,19 @@ test('deck templates use safe defaults and discard unsupported values', () => {
   });
   assert.deepEqual(normalized.front.fields, ['front', 'reading']);
   assert.equal(normalized.front.showDeckName, false);
-  assert.deepEqual(normalized.front.style, { theme: 'paper', fontScale: 'large', fontSize: 30, bold: false, italic: false, alignment: 'left' });
-  assert.deepEqual(normalized.back.style, { theme: 'paper', fontScale: 'large', fontSize: 30, bold: false, italic: false, alignment: 'left' });
+  assert.deepEqual(normalized.front.style, { theme: 'paper', fontScale: 'large', fontSize: 30, bold: false, italic: false, fontFamily: 'default', alignment: 'left' });
+  assert.deepEqual(normalized.back.style, { theme: 'paper', fontScale: 'large', fontSize: 30, bold: false, italic: false, fontFamily: 'default', alignment: 'left' });
   assert.equal('study' in normalized, false);
 });
 
 test('deck templates keep independent front and back presentation settings', () => {
   const normalized = normalizeDeckTemplate({
     version: 3,
-    front: { fields: ['front'], style: { theme: 'blue', fontScale: 'xlarge', fontSize: 42, bold: true, italic: false, alignment: 'center' } },
-    back: { fields: ['back'], showFront: true, style: { theme: 'dark', fontScale: 'small', fontSize: 18, bold: false, italic: true, alignment: 'left' } },
+    front: { fields: ['front'], style: { theme: 'blue', fontScale: 'xlarge', fontSize: 42, bold: true, italic: false, fontFamily: 'delaGothicOne', alignment: 'center' } },
+    back: { fields: ['back'], showFront: true, style: { theme: 'dark', fontScale: 'small', fontSize: 18, bold: false, italic: true, fontFamily: 'notoSerifJp', alignment: 'left' } },
   });
-  assert.deepEqual(normalized.front.style, { theme: 'blue', fontScale: 'xlarge', fontSize: 42, bold: true, italic: false, alignment: 'center' });
-  assert.deepEqual(normalized.back.style, { theme: 'dark', fontScale: 'small', fontSize: 18, bold: false, italic: true, alignment: 'left' });
+  assert.deepEqual(normalized.front.style, { theme: 'blue', fontScale: 'xlarge', fontSize: 42, bold: true, italic: false, fontFamily: 'delaGothicOne', alignment: 'center' });
+  assert.deepEqual(normalized.back.style, { theme: 'dark', fontScale: 'small', fontSize: 18, bold: false, italic: true, fontFamily: 'notoSerifJp', alignment: 'left' });
   assert.equal(normalized.back.showFront, true);
 });
 
@@ -79,6 +79,44 @@ test('JSON and CSV map Hán Việt aliases into a dedicated field', () => {
   assert.equal(json.cards[0].hanViet, 'Miễn Cường');
   const csv = parseTextImport('front,back,Hán Việt\n日本,Nhật Bản,Nhật Bản', 'cards.csv');
   assert.equal(csv.cards[0].hanViet, 'Nhật Bản');
+});
+test('front and back furigana import consistently and warnings do not drop cards', () => {
+  const result = parseTextImport(JSON.stringify([
+    { front: '勉強[べんきょう]する', back: '学校[がっこう]へ行[い]く', back_reading: 'がっこうへいく' },
+    { front: '学校[がっこう', back: 'School', reading: 'がっこう' },
+  ]), 'ruby.json');
+  assert.equal(result.cards.length, 2);
+  assert.equal(result.cards[0].front, '勉強する');
+  assert.equal(result.cards[0].reading, 'べんきょうする');
+  assert.equal(result.cards[0].back, '学校へ行く');
+  assert.equal(result.cards[0].backReading, 'がっこうへいく');
+  assert.match(result.cards[0].extraData.frontFuriganaSegments, /べんきょう/);
+  assert.match(result.cards[0].extraData.backFuriganaSegments, /がっこう/);
+  assert.equal(result.skipped, 0);
+  assert.equal(result.warnings.length, 1);
+});
+
+test('JSON, TXT, CSV, TSV, XLSX and XLS normalize to equivalent card data', async () => {
+  const examples = [{ japanese: '日本語を勉強します。', reading: 'にほんごをべんきょうします。', meaning: 'Tôi học tiếng Nhật.' }];
+  const record = { front: '勉強[べんきょう]する', back: '学校[がっこう]へ行[い]く', reading: 'べんきょうする', back_reading: 'がっこうへいく', han_viet: 'Miễn Cường', note: 'Ôn bài', type: 'VOCABULARY', tags: ['N3', 'bài 1'], examples };
+  const examplesCell = JSON.stringify(examples).replaceAll('"', '""');
+  const header = 'front,back,reading,back_reading,han_viet,note,type,tags,examples';
+  const row = `"${record.front}","${record.back}",${record.reading},${record.back_reading},${record.han_viet},${record.note},${record.type},"N3;bài 1","${examplesCell}"`;
+  const csv = `${header}\n${row}`;
+  const tsv = `front\tback\treading\tback_reading\than_viet\tnote\ttype\ttags\texamples\n${record.front}\t${record.back}\t${record.reading}\t${record.back_reading}\t${record.han_viet}\t${record.note}\t${record.type}\tN3;bài 1\t${JSON.stringify(examples)}`;
+  const sheet = utils.json_to_sheet([{ ...record, tags: 'N3;bài 1', examples: JSON.stringify(examples) }]);
+  const book = utils.book_new(); utils.book_append_sheet(book, sheet, 'Cards');
+  const previews = [
+    parseTextImport(JSON.stringify([record]), 'cards.json'),
+    parseTextImport(csv, 'cards.csv'),
+    parseTextImport(tsv, 'cards.tsv'),
+    parseTextImport(`#separator:Tab\n${tsv}`, 'cards.txt'),
+    await parseExcelImport(write(book, { type: 'array', bookType: 'xlsx' }), 'cards.xlsx'),
+    await parseExcelImport(write(book, { type: 'array', bookType: 'xls' }), 'cards.xls'),
+  ];
+  const shape = card => ({ front: card.front, back: card.back, reading: card.reading, backReading: card.backReading, hanViet: card.hanViet, notes: card.notes, kind: card.kind, tags: card.tags, examples: JSON.parse(card.extraData.examples), frontRuby: JSON.parse(card.extraData.frontFuriganaSegments), backRuby: JSON.parse(card.extraData.backFuriganaSegments) });
+  const expected = shape(previews[0].cards[0]);
+  for (const preview of previews) assert.deepEqual(shape(preview.cards[0]), expected);
 });
 test('Anki text directives, BOM, headers and skipped rows', () => {
   const result = parseTextImport('\uFEFF#separator:Tab\n#html:false\nMặt trước\tMặt sau\n猫\tmèo\nbad\t', 'cards.txt');

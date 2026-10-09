@@ -1,24 +1,27 @@
 import type { SRSCard } from '../types';
+import { resolveFurigana, segmentsReading } from './furigana.ts';
 
 export type ImportedKind = 'vocabulary' | 'kanji' | 'grammar' | 'general';
 export type CardField = 'front' | 'back' | 'reading' | 'hanViet' | 'notes' | 'kind' | 'deckName';
 export type CardTheme = 'paper' | 'blue' | 'dark' | 'system';
+export type CardFontFamily = 'default' | 'notoSansJp' | 'notoSerifJp' | 'delaGothicOne' | 'system';
 export interface CardSideStyle {
   theme: CardTheme;
   fontScale: 'small' | 'medium' | 'large' | 'xlarge';
   fontSize: number;
   bold: boolean;
   italic: boolean;
+  fontFamily: CardFontFamily;
   alignment: 'left' | 'center';
 }
 export interface DeckTemplateConfig {
-  version: 3;
+  version: 4;
   front: { fields: CardField[]; showDeckName: boolean; style: CardSideStyle };
   back: { fields: CardField[]; showFront: boolean; showExamples: boolean; style: CardSideStyle };
 }
-export interface ImportedCard { id: string; front: string; back: string; reading: string; hanViet: string; notes: string; kind: ImportedKind; tags?: string[]; sourceRef?: string; sourceSheet?: string; extraData?: Record<string, string>; srs?: SRSCard }
+export interface ImportedCard { id: string; front: string; back: string; reading: string; backReading: string; hanViet: string; notes: string; kind: ImportedKind; tags?: string[]; sourceRef?: string; sourceSheet?: string; extraData?: Record<string, string>; srs?: SRSCard }
 export interface ImportedDeck { id: string; name: string; source: string; format: string; createdAt: string; position: number; template: DeckTemplateConfig; cards: ImportedCard[] }
-export interface ImportPreview { name: string; source: string; format: string; cards: ImportedCard[]; skipped: number; tables?: ImportTable[]; issues?: ImportIssue[]; duplicates?: number }
+export interface ImportPreview { name: string; source: string; format: string; cards: ImportedCard[]; skipped: number; tables?: ImportTable[]; issues?: ImportIssue[]; warnings?: ImportWarning[]; duplicates?: number }
 export const kindLabels: Record<ImportedKind, string> = { vocabulary: 'Từ vựng', kanji: 'Kanji', grammar: 'Ngữ pháp', general: 'Thẻ tổng hợp' };
 export const CARD_FONT_PRESETS: Record<CardSideStyle['fontScale'], number> = {
   small: 20,
@@ -26,10 +29,14 @@ export const CARD_FONT_PRESETS: Record<CardSideStyle['fontScale'], number> = {
   large: 30,
   xlarge: 36,
 };
+export const IMPORT_EXAMPLE = [
+  { front: '勉強[べんきょう]', back: 'Việc học', reading: 'べんきょう', back_reading: '', han_viet: 'Miễn Cường', note: 'Ôn bài 6', type: 'VOCABULARY', tags: ['N3', 'bài 6'] },
+  { front: '学校[がっこう]へ行[い]く', back: 'Đi đến 学校[がっこう]', reading: 'がっこうへいく', back_reading: 'がっこう', note: 'Furigana dùng được ở cả hai mặt', type: 'GENERAL', tags: ['mẫu'] },
+] as const;
 export const defaultDeckTemplate = (): DeckTemplateConfig => ({
-  version: 3,
-  front: { fields: ['front', 'reading'], showDeckName: true, style: { theme: 'paper', fontScale: 'large', fontSize: CARD_FONT_PRESETS.large, bold: false, italic: false, alignment: 'center' } },
-  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: false, showExamples: true, style: { theme: 'paper', fontScale: 'large', fontSize: CARD_FONT_PRESETS.large, bold: false, italic: false, alignment: 'center' } },
+  version: 4,
+  front: { fields: ['front', 'reading'], showDeckName: true, style: { theme: 'paper', fontScale: 'large', fontSize: CARD_FONT_PRESETS.large, bold: false, italic: false, fontFamily: 'default', alignment: 'center' } },
+  back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: false, showExamples: true, style: { theme: 'paper', fontScale: 'large', fontSize: CARD_FONT_PRESETS.large, bold: false, italic: false, fontFamily: 'default', alignment: 'center' } },
 });
 
 export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
@@ -46,6 +53,7 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
     : defaults;
   const themes: CardTheme[] = ['paper', 'blue', 'dark', 'system'];
   const scales: CardSideStyle['fontScale'][] = ['small', 'medium', 'large', 'xlarge'];
+  const fontFamilies: CardFontFamily[] = ['default', 'notoSansJp', 'notoSerifJp', 'delaGothicOne', 'system'];
   const style = (candidate: unknown, defaults: CardSideStyle): CardSideStyle => {
     const source = candidate && typeof candidate === 'object' ? candidate as Record<string, unknown> : legacyStyle;
     const fontScale = scales.includes(source.fontScale as CardSideStyle['fontScale']) ? source.fontScale as CardSideStyle['fontScale'] : defaults.fontScale;
@@ -58,17 +66,18 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
       fontSize: Math.max(12, Math.min(72, requestedFontSize)),
       bold: source.bold === true,
       italic: source.italic === true,
+      fontFamily: fontFamilies.includes(source.fontFamily as CardFontFamily) ? source.fontFamily as CardFontFamily : defaults.fontFamily,
       alignment: source.alignment === 'left' ? 'left' : 'center',
     };
   };
   return {
-    version: 3,
+    version: 4,
     front: { fields: fields(frontConfig.fields, fallback.front.fields), showDeckName: typeof frontConfig.showDeckName === 'boolean' ? frontConfig.showDeckName : fallback.front.showDeckName, style: style(frontConfig.style, fallback.front.style) },
     back: { fields: fields(backConfig.fields, fallback.back.fields), showFront: version >= 3 && typeof backConfig.showFront === 'boolean' ? backConfig.showFront : false, showExamples: typeof backConfig.showExamples === 'boolean' ? backConfig.showExamples : true, style: style(backConfig.style, fallback.back.style) },
   };
 }
 
-export type ImportField = 'front' | 'back' | 'reading' | 'hanViet' | 'notes' | 'kind' | 'tags' | 'examples';
+export type ImportField = 'front' | 'back' | 'reading' | 'backReading' | 'hanViet' | 'notes' | 'kind' | 'tags' | 'examples';
 export interface CardExample { japanese: string; reading: string; meaning: string }
 export function parseCardExamples(value: unknown): CardExample[] {
  if (value == null || value === '') return [];
@@ -83,12 +92,13 @@ export function parseCardExamples(value: unknown): CardExample[] {
 }
 export interface ImportTable { id: string; name: string; rows: string[][]; hasHeader: boolean; selected: boolean; mapping: Partial<Record<ImportField, number>>; extraColumns: number[]; inferredKind?: ImportedKind }
 export interface ImportIssue { row: number; sheet: string; reason: string }
+export interface ImportWarning extends ImportIssue { cardId: string }
 const text = (value: unknown): string => (Array.isArray(value) ? value.map(text).filter(Boolean).join('\n') : typeof value === 'object' && value !== null ? JSON.stringify(value) : value == null ? '' : String(value)).replace(/\r\n?/g, '\n').trim().normalize('NFC');
 const normalize = (value: string) => value.replace(/^\uFEFF/, '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/[\s_-]/g, '');
 const keys: Record<ImportField, string[]> = {
  front: ['front','mat truoc','question','cau hoi','word','tu','tu vung','kanji','tu_chinh','pattern','mau_ngu_phap'],
  back: ['back','mat sau','answer','dap an','meaning','nghia','y nghia','nghia_cot_loi'],
- reading: ['reading','phien_am','hiragana','cach doc'], hanViet: ['hanViet','han_viet','han viet','hán việt','hanTu','han_tu','han tu','hán tự'], notes: ['notes','note','ghi_chu'], kind: ['kind','type','loai'], tags: ['tags','tag','nhan'], examples: ['examples'],
+ reading: ['reading','front_reading','phien_am','hiragana','cach doc','cach_doc'], backReading: ['back_reading','back hiragana','back_hiragana','mat sau reading','mat_sau_reading','cach doc mat sau','cach_doc_mat_sau'], hanViet: ['hanViet','han_viet','han viet','hán việt','hanTu','han_tu','han tu','hán tự'], notes: ['notes','note','ghi_chu'], kind: ['kind','type','loai'], tags: ['tags','tag','nhan'], examples: ['examples'],
 };
 function table(rows: string[][], name: string, json = false): ImportTable {
  const header = rows[0] || [];
@@ -104,7 +114,7 @@ function table(rows: string[][], name: string, json = false): ImportTable {
  return { id: crypto.randomUUID(), name, rows, hasHeader, selected: true, mapping: hasHeader ? { front: 0, back: 1, ...mapping } : { front: 0, back: 1, ...(header.length > 2 ? { reading: 2 } : {}) }, extraColumns: [], inferredKind: hasHeader ? inferredKind : 'general' };
 }
 export function remapImportPreview(preview: ImportPreview, tables: ImportTable[]): ImportPreview {
- const cards: ImportedCard[] = [], issues: ImportIssue[] = [], seen = new Set<string>(); let duplicates = 0, total = 0;
+ const cards: ImportedCard[] = [], issues: ImportIssue[] = [], warnings: ImportWarning[] = [], seen = new Set<string>(); let duplicates = 0, total = 0;
  for (const tab of tables.filter(t => t.selected)) {
   const start = tab.hasHeader ? 1 : 0;
   total += tab.rows.length - start;
@@ -112,16 +122,27 @@ export function remapImportPreview(preview: ImportPreview, tables: ImportTable[]
   for (let index = start; index < tab.rows.length; index++) {
    const row = tab.rows[index];
    const pick = (field: ImportField) => text(row[tab.mapping[field] ?? -1]);
-   const front = pick('front'), back = pick('back'), reading = pick('reading'), hanViet = pick('hanViet'), notes = pick('notes');
+   const rawFront = pick('front'), rawBack = pick('back'), rawReading = pick('reading'), rawBackReading = pick('backReading'), hanViet = pick('hanViet'), notes = pick('notes');
    const fail = (reason: string) => issues.push({ row: index + 1, sheet: tab.name, reason });
-   if (!front || !back) { fail('Thiếu mặt trước hoặc mặt sau'); continue; }
-   if (front.length > 20000 || back.length > 20000 || notes.length > 20000 || reading.length > 10000 || hanViet.length > 10000) { fail('Vượt giới hạn trường: front/back/note 20.000, reading/hanViet 10.000 ký tự'); continue; }
+   if (!rawFront || !rawBack) { fail('Thiếu mặt trước hoặc mặt sau'); continue; }
+   if (rawFront.length > 20000 || rawBack.length > 20000 || notes.length > 20000 || rawReading.length > 10000 || rawBackReading.length > 10000 || hanViet.length > 10000) { fail('Vượt giới hạn trường: front/back/note 20.000, reading/backReading/hanViet 10.000 ký tự'); continue; }
    const kindText = pick('kind').toLowerCase();
    const aliases: Record<string, ImportedKind> = { vocabulary: 'vocabulary', vocab: 'vocabulary', tuvung: 'vocabulary', kanji: 'kanji', grammar: 'grammar', nguphap: 'grammar', general: 'general' };
    const kind = kindText ? aliases[normalize(kindText)] : tab.inferredKind || 'general';
    if (!kind) { fail('Loại thẻ không hợp lệ'); continue; }
    const tags = pick('tags').split(/[,;\n]/).map(t => t.trim()).filter(Boolean);
-   const extraData = Object.fromEntries(tab.extraColumns.filter(i => !Object.values(tab.mapping).includes(i)).map(i => [tab.hasHeader ? tab.rows[0][i] || `Cột ${i + 1}` : `Cột ${i + 1}`, text(row[i])]));
+   const id = crypto.randomUUID();
+   const frontRuby = resolveFurigana(rawFront, rawReading);
+   const backRuby = resolveFurigana(rawBack, rawBackReading);
+   const front = frontRuby.text, back = backRuby.text;
+   const reading = rawReading || (frontRuby.explicit && !frontRuby.warning ? segmentsReading(frontRuby.segments) : '');
+   const backReading = rawBackReading || (backRuby.explicit && !backRuby.warning ? segmentsReading(backRuby.segments) : '');
+   if (frontRuby.warning) warnings.push({ cardId: id, row: index + 1, sheet: tab.name, reason: `Mặt trước: ${frontRuby.warning}` });
+   if (backRuby.warning) warnings.push({ cardId: id, row: index + 1, sheet: tab.name, reason: `Mặt sau: ${backRuby.warning}` });
+   const extraData: Record<string, string> = Object.fromEntries(tab.extraColumns.filter(i => !Object.values(tab.mapping).includes(i)).map(i => [tab.hasHeader ? tab.rows[0][i] || `Cột ${i + 1}` : `Cột ${i + 1}`, text(row[i])]));
+   if (backReading) extraData.backReading = backReading;
+   if (frontRuby.segments.some(segment => segment.reading)) extraData.frontFuriganaSegments = JSON.stringify(frontRuby.segments);
+   if (backRuby.segments.some(segment => segment.reading)) extraData.backFuriganaSegments = JSON.stringify(backRuby.segments);
    try {
     const examples = parseCardExamples(pick('examples'));
     if (examples.length) extraData.examples = JSON.stringify(examples);
@@ -130,10 +151,10 @@ export function remapImportPreview(preview: ImportPreview, tables: ImportTable[]
    const pair = JSON.stringify([front.replace(/\s+/g, ' '), back.replace(/\s+/g, ' ')]);
    if (seen.has(pair)) { duplicates++; fail('Trùng cặp mặt trước / mặt sau'); continue; }
    seen.add(pair);
-   cards.push({ id: crypto.randomUUID(), front, back, reading, hanViet, notes, kind, tags, sourceRef: preview.source, ...(tab.name ? { sourceSheet: tab.name } : {}), ...(Object.keys(extraData).length ? { extraData } : {}) });
+   cards.push({ id, front, back, reading, backReading, hanViet, notes, kind, tags, sourceRef: preview.source, ...(tab.name ? { sourceSheet: tab.name } : {}), ...(Object.keys(extraData).length ? { extraData } : {}) });
   }
  }
- return { ...preview, tables, cards, skipped: issues.length, issues, duplicates };
+ return { ...preview, tables, cards, skipped: issues.length, issues, warnings, duplicates };
 }
 // Quoted fields may contain separators, escaped quotes and line breaks.
 export function parseDelimited(input: string, delimiter: string): string[][] {

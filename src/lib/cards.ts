@@ -7,6 +7,7 @@ export interface CardView {
   front: string;
   back: string;
   reading?: string;
+  backReading?: string;
   hanViet?: string;
   note?: string;
   type: "VOCABULARY" | "KANJI" | "GRAMMAR" | "GENERAL";
@@ -102,6 +103,7 @@ export function importedCardView(
     front: card.front,
     back: card.back,
     reading: card.reading,
+    backReading: card.backReading,
     hanViet: card.hanViet,
     note: card.notes,
     type: card.kind.toUpperCase() as CardView["type"],
@@ -118,9 +120,12 @@ export function presentationCard(card: CardView): ImportedCard {
     front: card.front,
     back: card.back,
     reading: card.reading || "",
+    backReading: card.backReading || "",
     hanViet: card.hanViet || "",
     notes: card.note || "",
     kind: card.type.toLowerCase() as ImportedCard["kind"],
+    tags: card.tags,
+    sourceRef: card.sourceRef,
     extraData: card.extraData,
   };
 }

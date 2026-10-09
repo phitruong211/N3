@@ -5,11 +5,14 @@ import {
   kindLabels,
   normalizeDeckTemplate,
   parseImportFile,
+  IMPORT_EXAMPLE,
   type ImportedCard,
   type ImportPreview,
   type DeckTemplateConfig,
 } from "@/lib/ankiImport";
 import ImportPreviewEditor from "./ImportPreviewEditor";
+import { CardFields } from "./CardFields";
+import { ImportGuide } from "./ImportGuide";
 import {
   addCard,
   updateCard,
@@ -42,49 +45,18 @@ import { DeckCustomizeDialog } from "./CardPresentation";
 import { ContentBadge } from "@/components/ui/StudyUI";
 import {
   GripVertical,
-  HelpCircle,
   MoreVertical,
   PenLine,
   Plus,
   Upload,
   X,
 } from "lucide-react";
-const jsonImportExample = [
-  {
-    front: "勉強",
-    back: "Việc học",
-    reading: "べんきょう",
-    han_viet: "Miễn Cường",
-    note: "Ôn bài 6",
-    type: "VOCABULARY",
-    tags: ["N3", "từ vựng", "bài 6"],
-  },
-  {
-    front: "～たびに",
-    back: "Mỗi lần… thì…\n\nV thể từ điển + たびに\nN + の + たびに\n\n【Cách dùng】\nSự việc ở vế sau lặp lại mỗi lần vế trước xảy ra.",
-    examples: [{ japanese: "この歌を聞くたびに、学生時代を思い出します。", reading: "このうたをきくたびに、がくせいじだいをおもいだします。", meaning: "Mỗi lần nghe bài hát này, tôi lại nhớ thời sinh viên." }],
-    reading: "～たびに",
-    han_viet: null,
-    note: "",
-    type: "GRAMMAR",
-    tags: ["N3", "ngữ pháp", "bài 7"],
-  },
-];
-const jsonImportFields = [
-  ["front", "Bắt buộc", "Mặt trước: từ, Kanji hoặc mẫu ngữ pháp."],
-  ["back", "Bắt buộc", "Mặt sau: nghĩa; với ngữ pháp có thể thêm công thức, cách dùng và ví dụ."],
-  ["reading", "Tùy chọn", "Phiên âm hiragana. Có thể bật/tắt riêng từng mặt trong Cài đặt → Khi học."],
-  ["han_viet", "Tùy chọn", "Âm Hán Việt; dùng null hoặc chuỗi rỗng nếu không có."],
-  ["note", "Tùy chọn", "Ghi chú thêm hoặc nguồn tài liệu; không cần lặp lại mặt sau."],
-  ["type", "Nên có", "VOCABULARY (từ vựng), KANJI, GRAMMAR (ngữ pháp) hoặc GENERAL (tổng hợp)."],
-  ["tags", "Tùy chọn", 'Danh sách nhãn, ví dụ ["N3", "ngữ pháp", "bài 7"]. Tag “bài 7” giúp lọc theo bài học.'],
-  ["examples", "Tùy chọn", "Danh sách ví dụ. Mỗi ví dụ có japanese (câu tiếng Nhật), meaning (bản dịch) bắt buộc và reading (phiên âm) tùy chọn. Nghĩa ban đầu được ẩn; bấm biểu tượng mắt để hiện hoặc ẩn lại. Không cần chép ví dụ vào back."],
-];
 const blankCard = (): ImportedCard => ({
   id: crypto.randomUUID(),
   front: "",
   back: "",
   reading: "",
+  backReading: "",
   hanViet: "",
   notes: "",
   kind: "general",
@@ -156,7 +128,6 @@ export function ImportedDecks({
   );
   const [allowEmpty, setAllowEmpty] = useState(initial?.allowEmpty ?? false);
   const seed = useRef(initial?.importSeed ?? crypto.randomUUID());
-  const [rules, setRules] = useState(false);
   const [creatorError, setCreatorError] = useState("");
   const [draggingDeckId, setDraggingDeckId] = useState<string | null>(null);
   const [dropDeckId, setDropDeckId] = useState<string | null>(null);
@@ -185,7 +156,6 @@ export function ImportedDecks({
     selected: string;
   } | null>(null);
   const input = useRef<HTMLInputElement>(null);
-  const jsonGuide = useRef<HTMLDetailsElement>(null);
   const lock = useRef(false);
   const parser = useRef<AbortController | null>(null);
   const mounted = useRef(true);
@@ -296,7 +266,6 @@ export function ImportedDecks({
     setCreating(false);
     setDraft(null);
     setCreatorError("");
-    setRules(false);
     seed.current = crypto.randomUUID();
   }
   async function refreshActive() {
@@ -398,10 +367,6 @@ export function ImportedDecks({
   }
 
   function chooseImport() {
-    if (!name.trim()) {
-      setCreatorError("Nhập tên bộ thẻ trước khi chọn file import.");
-      return;
-    }
     setCreatorError("");
     input.current?.click();
   }
@@ -451,6 +416,7 @@ export function ImportedDecks({
           front: c.front,
           back: c.back,
           reading: c.reading || "",
+          backReading: typeof c.extraData?.backReading === "string" ? c.extraData.backReading : "",
           hanViet:
             (["hanViet", "han_viet", "hanTu", "han_tu"]
               .map((key) => c.extraData?.[key])
@@ -522,14 +488,16 @@ export function ImportedDecks({
       setReload((v) => v + 1);
     });
   }
-  function download(format: "csv" | "json") {
+  function download(format: "csv" | "json" | "txt") {
     const text =
-      format === "csv"
-        ? "front,back,reading,hanViet,note,type,tags\n勉強,Việc học,べんきょう,Miễn Cường,Ôn bài 6,VOCABULARY,học tập\n"
-        : JSON.stringify(jsonImportExample, null, 2);
+      format === "json"
+        ? JSON.stringify(IMPORT_EXAMPLE, null, 2)
+        : format === "csv"
+          ? "front,back,reading,back_reading,han_viet,note,type,tags\n勉強[べんきょう],Việc học,べんきょう,,Miễn Cường,Ôn bài 6,VOCABULARY,\"N3;bài 6\"\n"
+          : "front\tback\treading\tback_reading\than_viet\tnote\ttype\ttags\n学校[がっこう]\tTrường học\tがっこう\t\tHọc Hiệu\t\tKANJI\tN4;bài 1\n";
     const url = URL.createObjectURL(
       new Blob([text], {
-        type: format === "csv" ? "text/csv;charset=utf-8" : "application/json",
+        type: format === "json" ? "application/json" : "text/plain;charset=utf-8",
       }),
     );
     const a = document.createElement("a");
@@ -551,6 +519,15 @@ export function ImportedDecks({
           setSession(previous => previous ? { ...previous, template } : previous);
           setReload(value => value + 1);
         }}
+        onCardChange={session.deck.sourceType === "IMPORT" ? async changed => {
+          const updated = await updateCard(changed.id, cardRequest(changed));
+          return importedCardView(
+            asImported(updated as PersonalCard),
+            session.deck.id,
+            "IMPORT",
+            Math.max(0, session.cards.findIndex(card => card.id === changed.id)),
+          );
+        } : undefined}
         onExit={() => {
           setSession(null);
           void refreshActive();
@@ -729,7 +706,7 @@ export function ImportedDecks({
                 });
               }}
             >
-              <CardFields card={editing} onChange={setEditing} />
+              <CardFields key={editing.id} card={editing} onChange={setEditing} />
               <button
                 className="study-button study-button-primary"
                 disabled={busy || !editing.front.trim() || !editing.back.trim()}
@@ -1022,98 +999,17 @@ export function ImportedDecks({
                         </span>
                       </span>
                     </button>
-                    <div className="relative">
-                      <button
-                        type="button"
-                        className="flex min-h-28 w-full items-center gap-4 rounded-xl border border-[var(--color-border)] p-4 text-left transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-alt)]"
-                        disabled={busy}
-                        onClick={chooseImport}
-                      >
-                        <span className="rounded-full bg-[var(--color-surface-alt)] p-3 text-[var(--color-accent)]">
-                          <Upload size={21} />
-                        </span>
-                        <span>
-                          <strong className="block">Import file</strong>
-                          <span className="study-copy">
-                            TXT, CSV, TSV, JSON hoặc Excel
-                          </span>
-                        </span>
-                      </button>
-                      <button
-                        type="button"
-                        className="absolute right-2 top-2 rounded-full p-2 text-[var(--color-text-tertiary)] hover:bg-[var(--color-surface)] hover:text-[var(--color-text)]"
-                        aria-label="Hướng dẫn import"
-                        aria-expanded={rules}
-                        onClick={() => setRules((value) => !value)}
-                      >
-                        <HelpCircle size={17} />
-                      </button>
-                      {rules && (
-                        <div className="absolute right-0 top-11 z-20 w-[min(22rem,calc(100vw-3rem))] rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-sm shadow-xl">
-                          <p>
-                            Tệp tối đa 20 MB và 20.000 thẻ. Cần mặt trước, mặt
-                            sau; có thể thêm cách đọc, Hán Việt, ghi chú, loại và
-                            tag.
-                          </p>
-                          <p className="mt-2 text-xs text-[var(--color-text-secondary)]">
-                            JSON: danh sách thẻ có front và back; dùng reading cho phiên âm, type cho loại thẻ và tags để chia bài học.
-                          </p>
-                          <button
-                            type="button"
-                            className="mt-3 text-sm font-semibold text-[var(--color-accent)] underline underline-offset-4 focus-ring"
-                            onClick={() => {
-                              setRules(false);
-                              const guide = jsonGuide.current;
-                              if (!guide) return;
-                              guide.open = true;
-                              guide.scrollIntoView({ block: "nearest" });
-                              guide.querySelector("summary")?.focus();
-                            }}
-                          >
-                            Xem cấu trúc JSON và giải thích từng trường
-                          </button>
-                          <div className="mt-3 flex gap-2">
-                            <button
-                              className="study-button"
-                              onClick={() => download("csv")}
-                            >
-                              Mẫu CSV
-                            </button>
-                            <button
-                              className="study-button"
-                              onClick={() => download("json")}
-                            >
-                              Mẫu JSON
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
+                    <button
+                      type="button"
+                      className="flex min-h-28 w-full items-center gap-4 rounded-xl border border-[var(--color-border)] p-4 text-left transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-alt)]"
+                      disabled={busy}
+                      onClick={chooseImport}
+                    >
+                      <span className="rounded-full bg-[var(--color-surface-alt)] p-3 text-[var(--color-accent)]"><Upload size={21} /></span>
+                      <span><strong className="block">Import file</strong><span className="study-copy">TXT, CSV, TSV, JSON, XLSX hoặc XLS</span></span>
+                    </button>
                   </div>
-                  <details ref={jsonGuide} className="mt-4 rounded-xl border border-[var(--color-border)] p-4">
-                    <summary className="cursor-pointer text-sm font-semibold text-[var(--color-accent)]">
-                      Hướng dẫn cấu trúc file JSON · xem mẫu và các trường
-                    </summary>
-                    <div className="mt-4 space-y-4 text-sm leading-relaxed">
-                      <p>Tạo file đuôi <code>.json</code>, lưu bằng UTF-8. Toàn bộ file là một danh sách <code>[…]</code>; mỗi thẻ là một đối tượng <code>{"{…}"}</code>, ngăn cách bằng dấu phẩy. Mẫu dưới đây có một thẻ từ vựng và một thẻ ngữ pháp.</p>
-                      <pre className="max-h-80 overflow-auto rounded-lg bg-[var(--color-surface-alt)] p-3 text-left text-xs leading-6"><code>{JSON.stringify(jsonImportExample, null, 2)}</code></pre>
-                      <dl className="divide-y divide-[var(--color-border)]">
-                        {jsonImportFields.map(([field, required, description]) => (
-                          <div key={field} className="py-3">
-                            <dt className="flex flex-wrap items-center gap-2"><code className="font-semibold">{field}</code><span className="text-xs text-[var(--color-text-secondary)]">{required}</span></dt>
-                            <dd className="mt-1 text-[var(--color-text-secondary)]">{description}</dd>
-                          </div>
-                        ))}
-                      </dl>
-                      <ul className="list-disc space-y-2 pl-5 text-[var(--color-text-secondary)]">
-                        <li><code>front</code> và <code>back</code> phải có nội dung. Các trường chữ dùng dấu nháy kép; <code>tags</code> là danh sách chuỗi.</li>
-                        <li>Trong <code>back</code>, dùng <code>{"\\n"}</code> để xuống dòng và <code>{"\\n\\n"}</code> để tách đoạn. Nếu cần dấu nháy kép trong nội dung, viết <code>{'\\"'}</code>.</li>
-                        <li>Không thêm chú thích hoặc dấu phẩy sau thẻ/trường cuối cùng. Nếu sao chép từ chat, chỉ lấy phần JSON, bỏ dấu bao Markdown.</li>
-                        <li>Tệp tối đa 20 MB và 20.000 thẻ. Sau khi chọn file, kiểm tra bản xem trước và loại thẻ trước khi lưu bộ thẻ.</li>
-                      </ul>
-                      <button type="button" className="study-button" onClick={() => download("json")}>Tải file JSON mẫu</button>
-                    </div>
-                  </details>
+                  <ImportGuide onDownload={download} />
                   </>
                 )}
               </section>
@@ -1420,62 +1316,6 @@ function Pagination({
       >
         Trang sau
       </button>
-    </div>
-  );
-}
-function CardFields({
-  card,
-  onChange,
-}: {
-  card: ImportedCard;
-  onChange: (c: ImportedCard) => void;
-}) {
-  return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      {(["front", "back", "reading", "hanViet", "notes"] as const).map((key, i) => (
-        <label key={key}>
-          {["Mặt trước", "Mặt sau", "Cách đọc", "Hán Việt", "Ghi chú"][i]}
-          <textarea
-            className="study-input mt-1"
-            required={key === "front" || key === "back"}
-            maxLength={key === "reading" || key === "hanViet" ? 10000 : 20000}
-            value={card[key]}
-            onChange={(e) => onChange({ ...card, [key]: e.target.value })}
-          />
-        </label>
-      ))}
-      <label>
-        Loại
-        <select
-          className="study-input"
-          value={card.kind}
-          onChange={(e) =>
-            onChange({ ...card, kind: e.target.value as ImportedCard["kind"] })
-          }
-        >
-          {Object.entries(kindLabels).map(([k, v]) => (
-            <option key={k} value={k}>
-              {v}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label>
-        Tags (cách bằng dấu phẩy)
-        <input
-          className="study-input"
-          value={card.tags?.join(", ") || ""}
-          onChange={(e) =>
-            onChange({
-              ...card,
-              tags: e.target.value
-                .split(",")
-                .map((t) => t.trim())
-                .filter(Boolean),
-            })
-          }
-        />
-      </label>
     </div>
   );
 }

@@ -47,6 +47,7 @@ export function StudySession({
   initialProgress = {},
   onExit,
   onTemplateChange,
+  onCardChange,
   initialIndex = 0,
   onPositionChange,
   onComplete,
@@ -58,6 +59,7 @@ export function StudySession({
   initialProgress?: Record<string, ApiProgress | null>;
   onExit: () => void;
   onTemplateChange?: (template: DeckTemplateConfig) => Promise<void> | void;
+  onCardChange?: (card: ReturnType<typeof presentationCard>) => Promise<CardView>;
   initialIndex?: number;
   onPositionChange?: (cardId: string) => void;
   onComplete?: () => void;
@@ -434,12 +436,19 @@ export function StudySession({
         deck={{ id: cards[0]?.deckId || "study", name: deckName, source: "Phiên học", format: "", createdAt: "", position: 0, template, cards: [presentationCard(current)] }}
         busy={savingTemplate}
         error={error}
+        editableCard={current.source === "IMPORT" && onCardChange ? presentationCard(current) : undefined}
         onCancel={() => setCustomizing(false)}
-        onSave={async next => {
+        onSave={async (next, changedCard) => {
           setSavingTemplate(true);
           try {
-            if (onTemplateChange) await onTemplateChange(next);
-            else setJSON(templateKey, next);
+            if (changedCard && onCardChange && JSON.stringify(changedCard) !== JSON.stringify(presentationCard(current))) {
+              const updated = await onCardChange(changedCard);
+              setSessionCards((previous) => previous.map((card) => card.id === updated.id ? updated : card));
+            }
+            if (JSON.stringify(next) !== JSON.stringify(template)) {
+              if (onTemplateChange) await onTemplateChange(next);
+              else setJSON(templateKey, next);
+            }
             setTemplate(next);
             setCustomizing(false);
             setError("");

@@ -49,6 +49,9 @@ export const deckCardIds = (id: string) =>
 export const dueQueue = (id: string, limit = 50) =>
   apiRequest<ApiQueueCard[]>(`/anki/due?deckId=${id}&limit=${limit}`);
 export function cardRequest(card: ImportedCard, position?: number) {
+  const extraData = { ...card.extraData };
+  if (card.backReading.trim()) extraData.backReading = card.backReading.trim();
+  else delete extraData.backReading;
   return {
     front: card.front.trim(),
     back: card.back.trim(),
@@ -58,7 +61,7 @@ export function cardRequest(card: ImportedCard, position?: number) {
     position,
     tags: card.tags || [],
     extraData: {
-      ...card.extraData,
+      ...extraData,
       hanViet: card.hanViet.trim(),
       ...(card.sourceRef ? { sourceRef: card.sourceRef } : {}),
       ...(card.sourceSheet ? { sourceSheet: card.sourceSheet } : {}),
@@ -104,6 +107,7 @@ export function asImported(card: PersonalCard): ImportedCard {
     front: card.front,
     back: card.back,
     reading: card.reading || "",
+    backReading: typeof card.extraData?.backReading === "string" ? card.extraData.backReading : "",
     hanViet: typeof hanViet === "string" ? hanViet : "",
     notes: card.notes || "",
     kind: card.kind.toLowerCase() as ImportedCard["kind"],

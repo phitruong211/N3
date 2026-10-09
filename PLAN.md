@@ -36,21 +36,21 @@ Chọn giải pháp nhỏ nhất vẫn thống nhất hệ thống:
 
 ## Changes
 
-- [ ] `src/lib/furigana.ts` — thêm parser cú pháp `Kanji[hiragana]`, căn reading theo kana khi chỉ có một kết quả, serialize/parse segment an toàn và trả cảnh báo có vị trí.
-- [ ] `src/lib/ankiImport.ts` — thêm `backReading`, mapping alias hai mặt, warning riêng, segment furigana hai mặt, font family/version migration và chuẩn hóa giống nhau cho mọi định dạng.
-- [ ] `src/lib/deckApi.ts` và `src/lib/cards.ts` — chuyển đổi `backReading`/segments qua `extraData`, bảo toàn tags/metadata khi đổi giữa `ImportedCard`, API card và `CardView`.
-- [ ] `src/components/flashcard/FuriganaText.tsx` — render `ruby`/`rt`, fallback reading riêng khi alignment không chắc chắn, tuân theo bật/tắt phiên âm của từng mặt.
-- [ ] `src/components/flashcard/CardFields.tsx` — form nội dung thẻ dùng chung cho quản lý, preview và dialog; hỗ trợ front/back markup, reading hai mặt, Hán Việt, note, type, tags và cảnh báo trực tiếp.
-- [ ] `src/components/flashcard/ImportGuide.tsx` — một hướng dẫn import chung, ví dụ chuyển đổi giữa định dạng, file mẫu và prompt có nút sao chép.
-- [ ] `src/components/flashcard/ImportPreviewEditor.tsx` — preview gọn mặc định, mapping nâng cao mở theo nhu cầu/lỗi, hiển thị ruby thật và cho sửa card trước khi import.
-- [ ] `src/components/flashcard/ImportedDecks.tsx` — dùng component mới, đơn giản hóa ba bước import, thêm mẫu TXT/TSV, chuyển callback sửa card import vào phiên học và giữ draft/idempotency hiện tại.
-- [ ] `src/components/flashcard/CardPresentation.tsx` — chọn năm font, nút áp dụng style sang cả hai mặt, preview furigana hai mặt, và vùng sửa thẻ hiện tại chỉ khi được truyền quyền sửa.
-- [ ] `src/components/flashcard/StudySession.tsx` — truyền thẻ import hiện tại vào dialog, lưu card/template theo phần thay đổi và thay card đã xác nhận trong `sessionCards`.
-- [ ] `src/index.css`, `public/fonts/**` — khai báo ba font self-hosted, giữ OFL, thêm style ruby responsive và cho phép synthetic weight/oblique với Dela Gothic One.
-- [ ] `tests/furigana.test.mjs` — kiểm thử explicit markup, auto alignment chắc chắn, trường hợp mơ hồ, lỗi ngoặc và round-trip segments.
-- [ ] `tests/ankiImport.test.mjs` — fixture tương đương JSON/TXT/CSV/TSV/XLSX/XLS, reading hai mặt, tags/examples, warnings, migration font/template.
-- [ ] `tests/importCustomization.browser.mjs` — kiểm tra ruby hai mặt, font/style đồng bộ, chỉnh thẻ import hiện tại, reload và giới hạn quyền của bộ built-in/manual.
-- [ ] `docs/anki-import.md` — cập nhật schema chung, cú pháp furigana hai mặt và prompt giống UI.
+- [x] `src/lib/furigana.ts` — thêm parser cú pháp `Kanji[hiragana]`, căn reading theo kana khi chỉ có một kết quả, serialize/parse segment an toàn và trả cảnh báo có vị trí.
+- [x] `src/lib/ankiImport.ts` — thêm `backReading`, mapping alias hai mặt, warning riêng, segment furigana hai mặt, font family/version migration và chuẩn hóa giống nhau cho mọi định dạng.
+- [x] `src/lib/deckApi.ts` và `src/lib/cards.ts` — chuyển đổi `backReading`/segments qua `extraData`, bảo toàn tags/metadata khi đổi giữa `ImportedCard`, API card và `CardView`.
+- [x] `src/components/flashcard/FuriganaText.tsx` — render `ruby`/`rt`, fallback reading riêng khi alignment không chắc chắn, tuân theo bật/tắt phiên âm của từng mặt.
+- [x] `src/components/flashcard/CardFields.tsx` — form nội dung thẻ dùng chung cho quản lý, preview và dialog; hỗ trợ front/back markup, reading hai mặt, Hán Việt, note, type, tags và cảnh báo trực tiếp.
+- [x] `src/components/flashcard/ImportGuide.tsx` — một hướng dẫn import chung, ví dụ chuyển đổi giữa định dạng, file mẫu và prompt có nút sao chép.
+- [x] `src/components/flashcard/ImportPreviewEditor.tsx` — preview gọn mặc định, mapping nâng cao mở theo nhu cầu/lỗi, hiển thị ruby thật và cho sửa card trước khi import.
+- [x] `src/components/flashcard/ImportedDecks.tsx` — dùng component mới, đơn giản hóa ba bước import, thêm mẫu TXT/TSV, chuyển callback sửa card import vào phiên học và giữ draft/idempotency hiện tại.
+- [x] `src/components/flashcard/CardPresentation.tsx` — chọn năm font, nút áp dụng style sang cả hai mặt, preview furigana hai mặt, và vùng sửa thẻ hiện tại chỉ khi được truyền quyền sửa.
+- [x] `src/components/flashcard/StudySession.tsx` — truyền thẻ import hiện tại vào dialog, lưu card/template theo phần thay đổi và thay card đã xác nhận trong `sessionCards`.
+- [x] `src/index.css`, `public/fonts/**` — khai báo ba font self-hosted, giữ OFL, thêm style ruby responsive và cho phép synthetic weight/oblique với Dela Gothic One.
+- [x] `tests/furigana.test.mjs` — kiểm thử explicit markup, auto alignment chắc chắn, trường hợp mơ hồ, lỗi ngoặc và round-trip segments.
+- [x] `tests/ankiImport.test.mjs` — fixture tương đương JSON/TXT/CSV/TSV/XLSX/XLS, reading hai mặt, tags/examples, warnings, migration font/template.
+- [x] `tests/importCardCustomization.browser.mjs` — kiểm tra ruby hai mặt, font/style đồng bộ, chỉnh thẻ import hiện tại, reload và giới hạn quyền của bộ built-in/manual.
+- [x] `docs/anki-import.md` — cập nhật schema chung, cú pháp furigana hai mặt và prompt giống UI.
 
 ## Verification
 
