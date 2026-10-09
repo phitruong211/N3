@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { kindLabels, type ImportedCard } from "@/lib/ankiImport";
 import {
   parseStoredFurigana,
+  normalizeReadingInput,
   resolveFurigana,
   serializeFurigana,
   type FuriganaResult,
@@ -57,8 +58,9 @@ export function CardFields({
   const updateReading = (side: Side, value: string) => {
     const readingKey = side === "front" ? "reading" : "backReading";
     const inputValue = side === "front" ? frontInput : backInput;
-    const next = { ...card, [readingKey]: value };
-    onChange(withFurigana(next, side, resolveFurigana(inputValue, value)));
+    const normalized = normalizeReadingInput(value);
+    const next = { ...card, [readingKey]: normalized };
+    onChange(withFurigana(next, side, resolveFurigana(inputValue, normalized)));
   };
 
   return (
@@ -92,11 +94,11 @@ export function CardFields({
         </label>
         <label>
           Cách đọc mặt trước
-          <textarea className="study-input mt-1" maxLength={10000} value={card.reading} onChange={(event) => updateReading("front", event.target.value)} />
+          <textarea className="study-input mt-1" maxLength={10000} placeholder="Ví dụ: たちば" value={card.reading} onChange={(event) => updateReading("front", event.target.value)} />
         </label>
         <label>
           Cách đọc mặt sau
-          <textarea className="study-input mt-1" maxLength={10000} value={card.backReading} onChange={(event) => updateReading("back", event.target.value)} />
+          <textarea className="study-input mt-1" maxLength={10000} placeholder="Chỉ nhập hiragana của mặt sau" value={card.backReading} onChange={(event) => updateReading("back", event.target.value)} />
         </label>
         <label>
           Hán Việt

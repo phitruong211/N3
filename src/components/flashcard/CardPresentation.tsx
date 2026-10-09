@@ -80,7 +80,8 @@ function Examples({ value, showReading }: { value: unknown; showReading: boolean
 
 function GrammarBack({ value, reading, storedSegments, showReading, compact, style }: { value: string; reading: string; storedSegments?: unknown; showReading: boolean; compact: boolean; style: DeckTemplateConfig['back']['style'] }) {
   const textStyle = compact ? undefined : cardTextStyle(style);
-  if (showReading && (reading || parseStoredFurigana(storedSegments).length)) {
+  const hasExplicitFurigana = parseStoredFurigana(storedSegments).some((segment) => segment.reading);
+  if ((showReading && reading) || hasExplicitFurigana) {
     return <div className={`text-left whitespace-pre-wrap break-words leading-relaxed ${compact ? "text-sm" : ""}`} style={textStyle}>
       <FuriganaText text={value} reading={reading} storedSegments={storedSegments} />
     </div>;
@@ -143,6 +144,7 @@ export function CardFace({
         const isCardText = field === "front" || field === "back";
         const cardReading = field === "front" ? card.reading : field === "back" ? card.backReading : "";
         const storedSegments = field === "front" ? card.extraData?.frontFuriganaSegments : field === "back" ? card.extraData?.backFuriganaSegments : undefined;
+        const showFurigana = fields.includes("reading") || parseStoredFurigana(storedSegments).some((segment) => segment.reading);
         return (
           <div
             key={`${field}-${index}`}
@@ -161,7 +163,7 @@ export function CardFace({
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
             {field === "hanViet" ? `Hán Việt: ${value}` : isCardText ? (
-              <FuriganaText text={value} reading={cardReading} storedSegments={storedSegments} show={fields.includes("reading")} />
+              <FuriganaText text={value} reading={cardReading} storedSegments={storedSegments} show={showFurigana} />
             ) : value}
           </div>
         );

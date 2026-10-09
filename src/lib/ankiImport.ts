@@ -1,5 +1,5 @@
 import type { SRSCard } from '../types';
-import { resolveFurigana, segmentsReading } from './furigana.ts';
+import { normalizeReadingInput, resolveFurigana, segmentsReading } from './furigana.ts';
 
 export type ImportedKind = 'vocabulary' | 'kanji' | 'grammar' | 'general';
 export type CardField = 'front' | 'back' | 'reading' | 'hanViet' | 'notes' | 'kind' | 'deckName';
@@ -122,7 +122,7 @@ export function remapImportPreview(preview: ImportPreview, tables: ImportTable[]
   for (let index = start; index < tab.rows.length; index++) {
    const row = tab.rows[index];
    const pick = (field: ImportField) => text(row[tab.mapping[field] ?? -1]);
-   const rawFront = pick('front'), rawBack = pick('back'), rawReading = pick('reading'), rawBackReading = pick('backReading'), hanViet = pick('hanViet'), notes = pick('notes');
+   const rawFront = pick('front'), rawBack = pick('back'), rawReading = normalizeReadingInput(pick('reading')), rawBackReading = normalizeReadingInput(pick('backReading')), hanViet = pick('hanViet'), notes = pick('notes');
    const fail = (reason: string) => issues.push({ row: index + 1, sheet: tab.name, reason });
    if (!rawFront || !rawBack) { fail('Thiếu mặt trước hoặc mặt sau'); continue; }
    if (rawFront.length > 20000 || rawBack.length > 20000 || notes.length > 20000 || rawReading.length > 10000 || rawBackReading.length > 10000 || hanViet.length > 10000) { fail('Vượt giới hạn trường: front/back/note 20.000, reading/backReading/hanViet 10.000 ký tự'); continue; }

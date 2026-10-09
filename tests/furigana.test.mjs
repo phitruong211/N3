@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { alignFurigana, parseFuriganaMarkup, parseStoredFurigana, resolveFurigana, segmentsReading, serializeFurigana } from '../src/lib/furigana.ts';
+import { alignFurigana, normalizeReadingInput, parseFuriganaMarkup, parseStoredFurigana, resolveFurigana, segmentsReading, serializeFurigana } from '../src/lib/furigana.ts';
 
 test('explicit furigana markup becomes clean text and round-trips', () => {
   const result = parseFuriganaMarkup('明日[あした]は学校[がっこう]へ行[い]く');
@@ -8,6 +8,11 @@ test('explicit furigana markup becomes clean text and round-trips', () => {
   assert.equal(result.text, '明日は学校へ行く');
   assert.equal(segmentsReading(result.segments), 'あしたはがっこうへいく');
   assert.equal(serializeFurigana(result.segments), '明日[あした]は学校[がっこう]へ行[い]く');
+});
+
+test('reading fields accept kana or extract kana from Kanji[hiragana]', () => {
+  assert.equal(normalizeReadingInput('たちば'), 'たちば');
+  assert.equal(normalizeReadingInput('立場[たちば]'), 'たちば');
 });
 
 test('reading aligns to kanji runs only when kana anchors are unambiguous', () => {

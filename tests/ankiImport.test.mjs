@@ -96,6 +96,14 @@ test('front and back furigana import consistently and warnings do not drop cards
   assert.equal(result.warnings.length, 1);
 });
 
+test('reading columns normalize accidental Kanji[hiragana] input to kana', () => {
+  const result = parseTextImport(JSON.stringify([
+    { front: '立場', back: 'lập trường; vị thế', reading: '立場[たちば]' },
+  ]), 'reading-markup.json');
+  assert.equal(result.cards[0].reading, 'たちば');
+  assert.match(result.cards[0].extraData.frontFuriganaSegments, /たちば/);
+});
+
 test('JSON, TXT, CSV, TSV, XLSX and XLS normalize to equivalent card data', async () => {
   const examples = [{ japanese: '日本語を勉強します。', reading: 'にほんごをべんきょうします。', meaning: 'Tôi học tiếng Nhật.' }];
   const record = { front: '勉強[べんきょう]する', back: '学校[がっこう]へ行[い]く', reading: 'べんきょうする', back_reading: 'がっこうへいく', han_viet: 'Miễn Cường', note: 'Ôn bài', type: 'VOCABULARY', tags: ['N3', 'bài 1'], examples };

@@ -63,6 +63,13 @@ export function parseFuriganaMarkup(input: string): FuriganaResult {
   return { text: clean, segments, explicit: true };
 }
 
+export function normalizeReadingInput(input: string): string {
+  const parsed = parseFuriganaMarkup(input.trim());
+  return parsed.explicit && !parsed.warning
+    ? segmentsReading(parsed.segments)
+    : input.trim();
+}
+
 function surfaceRuns(text: string): Array<{ text: string; han: boolean }> {
   const runs: Array<{ text: string; han: boolean }> = [];
   let cursor = 0;
@@ -114,7 +121,7 @@ export function alignFurigana(text: string, reading: string): FuriganaResult {
 export function resolveFurigana(input: string, reading = ""): FuriganaResult {
   const explicit = parseFuriganaMarkup(input);
   if (explicit.explicit || explicit.warning) return explicit;
-  return alignFurigana(explicit.text, reading);
+  return alignFurigana(explicit.text, normalizeReadingInput(reading));
 }
 
 export function parseStoredFurigana(value: unknown): FuriganaSegment[] {

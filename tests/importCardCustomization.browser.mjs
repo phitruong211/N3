@@ -56,8 +56,9 @@ try {
   await dialog.getByText("Nội dung thẻ hiện tại", { exact: true }).waitFor();
   await dialog.getByLabel(/Mặt trước/).first().fill("学校[がっこう]");
   await dialog.getByLabel(/Mặt sau/).first().fill("日本[にほん]へ行[い]く");
-  await dialog.locator("label").filter({ hasText: "Cách đọc mặt trước" }).locator("textarea").fill("");
+  await dialog.locator("label").filter({ hasText: "Cách đọc mặt trước" }).locator("textarea").fill("学校[がっこう]");
   await dialog.locator("label").filter({ hasText: "Cách đọc mặt sau" }).locator("textarea").fill("");
+  await dialog.getByLabel("Cách đọc", { exact: true }).uncheck();
   await dialog.locator("label").filter({ hasText: "Font chữ" }).locator("select").selectOption("notoSansJp");
   await dialog.getByRole("button", { name: "Áp dụng kiểu này cho cả hai mặt", exact: true }).click();
   await dialog.getByRole("button", { name: "Lưu tùy chỉnh", exact: true }).click();
@@ -65,6 +66,7 @@ try {
   const saved = await page.evaluate(() => ({ card: window.savedCard, template: window.savedTemplate }));
   assert.equal(saved.card.front, "学校");
   assert.equal(saved.card.back, "日本へ行く");
+  assert.equal(saved.card.reading, "がっこう");
   assert.equal(JSON.parse(saved.card.extraData.frontFuriganaSegments)[0].reading, "がっこう");
   assert.equal(saved.template.front.style.fontFamily, "notoSansJp");
   assert.equal(saved.template.back.style.fontFamily, "notoSansJp");
