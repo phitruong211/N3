@@ -9,9 +9,14 @@ Yêu cầu:
 - Mỗi thẻ có: front, back, reading, back_reading, han_viet, note, type, tags.
 - front và back bắt buộc. Các trường còn lại có thể là chuỗi rỗng; tags là mảng chuỗi.
 - type chỉ dùng một trong: VOCABULARY, KANJI, GRAMMAR, GENERAL.
-- Khi có Kanji, ghi furigana chính xác theo dạng 学校[がっこう]. Có thể dùng ở cả front và back.
-- Không tự đoán cách đọc khi không chắc; để reading hoặc back_reading trống để tôi bổ sung.
+- Quy tắc furigana: đặt [hiragana] NGAY SAU đúng chữ hoặc cụm Kanji cần chú âm. Ví dụ: 立場[たちば], 日本[にほん]へ行[い]く.
+- Áp dụng quy tắc Kanji[hiragana] cho cả front và back. Không đặt cách đọc của cả câu ở cuối câu.
+- reading và back_reading chỉ chứa cách đọc bằng kana, không lặp lại Kanji và không dùng dấu ngoặc. Ví dụ: reading là "たちば", không phải "立場[たちば]".
+- Không tự đoán cách đọc khi không chắc; để reading/back_reading trống và giữ Kanji không có ngoặc để tôi bổ sung sau.
 - Giữ nguyên xuống dòng cần thiết trong back bằng ký tự \\n.
+
+Ví dụ một thẻ đúng:
+{"front":"立場[たちば]","back":"Lập trường; 日本[にほん]での立場[たちば]","reading":"たちば","back_reading":"","han_viet":"Lập Trường","note":"","type":"VOCABULARY","tags":["N3"]}
 
 Nội dung cần chuyển:
 [DÁN NỘI DUNG CỦA BẠN VÀO ĐÂY]`;
@@ -36,7 +41,7 @@ export function ImportGuide({ onDownload }: { onDownload: (format: "json" | "csv
       <div>
         <h4 className="font-semibold">Quy tắc chung cho mọi định dạng</h4>
         <p className="mt-1 text-[var(--color-text-secondary)]">
-          Cột bắt buộc: <code>front</code>, <code>back</code>. Cột tùy chọn: <code>reading</code>, <code>back_reading</code>, <code>han_viet</code>, <code>note</code>, <code>type</code>, <code>tags</code>, <code>examples</code>. Đặt hiragana trên Kanji bằng <code>学校[がっこう]</code> ở mặt trước hoặc mặt sau.
+          Cột bắt buộc: <code>front</code>, <code>back</code>. Cột tùy chọn: <code>reading</code>, <code>back_reading</code>, <code>han_viet</code>, <code>note</code>, <code>type</code>, <code>tags</code>, <code>examples</code>. Muốn hiragana nằm trên chữ nào, đặt <code>[hiragana]</code> ngay sau chữ hoặc cụm Kanji đó: <code>立場[たちば]</code>, <code>日本[にほん]へ行[い]く</code>. Dùng được ở cả hai mặt; riêng <code>reading</code> và <code>back_reading</code> chỉ nhập kana.
         </p>
       </div>
       <pre className="max-h-72 overflow-auto rounded-xl bg-[var(--color-surface-alt)] p-3 text-xs leading-6"><code>{JSON.stringify(IMPORT_EXAMPLE, null, 2)}</code></pre>
