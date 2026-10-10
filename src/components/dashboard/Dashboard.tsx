@@ -14,6 +14,7 @@ import {
   Headphones,
   Languages,
   Layers,
+  RotateCcw,
   ScrollText,
   Target,
 } from 'lucide-react';
@@ -57,9 +58,9 @@ export function Dashboard() {
         <div className="relative max-w-2xl">
           <p className="text-xs font-bold uppercase tracking-[.14em] opacity-60">Nhịp học hôm nay</p>
           <h2 id="today-focus-title" className="mt-3 max-w-xl text-2xl font-semibold leading-tight tracking-[-.035em] sm:text-3xl">{remaining > 0 ? `Còn ${remaining} thẻ để hoàn thành mục tiêu.` : 'Bạn đã hoàn thành mục tiêu hôm nay.'}</h2>
-          <p className="mt-3 max-w-xl text-sm leading-7 opacity-70">{due > 0 ? `${due} thẻ đang đến hạn. Chọn đúng bộ thẻ rồi bắt đầu chế độ ôn ngắt quãng.` : 'Chọn một bộ thẻ để học tự do hoặc bắt đầu xây lịch ôn ngắt quãng.'}</p>
+          <p className="mt-3 max-w-xl text-sm leading-7 opacity-70">{due > 0 ? `${due} thẻ đang đến hạn. Mở danh sách ôn để tiếp tục đúng lịch.` : 'Hôm nay chưa có thẻ đến hạn. Bạn có thể học tự do theo bài mình muốn.'}</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <button onClick={() => setCurrentPage('flashcards')} className="study-button !border-transparent !bg-[var(--color-bg)] !text-[var(--color-text)] hover:!opacity-90"><Layers size={18}/> Mở bộ thẻ <ArrowRight size={17}/></button>
+            <button onClick={() => setCurrentPage(due > 0 ? 'srs' : 'flashcards')} className="study-button !border-transparent !bg-[var(--color-bg)] !text-[var(--color-text)] hover:!opacity-90">{due > 0 ? <RotateCcw size={18}/> : <Layers size={18}/>} {due > 0 ? 'Ôn ngắt quãng' : 'Học tự do'} <ArrowRight size={17}/></button>
             <button onClick={() => setCurrentPage('progress')} className="study-button !border-white/20 !bg-transparent !text-inherit hover:!bg-white/10">Xem tiến độ</button>
           </div>
         </div>
@@ -90,10 +91,14 @@ export function Dashboard() {
       </div>
     </section>
 
-    <section className="grid gap-3 sm:grid-cols-2" aria-label="Hành động nhanh">
+    <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3" aria-label="Hành động nhanh">
       <button onClick={() => setCurrentPage('flashcards')} className="study-panel group flex min-h-28 cursor-pointer items-center gap-4 text-left transition-colors hover:border-[var(--color-border-strong)]">
         <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[var(--color-accent-subtle)] text-[var(--color-accent)]"><Layers size={23}/></span>
-        <span className="min-w-0 flex-1"><strong className="block">Bộ thẻ của bạn</strong><span className="mt-1 block text-sm text-[var(--color-text-secondary)]">Học tự do hoặc ôn ngắt quãng theo từng bộ</span></span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1"/>
+        <span className="min-w-0 flex-1"><strong className="block">Học tự do</strong><span className="mt-1 block text-sm text-[var(--color-text-secondary)]">Chọn bộ thẻ và bài muốn học</span></span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1"/>
+      </button>
+      <button onClick={() => setCurrentPage('srs')} className="study-panel group flex min-h-28 cursor-pointer items-center gap-4 text-left transition-colors hover:border-[var(--color-border-strong)]">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[var(--color-warning-subtle)] text-[var(--color-warning)]"><RotateCcw size={23}/></span>
+        <span className="min-w-0 flex-1"><strong className="block">Ôn ngắt quãng</strong><span className="mt-1 block text-sm text-[var(--color-text-secondary)]">Ôn đúng lịch, tự động chọn thẻ cần học</span></span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1"/>
       </button>
       <button onClick={() => setCurrentPage('progress')} className="study-panel group flex min-h-28 cursor-pointer items-center gap-4 text-left transition-colors hover:border-[var(--color-border-strong)]">
         <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[var(--color-success-subtle)] text-[var(--color-success)]"><ChartNoAxesCombined size={23}/></span>

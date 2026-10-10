@@ -216,12 +216,20 @@ export function createLearningStorage(scope: StorageScope) {
     autoPlayAudio: false,
     dailyGoal: 20,
     ankiSessionMinutes: 0,
+    srsAgainMinutes: 1,
+    srsGoodMinutes: 10,
+    srsDesiredRetention: 0.9,
     reducedMotion: false,
   };
 
   function getSettings(): AppSettings {
     const stored = getJSON<Partial<AppSettings>>(KEYS.SETTINGS, {});
     const requestedMinutes = Number(stored.ankiSessionMinutes);
+    const againMinutes = Number(stored.srsAgainMinutes);
+    const goodMinutes = Number(stored.srsGoodMinutes);
+    const retention = Number(stored.srsDesiredRetention);
+    const normalizedAgain = Number.isFinite(againMinutes) ? Math.min(30, Math.max(1, Math.round(againMinutes))) : 1;
+    const normalizedGood = Number.isFinite(goodMinutes) ? Math.min(720, Math.max(2, Math.round(goodMinutes))) : 10;
     return {
       ...DEFAULT_SETTINGS,
       ...stored,
@@ -230,6 +238,9 @@ export function createLearningStorage(scope: StorageScope) {
       ankiSessionMinutes: Number.isFinite(requestedMinutes)
         ? Math.min(180, Math.max(0, Math.round(requestedMinutes)))
         : DEFAULT_SETTINGS.ankiSessionMinutes,
+      srsAgainMinutes: normalizedAgain,
+      srsGoodMinutes: normalizedGood > normalizedAgain ? normalizedGood : Math.min(720, normalizedAgain + 1),
+      srsDesiredRetention: ([0.9, 0.93, 0.95].includes(retention) ? retention : 0.9) as AppSettings['srsDesiredRetention'],
     };
   }
 

@@ -5,9 +5,10 @@ import { pageForLocation, pathForPage, resolveInitialPath } from '../src/lib/nav
 test('legacy page ids map to canonical routes', () => {
   assert.equal(pathForPage('dashboard'), '/today');
   assert.equal(pathForPage('flashcards'), '/decks');
-  assert.equal(pathForPage('anki'), '/decks');
-  assert.equal(pathForPage('srs'), '/decks');
+  assert.equal(pathForPage('anki'), '/review');
+  assert.equal(pathForPage('srs'), '/review');
   assert.equal(pageForLocation('/decks', '?mode=scheduled'), 'flashcards');
+  assert.equal(pageForLocation('/review'), 'srs');
 });
 
 test('library routes retain their content page ids', () => {
@@ -19,7 +20,7 @@ test('library routes retain their content page ids', () => {
 
 test('the URL wins and root migrates the stored page', () => {
   assert.equal(resolveInitialPath('/library/kanji', 'dashboard'), '/library/kanji');
-  assert.equal(resolveInitialPath('/', 'anki'), '/decks');
+  assert.equal(resolveInitialPath('/', 'anki'), '/review');
   assert.equal(resolveInitialPath('/', '/progress'), '/progress');
   assert.equal(resolveInitialPath('/', 'unknown'), '/today');
 });

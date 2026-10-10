@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { useApp, useLearningStorage } from "@/hooks/useApp";
+import { useLearningStorage } from "@/hooks/useApp";
 import {
   defaultDeckTemplate,
   kindLabels,
@@ -43,10 +43,11 @@ import { importedCardView, type CardView } from "@/lib/cards";
 import { StudySession } from "./StudySession";
 import { StudySetupSheet } from "./StudySetupSheet";
 import { loadStudyPages } from "@/lib/loadStudyPages";
-import { buildFreeStudyQueue, lessonOptions, type StudySetup } from "@/lib/studySetup";
-import { buildScheduledDeckQueue } from "@/lib/deckSchedule";
+import { buildFreeStudyQueue, lessonOptions } from "@/lib/studySetup";
+import { DAILY_NEW_CARD_LIMIT } from "@/lib/deckSchedule";
+import { DeckProgressGrid } from "./DeckCard";
 import { DeckCustomizeDialog } from "./CardPresentation";
-import { builtInDeckResumeKey, resolveResumeIndex } from "@/lib/studyResume";
+import { personalDeckResumeKey, resolveResumeIndex } from "@/lib/studyResume";
 import { ContentBadge } from "@/components/ui/StudyUI";
 import {
   GripVertical,
@@ -76,15 +77,16 @@ const emptyPage = <T,>(): Page<T> => ({
 });
 
 export function ImportedDecks({
+  mode,
   leadingDeck,
 }: {
+  mode: "free" | "scheduled";
   leadingDeck?: ReactNode;
 }) {
-  const mode = "flashcards" as const;
-  const { settings } = useApp();
+  const draftMode = "flashcards" as const;
   const { getJSON, setJSON } = useLearningStorage();
   const { user, requestAuth, draft, setDraft } = useAuth();
-  const initial = useRef(draft?.mode === mode ? draft : null).current;
+  const initial = useRef(draft?.mode === draftMode ? draft : null).current;
   const [decks, setDecks] = useState<Page<PersonalDeck>>(emptyPage);
   const [deckPage, setDeckPage] = useState(0);
   const sort = "position,asc";
@@ -200,7 +202,7 @@ export function ImportedDecks({
               preview,
               name,
               creatingDeck: creating,
-              mode,
+              mode: draftMode,
               manualCards,
               allowEmpty,
               importSeed: seed.current,
@@ -230,7 +232,7 @@ export function ImportedDecks({
       preview,
       name,
       creatingDeck: creating,
-      mode,
+      mode: draftMode,
       manualCards,
       allowEmpty,
       importSeed: seed.current,
@@ -377,112 +379,90 @@ export function ImportedDecks({
       }
     });
   }
-  async function loadStudyCards(deck: PersonalDeck, studyMode: "free" | "scheduled") {
-    let views: CardView[] = [];
+  async function loadFreeStudyCards(deck: PersonalDeck) {
     const progress: Record<string, ApiProgress | null> = {};
-    if (studyMode === "scheduled") {
-      const queue = await dueQueue(
-        deck.id,
-        Math.min(200, Math.max(1, deck.cardCount)),
-      );
-      views = queue.map((c, i) => {
-        progress[c.cardId] = c.progress;
-        return {
-          id: c.cardId,
-          deckId: deck.id,
-          front: c.front,
-          back: c.back,
-          reading: c.reading || "",
-          backReading: typeof c.extraData?.backReading === "string" ? c.extraData.backReading : "",
-          hanViet:
-            (["hanViet", "han_viet", "hanTu", "han_tu"]
-              .map((key) => c.extraData?.[key])
-              .find((value) => typeof value === "string") as string) || "",
-          note: c.notes || "",
-          extraData: c.extraData as Record<string, string>,
-          type: c.kind,
-          tags: [],
-          source: deck.sourceType === "MANUAL" ? "MANUAL" : "IMPORT",
-          position: i,
-        };
-      });
-    } else {
-      const loaded = await loadStudyPages(p => cardPage(deck.id, p, "", "", "", 200, false));
-      views = loaded.map((c, i) =>
-            importedCardView(
-              asImported(c),
-              deck.id,
-              deck.sourceType === "MANUAL" ? "MANUAL" : "IMPORT",
-              i,
-            ),
-          );
-    }
+    const loaded = await loadStudyPages(p => cardPage(deck.id, p, "", "", "", 200, false));
+    const views = loaded.map((c, i) => importedCardView(
+      asImported(c),
+      deck.id,
+      deck.sourceType === "MANUAL" ? "MANUAL" : "IMPORT",
+      i,
+    ));
     return {
       views,
       progress,
       template: normalizeDeckTemplate(deck.templateConfig),
     };
   }
-  function personalSchedule(
-    cards: CardView[],
-    progress: Record<string, ApiProgress | null>,
-  ) {
-    return buildScheduledDeckQueue(cards, card => {
-      const item = progress[card.id];
-      return item ? { state: item.state.toLowerCase() as "new" | "learning" | "review" | "relearning", dueDate: item.dueAt } : null;
-    });
+
+  function readyCount(deck: PersonalDeck) {
+    const remainingNewToday = Math.max(0, DAILY_NEW_CARD_LIMIT - (deck.newStartedTodayCount ?? 0));
+    return (deck.dueCount ?? 0) + Math.min(deck.newCount ?? 0, remainingNewToday);
   }
+
   async function openFreeStudy(deck: PersonalDeck) {
     await operation(async () => {
-      const { views, progress, template } = await loadStudyCards(deck, "free");
+      const { views, progress, template } = await loadFreeStudyCards(deck);
       if (!views.length) {
         setMessage("Bộ này chưa có thẻ để học.");
         return;
       }
-      const lessons = lessonOptions(views);
-      if (lessons.length > 0) {
-        setStudySetup({ deck, cards: views, template, progress });
-      } else {
-        // No lessons — launch immediately with all cards
-        const cards = buildFreeStudyQueue(views, { mode: 'free', lessonKey: null });
-        const resumeCardId = getJSON<string | null>(builtInDeckResumeKey(deck.id), null);
-        setSession({ cards, deck, template, progress, mode: "flashcards", initialIndex: resolveResumeIndex(cards, resumeCardId) });
-      }
+      if (lessonOptions(views).length) setStudySetup({ deck, cards: views, template, progress });
+      else startFreeStudy({ deck, cards: views, template, progress }, null);
     });
   }
-  async function openScheduledStudy(deck: PersonalDeck) {
-    await operation(async () => {
-      const { views, progress, template } = await loadStudyCards(deck, "scheduled");
-      if (!views.length) {
-        setMessage("Bộ này chưa có thẻ mới hoặc thẻ đến hạn.");
-        return;
-      }
-      const scheduled = personalSchedule(views, progress);
-      if (!scheduled.cards.length) {
-        setMessage("Không có thẻ đến hạn.");
-        return;
-      }
-      setSession({ cards: scheduled.cards, deck, template, progress, mode: "anki", initialIndex: 0 });
-    });
-  }
-  function startConfiguredStudy(selection: StudySetup) {
-    if (!studySetup) return;
-    const cards = buildFreeStudyQueue(studySetup.cards, selection as { mode: 'free'; lessonKey: string | null });
+
+  function startFreeStudy(source: NonNullable<typeof studySetup>, lessonKey: string | null) {
+    const cards = buildFreeStudyQueue(source.cards, { mode: "free", lessonKey });
     if (!cards.length) {
       setMessage("Không có thẻ phù hợp với lựa chọn này.");
       setStudySetup(null);
       return;
     }
-    const resumeCardId = getJSON<string | null>(builtInDeckResumeKey(studySetup.deck.id), null);
     setSession({
       cards,
-      deck: studySetup.deck,
-      template: studySetup.template,
-      progress: studySetup.progress,
+      deck: source.deck,
+      template: source.template,
+      progress: source.progress,
       mode: "flashcards",
-      initialIndex: resolveResumeIndex(cards, resumeCardId),
+      initialIndex: resolveResumeIndex(cards, getJSON<string | null>(personalDeckResumeKey(source.deck.id), null)),
     });
     setStudySetup(null);
+  }
+
+  async function startScheduledStudy(deck: PersonalDeck) {
+    const count = readyCount(deck);
+    if (!count) {
+      setMessage("Bộ này đã hoàn thành lịch ôn hôm nay.");
+      return;
+    }
+    await operation(async () => {
+      const queue = await dueQueue(deck.id, Math.min(200, count));
+      const progress: Record<string, ApiProgress | null> = {};
+      const views = queue.map((card, index) => {
+        progress[card.cardId] = card.progress;
+        return {
+          id: card.cardId,
+          deckId: deck.id,
+          front: card.front,
+          back: card.back,
+          reading: card.reading || "",
+          backReading: typeof card.extraData?.backReading === "string" ? card.extraData.backReading : "",
+          hanViet: (["hanViet", "han_viet", "hanTu", "han_tu"].map(key => card.extraData?.[key]).find(value => typeof value === "string") as string) || "",
+          note: card.notes || "",
+          extraData: card.extraData as Record<string, string>,
+          type: card.kind,
+          tags: [],
+          source: deck.sourceType === "MANUAL" ? "MANUAL" as const : "IMPORT" as const,
+          position: index,
+        };
+      });
+      if (!views.length) {
+        setMessage("Bộ này đã hoàn thành lịch ôn hôm nay.");
+        return;
+      }
+      setSession({ cards: views, deck, template: normalizeDeckTemplate(deck.templateConfig), progress, mode: "anki", initialIndex: 0 });
+    });
   }
   async function shiftCard(id: string, delta: number) {
     if (!active) return;
@@ -520,12 +500,11 @@ export function ImportedDecks({
         cards={session.cards}
         deckName={session.deck.name}
         mode={session.mode}
-        sessionMinutes={0}
         initialIndex={session.initialIndex}
         template={session.template}
         initialProgress={session.progress}
-        onPositionChange={session.mode === 'flashcards' ? cardId => setJSON(builtInDeckResumeKey(session.deck.id), cardId) : undefined}
-        onComplete={session.mode === 'flashcards' ? () => setJSON(builtInDeckResumeKey(session.deck.id), null) : undefined}
+        onPositionChange={session.mode === "flashcards" ? cardId => setJSON(personalDeckResumeKey(session.deck.id), cardId) : undefined}
+        onComplete={session.mode === "flashcards" ? () => setJSON(personalDeckResumeKey(session.deck.id), null) : undefined}
         onTemplateChange={async template => {
           await updateDeck(session.deck.id, { templateConfig: template });
           setSession(previous => previous ? { ...previous, template } : previous);
@@ -551,10 +530,10 @@ export function ImportedDecks({
       <div className="flex items-end justify-between gap-3">
         <div>
           <p className="study-eyebrow">CỦA BẠN</p>
-          <h2 className="mt-1 text-xl font-semibold">Bộ thẻ của bạn</h2>
+          <h2 className="mt-1 text-xl font-semibold">{mode === "free" ? "Bộ thẻ của bạn" : "Bộ cần ôn"}</h2>
         </div>
       </div>
-      <input
+      {mode === "free" && <input
         ref={input}
         type="file"
         className="sr-only"
@@ -578,7 +557,7 @@ export function ImportedDecks({
             }
           });
         }}
-      />
+      />}
       {busy && (
         <p role="status">
           Đang xử lý…{" "}
@@ -686,13 +665,6 @@ export function ImportedDecks({
                   onClick={() => void openFreeStudy(active)}
                 >
                   Học tự do
-                </button>
-                <button
-                  className="study-button"
-                  disabled={busy || active.newCount + active.dueCount === 0}
-                  onClick={() => void openScheduledStudy(active)}
-                >
-                  Ôn ngắt quãng
                 </button>
               </>
             )}
@@ -920,7 +892,7 @@ export function ImportedDecks({
       {!active && (
         <div className="space-y-4">
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {creating || preview ? (
+            {mode === "free" && (creating || preview ? (
               <section className="study-panel relative space-y-4 border-dashed sm:col-span-2 xl:col-span-3">
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -1039,7 +1011,7 @@ export function ImportedDecks({
                 </span>
                 <span className="font-semibold">Tạo bộ mới</span>
               </button>
-            )}
+            ))}
 
             {leadingDeck}
 
@@ -1048,12 +1020,13 @@ export function ImportedDecks({
                 const badge = personalDeckBadge(deck);
                 const isDragging = draggingDeckId === deck.id;
                 const isDropTarget = dropDeckId === deck.id;
+                const needed = readyCount(deck);
                 return (
                   <article
                     key={deck.id}
                     className={`study-panel relative flex min-h-52 flex-col transition-[transform,border-color,opacity,box-shadow] duration-200 ${isDragging ? "opacity-[.45]" : ""} ${isDropTarget ? "-translate-y-0.5 border-[var(--color-accent)] shadow-lg" : ""}`}
                     onDragOver={(event) => {
-                      if (!draggingDeckId || draggingDeckId === deck.id) return;
+                      if (mode !== "free" || !draggingDeckId || draggingDeckId === deck.id) return;
                       event.preventDefault();
                       setDropDeckId(deck.id);
                     }}
@@ -1066,6 +1039,7 @@ export function ImportedDecks({
                         setDropDeckId(null);
                     }}
                     onDrop={(event) => {
+                      if (mode !== "free") return;
                       event.preventDefault();
                       if (draggingDeckId)
                         void dropDeck(draggingDeckId, deck.id);
@@ -1075,7 +1049,7 @@ export function ImportedDecks({
                       <ContentBadge tone={badge.tone}>
                         {badge.label}
                       </ContentBadge>
-                      <div className="flex items-center gap-1">
+                      {mode === "free" && <div className="flex items-center gap-1">
                         <button
                           type="button"
                           draggable={!busy}
@@ -1115,7 +1089,7 @@ export function ImportedDecks({
                             </button>
                           </div>
                         </details>
-                      </div>
+                      </div>}
                     </div>
                     <h3 className="mt-5 break-words text-base font-semibold">
                       {deck.name}
@@ -1126,28 +1100,23 @@ export function ImportedDecks({
                       </strong>
                       <span className="study-copy">thẻ</span>
                     </p>
-                    <p className="mt-1 text-xs text-[var(--color-text-tertiary)]">
-                      {deck.newCount} mới · {deck.dueCount} đến hạn
-                    </p>
+                    {mode === "scheduled" && <DeckProgressGrid metrics={[
+                      { label: "Cần ôn", value: deck.dueCount ?? 0, tone: "var(--color-accent)" },
+                      { label: "Chưa nhớ", value: deck.unresolvedCount ?? 0 },
+                      { label: "Hôm nay", value: deck.studiedTodayCount ?? 0 },
+                      { label: "Còn lại", value: deck.remainingTodayCount ?? needed },
+                    ]}/>}
                     <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
                       <button
                         type="button"
-                        className={`text-left text-sm font-semibold ${deck.cardCount ? "text-[var(--color-accent)] hover:underline" : "cursor-default text-[var(--color-text-tertiary)]"}`}
-                        disabled={!deck.cardCount}
-                        onClick={() => void openFreeStudy(deck)}
+                        className={`text-left text-sm font-semibold ${(mode === "free" ? deck.cardCount > 0 : needed > 0) ? "text-[var(--color-accent)] hover:underline" : "cursor-default text-[var(--color-text-tertiary)]"}`}
+                        disabled={busy || (mode === "free" ? !deck.cardCount : !needed)}
+                        onClick={() => void (mode === "free" ? openFreeStudy(deck) : startScheduledStudy(deck))}
                       >
-                        {deck.cardCount ? "Học tự do →" : "Chưa có thẻ"}
+                        {mode === "free"
+                          ? deck.cardCount ? "Bắt đầu học →" : "Chưa có thẻ"
+                          : needed ? "Ôn ngay →" : "Đã hoàn thành hôm nay"}
                       </button>
-                      {deck.cardCount > 0 && (
-                        <button
-                          type="button"
-                          className="text-left text-sm font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:underline disabled:cursor-not-allowed disabled:opacity-[.45]"
-                          disabled={busy || deck.newCount + deck.dueCount === 0}
-                          onClick={() => void openScheduledStudy(deck)}
-                        >
-                          Ôn ngắt quãng
-                        </button>
-                      )}
                     </div>
                   </article>
                 );
@@ -1156,13 +1125,13 @@ export function ImportedDecks({
 
           {!user && (
             <p className="study-copy">
-              Bạn có thể bắt đầu tạo bộ; hệ thống sẽ yêu cầu đăng nhập khi lưu.
+              {mode === "free" ? "Bạn có thể bắt đầu tạo bộ; hệ thống sẽ yêu cầu đăng nhập khi lưu." : "Đăng nhập để xem lịch ôn của các bộ thẻ cá nhân."}
             </p>
           )}
           {user && loading && <p role="status">Đang tải bộ thẻ…</p>}
           {user && !loading && !decks.content.length && (
             <p className="study-copy">
-              Chưa có bộ cá nhân. Chọn “Tạo bộ mới” để bắt đầu.
+              {mode === "free" ? "Chưa có bộ cá nhân. Chọn “Tạo bộ mới” để bắt đầu." : "Chưa có bộ cá nhân để ôn."}
             </p>
           )}
           {user && (
@@ -1180,7 +1149,7 @@ export function ImportedDecks({
         deckName={studySetup?.deck.name ?? ""}
         lessons={studySetup ? lessonOptions(studySetup.cards) : []}
         onClose={() => setStudySetup(null)}
-        onStart={startConfiguredStudy}
+        onStart={lessonKey => studySetup && startFreeStudy(studySetup, lessonKey)}
       />
       {customizing && (
         <DeckCustomizeDialog

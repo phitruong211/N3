@@ -18,6 +18,17 @@ export function SettingsPage() {
   const { settings, updateSettings, settingsSync } = useApp();
   const { user, signOut, requestAuth } = useAuth();
   const [confirmReset, setConfirmReset] = useState(false);
+  const [srsError, setSrsError] = useState('');
+  const changeAgain = (value: number) => {
+    const next = Math.min(30, Math.max(1, Math.round(value || 1)));
+    if (next >= settings.srsGoodMinutes) { setSrsError('Thời gian kiểm tra lại phải lớn hơn thời gian học lại.'); return; }
+    setSrsError(''); updateSettings({ srsAgainMinutes: next });
+  };
+  const changeGood = (value: number) => {
+    const next = Math.min(720, Math.max(2, Math.round(value || 2)));
+    if (next <= settings.srsAgainMinutes) { setSrsError('Thời gian kiểm tra lại phải lớn hơn thời gian học lại.'); return; }
+    setSrsError(''); updateSettings({ srsGoodMinutes: next });
+  };
   const handleReset = () => {
     if (!confirmReset) { setConfirmReset(true); return; }
     if (resetAllData()) window.location.reload();
@@ -55,15 +66,25 @@ export function SettingsPage() {
           <label className="block py-3">Mục tiêu mỗi ngày (thẻ)<input className="study-input" type="number" min={1} max={1000} value={settings.dailyGoal} onChange={e=>updateSettings({dailyGoal:Math.max(1,Math.min(1000,Math.round(Number(e.target.value)||1)))})}/></label>
         </section>
         <section className="study-panel">
-          <h2 className="text-base font-semibold text-[var(--color-text)]">Ôn tập</h2>
-          <p className="study-copy mt-1">Chỉ tính thời gian tab đang hoạt động. Khi hết giờ, bạn hoàn tất thẻ hiện tại rồi phiên sẽ kết thúc.</p>
-          <label className="mt-4 block text-sm font-semibold text-[var(--color-text)]">
-            Giới hạn tổng (phút)
-            <input type="number" min={0} max={180} step={1} className="study-input mt-2" value={settings.ankiSessionMinutes}
-              onChange={event => updateSettings({ ankiSessionMinutes: Math.min(180, Math.max(0, Number(event.target.value) || 0)) })}/>
-          </label>
-          <p className="study-copy mt-2">Nhập 0 để học không giới hạn. Tối đa 180 phút mỗi phiên.</p>
-          <div className="mt-3 flex flex-wrap gap-2">{[0, 10, 20, 30, 45, 60].map(minutes => <button key={minutes} aria-pressed={settings.ankiSessionMinutes === minutes} className={'study-button ' + (settings.ankiSessionMinutes === minutes ? 'study-button-primary' : '')} onClick={() => updateSettings({ ankiSessionMinutes: minutes })}>{minutes === 0 ? 'Không giới hạn' : `${minutes} phút`}</button>)}</div>
+          <h2 className="text-base font-semibold text-[var(--color-text)]">Ôn ngắt quãng</h2>
+          <p className="study-copy mt-1">Nếu không nhớ đáp án, hãy chọn Quên; Khó chỉ dùng khi bạn vẫn nhớ nhưng phải suy nghĩ nhiều.</p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <label className="text-sm font-semibold">Học lại khi quên
+              <span className="study-copy mt-1 block">Số phút trước khi thẻ quay lại</span>
+              <input className="study-input mt-2" aria-label="Học lại khi quên" type="number" min={1} max={30} value={settings.srsAgainMinutes} onChange={event => changeAgain(Number(event.target.value))}/>
+            </label>
+            <label className="text-sm font-semibold">Kiểm tra lại khi vừa nhớ
+              <span className="study-copy mt-1 block">Bước nhớ đầu tiên, tính bằng phút</span>
+              <input className="study-input mt-2" aria-label="Kiểm tra lại khi vừa nhớ" type="number" min={2} max={720} value={settings.srsGoodMinutes} onChange={event => changeGood(Number(event.target.value))}/>
+            </label>
+          </div>
+          {srsError && <p role="alert" className="mt-3 text-sm text-[var(--color-error)]">{srsError}</p>}
+          <p className="mt-5 text-sm font-semibold">Mức ghi nhớ mục tiêu</p>
+          <div className="mt-2 grid gap-2 sm:grid-cols-3">
+            {([{ value: 0.9, label: 'Cân bằng · 90%' }, { value: 0.93, label: 'Ghi nhớ cao · 93%' }, { value: 0.95, label: 'Ôn kỹ · 95%' }] as const).map(option =>
+              <button key={option.value} className={'study-button ' + (settings.srsDesiredRetention === option.value ? 'study-button-primary' : '')} aria-pressed={settings.srsDesiredRetention === option.value} onClick={() => updateSettings({ srsDesiredRetention: option.value })}>{option.label}</button>)}
+          </div>
+          <button className="study-button mt-4" onClick={() => { setSrsError(''); updateSettings({ srsAgainMinutes: 1, srsGoodMinutes: 10, srsDesiredRetention: 0.9 }); }}>Khôi phục mặc định</button>
         </section>
         <details className="study-panel">
           <summary className="flex cursor-pointer list-none items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><span className="text-base font-semibold">Vùng nguy hiểm</span></summary>

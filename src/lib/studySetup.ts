@@ -1,8 +1,7 @@
 import type { CardView } from './cards.ts';
 
 export type FreeStudySetup = { mode: 'free'; lessonKey: string | null };
-export type ScheduledStudySetup = { mode: 'scheduled' };
-export type StudySetup = FreeStudySetup | ScheduledStudySetup;
+export type StudySetup = FreeStudySetup;
 export type LessonOption = { key: string; label: string; count: number };
 
 export function lessonKey(tag: string): string | null {
@@ -30,16 +29,11 @@ export function buildFreeStudyQueue<T extends Pick<CardView, 'tags' | 'position'
 
 export function serializeStudySetup(setup: StudySetup): URLSearchParams {
   const params = new URLSearchParams({ mode: setup.mode });
-  if (setup.mode === 'free' && setup.lessonKey) {
-    params.set('lesson', setup.lessonKey);
-  }
+  if (setup.lessonKey) params.set('lesson', setup.lessonKey);
   return params;
 }
 
 export function parseStudySetup(search: string): StudySetup {
   const params = new URLSearchParams(search);
-  if (params.get('mode') === 'scheduled') {
-    return { mode: 'scheduled' };
-  }
   return { mode: 'free', lessonKey: params.get('lesson') || null };
 }

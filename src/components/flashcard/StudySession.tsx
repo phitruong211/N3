@@ -2,10 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useApp, useLearningStorage } from "@/hooks/useApp";
 import {
   useActiveElapsedMinutes,
-  useAnkiSessionTimer,
-  formatSessionTime,
 } from "@/hooks/useActiveElapsedMinutes";
 import { createSRSCard, getNextIntervals, processReview } from "@/lib/srs";
+import { legacyToFsrsProgress, progressToSrsCard } from "@/lib/fsrsProgress";
+import { applyReviewedProgress, createReviewQueue, nearestFutureDue, nextReadyCard, promoteDueCards } from "@/lib/liveReviewQueue";
 import { progressToSrs, reviewCard, type ApiProgress } from "@/lib/api";
 import { defaultDeckTemplate, normalizeDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { presentationCard, type CardView } from "@/lib/cards";
@@ -51,7 +51,6 @@ export function StudySession({
   initialIndex = 0,
   onPositionChange,
   onComplete,
-  sessionMinutes,
 }: {
   cards: CardView[];
   deckName: string;
@@ -64,7 +63,6 @@ export function StudySession({
   initialIndex?: number;
   onPositionChange?: (cardId: string) => void;
   onComplete?: () => void;
-  sessionMinutes?: number;
 }) {
   const { settings, srsCards, updateSRSCard, learningSync } = useApp();
   const { recordStudyActivity, recordFreeStudyActivity, getJSON, setJSON } = useLearningStorage();
@@ -74,6 +72,16 @@ export function StudySession({
   const [customizing, setCustomizing] = useState(false);
   const [savingTemplate, setSavingTemplate] = useState(false);
   const [sessionCards, setSessionCards] = useState(() => [...cards]);
+  const [reviewQueue, setReviewQueue] = useState(() => {
+    const progressByKey = new Map<string, ReturnType<typeof legacyToFsrsProgress> | null>();
+    for (const card of cards) {
+      const stored = card.source === 'BUILT_IN'
+        ? srsCards.find(item => item.cardId === card.id && item.deckType === card.type.toLowerCase())
+        : initialProgress[card.id] ? progressToSrs(card.id, initialProgress[card.id]!) : null;
+      progressByKey.set(card.id, stored ? legacyToFsrsProgress(stored) : null);
+    }
+    return createReviewQueue({ cards, keyFor: card => card.id, progressByKey, now: new Date() });
+  });
   const [shuffled, setShuffled] = useState(false);
   const [index, setIndex] = useState(() => Math.max(0, Math.min(cards.length - 1, initialIndex)));
   const [jumpValue, setJumpValue] = useState("1");
@@ -81,22 +89,21 @@ export function StudySession({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
+  const [clock, setClock] = useState(() => Date.now());
   const [stats, setStats] = useState({ count: 0, correct: 0, minutes: 0 });
   const viewed = useRef(new Set<string>());
   const lock = useRef(false);
   const [slideDirection, setSlideDirection] = useState(1);
-  const current = sessionCards[index];
+  const scheduled = mode === 'anki' ? nextReadyCard(reviewQueue) : null;
+  const current = mode === 'anki' ? scheduled?.card : sessionCards[index];
   const currentCardKey = current ? `${current.type}:${current.id}` : null;
   const flipped = currentCardKey !== null && revealedCardKey === currentCardKey;
   const elapsed = useActiveElapsedMinutes(
     current ? `${current.type}:${current.id}` : null,
   );
-  const timer = useAnkiSessionTimer(
-    mode === "anki" ? sessionMinutes ?? settings.ankiSessionMinutes : 0,
-    deckName,
-    !done,
-  );
-  const progress = current
+  const progress = current && mode === 'anki'
+    ? reviewQueue.progressByKey.get(current.id) ?? undefined
+    : current
     ? current.source === "BUILT_IN"
       ? srsCards.find(
           (c) =>
@@ -116,9 +123,12 @@ export function StudySession({
         ? "grammar"
         : "vocabulary";
   const state: SRSCard | undefined = current
-    ? progress || createSRSCard(current.id, type)
+    ? progress
+      ? ('dueAt' in progress ? progressToSrsCard(current.id, type, progress) : progress)
+      : createSRSCard(current.id, type)
     : undefined;
-  const intervals = state ? getNextIntervals(state) : null;
+  const intervals = state ? getNextIntervals(state, settings) : null;
+  const clientReviewIds = useRef(new Map<string, string>());
   const recordView = useCallback(() => {
     if (
       !current ||
@@ -206,9 +216,18 @@ export function StudySession({
     setError("");
     try {
       const minutes = elapsed();
-      if (current.source === "BUILT_IN")
-        updateSRSCard(processReview(state, rating));
-      else await reviewCard(current.id, rating, Math.round(minutes * 60000));
+      let saved: SRSCard;
+      if (current.source === "BUILT_IN") {
+        saved = processReview(state, rating, new Date(), settings);
+        updateSRSCard(saved);
+        await Promise.resolve();
+        await learningSync.flush().catch(() => {});
+      } else {
+        const operationId = clientReviewIds.current.get(current.id) ?? crypto.randomUUID();
+        clientReviewIds.current.set(current.id, operationId);
+        saved = await reviewCard(current.id, rating, operationId, Math.round(minutes * 60000));
+        clientReviewIds.current.delete(current.id);
+      }
       recordStudyActivity(
         1,
         state.state === "new" ? 1 : 0,
@@ -221,11 +240,10 @@ export function StudySession({
         correct: s.correct + (rating === "again" ? 0 : 1),
         minutes: s.minutes + minutes,
       }));
-      if (index + 1 >= sessionCards.length || timer.isExpired()) setDone(true);
-      else {
-        setIndex((i) => i + 1);
-        setRevealedCardKey(null);
-      }
+      const nextQueue = applyReviewedProgress(reviewQueue, current.id, legacyToFsrsProgress(saved), new Date());
+      setReviewQueue(nextQueue);
+      setRevealedCardKey(null);
+      if (!nextQueue.ready.length && !nextQueue.futureLearning.length) setDone(true);
     } catch (reason) {
       setError(
         reason instanceof Error
@@ -237,6 +255,16 @@ export function StudySession({
       setBusy(false);
     }
   }
+  useEffect(() => {
+    if (mode !== 'anki' || done || reviewQueue.ready.length || !reviewQueue.futureLearning.length) return;
+    const promote = () => {
+      setClock(Date.now());
+      setReviewQueue(queue => promoteDueCards(queue, new Date()));
+    };
+    promote();
+    const id = window.setInterval(promote, 1000);
+    return () => window.clearInterval(id);
+  }, [mode, done, reviewQueue.ready.length, reviewQueue.futureLearning.length]);
   useEffect(() => {
     if (
       !settings.autoPlayAudio ||
@@ -297,11 +325,24 @@ export function StudySession({
     window.addEventListener("keydown", key);
     return () => window.removeEventListener("keydown", key);
   });
+  const futureDue = mode === 'anki' ? nearestFutureDue(reviewQueue) : null;
+  if (!done && mode === 'anki' && !current && futureDue) {
+    const seconds = Math.max(0, Math.ceil((Date.parse(futureDue) - clock) / 1000));
+    return <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 bg-[var(--color-bg)] p-6 text-center">
+      <p className="study-eyebrow">THẺ QUÊN SẼ QUAY LẠI</p>
+      <h2 className="text-3xl font-semibold">Tiếp tục sau {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, '0')}</h2>
+      <p className="study-copy max-w-xl">Bạn đã xem hết các thẻ đang sẵn sàng. Có thể chờ để học lại đúng lịch hoặc kết thúc và quay lại sau.</p>
+      <div className="flex flex-wrap justify-center gap-3">
+        <button className="study-button" onClick={finish}>Kết thúc phiên</button>
+        <button className="study-button study-button-primary" onClick={() => setReviewQueue(queue => promoteDueCards(queue, new Date()))}>Kiểm tra lại</button>
+      </div>
+    </div>;
+  }
   if (done || !current)
     return (
       <div className="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-5 bg-[var(--color-bg)] p-6 text-center">
         <h2 className="text-2xl font-semibold">Đã hoàn thành</h2>
-        <p>{mode === 'flashcards' ? `Đã xem ${stats.count}/${sessionCards.length} thẻ · ${stats.minutes.toFixed(1)} phút` : `${stats.count} thẻ · ${stats.count ? Math.round((stats.correct / stats.count) * 100) : 0}% chính xác · ${stats.minutes.toFixed(1)} phút`}</p>
+        <p>{mode === 'flashcards' ? `Đã xem ${stats.count}/${sessionCards.length} thẻ · ${stats.minutes.toFixed(1)} phút` : `${reviewQueue.answeredToday.size} thẻ · ${stats.count} lượt trả lời · ${stats.count ? Math.round((stats.correct / stats.count) * 100) : 0}% chính xác · ${stats.minutes.toFixed(1)} phút`}</p>
         <button className="study-button study-button-primary" onClick={finish}>
           Về danh sách bộ thẻ
         </button>
@@ -328,14 +369,16 @@ export function StudySession({
         </button>
         <div className="flex min-w-0 items-center justify-center gap-3 sm:gap-5">
           <p className="truncate text-xs font-semibold text-[var(--color-text-secondary)] sm:text-sm">
-            {deckName} · <span className="text-[var(--color-accent)]">{index + 1}</span>/{sessionCards.length}
+            {deckName} · {mode === 'anki'
+              ? <><span className="text-[var(--color-accent)]">{stats.count}</span> lượt đã trả lời</>
+              : <><span className="text-[var(--color-accent)]">{index + 1}</span>/{sessionCards.length}</>}
           </p>
-          <div className="hidden h-2 w-28 overflow-hidden rounded-full bg-[var(--color-surface-alt)] sm:block lg:w-64">
+          {mode === 'flashcards' && <div className="hidden h-2 w-28 overflow-hidden rounded-full bg-[var(--color-surface-alt)] sm:block lg:w-64">
             <div
               className="h-full rounded-full bg-[var(--color-accent)] transition-[width] duration-300"
               style={{ width: `${((index + 1) / sessionCards.length) * 100}%` }}
             />
-          </div>
+          </div>}
         </div>
         <div className="flex items-center gap-2">
           <button className="study-button !min-h-10 !px-3" disabled={busy} aria-label="Tùy chỉnh thẻ" onClick={() => { setError(""); setCustomizing(true); }}>
@@ -364,13 +407,6 @@ export function StudySession({
           </button>
         </div>
       </header>
-      {timer.remainingSeconds !== null && (
-        <p className="shrink-0 px-4 text-center text-xs text-[var(--color-text-secondary)]">
-          {timer.expired
-            ? "Hết giờ · hoàn tất thẻ hiện tại"
-            : `Còn ${formatSessionTime(timer.remainingSeconds)}`}
-        </p>
-      )}
       <div className="relative flex min-h-0 flex-1 items-stretch justify-center overflow-hidden px-3 py-2 sm:px-6 sm:py-4">
         <AnimatePresence initial={false} custom={slideDirection} mode="popLayout">
           <motion.div
@@ -442,6 +478,10 @@ export function StudySession({
             if (changedCard && onCardChange && JSON.stringify(changedCard) !== JSON.stringify(presentationCard(current))) {
               const updated = await onCardChange(changedCard);
               setSessionCards((previous) => previous.map((card) => card.id === updated.id ? updated : card));
+              setReviewQueue(previous => ({
+                ...previous,
+                cardsByKey: new Map(previous.cardsByKey).set(updated.id, updated),
+              }));
             }
             if (JSON.stringify(next) !== JSON.stringify(template)) {
               if (onTemplateChange) await onTemplateChange(next);

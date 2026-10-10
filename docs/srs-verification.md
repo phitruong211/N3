@@ -1,4 +1,16 @@
-# Đối chiếu SRS 1.1 — 27/09/2026
+# Đối chiếu SRS 1.1 — cập nhật 10/10/2026
+
+## Xác nhận FSRS và hai luồng học
+
+- `/decks` chỉ phục vụ **Học tự do**: người học chọn bài nếu bộ có metadata bài học; việc xem thẻ không tạo rating hay thay đổi lịch ôn.
+- `/review` chỉ phục vụ **Ôn ngắt quãng**: hệ thống tự xếp thẻ học lại, đang học, đến hạn rồi mới đưa tối đa 20 thẻ mới mỗi ngày.
+- Lịch ôn dùng FSRS-6 ở cả trình duyệt (`ts-fsrs`) và backend (`io.github.open-spaced-repetition:fsrs`). Thẻ đánh dấu **Quên** rời hàng đợi hiện tại và tự xuất hiện lại đúng phút đã cấu hình trong cùng phiên.
+- Cài đặt tài khoản hỗ trợ thời gian Quên 1–30 phút, bước Nhớ đầu tiên 2–720 phút và mức ghi nhớ mục tiêu 90/93/95%. Backend kiểm tra `Nhớ > Quên`.
+- Mỗi lần chấm thẻ cá nhân có `clientReviewId` và kết quả đã lưu để retry không chấm hai lần. Backend khóa theo thẻ nhằm tránh hai request đồng thời cập nhật chồng lịch.
+- Bộ có sẵn lưu trạng thái FSRS vào learning snapshot có revision; bộ cá nhân lưu trực tiếp vào các bảng tiến độ và review log. Cả hai đều giữ `firstReviewedAt`, `lastRating`, stability, difficulty, elapsed/scheduled days và bước học.
+- Mỗi card ở trang ôn hiển thị bốn số: **Cần ôn**, **Chưa nhớ**, **Hôm nay**, **Còn lại**. Trang học tự do không hiển thị các số SRS này.
+
+Kiểm tra hiện tại: frontend `npm test` đạt 82 test và `npm run build` đạt; backend Java 21 `./mvnw clean package` đạt 20 test với H2 độc lập. Migration MySQL mới là `V7__fsrs_progress_and_settings.sql`.
 
 Nguồn: `/Users/vophitruong/Downloads/SRS.md`. Đã đối chiếu mục hiện trạng 1–16 với mục tiêu 17–22. Các giới hạn “chỉ local” của FR-BOOK-03, FR-SRS-10, FR-PROGRESS-04 và cách đưa sheet vào note tại FR-DECK-04 đã được thay bằng yêu cầu mục tiêu P3/FR-CARD-08. Không thêm các tính năng ngoài phạm vi tại mục 2.2 như thanh toán, admin hay quên mật khẩu.
 

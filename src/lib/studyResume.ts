@@ -1,6 +1,9 @@
 export const builtInDeckResumeKey = (deckId: string) =>
   `built_in_deck_resume_${deckId}`;
 
+export const personalDeckResumeKey = (deckId: string) =>
+  `personal_deck_resume_${deckId}`;
+
 export function resolveResumeIndex(
   cards: readonly { id: string }[],
   cardId: string | null | undefined,

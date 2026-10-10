@@ -149,7 +149,9 @@ export function useLearningSync(
     }
   }, [storage, apply, flush]);
   useEffect(() => {
-    alive.current = true;
+    const aliveRef = alive;
+    const loadVersionRef = loadVersion;
+    aliveRef.current = true;
     if (!enabled) return;
     void load();
     let debounceTimer: ReturnType<typeof setTimeout> | undefined;
@@ -174,11 +176,16 @@ export function useLearningSync(
         SYNC_MAX_WAIT_MS,
       );
     });
+    const retryOnline = () => {
+      if (storage.getJSON("learning_dirty", false) && !paused.current) void flush().catch(() => {});
+    };
+    window.addEventListener("online", retryOnline);
     return () => {
-      alive.current = false;
-      loadVersion.current++;
+      aliveRef.current = false;
+      loadVersionRef.current++;
       clearTimers();
       unsubscribe();
+      window.removeEventListener("online", retryOnline);
     };
   }, [enabled, storage, load, flush]);
   const beforeTransfer = useCallback(async () => {

@@ -17,6 +17,11 @@ export interface Page<T> {
 export type PersonalDeck = ApiDeckSummary & {
   newCount: number;
   dueCount: number;
+  learnedCount?: number;
+  studiedTodayCount?: number;
+  newStartedTodayCount?: number;
+  unresolvedCount?: number;
+  remainingTodayCount?: number;
   source?: "MANUAL" | "IMPORT";
   tags?: string[];
 };

@@ -7,8 +7,8 @@ export const PAGE_PATHS: Record<PageId, string> = {
   kanji: '/library/kanji',
   listening: '/library/listening',
   flashcards: '/decks',
-  anki: '/decks',
-  srs: '/decks',
+  anki: '/review',
+  srs: '/review',
   quiz: '/quiz',
   progress: '/progress',
   bookmarks: '/saved',
@@ -22,6 +22,7 @@ export function pathForPage(page: PageId): string {
 
 export function pageForLocation(pathname: string, _search = ''): PageId | null {
   if (pathname === '/decks') return 'flashcards';
+  if (pathname === '/review') return 'srs';
   const entry = Object.entries(PAGE_PATHS).find(([, path]) => path.split('?')[0] === pathname);
   return (entry?.[0] as PageId | undefined) ?? null;
 }
