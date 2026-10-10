@@ -113,12 +113,6 @@ export function getStateDistribution(
   return dist;
 }
 
-// --- Utility functions ---
-
-function addMinutes(date: Date, minutes: number): Date {
-  return new Date(date.getTime() + minutes * 60 * 1000);
-}
-
 function addDays(date: Date, days: number): Date {
   const result = new Date(date);
   result.setDate(result.getDate() + days);

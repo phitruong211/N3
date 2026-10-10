@@ -495,7 +495,6 @@ export function ImportedDecks({
         cards={session.cards}
         deckName={session.deck.name}
         mode={session.mode}
-        sessionMinutes={session.mode === "anki" ? 0 : undefined}
         template={session.template}
         initialProgress={session.progress}
         onTemplateChange={async template => {
@@ -1014,7 +1013,6 @@ export function ImportedDecks({
                 const isDragging = draggingDeckId === deck.id;
                 const isDropTarget = dropDeckId === deck.id;
                 const needed = readyCount(deck);
-                const learned = deck.learnedCount ?? Math.max(0, deck.cardCount - (deck.newCount ?? 0));
                 return (
                   <article
                     key={deck.id}
@@ -1095,10 +1093,10 @@ export function ImportedDecks({
                       <span className="study-copy">thẻ</span>
                     </p>
                     {mode === "scheduled" && <DeckProgressGrid metrics={[
-                      { label: "Cần ôn", value: needed, tone: "var(--color-accent)" },
+                      { label: "Cần ôn", value: deck.dueCount ?? 0, tone: "var(--color-accent)" },
+                      { label: "Chưa nhớ", value: deck.unresolvedCount ?? 0 },
                       { label: "Hôm nay", value: deck.studiedTodayCount ?? 0 },
-                      { label: "Còn lại", value: deck.newCount ?? 0 },
-                      { label: "Đã học", value: learned },
+                      { label: "Còn lại", value: deck.remainingTodayCount ?? needed },
                     ]}/>}
                     <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
                       <button

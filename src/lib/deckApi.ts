@@ -20,6 +20,8 @@ export type PersonalDeck = ApiDeckSummary & {
   learnedCount?: number;
   studiedTodayCount?: number;
   newStartedTodayCount?: number;
+  unresolvedCount?: number;
+  remainingTodayCount?: number;
   source?: "MANUAL" | "IMPORT";
   tags?: string[];
 };

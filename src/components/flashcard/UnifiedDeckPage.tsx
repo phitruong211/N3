@@ -27,7 +27,7 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
   function scheduleFor(deck: BuiltInDeckDefinition) {
     return buildScheduledDeckQueue(deck.cards, card => {
       const progress = progressById.get(`${card.type}:${card.id}`);
-      return progress ? { state: progress.state, dueDate: progress.dueDate, lastReviewedAt: progress.lastReviewedAt, repetitions: progress.reps } : null;
+      return progress ? { state: progress.state, dueDate: progress.dueDate, firstReviewedAt: progress.firstReviewedAt, lastReviewedAt: progress.lastReviewedAt, repetitions: progress.reps, lastRating: progress.lastRating } : null;
     });
   }
 
@@ -67,7 +67,6 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
   }
 
   if (session) return <StudySession cards={session.cards} deckName={session.name} template={session.template} mode={session.mode} initialIndex={session.initialIndex}
-    sessionMinutes={session.mode === 'anki' ? 0 : undefined}
     onPositionChange={session.mode === 'flashcards' ? cardId => setJSON(builtInDeckResumeKey(session.id), cardId) : undefined}
     onComplete={session.mode === 'flashcards' ? () => setJSON(builtInDeckResumeKey(session.id), null) : undefined}
     onExit={() => setSession(null)}/>;
@@ -97,9 +96,9 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
 
 function scheduleMetrics(summary: DeckScheduleSummary) {
   return [
-    { label: 'Cần ôn', value: summary.queuedCount, tone: 'var(--color-accent)' },
+    { label: 'Cần ôn', value: summary.dueCount, tone: 'var(--color-accent)' },
+    { label: 'Chưa nhớ', value: summary.unresolvedCount },
     { label: 'Hôm nay', value: summary.studiedTodayCount },
-    { label: 'Còn lại', value: summary.remainingCount },
-    { label: 'Đã học', value: summary.learnedCount },
+    { label: 'Còn lại', value: summary.remainingTodayCount },
   ];
 }

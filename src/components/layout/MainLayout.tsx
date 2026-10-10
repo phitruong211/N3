@@ -31,7 +31,7 @@ export function MainLayout({ children }: { children: ReactNode }) {
 
   const pageTitles: Record<PageId, string> = {
     dashboard: 'Hôm nay', vocabulary: 'Thư viện', grammar: 'Thư viện', kanji: 'Thư viện', listening: 'Thư viện',
-    flashcards: 'Bộ thẻ', anki: 'Bộ thẻ', srs: 'Ôn tập', quiz: 'Trắc nghiệm', progress: 'Tiến độ',
+    flashcards: 'Bộ thẻ', anki: 'Ôn ngắt quãng', srs: 'Ôn ngắt quãng', quiz: 'Trắc nghiệm', progress: 'Tiến độ',
     search: 'Tìm kiếm', bookmarks: 'Đã lưu', settings: 'Cài đặt',
   };
 

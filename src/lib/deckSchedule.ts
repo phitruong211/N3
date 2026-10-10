@@ -3,8 +3,10 @@ export type DeckScheduleState = 'new' | 'learning' | 'review' | 'relearning';
 export type DeckScheduleProgress = {
   state: DeckScheduleState;
   dueDate: string;
+  firstReviewedAt?: string | null;
   lastReviewedAt?: string | null;
   repetitions?: number;
+  lastRating?: 'again' | 'hard' | 'good' | 'easy' | null;
 };
 
 export type DeckScheduleSummary = {
@@ -16,6 +18,8 @@ export type DeckScheduleSummary = {
   learnedCount: number;
   remainingCount: number;
   newStartedTodayCount: number;
+  unresolvedCount: number;
+  remainingTodayCount: number;
 };
 
 export const DAILY_NEW_CARD_LIMIT = 20;
@@ -43,6 +47,7 @@ export function buildScheduledDeckQueue<T>(
   let studiedTodayCount = 0;
   let learnedCount = 0;
   let newStartedTodayCount = 0;
+  let unresolvedCount = 0;
 
   for (const card of cards) {
     const progress = progressFor(card);
@@ -51,10 +56,11 @@ export function buildScheduledDeckQueue<T>(
       continue;
     }
     learnedCount++;
-    if (sameLocalDay(progress.lastReviewedAt, nowDate)) {
-      studiedTodayCount++;
-      if (progress.state === 'learning' || (progress.state === 'review' && (progress.repetitions ?? 0) <= 1)) newStartedTodayCount++;
-    }
+    if (progress.lastRating === 'again' || progress.lastRating === 'hard') unresolvedCount++;
+    if (sameLocalDay(progress.lastReviewedAt, nowDate)) studiedTodayCount++;
+    // firstReviewedAt is stable after a card graduates. Counting from the latest state could
+    // otherwise let a card that completed two learning steps free another "new" slot today.
+    if (sameLocalDay(progress.firstReviewedAt ?? progress.lastReviewedAt, nowDate)) newStartedTodayCount++;
     const due = Date.parse(progress.dueDate);
     if (!Number.isFinite(due) || due > now) continue;
     if (progress.state === 'learning' || progress.state === 'relearning') learning.push({ card, due });
@@ -74,12 +80,14 @@ export function buildScheduledDeckQueue<T>(
     summary: {
       newCount: fresh.length,
       learningCount: learning.length,
-      dueCount: review.length,
+      dueCount: learning.length + review.length,
       queuedCount: cardsForSession.length,
       studiedTodayCount,
       learnedCount,
-      remainingCount: fresh.length,
+      remainingCount: cardsForSession.length,
       newStartedTodayCount,
+      unresolvedCount,
+      remainingTodayCount: cardsForSession.length,
     },
   };
 }

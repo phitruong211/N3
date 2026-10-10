@@ -206,8 +206,8 @@ export interface GrammarItem {
 export type CardState = 'new' | 'learning' | 'review' | 'relearning';
 
 /**
- * Rating options (SM-2 inspired):
- * - again: Complete failure, reset
+ * FSRS-6 rating options:
+ * - again: Recall failed; enter the configured relearning step
  * - hard: Correct but difficult
  * - good: Correct with moderate effort
  * - easy: Correct with no effort

@@ -168,7 +168,7 @@ export interface ApiDeckSummary { id: string; name: string; description: string 
 export interface ApiCard { id: string; deckId: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; position: number; externalId: string | null; extraData: Record<string, unknown>; createdAt: string; updatedAt: string }
 export interface ApiDeck { deck: ApiDeckSummary; cards: ApiCard[] }
 export interface ApiQueueCard { cardId: string; deckId: string; deckName: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; extraData: Record<string, unknown>; progress: ApiProgress | null }
-export interface ApiProgress { state: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'; easeFactor: number; intervalMinutes?: number; intervalDays?: number; dueAt: string; repetitions: number; lapses: number; lastReviewedAt: string | null }
+export interface ApiProgress { state: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'; easeFactor: number; intervalMinutes?: number; intervalDays?: number; dueAt: string; repetitions: number; lapses: number; lastReviewedAt: string | null; algorithm?: 'fsrs-6'; stability?: number; difficulty?: number; elapsedDays?: number; scheduledDays?: number; learningSteps?: number; firstReviewedAt?: string | null; lastRating?: 'AGAIN' | 'HARD' | 'GOOD' | 'EASY' | null }
 
 export const listDecks = () => apiRequest<ApiDeckSummary[]>('/decks');
 export const getDeck = (id: string) => apiRequest<ApiDeck>(`/decks/${id}`);
@@ -182,9 +182,9 @@ export const removeCard = (id: string) => apiRequest<void>(`/cards/${id}`, { met
 export const reorderCards = (deckId: string, cardIds: string[]) => apiRequest<ApiCard[]>(`/decks/${deckId}/cards/reorder`, { method: 'PUT', body: JSON.stringify({ cardIds }) });
 export const moveCards = (cardIds: string[], targetDeckId: string, targetPosition?: number) => apiRequest<ApiCard[]>('/cards/move', { method: 'POST', body: JSON.stringify({ cardIds, targetDeckId, targetPosition }) });
 export const getDeckProgress = (deckId: string) => apiRequest<ApiQueueCard[]>(`/anki/decks/${deckId}/cards`);
-export async function reviewCard(cardId: string, rating: Rating, responseTimeMs?: number): Promise<SRSCard> {
+export async function reviewCard(cardId: string, rating: Rating, clientReviewId: string, responseTimeMs?: number): Promise<SRSCard> {
   const result = await apiRequest<{ cardId: string; progress: ApiProgress }>(`/anki/cards/${cardId}/reviews`, {
-    method: 'POST', body: JSON.stringify({ rating: rating.toUpperCase(), responseTimeMs }),
+    method: 'POST', body: JSON.stringify({ clientReviewId, rating: rating.toUpperCase(), responseTimeMs }),
   });
   return progressToSrs(cardId, result.progress);
 }
@@ -193,5 +193,9 @@ export function progressToSrs(cardId: string, progress: ApiProgress): SRSCard {
   return { cardId, deckType: 'vocabulary', state: progress.state.toLowerCase() as SRSCard['state'],
     easeFactor: Number(progress.easeFactor), intervalMinutes: progress.intervalMinutes,
     intervalDays: progress.intervalDays, dueDate: progress.dueAt, reps: progress.repetitions,
-    lapses: progress.lapses, lastReviewedAt: progress.lastReviewedAt };
+    lapses: progress.lapses, lastReviewedAt: progress.lastReviewedAt,
+    algorithm: progress.algorithm, stability: progress.stability, difficulty: progress.difficulty,
+    elapsedDays: progress.elapsedDays, scheduledDays: progress.scheduledDays,
+    learningSteps: progress.learningSteps, firstReviewedAt: progress.firstReviewedAt,
+    lastRating: progress.lastRating?.toLowerCase() as SRSCard['lastRating'] };
 }
