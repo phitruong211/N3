@@ -364,7 +364,11 @@ export function AnkiSRSControls({
 // Shuffle Launch Modal
 // ============================================================
 export function FlashcardPage() {
-  return <UnifiedDeckPage />;
+  return <UnifiedDeckPage mode="free" />;
+}
+
+export function AnkiPage() {
+  return <UnifiedDeckPage mode="scheduled" />;
 }
 
 export function parseRelatedWords(rawText?: string) {

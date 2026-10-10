@@ -54,17 +54,6 @@ export function SettingsPage() {
           <SettingToggle label="Tự phát âm" detail="Đọc thẻ khi bắt đầu học nếu trình duyệt hỗ trợ" checked={settings.autoPlayAudio} onChange={value=>updateSettings({autoPlayAudio:value})}/>
           <label className="block py-3">Mục tiêu mỗi ngày (thẻ)<input className="study-input" type="number" min={1} max={1000} value={settings.dailyGoal} onChange={e=>updateSettings({dailyGoal:Math.max(1,Math.min(1000,Math.round(Number(e.target.value)||1)))})}/></label>
         </section>
-        <section className="study-panel">
-          <h2 className="text-base font-semibold text-[var(--color-text)]">Ôn tập</h2>
-          <p className="study-copy mt-1">Chỉ tính thời gian tab đang hoạt động. Khi hết giờ, bạn hoàn tất thẻ hiện tại rồi phiên sẽ kết thúc.</p>
-          <label className="mt-4 block text-sm font-semibold text-[var(--color-text)]">
-            Giới hạn tổng (phút)
-            <input type="number" min={0} max={180} step={1} className="study-input mt-2" value={settings.ankiSessionMinutes}
-              onChange={event => updateSettings({ ankiSessionMinutes: Math.min(180, Math.max(0, Number(event.target.value) || 0)) })}/>
-          </label>
-          <p className="study-copy mt-2">Nhập 0 để học không giới hạn. Tối đa 180 phút mỗi phiên.</p>
-          <div className="mt-3 flex flex-wrap gap-2">{[0, 10, 20, 30, 45, 60].map(minutes => <button key={minutes} aria-pressed={settings.ankiSessionMinutes === minutes} className={'study-button ' + (settings.ankiSessionMinutes === minutes ? 'study-button-primary' : '')} onClick={() => updateSettings({ ankiSessionMinutes: minutes })}>{minutes === 0 ? 'Không giới hạn' : `${minutes} phút`}</button>)}</div>
-        </section>
         <details className="study-panel">
           <summary className="flex cursor-pointer list-none items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><span className="text-base font-semibold">Vùng nguy hiểm</span></summary>
           <h2 className="mt-4 text-base font-semibold">Xóa dữ liệu trên thiết bị</h2>

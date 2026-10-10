@@ -117,15 +117,14 @@ try {
   ).data.content.find((c) => c.id === card.id);
   assert.deepEqual(after.progress, before);
   assert.equal(after.front, "猫 updated");
-  await nav("Bộ thẻ");
+  await nav("Ôn ngắt quãng");
   await page
     .locator("article")
     .filter({
       has: page.getByRole("heading", { name: "integration", exact: true }),
     })
-    .getByRole("button", { name: "Ôn ngắt quãng", exact: true })
+    .getByRole("button", { name: "Ôn ngay →", exact: true })
     .click();
-  await page.getByRole("dialog").getByRole("button", { name: /Bắt đầu ôn/ }).click();
   await page
     .getByRole("button", { name: "Hiện đáp án", exact: true })
     .first()

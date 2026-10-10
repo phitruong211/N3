@@ -158,7 +158,7 @@ const nav = async (name) => {
     await page.getByRole("navigation", { name: "Nội dung thư viện" }).getByRole("link", { name, exact: true }).click();
     return;
   }
-  const target = name === "Thẻ học" || name === "Anki" ? "Bộ thẻ" : name;
+  const target = name === "Thẻ học" ? "Bộ thẻ" : name === "Anki" ? "Ôn ngắt quãng" : name;
   if (target === "Cài đặt") {
     await page.getByRole("button", { name: "Cài đặt", exact: true }).click();
     return;
@@ -213,10 +213,9 @@ try {
     .first()
     .waitFor();
   await button("Đóng tìm kiếm").click();
-  await nav("Thẻ học");
-  await page.locator("article").filter({ has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }) }).getByRole("button", { name: "Ôn ngắt quãng", exact: true }).click();
-  await page.getByRole("dialog").getByRole("button", { name: /Bắt đầu ôn · 10 thẻ/ }).click();
-  for (let i = 0; i < 10; i++) {
+  await nav("Ôn ngắt quãng");
+  await page.locator("article").filter({ has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }) }).getByRole("button", { name: "Ôn ngay →", exact: true }).click();
+  for (let i = 0; i < 20; i++) {
     await page.locator("button").filter({ hasText: /^Hiện đáp án$/ }).click();
     await page.getByRole("button", { name: /3 · Được/ }).click();
   }
@@ -230,9 +229,9 @@ try {
         card.intervalMinutes === 10 &&
         card.lastReviewedAt,
     ).length,
-    10,
+    20,
   );
-  assert.equal((await stored("guest:n3_study_days"))[0].cardsReviewed, 10);
+  assert.equal((await stored("guest:n3_study_days"))[0].cardsReviewed, 20);
   await button("Về danh sách bộ thẻ").click();
   for (const name of ["Trắc nghiệm", "Luyện nghe", "Tiến độ", "Cài đặt"]) {
     await nav(name);
@@ -246,7 +245,7 @@ try {
     "Guest learning/settings must never call account API",
   );
   await nav("Thẻ học");
-  await page.locator("article").filter({ has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }) }).getByRole("button", { name: "Học tự do →", exact: true }).click();
+  await page.locator("article").filter({ has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }) }).getByRole("button", { name: "Chọn bài →", exact: true }).click();
   await page.getByRole("dialog").getByRole("button", { name: "Bắt đầu học", exact: true }).waitFor();
   await page.keyboard.press("Escape");
   await page
