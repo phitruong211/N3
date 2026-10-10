@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { useApp } from "@/hooks/useApp";
+import { useApp, useLearningStorage } from "@/hooks/useApp";
 import {
   defaultDeckTemplate,
   kindLabels,
@@ -46,6 +46,7 @@ import { loadStudyPages } from "@/lib/loadStudyPages";
 import { buildFreeStudyQueue, lessonOptions, type StudySetup } from "@/lib/studySetup";
 import { buildScheduledDeckQueue } from "@/lib/deckSchedule";
 import { DeckCustomizeDialog } from "./CardPresentation";
+import { builtInDeckResumeKey, resolveResumeIndex } from "@/lib/studyResume";
 import { ContentBadge } from "@/components/ui/StudyUI";
 import {
   GripVertical,
@@ -81,6 +82,7 @@ export function ImportedDecks({
 }) {
   const mode = "flashcards" as const;
   const { settings } = useApp();
+  const { getJSON, setJSON } = useLearningStorage();
   const { user, requestAuth, draft, setDraft } = useAuth();
   const initial = useRef(draft?.mode === mode ? draft : null).current;
   const [decks, setDecks] = useState<Page<PersonalDeck>>(emptyPage);
@@ -122,6 +124,7 @@ export function ImportedDecks({
     template: DeckTemplateConfig;
     progress: Record<string, ApiProgress | null>;
     mode: "flashcards" | "anki";
+    initialIndex: number;
   } | null>(null);
   const [studySetup, setStudySetup] = useState<{
     deck: PersonalDeck;
@@ -442,7 +445,8 @@ export function ImportedDecks({
       } else {
         // No lessons — launch immediately with all cards
         const cards = buildFreeStudyQueue(views, { mode: 'free', lessonKey: null });
-        setSession({ cards, deck, template, progress, mode: "flashcards" });
+        const resumeCardId = getJSON<string | null>(builtInDeckResumeKey(deck.id), null);
+        setSession({ cards, deck, template, progress, mode: "flashcards", initialIndex: resolveResumeIndex(cards, resumeCardId) });
       }
     });
   }
@@ -458,7 +462,7 @@ export function ImportedDecks({
         setMessage("Không có thẻ đến hạn.");
         return;
       }
-      setSession({ cards: scheduled.cards, deck, template, progress, mode: "anki" });
+      setSession({ cards: scheduled.cards, deck, template, progress, mode: "anki", initialIndex: 0 });
     });
   }
   function startConfiguredStudy(selection: StudySetup) {
@@ -469,12 +473,14 @@ export function ImportedDecks({
       setStudySetup(null);
       return;
     }
+    const resumeCardId = getJSON<string | null>(builtInDeckResumeKey(studySetup.deck.id), null);
     setSession({
       cards,
       deck: studySetup.deck,
       template: studySetup.template,
       progress: studySetup.progress,
       mode: "flashcards",
+      initialIndex: resolveResumeIndex(cards, resumeCardId),
     });
     setStudySetup(null);
   }
@@ -515,8 +521,11 @@ export function ImportedDecks({
         deckName={session.deck.name}
         mode={session.mode}
         sessionMinutes={0}
+        initialIndex={session.initialIndex}
         template={session.template}
         initialProgress={session.progress}
+        onPositionChange={session.mode === 'flashcards' ? cardId => setJSON(builtInDeckResumeKey(session.deck.id), cardId) : undefined}
+        onComplete={session.mode === 'flashcards' ? () => setJSON(builtInDeckResumeKey(session.deck.id), null) : undefined}
         onTemplateChange={async template => {
           await updateDeck(session.deck.id, { templateConfig: template });
           setSession(previous => previous ? { ...previous, template } : previous);
