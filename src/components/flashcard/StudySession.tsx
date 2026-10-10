@@ -65,7 +65,7 @@ export function StudySession({
   onComplete?: () => void;
 }) {
   const { settings, srsCards, updateSRSCard, learningSync } = useApp();
-  const { recordStudyActivity, getJSON, setJSON } = useLearningStorage();
+  const { recordStudyActivity, recordFreeStudyActivity, getJSON, setJSON } = useLearningStorage();
   const templateKey = `study_template_${cards[0]?.source === "BUILT_IN" ? deckName : cards[0]?.deckId || deckName}`;
   const [template, setTemplate] = useState(() => cards[0]?.source === "BUILT_IN"
     ? normalizeDeckTemplate(getJSON(templateKey, initialTemplate)) : initialTemplate);
@@ -126,13 +126,13 @@ export function StudySession({
       return;
     viewed.current.add(`${current.type}:${current.id}`);
     const minutes = elapsed();
-    recordStudyActivity(1, 0, 1, minutes, "flashcard");
+    recordFreeStudyActivity(1, minutes);
     setStats((s) => ({
       count: s.count + 1,
-      correct: s.correct + 1,
+      correct: s.correct,
       minutes: s.minutes + minutes,
     }));
-  }, [current, flipped, elapsed, recordStudyActivity]);
+  }, [current, flipped, elapsed, recordFreeStudyActivity]);
   function finish() {
     if (mode === "flashcards") recordView();
     if (mode === "flashcards") {
@@ -299,11 +299,7 @@ export function StudySession({
     return (
       <div className="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-5 bg-[var(--color-bg)] p-6 text-center">
         <h2 className="text-2xl font-semibold">Đã hoàn thành</h2>
-        <p>
-          {stats.count} thẻ ·{" "}
-          {stats.count ? Math.round((stats.correct / stats.count) * 100) : 0}%
-          chính xác · {stats.minutes.toFixed(1)} phút
-        </p>
+        <p>{mode === 'flashcards' ? `Đã xem ${stats.count}/${sessionCards.length} thẻ · ${stats.minutes.toFixed(1)} phút` : `${stats.count} thẻ · ${stats.count ? Math.round((stats.correct / stats.count) * 100) : 0}% chính xác · ${stats.minutes.toFixed(1)} phút`}</p>
         <button className="study-button study-button-primary" onClick={finish}>
           Về danh sách bộ thẻ
         </button>

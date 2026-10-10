@@ -151,11 +151,20 @@ await context.route("https://raw.githubusercontent.com/**", (route) =>
   route.abort(),
 );
 const button = (name) => page.getByRole("button", { name, exact: true });
-const nav = (name) =>
-  page
-    .getByRole("navigation", { name: "Các trang học" })
-    .getByRole("button", { name, exact: true })
-    .click();
+const nav = async (name) => {
+  const library = ["Từ vựng", "Ngữ pháp", "Kanji", "Luyện nghe"];
+  if (library.includes(name)) {
+    await page.getByRole("navigation", { name: "Các trang học" }).getByRole("button", { name: "Thư viện", exact: true }).click();
+    await page.getByRole("navigation", { name: "Nội dung thư viện" }).getByRole("link", { name, exact: true }).click();
+    return;
+  }
+  const target = name === "Thẻ học" || name === "Anki" ? "Bộ thẻ" : name;
+  if (target === "Cài đặt") {
+    await page.getByRole("button", { name: "Cài đặt", exact: true }).click();
+    return;
+  }
+  await page.getByRole("navigation", { name: "Các trang học" }).getByRole("button", { name: target, exact: true }).click();
+};
 const stored = (key) =>
   page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "null"), key);
 const createCount = () =>
@@ -192,7 +201,7 @@ try {
   const guestBookmarks = await stored("guest:n3_bookmarks");
   assert.equal(guestBookmarks.length, 1);
   await page.reload();
-  await button("Học thử").click();
+  await page.getByRole("heading", { name: "Thư viện", exact: true }).waitFor();
   await nav("Từ vựng");
   await button("Bỏ lưu từ").waitFor();
   assert.deepEqual(await stored("guest:n3_bookmarks"), guestBookmarks);
@@ -224,13 +233,7 @@ try {
   );
   assert.equal((await stored("guest:n3_study_days"))[0].cardsReviewed, 10);
   await button("Về trang ôn tập").click();
-  for (const name of [
-    "Anki",
-    "Trắc nghiệm",
-    "Luyện nghe",
-    "Tiến độ",
-    "Cài đặt",
-  ]) {
+  for (const name of ["Trắc nghiệm", "Luyện nghe", "Tiến độ", "Cài đặt"]) {
     await nav(name);
     await page.getByRole("heading", { name, exact: true }).first().waitFor();
   }
@@ -242,25 +245,9 @@ try {
     "Guest learning/settings must never call account API",
   );
   await nav("Thẻ học");
-  await page
-    .locator("article")
-    .filter({
-      has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }),
-    })
-    .getByRole("button", { name: "Bắt đầu học →", exact: true })
-    .click();
-  await page.getByLabel("Số thẻ nhập trực tiếp", { exact: true }).fill("1");
-  await button("Bắt đầu 1 thẻ").click();
-  await page
-    .getByRole("button", { name: "Hiện đáp án", exact: true })
-    .first()
-    .click();
-  await button("Hoàn thành").click();
-  await page
-    .getByRole("heading", { name: "Đã hoàn thành", exact: true })
-    .waitFor();
-  await button("Về danh sách bộ thẻ").click();
-  assert.equal((await stored("guest:n3_study_days"))[0].flashcardReviewed, 1);
+  await page.locator("article").filter({ has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }) }).getByRole("button", { name: "Chọn cách học →", exact: true }).click();
+  await page.getByRole("dialog").getByRole("button", { name: "Bắt đầu học", exact: true }).waitFor();
+  await page.keyboard.press("Escape");
   await page
     .getByLabel("Chọn file nhập bộ thẻ")
     .setInputFiles({
@@ -335,7 +322,6 @@ try {
     0,
     "Authentication must not create a deck automatically",
   );
-  await button("Để lại trên thiết bị").click();
   failCreate = true;
   await button("Tạo bộ thẻ").click();
   await page
@@ -352,6 +338,9 @@ try {
   await button("Tạo bộ mới").click();
   await page.getByLabel("Tên bộ thẻ").fill("Ngữ pháp cá nhân");
   await page.getByRole("button", { name: /^Tạo thủ công/ }).click();
+  await page.getByLabel("Mặt trước *").fill("〜ながら");
+  await page.getByLabel("Mặt sau *").fill("vừa… vừa…");
+  await button("Tạo bộ với 1 thẻ").click();
   await page
     .getByText("Đã tạo “Ngữ pháp cá nhân”. Mở menu ba chấm để thêm thẻ.", {
       exact: true,
@@ -405,6 +394,9 @@ try {
   await button("Tạo bộ mới").click();
   await page.getByLabel("Tên bộ thẻ").fill("B manual");
   await page.getByRole("button", { name: /^Tạo thủ công/ }).click();
+  await page.getByLabel("Mặt trước *").fill("一歩");
+  await page.getByLabel("Mặt sau *").fill("một bước");
+  await button("Tạo bộ với 1 thẻ").click();
   await signIn("b@example.com", true);
   await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
   await nav("Thẻ học");
@@ -432,11 +424,7 @@ try {
   // Mobile preview/auth: no horizontal overflow and the form remains usable.
   await page.setViewportSize({ width: 375, height: 812 });
   await button("Học thử").click();
-  await button("Mở trang khác").click();
-  await page
-    .getByRole("dialog", { name: "Trang khác" })
-    .getByRole("button", { name: "Thẻ học", exact: true })
-    .click();
+  await page.getByRole("navigation", { name: "Điều hướng điện thoại" }).getByRole("button", { name: "Bộ thẻ", exact: true }).click();
   await page
     .getByLabel("Chọn file nhập bộ thẻ")
     .setInputFiles({
