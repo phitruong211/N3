@@ -32,13 +32,13 @@ test('furigana preferences migrate the old toggle and persist all four side comb
 test('FSRS settings use safe defaults and normalize unsupported stored values', () => {
   const storage = createLearningStorage('guest');
   assert.deepEqual(
-    (({ srsAgainMinutes, srsGoodMinutes, srsDesiredRetention }) => ({ srsAgainMinutes, srsGoodMinutes, srsDesiredRetention }))(storage.getSettings()),
-    { srsAgainMinutes: 1, srsGoodMinutes: 10, srsDesiredRetention: 0.9 },
+    (({ srsDailyNewLimit, srsAgainMinutes, srsGoodMinutes, srsDesiredRetention }) => ({ srsDailyNewLimit, srsAgainMinutes, srsGoodMinutes, srsDesiredRetention }))(storage.getSettings()),
+    { srsDailyNewLimit: 20, srsAgainMinutes: 1, srsGoodMinutes: 10, srsDesiredRetention: 0.9 },
   );
-  storage.saveSettings({ ...storage.getSettings(), srsAgainMinutes: 45, srsGoodMinutes: 10, srsDesiredRetention: 0.94 });
+  storage.saveSettings({ ...storage.getSettings(), srsDailyNewLimit: 5000, srsAgainMinutes: 45, srsGoodMinutes: 10, srsDesiredRetention: 0.94 });
   assert.deepEqual(
-    (({ srsAgainMinutes, srsGoodMinutes, srsDesiredRetention }) => ({ srsAgainMinutes, srsGoodMinutes, srsDesiredRetention }))(storage.getSettings()),
-    { srsAgainMinutes: 30, srsGoodMinutes: 31, srsDesiredRetention: 0.9 },
+    (({ srsDailyNewLimit, srsAgainMinutes, srsGoodMinutes, srsDesiredRetention }) => ({ srsDailyNewLimit, srsAgainMinutes, srsGoodMinutes, srsDesiredRetention }))(storage.getSettings()),
+    { srsDailyNewLimit: 5000, srsAgainMinutes: 30, srsGoodMinutes: 31, srsDesiredRetention: 0.9 },
   );
 });
 

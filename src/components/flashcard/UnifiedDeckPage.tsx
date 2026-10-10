@@ -15,7 +15,7 @@ import { StudySetupSheet } from './StudySetupSheet';
 export type DeckPageMode = 'free' | 'scheduled';
 
 export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
-  const { vocabulary, kanji, grammar, bookmarks, srsCards } = useApp();
+  const { vocabulary, kanji, grammar, bookmarks, srsCards, settings } = useApp();
   const { getJSON, setJSON } = useLearningStorage();
   const [setupDeck, setSetupDeck] = useState<BuiltInDeckDefinition | null>(null);
   const [session, setSession] = useState<{ id: string; name: string; cards: CardView[]; template: DeckTemplateConfig; initialIndex: number; mode: 'flashcards' | 'anki' } | null>(null);
@@ -28,7 +28,7 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     return buildScheduledDeckQueue(deck.cards, card => {
       const progress = progressById.get(`${card.type}:${card.id}`);
       return progress ? { state: progress.state, dueDate: progress.dueDate, firstReviewedAt: progress.firstReviewedAt, lastReviewedAt: progress.lastReviewedAt, repetitions: progress.reps, lastRating: progress.lastRating } : null;
-    });
+    }, { dailyNewLimit: settings.srsDailyNewLimit });
   }
 
   function launchFree(deck: BuiltInDeckDefinition, lessonKey: string | null) {
@@ -77,7 +77,7 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
       <h1 className="mt-1 text-3xl font-semibold">{mode === 'free' ? 'Bộ thẻ' : 'Ôn ngắt quãng'}</h1>
       <p className="study-copy mt-3">{mode === 'free'
         ? 'Chọn bộ và bài muốn học. Phiên học tự do không thay đổi lịch ôn.'
-        : 'Hệ thống tự chọn thẻ đang học, thẻ đến hạn và tối đa 20 thẻ mới mỗi ngày.'}</p>
+        : `Hệ thống tự chọn thẻ đang học, thẻ đến hạn và tối đa ${settings.srsDailyNewLimit.toLocaleString('vi-VN')} thẻ mới mỗi ngày.`}</p>
     </header>
 
     <ImportedDecks mode={mode} leadingDeck={saved.cards.length ? card(saved, true) : undefined}/>

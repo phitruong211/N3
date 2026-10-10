@@ -346,6 +346,8 @@ export interface AppSettings {
   dailyGoal: number;
   /** Maximum active minutes for an Anki session; 0 disables the limit. */
   ankiSessionMinutes: number;
+  /** Maximum new cards introduced by scheduled study each day; 0 reviews due cards only. */
+  srsDailyNewLimit: number;
   srsAgainMinutes: number;
   srsGoodMinutes: number;
   srsDesiredRetention: 0.9 | 0.93 | 0.95;

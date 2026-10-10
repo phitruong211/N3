@@ -80,7 +80,7 @@ export function StudySession({
         : initialProgress[card.id] ? progressToSrs(card.id, initialProgress[card.id]!) : null;
       progressByKey.set(card.id, stored ? legacyToFsrsProgress(stored) : null);
     }
-    return createReviewQueue({ cards, keyFor: card => card.id, progressByKey, now: new Date() });
+    return createReviewQueue({ cards, keyFor: card => card.id, progressByKey, now: new Date(), dailyNewLimit: settings.srsDailyNewLimit });
   });
   const [shuffled, setShuffled] = useState(false);
   const [index, setIndex] = useState(() => Math.max(0, Math.min(cards.length - 1, initialIndex)));
