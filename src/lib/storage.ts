@@ -30,6 +30,7 @@ const KEYS = {
   LAST_GRAMMAR_N4_INDEX: 'n3_last_grammar_n4_index',
   LAST_ACTIVE_DECK: 'n3_last_active_deck',
   LAST_ACTIVE_ANKI_DECK: 'n3_last_active_anki_deck',
+  SIDEBAR_COLLAPSED: 'sidebar_collapsed',
 } as const;
 
 export type ActiveDeck = 'vocabN3' | 'vocabN4' | 'kanjiN3' | 'kanjiN4' | 'kanjiN2' | 'grammarN2' | 'grammarN3' | 'grammarN4' | 'saved' | null;
@@ -291,6 +292,19 @@ export function createLearningStorage(scope: StorageScope) {
     setJSON(KEYS.STUDY_DAYS, days);
   }
 
+  function recordFreeStudyActivity(viewed: number, timeSpent: number): void {
+    const days = getStudyDays();
+    const today = formatDate(new Date());
+    const existing = days.find(day => day.date === today);
+    if (existing) {
+      existing.flashcardViewed = (existing.flashcardViewed || 0) + viewed;
+      existing.timeSpent += timeSpent;
+    } else {
+      days.push({ date: today, cardsReviewed: 0, flashcardReviewed: 0, flashcardViewed: viewed, srsReviewed: 0, newCardsLearned: 0, accuracy: 0, timeSpent });
+    }
+    setJSON(KEYS.STUDY_DAYS, days);
+  }
+
   // --- Session continuity (Zeigarnik Effect) ---
 
   function getLastPage(): string {
@@ -299,6 +313,14 @@ export function createLearningStorage(scope: StorageScope) {
 
   function setLastPage(page: string): void {
     localStorage.setItem(KEYS.LAST_PAGE, page);
+  }
+
+  function getSidebarCollapsed(): boolean {
+    return localStorage.getItem(KEYS.SIDEBAR_COLLAPSED) === '1';
+  }
+
+  function setSidebarCollapsed(collapsed: boolean): void {
+    localStorage.setItem(KEYS.SIDEBAR_COLLAPSED, collapsed ? '1' : '0');
   }
 
   function getLastVocabIndex(): number {
@@ -420,7 +442,7 @@ export function createLearningStorage(scope: StorageScope) {
     return [...Object.values(KEYS), 'n3_srs_cards', 'nhat-listening-v1', 'nhat-jlpt-listening-scores-v1', 'learning_revision', 'learning_base', 'learning_dirty', 'learning_local_backup', 'learning_conflict_backup', 'settings_pending'].map(key => localStorage.removeItem(key)).every(Boolean);
   }
 
-  return { scope, subscribeLearning, withoutLearningEvents, getSRSKey, getSRSCards, saveSRSCards, getSRSCard, upsertSRSCard, getOrCreateSRSCard, migrateV1, getBookmarks, saveBookmarks, toggleBookmark, isBookmarked, getSettings, saveSettings, updateSetting, getStudyDays, recordStudyActivity, getLastPage, setLastPage, getLastVocabIndex, setLastVocabIndex, getLastKanjiIndex, setLastKanjiIndex, getLastGrammarIndex, setLastGrammarIndex, getLastActiveDeck, setLastActiveDeck, calculateStreak, applyTheme, resetAllData, getJSON, setJSON };
+  return { scope, subscribeLearning, withoutLearningEvents, getSRSKey, getSRSCards, saveSRSCards, getSRSCard, upsertSRSCard, getOrCreateSRSCard, migrateV1, getBookmarks, saveBookmarks, toggleBookmark, isBookmarked, getSettings, saveSettings, updateSetting, getStudyDays, recordStudyActivity, recordFreeStudyActivity, getLastPage, setLastPage, getSidebarCollapsed, setSidebarCollapsed, getLastVocabIndex, setLastVocabIndex, getLastKanjiIndex, setLastKanjiIndex, getLastGrammarIndex, setLastGrammarIndex, getLastActiveDeck, setLastActiveDeck, calculateStreak, applyTheme, resetAllData, getJSON, setJSON };
 }
 
 export type LearningStorage = ReturnType<typeof createLearningStorage>;

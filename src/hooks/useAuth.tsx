@@ -3,6 +3,7 @@ import { ApiError, currentUser, hasSession, invalidateApiSession, isSessionStora
 import { createLearningStorage, type LearningStorage } from '@/lib/storage';
 import type { ImportedCard, ImportPreview } from '@/lib/ankiImport';
 import type { PageId } from '@/types';
+import { readGuestSession, writeGuestSession } from '@/lib/guestSession';
 
 export type ImportDraft = { preview: ImportPreview | null; name: string; creatingDeck: boolean; mode: 'flashcards' | 'anki'; manualCards?: ImportedCard[]; allowEmpty?: boolean; importSeed?: string };
 type AuthPrompt = 'choice' | 'login' | 'register' | null;
@@ -29,14 +30,10 @@ interface AuthState {
   sessionKey: string;
 }
 const AuthContext = createContext<AuthState | null>(null);
-function startUnauthenticated() {
-  try { sessionStorage.removeItem('guest:session'); } catch { /* Ignore unavailable session storage. */ }
-  return false;
-}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<ApiUser | null>(null);
-  const [guest, setGuest] = useState(startUnauthenticated);
+  const [guest, setGuest] = useState(readGuestSession);
   const [loading, setLoading] = useState(true);
   const [restoreError, setRestoreError] = useState<string | null>(null);
   const [restoreAttempt, setRestoreAttempt] = useState(0);
@@ -57,6 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       generation.current++;
       authRequest.current?.abort();
       invalidateApiSession();
+      writeGuestSession(false);
       setUser(null); setGuest(false); setDraft(null); setPrompt(null); setResumePage(null); setGuestNotice(false);
       setLoading(true); setRestoreAttempt(value => value + 1);
     };
@@ -110,12 +108,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // P3 / FR-GUEST-07,08: connect consent + idempotent server migration here only after the sync API exists.
     const guestStorage = createLearningStorage('guest');
     setGuestNotice(guestStorage.getBookmarks().length > 0 || guestStorage.getStudyDays().length > 0 || (['vocabulary', 'kanji', 'grammar'] as const).some(type => guestStorage.getSRSCards(type).length > 0) || ['nhat-listening-v1', 'nhat-jlpt-listening-scores-v1'].some(key => Object.keys(guestStorage.getJSON(key, {})).length > 0));
+    writeGuestSession(false);
     setUser(account); setGuest(false); setSessionKey(sessionIdentity()!); setPrompt(null); setRestoreError(null);
   }
   function enterGuest() {
     // Never discard a recoverable authenticated session just to enter Guest.
     if (hasSession()) return;
-    invalidateApiSession(); setGuest(true); setResumePage('dashboard'); setPrompt(null);
+    invalidateApiSession(); writeGuestSession(true); setGuest(true); setResumePage('dashboard'); setPrompt(null);
     createLearningStorage('guest').setLastPage('dashboard');
   }
   async function signOut() {
@@ -123,7 +122,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     authRequest.current?.abort();
     const pending = logout();
     setUser(null); setDraft(null); setPrompt(null); setGuestNotice(false); setRestoreError(null);
-    setGuest(false); setResumePage(null); setSessionKey(`unauthenticated:${generation.current}`);
+    writeGuestSession(false); setGuest(false); setResumePage(null); setSessionKey(`unauthenticated:${generation.current}`);
     try { await pending; } catch { if (attempt !== generation.current || hasSession()) return; setRestoreError('Đã đăng xuất trên thiết bị. Chưa thể thu hồi phiên trên máy chủ do lỗi kết nối.'); }
   }
   return <AuthContext.Provider value={{ user, mode: user ? 'authenticated' : guest ? 'guest' : 'unauthenticated', loading, restoreError,

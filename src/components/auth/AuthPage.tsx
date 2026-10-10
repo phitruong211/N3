@@ -2,9 +2,11 @@ import { useState, type FormEvent } from 'react';
 import { ArrowRight, Eye, EyeOff, LoaderCircle, BookOpen, LogIn, UserPlus } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import './auth.css';
+import { useNavigate } from 'react-router-dom';
 
 export function AuthPage({ initialMode = 'login', compact = false }: { initialMode?: 'login' | 'register'; compact?: boolean }) {
   const { signIn, signUp, enterGuest, setPrompt } = useAuth();
+  const navigate = useNavigate();
   const [mode, setMode] = useState<'login' | 'register'>(initialMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +22,8 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
     try {
       if (mode === 'login') await signIn(email, password);
       else await signUp(email, password, displayName);
+      setPrompt(null);
+      navigate('/today', { replace: true });
     } catch (reason) { setError(reason instanceof Error ? reason.message : 'Không thể kết nối máy chủ.'); }
     finally { setBusy(false); }
   }
@@ -46,7 +50,10 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
         {error && <p role="alert" className="text-sm text-[var(--color-error)]">{error}</p>}
         <button className="auth-submit" disabled={busy}>{busy ? <><LoaderCircle className="auth-spinner" size={19}/>Đang kết nối…</> : <>{mode === 'login' ? 'Đăng nhập' : 'Tạo tài khoản'}<ArrowRight size={19}/></>}</button>
       </form>
-      <button type="button" className="study-button w-full mt-4" disabled={busy && !compact} onClick={() => compact ? setPrompt(null) : enterGuest()}>{compact ? 'Tiếp tục học thử' : 'Học thử'}</button>
+      <button type="button" className="study-button w-full mt-4" disabled={busy && !compact} onClick={() => {
+        if (compact) setPrompt(null);
+        else { enterGuest(); navigate('/today', { replace: true }); }
+      }}>{compact ? 'Tiếp tục học thử' : 'Học thử'}</button>
       <div className="auth-benefits"><BookOpen size={17} aria-hidden="true"/><span>Bộ thẻ cá nhân</span><span aria-hidden="true">·</span><span>Ôn tập theo nhịp của bạn</span></div>
     </div>
     <footer className="auth-bottom"><span>SỔ NHẬT</span><span>Bước nhỏ, hành trình lớn.</span></footer>

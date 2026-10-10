@@ -1,66 +1,49 @@
+import { LogIn, LogOut, PanelLeftClose, PanelLeftOpen, Search, Settings } from 'lucide-react';
 import { useApp } from '@/hooks/useApp';
-import type { PageId } from '@/types';
-import { LayoutGrid, BookOpen, ScrollText, Languages, RotateCcw, Layers, Brain, CircleHelp, Headphones, ChartNoAxesCombined, Bookmark, Settings, Search, PanelLeftClose, PanelLeftOpen, LogOut, LogIn } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-
-const groups: { label: string; items: { id: PageId; label: string; icon: typeof BookOpen; shortcut?: string }[] }[] = [
-  { label: 'Học', items: [
-    { id: 'dashboard', label: 'Hôm nay', icon: LayoutGrid, shortcut: 'G D' },
-    { id: 'vocabulary', label: 'Từ vựng', icon: BookOpen, shortcut: 'G V' },
-    { id: 'grammar', label: 'Ngữ pháp', icon: ScrollText, shortcut: 'G G' },
-    { id: 'kanji', label: 'Kanji', icon: Languages, shortcut: 'G K' },
-    { id: 'srs', label: 'Ôn tập', icon: RotateCcw, shortcut: 'G S' },
-  ] },
-  { label: 'Luyện thêm', items: [
-    { id: 'listening', label: 'Luyện nghe', icon: Headphones, shortcut: 'G L' },
-    { id: 'flashcards', label: 'Thẻ học', icon: Layers, shortcut: 'G F' },
-    { id: 'anki', label: 'Anki', icon: Brain, shortcut: 'G A' },
-    { id: 'quiz', label: 'Trắc nghiệm', icon: CircleHelp, shortcut: 'G Q' },
-  ] },
-  { label: 'Cá nhân', items: [
-    { id: 'progress', label: 'Tiến độ', icon: ChartNoAxesCombined, shortcut: 'G P' },
-    { id: 'bookmarks', label: 'Đã lưu', icon: Bookmark, shortcut: 'G B' },
-    { id: 'settings', label: 'Cài đặt', icon: Settings },
-  ] },
-];
+import { isNavigationItemActive, PRIMARY_NAV_ITEMS, SECONDARY_NAV_ITEMS, type NavigationItem } from './navigationItems';
 
 export function Sidebar() {
   const { currentPage, setCurrentPage, setSearchOpen, sidebarCollapsed, setSidebarCollapsed } = useApp();
-  const { user, signOut, requestAuth } = useAuth();
+  const { user, signOut, setPrompt } = useAuth();
+
+  const renderItem = (item: NavigationItem) => {
+    const Icon = item.icon;
+    const active = isNavigationItemActive(item, currentPage);
+    return <button key={item.page} onClick={() => setCurrentPage(item.page)} title={sidebarCollapsed ? item.label : undefined} aria-current={active ? 'page' : undefined}
+      className={`flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-xl px-3 text-left text-sm font-medium transition-colors ${active ? 'bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]' : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text)]'} ${sidebarCollapsed ? 'justify-center' : ''}`}>
+      <Icon size={19} strokeWidth={active ? 2.2 : 1.8}/><span className={sidebarCollapsed ? 'sr-only' : ''}>{item.label}</span>
+    </button>;
+  };
+
   return (
-    <aside className={`hidden md:flex sticky top-0 h-screen shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] transition-[width] duration-150 ${sidebarCollapsed ? 'w-20' : 'w-60'}`} aria-label="Điều hướng chính">
-      <div className="flex items-center justify-between gap-3 px-4 py-5 border-b border-[var(--color-border)]">
-        <button onClick={() => setCurrentPage('dashboard')} className="flex min-w-0 items-center gap-2 text-left cursor-pointer" aria-label="Về trang Hôm nay">
-          <img src="/so-nhat-mark.svg" alt="" className="h-12 w-12 shrink-0 object-contain" />
-          {!sidebarCollapsed && <span className="whitespace-nowrap text-xl font-bold tracking-wide text-[var(--color-text)]">SỔ NHẬT</span>}
+    <aside className={`sticky top-0 hidden h-screen shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] transition-[width] duration-200 lg:flex ${sidebarCollapsed ? 'w-[4.75rem]' : 'w-60'}`} aria-label="Điều hướng chính">
+      <div className={`flex items-center gap-2 px-3 py-4 ${sidebarCollapsed ? 'flex-col' : 'justify-between'}`}>
+        <button onClick={() => setCurrentPage('dashboard')} className="flex min-w-0 items-center gap-2.5 text-left" aria-label="Về trang Hôm nay">
+          <img src="/so-nhat-mark.svg" alt="" className="h-11 w-11 shrink-0 object-contain"/>
+          {!sidebarCollapsed && <span className="whitespace-nowrap text-lg font-bold tracking-wide">SỔ NHẬT</span>}
         </button>
         <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} className="study-button !min-h-9 !w-9 !p-0" aria-label={sidebarCollapsed ? 'Mở rộng menu' : 'Thu gọn menu'}>
-          {sidebarCollapsed ? <PanelLeftOpen size={17} /> : <PanelLeftClose size={17} />}
+          {sidebarCollapsed ? <PanelLeftOpen size={17}/> : <PanelLeftClose size={17}/>} 
         </button>
       </div>
-      <button onClick={() => setSearchOpen(true)} className="study-button mx-3 mt-4 !justify-start" aria-label="Tìm kiếm">
-        <Search size={17} /> {!sidebarCollapsed && <><span className="flex-1 text-left">Tìm kiếm</span><kbd className="kbd-shortcut">Ctrl K</kbd></>}
+
+      <button onClick={() => setSearchOpen(true)} className={`study-button mx-3 !min-h-10 ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} aria-label="Tìm kiếm">
+        <Search size={17}/>{!sidebarCollapsed && <><span className="flex-1 text-left">Tìm kiếm</span><kbd className="kbd-shortcut">⌘ K</kbd></>}
       </button>
-      <nav className="flex-1 overflow-y-auto px-3 py-5 space-y-6" aria-label="Các trang học">
-        {groups.map(group => (
-          <div key={group.label}>
-            {!sidebarCollapsed && <p className="study-eyebrow px-3 mb-2">{group.label}</p>}
-            <div className="space-y-1">
-              {group.items.map(item => {
-                const Icon = item.icon;
-                const active = currentPage === item.id;
-                return <button key={item.id} onClick={() => setCurrentPage(item.id)} title={sidebarCollapsed ? item.label : undefined} aria-current={active ? 'page' : undefined}
-                  className={`flex w-full min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-medium text-left cursor-pointer transition-colors ${active ? 'bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]' : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text)]'} ${sidebarCollapsed ? 'justify-center' : ''}`}>
-                  <Icon size={18} strokeWidth={active ? 2 : 1.8} /><span className={sidebarCollapsed ? 'sr-only' : ''}>{item.label}</span>
-                </button>;
-              })}
-            </div>
-          </div>
-        ))}
+
+      <nav className="flex-1 overflow-y-auto px-3 py-5" aria-label="Các trang học">
+        <div className="space-y-1">{PRIMARY_NAV_ITEMS.map(renderItem)}</div>
+        <div className="my-5 border-t border-[var(--color-border)]"/>
+        <div className="space-y-1">{SECONDARY_NAV_ITEMS.map(renderItem)}</div>
       </nav>
-      <div className="border-t border-[var(--color-border)] p-3">
-        {!sidebarCollapsed && <p className="truncate px-2 pb-2 text-xs text-[var(--color-text-tertiary)]" title={user?.email}>{user?.displayName || 'Khách · lưu trên thiết bị'}</p>}
-        <button className={`study-button w-full ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} title={user ? 'Đăng xuất' : 'Đăng nhập'} onClick={() => user ? void signOut() : requestAuth()}>{user ? <LogOut size={17}/> : <LogIn size={17}/>}<span className={sidebarCollapsed ? 'sr-only' : undefined}>{user ? 'Đăng xuất' : 'Đăng nhập'}</span></button>
+
+      <div className="space-y-1 border-t border-[var(--color-border)] p-3">
+        {renderItem({ page: 'settings', label: 'Cài đặt', icon: Settings })}
+        {!sidebarCollapsed && <p className="truncate px-3 pt-2 text-xs text-[var(--color-text-tertiary)]" title={user?.email}>{user?.displayName || 'Khách · lưu trên thiết bị'}</p>}
+        <button className={`study-button w-full ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} title={user ? 'Đăng xuất' : 'Đăng nhập'} onClick={() => user ? void signOut() : setPrompt('login')}>
+          {user ? <LogOut size={17}/> : <LogIn size={17}/>}<span className={sidebarCollapsed ? 'sr-only' : undefined}>{user ? 'Đăng xuất' : 'Đăng nhập'}</span>
+        </button>
       </div>
     </aside>
   );

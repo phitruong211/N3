@@ -6,12 +6,16 @@
 // ============================================================
 
 import React, { Suspense, lazy } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { AppProvider, useApp } from '@/hooks/useApp';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { AuthProvider, useAuth } from '@/hooks/useAuth';
 import { hasSession } from '@/lib/api';
 import { AuthPage } from '@/components/auth/AuthPage';
 import { AuthDialog, SessionNotices } from '@/components/auth/AuthDialog';
+import { NotFoundPage } from '@/components/layout/NotFoundPage';
+import { resolveInitialPath } from '@/lib/navigation';
+import { LibraryLayout } from '@/components/library/LibraryLayout';
 
 const Dashboard = lazy(() => import('@/components/dashboard/Dashboard').then((module) => ({ default: module.Dashboard })));
 const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage').then((module) => ({ default: module.VocabularyPage })));
@@ -27,7 +31,7 @@ const BookmarksPage = lazy(() => import('@/components/bookmarks/BookmarksPage').
 const SettingsPage = lazy(() => import('@/components/settings/SettingsPage').then((module) => ({ default: module.SettingsPage })));
 
 function AppContent() {
-  const { currentPage, loading, loadError, retryLoad, learningSync } = useApp();
+  const { loading, loadError, retryLoad, learningSync } = useApp();
 
   if (loading || !learningSync.initialized) {
     return (
@@ -49,32 +53,41 @@ function AppContent() {
     );
   }
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'dashboard': return <Dashboard />;
-      case 'vocabulary': return <VocabularyPage />;
-      case 'kanji': return <KanjiPage />;
-      case 'grammar': return <GrammarPage />;
-      case 'flashcards': return <FlashcardPage />;
-      case 'anki': return <AnkiPage />;
-      case 'srs': return <SRSPage />;
-      case 'quiz': return <QuizPage />;
-      case 'listening': return <ListeningPage />;
-      case 'progress': return <ProgressPage />;
-      case 'bookmarks': return <BookmarksPage />;
-      case 'settings': return <SettingsPage />;
-      default: return <Dashboard />;
-    }
-  };
-
   return (
     <MainLayout>
       <SessionNotices />
       <Suspense fallback={<div className="py-16 text-center text-sm text-[var(--color-text-secondary)]" role="status">Đang mở bài học…</div>}>
-        {renderPage()}
+        <Routes>
+          <Route path="/" element={<RootRedirect />} />
+          <Route path="/today" element={<Dashboard />} />
+          <Route path="/library" element={<LibraryLayout />}>
+            <Route index element={<Navigate to="vocabulary" replace />} />
+            <Route path="vocabulary" element={<VocabularyPage />} />
+            <Route path="grammar" element={<GrammarPage />} />
+            <Route path="kanji" element={<KanjiPage />} />
+            <Route path="listening" element={<ListeningPage />} />
+          </Route>
+          <Route path="/decks" element={<DecksRoute />} />
+          <Route path="/review" element={<SRSPage />} />
+          <Route path="/quiz" element={<QuizPage />} />
+          <Route path="/progress" element={<ProgressPage />} />
+          <Route path="/saved" element={<BookmarksPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </Suspense>
     </MainLayout>
   );
+}
+
+function DecksRoute() {
+  const { currentPage } = useApp();
+  return currentPage === 'anki' ? <AnkiPage /> : <FlashcardPage />;
+}
+
+function RootRedirect() {
+  const { storage } = useApp();
+  return <Navigate replace to={resolveInitialPath('/', storage.getLastPage())} />;
 }
 
 export default function App() {

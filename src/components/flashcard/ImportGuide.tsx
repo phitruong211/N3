@@ -30,12 +30,12 @@ export function ImportGuide({ onDownload }: { onDownload: (format: "json" | "csv
   }
   return <details className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
     <summary className="flex cursor-pointer list-none items-center gap-2 font-semibold text-[var(--color-accent)]">
-      <FileQuestion size={18} /> Hướng dẫn import và prompt tạo file
+      <FileQuestion size={18} /> JSON, Excel, CSV, TXT · Xem hướng dẫn và file mẫu
     </summary>
     <div className="mt-4 space-y-5 text-sm leading-relaxed">
       <ol className="grid gap-3 sm:grid-cols-3">
         <li className="rounded-xl bg-[var(--color-surface-alt)] p-3"><strong className="block">1. Chuẩn bị</strong>JSON, TXT, CSV, TSV, XLSX hoặc XLS; tối đa 20 MB và 20.000 thẻ.</li>
-        <li className="rounded-xl bg-[var(--color-surface-alt)] p-3"><strong className="block">2. Chọn file</strong>Hệ thống tự nhận diện cột và hiển thị bản xem trước để sửa.</li>
+        <li className="rounded-xl bg-[var(--color-surface-alt)] p-3"><strong className="block">2. Chọn tệp</strong>Hệ thống tự nhận diện cột và hiển thị bản xem trước để sửa.</li>
         <li className="rounded-xl bg-[var(--color-surface-alt)] p-3"><strong className="block">3. Kiểm tra</strong>Thấy đúng hai mặt và furigana thì bấm “Tạo bộ thẻ”.</li>
       </ol>
       <div>
@@ -51,7 +51,7 @@ export function ImportGuide({ onDownload }: { onDownload: (format: "json" | "csv
         <button type="button" className="study-button" onClick={() => onDownload("txt")}><Download size={16} /> Mẫu TXT/TSV</button>
       </div>
       <div>
-        <div className="mb-2 flex flex-wrap items-center justify-between gap-2"><h4 className="font-semibold">Prompt dùng ngay với AI</h4><button type="button" className="study-button !min-h-9 !py-1.5" onClick={() => void copyPrompt()}>{copied ? <Check size={16} /> : <Copy size={16} />}{copied ? "Đã sao chép" : "Sao chép prompt"}</button></div>
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2"><h4 className="font-semibold">Câu lệnh mẫu cho AI</h4><button type="button" className="study-button !min-h-9 !py-1.5" onClick={() => void copyPrompt()}>{copied ? <Check size={16} /> : <Copy size={16} />}{copied ? "Đã sao chép" : "Sao chép câu lệnh"}</button></div>
         <pre className="max-h-72 overflow-auto whitespace-pre-wrap rounded-xl bg-[var(--color-surface-alt)] p-3 text-xs leading-6">{aiPrompt}</pre>
       </div>
     </div>

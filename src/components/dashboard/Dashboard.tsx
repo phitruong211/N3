@@ -5,10 +5,13 @@ import { useLearningStorage } from '@/hooks/useApp';
 import { ArrowRight, BookOpen, ScrollText, Languages, RotateCcw, Layers, Headphones, ChartNoAxesCombined } from 'lucide-react';
 import { PageHeading } from '@/components/ui/StudyUI';
 import type { PageId } from '@/types';
+import { useAuth } from '@/hooks/useAuth';
+import { hasLegacyLearningData } from '@/lib/storage';
 
 export function Dashboard() {
   const { getStudyDays } = useLearningStorage();
   const { vocabulary, grammar, kanji, srsCards, setCurrentPage, settings } = useApp();
+  const { draft } = useAuth();
   const due = useMemo(() => getDueCards(srsCards).length, [srsCards]);
   const today = getStudyDays().find(day => day.date === formatDate(new Date()));
   const cards = [
@@ -35,6 +38,14 @@ export function Dashboard() {
         </button>
       </div>
     </section>
+    {draft && <section className="flex flex-col gap-3 rounded-xl border border-[var(--color-accent)]/30 bg-[var(--color-accent-subtle)] p-4 sm:flex-row sm:items-center sm:justify-between" aria-label="Bộ thẻ đang tạo dở">
+      <div><p className="font-semibold text-[var(--color-text)]">Bạn có một bộ thẻ đang tạo dở</p><p className="mt-1 text-sm text-[var(--color-text-secondary)]">Tiếp tục từ bước bạn đã dừng, nội dung nhập vẫn được giữ nguyên.</p></div>
+      <button className="study-button shrink-0" onClick={() => setCurrentPage('flashcards')}>Tiếp tục tạo bộ <ArrowRight size={17}/></button>
+    </section>}
+    {hasLegacyLearningData() && <section className="flex flex-col gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 sm:flex-row sm:items-center sm:justify-between" role="note">
+      <div><p className="font-semibold text-[var(--color-text)]">Có dữ liệu học từ phiên bản cũ</p><p className="mt-1 text-sm text-[var(--color-text-secondary)]">Dữ liệu vẫn an toàn trên thiết bị. Bạn có thể kiểm tra và chuyển trong Cài đặt.</p></div>
+      <button className="study-button shrink-0" onClick={() => setCurrentPage('settings')}>Xem dữ liệu</button>
+    </section>}
     <section aria-labelledby="library-title" className="space-y-4">
       <div className="flex items-end justify-between gap-3"><div><p className="study-eyebrow">Khám phá</p><h2 id="library-title" className="text-xl font-semibold">Thư viện học</h2></div><span className="text-xs text-[var(--color-text-tertiary)]">N2 / N3 / N4</span></div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">

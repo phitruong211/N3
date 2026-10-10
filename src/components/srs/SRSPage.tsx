@@ -18,7 +18,6 @@ import { formatSessionTime, useActiveElapsedMinutes, useAnkiSessionTimer } from 
 import type { Rating, SRSCard, VocabItem, KanjiItem, GrammarItem } from '@/types';
 import { RotateCcw, CheckCircle, ArrowRight } from 'lucide-react';
 import { PageHeading } from '@/components/ui/StudyUI';
-import { ImportedDecks } from '@/components/flashcard/ImportedDecks';
 
 export function SRSPage() {
   const { vocabulary, kanji, grammar, srsCards, updateSRSCard, setCurrentPage, settings } = useApp();
@@ -59,7 +58,6 @@ export function SRSPage() {
   return (
     <div className="study-page">
       <PageHeading eyebrow="HÔM NAY" title="Ôn tập" subtitle="Ôn đúng lúc để nhớ lâu hơn" />
-      <ImportedDecks />
 
       <div className="grid grid-cols-3 gap-2 sm:gap-4">
         {/* Due reviews */}
@@ -120,7 +118,7 @@ export function SRSPage() {
           <ArrowRight size={16} />
           Học {Math.min(10, newItemCount)} từ mới
         </button>
-        <button className="study-button" onClick={() => setCurrentPage('flashcards')}>Thẻ học →</button>
+        <button className="study-button" onClick={() => setCurrentPage('flashcards')}>Bộ thẻ →</button>
         <button className="study-button" onClick={() => setCurrentPage('quiz')}>Trắc nghiệm →</button>
       </div>
     </div>

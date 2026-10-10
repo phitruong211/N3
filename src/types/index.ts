@@ -274,6 +274,7 @@ export interface StudyDay {
   date: string; // YYYY-MM-DD
   cardsReviewed: number; // Legacy total
   flashcardReviewed?: number; // New: flashcard specific
+  flashcardViewed?: number; // Free study views; does not imply a correct answer
   srsReviewed?: number; // New: Anki specific
   newCardsLearned: number;
   accuracy: number;

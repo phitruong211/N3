@@ -5,6 +5,7 @@ import { useLearningStorage } from '@/hooks/useApp';
 import type { ThemeMode } from '@/types';
 import { PageHeading } from '@/components/ui/StudyUI';
 import { useAuth } from '@/hooks/useAuth';
+import { AccountLearningStatus } from '@/components/auth/AccountLearningStatus';
 
 const themes: { id: ThemeMode; label: string }[] = [
   { id: 'light', label: 'Sáng' }, { id: 'dark', label: 'Tối' },
@@ -30,6 +31,7 @@ export function SettingsPage() {
           <h2 className="text-base font-semibold text-[var(--color-text)]">Tài khoản</h2>
           <p className="study-copy mt-1">{user ? `${user.displayName} · ${user.email}` : 'Bạn đang học thử trên thiết bị này.'}</p>
           <button className="study-button mt-4" onClick={() => user ? void signOut() : requestAuth()}>{user ? 'Đăng xuất' : 'Đăng nhập / Đăng ký'}</button>
+          {user && <div className="mt-5 border-t border-[var(--color-border)] pt-4"><AccountLearningStatus /></div>}
         </section>
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Giao diện</h2>
@@ -37,23 +39,23 @@ export function SettingsPage() {
           <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">{themes.map(theme => <button key={theme.id} aria-pressed={settings.theme === theme.id}
             className={'study-button min-h-11 ' + (settings.theme === theme.id ? 'study-button-primary' : '')}
             onClick={() => updateSettings({ theme: theme.id })}>{theme.label}</button>)}</div>
+          <SettingToggle label="Giảm chuyển động" detail="Giảm hiệu ứng chuyển cảnh và lật thẻ" checked={settings.reducedMotion} onChange={value => updateSettings({ reducedMotion: value })}/>
         </section>
         <section className="study-panel">
-          <h2 className="text-base font-semibold text-[var(--color-text)]">Cỡ chữ</h2>
+          <h2 className="text-base font-semibold text-[var(--color-text)]">Cỡ chữ giao diện</h2>
           <div className="mt-4 grid grid-cols-3 gap-2">{sizes.map(size => <button key={size.id} aria-pressed={settings.fontSize === size.id}
             className={'study-button min-h-11 ' + (settings.fontSize === size.id ? 'study-button-primary' : '')}
             onClick={() => updateSettings({ fontSize: size.id })}>{size.label}</button>)}</div>
         </section>
         <section className="study-panel">
           <h2 className="mb-3 text-base font-semibold text-[var(--color-text)]">Khi học</h2>
-          <SettingToggle label="Phiên âm mặt trước" detail="Hiện cách đọc hiragana trước khi lật thẻ" checked={settings.showFuriganaFront} onChange={value => updateSettings({ showFuriganaFront: value })}/>
-          <SettingToggle label="Phiên âm mặt sau" detail="Hiện cách đọc hiragana sau khi lật thẻ" checked={settings.showFuriganaBack} onChange={value => updateSettings({ showFuriganaBack: value })}/>
+          <SettingToggle label="Hiện furigana mặt trước" detail="Hiện hiragana trên Kanji trước khi lật thẻ" checked={settings.showFuriganaFront} onChange={value => updateSettings({ showFuriganaFront: value })}/>
+          <SettingToggle label="Hiện furigana mặt sau" detail="Hiện hiragana trên Kanji sau khi lật thẻ" checked={settings.showFuriganaBack} onChange={value => updateSettings({ showFuriganaBack: value })}/>
           <SettingToggle label="Tự phát âm" detail="Đọc thẻ khi bắt đầu học nếu trình duyệt hỗ trợ" checked={settings.autoPlayAudio} onChange={value=>updateSettings({autoPlayAudio:value})}/>
           <label className="block py-3">Mục tiêu mỗi ngày (thẻ)<input className="study-input" type="number" min={1} max={1000} value={settings.dailyGoal} onChange={e=>updateSettings({dailyGoal:Math.max(1,Math.min(1000,Math.round(Number(e.target.value)||1)))})}/></label>
-          <SettingToggle label="Giảm chuyển động" detail="Giảm hiệu ứng chuyển cảnh" checked={settings.reducedMotion} onChange={value => updateSettings({ reducedMotion: value })}/>
         </section>
         <section className="study-panel">
-          <h2 className="text-base font-semibold text-[var(--color-text)]">Thời gian phiên Anki</h2>
+          <h2 className="text-base font-semibold text-[var(--color-text)]">Ôn tập</h2>
           <p className="study-copy mt-1">Chỉ tính thời gian tab đang hoạt động. Khi hết giờ, bạn hoàn tất thẻ hiện tại rồi phiên sẽ kết thúc.</p>
           <label className="mt-4 block text-sm font-semibold text-[var(--color-text)]">
             Giới hạn tổng (phút)
@@ -61,16 +63,17 @@ export function SettingsPage() {
               onChange={event => updateSettings({ ankiSessionMinutes: Math.min(180, Math.max(0, Number(event.target.value) || 0)) })}/>
           </label>
           <p className="study-copy mt-2">Nhập 0 để học không giới hạn. Tối đa 180 phút mỗi phiên.</p>
-          <div className="mt-3 flex flex-wrap gap-2">{[0, 10, 20, 30, 45, 60].map(minutes => <button key={minutes} className={'study-button ' + (settings.ankiSessionMinutes === minutes ? 'study-button-primary' : '')} onClick={() => updateSettings({ ankiSessionMinutes: minutes })}>{minutes === 0 ? 'Không giới hạn' : `${minutes}m`}</button>)}</div>
+          <div className="mt-3 flex flex-wrap gap-2">{[0, 10, 20, 30, 45, 60].map(minutes => <button key={minutes} aria-pressed={settings.ankiSessionMinutes === minutes} className={'study-button ' + (settings.ankiSessionMinutes === minutes ? 'study-button-primary' : '')} onClick={() => updateSettings({ ankiSessionMinutes: minutes })}>{minutes === 0 ? 'Không giới hạn' : `${minutes} phút`}</button>)}</div>
         </section>
-        <section className="study-panel">
-          <div className="flex items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><h2 className="text-base font-semibold">Xóa dữ liệu trên thiết bị</h2></div>
+        <details className="study-panel">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><span className="text-base font-semibold">Vùng nguy hiểm</span></summary>
+          <h2 className="mt-4 text-base font-semibold">Xóa dữ liệu trên thiết bị</h2>
           <p className="study-copy mt-2">Xóa lịch ôn, hoạt động học, mục đã lưu, dữ liệu nghe và cài đặt trên thiết bị của phiên hiện tại. Tiến độ đã đồng bộ sẽ được tải lại từ tài khoản. Không xóa dữ liệu của tài khoản khác, dữ liệu Guest khi đang đăng nhập hoặc bộ thẻ trên máy chủ.</p>
           <button className="study-button mt-4 border-[var(--color-error)] text-[var(--color-error)]" onClick={handleReset}>
             {confirmReset ? 'Xác nhận xóa toàn bộ dữ liệu' : 'Xóa dữ liệu học'}
           </button>
           {confirmReset && <button className="study-button ml-2 mt-4" onClick={() => setConfirmReset(false)}>Hủy</button>}
-        </section>
+        </details>
       </div>
       <section className="study-panel lg:sticky lg:top-20">
         <p className="study-eyebrow">XEM TRƯỚC</p>

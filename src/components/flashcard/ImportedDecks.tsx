@@ -541,11 +541,6 @@ export function ImportedDecks({
           <p className="study-eyebrow">CỦA BẠN</p>
           <h2 className="mt-1 text-xl font-semibold">Bộ thẻ của bạn</h2>
         </div>
-        {user && decks.totalElements > 1 && (
-          <p className="hidden text-xs text-[var(--color-text-tertiary)] sm:block">
-            Kéo tay cầm ⋮⋮ để đổi thứ tự
-          </p>
-        )}
       </div>
       <input
         ref={input}
@@ -980,6 +975,16 @@ export function ImportedDecks({
                       </button>
                     </div>
                   </>
+                ) : !allowEmpty ? (
+                  <div className="space-y-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-alt)] p-4">
+                    <div><p className="font-semibold">Thẻ đầu tiên</p><p className="study-copy mt-1">Nhập hai mặt để bộ thẻ sẵn sàng học ngay.</p></div>
+                    <CardFields card={manualCards[0]} onChange={(card) => setManualCards([card])} />
+                    <div className="flex flex-wrap gap-2">
+                      <button type="button" className="study-button study-button-primary" disabled={busy || !manualCards[0].front.trim() || !manualCards[0].back.trim()} onClick={() => void create(true)}>Tạo bộ với 1 thẻ</button>
+                      <button type="button" className="study-button" disabled={busy} onClick={() => void create(true, true)}>Tạo bộ trống</button>
+                      <button type="button" className="study-button" onClick={() => setAllowEmpty(true)}>Quay lại</button>
+                    </div>
+                  </div>
                 ) : (
                   <>
                   <div className="grid gap-3 sm:grid-cols-2">
@@ -987,7 +992,7 @@ export function ImportedDecks({
                       type="button"
                       className="group flex min-h-28 items-center gap-4 rounded-xl border border-[var(--color-border)] p-4 text-left transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-alt)]"
                       disabled={busy}
-                      onClick={() => void create(true, true)}
+                      onClick={() => setAllowEmpty(false)}
                     >
                       <span className="rounded-full bg-[var(--color-surface-alt)] p-3 text-[var(--color-accent)]">
                         <PenLine size={21} />
@@ -995,7 +1000,7 @@ export function ImportedDecks({
                       <span>
                         <strong className="block">Tạo thủ công</strong>
                         <span className="study-copy">
-                          Tạo bộ trống rồi thêm từng thẻ
+                          Nhập thẻ đầu tiên ngay trong bước tạo
                         </span>
                       </span>
                     </button>
@@ -1006,7 +1011,7 @@ export function ImportedDecks({
                       onClick={chooseImport}
                     >
                       <span className="rounded-full bg-[var(--color-surface-alt)] p-3 text-[var(--color-accent)]"><Upload size={21} /></span>
-                      <span><strong className="block">Import file</strong><span className="study-copy">TXT, CSV, TSV, JSON, XLSX hoặc XLS</span></span>
+                      <span><strong className="block">Nhập từ tệp</strong><span className="study-copy">TXT, CSV, TSV, JSON, XLSX hoặc XLS</span></span>
                     </button>
                   </div>
                   <ImportGuide onDownload={download} />
