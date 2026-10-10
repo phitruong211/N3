@@ -1,152 +1,38 @@
-// ============================================================
-// SM-2 Spaced Repetition Algorithm
-// ============================================================
-// Scientific basis: Piotr Wozniak's SuperMemo SM-2 algorithm
-// Principle: Spaced Repetition — increasing intervals between
-// successful reviews maximizes long-term retention.
-// ============================================================
+import type { SRSCard, Rating, CardState, DeckType, SrsSchedulingSettings } from '../types';
+import {
+  DEFAULT_SRS_SETTINGS,
+  previewBuiltInIntervals,
+  progressToSrsCard,
+  reviewBuiltInCard,
+} from './fsrsProgress.ts';
 
-import type { SRSCard, Rating, CardState, DeckType } from '../types';
-
-// Learning steps in minutes (short-term repetition)
-const LEARNING_STEPS = [1, 10, 60]; // 1 min, 10 min, 1 hour
-
-// Default ease factor for new cards
-const DEFAULT_EASE = 2.5;
-const MIN_EASE = 1.3;
-
-/**
- * Create a new SRS card for an item.
- */
-export function createSRSCard(
-  cardId: string,
-  deckType: DeckType
-): SRSCard {
+/** Create a new unscheduled card. It receives its FSRS memory state on first rating. */
+export function createSRSCard(cardId: string, deckType: DeckType): SRSCard {
   return {
     cardId,
     deckType,
     state: 'new',
-    easeFactor: DEFAULT_EASE,
+    easeFactor: 2.5,
     dueDate: new Date().toISOString(),
     reps: 0,
     lapses: 0,
     lastReviewedAt: null,
+    lastRating: null,
   };
 }
 
-/**
- * Process a review rating and return updated card.
- * 
- * SM-2 Algorithm (modified):
- * - Again: Reset to learning, step 0
- * - Hard: Stay at current step or reduce interval
- * - Good: Advance step / increase interval
- * - Easy: Graduate immediately with bonus interval
- */
-export function processReview(card: SRSCard, rating: Rating): SRSCard {
-  const now = new Date();
-  const updated = { ...card };
-  updated.lastReviewedAt = now.toISOString();
-
-  switch (card.state) {
-    case 'new':
-    case 'learning':
-    case 'relearning':
-      processLearningState(updated, rating);
-      break;
-    case 'review':
-      processReviewState(updated, rating);
-      break;
-  }
-
-  return updated;
-}
-
-function processLearningState(card: SRSCard, rating: Rating): void {
-  let currentStepIdx = 0;
-  if (card.intervalMinutes) {
-    const idx = LEARNING_STEPS.indexOf(card.intervalMinutes);
-    if (idx >= 0) currentStepIdx = idx;
-  }
-
-  switch (rating) {
-    case 'again':
-      // Reset to first learning step
-      card.intervalMinutes = LEARNING_STEPS[0];
-      card.dueDate = addMinutes(new Date(), card.intervalMinutes).toISOString();
-      card.state = card.state === 'relearning' ? 'relearning' : 'learning';
-      break;
-
-    case 'hard':
-      // Repeat current step
-      card.intervalMinutes = LEARNING_STEPS[currentStepIdx];
-      card.dueDate = addMinutes(new Date(), card.intervalMinutes).toISOString();
-      card.state = card.state === 'relearning' ? 'relearning' : 'learning';
-      break;
-
-    case 'good':
-      // Advance to next step
-      if (currentStepIdx + 1 >= LEARNING_STEPS.length) {
-        // Graduate to review
-        card.state = 'review';
-        card.intervalDays = 1; // 1 day
-        card.intervalMinutes = undefined;
-        card.reps = 1;
-        card.dueDate = addDays(new Date(), 1).toISOString();
-      } else {
-        card.intervalMinutes = LEARNING_STEPS[currentStepIdx + 1];
-        card.dueDate = addMinutes(new Date(), card.intervalMinutes).toISOString();
-        card.state = card.state === 'relearning' ? 'relearning' : 'learning';
-      }
-      break;
-
-    case 'easy':
-      // Graduate immediately with 4-day interval
-      card.state = 'review';
-      card.intervalDays = 4;
-      card.intervalMinutes = undefined;
-      card.reps = 1;
-      card.easeFactor = Math.max(MIN_EASE, card.easeFactor + 0.15);
-      card.dueDate = addDays(new Date(), 4).toISOString();
-      break;
-  }
-}
-
-function processReviewState(card: SRSCard, rating: Rating): void {
-  const currentInterval = card.intervalDays || 1;
-
-  switch (rating) {
-    case 'again':
-      // Lapse: reset to learning
-      card.state = 'relearning';
-      card.lapses += 1;
-      card.easeFactor = Math.max(MIN_EASE, card.easeFactor - 0.2);
-      card.intervalMinutes = LEARNING_STEPS[0];
-      card.intervalDays = undefined;
-      card.reps = 0;
-      card.dueDate = addMinutes(new Date(), card.intervalMinutes).toISOString();
-      break;
-
-    case 'hard':
-      card.easeFactor = Math.max(MIN_EASE, card.easeFactor - 0.15);
-      card.intervalDays = Math.max(1, Math.round(currentInterval * 1.2));
-      card.reps += 1;
-      card.dueDate = addDays(new Date(), card.intervalDays).toISOString();
-      break;
-
-    case 'good':
-      card.intervalDays = Math.max(1, Math.round(currentInterval * card.easeFactor));
-      card.reps += 1;
-      card.dueDate = addDays(new Date(), card.intervalDays).toISOString();
-      break;
-
-    case 'easy':
-      card.easeFactor = Math.max(MIN_EASE, card.easeFactor + 0.15);
-      card.intervalDays = Math.max(1, Math.round(currentInterval * card.easeFactor * 1.3));
-      card.reps += 1;
-      card.dueDate = addDays(new Date(), card.intervalDays).toISOString();
-      break;
-  }
+/** Apply an FSRS-6 rating while retaining the storage-compatible SRSCard shape. */
+export function processReview(
+  card: SRSCard,
+  rating: Rating,
+  now = new Date(),
+  settings: SrsSchedulingSettings = DEFAULT_SRS_SETTINGS,
+): SRSCard {
+  return progressToSrsCard(
+    card.cardId,
+    card.deckType,
+    reviewBuiltInCard(card, rating, now, settings, true),
+  );
 }
 
 /**
@@ -252,7 +138,7 @@ export function formatDate(date: Date): string {
 export function formatCardInterval(card: SRSCard | null): string {
   if (!card || card.state === 'new') return 'Chưa học';
   if (card.state === 'learning' || card.state === 'relearning') {
-    const min = card.intervalMinutes || LEARNING_STEPS[0];
+    const min = card.intervalMinutes || DEFAULT_SRS_SETTINGS.srsAgainMinutes;
     return min < 60 ? `${min}m` : `${Math.round(min / 60)}h`;
   }
   
@@ -290,33 +176,11 @@ export function formatInterval(interval: number): string {
   return `${(interval / 365).toFixed(1)} năm`;
 }
 
-/**
- * Get the next review intervals for each rating option.
- */
+/** Preview FSRS intervals using the same account settings as scheduling. */
 export function getNextIntervals(
-  card: SRSCard
+  card: SRSCard,
+  settings: SrsSchedulingSettings = DEFAULT_SRS_SETTINGS,
+  now = new Date(),
 ): Record<Rating, string> {
-  if (card.state === 'review') {
-    const currentInterval = card.intervalDays || 1;
-    return {
-      again: '1m',
-      hard: formatInterval(Math.max(1, Math.round(currentInterval * 1.2))),
-      good: formatInterval(Math.max(1, Math.round(currentInterval * card.easeFactor))),
-      easy: formatInterval(Math.max(1, Math.round(currentInterval * card.easeFactor * 1.3))),
-    };
-  } else {
-    let currentStepIdx = 0;
-    if (card.intervalMinutes) {
-      const idx = LEARNING_STEPS.indexOf(card.intervalMinutes);
-      if (idx >= 0) currentStepIdx = idx;
-    }
-    const nextStep = LEARNING_STEPS[currentStepIdx + 1];
-    
-    return {
-      again: '1m',
-      hard: `${LEARNING_STEPS[currentStepIdx]}m`,
-      good: nextStep ? (nextStep < 60 ? `${nextStep}m` : `${Math.round(nextStep / 60)}h`) : '1 ngày',
-      easy: '4 ngày',
-    };
-  }
+  return previewBuiltInIntervals(card, now, settings);
 }

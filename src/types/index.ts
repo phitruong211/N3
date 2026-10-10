@@ -214,6 +214,28 @@ export type CardState = 'new' | 'learning' | 'review' | 'relearning';
  */
 export type Rating = 'again' | 'hard' | 'good' | 'easy';
 
+export interface SrsSchedulingSettings {
+  srsAgainMinutes: number;
+  srsGoodMinutes: number;
+  srsDesiredRetention: 0.9 | 0.93 | 0.95;
+}
+
+export interface FsrsProgress {
+  algorithm: 'fsrs-6';
+  state: CardState;
+  dueAt: string;
+  stability: number;
+  difficulty: number;
+  elapsedDays: number;
+  scheduledDays: number;
+  learningSteps: number;
+  repetitions: number;
+  lapses: number;
+  firstReviewedAt: string | null;
+  lastReviewedAt: string | null;
+  lastRating: Rating | null;
+}
+
 export type DeckType = 'vocabulary' | 'kanji' | 'grammar';
 
 export interface SRSCard {
@@ -227,6 +249,14 @@ export interface SRSCard {
   reps: number;
   lapses: number;
   lastReviewedAt: string | null;
+  algorithm?: 'fsrs-6';
+  stability?: number;
+  difficulty?: number;
+  elapsedDays?: number;
+  scheduledDays?: number;
+  learningSteps?: number;
+  firstReviewedAt?: string | null;
+  lastRating?: Rating | null;
 }
 
 // ─── Quiz ───────────────────────────────────────────────────
@@ -316,6 +346,9 @@ export interface AppSettings {
   dailyGoal: number;
   /** Maximum active minutes for an Anki session; 0 disables the limit. */
   ankiSessionMinutes: number;
+  srsAgainMinutes: number;
+  srsGoodMinutes: number;
+  srsDesiredRetention: 0.9 | 0.93 | 0.95;
   reducedMotion: boolean;
 }
 
