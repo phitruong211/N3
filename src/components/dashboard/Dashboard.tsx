@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, type CSSProperties } from 'react';
 import { useApp, useLearningStorage } from '@/hooks/useApp';
 import { formatDate, getDueCards } from '@/lib/srs';
 import { useAuth } from '@/hooks/useAuth';
@@ -8,7 +8,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   BookOpen,
-  ChartNoAxesCombined,
   Clock3,
   Flame,
   Headphones,
@@ -16,7 +15,6 @@ import {
   Layers,
   RotateCcw,
   ScrollText,
-  Target,
 } from 'lucide-react';
 
 export function Dashboard() {
@@ -24,12 +22,10 @@ export function Dashboard() {
   const { vocabulary, grammar, kanji, srsCards, setCurrentPage, settings } = useApp();
   const { draft, user } = useAuth();
   const todayKey = formatDate(new Date());
-  const studyDays = getStudyDays();
-  const today = studyDays.find(day => day.date === todayKey);
+  const today = getStudyDays().find(day => day.date === todayKey);
   const streak = calculateStreak().current;
   const due = useMemo(() => getDueCards(srsCards).length, [srsCards]);
   const reviewed = today?.cardsReviewed ?? 0;
-  const remaining = Math.max(0, settings.dailyGoal - reviewed);
   const goalProgress = settings.dailyGoal > 0 ? Math.min(100, Math.round(reviewed / settings.dailyGoal * 100)) : 100;
   const displayName = user?.displayName?.trim().split(/\s+/)[0];
   const hour = new Date().getHours();
@@ -37,91 +33,94 @@ export function Dashboard() {
   const dateLabel = new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date());
 
   const library = [
-    { page: 'vocabulary' as PageId, title: 'Từ vựng', subtitle: `${vocabulary.length.toLocaleString('vi-VN')} từ theo cấp độ`, icon: BookOpen, tone: 'var(--color-accent)' },
-    { page: 'grammar' as PageId, title: 'Ngữ pháp', subtitle: `${grammar.length.toLocaleString('vi-VN')} mẫu N4–N2`, icon: ScrollText, tone: 'var(--color-grammar)' },
-    { page: 'kanji' as PageId, title: 'Kanji', subtitle: `${kanji.length.toLocaleString('vi-VN')} chữ và từ mở rộng`, icon: Languages, tone: 'var(--color-kanji)' },
-    { page: 'listening' as PageId, title: 'Luyện nghe', subtitle: 'Podcast và hội thoại theo cấp độ', icon: Headphones, tone: 'var(--color-success)' },
+    { page: 'vocabulary' as PageId, title: 'Từ vựng', count: `${vocabulary.length.toLocaleString('vi-VN')} từ`, mark: '語', icon: BookOpen, tone: 'var(--color-accent)' },
+    { page: 'grammar' as PageId, title: 'Ngữ pháp', count: `${grammar.length.toLocaleString('vi-VN')} mẫu`, mark: '文', icon: ScrollText, tone: 'var(--color-grammar)' },
+    { page: 'kanji' as PageId, title: 'Kanji', count: `${kanji.length.toLocaleString('vi-VN')} chữ`, mark: '漢', icon: Languages, tone: 'var(--color-kanji)' },
+    { page: 'listening' as PageId, title: 'Luyện nghe', count: 'Theo cấp độ', mark: '聴', icon: Headphones, tone: 'var(--color-success)' },
   ];
 
   return <div className="study-page dashboard-page">
-    <header className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+    <header className="dashboard-heading flex items-end justify-between gap-5 border-b border-[var(--color-border)] pb-5">
       <div>
         <p className="study-eyebrow capitalize">{dateLabel}</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-[-.04em] sm:text-4xl">{greeting}{displayName ? `, ${displayName}` : ''}.</h1>
+        <h1 className="mt-1 text-2xl font-semibold tracking-[-.035em] sm:text-3xl">{greeting}{displayName ? `, ${displayName}` : ''}.</h1>
       </div>
-      <p className="max-w-sm text-sm text-[var(--color-text-secondary)] sm:text-right">Giữ nhịp đều mỗi ngày. Một phiên tập trung là đủ để tiến về phía trước.</p>
+      <span className="hidden h-11 w-11 rotate-3 place-items-center rounded-full border border-[var(--color-error)] font-serif text-xl text-[var(--color-error)] sm:grid" aria-hidden="true">日</span>
     </header>
 
-    <section className="dashboard-hero overflow-hidden rounded-[1.4rem] bg-[var(--color-text)] text-[var(--color-bg)]" aria-labelledby="today-focus-title">
-      <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:p-10">
-        <span className="pointer-events-none absolute -right-4 -top-16 select-none font-serif text-[13rem] leading-none opacity-[.055]" aria-hidden="true">学</span>
-        <div className="relative max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-[.14em] opacity-60">Nhịp học hôm nay</p>
-          <h2 id="today-focus-title" className="mt-3 max-w-xl text-2xl font-semibold leading-tight tracking-[-.035em] sm:text-3xl">{remaining > 0 ? `Còn ${remaining} thẻ để hoàn thành mục tiêu.` : 'Bạn đã hoàn thành mục tiêu hôm nay.'}</h2>
-          <p className="mt-3 max-w-xl text-sm leading-7 opacity-70">{due > 0 ? `${due} thẻ đang đến hạn. Mở danh sách ôn để tiếp tục đúng lịch.` : 'Hôm nay chưa có thẻ đến hạn. Bạn có thể học tự do theo bài mình muốn.'}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <button onClick={() => setCurrentPage(due > 0 ? 'srs' : 'flashcards')} className="study-button !border-transparent !bg-[var(--color-bg)] !text-[var(--color-text)] hover:!opacity-90">{due > 0 ? <RotateCcw size={18}/> : <Layers size={18}/>} {due > 0 ? 'Ôn ngắt quãng' : 'Học tự do'} <ArrowRight size={17}/></button>
-            <button onClick={() => setCurrentPage('progress')} className="study-button !border-white/20 !bg-transparent !text-inherit hover:!bg-white/10">Xem tiến độ</button>
+    <section className="dashboard-focus overflow-hidden rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-surface)]" aria-labelledby="today-focus-title">
+      <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(280px,.55fr)]">
+        <div className="relative overflow-hidden p-6 sm:p-9 lg:p-11">
+          <span className="absolute left-0 top-10 h-20 w-1 bg-[var(--color-error)]" aria-hidden="true"/>
+          <span className="study-eyebrow flex items-center gap-2"><i className="h-2 w-2 rounded-full bg-[var(--color-error)]"/>Hôm nay</span>
+          <div className="mt-5 flex items-end gap-4">
+            <strong className="font-serif text-[clamp(5rem,11vw,8.5rem)] font-normal leading-[.75] tracking-[-.08em] text-[var(--color-text)]">{due}</strong>
+            <h2 id="today-focus-title" className="max-w-48 pb-1 text-xl font-semibold leading-tight tracking-[-.03em] sm:pb-2 sm:text-2xl">thẻ đến hạn</h2>
           </div>
+          <button onClick={() => setCurrentPage(due > 0 ? 'srs' : 'flashcards')} className="study-button study-button-primary mt-8 min-w-40 !rounded-full">
+            {due > 0 ? <RotateCcw size={18}/> : <Layers size={18}/>} {due > 0 ? 'Ôn ngay' : 'Học tự do'} <ArrowRight size={17}/>
+          </button>
+          <span className="pointer-events-none absolute -bottom-14 right-5 select-none font-serif text-[11rem] leading-none text-[var(--color-text)] opacity-[.035]" aria-hidden="true">学</span>
         </div>
-        <GoalRing value={goalProgress} reviewed={reviewed} goal={settings.dailyGoal}/>
-      </div>
-      <div className="grid border-t border-white/10 sm:grid-cols-3">
-        <HeroMetric icon={Flame} value={`${streak} ngày`} label="Chuỗi hiện tại"/>
-        <HeroMetric icon={Clock3} value={`${Math.round(today?.timeSpent ?? 0)} phút`} label="Thời gian học"/>
-        <HeroMetric icon={Target} value={`${due} thẻ`} label="Đang đến hạn"/>
+
+        <div className="dashboard-progress relative flex min-h-72 flex-col justify-between overflow-hidden bg-[var(--color-accent)] p-6 text-[var(--color-text-inverse)] sm:p-8">
+          <span className="absolute -right-6 -top-12 font-serif text-[10rem] leading-none opacity-10" aria-hidden="true">今</span>
+          <div className="relative flex items-start justify-between gap-4">
+            <div><p className="text-[.7rem] font-bold uppercase tracking-[.14em] opacity-65">Mục tiêu</p><p className="mt-2 text-3xl font-semibold tracking-[-.04em]">{reviewed}<span className="ml-1 text-base font-medium opacity-65">/ {settings.dailyGoal}</span></p></div>
+            <GoalDial value={goalProgress}/>
+          </div>
+          <div className="relative grid grid-cols-2 gap-3 border-t border-current/20 pt-5">
+            <MiniMetric icon={Flame} value={`${streak} ngày`} label="Liên tiếp"/>
+            <MiniMetric icon={Clock3} value={`${Math.round(today?.timeSpent ?? 0)} phút`} label="Hôm nay"/>
+          </div>
+          <button onClick={() => setCurrentPage('progress')} className="relative mt-5 flex w-fit items-center gap-1.5 text-xs font-semibold opacity-75 transition-opacity hover:opacity-100">Xem tiến độ <ArrowUpRight size={14}/></button>
+        </div>
       </div>
     </section>
 
     {draft && <section className="flex flex-col gap-3 rounded-2xl border border-[var(--color-accent)]/25 bg-[var(--color-accent-subtle)] p-4 sm:flex-row sm:items-center sm:justify-between" aria-label="Bộ thẻ đang tạo dở">
-      <div><p className="font-semibold text-[var(--color-text)]">Tiếp tục bộ thẻ đang tạo</p><p className="mt-1 text-sm text-[var(--color-text-secondary)]">Tên bộ và nội dung đã nhập vẫn được giữ nguyên.</p></div>
+      <p className="font-semibold text-[var(--color-text)]">Bộ thẻ đang tạo vẫn được lưu.</p>
       <button className="study-button shrink-0" onClick={() => setCurrentPage('flashcards')}>Tiếp tục <ArrowRight size={17}/></button>
     </section>}
 
     <section aria-labelledby="library-title">
       <div className="mb-4 flex items-end justify-between gap-4">
-        <div><p className="study-eyebrow">Thư viện</p><h2 id="library-title" className="mt-1 text-xl font-semibold">Chọn nội dung muốn luyện</h2></div>
-        <button className="hidden items-center gap-1 text-sm font-semibold text-[var(--color-accent)] hover:underline sm:flex" onClick={() => setCurrentPage('vocabulary')}>Mở thư viện <ArrowUpRight size={16}/></button>
+        <div><p className="study-eyebrow">Khám phá</p><h2 id="library-title" className="mt-1 text-xl font-semibold tracking-[-.025em]">Hôm nay học gì?</h2></div>
+        <button className="flex items-center gap-1 text-sm font-semibold text-[var(--color-accent)] hover:underline" onClick={() => setCurrentPage('flashcards')}><Layers size={16}/> Học theo bộ <ArrowRight size={15}/></button>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {library.map(({ page, title, subtitle, icon: Icon, tone }) => <button key={page} onClick={() => setCurrentPage(page)} className="study-panel group min-h-40 cursor-pointer text-left transition-[border-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-sm)]">
-          <div className="flex items-start justify-between"><span className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--color-surface-alt)]"><Icon size={21} style={{ color: tone }}/></span><ArrowUpRight size={17} className="text-[var(--color-text-tertiary)] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/></div>
-          <h3 className="mt-5 text-lg font-semibold">{title}</h3><p className="mt-1 text-sm leading-6 text-[var(--color-text-secondary)]">{subtitle}</p>
+        {library.map(({ page, title, count, mark, icon: Icon, tone }) => <button key={page} onClick={() => setCurrentPage(page)} className="dashboard-library-card group relative min-h-44 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 text-left" style={{ '--dashboard-card-tone': tone } as CSSProperties}>
+          <span className="absolute -bottom-7 right-2 select-none font-serif text-[7rem] leading-none opacity-[.08]" style={{ color: tone }} aria-hidden="true">{mark}</span>
+          <span className="grid h-10 w-10 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg)]" style={{ color: tone }}><Icon size={20}/></span>
+          <h3 className="relative mt-7 text-lg font-semibold">{title}</h3>
+          <p className="relative mt-1 text-sm font-medium text-[var(--color-text-secondary)]">{count}</p>
+          <ArrowUpRight size={17} className="absolute right-5 top-5 text-[var(--color-text-tertiary)] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/>
         </button>)}
       </div>
     </section>
 
-    <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3" aria-label="Hành động nhanh">
-      <button onClick={() => setCurrentPage('flashcards')} className="study-panel group flex min-h-28 cursor-pointer items-center gap-4 text-left transition-colors hover:border-[var(--color-border-strong)]">
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[var(--color-accent-subtle)] text-[var(--color-accent)]"><Layers size={23}/></span>
-        <span className="min-w-0 flex-1"><strong className="block">Học tự do</strong><span className="mt-1 block text-sm text-[var(--color-text-secondary)]">Chọn bộ thẻ và bài muốn học</span></span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1"/>
-      </button>
-      <button onClick={() => setCurrentPage('srs')} className="study-panel group flex min-h-28 cursor-pointer items-center gap-4 text-left transition-colors hover:border-[var(--color-border-strong)]">
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[var(--color-warning-subtle)] text-[var(--color-warning)]"><RotateCcw size={23}/></span>
-        <span className="min-w-0 flex-1"><strong className="block">Ôn ngắt quãng</strong><span className="mt-1 block text-sm text-[var(--color-text-secondary)]">Ôn đúng lịch, tự động chọn thẻ cần học</span></span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1"/>
-      </button>
-      <button onClick={() => setCurrentPage('progress')} className="study-panel group flex min-h-28 cursor-pointer items-center gap-4 text-left transition-colors hover:border-[var(--color-border-strong)]">
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[var(--color-success-subtle)] text-[var(--color-success)]"><ChartNoAxesCombined size={23}/></span>
-        <span className="min-w-0 flex-1"><strong className="block">Tiến độ học tập</strong><span className="mt-1 block text-sm text-[var(--color-text-secondary)]">Xem chuỗi ngày học và lịch sử hoạt động</span></span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1"/>
-      </button>
-    </section>
+    <button onClick={() => setCurrentPage('flashcards')} className="dashboard-free-link group flex items-center gap-4 rounded-2xl border border-[var(--color-border)] px-5 py-4 text-left transition-colors hover:border-[var(--color-border-strong)] sm:px-6">
+      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent)]"><Layers size={20}/></span>
+      <span className="flex-1 font-semibold">Mở bộ thẻ và học theo bài</span>
+      <ArrowRight size={18} className="transition-transform group-hover:translate-x-1"/>
+    </button>
 
     {hasLegacyLearningData() && <section className="flex flex-col gap-2 border-t border-[var(--color-border)] pt-5 text-sm sm:flex-row sm:items-center sm:justify-between" role="note">
-      <p className="text-[var(--color-text-secondary)]"><strong className="text-[var(--color-text)]">Dữ liệu phiên bản cũ vẫn an toàn.</strong> Kiểm tra và chuyển dữ liệu trong Cài đặt.</p>
-      <button className="font-semibold text-[var(--color-accent)] hover:underline" onClick={() => setCurrentPage('settings')}>Kiểm tra dữ liệu →</button>
+      <p className="text-[var(--color-text-secondary)]"><strong className="text-[var(--color-text)]">Dữ liệu cũ vẫn an toàn.</strong></p>
+      <button className="font-semibold text-[var(--color-accent)] hover:underline" onClick={() => setCurrentPage('settings')}>Kiểm tra →</button>
     </section>}
   </div>;
 }
 
-function GoalRing({ value, reviewed, goal }: { value: number; reviewed: number; goal: number }) {
-  const radius = 46;
+function GoalDial({ value }: { value: number }) {
+  const radius = 24;
   const circumference = 2 * Math.PI * radius;
-  return <div className="relative z-[1] mx-auto grid h-36 w-36 shrink-0 place-items-center lg:mx-5" aria-label={`Đã học ${reviewed} trên mục tiêu ${goal} thẻ`}>
-    <svg className="absolute inset-0 -rotate-90" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r={radius} fill="none" stroke="currentColor" strokeOpacity=".14" strokeWidth="8"/><circle cx="60" cy="60" r={radius} fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={circumference * (1 - value / 100)}/></svg>
-    <div className="text-center"><strong className="block text-3xl leading-none">{reviewed}</strong><span className="mt-2 block text-[.68rem] font-semibold uppercase tracking-[.12em] opacity-60">/ {goal} thẻ</span></div>
+  return <div className="relative grid h-16 w-16 shrink-0 place-items-center" aria-label={`Đã hoàn thành ${value}% mục tiêu`}>
+    <svg className="absolute inset-0 -rotate-90" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r={radius} fill="none" stroke="currentColor" strokeOpacity=".22" strokeWidth="5"/><circle cx="32" cy="32" r={radius} fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={circumference * (1 - value / 100)}/></svg>
+    <strong className="text-xs">{value}%</strong>
   </div>;
 }
 
-function HeroMetric({ icon: Icon, value, label }: { icon: typeof Flame; value: string; label: string }) {
-  return <div className="flex items-center gap-3 px-6 py-4 sm:px-8"><Icon size={18} className="shrink-0 opacity-60"/><div><strong className="block text-sm">{value}</strong><span className="block text-xs opacity-[.55]">{label}</span></div></div>;
+function MiniMetric({ icon: Icon, value, label }: { icon: typeof Flame; value: string; label: string }) {
+  return <div><Icon size={17} className="mb-2 opacity-65"/><strong className="block text-sm">{value}</strong><span className="mt-0.5 block text-[.7rem] opacity-60">{label}</span></div>;
 }
