@@ -12,6 +12,8 @@ import type { LearningStorage } from '@/lib/storage';
 import { useAuth } from '@/hooks/useAuth';
 import { useLearningSync } from './useLearningSync';
 import { useSettingsSync } from './useSettingsSync';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { pageForLocation, pathForPage } from '@/lib/navigation';
 
 interface AppState {
   storage: LearningStorage;
@@ -58,19 +60,17 @@ interface AppState {
 const AppContext = createContext<AppState | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const { storage, user, resumePage, rememberPage } = useAuth();
-  const { getSettings, applyTheme, getBookmarks, saveBookmarks, getSRSCards, saveSRSCards, upsertSRSCard, setLastPage, getLastPage, migrateV1 } = storage;
+  const { storage, user, rememberPage } = useAuth();
+  const { getSettings, applyTheme, getBookmarks, saveBookmarks, getSRSCards, saveSRSCards, upsertSRSCard, setLastPage, migrateV1 } = storage;
   const [vocabulary, setVocabulary] = useState<VocabItem[]>([]);
   const [kanji, setKanji] = useState<KanjiItem[]>([]);
   const [grammar, setGrammar] = useState<GrammarItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
-  const [currentPage, _setCurrentPage] = useState<PageId>(() => {
-    const saved = resumePage || getLastPage();
-    const pages: PageId[] = ['dashboard', 'vocabulary', 'kanji', 'grammar', 'flashcards', 'anki', 'srs', 'quiz', 'listening', 'progress', 'bookmarks', 'settings'];
-    return pages.includes(saved as PageId) ? saved as PageId : 'dashboard';
-  });
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentPage = pageForLocation(location.pathname, location.search) ?? 'dashboard';
   const [navigationTarget, setNavigationTarget] = useState<NavigationTarget | null>(null);
   const [settings, _setSettings] = useState<AppSettings>(getSettings());
   const [bookmarks, _setBookmarks] = useState<Bookmark[]>(getBookmarks());
@@ -109,7 +109,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return () => { active = false; };
   }, [loadAttempt]);
 
-  useEffect(() => { rememberPage(currentPage); }, [currentPage, rememberPage]);
+  useEffect(() => {
+    rememberPage(currentPage);
+    if (location.pathname !== '/') setLastPage(`${location.pathname}${location.search}`);
+  }, [currentPage, location.pathname, location.search, rememberPage, setLastPage]);
 
   const retryLoad = useCallback(() => setLoadAttempt((attempt) => attempt + 1), []);
 
@@ -133,16 +136,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const setCurrentPage = useCallback((page: PageId) => {
-    _setCurrentPage(page);
-    setLastPage(page);
-  }, [setLastPage]);
+    const path = pathForPage(page);
+    navigate(path);
+    setLastPage(path);
+  }, [navigate, setLastPage]);
 
   const selectSearchResult = useCallback((target: NavigationTarget) => {
     setNavigationTarget(target);
     const page = target.type === 'vocabulary' ? 'vocabulary' : target.type;
-    _setCurrentPage(page);
-    setLastPage(page);
-  }, [setLastPage]);
+    const path = pathForPage(page);
+    navigate(path);
+    setLastPage(path);
+  }, [navigate, setLastPage]);
 
   const clearNavigationTarget = useCallback(() => setNavigationTarget(null), []);
 
