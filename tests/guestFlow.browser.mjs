@@ -193,7 +193,7 @@ async function signIn(email, register = false) {
 try {
   await page.goto(baseURL);
   await button("Học thử").click();
-  await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
+  await page.getByRole("heading", { name: /Chào buổi/ }).waitFor();
   assert.equal(calls.length, 0);
   assert.equal(await button("Đăng xuất").count(), 0);
   await nav("Từ vựng");
@@ -213,11 +213,12 @@ try {
     .first()
     .waitFor();
   await button("Đóng tìm kiếm").click();
-  await nav("Ôn tập");
-  await button("Học 10 từ mới").click();
+  await nav("Thẻ học");
+  await page.locator("article").filter({ has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }) }).getByRole("button", { name: "Ôn ngắt quãng", exact: true }).click();
+  await page.getByRole("dialog").getByRole("button", { name: /Bắt đầu ôn · 10 thẻ/ }).click();
   for (let i = 0; i < 10; i++) {
-    await button("Chạm hoặc nhấn Space để xem đáp án").click();
-    await page.getByRole("button", { name: /3 Được/ }).click();
+    await page.locator("button").filter({ hasText: /^Hiện đáp án$/ }).click();
+    await page.getByRole("button", { name: /3 · Được/ }).click();
   }
   await page
     .getByRole("heading", { name: "Đã hoàn thành", exact: true })
@@ -232,7 +233,7 @@ try {
     10,
   );
   assert.equal((await stored("guest:n3_study_days"))[0].cardsReviewed, 10);
-  await button("Về trang ôn tập").click();
+  await button("Về danh sách bộ thẻ").click();
   for (const name of ["Trắc nghiệm", "Luyện nghe", "Tiến độ", "Cài đặt"]) {
     await nav(name);
     await page.getByRole("heading", { name, exact: true }).first().waitFor();
@@ -245,7 +246,7 @@ try {
     "Guest learning/settings must never call account API",
   );
   await nav("Thẻ học");
-  await page.locator("article").filter({ has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }) }).getByRole("button", { name: "Chọn cách học →", exact: true }).click();
+  await page.locator("article").filter({ has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }) }).getByRole("button", { name: "Học tự do →", exact: true }).click();
   await page.getByRole("dialog").getByRole("button", { name: "Bắt đầu học", exact: true }).waitFor();
   await page.keyboard.press("Escape");
   await page
@@ -313,7 +314,7 @@ try {
   failLogin = false;
   await signIn("a@example.com");
   await page.getByRole("dialog").waitFor({ state: "detached" });
-  await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
+  await page.getByRole("heading", { name: /Chào buổi/ }).waitFor();
   await nav("Thẻ học");
   await page.getByLabel("Tên bộ thẻ").waitFor();
   assert.equal(await page.getByLabel("Tên bộ thẻ").inputValue(), "Guest draft");
@@ -387,7 +388,7 @@ try {
   assert.equal((await stored("user:A:n3_bookmarks")).length, 1);
   await button("Đăng xuất").click();
   await button("Học thử").click();
-  await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
+  await page.getByRole("heading", { name: /Chào buổi/ }).waitFor();
   assert.deepEqual(await stored("guest:n3_bookmarks"), guestBookmarks);
   await nav("Thẻ học");
   assert.equal(await page.getByText("Guest draft", { exact: true }).count(), 0);
@@ -398,7 +399,7 @@ try {
   await page.getByLabel("Mặt sau *").fill("một bước");
   await button("Tạo bộ với 1 thẻ").click();
   await signIn("b@example.com", true);
-  await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
+  await page.getByRole("heading", { name: /Chào buổi/ }).waitFor();
   await nav("Thẻ học");
   await page.getByLabel("Tên bộ thẻ").waitFor();
   assert.equal(

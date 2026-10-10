@@ -51,6 +51,7 @@ export function StudySession({
   initialIndex = 0,
   onPositionChange,
   onComplete,
+  sessionMinutes,
 }: {
   cards: CardView[];
   deckName: string;
@@ -63,6 +64,7 @@ export function StudySession({
   initialIndex?: number;
   onPositionChange?: (cardId: string) => void;
   onComplete?: () => void;
+  sessionMinutes?: number;
 }) {
   const { settings, srsCards, updateSRSCard, learningSync } = useApp();
   const { recordStudyActivity, recordFreeStudyActivity, getJSON, setJSON } = useLearningStorage();
@@ -90,7 +92,7 @@ export function StudySession({
     current ? `${current.type}:${current.id}` : null,
   );
   const timer = useAnkiSessionTimer(
-    mode === "anki" ? settings.ankiSessionMinutes : 0,
+    mode === "anki" ? sessionMinutes ?? settings.ankiSessionMinutes : 0,
     deckName,
     !done,
   );

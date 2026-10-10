@@ -40,9 +40,9 @@ async function api(path, options = {}) {
 try {
   await page.goto(base);
   await button("Học thử").click();
-  await nav("Từ vựng");
+  await nav("Thư viện");
   await button("Lưu từ").click();
-  await nav("Thẻ học");
+  await nav("Bộ thẻ");
   await page.getByLabel("Chọn file nhập bộ thẻ").setInputFiles({
     name: "integration.csv",
     mimeType: "text/csv",
@@ -64,7 +64,7 @@ try {
     .getByRole("button", { name: "Tạo tài khoản", exact: true })
     .click();
   await dialog.waitFor({ state: "detached" });
-  await page.getByRole("heading", { name: "Hôm nay học gì?" }).waitFor();
+  await page.getByRole("heading", { name: /Chào buổi/ }).waitFor();
   await page.getByLabel("Tôi xác nhận dữ liệu này thuộc về tôi").check();
   await button("Chuyển dữ liệu vào tài khoản").click();
   await page.getByText(/Đã chuyển 1 dấu trang/).waitFor();
@@ -75,7 +75,7 @@ try {
     ),
     [],
   );
-  await nav("Thẻ học");
+  await nav("Bộ thẻ");
   await button("Tạo bộ thẻ").click();
   await page
     .getByText("Đã tạo “integration” với 2 thẻ; bỏ qua 1 dòng", {
@@ -117,14 +117,15 @@ try {
   ).data.content.find((c) => c.id === card.id);
   assert.deepEqual(after.progress, before);
   assert.equal(after.front, "猫 updated");
-  await nav("Anki");
+  await nav("Bộ thẻ");
   await page
     .locator("article")
     .filter({
       has: page.getByRole("heading", { name: "integration", exact: true }),
     })
-    .getByRole("button", { name: /^Bắt đầu học/ })
+    .getByRole("button", { name: "Ôn ngắt quãng", exact: true })
     .click();
+  await page.getByRole("dialog").getByRole("button", { name: /Bắt đầu ôn/ }).click();
   await page
     .getByRole("button", { name: "Hiện đáp án", exact: true })
     .first()
@@ -139,7 +140,7 @@ try {
   await page.getByLabel("Mục tiêu mỗi ngày (thẻ)").fill("35");
   await page.getByText("Cài đặt đã đồng bộ", { exact: true }).waitFor();
   assert.equal((await api("/users/me/settings")).data.dailyGoal, 35);
-  await nav("Từ vựng");
+  await nav("Thư viện");
   await button("Bỏ lưu từ").click();
   await page.getByText("Tiến độ đã đồng bộ", { exact: true }).waitFor();
   assert.equal((await api("/users/me/learning")).data.bookmarks.length, 0);
@@ -193,7 +194,7 @@ try {
     ).status,
     200,
   );
-  await nav("Từ vựng");
+  await nav("Thư viện");
   await button("Lưu từ").click();
   await page.getByRole("alert").filter({ hasText: "thiết bị khác" }).waitFor();
   assert.equal(
@@ -213,7 +214,7 @@ try {
     ),
   );
   // Offline write stays queued and retry acknowledges it only after the API succeeds.
-  await nav("Từ vựng");
+  await nav("Thư viện");
   await context.route("**/api/v1/users/me/learning", (route) =>
     route.request().method() === "PUT" ? route.abort() : route.continue(),
   );
@@ -223,7 +224,7 @@ try {
   await button("Thử đồng bộ lại").click();
   await page.getByText("Tiến độ đã đồng bộ", { exact: true }).waitFor();
   assert.equal((await api("/users/me/learning")).data.bookmarks.length, 2);
-  await nav("Thẻ học");
+  await nav("Bộ thẻ");
   await page.setViewportSize({ width: 375, height: 812 });
   await button("Tạo bộ mới").click();
   await page.getByRole("button", { name: "Hướng dẫn import" }).click();

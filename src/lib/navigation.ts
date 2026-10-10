@@ -7,8 +7,8 @@ export const PAGE_PATHS: Record<PageId, string> = {
   kanji: '/library/kanji',
   listening: '/library/listening',
   flashcards: '/decks',
-  anki: '/decks?mode=scheduled',
-  srs: '/review',
+  anki: '/decks',
+  srs: '/decks',
   quiz: '/quiz',
   progress: '/progress',
   bookmarks: '/saved',
@@ -20,10 +20,8 @@ export function pathForPage(page: PageId): string {
   return PAGE_PATHS[page] ?? '/today';
 }
 
-export function pageForLocation(pathname: string, search = ''): PageId | null {
-  if (pathname === '/decks') {
-    return new URLSearchParams(search).get('mode') === 'scheduled' ? 'anki' : 'flashcards';
-  }
+export function pageForLocation(pathname: string, _search = ''): PageId | null {
+  if (pathname === '/decks') return 'flashcards';
   const entry = Object.entries(PAGE_PATHS).find(([, path]) => path.split('?')[0] === pathname);
   return (entry?.[0] as PageId | undefined) ?? null;
 }

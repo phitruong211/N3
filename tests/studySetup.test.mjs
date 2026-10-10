@@ -11,7 +11,7 @@ test('free study filters lessons, orders, and caps large all sessions', () => {
 });
 
 test('scheduled setup does not accept shuffle or card limits', () => {
-  assert.deepEqual(parseStudySetup('?mode=scheduled&order=shuffle&limit=50&minutes=20'), { mode: 'scheduled', sessionMinutes: 20 });
+  assert.deepEqual(parseStudySetup('?mode=scheduled&order=shuffle&limit=50&minutes=20&new=10'), { mode: 'scheduled', sessionMinutes: 20, newLimit: 10 });
 });
 
 test('free setup round-trips through the URL', () => {

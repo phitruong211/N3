@@ -14,12 +14,12 @@ export function BottomNav() {
         const Icon = item.icon;
         const active = isNavigationItemActive(item, currentPage);
         return <button key={item.page} onClick={() => setCurrentPage(item.page)} aria-label={item.label} aria-current={active ? 'page' : undefined}
-          className={`flex min-h-16 min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-1 rounded-xl text-xs font-medium ${active ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)]'}`}>
+          className={`flex min-h-16 min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-1 rounded-xl text-[.68rem] font-medium sm:text-xs ${active ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)]'}`}>
           <Icon size={20} strokeWidth={active ? 2.2 : 1.8}/><span className="whitespace-nowrap">{item.label}</span>
         </button>;
       })}
       <button onClick={() => setMoreOpen(true)} aria-label="Thêm" aria-expanded={moreOpen}
-        className={`flex min-h-16 min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-1 rounded-xl text-xs font-medium ${moreActive ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)]'}`}>
+        className={`flex min-h-16 min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-1 rounded-xl text-[.68rem] font-medium sm:text-xs ${moreActive ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)]'}`}>
         <Ellipsis size={21}/><span>Thêm</span>
       </button>
     </nav>

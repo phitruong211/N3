@@ -364,14 +364,9 @@ export function AnkiSRSControls({
 // Shuffle Launch Modal
 // ============================================================
 export function FlashcardPage() {
-  return <DeckPage mode="flashcards" />;
+  return <UnifiedDeckPage />;
 }
 
-export function AnkiPage() {
-  return <DeckPage mode="anki" />;
-}
-
-function DeckPage({ mode }: { mode: 'flashcards' | 'anki' }) { return <UnifiedDeckPage mode={mode}/>; }
 export function parseRelatedWords(rawText?: string) {
   if (!rawText) return [];
   const parts = rawText.split(/(?:[,;]|\r?\n)\s*(?=[^\(（【\[,;]+[\(（【\[])/);
