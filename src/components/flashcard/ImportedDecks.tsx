@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { useLearningStorage } from "@/hooks/useApp";
 import {
   defaultDeckTemplate,
   kindLabels,
@@ -46,6 +47,7 @@ import { buildFreeStudyQueue, lessonOptions } from "@/lib/studySetup";
 import { DAILY_NEW_CARD_LIMIT } from "@/lib/deckSchedule";
 import { DeckProgressGrid } from "./DeckCard";
 import { DeckCustomizeDialog } from "./CardPresentation";
+import { personalDeckResumeKey, resolveResumeIndex } from "@/lib/studyResume";
 import { ContentBadge } from "@/components/ui/StudyUI";
 import {
   GripVertical,
@@ -82,6 +84,7 @@ export function ImportedDecks({
   leadingDeck?: ReactNode;
 }) {
   const draftMode = "flashcards" as const;
+  const { getJSON, setJSON } = useLearningStorage();
   const { user, requestAuth, draft, setDraft } = useAuth();
   const initial = useRef(draft?.mode === draftMode ? draft : null).current;
   const [decks, setDecks] = useState<Page<PersonalDeck>>(emptyPage);
@@ -123,6 +126,7 @@ export function ImportedDecks({
     template: DeckTemplateConfig;
     progress: Record<string, ApiProgress | null>;
     mode: "flashcards" | "anki";
+    initialIndex: number;
   } | null>(null);
   const [studySetup, setStudySetup] = useState<{
     deck: PersonalDeck;
@@ -421,6 +425,7 @@ export function ImportedDecks({
       template: source.template,
       progress: source.progress,
       mode: "flashcards",
+      initialIndex: resolveResumeIndex(cards, getJSON<string | null>(personalDeckResumeKey(source.deck.id), null)),
     });
     setStudySetup(null);
   }
@@ -456,7 +461,7 @@ export function ImportedDecks({
         setMessage("Bộ này đã hoàn thành lịch ôn hôm nay.");
         return;
       }
-      setSession({ cards: views, deck, template: normalizeDeckTemplate(deck.templateConfig), progress, mode: "anki" });
+      setSession({ cards: views, deck, template: normalizeDeckTemplate(deck.templateConfig), progress, mode: "anki", initialIndex: 0 });
     });
   }
   async function shiftCard(id: string, delta: number) {
@@ -495,8 +500,11 @@ export function ImportedDecks({
         cards={session.cards}
         deckName={session.deck.name}
         mode={session.mode}
+        initialIndex={session.initialIndex}
         template={session.template}
         initialProgress={session.progress}
+        onPositionChange={session.mode === "flashcards" ? cardId => setJSON(personalDeckResumeKey(session.deck.id), cardId) : undefined}
+        onComplete={session.mode === "flashcards" ? () => setJSON(personalDeckResumeKey(session.deck.id), null) : undefined}
         onTemplateChange={async template => {
           await updateDeck(session.deck.id, { templateConfig: template });
           setSession(previous => previous ? { ...previous, template } : previous);
