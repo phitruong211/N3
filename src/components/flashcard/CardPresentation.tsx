@@ -4,6 +4,7 @@ import { CARD_FONT_PRESETS, defaultDeckTemplate, kindLabels, parseCardExamples }
 import { parseStoredFurigana } from "@/lib/furigana";
 import { FuriganaText } from "./FuriganaText";
 import { CardFields } from "./CardFields";
+import { copySideStyle, createAppearanceDraft } from "@/lib/cardAppearance";
 import type {
   CardField,
   DeckTemplateConfig,
@@ -240,7 +241,9 @@ export function DeckCustomizeDialog({
       opener?.focus();
     };
   }, []);
-  const [template, setTemplate] = useState<DeckTemplateConfig>(deck.template);
+  const initialAppearance = createAppearanceDraft(deck.template);
+  const [template, setTemplate] = useState<DeckTemplateConfig>(initialAppearance.template);
+  const [separateSides, setSeparateSides] = useState(initialAppearance.separateSides);
   const [cardDraft, setCardDraft] = useState<ImportedCard | undefined>(editableCard);
   const [previewBack, setPreviewBack] = useState(false);
   const example = cardDraft || deck.cards[0] || {
@@ -289,12 +292,13 @@ export function DeckCustomizeDialog({
   const activePreset = (Object.entries(CARD_FONT_PRESETS) as Array<[DeckTemplateConfig[typeof activeSide]["style"]["fontScale"], number]>)
     .find(([, size]) => size === activeStyle.fontSize)?.[0] || "custom";
   const updateActiveStyle = (changes: Partial<DeckTemplateConfig[typeof activeSide]["style"]>) =>
-    setTemplate((previous) => ({
+    setTemplate((previous) => separateSides ? ({
       ...previous,
-      [activeSide]: {
-        ...previous[activeSide],
-        style: { ...previous[activeSide].style, ...changes },
-      },
+      [activeSide]: { ...previous[activeSide], style: { ...previous[activeSide].style, ...changes } },
+    }) : ({
+      ...previous,
+      front: { ...previous.front, style: { ...previous.front.style, ...changes } },
+      back: { ...previous.back, style: { ...previous.back.style, ...changes } },
     }));
   const themeClass =
     activeStyle.theme === "dark"
@@ -348,6 +352,14 @@ export function DeckCustomizeDialog({
             Mặt sau
           </button>
         </div>
+        <label className="mb-5 flex items-center justify-between gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+          <span><strong className="block text-sm">Chỉnh riêng từng mặt</strong><span className="mt-1 block text-xs text-[var(--color-text-secondary)]">Tắt để font, cỡ chữ và kiểu chữ luôn giống nhau ở hai mặt.</span></span>
+          <input type="checkbox" checked={separateSides} aria-label="Chỉnh riêng từng mặt" onChange={(event) => {
+            const next = event.target.checked;
+            if (!next) setTemplate((previous) => copySideStyle(previous, activeSide));
+            setSeparateSides(next);
+          }}/>
+        </label>
         <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr]">
           <div className="space-y-5">
             {cardDraft && (
@@ -426,18 +438,7 @@ export function DeckCustomizeDialog({
                 <select
                   className="study-input mt-1"
                   value={activeStyle.theme}
-                  onChange={(event) =>
-                    setTemplate((previous) => ({
-                      ...previous,
-                      [activeSide]: {
-                        ...previous[activeSide],
-                        style: {
-                          ...previous[activeSide].style,
-                          theme: event.target.value as DeckTemplateConfig[typeof activeSide]["style"]["theme"],
-                        },
-                      },
-                    }))
-                  }
+                  onChange={(event) => updateActiveStyle({ theme: event.target.value as DeckTemplateConfig[typeof activeSide]["style"]["theme"] })}
                 >
                   <option value="paper">Giấy sáng</option>
                   <option value="blue">Xanh nhạt</option>
@@ -537,18 +538,7 @@ export function DeckCustomizeDialog({
                 <select
                   className="study-input mt-1"
                   value={activeStyle.alignment}
-                  onChange={(event) =>
-                    setTemplate((previous) => ({
-                      ...previous,
-                      [activeSide]: {
-                        ...previous[activeSide],
-                        style: {
-                          ...previous[activeSide].style,
-                          alignment: event.target.value as "left" | "center",
-                        },
-                      },
-                    }))
-                  }
+                  onChange={(event) => updateActiveStyle({ alignment: event.target.value as "left" | "center" })}
                 >
                   <option value="center">Giữa</option>
                   <option value="left">Trái</option>
@@ -557,13 +547,7 @@ export function DeckCustomizeDialog({
               <button
                 type="button"
                 className="study-button self-end sm:col-span-2"
-                onClick={() => setTemplate((previous) => ({
-                  ...previous,
-                  [activeSide === "front" ? "back" : "front"]: {
-                    ...previous[activeSide === "front" ? "back" : "front"],
-                    style: { ...previous[activeSide].style },
-                  },
-                }))}
+                onClick={() => { setTemplate(previous => copySideStyle(previous, activeSide)); setSeparateSides(false); }}
               >
                 <Copy size={17} /> Áp dụng kiểu này cho cả hai mặt
               </button>
@@ -590,7 +574,7 @@ export function DeckCustomizeDialog({
           <button
             className="study-button"
             disabled={busy}
-            onClick={() => setTemplate(defaultDeckTemplate())}
+            onClick={() => { setTemplate(defaultDeckTemplate()); setSeparateSides(false); }}
           >
             Khôi phục mặc định
           </button>
