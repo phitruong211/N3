@@ -2,7 +2,7 @@ import type { CardView } from './cards.ts';
 
 export type FreeStudyLimit = 10 | 20 | 50 | 200 | 'all';
 export type FreeStudySetup = { mode: 'free'; limit: FreeStudyLimit; order: 'source' | 'shuffle'; lessonKey: string | null };
-export type ScheduledStudySetup = { mode: 'scheduled'; sessionMinutes: number };
+export type ScheduledStudySetup = { mode: 'scheduled'; sessionMinutes: number; newLimit: 0 | 10 | 20 };
 export type StudySetup = FreeStudySetup | ScheduledStudySetup;
 export type LessonOption = { key: string; label: string; count: number };
 
@@ -42,7 +42,10 @@ export function buildFreeStudyQueue<T extends Pick<CardView, 'tags' | 'position'
 
 export function serializeStudySetup(setup: StudySetup): URLSearchParams {
   const params = new URLSearchParams({ mode: setup.mode });
-  if (setup.mode === 'scheduled') params.set('minutes', String(Math.max(0, Math.min(180, Math.round(setup.sessionMinutes)))));
+  if (setup.mode === 'scheduled') {
+    params.set('minutes', String(Math.max(0, Math.min(180, Math.round(setup.sessionMinutes)))));
+    params.set('new', String(setup.newLimit));
+  }
   else {
     params.set('limit', String(setup.limit));
     params.set('order', setup.order);
@@ -54,7 +57,9 @@ export function serializeStudySetup(setup: StudySetup): URLSearchParams {
 export function parseStudySetup(search: string): StudySetup {
   const params = new URLSearchParams(search);
   if (params.get('mode') === 'scheduled') {
-    return { mode: 'scheduled', sessionMinutes: Math.max(0, Math.min(180, Number(params.get('minutes')) || 0)) };
+    const requestedNew = Number(params.get('new'));
+    const newLimit = ([0, 10, 20].includes(requestedNew) ? requestedNew : 10) as 0 | 10 | 20;
+    return { mode: 'scheduled', sessionMinutes: Math.max(0, Math.min(180, Number(params.get('minutes')) || 0)), newLimit };
   }
   const rawLimit = params.get('limit');
   const limit: FreeStudyLimit = rawLimit === 'all' ? 'all' : ([10, 20, 50, 200].includes(Number(rawLimit)) ? Number(rawLimit) as 10 | 20 | 50 | 200 : 20);

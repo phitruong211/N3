@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { useApp } from "@/hooks/useApp";
 import {
   defaultDeckTemplate,
   kindLabels,
@@ -40,7 +41,10 @@ import {
 } from "@/lib/deckApi";
 import { importedCardView, type CardView } from "@/lib/cards";
 import { StudySession } from "./StudySession";
+import { StudySetupSheet } from "./StudySetupSheet";
 import { loadStudyPages } from "@/lib/loadStudyPages";
+import { buildFreeStudyQueue, lessonOptions, type StudySetup } from "@/lib/studySetup";
+import { buildScheduledDeckQueue, type DeckScheduleSummary } from "@/lib/deckSchedule";
 import { DeckCustomizeDialog } from "./CardPresentation";
 import { ContentBadge } from "@/components/ui/StudyUI";
 import {
@@ -70,43 +74,13 @@ const emptyPage = <T,>(): Page<T> => ({
   totalElements: 0,
 });
 
-type LessonOption = { key: string; label: string; count: number };
-
-function lessonKey(tag: string): string | null {
-  const match = tag.trim().match(/^b(?:à|a)i\s*(\d+)$/iu);
-  return match ? `lesson-${Number(match[1])}` : null;
-}
-
-function lessonOptions(cards: CardView[]): LessonOption[] {
-  const counts = new Map<string, number>();
-  for (const card of cards) {
-    const keys = new Set(card.tags.map(lessonKey).filter(Boolean) as string[]);
-    for (const key of keys) counts.set(key, (counts.get(key) || 0) + 1);
-  }
-  return [...counts.entries()]
-    .map(([key, count]) => ({
-      key,
-      label: `Bài ${Number(key.slice("lesson-".length))}`,
-      count,
-    }))
-    .sort(
-      (a, b) =>
-        Number(a.key.slice("lesson-".length)) -
-        Number(b.key.slice("lesson-".length)),
-    );
-}
-
-function belongsToLesson(card: CardView, key: string): boolean {
-  return card.tags.some((tag) => lessonKey(tag) === key);
-}
-
 export function ImportedDecks({
   leadingDeck,
-  mode = "anki",
 }: {
   leadingDeck?: ReactNode;
-  mode?: "flashcards" | "anki";
 }) {
+  const mode = "flashcards" as const;
+  const { settings } = useApp();
   const { user, requestAuth, draft, setDraft } = useAuth();
   const initial = useRef(draft?.mode === mode ? draft : null).current;
   const [decks, setDecks] = useState<Page<PersonalDeck>>(emptyPage);
@@ -147,13 +121,16 @@ export function ImportedDecks({
     deck: PersonalDeck;
     template: DeckTemplateConfig;
     progress: Record<string, ApiProgress | null>;
+    mode: "flashcards" | "anki";
+    sessionMinutes?: number;
   } | null>(null);
-  const [lessonPicker, setLessonPicker] = useState<{
+  const [studySetup, setStudySetup] = useState<{
     deck: PersonalDeck;
     cards: CardView[];
     template: DeckTemplateConfig;
-    lessons: LessonOption[];
-    selected: string;
+    progress: Record<string, ApiProgress | null>;
+    mode: "free" | "scheduled";
+    summary?: DeckScheduleSummary;
   } | null>(null);
   const input = useRef<HTMLInputElement>(null);
   const lock = useRef(false);
@@ -400,10 +377,10 @@ export function ImportedDecks({
       }
     });
   }
-  async function loadStudyCards(deck: PersonalDeck) {
+  async function loadStudyCards(deck: PersonalDeck, studyMode: "free" | "scheduled") {
     let views: CardView[] = [];
     const progress: Record<string, ApiProgress | null> = {};
-    if (mode === "anki") {
+    if (studyMode === "scheduled") {
       const queue = await dueQueue(
         deck.id,
         Math.min(200, Math.max(1, deck.cardCount)),
@@ -446,35 +423,46 @@ export function ImportedDecks({
       template: normalizeDeckTemplate(deck.templateConfig),
     };
   }
-  async function startStudy(deck: PersonalDeck) {
+  function personalSchedule(
+    cards: CardView[],
+    progress: Record<string, ApiProgress | null>,
+    newLimit: 0 | 10 | 20,
+  ) {
+    return buildScheduledDeckQueue(cards, card => {
+      const item = progress[card.id];
+      return item ? { state: item.state.toLowerCase() as "new" | "learning" | "review" | "relearning", dueDate: item.dueAt } : null;
+    }, { newLimit });
+  }
+  async function openStudySetup(deck: PersonalDeck, studyMode: "free" | "scheduled") {
     await operation(async () => {
-      const { views, progress, template } = await loadStudyCards(deck);
+      const { views, progress, template } = await loadStudyCards(deck, studyMode);
       if (!views.length) {
-        setMessage("Chưa có thẻ đến hạn hoặc thẻ mới trong bộ này.");
+        setMessage(studyMode === "scheduled" ? "Bộ này chưa có thẻ mới hoặc thẻ đến hạn." : "Bộ này chưa có thẻ để học.");
         return;
       }
-      setSession({ cards: views, deck, template, progress });
+      const summary = studyMode === "scheduled" ? personalSchedule(views, progress, 10).summary : undefined;
+      setStudySetup({ deck, cards: views, template, progress, mode: studyMode, summary });
     });
   }
-  async function chooseLesson(deck: PersonalDeck) {
-    if (mode !== "flashcards") return;
-    await operation(async () => {
-      const { views, template } = await loadStudyCards(deck);
-      const lessons = lessonOptions(views);
-      if (!lessons.length) {
-        setMessage(
-          "Bộ thẻ chưa có tag bài học. Hãy thêm tag theo dạng “bài 1”, “bài 2”…",
-        );
-        return;
-      }
-      setLessonPicker({
-        deck,
-        cards: views,
-        template,
-        lessons,
-        selected: lessons[0].key,
-      });
+  function startConfiguredStudy(selection: StudySetup) {
+    if (!studySetup) return;
+    const cards = selection.mode === "free"
+      ? buildFreeStudyQueue(studySetup.cards, selection)
+      : personalSchedule(studySetup.cards, studySetup.progress, selection.newLimit).cards;
+    if (!cards.length) {
+      setMessage("Không có thẻ phù hợp với lựa chọn này.");
+      setStudySetup(null);
+      return;
+    }
+    setSession({
+      cards,
+      deck: studySetup.deck,
+      template: studySetup.template,
+      progress: studySetup.progress,
+      mode: selection.mode === "scheduled" ? "anki" : "flashcards",
+      sessionMinutes: selection.mode === "scheduled" ? selection.sessionMinutes : undefined,
     });
+    setStudySetup(null);
   }
   async function shiftCard(id: string, delta: number) {
     if (!active) return;
@@ -511,7 +499,8 @@ export function ImportedDecks({
       <StudySession
         cards={session.cards}
         deckName={session.deck.name}
-        mode={mode}
+        mode={session.mode}
+        sessionMinutes={session.sessionMinutes}
         template={session.template}
         initialProgress={session.progress}
         onTemplateChange={async template => {
@@ -671,19 +660,17 @@ export function ImportedDecks({
                 <button
                   className="study-button"
                   disabled={busy}
-                  onClick={() => void startStudy(active)}
+                  onClick={() => void openStudySetup(active, "free")}
                 >
-                  Bắt đầu học
+                  Học tự do
                 </button>
-                {mode === "flashcards" && (
-                  <button
-                    className="study-button"
-                    disabled={busy}
-                    onClick={() => void chooseLesson(active)}
-                  >
-                    Chọn bài
-                  </button>
-                )}
+                <button
+                  className="study-button"
+                  disabled={busy || active.newCount + active.dueCount === 0}
+                  onClick={() => void openStudySetup(active, "scheduled")}
+                >
+                  Ôn ngắt quãng
+                </button>
               </>
             )}
           </div>
@@ -1041,7 +1028,7 @@ export function ImportedDecks({
                 return (
                   <article
                     key={deck.id}
-                    className={`study-panel relative flex min-h-52 flex-col transition-[transform,border-color,opacity,box-shadow] duration-200 ${isDragging ? "opacity-45" : ""} ${isDropTarget ? "-translate-y-0.5 border-[var(--color-accent)] shadow-lg" : ""}`}
+                    className={`study-panel relative flex min-h-52 flex-col transition-[transform,border-color,opacity,box-shadow] duration-200 ${isDragging ? "opacity-[.45]" : ""} ${isDropTarget ? "-translate-y-0.5 border-[var(--color-accent)] shadow-lg" : ""}`}
                     onDragOver={(event) => {
                       if (!draggingDeckId || draggingDeckId === deck.id) return;
                       event.preventDefault();
@@ -1124,18 +1111,18 @@ export function ImportedDecks({
                         type="button"
                         className={`text-left text-sm font-semibold ${deck.cardCount ? "text-[var(--color-accent)] hover:underline" : "cursor-default text-[var(--color-text-tertiary)]"}`}
                         disabled={!deck.cardCount}
-                        onClick={() => void startStudy(deck)}
+                        onClick={() => void openStudySetup(deck, "free")}
                       >
-                        {deck.cardCount ? "Bắt đầu học →" : "Chưa có thẻ"}
+                        {deck.cardCount ? "Học tự do →" : "Chưa có thẻ"}
                       </button>
-                      {mode === "flashcards" && deck.cardCount > 0 && (
+                      {deck.cardCount > 0 && (
                         <button
                           type="button"
-                          className="text-left text-sm font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:underline"
-                          disabled={busy}
-                          onClick={() => void chooseLesson(deck)}
+                          className="text-left text-sm font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:underline disabled:cursor-not-allowed disabled:opacity-[.45]"
+                          disabled={busy || deck.newCount + deck.dueCount === 0}
+                          onClick={() => void openStudySetup(deck, "scheduled")}
                         >
-                          Chọn bài
+                          Ôn ngắt quãng
                         </button>
                       )}
                     </div>
@@ -1165,86 +1152,17 @@ export function ImportedDecks({
           )}
         </div>
       )}
-      {lessonPicker && (
-        <div
-          className="fixed inset-0 z-[60] grid place-items-center bg-black/35 p-4"
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setLessonPicker(null);
-          }}
-        >
-          <section
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="lesson-picker-title"
-            className="w-full max-w-md space-y-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-xl"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="study-eyebrow">THẺ HỌC</p>
-                <h3 id="lesson-picker-title" className="mt-1 text-lg font-semibold">
-                  Chọn bài trong {lessonPicker.deck.name}
-                </h3>
-              </div>
-              <button
-                type="button"
-                className="rounded-full p-2 text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-alt)]"
-                aria-label="Đóng chọn bài"
-                onClick={() => setLessonPicker(null)}
-              >
-                <X size={18} />
-              </button>
-            </div>
-            <label className="block text-sm font-semibold">
-              Bài muốn học
-              <select
-                className="study-input mt-1"
-                value={lessonPicker.selected}
-                onChange={(event) =>
-                  setLessonPicker((current) =>
-                    current
-                      ? { ...current, selected: event.target.value }
-                      : current,
-                  )
-                }
-              >
-                {lessonPicker.lessons.map((lesson) => (
-                  <option key={lesson.key} value={lesson.key}>
-                    {lesson.label} · {lesson.count} thẻ
-                  </option>
-                ))}
-              </select>
-            </label>
-            <div className="flex flex-wrap gap-2">
-              <button
-                type="button"
-                className="study-button study-button-primary"
-                onClick={() => {
-                  const selectedCards = lessonPicker.cards.filter((card) =>
-                    belongsToLesson(card, lessonPicker.selected),
-                  );
-                  setSession({
-                    cards: selectedCards,
-                    deck: lessonPicker.deck,
-                    template: lessonPicker.template,
-                    progress: {},
-                  });
-                  setLessonPicker(null);
-                }}
-              >
-                Học bài này
-              </button>
-              <button
-                type="button"
-                className="study-button"
-                onClick={() => setLessonPicker(null)}
-              >
-                Hủy
-              </button>
-            </div>
-          </section>
-        </div>
-      )}
+      <StudySetupSheet
+        open={Boolean(studySetup)}
+        deckName={studySetup?.deck.name ?? ""}
+        totalCards={studySetup?.cards.length ?? 0}
+        mode={studySetup?.mode ?? "free"}
+        lessons={studySetup ? lessonOptions(studySetup.cards) : []}
+        scheduleSummary={studySetup?.summary}
+        defaultMinutes={settings.ankiSessionMinutes}
+        onClose={() => setStudySetup(null)}
+        onStart={startConfiguredStudy}
+      />
       {customizing && (
         <DeckCustomizeDialog
           deck={{

@@ -22,8 +22,6 @@ const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage
 const KanjiPage = lazy(() => import('@/components/kanji/KanjiPage').then((module) => ({ default: module.KanjiPage })));
 const GrammarPage = lazy(() => import('@/components/grammar/GrammarPage').then((module) => ({ default: module.GrammarPage })));
 const FlashcardPage = lazy(() => import('@/components/flashcard/FlashcardPage').then((module) => ({ default: module.FlashcardPage })));
-const AnkiPage = lazy(() => import('@/components/flashcard/FlashcardPage').then((module) => ({ default: module.AnkiPage })));
-const SRSPage = lazy(() => import('@/components/srs/SRSPage').then((module) => ({ default: module.SRSPage })));
 const QuizPage = lazy(() => import('@/components/quiz/QuizPage').then((module) => ({ default: module.QuizPage })));
 const ListeningPage = lazy(() => import('@/components/listening/ListeningPage').then((module) => ({ default: module.ListeningPage })));
 const ProgressPage = lazy(() => import('@/components/progress/ProgressPage').then((module) => ({ default: module.ProgressPage })));
@@ -67,8 +65,8 @@ function AppContent() {
             <Route path="kanji" element={<KanjiPage />} />
             <Route path="listening" element={<ListeningPage />} />
           </Route>
-          <Route path="/decks" element={<DecksRoute />} />
-          <Route path="/review" element={<SRSPage />} />
+          <Route path="/decks" element={<FlashcardPage />} />
+          <Route path="/review" element={<Navigate to="/decks" replace />} />
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="/saved" element={<BookmarksPage />} />
@@ -78,11 +76,6 @@ function AppContent() {
       </Suspense>
     </MainLayout>
   );
-}
-
-function DecksRoute() {
-  const { currentPage } = useApp();
-  return currentPage === 'anki' ? <AnkiPage /> : <FlashcardPage />;
 }
 
 function RootRedirect() {

@@ -10,13 +10,16 @@ export type DeckCardProps = {
   primaryLabel: string;
   primaryDisabled?: boolean;
   onPrimary: () => void;
+  secondaryLabel?: string;
+  secondaryDisabled?: boolean;
+  onSecondary?: () => void;
   actions?: DeckAction[];
   draggable?: boolean;
   onDragStart?: DragEventHandler;
   onDrop?: DragEventHandler;
 };
 
-export function DeckCard({ summary, badge, description, primaryLabel, primaryDisabled, onPrimary, actions, draggable, onDragStart, onDrop }: DeckCardProps) {
+export function DeckCard({ summary, badge, description, primaryLabel, primaryDisabled, onPrimary, secondaryLabel, secondaryDisabled, onSecondary, actions, draggable, onDragStart, onDrop }: DeckCardProps) {
   const muted = summary.totalCards === 0;
   return <article className="study-panel flex min-h-56 flex-col transition-[border-color,transform] duration-150 hover:border-[var(--color-border-strong)]" draggable={draggable} onDragStart={onDragStart} onDragOver={event => draggable && event.preventDefault()} onDrop={onDrop}>
     <div className="flex items-start justify-between gap-3">
@@ -27,6 +30,9 @@ export function DeckCard({ summary, badge, description, primaryLabel, primaryDis
     {description && <p className="study-copy mt-1 line-clamp-2">{description}</p>}
     <p className={`mt-4 flex items-baseline gap-1.5 ${muted ? 'text-[var(--color-text-tertiary)]' : ''}`}><strong className="text-4xl font-semibold tracking-tight">{summary.totalCards}</strong><span className="text-sm">thẻ</span></p>
     <p className="mt-1 text-xs text-[var(--color-text-tertiary)]">{summary.newCount} mới · {summary.dueCount} đến hạn</p>
-    <button className={`mt-auto pt-5 text-left text-sm font-semibold ${primaryDisabled ? 'cursor-default text-[var(--color-text-tertiary)]' : 'text-[var(--color-accent)] hover:underline'}`} disabled={primaryDisabled} onClick={onPrimary}>{primaryLabel}</button>
+    <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
+      <button className={`text-left text-sm font-semibold ${primaryDisabled ? 'cursor-default text-[var(--color-text-tertiary)]' : 'text-[var(--color-accent)] hover:underline'}`} disabled={primaryDisabled} onClick={onPrimary}>{primaryLabel}</button>
+      {secondaryLabel && onSecondary ? <button className={`text-left text-sm font-semibold ${secondaryDisabled ? 'cursor-default text-[var(--color-text-tertiary)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:underline'}`} disabled={secondaryDisabled} onClick={onSecondary}>{secondaryLabel}</button> : null}
+    </div>
   </article>;
 }
