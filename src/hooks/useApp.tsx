@@ -83,7 +83,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     ];
   });
   const [searchOpen, setSearchOpen] = useState(false);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsedState] = useState(storage.getSidebarCollapsed);
 
   const learningSync = useLearningSync(storage, Boolean(user), state => { _setBookmarks(state.bookmarks); _setSRSCards(state.srsCards); });
 
@@ -153,6 +153,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const settingsSync = useSettingsSync(storage, Boolean(user), _setSettings);
   const updateSettings = settingsSync.change;
+
+  const setSidebarCollapsed = useCallback((collapsed: boolean) => {
+    setSidebarCollapsedState(collapsed);
+    storage.setSidebarCollapsed(collapsed);
+  }, [storage]);
 
   const toggleBookmark = useCallback(
     (itemId: string, itemType: 'vocabulary' | 'kanji' | 'grammar') => {
