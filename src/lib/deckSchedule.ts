@@ -15,9 +15,9 @@ export type DeckScheduleSummary = {
 export function buildScheduledDeckQueue<T>(
   cards: readonly T[],
   progressFor: (card: T) => DeckScheduleProgress | null | undefined,
-  options: { now?: Date; newLimit: 0 | 10 | 20 },
+  options?: { now?: Date },
 ): { cards: T[]; summary: DeckScheduleSummary } {
-  const now = (options.now ?? new Date()).getTime();
+  const now = (options?.now ?? new Date()).getTime();
   const fresh: T[] = [];
   const learning: Array<{ card: T; due: number }> = [];
   const review: Array<{ card: T; due: number }> = [];
@@ -39,7 +39,7 @@ export function buildScheduledDeckQueue<T>(
   const cardsForSession = [
     ...learning.map(item => item.card),
     ...review.map(item => item.card),
-    ...fresh.slice(0, options.newLimit),
+    ...fresh,
   ];
 
   return {

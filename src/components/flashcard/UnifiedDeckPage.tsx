@@ -15,37 +15,55 @@ import { StudySetupSheet } from './StudySetupSheet';
 export function UnifiedDeckPage() {
   const { vocabulary, kanji, grammar, bookmarks, srsCards, settings } = useApp();
   const { getJSON, setJSON } = useLearningStorage();
-  const [setup, setSetup] = useState<{ deck: BuiltInDeckDefinition; mode: 'free' | 'scheduled'; summary?: DeckScheduleSummary } | null>(null);
-  const [session, setSession] = useState<{ id: string; name: string; cards: CardView[]; template: DeckTemplateConfig; initialIndex: number; mode: 'flashcards' | 'anki'; sessionMinutes?: number } | null>(null);
+  const [freeSetup, setFreeSetup] = useState<{ deck: BuiltInDeckDefinition } | null>(null);
+  const [session, setSession] = useState<{ id: string; name: string; cards: CardView[]; template: DeckTemplateConfig; initialIndex: number; mode: 'flashcards' | 'anki' } | null>(null);
 
   const decks = useMemo(() => buildBuiltInDecks(vocabulary, kanji, grammar), [vocabulary, kanji, grammar]);
   const saved = useMemo(() => buildSavedDeck(decks, bookmarks), [decks, bookmarks]);
   const progressById = useMemo(() => new Map(srsCards.map(card => [`${card.deckType.toUpperCase()}:${card.cardId}`, card])), [srsCards]);
   const progress = (card: CardView) => progressById.get(`${card.type}:${card.id}`);
 
-  function scheduleFor(deck: BuiltInDeckDefinition, newLimit: 0 | 10 | 20) {
-    return buildScheduledDeckQueue(deck.cards, card => progress(card), { newLimit });
+  function scheduleFor(deck: BuiltInDeckDefinition): { cards: CardView[]; summary: DeckScheduleSummary } {
+    return buildScheduledDeckQueue(deck.cards, card => progress(card));
   }
 
-  function launch(deck: BuiltInDeckDefinition, selection: StudySetup) {
-    const cards = selection.mode === 'free' ? buildFreeStudyQueue(deck.cards, selection) : scheduleFor(deck, selection.newLimit).cards;
-    if (!cards.length) { setSetup(null); return; }
-    const resumeCardId = selection.mode === 'free' ? getJSON<string | null>(builtInDeckResumeKey(deck.id), null) : null;
-    setSession({ id: deck.id, name: deck.name, cards, template: defaultDeckTemplate(), initialIndex: resolveResumeIndex(cards, resumeCardId), mode: selection.mode === 'free' ? 'flashcards' : 'anki', sessionMinutes: selection.mode === 'scheduled' ? selection.sessionMinutes : undefined });
-    setSetup(null);
+  function launchFree(deck: BuiltInDeckDefinition, selection: StudySetup) {
+    if (selection.mode !== 'free') return;
+    const cards = buildFreeStudyQueue(deck.cards, selection);
+    if (!cards.length) { setFreeSetup(null); return; }
+    const resumeCardId = getJSON<string | null>(builtInDeckResumeKey(deck.id), null);
+    setSession({ id: deck.id, name: deck.name, cards, template: defaultDeckTemplate(), initialIndex: resolveResumeIndex(cards, resumeCardId), mode: 'flashcards' });
+    setFreeSetup(null);
+  }
+
+  function launchScheduled(deck: BuiltInDeckDefinition) {
+    const scheduled = scheduleFor(deck);
+    if (!scheduled.cards.length) return;
+    setSession({ id: deck.id, name: deck.name, cards: scheduled.cards, template: defaultDeckTemplate(), initialIndex: 0, mode: 'anki' });
+  }
+
+  function handleFreeClick(deck: BuiltInDeckDefinition) {
+    const lessons = lessonOptions(deck.cards);
+    if (lessons.length > 0) {
+      setFreeSetup({ deck });
+    } else {
+      // No lessons — launch immediately with all cards
+      launchFree(deck, { mode: 'free', lessonKey: null });
+    }
   }
 
   function card(deck: BuiltInDeckDefinition, savedDeck = false) {
     const summary = deckSummary({ ...deck, source: savedDeck ? 'SAVED' : 'BUILT_IN' }, progressById);
     const badge = savedDeck ? { label: 'Đã lưu', tone: 'neutral' as const } : deck.kind === 'vocabulary' ? { label: 'Từ vựng', tone: 'vocabulary' as const } : deck.kind === 'kanji' ? { label: 'Kanji', tone: 'kanji' as const } : { label: 'Ngữ pháp', tone: 'grammar' as const };
-    const scheduled = scheduleFor(deck, 10);
+    const scheduled = scheduleFor(deck);
     return <DeckCard key={deck.id} summary={summary} badge={badge}
-      primaryLabel={deck.cards.length ? 'Học tự do →' : 'Chưa có thẻ'} primaryDisabled={!deck.cards.length} onPrimary={() => setSetup({ deck, mode: 'free' })}
-      secondaryLabel="Ôn ngắt quãng" secondaryDisabled={!scheduled.cards.length} onSecondary={() => setSetup({ deck, mode: 'scheduled', summary: scheduled.summary })}/>;
+      scheduleSummary={scheduled.summary}
+      primaryLabel={deck.cards.length ? 'Học tự do →' : 'Chưa có thẻ'} primaryDisabled={!deck.cards.length} onPrimary={() => handleFreeClick(deck)}
+      secondaryLabel="Ôn ngắt quãng" secondaryDisabled={!scheduled.cards.length} onSecondary={() => launchScheduled(deck)}/>;
   }
 
   if (session) return <StudySession cards={session.cards} deckName={session.name} template={session.template} mode={session.mode} initialIndex={session.initialIndex}
-    sessionMinutes={session.sessionMinutes}
+    sessionMinutes={0}
     onPositionChange={session.mode === 'flashcards' ? cardId => setJSON(builtInDeckResumeKey(session.id), cardId) : undefined}
     onComplete={session.mode === 'flashcards' ? () => setJSON(builtInDeckResumeKey(session.id), null) : undefined}
     onExit={() => setSession(null)}/>;
@@ -63,6 +81,6 @@ export function UnifiedDeckPage() {
       })}</div>
     </section>
 
-    <StudySetupSheet open={Boolean(setup)} deckName={setup?.deck.name ?? ''} totalCards={setup?.deck.cards.length ?? 0} mode={setup?.mode ?? 'free'} lessons={setup ? lessonOptions(setup.deck.cards) : []} scheduleSummary={setup?.summary} defaultMinutes={settings.ankiSessionMinutes} onClose={() => setSetup(null)} onStart={selection => setup && launch(setup.deck, selection)}/>
+    <StudySetupSheet open={Boolean(freeSetup)} deckName={freeSetup?.deck.name ?? ''} lessons={freeSetup ? lessonOptions(freeSetup.deck.cards) : []} onClose={() => setFreeSetup(null)} onStart={selection => freeSetup && launchFree(freeSetup.deck, selection)}/>
   </div>;
 }

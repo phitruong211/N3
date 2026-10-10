@@ -44,7 +44,7 @@ import { StudySession } from "./StudySession";
 import { StudySetupSheet } from "./StudySetupSheet";
 import { loadStudyPages } from "@/lib/loadStudyPages";
 import { buildFreeStudyQueue, lessonOptions, type StudySetup } from "@/lib/studySetup";
-import { buildScheduledDeckQueue, type DeckScheduleSummary } from "@/lib/deckSchedule";
+import { buildScheduledDeckQueue } from "@/lib/deckSchedule";
 import { DeckCustomizeDialog } from "./CardPresentation";
 import { ContentBadge } from "@/components/ui/StudyUI";
 import {
@@ -122,15 +122,12 @@ export function ImportedDecks({
     template: DeckTemplateConfig;
     progress: Record<string, ApiProgress | null>;
     mode: "flashcards" | "anki";
-    sessionMinutes?: number;
   } | null>(null);
   const [studySetup, setStudySetup] = useState<{
     deck: PersonalDeck;
     cards: CardView[];
     template: DeckTemplateConfig;
     progress: Record<string, ApiProgress | null>;
-    mode: "free" | "scheduled";
-    summary?: DeckScheduleSummary;
   } | null>(null);
   const input = useRef<HTMLInputElement>(null);
   const lock = useRef(false);
@@ -426,29 +423,47 @@ export function ImportedDecks({
   function personalSchedule(
     cards: CardView[],
     progress: Record<string, ApiProgress | null>,
-    newLimit: 0 | 10 | 20,
   ) {
     return buildScheduledDeckQueue(cards, card => {
       const item = progress[card.id];
       return item ? { state: item.state.toLowerCase() as "new" | "learning" | "review" | "relearning", dueDate: item.dueAt } : null;
-    }, { newLimit });
+    });
   }
-  async function openStudySetup(deck: PersonalDeck, studyMode: "free" | "scheduled") {
+  async function openFreeStudy(deck: PersonalDeck) {
     await operation(async () => {
-      const { views, progress, template } = await loadStudyCards(deck, studyMode);
+      const { views, progress, template } = await loadStudyCards(deck, "free");
       if (!views.length) {
-        setMessage(studyMode === "scheduled" ? "Bộ này chưa có thẻ mới hoặc thẻ đến hạn." : "Bộ này chưa có thẻ để học.");
+        setMessage("Bộ này chưa có thẻ để học.");
         return;
       }
-      const summary = studyMode === "scheduled" ? personalSchedule(views, progress, 10).summary : undefined;
-      setStudySetup({ deck, cards: views, template, progress, mode: studyMode, summary });
+      const lessons = lessonOptions(views);
+      if (lessons.length > 0) {
+        setStudySetup({ deck, cards: views, template, progress });
+      } else {
+        // No lessons — launch immediately with all cards
+        const cards = buildFreeStudyQueue(views, { mode: 'free', lessonKey: null });
+        setSession({ cards, deck, template, progress, mode: "flashcards" });
+      }
+    });
+  }
+  async function openScheduledStudy(deck: PersonalDeck) {
+    await operation(async () => {
+      const { views, progress, template } = await loadStudyCards(deck, "scheduled");
+      if (!views.length) {
+        setMessage("Bộ này chưa có thẻ mới hoặc thẻ đến hạn.");
+        return;
+      }
+      const scheduled = personalSchedule(views, progress);
+      if (!scheduled.cards.length) {
+        setMessage("Không có thẻ đến hạn.");
+        return;
+      }
+      setSession({ cards: scheduled.cards, deck, template, progress, mode: "anki" });
     });
   }
   function startConfiguredStudy(selection: StudySetup) {
     if (!studySetup) return;
-    const cards = selection.mode === "free"
-      ? buildFreeStudyQueue(studySetup.cards, selection)
-      : personalSchedule(studySetup.cards, studySetup.progress, selection.newLimit).cards;
+    const cards = buildFreeStudyQueue(studySetup.cards, selection as { mode: 'free'; lessonKey: string | null });
     if (!cards.length) {
       setMessage("Không có thẻ phù hợp với lựa chọn này.");
       setStudySetup(null);
@@ -459,8 +474,7 @@ export function ImportedDecks({
       deck: studySetup.deck,
       template: studySetup.template,
       progress: studySetup.progress,
-      mode: selection.mode === "scheduled" ? "anki" : "flashcards",
-      sessionMinutes: selection.mode === "scheduled" ? selection.sessionMinutes : undefined,
+      mode: "flashcards",
     });
     setStudySetup(null);
   }
@@ -500,7 +514,7 @@ export function ImportedDecks({
         cards={session.cards}
         deckName={session.deck.name}
         mode={session.mode}
-        sessionMinutes={session.sessionMinutes}
+        sessionMinutes={0}
         template={session.template}
         initialProgress={session.progress}
         onTemplateChange={async template => {
@@ -660,14 +674,14 @@ export function ImportedDecks({
                 <button
                   className="study-button"
                   disabled={busy}
-                  onClick={() => void openStudySetup(active, "free")}
+                  onClick={() => void openFreeStudy(active)}
                 >
                   Học tự do
                 </button>
                 <button
                   className="study-button"
                   disabled={busy || active.newCount + active.dueCount === 0}
-                  onClick={() => void openStudySetup(active, "scheduled")}
+                  onClick={() => void openScheduledStudy(active)}
                 >
                   Ôn ngắt quãng
                 </button>
@@ -1111,7 +1125,7 @@ export function ImportedDecks({
                         type="button"
                         className={`text-left text-sm font-semibold ${deck.cardCount ? "text-[var(--color-accent)] hover:underline" : "cursor-default text-[var(--color-text-tertiary)]"}`}
                         disabled={!deck.cardCount}
-                        onClick={() => void openStudySetup(deck, "free")}
+                        onClick={() => void openFreeStudy(deck)}
                       >
                         {deck.cardCount ? "Học tự do →" : "Chưa có thẻ"}
                       </button>
@@ -1120,7 +1134,7 @@ export function ImportedDecks({
                           type="button"
                           className="text-left text-sm font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:underline disabled:cursor-not-allowed disabled:opacity-[.45]"
                           disabled={busy || deck.newCount + deck.dueCount === 0}
-                          onClick={() => void openStudySetup(deck, "scheduled")}
+                          onClick={() => void openScheduledStudy(deck)}
                         >
                           Ôn ngắt quãng
                         </button>
@@ -1155,11 +1169,7 @@ export function ImportedDecks({
       <StudySetupSheet
         open={Boolean(studySetup)}
         deckName={studySetup?.deck.name ?? ""}
-        totalCards={studySetup?.cards.length ?? 0}
-        mode={studySetup?.mode ?? "free"}
         lessons={studySetup ? lessonOptions(studySetup.cards) : []}
-        scheduleSummary={studySetup?.summary}
-        defaultMinutes={settings.ankiSessionMinutes}
         onClose={() => setStudySetup(null)}
         onStart={startConfiguredStudy}
       />
