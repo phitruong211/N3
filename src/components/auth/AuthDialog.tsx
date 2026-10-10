@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { hasLegacyLearningData } from '@/lib/storage';
-import { AccountLearningStatus } from './AccountLearningStatus';
 import { AuthPage } from './AuthPage';
 
 export function AuthDialog() {
@@ -41,8 +39,6 @@ export function SessionNotices() {
     return () => window.removeEventListener('learning-storage-error', failed);
   }, []);
   return <div className="space-y-3 mb-5">
-    <AccountLearningStatus />
-    {hasLegacyLearningData() && <p className="study-copy" role="note">Dữ liệu học phiên bản cũ vẫn được giữ trên thiết bị. Vì chưa xác định được chủ sở hữu, dữ liệu này chưa tự chuyển vào Guest hoặc tài khoản.</p>}
     {storageError && <p role="alert" className="text-[var(--color-error)]">Không lưu được dữ liệu trên thiết bị. Hãy kiểm tra dung lượng trình duyệt; thay đổi vừa rồi có thể chưa được lưu.</p>}
     {restoreError && <p role="alert" className="study-copy">{restoreError}</p>}
   </div>;

@@ -5,6 +5,7 @@ import { useLearningStorage } from '@/hooks/useApp';
 import type { ThemeMode } from '@/types';
 import { PageHeading } from '@/components/ui/StudyUI';
 import { useAuth } from '@/hooks/useAuth';
+import { AccountLearningStatus } from '@/components/auth/AccountLearningStatus';
 
 const themes: { id: ThemeMode; label: string }[] = [
   { id: 'light', label: 'Sáng' }, { id: 'dark', label: 'Tối' },
@@ -30,6 +31,7 @@ export function SettingsPage() {
           <h2 className="text-base font-semibold text-[var(--color-text)]">Tài khoản</h2>
           <p className="study-copy mt-1">{user ? `${user.displayName} · ${user.email}` : 'Bạn đang học thử trên thiết bị này.'}</p>
           <button className="study-button mt-4" onClick={() => user ? void signOut() : requestAuth()}>{user ? 'Đăng xuất' : 'Đăng nhập / Đăng ký'}</button>
+          {user && <div className="mt-5 border-t border-[var(--color-border)] pt-4"><AccountLearningStatus /></div>}
         </section>
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Giao diện</h2>

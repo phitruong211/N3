@@ -15,6 +15,7 @@ import { AuthPage } from '@/components/auth/AuthPage';
 import { AuthDialog, SessionNotices } from '@/components/auth/AuthDialog';
 import { NotFoundPage } from '@/components/layout/NotFoundPage';
 import { resolveInitialPath } from '@/lib/navigation';
+import { LibraryLayout } from '@/components/library/LibraryLayout';
 
 const Dashboard = lazy(() => import('@/components/dashboard/Dashboard').then((module) => ({ default: module.Dashboard })));
 const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage').then((module) => ({ default: module.VocabularyPage })));
@@ -59,11 +60,13 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<RootRedirect />} />
           <Route path="/today" element={<Dashboard />} />
-          <Route path="/library" element={<Navigate to="/library/vocabulary" replace />} />
-          <Route path="/library/vocabulary" element={<VocabularyPage />} />
-          <Route path="/library/grammar" element={<GrammarPage />} />
-          <Route path="/library/kanji" element={<KanjiPage />} />
-          <Route path="/library/listening" element={<ListeningPage />} />
+          <Route path="/library" element={<LibraryLayout />}>
+            <Route index element={<Navigate to="vocabulary" replace />} />
+            <Route path="vocabulary" element={<VocabularyPage />} />
+            <Route path="grammar" element={<GrammarPage />} />
+            <Route path="kanji" element={<KanjiPage />} />
+            <Route path="listening" element={<ListeningPage />} />
+          </Route>
           <Route path="/decks" element={<DecksRoute />} />
           <Route path="/review" element={<SRSPage />} />
           <Route path="/quiz" element={<QuizPage />} />
