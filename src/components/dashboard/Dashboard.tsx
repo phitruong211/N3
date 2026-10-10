@@ -5,8 +5,6 @@ import { useAuth } from '@/hooks/useAuth';
 import { hasLegacyLearningData } from '@/lib/storage';
 import type { PageId } from '@/types';
 import {
-  ArrowRight,
-  ArrowUpRight,
   BookOpen,
   Clock3,
   Flame,
@@ -58,7 +56,7 @@ export function Dashboard() {
             <h2 id="today-focus-title" className="max-w-48 pb-1 text-xl font-semibold leading-tight tracking-[-.03em] sm:pb-2 sm:text-2xl">thẻ đến hạn</h2>
           </div>
           <button onClick={() => setCurrentPage(due > 0 ? 'srs' : 'flashcards')} className="study-button study-button-primary mt-8 min-w-40 !rounded-full">
-            {due > 0 ? <RotateCcw size={18}/> : <Layers size={18}/>} {due > 0 ? 'Ôn ngay' : 'Học tự do'} <ArrowRight size={17}/>
+            {due > 0 ? <RotateCcw size={18}/> : <Layers size={18}/>} {due > 0 ? 'Ôn ngay' : 'Học tự do'}
           </button>
           <span className="pointer-events-none absolute -bottom-14 right-5 select-none font-serif text-[11rem] leading-none text-[var(--color-text)] opacity-[.035]" aria-hidden="true">学</span>
         </div>
@@ -73,20 +71,20 @@ export function Dashboard() {
             <MiniMetric icon={Flame} value={`${streak} ngày`} label="Liên tiếp"/>
             <MiniMetric icon={Clock3} value={`${Math.round(today?.timeSpent ?? 0)} phút`} label="Hôm nay"/>
           </div>
-          <button onClick={() => setCurrentPage('progress')} className="relative mt-5 flex w-fit items-center gap-1.5 text-xs font-semibold opacity-75 transition-opacity hover:opacity-100">Xem tiến độ <ArrowUpRight size={14}/></button>
+          <button onClick={() => setCurrentPage('progress')} className="relative mt-5 flex w-fit items-center gap-1.5 text-xs font-semibold opacity-75 transition-opacity hover:opacity-100">Xem tiến độ</button>
         </div>
       </div>
     </section>
 
     {draft && <section className="flex flex-col gap-3 rounded-2xl border border-[var(--color-accent)]/25 bg-[var(--color-accent-subtle)] p-4 sm:flex-row sm:items-center sm:justify-between" aria-label="Bộ thẻ đang tạo dở">
       <p className="font-semibold text-[var(--color-text)]">Bộ thẻ đang tạo vẫn được lưu.</p>
-      <button className="study-button shrink-0" onClick={() => setCurrentPage('flashcards')}>Tiếp tục <ArrowRight size={17}/></button>
+      <button className="study-button shrink-0" onClick={() => setCurrentPage('flashcards')}>Tiếp tục</button>
     </section>}
 
     <section aria-labelledby="library-title">
       <div className="mb-4 flex items-end justify-between gap-4">
         <div><p className="study-eyebrow">Khám phá</p><h2 id="library-title" className="mt-1 text-xl font-semibold tracking-[-.025em]">Hôm nay học gì?</h2></div>
-        <button className="flex items-center gap-1 text-sm font-semibold text-[var(--color-accent)] hover:underline" onClick={() => setCurrentPage('flashcards')}><Layers size={16}/> Học theo bộ <ArrowRight size={15}/></button>
+        <button className="flex items-center gap-1 text-sm font-semibold text-[var(--color-accent)] hover:underline" onClick={() => setCurrentPage('flashcards')}><Layers size={16}/> Học theo bộ</button>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {library.map(({ page, title, count, mark, icon: Icon, tone }) => <button key={page} onClick={() => setCurrentPage(page)} className="dashboard-library-card group relative min-h-44 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 text-left" style={{ '--dashboard-card-tone': tone } as CSSProperties}>
@@ -94,7 +92,6 @@ export function Dashboard() {
           <span className="grid h-10 w-10 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg)]" style={{ color: tone }}><Icon size={20}/></span>
           <h3 className="relative mt-7 text-lg font-semibold">{title}</h3>
           <p className="relative mt-1 text-sm font-medium text-[var(--color-text-secondary)]">{count}</p>
-          <ArrowUpRight size={17} className="absolute right-5 top-5 text-[var(--color-text-tertiary)] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/>
         </button>)}
       </div>
     </section>
@@ -102,7 +99,6 @@ export function Dashboard() {
     <button onClick={() => setCurrentPage('flashcards')} className="dashboard-free-link group flex items-center gap-4 rounded-2xl border border-[var(--color-border)] px-5 py-4 text-left transition-colors hover:border-[var(--color-border-strong)] sm:px-6">
       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent)]"><Layers size={20}/></span>
       <span className="flex-1 font-semibold">Mở bộ thẻ và học theo bài</span>
-      <ArrowRight size={18} className="transition-transform group-hover:translate-x-1"/>
     </button>
 
     {hasLegacyLearningData() && <section className="flex flex-col gap-2 border-t border-[var(--color-border)] pt-5 text-sm sm:flex-row sm:items-center sm:justify-between" role="note">
