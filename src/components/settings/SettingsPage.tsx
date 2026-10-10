@@ -68,6 +68,12 @@ export function SettingsPage() {
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Ôn ngắt quãng</h2>
           <p className="study-copy mt-1">Nếu không nhớ đáp án, hãy chọn Quên; Khó chỉ dùng khi bạn vẫn nhớ nhưng phải suy nghĩ nhiều.</p>
+          <label className="mt-4 block text-sm font-semibold">Thẻ mới mỗi ngày
+            <span className="study-copy mt-1 block">Nhập mọi số nguyên từ 0 trở lên. 0 nghĩa là chỉ ôn thẻ đang học và đến hạn.</span>
+            <input className="study-input mt-2" aria-label="Thẻ mới mỗi ngày" type="number" min={0} step={1}
+              value={settings.srsDailyNewLimit}
+              onChange={event => updateSettings({ srsDailyNewLimit: Math.min(2_147_483_647, Math.max(0, Math.round(Number(event.target.value) || 0))) })}/>
+          </label>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <label className="text-sm font-semibold">Học lại khi quên
               <span className="study-copy mt-1 block">Số phút trước khi thẻ quay lại</span>
@@ -84,7 +90,7 @@ export function SettingsPage() {
             {([{ value: 0.9, label: 'Cân bằng · 90%' }, { value: 0.93, label: 'Ghi nhớ cao · 93%' }, { value: 0.95, label: 'Ôn kỹ · 95%' }] as const).map(option =>
               <button key={option.value} className={'study-button ' + (settings.srsDesiredRetention === option.value ? 'study-button-primary' : '')} aria-pressed={settings.srsDesiredRetention === option.value} onClick={() => updateSettings({ srsDesiredRetention: option.value })}>{option.label}</button>)}
           </div>
-          <button className="study-button mt-4" onClick={() => { setSrsError(''); updateSettings({ srsAgainMinutes: 1, srsGoodMinutes: 10, srsDesiredRetention: 0.9 }); }}>Khôi phục mặc định</button>
+          <button className="study-button mt-4" onClick={() => { setSrsError(''); updateSettings({ srsDailyNewLimit: 20, srsAgainMinutes: 1, srsGoodMinutes: 10, srsDesiredRetention: 0.9 }); }}>Khôi phục mặc định</button>
         </section>
         <details className="study-panel">
           <summary className="flex cursor-pointer list-none items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><span className="text-base font-semibold">Vùng nguy hiểm</span></summary>

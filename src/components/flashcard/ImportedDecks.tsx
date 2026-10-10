@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { useLearningStorage } from "@/hooks/useApp";
+import { useApp, useLearningStorage } from "@/hooks/useApp";
 import {
   defaultDeckTemplate,
   kindLabels,
@@ -44,7 +44,6 @@ import { StudySession } from "./StudySession";
 import { StudySetupSheet } from "./StudySetupSheet";
 import { loadStudyPages } from "@/lib/loadStudyPages";
 import { buildFreeStudyQueue, lessonOptions } from "@/lib/studySetup";
-import { DAILY_NEW_CARD_LIMIT } from "@/lib/deckSchedule";
 import { DeckProgressGrid } from "./DeckCard";
 import { DeckCustomizeDialog } from "./CardPresentation";
 import { personalDeckResumeKey, resolveResumeIndex } from "@/lib/studyResume";
@@ -84,6 +83,7 @@ export function ImportedDecks({
   leadingDeck?: ReactNode;
 }) {
   const draftMode = "flashcards" as const;
+  const { settings } = useApp();
   const { getJSON, setJSON } = useLearningStorage();
   const { user, requestAuth, draft, setDraft } = useAuth();
   const initial = useRef(draft?.mode === draftMode ? draft : null).current;
@@ -396,7 +396,8 @@ export function ImportedDecks({
   }
 
   function readyCount(deck: PersonalDeck) {
-    const remainingNewToday = Math.max(0, DAILY_NEW_CARD_LIMIT - (deck.newStartedTodayCount ?? 0));
+    if (typeof deck.remainingTodayCount === "number") return deck.remainingTodayCount;
+    const remainingNewToday = Math.max(0, settings.srsDailyNewLimit - (deck.newStartedTodayCount ?? 0));
     return (deck.dueCount ?? 0) + Math.min(deck.newCount ?? 0, remainingNewToday);
   }
 
