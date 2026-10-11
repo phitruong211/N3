@@ -200,12 +200,13 @@ button, input, select, textarea { font: inherit; }
 .dashboard-primary-cta:hover { box-shadow: 0 9px 24px color-mix(in srgb, var(--color-accent) 24%, transparent); transform: translateY(-2px); }
 .dashboard-primary-cta:active { box-shadow: none; transform: translateY(0) scale(.98); }
 .dashboard-postcard { border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.095); box-shadow: inset 0 1px rgba(255,255,255,.08); backdrop-filter: blur(8px); }
-.dashboard-live2d-slot { position: relative; width: 6rem; height: 6.5rem; margin-block: -.25rem; overflow: hidden; border-radius: 1rem; }
+.dashboard-header-companion { position: relative; width: 4.75rem; height: 6rem; margin: -1rem .25rem -1.15rem 0; overflow: hidden; border-radius: 1.25rem; flex: 0 0 auto; }
+.dashboard-header-seal { position: absolute; left: 50%; top: 50%; display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid var(--color-error); border-radius: 50%; color: var(--color-error); font-size: 1.25rem; transform: translate(-50%, -50%) rotate(3deg); transition: opacity .25s ease, transform .35s ease; }
 .dashboard-live2d-host { position: absolute; inset: 0; z-index: 2; opacity: 0; transform: translateY(6px) scale(.96); transition: opacity .4s ease, transform .5s cubic-bezier(.2,.8,.2,1); touch-action: pan-y; cursor: pointer; }
 .dashboard-live2d-host canvas { display: block; width: 100%; height: 100%; }
-.dashboard-live2d-slot.is-ready .dashboard-live2d-host { opacity: 1; transform: translateY(0) scale(1); }
+.dashboard-header-companion.is-ready .dashboard-live2d-host { opacity: 1; transform: translateY(0) scale(1); }
+.dashboard-header-companion.is-ready .dashboard-header-seal { opacity: 0; transform: translate(-50%, -50%) rotate(3deg) scale(.75); }
 .dashboard-card-stack { filter: drop-shadow(0 8px 12px rgba(13,28,48,.18)); animation: dashboard-postcard-float 6s ease-in-out infinite; transition: opacity .25s ease, transform .35s ease; }
-.dashboard-live2d-slot.is-ready .dashboard-card-stack { opacity: 0; transform: scale(.9); }
 .dashboard-study-card { position: absolute; inset: 7px 10px; display: grid; place-items: center; border-radius: 9px; background: #FAF4E7; border: 1px solid rgba(39,45,39,.14); transform-origin: 50% 85%; }
 .dashboard-study-card::after { position: absolute; inset: 7px; border: 1px solid rgba(179,67,58,.22); border-radius: 5px; content: ''; }
 .dashboard-study-card-back { transform: rotate(-10deg) translate(-4px, 1px); opacity: .58; }
@@ -230,6 +231,7 @@ button, input, select, textarea { font: inherit; }
 .dashboard-free-link:active { box-shadow: var(--shadow-sm); transform: scale(.99); }
 @media (max-width: 639px) {
   .dashboard-heading { align-items: flex-start; }
+  .dashboard-header-companion { width: 3.75rem; height: 4.75rem; margin: -.65rem 0 -.7rem; }
   .dashboard-progress { min-height: 230px; }
   .dashboard-page { gap: 20px; }
   .dashboard-postcard { margin-block: 1.25rem; }

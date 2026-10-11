@@ -10,9 +10,10 @@ type IdleWindow = Window & typeof globalThis & {
 interface Live2DCompanionProps {
   onReady?: () => void;
   onUnavailable?: () => void;
+  trackPagePointer?: boolean;
 }
 
-export function Live2DCompanion({ onReady, onUnavailable }: Live2DCompanionProps) {
+export function Live2DCompanion({ onReady, onUnavailable, trackPagePointer = false }: Live2DCompanionProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -124,8 +125,12 @@ export function Live2DCompanion({ onReady, onUnavailable }: Live2DCompanionProps
         pointerFrame = 0;
         if (!model) return;
         const bounds = canvas.getBoundingClientRect();
-        const x = Math.min(bounds.width, Math.max(0, clientX - bounds.left));
-        const y = Math.min(bounds.height, Math.max(0, clientY - bounds.top));
+        const x = trackPagePointer
+          ? Math.min(bounds.width, Math.max(0, clientX / Math.max(1, window.innerWidth) * bounds.width))
+          : Math.min(bounds.width, Math.max(0, clientX - bounds.left));
+        const y = trackPagePointer
+          ? Math.min(bounds.height, Math.max(0, clientY / Math.max(1, window.innerHeight) * bounds.height))
+          : Math.min(bounds.height, Math.max(0, clientY - bounds.top));
         model.focus(x, y);
       });
     };
@@ -140,7 +145,8 @@ export function Live2DCompanion({ onReady, onUnavailable }: Live2DCompanionProps
     };
 
     document.addEventListener('visibilitychange', handleVisibility);
-    host.addEventListener('pointermove', handlePointerMove, { passive: true });
+    const pointerTarget: Window | HTMLDivElement = trackPagePointer ? window : host;
+    pointerTarget.addEventListener('pointermove', handlePointerMove as EventListener, { passive: true });
     host.addEventListener('pointerleave', handlePointerLeave, { passive: true });
     host.addEventListener('pointerdown', handlePointerDown, { passive: true });
 
@@ -149,7 +155,7 @@ export function Live2DCompanion({ onReady, onUnavailable }: Live2DCompanionProps
       visibilityObserver.disconnect();
       resizeObserver?.disconnect();
       document.removeEventListener('visibilitychange', handleVisibility);
-      host.removeEventListener('pointermove', handlePointerMove);
+      pointerTarget.removeEventListener('pointermove', handlePointerMove as EventListener);
       host.removeEventListener('pointerleave', handlePointerLeave);
       host.removeEventListener('pointerdown', handlePointerDown);
       if (pointerFrame) cancelAnimationFrame(pointerFrame);
@@ -164,7 +170,7 @@ export function Live2DCompanion({ onReady, onUnavailable }: Live2DCompanionProps
       }
       app?.destroy(false, { children: false, texture: false, baseTexture: false });
     };
-  }, [onReady, onUnavailable]);
+  }, [onReady, onUnavailable, trackPagePointer]);
 
   return <div ref={hostRef} className="dashboard-live2d-host" aria-hidden="true">
     <canvas ref={canvasRef}/>

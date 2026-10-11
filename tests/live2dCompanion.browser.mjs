@@ -22,9 +22,10 @@ async function openDashboard(reducedMotion) {
 
 try {
   const enabled = await openDashboard(false);
-  await enabled.page.locator('.dashboard-live2d-slot.is-ready').waitFor({ timeout: 10_000 });
+  await enabled.page.locator('.dashboard-header-companion.is-ready').waitFor({ timeout: 10_000 });
   const canvas = enabled.page.locator('.dashboard-live2d-host canvas');
-  await canvas.hover();
+  await enabled.page.mouse.move(120, 160);
+  await enabled.page.mouse.move(1_100, 620);
   await canvas.dispatchEvent('pointerdown', { clientX: 20, clientY: 20 });
   await enabled.page.waitForTimeout(250);
   const resources = await enabled.page.evaluate(() => performance.getEntriesByType('resource').map(entry => entry.name));
