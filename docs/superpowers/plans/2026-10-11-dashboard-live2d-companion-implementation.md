@@ -1,6 +1,6 @@
 # Dashboard Live2D Companion Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Add a lazy-loaded, interactive Haru Live2D companion to the Dashboard postcard without delaying or destabilizing the existing learning interface.
 
@@ -35,7 +35,7 @@
 - Produces: `Live2DCapabilities`, `shouldEnableLive2D(capabilities): boolean`, and `detectLive2DCapabilities(): Live2DCapabilities`.
 - Consumers: `Live2DCompanion.tsx` uses `detectLive2DCapabilities` before importing Pixi or loading model assets.
 
-- [ ] **Step 1: Write the failing policy test**
+- [x] **Step 1: Write the failing policy test**
 
 ```js
 import test from 'node:test';
@@ -50,13 +50,13 @@ test('Live2D runs only when motion, data and WebGL policies allow it', () => {
 });
 ```
 
-- [ ] **Step 2: Run the focused test and verify failure**
+- [x] **Step 2: Run the focused test and verify failure**
 
 Run: `node --experimental-strip-types --test tests/live2dPolicy.test.mjs`
 
 Expected: FAIL because `live2dPolicy.ts` does not exist.
 
-- [ ] **Step 3: Implement the policy module**
+- [x] **Step 3: Implement the policy module**
 
 ```ts
 export interface Live2DCapabilities {
@@ -80,19 +80,19 @@ export function detectLive2DCapabilities(): Live2DCapabilities {
 }
 ```
 
-- [ ] **Step 4: Install pinned dependencies**
+- [x] **Step 4: Install pinned dependencies**
 
 Run: `npm install pixi.js@6.5.10 pixi-live2d-display@0.4.0`
 
 Expected: both exact versions appear in `package.json` and the lockfile resolves Pixi peer packages at 6.x.
 
-- [ ] **Step 5: Run the policy test**
+- [x] **Step 5: Run the policy test**
 
 Run: `node --experimental-strip-types --test tests/live2dPolicy.test.mjs`
 
 Expected: PASS.
 
-- [ ] **Step 6: Commit the capability slice locally**
+- [x] **Step 6: Commit the capability slice locally**
 
 ```bash
 git add package.json package-lock.json src/components/dashboard/live2dPolicy.ts tests/live2dPolicy.test.mjs
@@ -112,7 +112,7 @@ git commit -m "Add Live2D capability policy"
 - Produces model URL `/models/haru/Haru.model3.json` and every file referenced by that manifest.
 - Consumers: `Live2DCompanion.tsx` loads both URLs without a cross-origin request.
 
-- [ ] **Step 1: Download Cubism Core from the official hosting endpoint**
+- [x] **Step 1: Download Cubism Core from the official hosting endpoint**
 
 Run:
 
@@ -124,7 +124,7 @@ curl --fail --location https://cubism.live2d.com/sdk-web/core/live2dcubismcore.m
 
 Expected: the file is JavaScript, non-empty, and defines `Live2DCubismCore`.
 
-- [ ] **Step 2: Fetch Haru from the official Live2D repository**
+- [x] **Step 2: Fetch Haru from the official Live2D repository**
 
 Run:
 
@@ -138,13 +138,13 @@ cp -R /tmp/CubismWebSamples/Samples/Resources/Haru public/models/haru
 
 Expected: `Haru.model3.json`, `Haru.moc3`, both 2048 textures, motions, expressions, physics, pose, display information and user data exist under `public/models/haru`.
 
-- [ ] **Step 3: Remove sound references and unused audio from the prototype copy**
+- [x] **Step 3: Remove sound references and unused audio from the prototype copy**
 
 Use a Node script to delete every `Sound` key from `FileReferences.Motions` in `public/models/haru/Haru.model3.json`, then remove `public/models/haru/sounds`.
 
 Expected: tapping a motion never requests or plays WAV files, while every motion JSON remains available.
 
-- [ ] **Step 4: Add provenance and license notices**
+- [x] **Step 4: Add provenance and license notices**
 
 `public/vendor/live2d/NOTICE.md` records the official Core source URL and links to the Live2D Proprietary Software License Agreement. `public/models/haru/NOTICE.md` records the official repository path and contains the required notice:
 
@@ -152,13 +152,13 @@ Expected: tapping a motion never requests or plays WAV files, while every motion
 This content uses sample data owned and copyrighted by Live2D Inc. The sample data are utilized in accordance with terms and conditions set by Live2D Inc. This content itself is created at the author's sole discretion.
 ```
 
-- [ ] **Step 5: Validate every model reference**
+- [x] **Step 5: Validate every model reference**
 
 Run a Node script that reads `Haru.model3.json`, collects `Moc`, `Textures`, `Physics`, `Pose`, `DisplayInfo`, `UserData`, expression files and motion files, and fails if any referenced path does not exist.
 
 Expected: exit code 0 and no missing paths.
 
-- [ ] **Step 6: Commit official prototype assets locally**
+- [x] **Step 6: Commit official prototype assets locally**
 
 ```bash
 git add public/vendor/live2d public/models/haru
@@ -177,15 +177,15 @@ git commit -m "Add official Live2D Haru prototype assets"
 - `Live2DCompanionProps = { modelUrl: string; className?: string; onReady?: () => void; onUnavailable?: () => void }`.
 - `Live2DCompanion` renders only a canvas container and never owns surrounding Dashboard copy.
 
-- [ ] **Step 1: Add Core loader with a shared promise**
+- [x] **Step 1: Add Core loader with a shared promise**
 
 Implement `loadCubismCore` so it immediately resolves when `window.Live2DCubismCore` exists, reuses one module-level promise, adds a script with `data-live2d-core="true"`, and rejects on `error`.
 
-- [ ] **Step 2: Declare the Cubism global and adapter module**
+- [x] **Step 2: Declare the Cubism global and adapter module**
 
 Add the minimum TypeScript declaration for `window.Live2DCubismCore` and for imports from `pixi-live2d-display/cubism4` that are not exposed correctly by the package's current type resolution.
 
-- [ ] **Step 3: Build the isolated renderer**
+- [x] **Step 3: Build the isolated renderer**
 
 Inside a mount-only effect:
 
@@ -202,17 +202,17 @@ Inside a mount-only effect:
 11. Trigger `TapBody` from a canvas pointer tap without playing sound.
 12. Set `app.ticker.maxFPS = 30`, pause/resume from intersection and `visibilitychange`, then call `onReady`.
 
-- [ ] **Step 4: Implement deterministic cleanup**
+- [x] **Step 4: Implement deterministic cleanup**
 
 Cleanup cancels idle/animation callbacks, disconnects both observers, removes pointer and visibility handlers, stops the ticker, destroys the model with textures, removes the canvas, and destroys the Pixi application. Guard every asynchronous continuation with a `disposed` boolean.
 
-- [ ] **Step 5: Type-check and build the lazy chunk**
+- [x] **Step 5: Type-check and build the lazy chunk**
 
 Run: `npm run build`
 
 Expected: PASS. Vite output contains a separate Pixi/Live2D-related chunk; the main Dashboard chunk does not absorb the complete runtime.
 
-- [ ] **Step 6: Commit the renderer locally**
+- [x] **Step 6: Commit the renderer locally**
 
 ```bash
 git add src/components/dashboard/Live2DCompanion.tsx src/components/dashboard/live2dRuntime.ts src/types/pixi-live2d-display.d.ts
@@ -230,19 +230,19 @@ git commit -m "Add lazy Live2D renderer lifecycle"
 - Consumes `Live2DCompanion` through `React.lazy`.
 - The existing `TodayPostcard` retains its fixed dimensions, text and static card stack until `onReady` fires.
 
-- [ ] **Step 1: Add the lazy companion boundary**
+- [x] **Step 1: Add the lazy companion boundary**
 
 Create a lazy import at module scope and render it inside `TodayPostcard` only after the component requests enhancement. Keep `.dashboard-card-stack` visible during loading and on errors; fade it out only after `onReady`.
 
-- [ ] **Step 2: Add the visual slot styles**
+- [x] **Step 2: Add the visual slot styles**
 
 Add a fixed-aspect canvas wrapper, opacity crossfade, pointer cursor only over the model, a soft radial floor shadow, responsive desktop/mobile crops, and a static fallback rule for `.reduced-motion`. The canvas must not change card dimensions.
 
-- [ ] **Step 3: Add a browser smoke test**
+- [x] **Step 3: Add a browser smoke test**
 
 The Playwright test opens `/today`, enters guest mode, verifies there is no horizontal overflow at 390 px, confirms the primary study button is available before Live2D reaches ready state, waits for either a Live2D canvas or the fallback, navigates away, and asserts no uncaught page errors.
 
-- [ ] **Step 4: Run all automated checks**
+- [x] **Step 4: Run all automated checks**
 
 Run:
 
@@ -255,15 +255,15 @@ node tests/live2dDashboard.browser.mjs
 
 Expected: tests and build pass; lint reports no new errors.
 
-- [ ] **Step 5: Inspect the desktop and mobile Dashboard**
+- [x] **Step 5: Inspect the desktop and mobile Dashboard**
 
 Check at 1280×800 and 390×844. Verify Haru stays inside the postcard, pointer focus is subtle, tapping triggers one silent motion, navigating away releases the WebGL canvas, and disabling WebGL or reduced motion keeps the static illustration.
 
-- [ ] **Step 6: Add visible model attribution**
+- [x] **Step 6: Add visible model attribution**
 
 Add the required Live2D sample-data copyright notice to an existing settings/about/legal surface. Keep it one concise line with a link to `public/models/haru/NOTICE.md` in source documentation.
 
-- [ ] **Step 7: Commit the Dashboard integration locally**
+- [x] **Step 7: Commit the Dashboard integration locally**
 
 ```bash
 git add src/components/dashboard/Dashboard.tsx src/index.css tests/live2dDashboard.browser.mjs

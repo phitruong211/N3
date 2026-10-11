@@ -1,4 +1,4 @@
-import { useMemo, type CSSProperties } from 'react';
+import { lazy, Suspense, useCallback, useMemo, useState, type CSSProperties } from 'react';
 import { useApp, useLearningStorage } from '@/hooks/useApp';
 import { formatDate, getDueCards } from '@/lib/srs';
 import { useAuth } from '@/hooks/useAuth';
@@ -15,6 +15,8 @@ import {
   RotateCcw,
   ScrollText,
 } from 'lucide-react';
+
+const Live2DCompanion = lazy(() => import('./Live2DCompanion'));
 
 export function Dashboard() {
   const { getStudyDays, calculateStreak } = useLearningStorage();
@@ -112,16 +114,24 @@ export function Dashboard() {
 }
 
 function TodayPostcard({ due, complete }: { due: number; complete: boolean }) {
+  const [companionReady, setCompanionReady] = useState(false);
+  const showCompanion = useCallback(() => setCompanionReady(true), []);
+  const keepFallback = useCallback(() => setCompanionReady(false), []);
   const title = complete ? 'Hôm nay đã xong' : due > 0 ? 'Một lượt ôn ngắn' : 'Sẵn sàng học mới';
   const caption = complete ? 'Mục tiêu đã hoàn thành' : due > 0 ? `${due} thẻ đang chờ bạn` : 'Chọn một bộ thẻ để bắt đầu';
   return <div className={`dashboard-postcard relative my-6 flex min-h-28 items-center gap-4 rounded-2xl p-4 ${complete ? 'is-complete' : ''}`} role="status">
-    <div className="dashboard-card-stack relative h-20 w-20 shrink-0" aria-hidden="true">
-      <span className="dashboard-study-card dashboard-study-card-back"/>
-      <span className="dashboard-study-card dashboard-study-card-middle"/>
-      <span className="dashboard-study-card dashboard-study-card-front">
-        <span className="dashboard-postcard-mark font-serif">{complete ? '完' : '学'}</span>
-        {complete && <span className="dashboard-complete-check"><Check size={12} strokeWidth={3}/></span>}
-      </span>
+    <div className={`dashboard-live2d-slot shrink-0 ${companionReady ? 'is-ready' : ''}`} aria-hidden="true">
+      <div className="dashboard-card-stack absolute inset-0">
+        <span className="dashboard-study-card dashboard-study-card-back"/>
+        <span className="dashboard-study-card dashboard-study-card-middle"/>
+        <span className="dashboard-study-card dashboard-study-card-front">
+          <span className="dashboard-postcard-mark font-serif">{complete ? '完' : '学'}</span>
+          {complete && <span className="dashboard-complete-check"><Check size={12} strokeWidth={3}/></span>}
+        </span>
+      </div>
+      <Suspense fallback={null}>
+        <Live2DCompanion onReady={showCompanion} onUnavailable={keepFallback}/>
+      </Suspense>
     </div>
     <div className="relative min-w-0">
       <p className="text-[.65rem] font-bold uppercase tracking-[.14em] opacity-55">Bưu thiếp hôm nay</p>

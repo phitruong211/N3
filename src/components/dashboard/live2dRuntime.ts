@@ -21,13 +21,17 @@ export function loadCubismCore(source = CORE_SCRIPT_URL): Promise<void> {
       if (window.Live2DCubismCore) resolve();
       else reject(new Error('Live2D Cubism Core did not initialize.'));
     };
-    const fail = () => reject(new Error('Unable to load Live2D Cubism Core.'));
+    const fail = () => {
+      script.remove();
+      reject(new Error('Unable to load Live2D Cubism Core.'));
+    };
 
     script.addEventListener('load', finish, { once: true });
     script.addEventListener('error', fail, { once: true });
 
     if (!existing) {
       script.id = CORE_SCRIPT_ID;
+      script.dataset.live2dCore = 'true';
       script.src = source;
       script.async = true;
       script.crossOrigin = 'anonymous';

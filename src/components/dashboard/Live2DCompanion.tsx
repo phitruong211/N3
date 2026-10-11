@@ -124,14 +124,18 @@ export function Live2DCompanion({ onReady, onUnavailable }: Live2DCompanionProps
         pointerFrame = 0;
         if (!model) return;
         const bounds = canvas.getBoundingClientRect();
-        model.focus(clientX - bounds.left, clientY - bounds.top);
+        const x = Math.min(bounds.width, Math.max(0, clientX - bounds.left));
+        const y = Math.min(bounds.height, Math.max(0, clientY - bounds.top));
+        model.focus(x, y);
       });
     };
     const handlePointerLeave = () => model?.focus(host.clientWidth / 2, host.clientHeight / 2);
     const handlePointerDown = (event: PointerEvent) => {
       if (!model) return;
       const bounds = canvas.getBoundingClientRect();
-      model.tap(event.clientX - bounds.left, event.clientY - bounds.top);
+      const x = Math.min(bounds.width, Math.max(0, event.clientX - bounds.left));
+      const y = Math.min(bounds.height, Math.max(0, event.clientY - bounds.top));
+      model.tap(x, y);
       void model.motion('TapBody');
     };
 
