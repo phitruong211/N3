@@ -6,6 +6,7 @@ import { hasLegacyLearningData } from '@/lib/storage';
 import type { PageId } from '@/types';
 import {
   BookOpen,
+  Check,
   Clock3,
   Flame,
   Headphones,
@@ -25,6 +26,7 @@ export function Dashboard() {
   const due = useMemo(() => getDueCards(srsCards).length, [srsCards]);
   const reviewed = today?.cardsReviewed ?? 0;
   const goalProgress = settings.dailyGoal > 0 ? Math.min(100, Math.round(reviewed / settings.dailyGoal * 100)) : 100;
+  const goalComplete = settings.dailyGoal > 0 && reviewed >= settings.dailyGoal;
   const displayName = user?.displayName?.trim().split(/\s+/)[0];
   const hour = new Date().getHours();
   const greeting = hour < 11 ? 'Chào buổi sáng' : hour < 18 ? 'Chào buổi chiều' : 'Chào buổi tối';
@@ -55,18 +57,19 @@ export function Dashboard() {
             <strong className="font-serif text-[clamp(5rem,11vw,8.5rem)] font-normal leading-[.75] tracking-[-.08em] text-[var(--color-text)]">{due}</strong>
             <h2 id="today-focus-title" className="max-w-48 pb-1 text-xl font-semibold leading-tight tracking-[-.03em] sm:pb-2 sm:text-2xl">thẻ đến hạn</h2>
           </div>
-          <button onClick={() => setCurrentPage(due > 0 ? 'srs' : 'flashcards')} className="study-button study-button-primary mt-8 min-w-40 !rounded-full">
+          <button onClick={() => setCurrentPage(due > 0 ? 'srs' : 'flashcards')} className="study-button study-button-primary dashboard-primary-cta mt-8 min-w-40 !rounded-full">
             {due > 0 ? <RotateCcw size={18}/> : <Layers size={18}/>} {due > 0 ? 'Ôn ngay' : 'Học tự do'}
           </button>
           <span className="pointer-events-none absolute -bottom-14 right-5 select-none font-serif text-[11rem] leading-none text-[var(--color-text)] opacity-[.035]" aria-hidden="true">学</span>
         </div>
 
-        <div className="dashboard-progress relative flex min-h-72 flex-col justify-between overflow-hidden bg-[var(--color-accent)] p-6 text-[var(--color-text-inverse)] sm:p-8">
+        <div className="dashboard-progress relative flex min-h-80 flex-col justify-between overflow-hidden bg-[var(--color-accent)] p-6 text-[var(--color-text-inverse)] sm:p-8">
           <span className="absolute -right-6 -top-12 font-serif text-[10rem] leading-none opacity-10" aria-hidden="true">今</span>
           <div className="relative flex items-start justify-between gap-4">
             <div><p className="text-[.7rem] font-bold uppercase tracking-[.14em] opacity-65">Mục tiêu</p><p className="mt-2 text-3xl font-semibold tracking-[-.04em]">{reviewed}<span className="ml-1 text-base font-medium opacity-65">/ {settings.dailyGoal}</span></p></div>
             <GoalDial value={goalProgress}/>
           </div>
+          <TodayPostcard due={due} complete={goalComplete}/>
           <div className="relative grid grid-cols-2 gap-3 border-t border-current/20 pt-5">
             <MiniMetric icon={Flame} value={`${streak} ngày`} label="Liên tiếp"/>
             <MiniMetric icon={Clock3} value={`${Math.round(today?.timeSpent ?? 0)} phút`} label="Hôm nay"/>
@@ -87,9 +90,9 @@ export function Dashboard() {
         <button className="flex items-center gap-1 text-sm font-semibold text-[var(--color-accent)] hover:underline" onClick={() => setCurrentPage('flashcards')}><Layers size={16}/> Học theo bộ</button>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {library.map(({ page, title, count, mark, icon: Icon, tone }) => <button key={page} onClick={() => setCurrentPage(page)} className="dashboard-library-card group relative min-h-44 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 text-left" style={{ '--dashboard-card-tone': tone } as CSSProperties}>
-          <span className="absolute -bottom-7 right-2 select-none font-serif text-[7rem] leading-none opacity-[.08]" style={{ color: tone }} aria-hidden="true">{mark}</span>
-          <span className="grid h-10 w-10 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg)]" style={{ color: tone }}><Icon size={20}/></span>
+        {library.map(({ page, title, count, mark, icon: Icon, tone }, index) => <button key={page} onClick={() => setCurrentPage(page)} className="dashboard-library-card group relative min-h-44 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 text-left" style={{ '--dashboard-card-tone': tone, '--dashboard-card-delay': `${.14 + index * .055}s` } as CSSProperties}>
+          <span className="dashboard-card-mark absolute -bottom-7 right-2 select-none font-serif text-[7rem] leading-none opacity-[.08]" style={{ color: tone }} aria-hidden="true">{mark}</span>
+          <span className="dashboard-card-icon grid h-10 w-10 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg)]" style={{ color: tone }}><Icon size={20}/></span>
           <h3 className="relative mt-7 text-lg font-semibold">{title}</h3>
           <p className="relative mt-1 text-sm font-medium text-[var(--color-text-secondary)]">{count}</p>
         </button>)}
@@ -105,6 +108,26 @@ export function Dashboard() {
       <p className="text-[var(--color-text-secondary)]"><strong className="text-[var(--color-text)]">Dữ liệu cũ vẫn an toàn.</strong></p>
       <button className="font-semibold text-[var(--color-accent)] hover:underline" onClick={() => setCurrentPage('settings')}>Kiểm tra →</button>
     </section>}
+  </div>;
+}
+
+function TodayPostcard({ due, complete }: { due: number; complete: boolean }) {
+  const title = complete ? 'Hôm nay đã xong' : due > 0 ? 'Một lượt ôn ngắn' : 'Sẵn sàng học mới';
+  const caption = complete ? 'Mục tiêu đã hoàn thành' : due > 0 ? `${due} thẻ đang chờ bạn` : 'Chọn một bộ thẻ để bắt đầu';
+  return <div className={`dashboard-postcard relative my-6 flex min-h-28 items-center gap-4 rounded-2xl p-4 ${complete ? 'is-complete' : ''}`} role="status">
+    <div className="dashboard-card-stack relative h-20 w-20 shrink-0" aria-hidden="true">
+      <span className="dashboard-study-card dashboard-study-card-back"/>
+      <span className="dashboard-study-card dashboard-study-card-middle"/>
+      <span className="dashboard-study-card dashboard-study-card-front">
+        <span className="dashboard-postcard-mark font-serif">{complete ? '完' : '学'}</span>
+        {complete && <span className="dashboard-complete-check"><Check size={12} strokeWidth={3}/></span>}
+      </span>
+    </div>
+    <div className="relative min-w-0">
+      <p className="text-[.65rem] font-bold uppercase tracking-[.14em] opacity-55">Bưu thiếp hôm nay</p>
+      <p className="mt-1 text-sm font-semibold leading-snug">{title}</p>
+      <p className="mt-0.5 text-xs opacity-65">{caption}</p>
+    </div>
   </div>;
 }
 
