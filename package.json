@@ -19,6 +19,8 @@
     "framer-motion": "^12.43.0",
     "fuse.js": "^7.5.0",
     "lucide-react": "^1.28.0",
+    "pixi-live2d-display": "0.4.0",
+    "pixi.js": "6.5.10",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2",
@@ -38,5 +40,8 @@
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.2.0"
+  },
+  "overrides": {
+    "gh-pages": "6.3.0"
   }
 }
