@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useMemo, useState, type CSSProperties } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useApp, useLearningStorage } from '@/hooks/useApp';
 import { formatDate, getDueCards } from '@/lib/srs';
 import { useAuth } from '@/hooks/useAuth';
@@ -15,23 +15,27 @@ import {
   RotateCcw,
   ScrollText,
 } from 'lucide-react';
+import { ACTIVE_CAT } from './catConfig';
+import { detectCompanionCapabilities, shouldEnableCompanion, watchReducedMotion } from './companionPolicy';
 
-const Live2DCompanion = lazy(() => import('./Live2DCompanion'));
+const CatCompanion = lazy(() => import('./CatCompanion'));
 
 export function Dashboard() {
   const { getStudyDays, calculateStreak } = useLearningStorage();
   const { vocabulary, grammar, kanji, srsCards, setCurrentPage, settings } = useApp();
   const { draft, user } = useAuth();
   const todayKey = formatDate(new Date());
-  const today = getStudyDays().find(day => day.date === todayKey);
+  const studyDays = useMemo(() => getStudyDays(), [getStudyDays]);
+  const today = studyDays.find(day => day.date === todayKey);
+  const legacyDataPresent = useMemo(() => hasLegacyLearningData(), []);
   const streak = calculateStreak().current;
   const due = useMemo(() => getDueCards(srsCards).length, [srsCards]);
   const reviewed = today?.cardsReviewed ?? 0;
-  const goalProgress = settings.dailyGoal > 0 ? Math.min(100, Math.round(reviewed / settings.dailyGoal * 100)) : 100;
+  const goalProgress = settings.dailyGoal > 0 ? Math.min(100, Math.round(reviewed / settings.dailyGoal * 100)) : 0;
   const goalComplete = settings.dailyGoal > 0 && reviewed >= settings.dailyGoal;
   const displayName = user?.displayName?.trim().split(/\s+/)[0];
   const hour = new Date().getHours();
-  const greeting = hour < 11 ? 'Chào buổi sáng' : hour < 18 ? 'Chào buổi chiều' : 'Chào buổi tối';
+  const greeting = hour < 11 ? 'Chào buổi sáng' : hour < 14 ? 'Chào buổi trưa' : hour < 18 ? 'Chào buổi chiều' : 'Chào buổi tối';
   const dateLabel = new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date());
 
   const library = [
@@ -47,12 +51,12 @@ export function Dashboard() {
         <p className="study-eyebrow capitalize">{dateLabel}</p>
         <h1 className="mt-1 text-2xl font-semibold tracking-[-.035em] sm:text-3xl">{greeting}{displayName ? `, ${displayName}` : ''}.</h1>
       </div>
-      <HeaderCompanion/>
+
     </header>
 
     <section className="dashboard-focus overflow-hidden rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-surface)]" aria-labelledby="today-focus-title">
       <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(280px,.55fr)]">
-        <div className="relative overflow-hidden p-6 sm:p-9 lg:p-11">
+        <div className="dashboard-study-space relative overflow-hidden p-6 sm:p-9 lg:p-11">
           <span className="absolute left-0 top-10 h-20 w-1 bg-[var(--color-error)]" aria-hidden="true"/>
           <span className="study-eyebrow flex items-center gap-2"><i className="h-2 w-2 rounded-full bg-[var(--color-error)]"/>Hôm nay</span>
           <div className="mt-5 flex items-end gap-4">
@@ -62,6 +66,7 @@ export function Dashboard() {
           <button onClick={() => setCurrentPage(due > 0 ? 'srs' : 'flashcards')} className="study-button study-button-primary dashboard-primary-cta mt-8 min-w-40 !rounded-full">
             {due > 0 ? <RotateCcw size={18}/> : <Layers size={18}/>} {due > 0 ? 'Ôn ngay' : 'Học tự do'}
           </button>
+          <StudyCompanion due={due} goalComplete={goalComplete}/>
           <span className="pointer-events-none absolute -bottom-14 right-5 select-none font-serif text-[11rem] leading-none text-[var(--color-text)] opacity-[.035]" aria-hidden="true">学</span>
         </div>
 
@@ -106,7 +111,7 @@ export function Dashboard() {
       <span className="flex-1 font-semibold">Mở bộ thẻ và học theo bài</span>
     </button>
 
-    {hasLegacyLearningData() && <section className="flex flex-col gap-2 border-t border-[var(--color-border)] pt-5 text-sm sm:flex-row sm:items-center sm:justify-between" role="note">
+    {legacyDataPresent && <section className="flex flex-col gap-2 border-t border-[var(--color-border)] pt-5 text-sm sm:flex-row sm:items-center sm:justify-between" role="note">
       <p className="text-[var(--color-text-secondary)]"><strong className="text-[var(--color-text)]">Dữ liệu cũ vẫn an toàn.</strong></p>
       <button className="font-semibold text-[var(--color-accent)] hover:underline" onClick={() => setCurrentPage('settings')}>Kiểm tra →</button>
     </section>}
@@ -133,16 +138,29 @@ function TodayPostcard({ due, complete }: { due: number; complete: boolean }) {
   </div>;
 }
 
-function HeaderCompanion() {
+function StudyCompanion({ due, goalComplete }: { due: number; goalComplete: boolean }) {
   const [ready, setReady] = useState(false);
-  const showCompanion = useCallback(() => setReady(true), []);
-  const keepFallback = useCallback(() => setReady(false), []);
-  return <div className={`dashboard-header-companion ${ready ? 'is-ready' : ''}`} aria-hidden="true">
-    <span className="dashboard-header-seal font-serif">日</span>
-    <Suspense fallback={null}>
-      <Live2DCompanion trackPagePointer onReady={showCompanion} onUnavailable={keepFallback}/>
-    </Suspense>
-  </div>;
+  const initiallyEnabled = useMemo(() => shouldEnableCompanion(detectCompanionCapabilities()), []);
+  const [enabled, setEnabled] = useState(initiallyEnabled);
+
+  useEffect(() => watchReducedMotion(reduced => {
+    setEnabled(reduced ? false : shouldEnableCompanion(detectCompanionCapabilities()));
+    if (reduced) setReady(false);
+  }), []);
+
+  return <aside className="dashboard-companion-nook" aria-label="Góc của Kuro">
+    <div className="dashboard-companion-note">
+      <span className="dashboard-companion-name">くろ · KURO</span>
+      <p>{goalComplete ? 'Giỏi lắm. Nghỉ một chút nhé.' : due > 0 ? 'Từng chút một, mình cùng học nhé.' : 'Một trang mới, có mình bên cạnh.'}</p>
+      <span className="dashboard-companion-hint">{ready ? 'Chạm nhẹ để chào Kuro' : 'Bạn đồng hành mỗi ngày'}</span>
+    </div>
+    <div className={`dashboard-header-companion ${ready ? 'is-ready' : ''}`}>
+    <span className="dashboard-header-seal font-serif" aria-hidden="true">猫</span>
+    {enabled && <Suspense fallback={null}>
+      <CatCompanion config={ACTIVE_CAT} due={due} goalComplete={goalComplete} onReady={() => setReady(true)} onUnavailable={() => setReady(false)}/>
+    </Suspense>}
+    </div>
+  </aside>;
 }
 
 function GoalDial({ value }: { value: number }) {

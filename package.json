@@ -10,7 +10,7 @@
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "preview": "vite preview",
     "test:guest": "node tests/guestFlow.browser.mjs",
-    "test:live2d": "node tests/live2dCompanion.browser.mjs",
+    "test:companion": "node tests/catCompanion.browser.mjs",
     "test:integration": "node tests/srsIntegration.browser.mjs",
     "test:scale": "node tests/srsScale.api.mjs"
   },
@@ -20,13 +20,12 @@
     "framer-motion": "^12.43.0",
     "fuse.js": "^7.5.0",
     "lucide-react": "^1.28.0",
-    "pixi-live2d-display": "0.4.0",
-    "pixi.js": "6.5.10",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2",
     "recharts": "^3.10.1",
     "tailwind-merge": "^3.6.0",
+    "three": "^0.186.1",
     "ts-fsrs": "5.4.2",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
@@ -35,14 +34,12 @@
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.186.0",
     "@vitejs/plugin-react": "^6.0.4",
     "oxlint": "^1.75.0",
     "playwright": "^1.63.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.2.0"
-  },
-  "overrides": {
-    "gh-pages": "6.3.0"
   }
 }

@@ -115,9 +115,6 @@ export function SettingsPage() {
           </div>
         </div>
         <p className="study-copy mt-4">{user ? 'Cài đặt, bộ thẻ, dấu trang và tiến độ ôn được đồng bộ với tài khoản. Lịch sử nghe vẫn lưu trên thiết bị.' : 'Cài đặt và tiến độ học thử chỉ lưu trên thiết bị này, chưa đồng bộ vào tài khoản.'}</p>
-        <p className="mt-4 border-t border-[var(--color-border)] pt-4 text-xs leading-relaxed text-[var(--color-text-tertiary)]">
-          Nhân vật Haru © Live2D Inc., sử dụng theo <a className="underline underline-offset-2 hover:text-[var(--color-text)]" href="https://www.live2d.com/eula/live2d-free-material-license-agreement_en.html" target="_blank" rel="noreferrer">Live2D Free Material License</a>.
-        </p>
       </section>
     </div>
   </div>;
