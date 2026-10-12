@@ -52,7 +52,7 @@ export function ImportGuide({ onDownload }: { onDownload: (format: "json" | "csv
           <li><code>back_reading</code>: cách đọc của <strong>mặt sau</strong> → chọn “Cách đọc mặt sau”. Nếu mặt sau là nghĩa tiếng Việt, để trống như mẫu.</li>
           <li><code>reading</code> bên trong từng ví dụ: chỉ là cách đọc của <strong>câu ví dụ đó</strong>.</li>
         </ul>
-        <p className="mt-2 text-xs text-[var(--color-text-secondary)]">Cách đọc viết bằng kana. Bạn có thể đổi tên cột; chỉ cần chọn đúng mục khi nhập.</p>
+        <p className="mt-2 text-xs text-[var(--color-text-secondary)]">Cách đọc viết bằng kana. Mặt sau chưa có cách đọc riêng sẽ dùng mặt trước; muốn ẩn, vào Tùy chỉnh thẻ → Mặt sau và bỏ chọn “Cách đọc”.</p>
       </div>
       <div>
         <h4 className="mb-2 font-semibold">Mẫu JSON — có thể sao chép và dùng ngay</h4>

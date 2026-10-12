@@ -121,7 +121,7 @@ function KanjiVocabulary({ value, showReading }: { value: unknown; showReading: 
 function GrammarBack({ value, reading, storedSegments, showReading, compact, style }: { value: string; reading: string; storedSegments?: unknown; showReading: boolean; compact: boolean; style: DeckTemplateConfig['back']['style'] }) {
   const textStyle = compact ? undefined : cardTextStyle(style);
   const hasExplicitFurigana = parseStoredFurigana(storedSegments).some((segment) => segment.reading);
-  if ((showReading && reading) || hasExplicitFurigana) {
+  if (showReading && (reading || hasExplicitFurigana)) {
     return <div className={`text-left whitespace-pre-wrap break-words leading-relaxed ${compact ? "text-sm" : ""}`} style={textStyle}>
       <FuriganaText text={value} reading={reading} storedSegments={storedSegments} />
     </div>;
@@ -193,14 +193,17 @@ export function CardFace({
         const kanjiVocabulary = field === "notes" && card.kind === "kanji"
           ? parseKanjiVocabulary(card.extraData?.kanjiVocabulary)
           : [];
-        if (field === "reading" && (fields.includes("front") || fields.includes("back"))) return null;
+        if (field === "reading" && (
+          (side === "front" && fields.includes("front")) ||
+          (side === "back" && fields.includes("back") && card.backReading)
+        )) return null;
         if (grammarAnswer && field === "back" && !importedBlocks.length) {
           return <GrammarBack key={`${field}-${index}`} value={value} reading={card.backReading} storedSegments={card.extraData?.backFuriganaSegments} showReading={fields.includes("reading")} compact={compact} style={style} />;
         }
         const isCardText = field === "front" || field === "back";
         const cardReading = field === "front" ? card.reading : field === "back" ? card.backReading : "";
         const storedSegments = field === "front" ? card.extraData?.frontFuriganaSegments : field === "back" ? card.extraData?.backFuriganaSegments : undefined;
-        const showFurigana = fields.includes("reading") || parseStoredFurigana(storedSegments).some((segment) => segment.reading);
+        const showFurigana = fields.includes("reading");
         return (
           <div
             key={`${field}-${index}`}
@@ -408,6 +411,9 @@ export function DeckCustomizeDialog({
                     </label>
                   ))}
                 </div>
+                <p className="mt-3 text-xs leading-relaxed text-[var(--color-text-secondary)]">
+                  {activeSide === "back" ? 'Khi mặt sau chưa có cách đọc riêng, dùng cách đọc mặt trước. Bỏ chọn “Cách đọc” để ẩn trên mặt sau.' : 'Bỏ chọn “Cách đọc” để ẩn trên mặt trước.'}
+                </p>
                 {template[activeSide].fields.length > 1 && (
                   <div className="mt-3 space-y-1 border-t border-[var(--color-border)] pt-3">
                     {template[activeSide].fields.map((field, index) => (

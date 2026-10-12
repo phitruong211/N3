@@ -23,6 +23,27 @@ const card = {
   type: "VOCABULARY", tags: ["N3"], source: "IMPORT", position: 0, extraData: {},
 };
 server.middlewares.use(async (request, response, next) => {
+  if (request.url?.startsWith("/__reading-isolation__")) {
+    const html = await server.transformIndexHtml(request.url, `<html><body><div id="root"></div><script type="module">
+      import React from 'react'; import {createRoot} from 'react-dom/client';
+      import {CardFace} from '/src/components/flashcard/CardPresentation.tsx';
+      import {defaultDeckTemplate} from '/src/lib/ankiImport.ts';
+      const card={id:'reading-test',front:'地形',back:'Địa hình',reading:'ちけい',backReading:'',hanViet:'',notes:'',kind:'vocabulary'};
+      createRoot(document.getElementById('root')).render(React.createElement('main',null,
+        ...[
+          ['front',card,'front',['reading']],
+          ['empty-back',card,'back',['reading']],
+          ['filled-back',{...card,backReading:'うら'},'back',['reading']],
+          ['answer-with-fallback',card,'back',['back','reading']],
+          ['hidden-back',card,'back',['back']],
+          ['hidden-front',{...card,front:'地形[ちけい]'},'front',['front']],
+          ['hidden-explicit-back',{...card,back:'日本[にほん]'},'back',['back']],
+        ].map(([id,value,side,fields]) =>
+          React.createElement('section',{id,key:id},React.createElement(CardFace,{card:value,deckName:'Test',fields,template:defaultDeckTemplate(),side})))));
+    </script></body></html>`);
+    response.setHeader("Content-Type", "text/html"); response.end(html);
+    return;
+  }
   if (!request.url?.startsWith("/__import-card-test__")) return next();
   const html = await server.transformIndexHtml(request.url, `<html><body><div id="root"></div><script type="module">
     import React from 'react'; import {createRoot} from 'react-dom/client';
@@ -44,6 +65,17 @@ try {
   browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL });
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   const errors = []; page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/__reading-isolation__`);
+  await page.locator('#front').waitFor();
+  assert.match(await page.locator('#front').innerText(), /ちけい/);
+  assert.match(await page.locator('#empty-back').innerText(), /ちけい/);
+  assert.match(await page.locator('#answer-with-fallback').innerText(), /Địa hình/);
+  assert.match(await page.locator('#answer-with-fallback').innerText(), /ちけい/);
+  assert.doesNotMatch(await page.locator('#hidden-back').innerText(), /ちけい/);
+  assert.equal(await page.locator('#hidden-front ruby rt').count(), 0);
+  assert.equal(await page.locator('#hidden-explicit-back ruby rt').count(), 0);
+  assert.match(await page.locator('#filled-back').innerText(), /うら/);
+  assert.doesNotMatch(await page.locator('#filled-back').innerText(), /ちけい/);
   await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/__import-card-test__`);
   assert.equal(await page.evaluate(async () => {
     const names = ["Noto Sans JP Local", "Noto Serif JP Local", "Dela Gothic One Local"];
@@ -70,7 +102,7 @@ try {
   assert.equal(JSON.parse(saved.card.extraData.frontFuriganaSegments)[0].reading, "がっこう");
   assert.equal(saved.template.front.style.fontFamily, "notoSansJp");
   assert.equal(saved.template.back.style.fontFamily, "notoSansJp");
-  assert.equal(await page.locator("ruby rt").first().innerText(), "がっこう");
+  assert.equal(await page.locator("ruby rt").count(), 0);
   await page.locator('div[role="button"][aria-label="Hiện đáp án"]').click();
   assert.deepEqual(await page.locator("ruby rt").allTextContents(), ["にほん", "い"]);
   assert.deepEqual(errors, []);
