@@ -30,8 +30,22 @@ export const CARD_FONT_PRESETS: Record<CardSideStyle['fontScale'], number> = {
   xlarge: 36,
 };
 export const IMPORT_EXAMPLE = [
-  { front: '勉強[べんきょう]', back: 'Việc học', reading: 'べんきょう', back_reading: '', han_viet: 'Miễn Cường', note: 'Ôn bài 6', type: 'VOCABULARY', tags: ['N3', 'bài 6'] },
-  { front: '学校[がっこう]へ行[い]く', back: 'Đi đến 学校[がっこう]', reading: 'がっこうへいく', back_reading: 'がっこう', note: 'Furigana dùng được ở cả hai mặt', type: 'GENERAL', tags: ['mẫu'] },
+  {
+    front: 'きっかけ',
+    back: 'cơ duyên; nguyên nhân/động lực khởi đầu',
+    reading: 'きっかけ',
+    han_viet: null,
+    note: 'Ôn bài 1',
+    type: 'VOCABULARY',
+    tags: ['N3', 'từ vựng', 'bài 1'],
+    examples: [
+      {
+        japanese: '日本語を勉強し始めたきっかけは、日本の映画です。',
+        reading: 'にほんごをべんきょうしはじめたきっかけは、にほんのえいがです。',
+        meaning: 'Cơ duyên khiến tôi bắt đầu học tiếng Nhật là phim Nhật.',
+      },
+    ],
+  },
 ] as const;
 export const defaultDeckTemplate = (): DeckTemplateConfig => ({
   version: 4,
@@ -350,7 +364,7 @@ export function parseTextImport(input: string, filename: string): ImportPreview 
   const header = [...new Set(records.flatMap(r => r && typeof r === 'object' && !Array.isArray(r) ? Object.keys(r) : []))];
   tab = table([header, ...records.map(r => header.map(k => {
    const value = r && typeof r === 'object' && !Array.isArray(r) ? (r as Record<string, unknown>)[k] : '';
-   return k === 'examples' && value != null ? JSON.stringify(value) : text(value);
+   return value != null && (k === 'examples' || (Array.isArray(value) && value.some(item => item != null && typeof item === 'object'))) ? JSON.stringify(value) : text(value);
   }))], '', true); format = 'JSON';
  } else {
   const lines = clean.split(/\r?\n/), directives: string[] = [];

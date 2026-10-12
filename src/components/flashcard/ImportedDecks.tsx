@@ -478,12 +478,17 @@ export function ImportedDecks({
     });
   }
   function download(format: "csv" | "json" | "txt") {
-    const text =
-      format === "json"
-        ? JSON.stringify(IMPORT_EXAMPLE, null, 2)
-        : format === "csv"
-          ? "front,back,reading,back_reading,han_viet,note,type,tags\n勉強[べんきょう],Việc học,べんきょう,,Miễn Cường,Ôn bài 6,VOCABULARY,\"N3;bài 6\"\n"
-          : "front\tback\treading\tback_reading\than_viet\tnote\ttype\ttags\n学校[がっこう]\tTrường học\tがっこう\t\tHọc Hiệu\t\tKANJI\tN4;bài 1\n";
+    const delimiter = format === "csv" ? "," : "\t";
+    const headers = Object.keys(IMPORT_EXAMPLE[0]);
+    const rows = IMPORT_EXAMPLE.map(card => headers.map(key => {
+      const value = card[key as keyof typeof card];
+      if (value == null) return "";
+      if (key === "tags") return (value as readonly string[]).join(";");
+      return typeof value === "object" ? JSON.stringify(value) : String(value);
+    }));
+    const text = format === "json"
+      ? JSON.stringify(IMPORT_EXAMPLE, null, 2)
+      : [headers, ...rows].map(row => row.map(value => `"${value.replaceAll('"', '""')}"`).join(delimiter)).join("\n") + "\n";
     const url = URL.createObjectURL(
       new Blob([text], {
         type: format === "json" ? "application/json" : "text/plain;charset=utf-8",

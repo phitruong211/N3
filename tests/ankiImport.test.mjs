@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { utils, write } from 'xlsx';
-import { assignImportSourceField, defaultDeckTemplate, importFaceBlocks, importSourceFields, moveImportSourceField, normalizeDeckTemplate, parseTextImport, parseExcelImport, parseImportFile, remapImportPreview, parseCardExamples } from '../src/lib/ankiImport.ts';
+import { IMPORT_EXAMPLE, assignImportSourceField, defaultDeckTemplate, importFaceBlocks, importSourceFields, moveImportSourceField, normalizeDeckTemplate, parseTextImport, parseExcelImport, parseImportFile, remapImportPreview, parseCardExamples } from '../src/lib/ankiImport.ts';
 
 test('structured examples survive JSON import, remapping and API extra data serialization', () => {
   const examples = [{ japanese: '雨が降るたびに、道がぬれます。', reading: 'あめがふるたびに、みちがぬれます。', meaning: 'Mỗi lần trời mưa, đường lại ướt.' }, { japanese: '日本語を勉強します。', meaning: 'Tôi học tiếng Nhật.' }];
@@ -211,4 +211,36 @@ test('file size and cancelled parsing fail before work', async () => {
  const controller = new AbortController(); controller.abort();
  await assert.rejects(parseImportFile(new File(['a,b'], 'cards.csv'), controller.signal), {name:'AbortError'});
  await assert.rejects(parseImportFile(new File(['x'.repeat(20*1024*1024+1)], 'large.csv')), /20 MB/);
+});
+
+
+test('guide sample retains notes and structured examples across JSON, CSV and TSV', () => {
+  const headers = Object.keys(IMPORT_EXAMPLE[0]);
+  const rows = IMPORT_EXAMPLE.map(card => headers.map(key => card[key] == null ? '' : key === 'tags' ? card[key].join(';') : typeof card[key] === 'object' ? JSON.stringify(card[key]) : String(card[key])));
+  const samples = [['json', JSON.stringify(IMPORT_EXAMPLE)], ...[',', '\t'].map(delimiter => [delimiter === ',' ? 'csv' : 'txt', [headers, ...rows].map(row => row.map(value => `"${value.replaceAll('"', '""')}"`).join(delimiter)).join('\n')])];
+  for (const [extension, source] of samples) {
+    const preview = parseTextImport(source, `guide.${extension}`);
+    assert.equal(preview.skipped, 0);
+    assert.equal(preview.cards.length, 1);
+    const card = preview.cards[0];
+    assert.equal(card.front, IMPORT_EXAMPLE[0].front);
+    assert.equal(card.back, IMPORT_EXAMPLE[0].back);
+    assert.equal(card.notes, IMPORT_EXAMPLE[0].note);
+    assert.deepEqual(parseCardExamples(card.extraData.examples), IMPORT_EXAMPLE[0].examples);
+  }
+});
+
+test('custom-named JSON example lists preserve multiple examples when assigned a role', () => {
+  const examples = [
+    { japanese: '猫です。', reading: 'ねこです。', meaning: 'Là mèo.' },
+    { japanese: '猫がいます。', reading: 'ねこがいます。', meaning: 'Có một con mèo.' },
+  ];
+  const preview = parseTextImport(JSON.stringify([{ 'Từ': '猫', 'Nghĩa': 'Mèo', 'Minh họa': examples }]), 'custom.json');
+  let table = preview.tables[0];
+  const field = importSourceFields(table).find(field => field.label === 'Minh họa');
+  table = assignImportSourceField(table, field.key, 'examples');
+  const result = remapImportPreview(preview, [table]);
+  assert.equal(result.skipped, 0);
+  assert.equal(result.cards.length, 1);
+  assert.deepEqual(parseCardExamples(result.cards[0].extraData.examples), examples);
 });
