@@ -34,6 +34,7 @@ export const IMPORT_EXAMPLE = [
     front: 'きっかけ',
     back: 'cơ duyên; nguyên nhân/động lực khởi đầu',
     reading: 'きっかけ',
+    back_reading: '',
     han_viet: null,
     note: 'Ôn bài 1',
     type: 'VOCABULARY',

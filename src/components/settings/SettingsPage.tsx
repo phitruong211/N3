@@ -12,6 +12,7 @@ const themes: { id: ThemeMode; label: string }[] = [
   { id: 'reading', label: 'Đọc sách' }, { id: 'high-contrast', label: 'Tương phản cao' },
 ];
 const sizes = [{ id: 'small', label: 'Nhỏ' }, { id: 'medium', label: 'Vừa' }, { id: 'large', label: 'Lớn' }] as const;
+const dailyNewCardPresets = [0, 10, 20, 50, 100] as const;
 
 export function SettingsPage() {
   const { resetAllData } = useLearningStorage();
@@ -19,6 +20,17 @@ export function SettingsPage() {
   const { user, signOut, requestAuth } = useAuth();
   const [confirmReset, setConfirmReset] = useState(false);
   const [srsError, setSrsError] = useState('');
+  const dailyNewLimitStatus = !user
+    ? 'Tự động lưu trên thiết bị'
+    : settingsSync.pending
+      ? 'Đang lưu…'
+      : settingsSync.error
+        ? 'Chưa đồng bộ'
+        : 'Đã lưu';
+  const changeDailyNewLimit = (value: number) => {
+    const next = Number.isFinite(value) ? Math.round(value) : 0;
+    updateSettings({ srsDailyNewLimit: Math.min(2_147_483_647, Math.max(0, next)) });
+  };
   const changeAgain = (value: number) => {
     const next = Math.min(30, Math.max(1, Math.round(value || 1)));
     if (next >= settings.srsGoodMinutes) { setSrsError('Thời gian kiểm tra lại phải lớn hơn thời gian học lại.'); return; }
@@ -68,12 +80,49 @@ export function SettingsPage() {
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Ôn ngắt quãng</h2>
           <p className="study-copy mt-1">Nếu không nhớ đáp án, hãy chọn Quên; Khó chỉ dùng khi bạn vẫn nhớ nhưng phải suy nghĩ nhiều.</p>
-          <label className="mt-4 block text-sm font-semibold">Thẻ mới mỗi ngày
-            <span className="study-copy mt-1 block">Nhập mọi số nguyên từ 0 trở lên. 0 nghĩa là chỉ ôn thẻ đang học và đến hạn.</span>
-            <input className="study-input mt-2" aria-label="Thẻ mới mỗi ngày" type="number" min={0} step={1}
-              value={settings.srsDailyNewLimit}
-              onChange={event => updateSettings({ srsDailyNewLimit: Math.min(2_147_483_647, Math.max(0, Math.round(Number(event.target.value) || 0))) })}/>
-          </label>
+          <div className="mt-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-4 sm:p-5">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <label htmlFor="srs-daily-new-limit" className="block text-sm font-semibold text-[var(--color-text)]">Giới hạn thẻ mới mỗi ngày</label>
+                <p className="study-copy mt-1">Thẻ đến hạn luôn được ưu tiên trước thẻ mới.</p>
+              </div>
+              <span role="status" className={'study-pill ' + (settingsSync.error && user ? '!text-[var(--color-error)]' : '')}>{dailyNewLimitStatus}</span>
+            </div>
+
+            <div className="relative mt-4">
+              <input
+                id="srs-daily-new-limit"
+                className="study-input !pr-28 text-lg font-semibold"
+                aria-describedby="srs-daily-new-limit-help"
+                type="number"
+                inputMode="numeric"
+                min={0}
+                step={1}
+                value={settings.srsDailyNewLimit}
+                onChange={event => changeDailyNewLimit(Number(event.target.value))}
+              />
+              <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-sm font-medium text-[var(--color-text-secondary)]">thẻ / ngày</span>
+            </div>
+
+            <div className="mt-3 flex flex-wrap items-center gap-2" aria-label="Chọn nhanh giới hạn thẻ mới">
+              <span className="mr-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-tertiary)]">Chọn nhanh</span>
+              {dailyNewCardPresets.map(value => <button
+                key={value}
+                type="button"
+                aria-pressed={settings.srsDailyNewLimit === value}
+                className={'min-h-9 rounded-lg border px-3 text-sm font-semibold transition-colors focus-ring ' + (settings.srsDailyNewLimit === value
+                  ? 'border-[var(--color-accent)] bg-[var(--color-accent)] text-white'
+                  : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]')}
+                onClick={() => changeDailyNewLimit(value)}
+              >{value === 0 ? 'Chỉ ôn' : value}</button>)}
+            </div>
+
+            <p id="srs-daily-new-limit-help" className="mt-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+              {settings.srsDailyNewLimit === 0
+                ? 'Hôm nay hệ thống chỉ đưa thẻ đang học và thẻ đến hạn vào phiên ôn.'
+                : `Mỗi ngày hệ thống đưa tối đa ${settings.srsDailyNewLimit.toLocaleString('vi-VN')} thẻ mới vào lịch ôn. Bạn vẫn có thể nhập một số khác.`}
+            </p>
+          </div>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <label className="text-sm font-semibold">Học lại khi quên
               <span className="study-copy mt-1 block">Số phút trước khi thẻ quay lại</span>
