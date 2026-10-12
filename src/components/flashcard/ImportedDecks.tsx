@@ -12,6 +12,7 @@ import {
   type DeckTemplateConfig,
 } from "@/lib/ankiImport";
 import ImportPreviewEditor from "./ImportPreviewEditor";
+import { DeckGroups } from "./DeckGroups";
 import { CardFields } from "./CardFields";
 import { ImportGuide } from "./ImportGuide";
 import {
@@ -21,7 +22,6 @@ import {
   removeCard,
   removeDeck,
   reorderCards,
-  reorderDecks,
   moveCards,
   type ApiProgress,
 } from "@/lib/api";
@@ -49,7 +49,6 @@ import { DeckCustomizeDialog } from "./CardPresentation";
 import { personalDeckResumeKey, resolveResumeIndex } from "@/lib/studyResume";
 import { ContentBadge } from "@/components/ui/StudyUI";
 import {
-  GripVertical,
   MoreVertical,
   PenLine,
   Plus,
@@ -107,8 +106,6 @@ export function ImportedDecks({
   const [allowEmpty, setAllowEmpty] = useState(initial?.allowEmpty ?? false);
   const seed = useRef(initial?.importSeed ?? crypto.randomUUID());
   const [creatorError, setCreatorError] = useState("");
-  const [draggingDeckId, setDraggingDeckId] = useState<string | null>(null);
-  const [dropDeckId, setDropDeckId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -153,7 +150,7 @@ export function ImportedDecks({
     let valid = true;
     setLoading(true);
     setError("");
-    listDeckPage(deckPage, sort)
+    listDeckPage(deckPage, sort, null)
       .then((p) => {
         if (valid) {
           setDecks(p);
@@ -350,35 +347,6 @@ export function ImportedDecks({
     input.current?.click();
   }
 
-  async function dropDeck(sourceId: string, targetId: string) {
-    if (sourceId === targetId || busy) return;
-    const previous = decks;
-    const visible = [...decks.content];
-    const from = visible.findIndex((deck) => deck.id === sourceId);
-    const to = visible.findIndex((deck) => deck.id === targetId);
-    if (from < 0 || to < 0) return;
-    const [moved] = visible.splice(from, 1);
-    visible.splice(to, 0, moved);
-    setDecks((current) => ({ ...current, content: visible }));
-    setDraggingDeckId(null);
-    setDropDeckId(null);
-    await operation(async () => {
-      try {
-        const all = await allDecks();
-        const sourceIndex = all.findIndex((deck) => deck.id === sourceId);
-        const targetIndex = all.findIndex((deck) => deck.id === targetId);
-        if (sourceIndex < 0 || targetIndex < 0)
-          throw new Error("Không tìm thấy bộ thẻ để sắp xếp.");
-        const [item] = all.splice(sourceIndex, 1);
-        all.splice(targetIndex, 0, item);
-        await reorderDecks(all.map((deck) => deck.id));
-        setMessage("Đã lưu thứ tự bộ thẻ.");
-      } catch (reason) {
-        setDecks(previous);
-        throw reason;
-      }
-    });
-  }
   async function loadFreeStudyCards(deck: PersonalDeck) {
     const progress: Record<string, ApiProgress | null> = {};
     const loaded = await loadStudyPages(p => cardPage(deck.id, p, "", "", "", 200, false));
@@ -1007,72 +975,27 @@ export function ImportedDecks({
                 )}
               </section>
             ) : (
-              <button
-                type="button"
-                className="group flex min-h-52 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-[var(--color-border)] bg-transparent p-5 text-center transition-all hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-alt)]"
-                onClick={openCreator}
-              >
-                <span className="grid size-11 place-items-center rounded-full bg-[var(--color-surface-alt)] text-[var(--color-accent)] transition-transform group-hover:scale-105">
-                  <Plus size={24} />
-                </span>
-                <span className="font-semibold">Tạo bộ mới</span>
+              <button type="button" className="study-button w-fit" onClick={openCreator}>
+                <Plus size={18} /> Tạo bộ mới
               </button>
             ))}
 
             {leadingDeck}
 
-            {user &&
-              decks.content.map((deck) => {
+            {user && <DeckGroups key={user.id} rootDecks={decks.content} reload={reload} mode={mode} busy={busy || loading} reducedMotion={settings.reducedMotion}
+              onChange={() => setReload(value => value + 1)} renderDeck={(deck) => {
                 const badge = personalDeckBadge(deck);
-                const isDragging = draggingDeckId === deck.id;
-                const isDropTarget = dropDeckId === deck.id;
                 const needed = readyCount(deck);
                 return (
                   <article
                     key={deck.id}
-                    className={`study-panel relative flex min-h-52 flex-col transition-[transform,border-color,opacity,box-shadow] duration-200 ${isDragging ? "opacity-[.45]" : ""} ${isDropTarget ? "-translate-y-0.5 border-[var(--color-accent)] shadow-lg" : ""}`}
-                    onDragOver={(event) => {
-                      if (mode !== "free" || !draggingDeckId || draggingDeckId === deck.id) return;
-                      event.preventDefault();
-                      setDropDeckId(deck.id);
-                    }}
-                    onDragLeave={(event) => {
-                      if (
-                        !event.currentTarget.contains(
-                          event.relatedTarget as Node,
-                        )
-                      )
-                        setDropDeckId(null);
-                    }}
-                    onDrop={(event) => {
-                      if (mode !== "free") return;
-                      event.preventDefault();
-                      if (draggingDeckId)
-                        void dropDeck(draggingDeckId, deck.id);
-                    }}
+                    className="study-panel relative flex min-h-52 flex-col"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <ContentBadge tone={badge.tone}>
                         {badge.label}
                       </ContentBadge>
                       {mode === "free" && <div className="flex items-center gap-1">
-                        <button
-                          type="button"
-                          draggable={!busy}
-                          className="cursor-grab rounded-full p-2 text-[var(--color-text-tertiary)] hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-text)] active:cursor-grabbing"
-                          aria-label={`Kéo để sắp xếp bộ ${deck.name}`}
-                          onDragStart={(event) => {
-                            event.dataTransfer.effectAllowed = "move";
-                            event.dataTransfer.setData("text/plain", deck.id);
-                            setDraggingDeckId(deck.id);
-                          }}
-                          onDragEnd={() => {
-                            setDraggingDeckId(null);
-                            setDropDeckId(null);
-                          }}
-                        >
-                          <GripVertical size={18} />
-                        </button>
                         <details className="relative">
                           <summary
                             className="list-none cursor-pointer rounded-full p-2 text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-text)] [&::-webkit-details-marker]:hidden"
@@ -1126,7 +1049,7 @@ export function ImportedDecks({
                     </div>
                   </article>
                 );
-              })}
+              }}/> }
           </div>
 
           {!user && (
@@ -1135,11 +1058,6 @@ export function ImportedDecks({
             </p>
           )}
           {user && loading && <p role="status">Đang tải bộ thẻ…</p>}
-          {user && !loading && !decks.content.length && (
-            <p className="study-copy">
-              {mode === "free" ? "Chưa có bộ cá nhân. Chọn “Tạo bộ mới” để bắt đầu." : "Chưa có bộ cá nhân để ôn."}
-            </p>
-          )}
           {user && (
             <Pagination
               value={deckPage}

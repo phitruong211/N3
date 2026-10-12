@@ -12,7 +12,9 @@
     "test:guest": "node tests/guestFlow.browser.mjs",
     "test:companion": "node tests/catCompanion.browser.mjs",
     "test:integration": "node tests/srsIntegration.browser.mjs",
-    "test:scale": "node tests/srsScale.api.mjs"
+    "test:scale": "node tests/srsScale.api.mjs",
+    "test:deck-groups": "node tests/deckGroups.browser.mjs",
+    "test:deck-groups:integration": "node tests/deckGroups.integration.browser.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

@@ -15,6 +15,8 @@ export interface Page<T> {
   size: number;
 }
 export type PersonalDeck = ApiDeckSummary & {
+  groupId?: string | null;
+  version?: number;
   newCount: number;
   dueCount: number;
   learnedCount?: number;
@@ -31,9 +33,9 @@ export type PersonalCard = ApiCard & {
   sourceRef?: string;
   sourceSheet?: string;
 };
-export const listDeckPage = (page = 0, sort = "updatedAt,desc") =>
+export const listDeckPage = (page = 0, sort = "updatedAt,desc", groupId?: string | null) =>
   apiRequest<Page<PersonalDeck>>(
-    `/decks?page=${page}&size=20&sort=${encodeURIComponent(sort)}`,
+    `/decks?page=${page}&size=20&sort=${encodeURIComponent(sort)}${groupId !== undefined ? `&grouped=true${groupId ? `&groupId=${encodeURIComponent(groupId)}` : ""}` : ""}`,
   );
 export const deckMetadata = (id: string) =>
   apiRequest<PersonalDeck>(`/decks/${id}/metadata`);
@@ -122,3 +124,11 @@ export function asImported(card: PersonalCard): ImportedCard {
     extraData: card.extraData as Record<string, string>,
   };
 }
+
+export interface DeckGroup { id: string; name: string; position: number; version: number; deckCount: number; cardCount: number; dueCount: number }
+export const listDeckGroups = () => apiRequest<DeckGroup[]>('/deck-groups');
+export const createDeckGroup = (name: string) => apiRequest<void>('/deck-groups', { method: 'POST', body: JSON.stringify({ name }) });
+export const renameDeckGroup = (group: DeckGroup, name: string) => apiRequest<void>(`/deck-groups/${group.id}`, { method: 'PATCH', body: JSON.stringify({ name, version: group.version }) });
+export const dissolveDeckGroup = (group: DeckGroup) => apiRequest<void>(`/deck-groups/${group.id}?version=${group.version}`, { method: 'DELETE' });
+export const orderDeckGroups = (ids: string[]) => apiRequest<void>('/deck-groups/order', { method: 'PUT', body: JSON.stringify({ ids }) });
+export const moveDeckToGroup = (deck: PersonalDeck, groupId: string | null, beforeId?: string) => apiRequest<void>(`/decks/${deck.id}/group`, { method: 'PUT', body: JSON.stringify({ groupId, beforeId, version: deck.version }) });
