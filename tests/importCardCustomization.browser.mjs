@@ -10,7 +10,7 @@ const server = await createServer({
     load(id) {
       if (!id.replaceAll("\\", "/").endsWith("/src/hooks/useApp.tsx")) return;
       return `
-        const settings={showFuriganaFront:true,showFuriganaBack:true,autoPlayAudio:false,ankiSessionMinutes:0,reducedMotion:true};
+        const settings={showFuriganaFront:true,showFuriganaBack:true,autoPlayAudio:false,ankiSessionMinutes:0,reducedMotion:true,srsAgainMinutes:1,srsGoodMinutes:10,srsDesiredRetention:0.9};
         export const useApp=()=>({settings,srsCards:[],updateSRSCard:()=>{},learningSync:{flush:async()=>{}}});
         export const useLearningStorage=()=>({recordStudyActivity:()=>{},getJSON:(key,fallback)=>fallback,setJSON:()=>{}});
       `;

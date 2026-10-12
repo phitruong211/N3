@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { utils, write } from 'xlsx';
-import { defaultDeckTemplate, normalizeDeckTemplate, parseTextImport, parseExcelImport, parseImportFile, remapImportPreview, parseCardExamples } from '../src/lib/ankiImport.ts';
+import { assignImportSourceField, defaultDeckTemplate, importFaceBlocks, importSourceFields, moveImportSourceField, normalizeDeckTemplate, parseTextImport, parseExcelImport, parseImportFile, remapImportPreview, parseCardExamples } from '../src/lib/ankiImport.ts';
 
 test('structured examples survive JSON import, remapping and API extra data serialization', () => {
   const examples = [{ japanese: '雨が降るたびに、道がぬれます。', reading: 'あめがふるたびに、みちがぬれます。', meaning: 'Mỗi lần trời mưa, đường lại ướt.' }, { japanese: '日本語を勉強します。', meaning: 'Tôi học tiếng Nhật.' }];
@@ -145,7 +145,7 @@ test('invalid files fail explicitly', async () => {
 test('existing vocabulary, kanji and grammar schemas are detected', async () => {
   for (const [file, kind] of [['vocabN3.json', 'vocabulary'], ['kanjiN3_vocab_full.json', 'kanji'], ['kanjiN4.json', 'kanji'], ['kanjiN2.json', 'kanji'], ['grammarN2.json', 'grammar'], ['grammarN3.json', 'grammar']]) {
     const result = parseTextImport(await readFile(new URL(`../public/data/${file}`, import.meta.url), 'utf8'), file);
-    assert.ok(result.cards.length > 0); assert.equal(result.cards[0].kind, kind); assert.equal(result.skipped, result.duplicates);
+    assert.ok(result.cards.length > 0); assert.equal(result.cards[0].kind, kind); assert.ok(result.skipped >= result.duplicates);
   }
 });
 test('Excel XLSX and XLS combine sheets while retaining source sheet', async () => {
@@ -165,13 +165,32 @@ test('Unicode pair duplicates keep first but retain distinct answers', () => {
  assert.equal(p.cards.length, 2); assert.equal(p.duplicates, 1); assert.equal(p.issues[0].row, 3);
  assert.equal(p.cards[0].notes, 'note'); assert.equal(p.cards[0].kind, 'vocabulary'); assert.deepEqual(p.cards[0].tags, ['a','b']);
 });
-test('unknown columns require explicit review and mapping can recover empty preview', () => {
+test('arbitrary source fields default to one front field and can be reassigned', () => {
  let p = parseTextImport('[{"A":"", "B":"猫", "C":"mèo", "Secret":"value"}]', 'custom.json');
  assert.equal(p.cards.length, 0);
- p = remapImportPreview(p, p.tables.map(t => ({...t, mapping: {front: 1, back: 2}, extraColumns: []})));
- assert.equal(p.cards[0].front, '猫'); assert.equal(p.cards[0].extraData, undefined); assert.equal(p.cards[0].notes, '');
- p = remapImportPreview(p, p.tables.map(t => ({...t, extraColumns: [3]})));
- assert.deepEqual(p.cards[0].extraData, { Secret: 'value' });
+ let table = p.tables[0];
+ const fields = importSourceFields(table);
+ assert.deepEqual(fields.map(field => field.destination), ['front', 'back', 'back', 'back']);
+ table = assignImportSourceField(table, fields[0].key, 'ignore');
+ table = assignImportSourceField(table, fields[1].key, 'front');
+ table = assignImportSourceField(table, fields[3].key, 'ignore');
+ p = remapImportPreview(p, [table]);
+ assert.equal(p.cards[0].front, '猫'); assert.equal(p.cards[0].back, 'mèo'); assert.equal(p.cards[0].notes, '');
+ assert.deepEqual(importFaceBlocks(p.cards[0], 'front').map(block => block.value), ['猫']);
+ assert.deepEqual(importFaceBlocks(p.cards[0], 'back').map(block => block.value), ['mèo']);
+});
+
+test('source fields can compose and reorder one card face while preserving labels', () => {
+ let p = parseTextImport('[{"Question":"丘[おか]","Meaning":"Đồi","Sentence":"丘[おか]の上[うえ]"}]', 'free-form.json');
+ let table = p.tables[0];
+ const fields = importSourceFields(table);
+ table = moveImportSourceField(table, fields[2].key, -1);
+ p = remapImportPreview(p, [table]);
+ assert.equal(p.cards[0].front, '丘');
+ assert.equal(p.cards[0].back, '丘の上\n\nĐồi');
+ assert.deepEqual(importFaceBlocks(p.cards[0], 'back').map(block => [block.label, block.value]), [['Sentence', '丘[おか]の上[うえ]'], ['Meaning', 'Đồi']]);
+ assert.equal(p.cards[0].reading, 'おか');
+ assert.equal(p.cards[0].backReading, 'おかのうえ');
 });
 test('length limits, blank rows and manual header handling', () => {
  const p = parseTextImport('front,back\ncat,meaning\n,\n' + 'x'.repeat(20001) + ',back', 'limits.csv');

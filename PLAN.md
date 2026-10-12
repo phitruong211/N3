@@ -1,71 +1,49 @@
-# Kế hoạch tối ưu import, furigana và tùy chỉnh thẻ
+# Kế hoạch triển khai import Anki theo trường tùy ý
 
 ## Summary
 
-Chuẩn hóa mọi định dạng import vào một model thẻ duy nhất, thêm furigana có cấu trúc cho cả hai mặt, và mở rộng dialog tùy chỉnh để sửa thẻ import hiện tại cùng typography. Dùng API/`extraData` hiện có, không đổi schema backend hay thuật toán SRS.
+Cho phép mọi file JSON, CSV, TSV, TXT và Excel dùng tên trường riêng. Parser tạo một bố cục trường có version; giao diện cho đặt và sắp xếp trường vào hai mặt, hai nguồn cách đọc, ghi chú hoặc nhãn; preview và phiên học dùng cùng dữ liệu có cấu trúc.
 
 ## Context
 
-- `src/lib/ankiImport.ts` đang là điểm hội tụ của JSON, TXT/CSV/TSV và Excel, nhưng chỉ có một `reading`, chưa có cảnh báo furigana hoặc font family.
-- `src/components/flashcard/ImportedDecks.tsx` đang chứa cả tạo bộ, hướng dẫn JSON, đọc file, lưu API, quản lý và bắt đầu phiên học; hướng dẫn import và editor trường thẻ cần được tách để giảm độ phức tạp.
-- `src/components/flashcard/ImportPreviewEditor.tsx` luôn hiển thị toàn bộ ánh xạ cột, làm luồng phổ biến nặng hơn cần thiết.
-- `src/components/flashcard/CardPresentation.tsx` lưu style theo từng mặt nhưng chưa chọn font hoặc sao chép style giữa hai mặt. Dialog chỉ nhận một thẻ mẫu và chỉ lưu template.
-- `src/components/flashcard/StudySession.tsx` sở hữu `sessionCards`; việc sửa thẻ hiện tại phải cập nhật API trước rồi thay đúng phần tử tại đây để không đổi vị trí hoặc tiến trình.
-- Backend đã có `PATCH /cards/{id}`, `PATCH /decks/{id}` và `extraData`; có thể lưu `backReading` và các segment furigana mà không migration database.
-- Ba font được cung cấp đều có OFL 1.1: Dela Gothic One, Noto Sans JP và Noto Serif JP. File nguồn là TTF; cần chuyển WOFF2 và giữ giấy phép trong repo.
+- `src/lib/ankiImport.ts` hiện đọc được mọi định dạng nhưng chỉ ánh xạ một cột vào mỗi trường cố định.
+- `ImportPreviewEditor.tsx` tổ chức UI theo trường đích nên khó hiểu và không cho nhiều trường trên một mặt.
+- Card/backend đã có `extraData`, đủ để lưu bố cục và giá trị nguồn mà không đổi schema API.
+- `CardFace` là renderer chung của phiên học; mở rộng tại đây giúp preview và lúc học không lệch nhau.
+- `resolveFurigana` đã hỗ trợ cú pháp `Kanji[hiragana]` và căn reading an toàn, nên không thêm thư viện hay tự đoán cách đọc.
 
 ## System Impact
 
-Nguồn sự thật sau thay đổi vẫn là card/template trên backend. Parser tạo một `ImportedCard` chuẩn có `reading` mặt trước, `backReading` mặt sau và segment furigana trong `extraData`. `CardView` mang các trường này vào phiên học. `FuriganaText` là nơi duy nhất diễn giải và render ruby, tránh lặp thuật toán trong preview, dialog và phiên học.
+Nguồn sự thật của file đang import là `ImportTable.sourceFields`. `mapping` vẫn tồn tại để tương thích draft cũ và metadata đã biết. Mỗi card tiếp tục có `front`/`back` dạng text để tìm kiếm và dùng với client cũ, đồng thời lưu `importFieldLayout` và `importFieldValues` trong `extraData` để renderer hiện đúng các block có nhãn và thứ tự.
 
-Template thêm `fontFamily` và tăng version để migration rõ ràng. `normalizeDeckTemplate` là cửa vào duy nhất cho template cũ/mới. Nút đồng bộ style chỉ sao chép snapshot style hiện tại; hai mặt không tạo state liên kết lâu dài.
-
-Import tiếp tục dùng worker và idempotency key. Mọi định dạng đi qua cùng `ImportTable` và `remapImportPreview`; cảnh báo furigana tách khỏi lỗi làm bỏ dòng. Sửa card trong preview thay bản card chuẩn sau mapping; thay mapping sẽ tái tạo preview và thông báo rằng sửa nội dung cần thực hiện lại.
-
-Sửa thẻ trong phiên học chỉ được cấp khi `CardView.source === "IMPORT"`. Lưu card và template là hai mutation độc lập, chỉ gửi phần đã đổi. State local cập nhật sau phản hồi thành công; lỗi giữ dialog mở và hiển thị phần chưa lưu.
-
-## Approach
-
-Chọn giải pháp nhỏ nhất vẫn thống nhất hệ thống:
-
-1. Tách parser/render furigana thành module dùng chung, không thêm thư viện phân tích tiếng Nhật và không tự đoán cách đọc.
-2. Mở rộng model frontend và `extraData`, tái sử dụng API hiện tại.
-3. Tách hướng dẫn import và form nội dung thẻ thành component dùng lại thay vì tiếp tục mở rộng `ImportedDecks.tsx`/`CardPresentation.tsx`.
-4. Dùng self-hosted WOFF2, `font-display: swap`, tải font theo lúc được dùng; không cho CSS/font URL tùy ý.
-5. Giữ advanced mapping nhưng mặc định thu gọn khi `front`/`back` đã nhận dạng, giúp luồng chính chỉ còn chọn file, kiểm tra và nhập.
+Không có state bố cục trùng lặp trong component: mọi thao tác cập nhật `ImportTable`, sau đó `remapImportPreview` tạo lại card, cảnh báo và preview. Card cũ không có layout sẽ đi qua renderer hiện tại. Khi người dùng sửa trực tiếp nội dung một card sau import, layout nguồn của riêng card đó được bỏ để nội dung vừa sửa trở thành nguồn sự thật.
 
 ## Changes
 
-- [x] `src/lib/furigana.ts` — thêm parser cú pháp `Kanji[hiragana]`, căn reading theo kana khi chỉ có một kết quả, serialize/parse segment an toàn và trả cảnh báo có vị trí.
-- [x] `src/lib/ankiImport.ts` — thêm `backReading`, mapping alias hai mặt, warning riêng, segment furigana hai mặt, font family/version migration và chuẩn hóa giống nhau cho mọi định dạng.
-- [x] `src/lib/deckApi.ts` và `src/lib/cards.ts` — chuyển đổi `backReading`/segments qua `extraData`, bảo toàn tags/metadata khi đổi giữa `ImportedCard`, API card và `CardView`.
-- [x] `src/components/flashcard/FuriganaText.tsx` — render `ruby`/`rt`, fallback reading riêng khi alignment không chắc chắn, tuân theo bật/tắt phiên âm của từng mặt.
-- [x] `src/components/flashcard/CardFields.tsx` — form nội dung thẻ dùng chung cho quản lý, preview và dialog; hỗ trợ front/back markup, reading hai mặt, Hán Việt, note, type, tags và cảnh báo trực tiếp.
-- [x] `src/components/flashcard/ImportGuide.tsx` — một hướng dẫn import chung, ví dụ chuyển đổi giữa định dạng, file mẫu và prompt có nút sao chép.
-- [x] `src/components/flashcard/ImportPreviewEditor.tsx` — preview gọn mặc định, mapping nâng cao mở theo nhu cầu/lỗi, hiển thị ruby thật và cho sửa card trước khi import.
-- [x] `src/components/flashcard/ImportedDecks.tsx` — dùng component mới, đơn giản hóa ba bước import, thêm mẫu TXT/TSV, chuyển callback sửa card import vào phiên học và giữ draft/idempotency hiện tại.
-- [x] `src/components/flashcard/CardPresentation.tsx` — chọn năm font, nút áp dụng style sang cả hai mặt, preview furigana hai mặt, và vùng sửa thẻ hiện tại chỉ khi được truyền quyền sửa.
-- [x] `src/components/flashcard/StudySession.tsx` — truyền thẻ import hiện tại vào dialog, lưu card/template theo phần thay đổi và thay card đã xác nhận trong `sessionCards`.
-- [x] `src/index.css`, `public/fonts/**` — khai báo ba font self-hosted, giữ OFL, thêm style ruby responsive và cho phép synthetic weight/oblique với Dela Gothic One.
-- [x] `tests/furigana.test.mjs` — kiểm thử explicit markup, auto alignment chắc chắn, trường hợp mơ hồ, lỗi ngoặc và round-trip segments.
-- [x] `tests/ankiImport.test.mjs` — fixture tương đương JSON/TXT/CSV/TSV/XLSX/XLS, reading hai mặt, tags/examples, warnings, migration font/template.
-- [x] `tests/importCardCustomization.browser.mjs` — kiểm tra ruby hai mặt, font/style đồng bộ, chỉnh thẻ import hiện tại, reload và giới hạn quyền của bộ built-in/manual.
-- [x] `docs/anki-import.md` — cập nhật schema chung, cú pháp furigana hai mặt và prompt giống UI.
+- [x] `src/lib/ankiImport.ts` — thêm model bố cục trường, mặc định trường đầu tiên ở mặt trước, semantic suggestions, migration mapping cũ, multi-field composition, structured extraData, helpers gán/sắp xếp/đọc block.
+- [x] `tests/ankiImport.test.mjs` — thêm test field tùy ý, mặc định một trường mặt trước, nhiều trường mặt sau, reorder, legacy migration, round-trip và furigana hai mặt.
+- [x] `src/components/flashcard/ImportPreviewEditor.tsx` — đổi thành danh sách trường nguồn có sample, select vị trí, nút lên/xuống, lỗi thiếu mặt và preview dùng renderer chung.
+- [x] `src/components/flashcard/CardPresentation.tsx` — render các block import có cấu trúc; block đầu dùng reading của mặt tương ứng, các block sau giữ markup furigana riêng.
+- [x] `src/components/flashcard/CardFields.tsx` — khi sửa trực tiếp front/back thì bỏ layout nguồn cũ để tránh hiển thị dữ liệu stale.
+- [x] `src/components/flashcard/ImportGuide.tsx` — nói rõ không cần file mẫu; prompt AI cho phép tên trường tùy ý và hướng dẫn furigana đúng mặt.
+- [x] `tests/flexibleAnkiImport.browser.mjs` — kiểm tra UI gán/reorder và preview khớp CardFace.
+- [x] Chạy lint, unit tests, browser tests và build; kiểm tra desktop/mobile bằng Playwright.
 
 ## Verification
 
-- Chạy `npm test` và xác nhận toàn bộ unit/contract tests đạt.
-- Chạy `npm run build` để kiểm tra TypeScript, worker import và bundle font/CSS.
-- Chạy `npm run lint`; không tạo warning mới trong các file sửa.
-- Chạy browser test với local Vite/API cho luồng: import từng định dạng, sửa preview, lưu bộ, học, sửa thẻ hiện tại, đổi font, đồng bộ style, tải lại.
-- Kiểm tra thủ công desktop/mobile: drag-drop và file picker, mapping tự động/nâng cao, focus keyboard, overflow với cỡ 72 px, ruby ở hai mặt và font fallback trong lúc WOFF2 tải.
-- Kiểm tra backend không đổi schema: card reload giữ `backReading`, segment hai mặt, tags và SRS hiện tại.
+- `node --experimental-strip-types --test tests/ankiImport.test.mjs`
+- `npm test`
+- `node tests/flexibleAnkiImport.browser.mjs`
+- `node tests/importCardCustomization.browser.mjs`
+- `npx oxlint src/lib/ankiImport.ts src/components/flashcard/ImportPreviewEditor.tsx src/components/flashcard/CardPresentation.tsx src/components/flashcard/CardFields.tsx src/components/flashcard/ImportGuide.tsx`
+- `npm run build`
 
 ## Invariants
 
-- Không tự tạo cách đọc nếu người dùng không cung cấp.
-- Không cho sửa nội dung bộ built-in hoặc nội dung bộ manual trong dialog tùy chỉnh.
-- Không xóa tiến trình SRS khi sửa nội dung.
-- Không lưu markup ngoặc vào `front`/`back` hiển thị; lưu text sạch và segment có cấu trúc.
-- Không để lỗi furigana làm mất thẻ có `front`/`back` hợp lệ.
-- Không tải hoặc thực thi HTML/CSS/font URL từ file import.
+- Field nguồn đầu tiên là field duy nhất ở mặt trước mặc định.
+- Không bỏ field chưa biết trừ khi người dùng chọn `Không dùng`.
+- Front/back bắt buộc có ít nhất một field với dữ liệu.
+- Reading hai mặt không dùng thay cho nhau.
+- Chỉ tạo ruby khi markup rõ ràng hoặc căn reading không mơ hồ.
+- Bộ thẻ cũ và built-in không đổi cách render.
+- Không đổi schema backend và không thực thi HTML/JS từ file import.

@@ -78,6 +78,20 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
 }
 
 export type ImportField = 'front' | 'back' | 'reading' | 'backReading' | 'hanViet' | 'notes' | 'kind' | 'tags' | 'examples';
+export type ImportDestination = 'front' | 'back' | 'frontReading' | 'backReading' | 'hanViet' | 'notes' | 'kind' | 'tags' | 'examples' | 'ignore';
+export interface ImportSourceField {
+ key: string;
+ label: string;
+ column: number;
+ destination: ImportDestination;
+ order: number;
+ suggested?: boolean;
+}
+export interface StoredImportFieldLayout {
+ version: 1;
+ fields: Array<Pick<ImportSourceField, 'key' | 'label' | 'destination' | 'order'>>;
+}
+export interface ImportFaceBlock { key: string; label: string; value: string; order: number }
 export interface CardExample { japanese: string; reading: string; meaning: string }
 export function parseCardExamples(value: unknown): CardExample[] {
  if (value == null || value === '') return [];
@@ -90,7 +104,7 @@ export function parseCardExamples(value: unknown): CardExample[] {
   return { japanese: entry.japanese.trim(), reading: typeof entry.reading === 'string' ? entry.reading.trim() : '', meaning: entry.meaning.trim() };
  });
 }
-export interface ImportTable { id: string; name: string; rows: string[][]; hasHeader: boolean; selected: boolean; mapping: Partial<Record<ImportField, number>>; extraColumns: number[]; inferredKind?: ImportedKind }
+export interface ImportTable { id: string; name: string; rows: string[][]; hasHeader: boolean; selected: boolean; mapping: Partial<Record<ImportField, number>>; extraColumns: number[]; inferredKind?: ImportedKind; layoutVersion?: 1; sourceFields?: ImportSourceField[] }
 export interface ImportIssue { row: number; sheet: string; reason: string }
 export interface ImportWarning extends ImportIssue { cardId: string }
 const text = (value: unknown): string => (Array.isArray(value) ? value.map(text).filter(Boolean).join('\n') : typeof value === 'object' && value !== null ? JSON.stringify(value) : value == null ? '' : String(value)).replace(/\r\n?/g, '\n').trim().normalize('NFC');
@@ -98,8 +112,140 @@ const normalize = (value: string) => value.replace(/^\uFEFF/, '').trim().toLower
 const keys: Record<ImportField, string[]> = {
  front: ['front','mat truoc','question','cau hoi','word','tu','tu vung','kanji','tu_chinh','pattern','mau_ngu_phap'],
  back: ['back','mat sau','answer','dap an','meaning','nghia','y nghia','nghia_cot_loi'],
- reading: ['reading','front_reading','phien_am','hiragana','cach doc','cach_doc'], backReading: ['back_reading','back hiragana','back_hiragana','mat sau reading','mat_sau_reading','cach doc mat sau','cach_doc_mat_sau'], hanViet: ['hanViet','han_viet','han viet','hán việt','hanTu','han_tu','han tu','hán tự'], notes: ['notes','note','ghi_chu'], kind: ['kind','type','loai'], tags: ['tags','tag','nhan'], examples: ['examples'],
+ reading: ['reading','front_reading','phien_am','hiragana','kana','yomikata','cach doc','cach_doc'], backReading: ['back_reading','back hiragana','back_hiragana','back kana','mat sau reading','mat_sau_reading','cach doc mat sau','cach_doc_mat_sau'], hanViet: ['hanViet','han_viet','han viet','hán việt','hanTu','han_tu','han tu','hán tự'], notes: ['notes','note','ghi_chu'], kind: ['kind','type','loai'], tags: ['tags','tag','nhan'], examples: ['examples','example','vi du','ví dụ'],
 };
+
+const semanticDestination: Partial<Record<ImportField, ImportDestination>> = {
+ reading: 'frontReading', backReading: 'backReading', hanViet: 'hanViet', notes: 'notes', kind: 'kind', tags: 'tags', examples: 'examples',
+};
+const destinationMapping: Partial<Record<ImportDestination, ImportField>> = {
+ front: 'front', back: 'back', frontReading: 'reading', backReading: 'backReading', hanViet: 'hanViet', notes: 'notes', kind: 'kind', tags: 'tags', examples: 'examples',
+};
+const validDestinations = new Set<ImportDestination>(['front', 'back', 'frontReading', 'backReading', 'hanViet', 'notes', 'kind', 'tags', 'examples', 'ignore']);
+const uniqueDestinations = new Set<ImportDestination>(['frontReading', 'backReading', 'hanViet', 'notes', 'kind', 'tags', 'examples']);
+
+function widthOf(rows: string[][]) {
+ return rows.reduce((maximum, row) => Math.max(maximum, row.length), 0);
+}
+
+function labelFor(table: Pick<ImportTable, 'rows' | 'hasHeader'>, column: number) {
+ return (table.hasHeader ? text(table.rows[0]?.[column]) || `Cột ${column + 1}` : `Cột ${column + 1}`).slice(0, 200);
+}
+
+function normalizeOrders(fields: ImportSourceField[]): ImportSourceField[] {
+ const orders = new Map<string, number>();
+ for (const destination of new Set(fields.map(field => field.destination))) {
+  fields
+   .filter(field => field.destination === destination)
+   .sort((a, b) => a.order - b.order || a.column - b.column)
+   .forEach((field, order) => orders.set(field.key, order));
+ }
+ return fields
+  .map(field => ({ ...field, order: orders.get(field.key) ?? 0 }))
+  .sort((a, b) => a.column - b.column);
+}
+
+function detectedFieldForColumn(mapping: ImportTable['mapping'], column: number): ImportField | undefined {
+ return (Object.keys(mapping) as ImportField[]).find(field => mapping[field] === column && field !== 'front' && field !== 'back');
+}
+
+function createSourceFields(table: Pick<ImportTable, 'rows' | 'hasHeader' | 'mapping'>, legacy = false): ImportSourceField[] {
+ const width = widthOf(table.rows);
+ const destinations: ImportDestination[] = Array.from({ length: width }, (_, column) => {
+  if (legacy) {
+   if (table.mapping.front === column) return 'front';
+   if (table.mapping.back === column) return 'back';
+   const detected = detectedFieldForColumn(table.mapping, column);
+   return detected ? semanticDestination[detected] ?? 'ignore' : 'ignore';
+  }
+  if (column === 0) return 'front';
+  const detected = detectedFieldForColumn(table.mapping, column);
+  return detected ? semanticDestination[detected] ?? 'back' : 'back';
+ });
+ const counters = new Map<ImportDestination, number>();
+ return destinations.map((destination, column) => {
+  const order = counters.get(destination) ?? 0;
+  counters.set(destination, order + 1);
+  return { key: `field-${column}`, label: labelFor(table, column), column, destination, order, suggested: destination !== 'front' && destination !== 'back' && destination !== 'ignore' };
+ });
+}
+
+export function importSourceFields(table: ImportTable): ImportSourceField[] {
+ if (table.layoutVersion === 1 && Array.isArray(table.sourceFields)) {
+  const width = widthOf(table.rows);
+  const byColumn = new Map(table.sourceFields.filter(field => Number.isInteger(field.column) && field.column >= 0 && field.column < width).map(field => [field.column, field]));
+  const fields = Array.from({ length: width }, (_, column) => {
+   const existing = byColumn.get(column);
+   return existing ? {
+    ...existing,
+    key: existing.key || `field-${column}`,
+    label: labelFor(table, column),
+    destination: validDestinations.has(existing.destination) ? existing.destination : 'back',
+    order: Number.isFinite(existing.order) ? existing.order : column,
+   } : { key: `field-${column}`, label: labelFor(table, column), column, destination: 'back' as const, order: column };
+  });
+  return normalizeOrders(fields);
+ }
+ return normalizeOrders(createSourceFields(table, true));
+}
+
+function mappingForFields(table: ImportTable, fields: ImportSourceField[]) {
+ const mapping = { ...table.mapping };
+ for (const field of Object.keys(mapping) as ImportField[]) {
+  if (['front', 'back', 'reading', 'backReading', 'hanViet', 'notes', 'kind', 'tags', 'examples'].includes(field)) delete mapping[field];
+ }
+ for (const source of fields) {
+  if (source.destination === 'ignore') continue;
+  const target = destinationMapping[source.destination];
+  if (target !== undefined && mapping[target] === undefined) mapping[target] = source.column;
+ }
+ return mapping;
+}
+
+function withFields(table: ImportTable, fields: ImportSourceField[]): ImportTable {
+ const normalized = normalizeOrders(fields);
+ return { ...table, layoutVersion: 1, sourceFields: normalized, mapping: mappingForFields(table, normalized) };
+}
+
+export function assignImportSourceField(table: ImportTable, key: string, destination: ImportDestination): ImportTable {
+ let fields = importSourceFields(table);
+ const target = fields.find(field => field.key === key);
+ if (!target) return withFields(table, fields);
+ if (uniqueDestinations.has(destination)) {
+  const nextBackOrder = fields.filter(field => field.destination === 'back').length;
+  fields = fields.map(field => field.key !== key && field.destination === destination ? { ...field, destination: 'back' as const, order: nextBackOrder } : field);
+ }
+ const nextOrder = fields.filter(field => field.destination === destination && field.key !== key).length;
+ fields = fields.map(field => field.key === key ? { ...field, destination, order: nextOrder, suggested: false } : field);
+ return withFields(table, fields);
+}
+
+export function moveImportSourceField(table: ImportTable, key: string, delta: -1 | 1): ImportTable {
+ const fields = importSourceFields(table);
+ const target = fields.find(field => field.key === key);
+ if (!target || (target.destination !== 'front' && target.destination !== 'back')) return withFields(table, fields);
+ const group = fields.filter(field => field.destination === target.destination).sort((a, b) => a.order - b.order);
+ const index = group.findIndex(field => field.key === key), destinationIndex = index + delta;
+ if (index < 0 || destinationIndex < 0 || destinationIndex >= group.length) return withFields(table, fields);
+ const other = group[destinationIndex];
+ return withFields(table, fields.map(field => field.key === target.key ? { ...field, order: other.order } : field.key === other.key ? { ...field, order: target.order } : field));
+}
+
+export function setImportTableHeader(table: ImportTable, hasHeader: boolean): ImportTable {
+ return withFields({ ...table, hasHeader }, importSourceFields(table).map(field => ({ ...field, label: hasHeader ? text(table.rows[0]?.[field.column]) || `Cột ${field.column + 1}` : `Cột ${field.column + 1}` })));
+}
+
+export function importFaceBlocks(card: Pick<ImportedCard, 'extraData'>, side: 'front' | 'back'): ImportFaceBlock[] {
+ try {
+  const layout = JSON.parse(card.extraData?.importFieldLayout || '') as StoredImportFieldLayout;
+  const values = JSON.parse(card.extraData?.importFieldValues || '') as Record<string, unknown>;
+  if (layout.version !== 1 || !Array.isArray(layout.fields) || !values || typeof values !== 'object') return [];
+  return layout.fields
+   .filter(field => field.destination === side && typeof values[field.key] === 'string' && String(values[field.key]).trim())
+   .map(field => ({ key: field.key, label: String(field.label || ''), value: String(values[field.key]), order: Number.isFinite(field.order) ? field.order : 0 }))
+   .sort((a, b) => a.order - b.order);
+ } catch { return []; }
+}
 function table(rows: string[][], name: string, json = false): ImportTable {
  const header = rows[0] || [];
  const mapping: ImportTable['mapping'] = {};
@@ -111,35 +257,54 @@ function table(rows: string[][], name: string, json = false): ImportTable {
  const hasHeader = json || (mapping.front !== undefined && mapping.back !== undefined);
  const normalized = header.map(normalize);
  const inferredKind: ImportedKind = normalized.some(k => ['maunguphap','pattern','congthuc'].includes(k)) ? 'grammar' : normalized.some(k => ['tuchinh','onyomi','kunyomi'].includes(k)) || (normalized.includes('kanji') && !normalized.includes('hiragana')) ? 'kanji' : normalized.some(k => ['word','tu','phienam','reading','hiragana'].includes(k)) ? 'vocabulary' : 'general';
- return { id: crypto.randomUUID(), name, rows, hasHeader, selected: true, mapping: hasHeader ? { front: 0, back: 1, ...mapping } : { front: 0, back: 1, ...(header.length > 2 ? { reading: 2 } : {}) }, extraColumns: [], inferredKind: hasHeader ? inferredKind : 'general' };
+ const result: ImportTable = { id: crypto.randomUUID(), name, rows, hasHeader, selected: true, mapping: hasHeader ? { front: 0, back: 1, ...mapping } : { front: 0, back: 1, ...(header.length > 2 ? { reading: 2 } : {}) }, extraColumns: [], inferredKind: hasHeader ? inferredKind : 'general' };
+ return withFields(result, createSourceFields(result));
 }
 export function remapImportPreview(preview: ImportPreview, tables: ImportTable[]): ImportPreview {
  const cards: ImportedCard[] = [], issues: ImportIssue[] = [], warnings: ImportWarning[] = [], seen = new Set<string>(); let duplicates = 0, total = 0;
- for (const tab of tables.filter(t => t.selected)) {
+ const normalizedTables = tables.map(tab => withFields(tab, importSourceFields(tab)));
+ for (const tab of normalizedTables.filter(t => t.selected)) {
+  const sourceFields = importSourceFields(tab);
+  const frontFields = sourceFields.filter(field => field.destination === 'front').sort((a, b) => a.order - b.order);
+  const backFields = sourceFields.filter(field => field.destination === 'back').sort((a, b) => a.order - b.order);
   const start = tab.hasHeader ? 1 : 0;
   total += tab.rows.length - start;
   if (total > 20000) throw new Error('Mỗi file tối đa 20.000 thẻ. Hãy chia nhỏ file.');
   for (let index = start; index < tab.rows.length; index++) {
    const row = tab.rows[index];
    const pick = (field: ImportField) => text(row[tab.mapping[field] ?? -1]);
-   const rawFront = pick('front'), rawBack = pick('back'), rawReading = normalizeReadingInput(pick('reading')), rawBackReading = normalizeReadingInput(pick('backReading')), hanViet = pick('hanViet'), notes = pick('notes');
+   const valueFor = (field: ImportSourceField) => text(row[field.column]);
+   const frontValues = frontFields.map(field => ({ field, value: valueFor(field) })).filter(item => item.value);
+   const backValues = backFields.map(field => ({ field, value: valueFor(field) })).filter(item => item.value);
+   const rawReading = normalizeReadingInput(pick('reading')), rawBackReading = normalizeReadingInput(pick('backReading')), hanViet = pick('hanViet'), notes = pick('notes');
    const fail = (reason: string) => issues.push({ row: index + 1, sheet: tab.name, reason });
-   if (!rawFront || !rawBack) { fail('Thiếu mặt trước hoặc mặt sau'); continue; }
-   if (rawFront.length > 20000 || rawBack.length > 20000 || notes.length > 20000 || rawReading.length > 10000 || rawBackReading.length > 10000 || hanViet.length > 10000) { fail('Vượt giới hạn trường: front/back/note 20.000, reading/backReading/hanViet 10.000 ký tự'); continue; }
+   if (!frontValues.length) { fail('Thiếu dữ liệu mặt trước'); continue; }
+   if (!backValues.length) { fail('Thiếu dữ liệu mặt sau'); continue; }
+   const rawFront = frontValues.map(item => item.value).join('\n\n');
+   const rawBack = backValues.map(item => item.value).join('\n\n');
+   if (rawFront.length > 20000 || rawBack.length > 20000 || notes.length > 20000 || rawReading.length > 10000 || rawBackReading.length > 10000 || hanViet.length > 10000) { fail('Vượt giới hạn trường: mặt trước/mặt sau/ghi chú 20.000, cách đọc/Hán Việt 10.000 ký tự'); continue; }
    const kindText = pick('kind').toLowerCase();
    const aliases: Record<string, ImportedKind> = { vocabulary: 'vocabulary', vocab: 'vocabulary', tuvung: 'vocabulary', kanji: 'kanji', grammar: 'grammar', nguphap: 'grammar', general: 'general' };
    const kind = kindText ? aliases[normalize(kindText)] : tab.inferredKind || 'general';
    if (!kind) { fail('Loại thẻ không hợp lệ'); continue; }
    const tags = pick('tags').split(/[,;\n]/).map(t => t.trim()).filter(Boolean);
    const id = crypto.randomUUID();
-   const frontRuby = resolveFurigana(rawFront, rawReading);
-   const backRuby = resolveFurigana(rawBack, rawBackReading);
-   const front = frontRuby.text, back = backRuby.text;
+   const frontRuby = resolveFurigana(frontValues[0].value, rawReading);
+   const backRuby = resolveFurigana(backValues[0].value, rawBackReading);
+   const front = [frontRuby.text, ...frontValues.slice(1).map(item => resolveFurigana(item.value, '').text)].join('\n\n');
+   const back = [backRuby.text, ...backValues.slice(1).map(item => resolveFurigana(item.value, '').text)].join('\n\n');
    const reading = rawReading || (frontRuby.explicit && !frontRuby.warning ? segmentsReading(frontRuby.segments) : '');
    const backReading = rawBackReading || (backRuby.explicit && !backRuby.warning ? segmentsReading(backRuby.segments) : '');
-   if (frontRuby.warning) warnings.push({ cardId: id, row: index + 1, sheet: tab.name, reason: `Mặt trước: ${frontRuby.warning}` });
-   if (backRuby.warning) warnings.push({ cardId: id, row: index + 1, sheet: tab.name, reason: `Mặt sau: ${backRuby.warning}` });
+   if (frontRuby.warning) warnings.push({ cardId: id, row: index + 1, sheet: tab.name, reason: `${frontValues[0].field.label}: ${frontRuby.warning}` });
+   if (backRuby.warning) warnings.push({ cardId: id, row: index + 1, sheet: tab.name, reason: `${backValues[0].field.label}: ${backRuby.warning}` });
+   for (const item of [...frontValues.slice(1), ...backValues.slice(1)]) {
+    const ruby = resolveFurigana(item.value, '');
+    if (ruby.warning) warnings.push({ cardId: id, row: index + 1, sheet: tab.name, reason: `${item.field.label}: ${ruby.warning}` });
+   }
    const extraData: Record<string, string> = Object.fromEntries(tab.extraColumns.filter(i => !Object.values(tab.mapping).includes(i)).map(i => [tab.hasHeader ? tab.rows[0][i] || `Cột ${i + 1}` : `Cột ${i + 1}`, text(row[i])]));
+   const layout: StoredImportFieldLayout = { version: 1, fields: sourceFields.filter(field => field.destination !== 'ignore').map(({ key, label, destination, order }) => ({ key, label, destination, order })) };
+   extraData.importFieldLayout = JSON.stringify(layout);
+   extraData.importFieldValues = JSON.stringify(Object.fromEntries(sourceFields.filter(field => field.destination !== 'ignore').map(field => [field.key, valueFor(field)])));
    if (backReading) extraData.backReading = backReading;
    if (frontRuby.segments.some(segment => segment.reading)) extraData.frontFuriganaSegments = JSON.stringify(frontRuby.segments);
    if (backRuby.segments.some(segment => segment.reading)) extraData.backFuriganaSegments = JSON.stringify(backRuby.segments);
@@ -147,14 +312,14 @@ export function remapImportPreview(preview: ImportPreview, tables: ImportTable[]
     const examples = parseCardExamples(pick('examples'));
     if (examples.length) extraData.examples = JSON.stringify(examples);
    } catch (error) { fail(error instanceof Error ? error.message : 'examples không hợp lệ'); continue; }
-   if (tags.length > 100 || tags.some(t => t.length > 100) || JSON.stringify(extraData).length > 20000) { fail('Tags hoặc dữ liệu mở rộng vượt giới hạn'); continue; }
+   if (tags.length > 100 || tags.some(t => t.length > 100) || JSON.stringify(extraData).length > 100000) { fail('Nhãn hoặc dữ liệu mở rộng vượt giới hạn'); continue; }
    const pair = JSON.stringify([front.replace(/\s+/g, ' '), back.replace(/\s+/g, ' ')]);
    if (seen.has(pair)) { duplicates++; fail('Trùng cặp mặt trước / mặt sau'); continue; }
    seen.add(pair);
    cards.push({ id, front, back, reading, backReading, hanViet, notes, kind, tags, sourceRef: preview.source, ...(tab.name ? { sourceSheet: tab.name } : {}), ...(Object.keys(extraData).length ? { extraData } : {}) });
   }
  }
- return { ...preview, tables, cards, skipped: issues.length, issues, warnings, duplicates };
+ return { ...preview, tables: normalizedTables, cards, skipped: issues.length, issues, warnings, duplicates };
 }
 // Quoted fields may contain separators, escaped quotes and line breaks.
 export function parseDelimited(input: string, delimiter: string): string[][] {

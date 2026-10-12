@@ -17,13 +17,17 @@ function editableText(card: ImportedCard, side: Side) {
   return segments.length ? serializeFurigana(segments) : card[side];
 }
 
-function withFurigana(card: ImportedCard, side: Side, result: FuriganaResult): ImportedCard {
+function withFurigana(card: ImportedCard, side: Side, result: FuriganaResult, clearImportedLayout = false): ImportedCard {
   const key = side === "front" ? "frontFuriganaSegments" : "backFuriganaSegments";
   const extraData = { ...card.extraData };
   if (!result.warning && result.segments.some((segment) => segment.reading)) {
     extraData[key] = JSON.stringify(result.segments);
   } else {
     delete extraData[key];
+  }
+  if (clearImportedLayout) {
+    delete extraData.importFieldLayout;
+    delete extraData.importFieldValues;
   }
   return { ...card, [side]: result.text, extraData };
 }
@@ -53,7 +57,7 @@ export function CardFields({
     if (side === "front") setFrontInput(value);
     else setBackInput(value);
     const reading = side === "front" ? card.reading : card.backReading;
-    onChange(withFurigana(card, side, resolveFurigana(value, reading)));
+    onChange(withFurigana(card, side, resolveFurigana(value, reading), true));
   };
   const updateReading = (side: Side, value: string) => {
     const readingKey = side === "front" ? "reading" : "backReading";

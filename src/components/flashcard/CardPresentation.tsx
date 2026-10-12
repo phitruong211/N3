@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, type CSSProperties } from "react";
 import { ArrowDown, ArrowUp, Bold, Copy, Eye, EyeOff, GripVertical, Italic, Minus, Plus, X } from "lucide-react";
-import { CARD_FONT_PRESETS, defaultDeckTemplate, kindLabels, parseCardExamples } from "@/lib/ankiImport";
+import { CARD_FONT_PRESETS, defaultDeckTemplate, importFaceBlocks, kindLabels, parseCardExamples, type ImportFaceBlock } from "@/lib/ankiImport";
 import { parseStoredFurigana } from "@/lib/furigana";
 import { FuriganaText } from "./FuriganaText";
 import { CardFields } from "./CardFields";
@@ -151,6 +151,18 @@ function GrammarBack({ value, reading, storedSegments, showReading, compact, sty
   );
 }
 
+function ImportedFaceBlocks({ blocks, reading, showReading, compact, style }: { blocks: ImportFaceBlock[]; reading: string; showReading: boolean; compact: boolean; style: DeckTemplateConfig['front']['style'] }) {
+  const multiple = blocks.length > 1;
+  return <div className={`space-y-4 ${style.alignment === "left" ? "text-left" : "text-center"}`}>
+    {blocks.map((block, index) => <section key={block.key} className={index ? "border-t border-current/10 pt-4" : ""}>
+      {multiple && <p className="mb-2 text-[0.7rem] font-bold uppercase tracking-wider opacity-55">{block.label}</p>}
+      <div className={`font-jp whitespace-pre-wrap break-words leading-relaxed ${compact ? "text-base" : ""}`} style={compact ? undefined : cardTextStyle(style)}>
+        <FuriganaText text={block.value} reading={index === 0 ? reading : ""} show={showReading} />
+      </div>
+    </section>)}
+  </div>;
+}
+
 export function CardFace({
   card,
   deckName,
@@ -177,11 +189,12 @@ export function CardFace({
       {fields.map((field, index) => {
         const value = fieldValue(field, card, deckName, side);
         if (!value) return null;
+        const importedBlocks = field === "front" || field === "back" ? importFaceBlocks(card, field) : [];
         const kanjiVocabulary = field === "notes" && card.kind === "kanji"
           ? parseKanjiVocabulary(card.extraData?.kanjiVocabulary)
           : [];
         if (field === "reading" && (fields.includes("front") || fields.includes("back"))) return null;
-        if (grammarAnswer && field === "back") {
+        if (grammarAnswer && field === "back" && !importedBlocks.length) {
           return <GrammarBack key={`${field}-${index}`} value={value} reading={card.backReading} storedSegments={card.extraData?.backFuriganaSegments} showReading={fields.includes("reading")} compact={compact} style={style} />;
         }
         const isCardText = field === "front" || field === "back";
@@ -205,7 +218,9 @@ export function CardFace({
             style={isCardText ? cardTextStyle(style) : undefined}
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
-            {kanjiVocabulary.length ? <KanjiVocabulary value={kanjiVocabulary} showReading={showExampleReadings} /> : field === "hanViet" ? `Hán Việt: ${value}` : isCardText ? (
+            {kanjiVocabulary.length ? <KanjiVocabulary value={kanjiVocabulary} showReading={showExampleReadings} /> : field === "hanViet" ? `Hán Việt: ${value}` : importedBlocks.length ? (
+              <ImportedFaceBlocks blocks={importedBlocks} reading={cardReading} showReading={showFurigana} compact={compact} style={style} />
+            ) : isCardText ? (
               <FuriganaText text={value} reading={cardReading} storedSegments={storedSegments} show={showFurigana} />
             ) : value}
           </div>
