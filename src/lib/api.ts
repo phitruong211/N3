@@ -18,13 +18,14 @@ export interface ApiUser {
 }
 
 interface AuthResponse { accessToken: string; refreshToken: string; expiresIn: number; user: ApiUser }
-interface ApiErrorBody { message?: string; fieldErrors?: Record<string, string> }
+interface ApiErrorBody { message?: string; fieldErrors?: Record<string, string>; code?: string }
 
 export class ApiError extends Error {
   status: number;
   fields?: Record<string, string>;
-  constructor(status: number, message: string, fields?: Record<string, string>) {
-    super(message); this.status = status; this.fields = fields;
+  code?: string;
+  constructor(status: number, message: string, fields?: Record<string, string>, code?: string) {
+    super(message); this.status = status; this.fields = fields; this.code = code;
   }
 }
 
@@ -65,7 +66,7 @@ function assertSession(identity: string | null) {
 
 async function parseError(response: Response): Promise<ApiError> {
   const body = await response.json().catch(() => ({})) as ApiErrorBody;
-  return new ApiError(response.status, body.message || `Yêu cầu thất bại (${response.status})`, body.fieldErrors);
+  return new ApiError(response.status, body.message || `Yêu cầu thất bại (${response.status})`, body.fieldErrors, body.code);
 }
 
 let refreshFlight: { identity: string | null; promise: Promise<boolean> } | null = null;

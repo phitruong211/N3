@@ -72,6 +72,7 @@ export function SharedDeckPage() {
       {error && <div className="study-panel space-y-3" role="alert"><h1 className="text-lg font-semibold">{unavailable ? 'Liên kết không còn khả dụng' : 'Chưa thể hoàn tất'}</h1><p className="study-copy">{error}</p>{unavailable ? <p className="study-copy">Hãy nhờ người chia sẻ gửi một liên kết mới.</p> : <button className="study-button" disabled={busy} onClick={() => setAttempt(v => v + 1)}>Thử tải lại</button>}</div>}
       {restoreError && <div role="alert" className="study-panel space-y-3"><p>{restoreError}</p><button className="study-button" onClick={retryRestore}>Kết nối lại tài khoản</button></div>}
       <p className="study-copy text-sm">Chỉ nội dung bộ thẻ được sao chép. Lịch ôn và tiến độ học của mỗi người được giữ riêng.</p>
+      {deck?.cards.some(card => card.dictionarySource) && <p className="study-copy text-xs">Một số thẻ dựa trên JMdict — EDRDG / James William Breen, có thể đã được chỉnh sửa. <a href="https://www.edrdg.org/edrdg/licence.html" className="underline" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <Link to="/dictionary/sources" className="underline">Nguồn từ điển</Link></p>}
     </div>
   </main>;
 }

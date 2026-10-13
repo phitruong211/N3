@@ -15,7 +15,10 @@
     "test:scale": "node tests/srsScale.api.mjs",
     "test:deck-groups": "node tests/deckGroups.browser.mjs",
     "test:deck-groups:integration": "node tests/deckGroups.integration.browser.mjs",
-    "test:sharing": "node tests/deckSharing.browser.mjs"
+    "test:sharing": "node tests/deckSharing.browser.mjs",
+    "test:dictionary": "node tests/dictionary.browser.mjs",
+    "test:dictionary:integration": "node tests/dictionary.integration.browser.mjs",
+    "test:dictionary:benchmark": "node tests/dictionary.benchmark.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -30,6 +33,7 @@
     "tailwind-merge": "^3.6.0",
     "three": "^0.186.1",
     "ts-fsrs": "5.4.2",
+    "wanakana": "^5.3.1",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "devDependencies": {

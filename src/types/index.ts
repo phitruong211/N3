@@ -357,6 +357,7 @@ export interface AppSettings {
 // ─── Navigation ─────────────────────────────────────────────
 
 export type PageId =
+  | 'dictionary'
   | 'dashboard'
   | 'vocabulary'
   | 'kanji'

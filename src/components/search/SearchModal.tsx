@@ -10,11 +10,13 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useApp } from '@/hooks/useApp';
-import { Search, X, BookOpen, Languages, GraduationCap } from 'lucide-react';
+import { Search, X, BookOpen, Languages, GraduationCap, ArrowRight } from 'lucide-react';
 import Fuse from 'fuse.js';
 import type { SearchResult } from '@/types';
+import { useNavigate } from 'react-router-dom';
 
 export function SearchModal() {
+  const navigate = useNavigate();
   const { searchOpen, setSearchOpen, vocabulary, kanji, grammar, selectSearchResult } = useApp();
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -180,6 +182,7 @@ export function SearchModal() {
           </div>
 
           {/* Results */}
+          <button className="w-full flex items-center gap-3 text-left px-4 py-3 text-sm border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]" onClick={() => { setSearchOpen(false); navigate(`/dictionary${query.trim() ? `?q=${encodeURIComponent(query)}` : ''}`); }}><BookOpen size={17}/>Tra {query.trim() ? `“${query}” ` : ''}trong từ điển<ArrowRight size={16}/></button>
           <div className="max-h-[65vh] overflow-y-auto" role="listbox" aria-label="Kết quả tìm kiếm">
             {query.trim() && results.length === 0 && (
               <div className="px-4 py-8 text-center text-sm text-[var(--color-text-tertiary)]">

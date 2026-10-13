@@ -4,7 +4,7 @@ export interface ShareLink { token: string | null }
 export interface SharedDeckPreview {
   name: string; description: string | null; author: string; cardCount: number;
   previewCount: number; page: number; size: number; totalPages: number;
-  cards: Array<{ front: string; back: string; reading: string | null; kind: string }>;
+  cards: Array<{ front: string; back: string; reading: string | null; kind: string; dictionarySource?: boolean }>;
 }
 export const shareStatus = (id: string) => apiRequest<ShareLink>(`/decks/${id}/share`);
 export const enableShare = (id: string) => apiRequest<ShareLink>(`/decks/${id}/share`, { method: 'PUT' });

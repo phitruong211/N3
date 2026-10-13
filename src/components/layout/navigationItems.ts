@@ -12,6 +12,7 @@ export const PRIMARY_NAV_ITEMS: NavigationItem[] = [
 ];
 
 export const SECONDARY_NAV_ITEMS: NavigationItem[] = [
+  { page: 'dictionary', label: 'Từ điển', icon: BookOpen },
   { page: 'progress', label: 'Tiến độ', icon: ChartNoAxesCombined, shortcut: 'G P' },
   { page: 'bookmarks', label: 'Đã lưu', icon: Bookmark, shortcut: 'G B' },
 ];

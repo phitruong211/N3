@@ -23,6 +23,7 @@ artifacts/deck-sharing/
 !.vscode/extensions.json
 .idea
 .DS_Store
+artifacts/dictionary/
 *.suo
 *.ntvs*
 *.njsproj

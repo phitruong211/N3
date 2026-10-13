@@ -1,6 +1,7 @@
 import type { PageId } from '../types/index.ts';
 
 export const PAGE_PATHS: Record<PageId, string> = {
+  dictionary: '/dictionary',
   dashboard: '/today',
   vocabulary: '/library/vocabulary',
   grammar: '/library/grammar',

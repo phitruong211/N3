@@ -117,6 +117,14 @@ export function ImportedDecks({
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [reload, setReload] = useState(0);
+  useEffect(() => {
+    if (!user) return;
+    const refresh = () => setReload(value => value + 1);
+    const changed = (event: StorageEvent) => { if (event.key === `dictionary:deck-changed:${user.id}`) refresh(); };
+    window.addEventListener('dictionary-deck-changed', refresh);
+    window.addEventListener('storage', changed);
+    return () => { window.removeEventListener('dictionary-deck-changed', refresh); window.removeEventListener('storage', changed); };
+  }, [user]);
   const editExisting = useRef(false);
   const [editing, setEditing] = useState<ImportedCard | null>(null);
   const [selected, setSelected] = useState<string[]>([]);
