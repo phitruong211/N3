@@ -10,6 +10,8 @@ Lưu lại cùng nguồn trả về bản đã có, kể cả qua liên kết m�
 
 ## API
 
+Trang liên kết mặc định mở **Học thử**: lật thẻ để xem nghĩa, chuyển thẻ bằng nút, phím mũi tên hoặc vuốt trên điện thoại; Space/Enter để lật. Ô **Số thẻ** cho phép đến trực tiếp thẻ bất kỳ trong nửa bộ được xem trước. **Danh sách** hiển thị từ, cách đọc và nghĩa theo từng trang; bấm một từ để mở thẻ tương ứng. Chuyển chế độ giữ vị trí đang xem. Học thử không ghi tiến độ hoặc lịch ôn.
+
 - `GET /api/v1/decks/{id}/share`: trạng thái, chỉ chủ bộ.
 - `PUT /api/v1/decks/{id}/share`: tạo/giữ liên kết, chỉ chủ bộ import.
 - `DELETE /api/v1/decks/{id}/share`: thu hồi liên kết, trả 204.
