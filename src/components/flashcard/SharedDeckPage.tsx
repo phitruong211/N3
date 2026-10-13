@@ -5,6 +5,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { saveSharedDeck, sharedDeckPreview, type SharedDeckPreview } from '@/lib/deckSharing';
 import { SharedDeckContent } from './SharedDeckContent';
+import { AppLoading } from '@/components/ui/AppLoading';
 
 export function SharedDeckPage() {
   const { token = '' } = useParams();
@@ -52,7 +53,7 @@ export function SharedDeckPage() {
   return <main className="min-h-screen bg-[var(--color-bg)] px-4 py-8 text-[var(--color-text)] sm:py-12">
     <div className="mx-auto max-w-3xl space-y-6">
       <Link to="/today" className="inline-flex items-center gap-3 font-semibold"><img src="/so-nhat-mark.svg" alt="" className="h-10 w-10"/>SỔ NHẬT</Link>
-      {loading && !deck ? <div className="study-panel" role="status">Đang mở bộ thẻ được chia sẻ…</div> : deck && <>
+      {loading && !deck ? <AppLoading message="Đang mở bộ thẻ được chia sẻ…"/> : deck && <>
         <section className="study-panel space-y-2">
           <p className="study-eyebrow flex items-center gap-2"><BookOpen size={16}/>BỘ THẺ ĐƯỢC CHIA SẺ</p>
           <h1 className="text-2xl font-semibold break-words">{deck.name}</h1>

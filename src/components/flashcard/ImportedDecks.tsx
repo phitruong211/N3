@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useSearchParams } from 'react-router-dom';
 import { DeckShareDialog } from './DeckShareDialog';
+import { AppLoading } from '@/components/ui/AppLoading';
 import { useAuth } from "@/hooks/useAuth";
 import { useApp, useLearningStorage } from "@/hooks/useApp";
 import {
@@ -790,7 +791,7 @@ export function ImportedDecks({
             </div>
           )}
           {loading ? (
-            <p role="status">Đang tải thẻ…</p>
+            <AppLoading message="Đang tải thẻ…"/>
           ) : cards.content.length ? (
             cards.content.map((c) => (
               <article
@@ -1065,7 +1066,7 @@ export function ImportedDecks({
               {mode === "free" ? "Bạn có thể bắt đầu tạo bộ; hệ thống sẽ yêu cầu đăng nhập khi lưu." : "Đăng nhập để xem lịch ôn của các bộ thẻ cá nhân."}
             </p>
           )}
-          {user && loading && <p role="status">Đang tải bộ thẻ…</p>}
+          {user && loading && !active && <AppLoading message="Đang tải bộ thẻ…"/>}
           {user && (
             <Pagination
               value={deckPage}

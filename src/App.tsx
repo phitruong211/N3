@@ -17,6 +17,7 @@ import { NotFoundPage } from '@/components/layout/NotFoundPage';
 import { resolveInitialPath } from '@/lib/navigation';
 import { LibraryLayout } from '@/components/library/LibraryLayout';
 import { SharedDeckPage } from '@/components/flashcard/SharedDeckPage';
+import { AppLoading } from '@/components/ui/AppLoading';
 
 const Dashboard = lazy(() => import('@/components/dashboard/Dashboard').then((module) => ({ default: module.Dashboard })));
 const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage').then((module) => ({ default: module.VocabularyPage })));
@@ -34,14 +35,7 @@ function AppContent() {
   const { loading, loadError, retryLoad, learningSync } = useApp();
 
   if (loading || !learningSync.initialized) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-[var(--color-bg)]">
-        <div className="text-center space-y-3">
-          <div className="flex items-center justify-center gap-3 text-2xl font-bold tracking-wide text-[var(--color-text)]"><img src="/so-nhat-mark.svg" alt="" className="h-12 w-12 object-contain" />SỔ NHẬT</div>
-          <div className="text-sm text-[var(--color-text-tertiary)]">Đang tải nội dung học…</div>
-        </div>
-      </div>
-    );
+    return <AppLoading fullScreen message="Đang chuẩn bị nội dung học…"/>;
   }
 
   if (loadError) {
@@ -56,7 +50,7 @@ function AppContent() {
   return (
     <MainLayout>
       <SessionNotices />
-      <Suspense fallback={<div className="py-16 text-center text-sm text-[var(--color-text-secondary)]" role="status">Đang mở bài học…</div>}>
+      <Suspense fallback={<AppLoading message="Đang mở bài học…"/>}>
         <Routes>
           <Route path="/" element={<RootRedirect />} />
           <Route path="/today" element={<Dashboard />} />
@@ -95,7 +89,7 @@ function AuthGate() {
   const location = useLocation();
   const { user, mode, loading, restoreError, retryRestore, sessionKey } = useAuth();
   if (/^\/shared\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/shared/:token" element={<SharedDeckPage />}/></Routes><AuthDialog /></>;
-  if (loading) return <div className="flex min-h-screen items-center justify-center bg-[var(--color-bg)]"><p className="study-copy">Đang khôi phục phiên đăng nhập…</p></div>;
+  if (loading) return <AppLoading fullScreen message="Đang mở không gian học của bạn…"/>;
   if (!user && restoreError && hasSession()) return <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-6 bg-[var(--color-bg)]"><p className="study-copy max-w-md text-center" role="alert">{restoreError}</p><button className="study-button study-button-primary" onClick={retryRestore}>Thử kết nối lại</button></div>;
   if (mode === 'unauthenticated') return <AuthPage />;
   return <><AppProvider key={sessionKey}><AppContent /></AppProvider><AuthDialog /></>;

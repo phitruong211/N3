@@ -6,10 +6,23 @@
     <meta name="description" content="SỔ NHẬT — học tiếng Nhật mỗi ngày với từ vựng, ngữ pháp, kanji và lịch ôn N2/N3/N4." />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/svg+xml" href="/so-nhat-mark.svg" />
+    <link rel="stylesheet" href="/loading.css" />
     <title>SỔ NHẬT · Học tiếng Nhật mỗi ngày</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="nhat-loading nhat-loading-screen" role="status" aria-live="polite" aria-atomic="true">
+        <div class="nhat-loading-art" aria-hidden="true">
+          <span class="nhat-loading-halo"></span><span class="nhat-loading-orbit"></span>
+          <span class="nhat-loading-spark nhat-loading-spark-one"></span><span class="nhat-loading-spark nhat-loading-spark-two"></span>
+          <div class="nhat-loading-book"><img src="/so-nhat-mark.svg" alt="" width="80" height="80" /><span class="nhat-loading-page"></span></div>
+          <span class="nhat-loading-shadow"></span>
+        </div>
+        <p class="nhat-loading-brand">SỔ NHẬT<span>MỖI NGÀY, MỘT TRANG MỚI</span></p>
+        <p class="nhat-loading-message">Đang mở không gian học của bạn…</p>
+        <span class="nhat-loading-track" aria-hidden="true"><span></span></span>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
