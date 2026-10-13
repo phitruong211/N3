@@ -20,7 +20,7 @@ export type DeckCardProps = {
 
 export function DeckCard({ summary, badge, description, primaryLabel, primaryDisabled, onPrimary, metrics, hideProgress, actions, draggable, onDragStart, onDrop }: DeckCardProps) {
   const muted = summary.totalCards === 0;
-  return <article className="study-panel flex min-h-56 flex-col transition-[border-color,transform] duration-150 hover:border-[var(--color-border-strong)]" draggable={draggable} onDragStart={onDragStart} onDragOver={event => draggable && event.preventDefault()} onDrop={onDrop}>
+  return <article className="study-panel deck-hover-card flex min-h-56 flex-col transition-[border-color,transform] duration-150 hover:border-[var(--color-border-strong)]" draggable={draggable} onDragStart={onDragStart} onDragOver={event => draggable && event.preventDefault()} onDrop={onDrop}>
     <div className="flex items-start justify-between gap-3">
       <ContentBadge tone={badge.tone === 'neutral' ? undefined : badge.tone}>{badge.label}</ContentBadge>
       {actions?.length ? <OverflowMenu label={`Tùy chọn ${summary.name}`} actions={actions}/> : null}
@@ -30,7 +30,7 @@ export function DeckCard({ summary, badge, description, primaryLabel, primaryDis
     <p className={`mt-4 flex items-baseline gap-1.5 ${muted ? 'text-[var(--color-text-tertiary)]' : ''}`}><strong className="text-4xl font-semibold tracking-tight">{summary.totalCards}</strong><span className="text-sm">thẻ</span></p>
     {metrics?.length ? <DeckProgressGrid metrics={metrics}/> : hideProgress ? null : <p className="mt-1 text-xs text-[var(--color-text-tertiary)]">{summary.newCount} mới · {summary.dueCount} đến hạn</p>}
     <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
-      <button className={`text-left text-sm font-semibold ${primaryDisabled ? 'cursor-default text-[var(--color-text-tertiary)]' : 'text-[var(--color-accent)] hover:underline'}`} disabled={primaryDisabled} onClick={onPrimary}>{primaryLabel}</button>
+      <button className={`deck-study-action text-left text-sm font-semibold ${primaryDisabled ? 'cursor-default text-[var(--color-text-tertiary)]' : 'text-[var(--color-accent)] hover:underline'}`} disabled={primaryDisabled} onClick={onPrimary}>{primaryLabel}</button>
     </div>
   </article>;
 }

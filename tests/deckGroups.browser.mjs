@@ -9,6 +9,7 @@ server.middlewares.use(async (request, response, next) => {
   const html = `<html><body><div id="root"></div><script type="module">
     import React,{useState,useEffect} from 'react'; import {createRoot} from 'react-dom/client';
     import {DeckGroups} from '/src/components/flashcard/DeckGroups.tsx';
+    import {createLearningStorage} from '/src/lib/storage.ts'; const storage=createLearningStorage('user:fixture');
     import {listDeckPage} from '/src/lib/deckApi.ts'; import {currentUser} from '/src/lib/api.ts'; import '/src/index.css';
     localStorage.setItem('auth:refresh_token','fixture');localStorage.setItem('auth:access_token','fixture');
     await currentUser();
@@ -16,7 +17,7 @@ server.middlewares.use(async (request, response, next) => {
       useEffect(()=>{ listDeckPage(0,'position,asc',null).then(p=>setDecks(p.content)); },[reload]);
       const h=React.createElement;
       return h('main',{style:{maxWidth:1120,margin:'40px auto',padding:20}},h('h1',null,'Thư viện của bạn'),h('button',{className:'study-button',onClick:()=>setMode(mode==='free'?'scheduled':'free')},'Đổi chế độ'),
-        h(DeckGroups,{rootDecks:decks,reload,mode,busy:false,onChange:()=>setReload(v=>v+1),renderDeck:deck=>h('article',{className:'study-panel'},h('h3',null,deck.name),h('p',null,deck.cardCount+' thẻ'),h('button',{className:'study-button',onClick:()=>window.started=deck.id},mode==='free'?'Bắt đầu học':'Ôn ngay'))}));
+        h(DeckGroups,{rootDecks:decks,reload,mode,busy:false,storage,onChange:()=>setReload(v=>v+1),renderDeck:(deck,menu)=>h('article',{className:'study-panel deck-hover-card'},menu,h('h3',null,deck.name),h('p',null,deck.cardCount+' thẻ'),h('button',{className:'study-button',onClick:()=>window.started=deck.id},mode==='free'?'Bắt đầu học':'Ôn ngay'))}));
     }createRoot(document.getElementById('root')).render(React.createElement(App));
   </script></body></html>`;
   response.setHeader('Content-Type', 'text/html'); response.end(await server.transformIndexHtml(request.url, html));
@@ -64,24 +65,34 @@ try {
   assert.equal(await page.getByRole('heading',{name:'Bài 2 · Cuộc sống'}).count(),0);
   await page.getByRole('button',{name:/Từ vựng N3.*1 bộ/}).click();
   await page.getByRole('heading',{name:'Bài 2 · Cuộc sống'}).waitFor();
+  const studyButton=await folder().getByRole('button',{name:'Bắt đầu học'}).boundingBox();
+  await page.mouse.move(studyButton.x+10,studyButton.y+10);await page.mouse.down();await page.mouse.move(studyButton.x+45,studyButton.y+15);
+  assert.equal(await page.locator('.deck-drag-preview').count(),0);await page.mouse.up();
   await folder().getByRole('button',{name:'Bắt đầu học'}).click(); assert.equal(await page.evaluate(()=>window.started),'d2');
   await page.getByRole('button',{name:'Đổi chế độ'}).click();
   await folder().getByRole('button',{name:'Ôn ngay'}).click(); assert.equal(await page.evaluate(()=>window.started),'d2');
   assert.match(await folder().innerText(),/3 cần ôn/);
-  // Native select offers a keyboard/touch alternative.
-  await page.getByRole('combobox',{name:'Chuyển nhóm cho Bài 1 · Khởi đầu'}).selectOption('g1');
+  async function moveByMenu(name, groupId) {
+    await page.getByRole('button',{name:'Thao tác với bộ '+name,exact:true}).click();
+    await page.getByRole('menuitem',{name:'Chuyển đến nhóm…'}).click();
+    await page.getByRole('combobox',{name:'Chuyển nhóm cho '+name}).selectOption(groupId);
+    await page.getByRole('button',{name:'Chuyển nhóm',exact:true}).click();
+  }
+  // Menu offers a keyboard/touch alternative.
+  await moveByMenu('Bài 1 · Khởi đầu','g1');
   await page.waitForFunction(()=>document.querySelector('.deck-folder-toggle').textContent.includes('2 bộ'));
   assert.equal(moveCount,1);
   failNextMove=true;
-  await page.getByRole('combobox',{name:'Chuyển nhóm cho Bài 1 · Khởi đầu'}).selectOption('');
-  await page.getByRole('alert').waitFor(); assert.equal(decks[0].groupId,'g1');
+  await moveByMenu('Bài 1 · Khởi đầu','');
+  await page.getByRole('dialog').getByRole('alert').waitFor();
+  await page.getByRole('button',{name:'Hủy',exact:true}).click(); assert.equal(decks[0].groupId,'g1');
   await page.getByRole('button',{name:'Thử lại',exact:true}).click();
-  await page.getByRole('combobox',{name:'Chuyển nhóm cho Bài 1 · Khởi đầu'}).selectOption('');
+  await moveByMenu('Bài 1 · Khởi đầu','');
   await page.waitForFunction(()=>document.querySelector('.deck-root-zone h3')?.textContent==='Bài 1 · Khởi đầu');
   // Drag into a closed folder: hover opens it, drop persists the move.
   await page.getByRole('button',{name:/Từ vựng N3.*1 bộ/}).click();
-  const dragHandle=page.getByRole('button',{name:'Kéo bộ Bài 1 · Khởi đầu',exact:true});
-  await page.waitForFunction(()=>!document.querySelector('.deck-root-zone .deck-drag-handle')?.disabled);
+  const dragHandle=page.getByRole('heading',{name:'Bài 1 · Khởi đầu',exact:true});
+  await page.waitForFunction(()=>document.querySelector('.deck-groups-library').getAttribute('aria-busy')==='false');
   await dragHandle.hover();
   const handle=await dragHandle.boundingBox();
   const target=await page.locator('.deck-folder-toggle').boundingBox();
@@ -92,37 +103,69 @@ try {
   await page.waitForFunction(()=>document.querySelector('.deck-folder-toggle').textContent.includes('2 bộ'));
   assert.equal(moveCount,3);
   // Escape cancels without a network mutation.
-  const cancelHandle=await page.getByRole('button',{name:'Kéo bộ Bài 1 · Khởi đầu',exact:true}).boundingBox();
+  const cancelHandle=await page.getByRole('heading',{name:'Bài 1 · Khởi đầu',exact:true}).boundingBox();
   await page.mouse.move(cancelHandle.x+10,cancelHandle.y+10);await page.mouse.down();await page.mouse.move(cancelHandle.x+50,cancelHandle.y+40);
   await page.keyboard.press('Escape');await page.mouse.up();assert.equal(moveCount,3);
-  await page.getByRole('button',{name:'Tạo nhóm',exact:true}).click();
+  await page.getByRole('button',{name:'Tạo mới',exact:true}).click();
+  await page.getByRole('menuitem',{name:'Tạo nhóm',exact:true}).click();
   await page.getByRole('textbox',{name:'Tên nhóm'}).fill('Ngữ pháp');await page.getByRole('button',{name:'Lưu nhóm'}).click();
   await page.getByRole('button',{name:/Ngữ pháp.*0 bộ/}).waitFor();
-  await page.getByLabel('Thao tác nhóm Ngữ pháp').click();await page.getByRole('button',{name:'Đổi tên',exact:true}).click();
+  await page.getByLabel('Thao tác nhóm Ngữ pháp').click();await page.getByRole('menuitem',{name:'Đổi tên',exact:true}).click();
   await page.getByRole('textbox',{name:'Tên nhóm'}).fill('Luyện thi');await page.getByRole('button',{name:'Lưu nhóm'}).click();
   await page.getByRole('button',{name:/Luyện thi.*0 bộ/}).waitFor();
+  // Resize is live, persistent, cancellable and keyboard accessible.
+  const sizeKey = 'user:fixture:deck-group-sizes-v1';
+  const resize = page.getByRole('button',{name:'Đổi kích thước nhóm Từ vựng N3',exact:true});
+  let before = await folder().first().boundingBox();
+  let grip = await resize.boundingBox();
+  await page.mouse.move(grip.x+grip.width/2,grip.y+grip.height/2);await page.mouse.down();
+  await page.mouse.move(grip.x+grip.width/2-500,grip.y+grip.height/2+100,{steps:8});
+  assert.equal(await page.locator('.deck-drag-preview').count(),0);
+  await page.mouse.up();
+  const saved = await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,sizeKey);
+  assert.ok(saved.width < before.width-450); assert.ok(saved.height >= before.height+90);
+  before = await folder().first().boundingBox();grip = await resize.boundingBox();
+  await page.mouse.move(grip.x+20,grip.y+20);await page.mouse.down();await page.mouse.move(grip.x-80,grip.y+70);
+  await page.keyboard.press('Escape');await page.mouse.up();
+  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,sizeKey),saved);
+  assert.ok(Math.abs((await folder().first().boundingBox()).width-before.width)<2);
+  await resize.focus();await page.keyboard.press('ArrowRight');
+  assert.equal((await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,sizeKey)).width,saved.width+10);
+  await page.reload();await page.getByRole('button',{name:/Từ vựng N3.*2 bộ/}).click();
+  await page.getByRole('heading',{name:'Bài 1 · Khởi đầu'}).waitFor();
+  assert.ok(Math.abs((await folder().first().boundingBox()).width-(saved.width+10))<2);
+  // Resizing does not clip portaled menus; Escape restores trigger focus.
+  const menuTrigger=page.getByRole('button',{name:'Thao tác với bộ Bài 1 · Khởi đầu',exact:true});
+  await menuTrigger.click();await page.getByRole('menuitem',{name:'Chuyển đến nhóm…'}).waitFor();
+  assert.equal(await page.getByRole('menu').evaluate(el=>el.parentElement===document.body),true);
+  await page.keyboard.press('Escape');assert.equal(await menuTrigger.evaluate(el=>el===document.activeElement),true);
+  // Keep the mobile touch fixture compact after testing stored dimensions.
+  await page.getByLabel('Thao tác nhóm Từ vựng N3').click();
+  await page.getByRole('menuitem',{name:'Đặt lại kích thước'}).click();
+  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,sizeKey),undefined);
   await mkdir('artifacts/deck-groups',{recursive:true});
   await page.screenshot({path:'artifacts/deck-groups/desktop.png',fullPage:true});
   await page.setViewportSize({width:390,height:844});await page.emulateMedia({reducedMotion:'reduce'});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.screenshot({path:'artifacts/deck-groups/mobile.png',fullPage:true});
-  const touchHandle = await page.getByRole('button',{name:'Kéo bộ Bài 1 · Khởi đầu',exact:true}).boundingBox();
-  const touchTarget = await page.getByRole('button',{name:/Luyện thi.*0 bộ/}).boundingBox();
+  await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
+  const touchHandle = await page.getByRole('heading',{name:'Bài 1 · Khởi đầu',exact:true}).boundingBox();
   const cdp = await page.context().newCDPSession(page);
   await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:touchHandle.x+12,y:touchHandle.y+12}]});
-  await page.waitForTimeout(280); // Touch hold activation threshold is 240 ms.
+  await page.waitForTimeout(500); // Hold (240 ms) plus drop-zone layout transition.
+  const touchTarget = await page.getByRole('button',{name:/Luyện thi.*0 bộ/}).boundingBox();
   await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:touchTarget.x+80,y:touchTarget.y+20}]});
-  await page.waitForFunction(()=>document.querySelectorAll('.deck-folder.is-target').length===1);
+  await page.waitForFunction(()=>document.querySelectorAll('.deck-folder.is-target').length===1,undefined,{timeout:5000});
   await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
   await page.getByRole('button',{name:/Luyện thi.*1 bộ/}).waitFor();
   assert.equal(decks[0].groupId,'g2');
   await page.getByRole('button',{name:/Luyện thi.*1 bộ/}).click();
-  await page.getByRole('combobox',{name:'Chuyển nhóm cho Bài 1 · Khởi đầu'}).selectOption('g1');
+  await moveByMenu('Bài 1 · Khởi đầu','g1');
   await page.getByRole('button',{name:/Từ vựng N3.*2 bộ/}).waitFor();
-  await page.getByLabel('Thao tác nhóm Từ vựng N3').click();await page.getByRole('button',{name:'Giải tán nhóm',exact:true}).click();
+  await page.getByLabel('Thao tác nhóm Từ vựng N3').click();await page.getByRole('menuitem',{name:'Giải tán nhóm',exact:true}).click();
   await page.getByRole('button',{name:'Giải tán',exact:true}).click();
   await page.waitForFunction(()=>document.querySelectorAll('.deck-root-zone h3').length===2);
   assert.equal(decks.every(d=>d.groupId===null),true);
   assert.deepEqual(errors,[]);
-  console.log('PASS: groups CRUD, both study actions, move, rollback, hover-open drag, Escape, dissolve, mobile touch drag and reduced motion');
+  console.log('PASS: resize/persistence/cancel/keyboard, portal menus, groups CRUD, both study actions, move, rollback, hover-open drag, Escape, dissolve, mobile touch drag and reduced motion');
 } finally { await browser?.close(); await server.close(); }

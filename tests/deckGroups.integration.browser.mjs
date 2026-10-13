@@ -18,12 +18,28 @@ try {
   const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(base+'/decks');
   await page.getByRole('heading',{name:'Bài 1 · Cơ duyên'}).waitFor();
-  await page.getByRole('button',{name:'Tạo nhóm',exact:true}).click();
+  await page.getByRole('button',{name:'Tạo mới',exact:true}).click();
+  assert.deepEqual(await page.getByRole('menuitem').allTextContents(),['Tạo bộ thẻ','Nhập từ tệp','Tạo nhóm']);
+  await page.getByRole('menuitem',{name:'Tạo bộ thẻ',exact:true}).click();
+  await page.getByRole('heading',{name:'Bạn muốn tạo bộ thế nào?'}).waitFor();
+  await page.getByRole('button',{name:'Đóng form tạo bộ thẻ'}).click();
+  await page.getByRole('button',{name:'Tạo mới',exact:true}).click();
+  const chooserEvent=page.waitForEvent('filechooser');
+  await page.getByRole('menuitem',{name:'Nhập từ tệp',exact:true}).click();
+  await (await chooserEvent).setFiles({name:'menu-import.csv',mimeType:'text/csv',buffer:Buffer.from('front,back\n猫,mèo')});
+  await page.getByRole('heading',{name:'Kiểm tra dữ liệu import'}).waitFor();
+  await page.getByRole('button',{name:'Đóng form tạo bộ thẻ'}).click();
+  await page.getByRole('button',{name:'Tạo mới',exact:true}).click();
+  await page.getByRole('menuitem',{name:'Tạo nhóm',exact:true}).click();
   await page.getByRole('textbox',{name:'Tên nhóm'}).fill('N3 · Mỗi ngày một bài');await page.getByRole('button',{name:'Lưu nhóm'}).click();
   await page.getByRole('button',{name:/N3 · Mỗi ngày một bài.*0 bộ/}).waitFor();
   const groupResponse=await context.request.get(base+'/api/v1/deck-groups',{headers});
   const [group]=await groupResponse.json();
+  await page.getByRole('button',{name:'Thao tác với bộ Bài 1 · Cơ duyên'}).click();
+  assert.deepEqual(await page.getByRole('menuitem').allTextContents(),['Quản lý thẻ','Chuyển đến nhóm…','Tùy chỉnh giao diện']);
+  await page.getByRole('menuitem',{name:'Chuyển đến nhóm…'}).click();
   await page.getByRole('combobox',{name:'Chuyển nhóm cho Bài 1 · Cơ duyên'}).selectOption(group.id);
+  await page.getByRole('button',{name:'Chuyển nhóm',exact:true}).click();
   await page.getByRole('button',{name:/N3 · Mỗi ngày một bài.*1 bộ/}).click();
   const folder=page.locator('.deck-folder');
   await folder.getByRole('heading',{name:'Bài 1 · Cơ duyên'}).waitFor();
@@ -39,14 +55,24 @@ try {
   await mkdir('artifacts/deck-groups',{recursive:true});
   await page.getByRole('region',{name:'Bộ thẻ của bạn'}).screenshot({path:'artifacts/deck-groups/app-library.png',animations:'disabled'});
   await page.screenshot({path:'artifacts/deck-groups/app-desktop.png',fullPage:true,animations:'disabled'});
+  // Persist an actual group size, render dark mode and clamp it on mobile.
+  const grip=await page.getByRole('button',{name:'Đổi kích thước nhóm N3 · Mỗi ngày một bài'}).boundingBox();
+  await page.mouse.move(grip.x+20,grip.y+20);await page.mouse.down();await page.mouse.move(grip.x-380,grip.y+50,{steps:10});await page.mouse.up();
+  const resized=await folder.boundingBox();
+  await page.reload();await page.getByRole('button',{name:/N3 · Mỗi ngày một bài.*1 bộ/}).click();
+  assert.ok(Math.abs((await folder.boundingBox()).width-resized.width)<2);
+  await page.evaluate(()=>{document.documentElement.classList.remove('light');document.documentElement.classList.add('dark');});
+  await page.mouse.move(0,0);
+  await page.getByRole('region',{name:'Bộ thẻ của bạn'}).screenshot({path:'artifacts/deck-groups/app-library-dark.png',animations:'disabled'});
+
   await page.setViewportSize({width:390,height:844});
   await page.screenshot({path:'artifacts/deck-groups/app-mobile.png',fullPage:true,animations:'disabled'});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.getByLabel('Thao tác nhóm N3 · Mỗi ngày một bài').click();
-  await page.getByRole('button',{name:'Giải tán nhóm',exact:true}).click();await page.getByRole('button',{name:'Giải tán',exact:true}).click();
+  await page.getByRole('menuitem',{name:'Giải tán nhóm',exact:true}).click();await page.getByRole('button',{name:'Giải tán',exact:true}).click();
   await page.locator('.deck-root-zone').getByRole('heading',{name:'Bài 1 · Cơ duyên'}).waitFor();
   const after=await (await context.request.get(base+'/api/v1/decks/'+original.deck.id,{headers})).json();
   assert.equal(after.deck.groupId,null);assert.deepEqual(after.cards.map(c=>c.id),original.cards.map(c=>c.id));
   assert.deepEqual(errors,[]);
-  console.log('PASS: real MySQL/API + ImportedDecks, group persistence across reload/routes, free/SRS sessions and dissolve preserving cards');
+  console.log('PASS: create/import menu, deck menu, resize persistence, dark/mobile layout, real MySQL/API + ImportedDecks, group persistence across reload/routes, free/SRS sessions and dissolve preserving cards');
 } finally {await browser.close();}

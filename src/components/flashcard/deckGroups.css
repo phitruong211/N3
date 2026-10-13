@@ -8,24 +8,13 @@
 .deck-folder-chevron { flex-shrink:0; transition:transform 180ms; }
 .deck-folder-chevron.is-open { transform:rotate(180deg); }
 .deck-folder-content { padding:0 18px 18px; animation:deck-folder-open 180ms ease-out; }
-.deck-folder-menu { position:relative; }
-.deck-folder-menu summary { cursor:pointer; list-style:none; border-radius:8px; padding:10px; }
-.deck-folder-menu summary::-webkit-details-marker { display:none; }
-.deck-folder-menu[open] { z-index:30; }
-.deck-folder-menu>div { position:absolute; right:0; width:170px; padding:6px; border:1px solid var(--color-border); background:var(--color-surface); box-shadow:0 10px 28px #0002; border-radius:12px; }
-.deck-folder-menu button { display:block; width:100%; text-align:left; padding:10px; font-size:14px; border-radius:8px; }
-.deck-folder-menu button:hover { background:var(--color-surface-alt); }
 .deck-groups-library button:disabled { opacity:.5; cursor:default; }
 .deck-root-zone { border:1px solid transparent; border-radius:18px; min-height:48px; transition:border-color 180ms,box-shadow 180ms; }
 .deck-root-heading { display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; padding:8px 0 16px; font-size:13px; color:var(--color-text-secondary); }
 .deck-root-zone.is-target .deck-root-heading { padding-left:12px; }
 .deck-group-entry { position:relative; display:flex; flex-direction:column; min-width:0; transition:opacity 180ms,transform 180ms; }
-.deck-group-entry>article { flex:1; border-top-left-radius:0; border-top-right-radius:0; }
+.deck-group-entry>article { flex:1; border-radius:16px; }
 .deck-group-entry.is-dragging { opacity:.35; transform:scale(.98); }
-.deck-group-tools { display:flex; align-items:center; gap:8px; background:var(--color-surface-alt); border:1px solid var(--color-border); border-bottom:0; border-radius:16px 16px 0 0; padding:5px 10px; }
-.deck-group-tools select { min-width:0; flex:1; font-size:12px; background:transparent; color:var(--color-text-secondary); padding:7px; border-radius:6px; }
-.deck-drag-handle { touch-action:none; cursor:grab; padding:7px; color:var(--color-text-tertiary); border-radius:6px; }
-.deck-drag-handle:active { cursor:grabbing; }
 .deck-insert-zone { position:absolute; left:0; right:0; top:-10px; height:0; z-index:10; pointer-events:none; }
 .deck-insert-zone.is-active { height:22px; pointer-events:auto; }
 .deck-insert-zone span { display:none; }
@@ -45,3 +34,36 @@
 .deck-end-zone { height:32px; margin-top:8px; padding:5px 12px; border:1px dashed var(--color-border); border-radius:10px; text-align:center; font-size:13px; color:var(--color-text-secondary); visibility:hidden; pointer-events:none; }
 .deck-end-zone.is-active { visibility:visible; pointer-events:auto; }
 .deck-end-zone.is-target { border-color:var(--color-accent); color:var(--color-accent); background:color-mix(in srgb,var(--color-accent) 8%,var(--color-surface)); }
+
+/* Library controls share one anchor; cards keep their study action visible. */
+.deck-library-toolbar { display:flex; justify-content:flex-end; }
+.deck-library-hint { font-size:12px; line-height:1.6; color:var(--color-text-tertiary); }
+.deck-folder-grid { display:flex; flex-wrap:wrap; align-items:flex-start; gap:16px; min-width:0; }
+.deck-folder { position:relative; display:flex; flex-direction:column; flex:0 0 auto; width:100%; max-width:100%; min-width:0; }
+.deck-folder.is-open { padding-bottom:24px; }
+.deck-folder-header { flex-shrink:0; }
+.deck-folder-toggle { min-height:72px; }
+.deck-folder-content { min-height:0; flex:1 1 auto; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
+.deck-responsive-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr)); gap:14px; }
+.deck-root-zone .deck-responsive-grid { grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr)); }
+.deck-group-entry { cursor:grab; }
+.deck-group-entry button { cursor:pointer; }
+.deck-group-entry button:disabled { cursor:default; }
+.deck-group-entry.is-dragging { cursor:grabbing; }
+.deck-end-zone:not(.is-active) { display:none; }
+.deck-resize-handle { position:absolute; bottom:0; right:0; width:44px; height:44px; display:flex; align-items:flex-end; justify-content:flex-end; padding:7px; color:var(--color-text-tertiary); border-radius:8px 0 17px 0; cursor:nwse-resize; touch-action:none; }
+.deck-resize-handle:hover,.deck-resize-handle:focus-visible { color:var(--color-accent); background:color-mix(in srgb,var(--color-accent) 8%,transparent); }
+.deck-folder.is-resizing { border-color:var(--color-accent); box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 12%,transparent); }
+.deck-study-action { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:10px 15px; border-radius:10px; background:color-mix(in srgb,var(--color-accent) 10%,var(--color-surface)); text-decoration:none!important; }
+.deck-study-action:hover:not(:disabled) { background:color-mix(in srgb,var(--color-accent) 17%,var(--color-surface)); }
+.deck-study-action:disabled { background:var(--color-surface-alt); }
+.deck-hover-card { transition:background-color 180ms,border-color 180ms,box-shadow 180ms; transform-origin:center; }
+@media(hover:hover) and (pointer:fine) {
+  .deck-hover-card:hover { background:color-mix(in srgb,var(--color-accent) 5%,var(--color-surface)); border-color:var(--color-border-strong); box-shadow:0 8px 24px #0000000d; animation:deck-hover-wiggle 260ms ease-out; }
+}
+@keyframes deck-hover-wiggle { 0%,100% { transform:rotate(0); } 25% { transform:rotate(-.4deg); } 65% { transform:rotate(.4deg); } }
+.is-drag-active .deck-hover-card,.is-resizing .deck-hover-card { animation:none!important; }
+[data-reduced-motion=true] .deck-hover-card { animation:none!important; transition:none; }
+[data-reduced-motion=true] .deck-folder-content { animation:none!important; }
+@media(prefers-reduced-motion:reduce) { .deck-hover-card { animation:none!important; transition:none!important; } }
+@media(max-width:600px) { .deck-folder-header { padding-right:6px; } .deck-folder-toggle { gap:9px; padding:10px; } .deck-folder-icon { padding:8px; } }

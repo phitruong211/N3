@@ -47,11 +47,12 @@ import { buildFreeStudyQueue, lessonOptions } from "@/lib/studySetup";
 import { DeckProgressGrid } from "./DeckCard";
 import { DeckCustomizeDialog } from "./CardPresentation";
 import { personalDeckResumeKey, resolveResumeIndex } from "@/lib/studyResume";
+import { OverflowMenu } from "@/components/ui/OverflowMenu";
 import { ContentBadge } from "@/components/ui/StudyUI";
 import {
-  MoreVertical,
   PenLine,
   Plus,
+  ChevronDown,
   Upload,
   X,
 } from "lucide-react";
@@ -83,7 +84,9 @@ export function ImportedDecks({
 }) {
   const draftMode = "flashcards" as const;
   const { settings } = useApp();
-  const { getJSON, setJSON } = useLearningStorage();
+  const storage = useLearningStorage();
+  const { getJSON, setJSON } = storage;
+  const [toolbarTarget, setToolbarTarget] = useState<HTMLDivElement | null>(null);
   const { user, requestAuth, draft, setDraft } = useAuth();
   const initial = useRef(draft?.mode === draftMode ? draft : null).current;
   const [decks, setDecks] = useState<Page<PersonalDeck>>(emptyPage);
@@ -500,12 +503,18 @@ export function ImportedDecks({
       />
     );
   return (
-    <section className="space-y-5" aria-label="Bộ thẻ của bạn">
+    <section className="space-y-5" aria-label="Bộ thẻ của bạn" data-reduced-motion={settings.reducedMotion || undefined}>
       <div className="flex items-end justify-between gap-3">
         <div>
           <p className="study-eyebrow">CỦA BẠN</p>
           <h2 className="mt-1 text-xl font-semibold">{mode === "free" ? "Bộ thẻ của bạn" : "Bộ cần ôn"}</h2>
         </div>
+        {!active && !creating && !preview && <div ref={setToolbarTarget} className="shrink-0">
+          {!user && mode === 'free' && <OverflowMenu label="Tạo mới" triggerContent={<><Plus size={18}/>Tạo mới<ChevronDown size={15}/></>} actions={[
+            { id: 'create', label: 'Tạo bộ thẻ', onSelect: openCreator },
+            { id: 'import', label: 'Nhập từ tệp', onSelect: chooseImport },
+          ]}/>}
+        </div>}
       </div>
       {mode === "free" && <input
         ref={input}
@@ -974,51 +983,33 @@ export function ImportedDecks({
                   </>
                 )}
               </section>
-            ) : (
-              <button type="button" className="study-button w-fit" onClick={openCreator}>
-                <Plus size={18} /> Tạo bộ mới
-              </button>
-            ))}
+            ) : null)}
 
             {leadingDeck}
 
             {user && <DeckGroups key={user.id} rootDecks={decks.content} reload={reload} mode={mode} busy={busy || loading} reducedMotion={settings.reducedMotion}
-              onChange={() => setReload(value => value + 1)} renderDeck={(deck) => {
+              storage={storage} toolbarTarget={toolbarTarget}
+              createActions={mode === 'free' ? [
+                { id: 'create', label: 'Tạo bộ thẻ', disabled: busy, onSelect: openCreator },
+                { id: 'import', label: 'Nhập từ tệp', disabled: busy, onSelect: chooseImport },
+              ] : []}
+              deckActions={deck => [
+                { id: 'manage', label: 'Quản lý thẻ', disabled: busy, onSelect: () => open(deck) },
+                { id: 'customize', label: 'Tùy chỉnh giao diện', disabled: busy, onSelect: () => setCustomizing(deck) },
+              ]}
+              onChange={() => setReload(value => value + 1)} renderDeck={(deck, menu) => {
                 const badge = personalDeckBadge(deck);
                 const needed = readyCount(deck);
                 return (
                   <article
                     key={deck.id}
-                    className="study-panel relative flex min-h-52 flex-col"
+                    className="study-panel deck-hover-card relative flex min-h-52 flex-col"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <ContentBadge tone={badge.tone}>
                         {badge.label}
                       </ContentBadge>
-                      {mode === "free" && <div className="flex items-center gap-1">
-                        <details className="relative">
-                          <summary
-                            className="list-none cursor-pointer rounded-full p-2 text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-text)] [&::-webkit-details-marker]:hidden"
-                            aria-label={`Thao tác với bộ ${deck.name}`}
-                          >
-                            <MoreVertical size={18} />
-                          </summary>
-                          <div className="absolute right-0 top-10 z-20 min-w-36 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-1.5 shadow-xl">
-                            <button
-                              className="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-[var(--color-surface-alt)]"
-                              onClick={() => open(deck)}
-                            >
-                              Quản lý
-                            </button>
-                            <button
-                              className="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-[var(--color-surface-alt)]"
-                              onClick={() => setCustomizing(deck)}
-                            >
-                              Tùy chỉnh
-                            </button>
-                          </div>
-                        </details>
-                      </div>}
+                      {menu}
                     </div>
                     <h3 className="mt-5 break-words text-base font-semibold">
                       {deck.name}
@@ -1038,7 +1029,7 @@ export function ImportedDecks({
                     <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
                       <button
                         type="button"
-                        className={`text-left text-sm font-semibold ${(mode === "free" ? deck.cardCount > 0 : needed > 0) ? "text-[var(--color-accent)] hover:underline" : "cursor-default text-[var(--color-text-tertiary)]"}`}
+                        className={`deck-study-action text-left text-sm font-semibold ${(mode === "free" ? deck.cardCount > 0 : needed > 0) ? "text-[var(--color-accent)] hover:underline" : "cursor-default text-[var(--color-text-tertiary)]"}`}
                         disabled={busy || (mode === "free" ? !deck.cardCount : !needed)}
                         onClick={() => void (mode === "free" ? openFreeStudy(deck) : startScheduledStudy(deck))}
                       >

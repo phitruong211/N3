@@ -71,7 +71,7 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     onComplete={session.mode === 'flashcards' ? () => setJSON(builtInDeckResumeKey(session.id), null) : undefined}
     onExit={() => setSession(null)}/>;
 
-  return <div className="study-page">
+  return <div className="study-page" data-reduced-motion={settings.reducedMotion || undefined}>
     <header className="max-w-2xl">
       <p className="study-eyebrow">{mode === 'free' ? 'HỌC THEO Ý BẠN' : 'LỊCH ÔN HÔM NAY'}</p>
       <h1 className="mt-1 text-3xl font-semibold">{mode === 'free' ? 'Bộ thẻ' : 'Ôn ngắt quãng'}</h1>
