@@ -53,6 +53,8 @@ const searches = [];
 const adds = [];
 const creates = [];
 const errors = [];
+let failPublicSources = false;
+let emptyPublicSources = false;
 let failAdd = true;
 let failCreate = true;
 let expireNextAdd = false;
@@ -90,9 +92,14 @@ try {
         contentType: "application/json",
         body: JSON.stringify(body),
       });
+    if (path === "/users/me/learning")
+      return reply({ revision: 0, bookmarks: [], srsCards: [], studyDays: [] });
+    if (path === "/users/me/settings") return reply({});
+    if (path === "/dictionary/sources" && failPublicSources)
+      return reply({ message: "B?n c?n ??ng nh?p" }, 401);
     if (path === "/dictionary/sources")
       return reply({
-        ready: true,
+        ready: !emptyPublicSources,
         entryCount: 200000,
         importedAt: "2026-10-13T00:00:00Z",
         version,
@@ -235,6 +242,13 @@ try {
   await dialog.waitFor();
   assert.match(page.url(), /dictionary\?q=neko$/);
   assert.equal(adds.length, 0);
+  await page.getByRole("complementary", { name: "Điều hướng chính" }).waitFor();
+  assert.equal(
+    await page
+      .getByRole("button", { name: "Từ điển", exact: true })
+      .getAttribute("aria-current"),
+    "page",
+  );
   assert.equal(await dialog.getByLabel("Nghĩa dùng cho thẻ").isVisible(), true);
   await dialog.getByRole("button", { name: "Tiếp", exact: true }).click();
   await dialog.getByRole("button", { name: /Bộ ở trang hai/ }).click();
@@ -533,6 +547,46 @@ try {
   assert.equal(
     await opener.evaluate((el) => document.activeElement === el),
     true,
+  );
+  await page.setViewportSize({ width: 1280, height: 960 });
+  await page.goto(`${base}/dictionary/sources`);
+  assert.equal(
+    await page
+      .getByRole("button", { name: "Từ điển", exact: true })
+      .getAttribute("aria-current"),
+    "page",
+  );
+  await page.goto(`${base}/dictionary?q=neko`);
+  await page
+    .getByRole("textbox", { name: "Tra từ điển", exact: true })
+    .waitFor();
+  await page.keyboard.press("Control+k");
+  assert.equal(
+    await page
+      .getByRole("textbox", { name: "Tra từ điển", exact: true })
+      .evaluate((el) => document.activeElement === el),
+    true,
+  );
+  assert.equal(await page.getByRole("dialog").count(), 0);
+  emptyPublicSources = true;
+  await page.goto(`${base}/dictionary`);
+  await page
+    .getByText(
+      "Dữ liệu từ điển chưa được nạp trên máy chủ. Chức năng tra từ sẽ sẵn sàng sau khi dữ liệu được cập nhật.",
+      { exact: true },
+    )
+    .waitFor();
+  failPublicSources = true;
+  await page.reload();
+  await page
+    .getByText(
+      "Dịch vụ từ điển chưa sẵn sàng. Bạn không cần đăng nhập để tra từ; hãy thử lại sau.",
+      { exact: true },
+    )
+    .waitFor();
+  assert.equal(
+    await page.getByText("B?n c?n ??ng nh?p", { exact: true }).count(),
+    0,
   );
   assert.deepEqual(errors, []);
   console.log(

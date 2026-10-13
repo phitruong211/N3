@@ -126,6 +126,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       // Ctrl+K / Cmd+K → Open search (Raycast/Linear style)
+      if (location.pathname === '/dictionary' || location.pathname.startsWith('/dictionary/')) return;
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setSearchOpen((prev) => !prev);
@@ -133,7 +134,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, []);
+  }, [location.pathname]);
 
   const setCurrentPage = useCallback((page: PageId) => {
     const path = pathForPage(page);

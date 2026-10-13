@@ -22,6 +22,7 @@ export function pathForPage(page: PageId): string {
 }
 
 export function pageForLocation(pathname: string, _search = ''): PageId | null {
+  if (pathname === '/dictionary' || pathname.startsWith('/dictionary/')) return 'dictionary';
   if (pathname === '/decks') return 'flashcards';
   if (pathname === '/review') return 'srs';
   const entry = Object.entries(PAGE_PATHS).find(([, path]) => path.split('?')[0] === pathname);

@@ -75,7 +75,9 @@ async function publicGet<T>(path: string, signal?: AbortSignal): Promise<T> {
     const error = await response.json().catch(() => ({}));
     throw new ApiError(
       response.status,
-      error.message || "Không thể tải từ điển.",
+      response.status === 401 || response.status === 403
+        ? "Dịch vụ từ điển chưa sẵn sàng. Bạn không cần đăng nhập để tra từ; hãy thử lại sau."
+        : error.message || "Không thể tải từ điển.",
       undefined,
       error.code,
     );

@@ -469,3 +469,8 @@
     font-size: 16px;
   }
 }
+
+.dictionary-page.dictionary-embedded {
+  min-height: 0;
+  padding: 0;
+}

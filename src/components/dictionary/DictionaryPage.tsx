@@ -58,7 +58,7 @@ function Attribution() {
     </footer>
   );
 }
-export function DictionaryPage() {
+export function DictionaryPage({ embedded = false }: { embedded?: boolean }) {
   const location = useLocation();
   const navigate = useNavigate();
   const params = new URLSearchParams(location.search);
@@ -267,28 +267,30 @@ export function DictionaryPage() {
   const resultsCurrent =
     data?.query === query && !loading && !error && input === query;
   return (
-    <main className="dictionary-page">
+    <div className={`dictionary-page${embedded ? " dictionary-embedded" : ""}`}>
       <div className="dictionary-wrap">
-        <header className="dictionary-header">
-          <Link to="/today" className="dictionary-brand">
-            <img src="/so-nhat-mark.svg" alt="" />
-            SỔ NHẬT
-          </Link>
-          <nav aria-label="Điều hướng từ điển">
-            <Link to="/decks">Bộ thẻ</Link>
-            {user ? (
-              <span className="dictionary-account">{user.displayName}</span>
-            ) : (
-              <button
-                className="study-button"
-                disabled={authLoading}
-                onClick={requestAuth}
-              >
-                Đăng nhập
-              </button>
-            )}
-          </nav>
-        </header>
+        {!embedded && (
+          <header className="dictionary-header">
+            <Link to="/today" className="dictionary-brand">
+              <img src="/so-nhat-mark.svg" alt="" />
+              SỔ NHẬT
+            </Link>
+            <nav aria-label="Điều hướng từ điển">
+              <Link to="/decks">Bộ thẻ</Link>
+              {user ? (
+                <span className="dictionary-account">{user.displayName}</span>
+              ) : (
+                <button
+                  className="study-button"
+                  disabled={authLoading}
+                  onClick={requestAuth}
+                >
+                  Đăng nhập
+                </button>
+              )}
+            </nav>
+          </header>
+        )}
         <section className="dictionary-hero">
           <div>
             <p className="dictionary-eyebrow">MỖI TỪ MỚI, MỘT BƯỚC TIẾN</p>
@@ -480,7 +482,8 @@ export function DictionaryPage() {
                     </div>
                     {sourceInfo && !sourceInfo.ready && (
                       <p className="mt-5" role="status">
-                        Từ điển đang được chuẩn bị.
+                        Dữ liệu từ điển chưa được nạp trên máy chủ. Chức năng
+                        tra từ sẽ sẵn sàng sau khi dữ liệu được cập nhật.
                       </p>
                     )}
                   </div>
@@ -688,6 +691,6 @@ export function DictionaryPage() {
           />
         </Suspense>
       )}
-    </main>
+    </div>
   );
 }

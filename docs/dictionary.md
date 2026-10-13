@@ -1,6 +1,6 @@
 # Dictionary MVP — 13 October 2026
 
-Public entry: `/dictionary`. The dictionary route sits outside the learning AppProvider/AuthGate, so search does not require loading the study library or signing in. Navigation includes Từ điển in the sidebar/mobile More and a dictionary action in Ctrl+K. Dictionary Ctrl+K focuses its own input.
+Public entry: `/dictionary`. Guests can search without signing in. Signed-in users see the dictionary inside MainLayout with the existing sidebar and mobile navigation; dictionary rendering does not wait for library/learning sync. Navigation includes Từ điển in the sidebar/mobile More and a dictionary action in global search. Dictionary Ctrl+K focuses its own input. A not-ready source means no dataset has been activated in the API database; login cannot resolve it. Run the backend import script against that database.
 
 The shipped source is JMdict's Japanese/English component; English is labeled explicitly. No unlicensed Vietnamese dataset or machine translation is silently substituted. Users can edit the card's definition into Vietnamese when adding it. Source/license links appear on dictionary screens and on shared previews containing dictionary cards.
 
