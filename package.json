@@ -14,7 +14,8 @@
     "test:integration": "node tests/srsIntegration.browser.mjs",
     "test:scale": "node tests/srsScale.api.mjs",
     "test:deck-groups": "node tests/deckGroups.browser.mjs",
-    "test:deck-groups:integration": "node tests/deckGroups.integration.browser.mjs"
+    "test:deck-groups:integration": "node tests/deckGroups.integration.browser.mjs",
+    "test:sharing": "node tests/deckSharing.browser.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

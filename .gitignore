@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+artifacts/deck-sharing/
 *.local
 
 # Local environment files (keep the example file tracked)

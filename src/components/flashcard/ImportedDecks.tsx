@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useSearchParams } from 'react-router-dom';
+import { DeckShareDialog } from './DeckShareDialog';
 import { useAuth } from "@/hooks/useAuth";
 import { useApp, useLearningStorage } from "@/hooks/useApp";
 import {
@@ -120,6 +122,9 @@ export function ImportedDecks({
   const [targets, setTargets] = useState<PersonalDeck[]>([]);
   const [target, setTarget] = useState("");
   const [customizing, setCustomizing] = useState<PersonalDeck | null>(null);
+  const [sharing, setSharing] = useState<PersonalDeck | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedDeck = searchParams.get('deck');
   const [session, setSession] = useState<{
     cards: CardView[];
     deck: PersonalDeck;
@@ -138,6 +143,16 @@ export function ImportedDecks({
   const lock = useRef(false);
   const parser = useRef<AbortController | null>(null);
   const mounted = useRef(true);
+  useEffect(() => {
+    if (!user || !requestedDeck) return;
+    let valid = true;
+    deckMetadata(requestedDeck).then(deck => {
+      if (!valid) return;
+      setActive(deck); setName(deck.name); setPage(0); setCards(emptyPage());
+      setSearchParams(current => { const next = new URLSearchParams(current); next.delete('deck'); return next; }, { replace: true });
+    }).catch(e => { if (valid) setError(e.message); });
+    return () => { valid = false; };
+  }, [user, requestedDeck, setSearchParams]);
   useEffect(() => {
     mounted.current = true;
     return () => {
@@ -608,6 +623,7 @@ export function ImportedDecks({
             >
               Tùy chỉnh
             </button>
+            {active.sourceType === 'IMPORT' && <button className="study-button" disabled={busy} onClick={() => setSharing(active)}>Chia sẻ</button>}
             <button
               className="study-button"
               disabled={busy}
@@ -995,6 +1011,7 @@ export function ImportedDecks({
               ] : []}
               deckActions={deck => [
                 { id: 'manage', label: 'Quản lý thẻ', disabled: busy, onSelect: () => open(deck) },
+                ...(deck.sourceType === 'IMPORT' ? [{ id: 'share', label: 'Chia sẻ bộ thẻ', disabled: busy, onSelect: () => setSharing(deck) }] : []),
                 { id: 'customize', label: 'Tùy chỉnh giao diện', disabled: busy, onSelect: () => setCustomizing(deck) },
               ]}
               onChange={() => setReload(value => value + 1)} renderDeck={(deck, menu) => {
@@ -1066,6 +1083,7 @@ export function ImportedDecks({
         onClose={() => setStudySetup(null)}
         onStart={lessonKey => studySetup && startFreeStudy(studySetup, lessonKey)}
       />
+      {sharing && <DeckShareDialog key={sharing.id} deck={sharing} onClose={() => setSharing(null)}/>}
       {customizing && (
         <DeckCustomizeDialog
           deck={{

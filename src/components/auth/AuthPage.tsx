@@ -2,11 +2,12 @@ import { useState, type FormEvent } from 'react';
 import { ArrowRight, Eye, EyeOff, LoaderCircle, BookOpen, LogIn, UserPlus } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import './auth.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export function AuthPage({ initialMode = 'login', compact = false }: { initialMode?: 'login' | 'register'; compact?: boolean }) {
   const { signIn, signUp, enterGuest, setPrompt } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [mode, setMode] = useState<'login' | 'register'>(initialMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,7 +24,7 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
       if (mode === 'login') await signIn(email, password);
       else await signUp(email, password, displayName);
       setPrompt(null);
-      navigate('/today', { replace: true });
+      if (!compact || !/^\/shared\/[^/]+\/?$/.test(location.pathname)) navigate('/today', { replace: true });
     } catch (reason) { setError(reason instanceof Error ? reason.message : 'Không thể kết nối máy chủ.'); }
     finally { setBusy(false); }
   }

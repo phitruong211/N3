@@ -6,7 +6,7 @@
 // ============================================================
 
 import React, { Suspense, lazy } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AppProvider, useApp } from '@/hooks/useApp';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { AuthProvider, useAuth } from '@/hooks/useAuth';
@@ -16,6 +16,7 @@ import { AuthDialog, SessionNotices } from '@/components/auth/AuthDialog';
 import { NotFoundPage } from '@/components/layout/NotFoundPage';
 import { resolveInitialPath } from '@/lib/navigation';
 import { LibraryLayout } from '@/components/library/LibraryLayout';
+import { SharedDeckPage } from '@/components/flashcard/SharedDeckPage';
 
 const Dashboard = lazy(() => import('@/components/dashboard/Dashboard').then((module) => ({ default: module.Dashboard })));
 const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage').then((module) => ({ default: module.VocabularyPage })));
@@ -91,7 +92,9 @@ export default function App() {
 }
 
 function AuthGate() {
+  const location = useLocation();
   const { user, mode, loading, restoreError, retryRestore, sessionKey } = useAuth();
+  if (/^\/shared\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/shared/:token" element={<SharedDeckPage />}/></Routes><AuthDialog /></>;
   if (loading) return <div className="flex min-h-screen items-center justify-center bg-[var(--color-bg)]"><p className="study-copy">Đang khôi phục phiên đăng nhập…</p></div>;
   if (!user && restoreError && hasSession()) return <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-6 bg-[var(--color-bg)]"><p className="study-copy max-w-md text-center" role="alert">{restoreError}</p><button className="study-button study-button-primary" onClick={retryRestore}>Thử kết nối lại</button></div>;
   if (mode === 'unauthenticated') return <AuthPage />;
