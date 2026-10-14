@@ -256,6 +256,9 @@ button, input, select, textarea { font: inherit; }
   --font-serif: 'Noto Serif JP Local', serif;
   --font-mono: ui-monospace, Consolas, monospace;
 }
+.card-font-size-input { appearance: textfield; -moz-appearance: textfield; }
+.card-font-size-input::-webkit-inner-spin-button,
+.card-font-size-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
 @media (prefers-reduced-motion: reduce) { .dashboard-cat-host, .dashboard-cat-bubble, .dashboard-header-seal { transition: none !important; } }
 .reduced-motion *, .reduced-motion *::before, .reduced-motion *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }

@@ -22,6 +22,34 @@ const fieldLabels: Record<CardField, string> = {
   deckName: "Tên bộ thẻ",
 };
 const clampFontSize = (value: number) => Math.max(12, Math.min(72, Math.round(value)));
+function FontSizeInput({ value, label, onCommit }: { value: number; label: string; onCommit: (value: number) => void }) {
+  const [draft, setDraft] = useState(String(value));
+  useEffect(() => setDraft(String(value)), [value]);
+  const commit = () => {
+    const number = draft.trim() ? Number(draft) : NaN;
+    const next = Number.isFinite(number) ? clampFontSize(number) : value;
+    setDraft(String(next));
+    onCommit(next);
+  };
+  return <input type="text" inputMode="numeric" role="spinbutton"
+    aria-valuemin={12} aria-valuemax={72} aria-valuenow={value} aria-label={label}
+    className="card-font-size-input min-w-0 w-full bg-transparent px-2 text-center tabular-nums outline-none"
+    value={draft} onChange={event => setDraft(event.target.value)} onBlur={commit}
+    onKeyDown={event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        event.stopPropagation();
+        event.currentTarget.blur();
+      }
+      if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+        event.preventDefault();
+        const number = draft.trim() ? Number(draft) : value;
+        const next = clampFontSize((Number.isFinite(number) ? number : value) + (event.key === 'ArrowUp' ? 1 : -1));
+        setDraft(String(next));
+        onCommit(next);
+      }
+    }} />;
+}
 const fontFamilies: Record<DeckTemplateConfig['front']['style']['fontFamily'], string> = {
   default: "'Be Vietnam Pro', 'Noto Serif JP Local', serif",
   notoSansJp: "'Noto Sans JP Local', sans-serif",
@@ -503,7 +531,7 @@ export function DeckCustomizeDialog({
               </label>
               <label>
                 Cỡ chữ chính xác (px)
-                <span className="mt-1 flex overflow-hidden rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] focus-within:ring-2 focus-within:ring-[var(--color-accent)]">
+                <span className="mt-1 grid grid-cols-[44px_minmax(64px,1fr)_44px] overflow-hidden rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] focus-within:ring-2 focus-within:ring-[var(--color-accent)]">
                   <button
                     type="button"
                     className="grid min-h-11 w-11 shrink-0 place-items-center border-r border-[var(--color-border)] hover:bg-[var(--color-surface-hover)]"
@@ -512,17 +540,11 @@ export function DeckCustomizeDialog({
                   >
                     <Minus size={17} />
                   </button>
-                  <input
-                    type="number"
-                    min="12"
-                    max="72"
-                    step="1"
-                    className="min-w-0 flex-1 bg-transparent px-3 text-center outline-none"
+                  <FontSizeInput
+                    key={activeSide}
                     value={activeStyle.fontSize}
-                    aria-label={`Cỡ chữ chính xác ${previewBack ? "mặt sau" : "mặt trước"}`}
-                    onChange={(event) => {
-                      if (!Number.isNaN(event.target.valueAsNumber)) updateActiveStyle({ fontSize: clampFontSize(event.target.valueAsNumber) });
-                    }}
+                    label={`Cỡ chữ chính xác ${previewBack ? "mặt sau" : "mặt trước"}`}
+                    onCommit={fontSize => updateActiveStyle({ fontSize })}
                   />
                   <button
                     type="button"
