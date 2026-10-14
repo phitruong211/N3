@@ -16,6 +16,7 @@ import { AuthDialog, SessionNotices } from '@/components/auth/AuthDialog';
 import { NotFoundPage } from '@/components/layout/NotFoundPage';
 import { resolveInitialPath } from '@/lib/navigation';
 import { LibraryLayout } from '@/components/library/LibraryLayout';
+import { SharedGroupPage } from '@/components/flashcard/SharedGroupPage';
 import { SharedDeckPage } from '@/components/flashcard/SharedDeckPage';
 import { AppLoading } from '@/components/ui/AppLoading';
 
@@ -93,6 +94,7 @@ function AuthGate() {
   const location = useLocation();
   const { user, mode, loading, restoreError, retryRestore, sessionKey } = useAuth();
   if (!user && (location.pathname === '/dictionary' || location.pathname.startsWith('/dictionary/'))) return <><Suspense fallback={<AppLoading fullScreen message="Đang mở từ điển…"/>}><DictionaryPage/></Suspense><AuthDialog/></>;
+  if (/^\/shared\/groups\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/shared/groups/:token" element={<SharedGroupPage />}/></Routes><AuthDialog /></>;
   if (/^\/shared\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/shared/:token" element={<SharedDeckPage />}/></Routes><AuthDialog /></>;
   if (loading) return <AppLoading fullScreen message="Đang mở không gian học của bạn…"/>;
   if (!user && restoreError && hasSession()) return <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-6 bg-[var(--color-bg)]"><p className="study-copy max-w-md text-center" role="alert">{restoreError}</p><button className="study-button study-button-primary" onClick={retryRestore}>Thử kết nối lại</button></div>;

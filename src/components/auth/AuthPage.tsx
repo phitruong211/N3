@@ -24,7 +24,7 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
       if (mode === 'login') await signIn(email, password);
       else await signUp(email, password, displayName);
       setPrompt(null);
-      if (!compact || (!/^\/shared\/[^/]+\/?$/.test(location.pathname) && !/^\/dictionary(?:\/|$)/.test(location.pathname))) navigate('/today', { replace: true });
+      if (!compact || (!/^\/shared\/(?:groups\/)?[^/]+\/?$/.test(location.pathname) && !/^\/dictionary(?:\/|$)/.test(location.pathname))) navigate('/today', { replace: true });
     } catch (reason) { setError(reason instanceof Error ? reason.message : 'Không thể kết nối máy chủ.'); }
     finally { setBusy(false); }
   }

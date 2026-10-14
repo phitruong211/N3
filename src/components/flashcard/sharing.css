@@ -1,0 +1,61 @@
+.shared-page { min-height:100dvh; background:var(--color-bg); color:var(--color-text); padding:28px 24px 64px; }
+.shared-page-inner { max-width:880px; margin:0 auto; }
+.shared-brand { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:64px; }
+.shared-brand a { display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:700; letter-spacing:.05em; }
+.shared-brand img { width:30px; height:30px; }
+.shared-brand>span { color:var(--color-text-tertiary); font-size:12px; }
+.shared-hero { display:flex; justify-content:space-between; align-items:flex-start; gap:32px; padding-bottom:32px; border-bottom:1px solid var(--color-border); margin-bottom:28px; }
+.shared-hero-copy { min-width:0; flex:1; }
+.shared-hero h1 { font-size:clamp(26px,4vw,38px); font-weight:600; line-height:1.25; letter-spacing:-.025em; overflow-wrap:anywhere; margin:10px 0; }
+.shared-meta { color:var(--color-text-secondary); font-size:14px; line-height:1.7; overflow-wrap:anywhere; }
+.shared-description { color:var(--color-text-secondary); font-size:14px; line-height:1.8; margin-top:16px; }
+.shared-description>p { white-space:pre-wrap; overflow-wrap:anywhere; }
+.shared-description button { color:var(--color-accent); font-size:13px; margin-top:6px; min-height:32px; }
+.shared-save-bar { display:flex; flex-direction:column; align-items:flex-end; gap:9px; flex-shrink:0; padding-top:12px; }
+.shared-save-bar .study-button { min-height:46px; white-space:nowrap; }
+.shared-save-caption { display:inline-flex; align-items:center; gap:5px; font-size:11px; color:var(--color-text-tertiary); }
+.shared-content-header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:18px; }
+.shared-content-header h2 { font-size:15px; font-weight:600; }
+.shared-content-header p { color:var(--color-text-tertiary); font-size:12px; }
+.shared-modes { display:inline-flex; gap:2px; padding:3px; border-radius:10px; background:var(--color-surface-alt); }
+.shared-modes button { min-height:38px; padding:8px 14px; border-radius:8px; font-size:13px; color:var(--color-text-secondary); }
+.shared-modes button[aria-pressed=true] { background:var(--color-surface); color:var(--color-text); box-shadow:0 1px 4px #0000000a; }
+.shared-preview-card { min-height:340px; border:1px solid var(--color-border); border-radius:20px; background:var(--color-surface); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 28px; cursor:pointer; touch-action:pan-y; }
+.shared-preview-card small { margin-top:32px; font-size:12px; color:var(--color-text-tertiary); }
+.shared-card-nav { display:flex; justify-content:center; align-items:center; gap:18px; margin:16px 0; }
+.shared-card-nav>button { display:inline-flex; align-items:center; justify-content:center; min-height:44px; min-width:44px; border:1px solid var(--color-border); background:var(--color-surface); border-radius:50%; }
+.shared-card-nav>button.shared-card-index { border:0; background:transparent; border-radius:8px; font-size:13px; color:var(--color-text-secondary); min-width:100px; font-variant-numeric:tabular-nums; }
+.shared-card-nav button:disabled { opacity:.35; cursor:default; }
+.shared-jump { display:flex; justify-content:center; align-items:center; gap:8px; margin-bottom:16px; }
+.shared-footer { color:var(--color-text-tertiary); font-size:12px; line-height:1.8; margin-top:32px; padding-top:20px; border-top:1px solid var(--color-border); }
+.shared-error { padding:20px; margin:20px 0; border:1px solid var(--color-border); border-radius:14px; background:var(--color-surface); }
+.shared-error h2 { font-size:16px; font-weight:600; }
+.shared-error p { color:var(--color-text-secondary); font-size:14px; line-height:1.7; margin:8px 0; }
+.shared-group-list { border:1px solid var(--color-border); border-radius:16px; background:var(--color-surface); overflow:hidden; }
+.shared-group-row { width:100%; display:flex; text-align:left; align-items:center; gap:14px; padding:18px; border-bottom:1px solid var(--color-border); }
+.shared-group-row:last-child { border-bottom:0; }
+.shared-group-row:hover,.shared-group-row[aria-expanded=true] { background:var(--color-surface-alt); }
+.shared-group-number { display:flex; justify-content:center; align-items:center; width:34px; height:34px; flex-shrink:0; border-radius:9px; background:var(--color-surface-alt); color:var(--color-text-tertiary); font-size:12px; font-variant-numeric:tabular-nums; }
+.shared-group-row strong { display:block; font-size:15px; font-weight:500; overflow-wrap:anywhere; }
+.shared-group-row small { display:block; margin-top:4px; font-size:12px; color:var(--color-text-tertiary); }
+.shared-group-preview { margin-top:24px; scroll-margin-top:20px; }
+.shared-group-preview-title { display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:16px; }
+.shared-group-preview-title h2 { font-size:18px; font-weight:600; overflow-wrap:anywhere; }
+.shared-pagination { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:16px; font-size:13px; color:var(--color-text-secondary); }
+.share-link-box { display:flex; align-items:center; gap:8px; padding:6px; border:1px solid var(--color-border); border-radius:12px; background:var(--color-surface-alt); }
+.share-link-box input { min-width:0; flex:1; padding:8px; background:transparent; font-size:13px; color:var(--color-text-secondary); }
+.share-link-box button { flex-shrink:0; }
+.share-options { border-top:1px solid var(--color-border); padding-top:14px; color:var(--color-text-secondary); font-size:12px; }
+.share-options summary { cursor:pointer; padding:6px 0; }
+.share-options p { margin:12px 0; line-height:1.8; }
+@media(max-width:640px) {
+  .shared-page { padding:20px 18px calc(120px + env(safe-area-inset-bottom)); }
+  .shared-brand { margin-bottom:36px; }
+  .shared-brand>span { display:none; }
+  .shared-hero { display:block; padding-bottom:24px; margin-bottom:24px; }
+  .shared-save-bar { position:fixed; left:0; right:0; bottom:0; z-index:40; padding:12px 18px calc(12px + env(safe-area-inset-bottom)); border-top:1px solid var(--color-border); background:var(--color-surface); flex-direction:row; align-items:center; justify-content:space-between; gap:12px; box-shadow:0 -8px 32px #00000006; }
+  .shared-save-caption { max-width:42%; line-height:1.6; }
+  .shared-save-bar .study-button { min-width:150px; }
+  .shared-preview-card { min-height:290px; padding:32px 20px; }
+  .shared-group-row { padding:16px 12px; gap:10px; }
+}

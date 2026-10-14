@@ -41,6 +41,7 @@ import {
   type Page,
   type PersonalCard,
   type PersonalDeck,
+  type DeckGroup,
 } from "@/lib/deckApi";
 import { importedCardView, type CardView } from "@/lib/cards";
 import { StudySession } from "./StudySession";
@@ -131,9 +132,11 @@ export function ImportedDecks({
   const [targets, setTargets] = useState<PersonalDeck[]>([]);
   const [target, setTarget] = useState("");
   const [customizing, setCustomizing] = useState<PersonalDeck | null>(null);
+  const [sharingGroup, setSharingGroup] = useState<DeckGroup | null>(null);
   const [sharing, setSharing] = useState<PersonalDeck | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedDeck = searchParams.get('deck');
+  const requestedGroup = searchParams.get('group');
   const [session, setSession] = useState<{
     cards: CardView[];
     deck: PersonalDeck;
@@ -1013,7 +1016,8 @@ export function ImportedDecks({
             {leadingDeck}
 
             {user && <DeckGroups key={user.id} rootDecks={decks.content} reload={reload} mode={mode} busy={busy || loading} reducedMotion={settings.reducedMotion}
-              storage={storage} toolbarTarget={toolbarTarget}
+              storage={storage} toolbarTarget={toolbarTarget} onShareGroup={setSharingGroup} requestedGroup={requestedGroup}
+              onGroupOpened={() => setSearchParams(current => { const next = new URLSearchParams(current); next.delete('group'); return next; }, { replace: true })}
               createActions={mode === 'free' ? [
                 { id: 'create', label: 'Tạo bộ thẻ', disabled: busy, onSelect: openCreator },
                 { id: 'import', label: 'Nhập từ tệp', disabled: busy, onSelect: chooseImport },
@@ -1092,6 +1096,7 @@ export function ImportedDecks({
         onClose={() => setStudySetup(null)}
         onStart={lessonKey => studySetup && startFreeStudy(studySetup, lessonKey)}
       />
+      {sharingGroup && <DeckShareDialog key={`group:${sharingGroup.id}`} kind="group" deck={sharingGroup} onClose={() => setSharingGroup(null)}/>}
       {sharing && <DeckShareDialog key={sharing.id} deck={sharing} onClose={() => setSharing(null)}/>}
       {customizing && (
         <DeckCustomizeDialog

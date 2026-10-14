@@ -16,11 +16,12 @@ type Props = {
   onChange: () => void; renderDeck: (deck: PersonalDeck, menu: ReactNode) => ReactNode;
   deckActions?: (deck: PersonalDeck) => DeckAction[]; createActions?: DeckAction[]; toolbarTarget?: HTMLElement | null;
   storage?: Pick<LearningStorage, 'getJSON' | 'setJSON'>;
+  onShareGroup?: (group: DeckGroup) => void; requestedGroup?: string | null; onGroupOpened?: () => void;
 };
 type Target = { groupId: string | null; beforeId?: string; key: string };
 type Drag = { deck: PersonalDeck; x: number; y: number };
 
-export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = false, onChange, renderDeck, deckActions, createActions = [], toolbarTarget, storage }: Props) {
+export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = false, onChange, renderDeck, deckActions, createActions = [], toolbarTarget, storage, onShareGroup, requestedGroup, onGroupOpened }: Props) {
   const sizing = useDeckGroupSizes(storage);
   const pruneSizes = sizing.prune;
   const suppressClick = useRef(false);
@@ -94,6 +95,17 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
       if (alive.current && generation === epoch.current && requests.current.get(id) === serial) setLoading(current => { const next = new Set(current); next.delete(id); return next; });
     }
   }
+  const pendingGroup = useRef<string | null>(null);
+  useEffect(() => {
+    if (!requestedGroup) { pendingGroup.current = null; return; }
+    if (groupLoading || pendingGroup.current === requestedGroup) return;
+    pendingGroup.current = requestedGroup;
+    if (groups.some(group => group.id === requestedGroup)) {
+      expand(requestedGroup);
+      requestAnimationFrame(() => document.getElementById(`group-${requestedGroup}`)?.scrollIntoView({ block: 'start' }));
+    } else setError('Không tìm thấy nhóm. Nhóm có thể đã được giải tán.');
+    onGroupOpened?.();
+  }, [requestedGroup, groupLoading, groups, onGroupOpened]);
   function expand(id: string) {
     if (openRef.current.has(id)) return;
     const next = new Set(openRef.current).add(id); openRef.current = next; setOpened(next);
@@ -237,7 +249,7 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
     <p className="deck-library-hint">Giữ và kéo bộ thẻ để sắp xếp · Kéo góc nhóm để đổi kích thước</p>
     {error && <p role="alert" className="text-sm text-[var(--color-error)]">{error} <button className="underline" onClick={() => { setError(''); setRevision(v => v + 1); onChange(); }}>Thử lại</button></p>}
     <p className="sr-only" role="status">{saving ? 'Đang lưu…' : notice}</p>
-    <div className="deck-folder-grid">{groups.map((group, index) => <motion.section layout="position" transition={layoutTransition} key={group.id} style={{ width: sizing.sizes[group.id]?.width, height: opened.has(group.id) ? sizing.sizes[group.id]?.height : undefined }} className={`deck-folder ${sizing.resizing === group.id ? "is-resizing" : ""} ${opened.has(group.id) ? "is-open" : ""} ${targetKey === `group:${group.id}` ? 'is-target' : ''}`}
+    <div className="deck-folder-grid">{groups.map((group, index) => <motion.section layout="position" transition={layoutTransition} key={group.id} id={`group-${group.id}`} style={{ width: sizing.sizes[group.id]?.width, height: opened.has(group.id) ? sizing.sizes[group.id]?.height : undefined }} className={`deck-folder ${sizing.resizing === group.id ? "is-resizing" : ""} ${opened.has(group.id) ? "is-open" : ""} ${targetKey === `group:${group.id}` ? 'is-target' : ''}`}
       data-deck-drop={`group:${group.id}`} data-group-id={group.id}>
       <div className="deck-folder-header">
         <button className="deck-folder-toggle" aria-expanded={opened.has(group.id)} aria-controls={`folder-${group.id}`} onClick={() => toggle(group.id)}>
@@ -247,6 +259,7 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
         </button>
         <OverflowMenu horizontal label={`Thao tác nhóm ${group.name}`} actions={[
           { id: 'rename', label: 'Đổi tên', disabled: saving || busy || groupLoading, onSelect: () => { setError(''); setEditor({ group, name: group.name }); } },
+          ...(onShareGroup ? [{ id: 'share', label: 'Chia sẻ nhóm', disabled: saving || busy || groupLoading, onSelect: () => onShareGroup(group) }] : []),
           { id: 'up', label: 'Đưa lên', disabled: saving || busy || groupLoading || index === 0, onSelect: () => shiftGroup(group, -1) },
           { id: 'down', label: 'Đưa xuống', disabled: saving || busy || groupLoading || index === groups.length - 1, onSelect: () => shiftGroup(group, 1) },
           { id: 'reset', label: 'Đặt lại kích thước', disabled: !sizing.sizes[group.id], onSelect: () => sizing.reset(group.id) },
