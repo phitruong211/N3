@@ -1,3 +1,5 @@
+import { hasCardMarkup } from './cardFormatting.ts';
+
 export interface FuriganaSegment {
   text: string;
   reading?: string;
@@ -32,6 +34,7 @@ export function serializeFurigana(segments: FuriganaSegment[]): string {
 
 export function parseFuriganaMarkup(input: string): FuriganaResult {
   const source = input.normalize("NFC");
+  if (hasCardMarkup(source)) return { text: source, segments: [{ text: source }], explicit: false };
   if (!source.includes("[") && !source.includes("]")) return { text: source, segments: source ? [{ text: source }] : [], explicit: false };
 
   const segments: FuriganaSegment[] = [];
@@ -120,6 +123,7 @@ export function alignFurigana(text: string, reading: string): FuriganaResult {
 
 export function resolveFurigana(input: string, reading = ""): FuriganaResult {
   const explicit = parseFuriganaMarkup(input);
+  if (hasCardMarkup(input)) return explicit;
   if (explicit.explicit || explicit.warning) return explicit;
   return alignFurigana(explicit.text, normalizeReadingInput(reading));
 }

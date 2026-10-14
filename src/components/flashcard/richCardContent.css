@@ -1,0 +1,15 @@
+.rich-card-content { display: block; max-width: 100%; overflow-wrap: anywhere; white-space: pre-wrap; font-weight: inherit; }
+.rich-card-content p { margin-block: .35em .7em; }
+.rich-card-content :is(h1,h2,h3,h4,h5,h6) { font-weight: 700; margin-block: .5em; line-height: 1.4; }
+.rich-card-content h1 { font-size: 1.6em; }
+.rich-card-content h2 { font-size: 1.4em; }
+.rich-card-content h3 { font-size: 1.2em; }
+.rich-card-content :is(b,strong) { font-weight: 700; }
+.rich-card-content :is(i,em) { font-style: italic; }
+.rich-card-content ul { list-style: disc; padding-left: 1.5em; }
+.rich-card-content ol { list-style: decimal; padding-left: 1.5em; }
+.rich-card-content blockquote { border-left: 3px solid currentColor; padding-left: 1em; margin-block: .5em; }
+.rich-card-content pre { white-space: pre-wrap; }
+.rich-card-content code { font-family: monospace; }
+.rich-card-content small { font-size: .8em; }
+.rich-card-content mark { background: #fef08a; color: #1c1917; }

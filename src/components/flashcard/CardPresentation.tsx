@@ -3,6 +3,7 @@ import { ArrowDown, ArrowUp, Bold, Copy, Eye, EyeOff, GripVertical, Italic, Minu
 import { CARD_FONT_PRESETS, defaultDeckTemplate, importFaceBlocks, kindLabels, parseCardExamples, type ImportFaceBlock } from "@/lib/ankiImport";
 import { parseStoredFurigana } from "@/lib/furigana";
 import { FuriganaText } from "./FuriganaText";
+import { hasCardMarkup } from '@/lib/cardFormatting';
 import { CardFields } from "./CardFields";
 import { copySideStyle, createAppearanceDraft } from "@/lib/cardAppearance";
 import type {
@@ -61,7 +62,7 @@ function ExampleMeaning({ meaning, label }: { meaning: string; label: string }) 
       {visible ? <EyeOff size={16} /> : <Eye size={16} />}
       {visible ? "Ẩn nghĩa" : "Hiện nghĩa"}
     </button>
-    {visible && <p className="mt-2 whitespace-pre-wrap break-words opacity-75">{meaning}</p>}
+    {visible && <div className="mt-2 whitespace-pre-wrap break-words opacity-75"><FuriganaText text={meaning} show={false} /></div>}
   </div>;
 }
 
@@ -72,7 +73,7 @@ function Examples({ value, showReading }: { value: unknown; showReading: boolean
   return <div className="space-y-3 border-t border-current/10 pt-4 text-left">
     <p className="text-xs font-semibold opacity-60">Ví dụ · bấm mắt để xem nghĩa</p>
     {examples.map((example, index) => <div key={index} className="rounded-xl bg-black/5 p-4">
-      <p lang="ja" className="font-jp whitespace-pre-wrap break-words text-base leading-relaxed sm:text-lg">{index + 1}. {example.japanese}</p>
+      <div lang="ja" className="font-jp whitespace-pre-wrap break-words text-base leading-relaxed sm:text-lg">{index + 1}. <FuriganaText text={example.japanese} show={showReading} /></div>
       {showReading && example.reading && <p lang="ja" className="font-jp mt-1 text-sm text-[var(--color-accent)]">{example.reading}</p>}
       <ExampleMeaning meaning={example.meaning} label={`ví dụ ${index + 1}`} />
     </div>)}
@@ -197,7 +198,7 @@ export function CardFace({
           (side === "front" && fields.includes("front")) ||
           (side === "back" && fields.includes("back") && card.backReading)
         )) return null;
-        if (grammarAnswer && field === "back" && !importedBlocks.length) {
+        if (grammarAnswer && field === "back" && !importedBlocks.length && !hasCardMarkup(value)) {
           return <GrammarBack key={`${field}-${index}`} value={value} reading={card.backReading} storedSegments={card.extraData?.backFuriganaSegments} showReading={fields.includes("reading")} compact={compact} style={style} />;
         }
         const isCardText = field === "front" || field === "back";
@@ -225,7 +226,7 @@ export function CardFace({
               <ImportedFaceBlocks blocks={importedBlocks} reading={cardReading} showReading={showFurigana} compact={compact} style={style} />
             ) : isCardText ? (
               <FuriganaText text={value} reading={cardReading} storedSegments={storedSegments} show={showFurigana} />
-            ) : value}
+            ) : hasCardMarkup(value) ? <FuriganaText text={value} show={false} /> : value}
           </div>
         );
       })}

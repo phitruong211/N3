@@ -72,6 +72,7 @@ export function CardFields({
       <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-alt)] p-3 text-sm text-[var(--color-text-secondary)]">
         Đặt hiragana trên Kanji bằng <code className="font-semibold text-[var(--color-text)]">学校[がっこう]</code>.
         Trường “Cách đọc” vẫn dùng được khi hệ thống ghép chắc chắn; cú pháp trong ngoặc vuông cho kết quả chính xác nhất.
+        <span className="mt-2 block">Có thể nhập HTML để định dạng từng đoạn: <code>{'<b>In đậm</b>'}</code>, <code>{'<br>'}</code> xuống dòng, <code>{'<span style="color:#60a5fa">Chữ màu</span>'}</code>. Xem <a className="underline" href="/data/import-formatting-guide.md" target="_blank" rel="noreferrer">hướng dẫn và mẫu</a>.</span>
       </div>
       <div className={`grid gap-3 ${compact ? "" : "sm:grid-cols-2"}`}>
         <label>

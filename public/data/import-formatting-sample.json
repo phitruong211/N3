@@ -1,0 +1,13 @@
+[
+  {
+    "front": "<span style=\"color:#60a5fa;font-size:36px\"><b>Whereas / While</b></span>",
+    "back": "<div style=\"text-align:left;font-size:24px;line-height:1.6\"><p><strong style=\"color:#60a5fa\">Ý NGHĨA:</strong> Trong khi; đối chiếu hai đặc điểm khác nhau.</p><p><strong style=\"color:#c084fc\">CÔNG THỨC:</strong><br><span style=\"padding-left:24px\">S + V, <b>whereas/while</b> + S + V.</span></p><p><strong style=\"color:#fb923c\">MẸO NHỚ:</strong> Whereas = đặt hai vế lên bàn cân.</p><ul><li>Urban areas are crowded, <b>whereas</b> rural areas are quiet.</li><li><i>While</i> còn có nghĩa về thời gian.</li></ul></div>",
+    "type": "GENERAL",
+    "note": "<p style=\"font-size:16px\">Có thể chỉnh HTML trong phần <b>Tùy chỉnh</b>.</p>"
+  },
+  {
+    "front": "<span style=\"color:#60a5fa\">学校[がっこう]</span>",
+    "back": "<b>Trường học</b><br><span style=\"font-weight:300;font-size:20px\">Nơi học tập</span>",
+    "type": "VOCABULARY"
+  }
+]

@@ -1,5 +1,11 @@
 # Import bộ thẻ
 
+## Định dạng màu, cỡ chữ và thụt dòng
+
+Các trường nội dung nhận HTML và CSS nội tuyến theo danh sách cho phép, tự hiển thị trong preview và phiên học. Hướng dẫn đầy đủ: [import-formatting-guide.md](../public/data/import-formatting-guide.md). File mẫu: [import-formatting-sample.json](../public/data/import-formatting-sample.json). Trong ứng dụng, liên kết hướng dẫn nằm ở phần chỉnh nội dung thẻ.
+
+HTML được chuyển thành các phần tử React với thuộc tính trình bày đã kiểm tra. Không đưa HTML trực tiếp vào DOM; không giữ event handler, URL, class hoặc CSS toàn cục. Nội dung gốc được lưu như văn bản, vì vậy mọi nơi hiển thị định dạng đều phải đi qua bộ hiển thị được lọc này. Định dạng ô Excel và CSS template Anki chưa được chuyển đổi.
+
 SỔ NHẬT đọc cùng một schema từ JSON, TXT, CSV, TSV, XLSX và XLS. File tối đa 20 MB và 20.000 thẻ.
 
 ## Các trường
