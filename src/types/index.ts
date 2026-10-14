@@ -57,6 +57,7 @@ export interface LegacyVerbVariant {
 }
 
 export interface VocabItem {
+  noteId?: string;
   // Core identity
   id: string;            // Generated runtime id (e.g. "vocab-n3-42")
   numericId: number;     // Original JSON `id`
@@ -113,6 +114,7 @@ export interface KanjiVocab {
 }
 
 export interface KanjiItem {
+  noteId?: string;
   id: string;
   kanji: string;
   hanViet: string;
@@ -149,6 +151,7 @@ export interface GrammarExample {
 }
 
 export interface GrammarItem {
+  noteId?: string;
   cardBack?: string;
   tags?: string[];
   // Core identity

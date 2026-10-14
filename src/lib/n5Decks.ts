@@ -3,6 +3,7 @@ import type { BuiltInDeckDefinition } from './deckCatalog.ts';
 import type { GrammarExample } from '../types/index.ts';
 
 interface StudyCardData {
+  note_id?: string;
   front: string;
   back: string;
   reading?: string;
@@ -20,6 +21,7 @@ export function n5StudyCard(item: StudyCardData, deckId: string, position: numbe
   const id = `${deckId}-${item.type.toLowerCase()}-${JSON.stringify([item.front, item.reading || ''])}`;
   return {
     id, deckId, front: item.front, back: item.back, reading: item.reading,
+    noteIdentity: item.note_id,
     hanViet: item.han_viet || undefined, note: item.note, type: item.type,
     tags: item.tags || ['N5'], source: 'BUILT_IN', sourceRef: id, position,
     extraData: item.examples ? { examples: JSON.stringify(item.examples) } : undefined,

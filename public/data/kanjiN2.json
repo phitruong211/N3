@@ -9,6 +9,7 @@
   },
   "data": [
     {
+      "note_id": "e3969008-49ad-4d7f-ae04-b38ad2ee13d0",
       "source_no": 1,
       "kanji": "閥",
       "han_viet": "PHIỆT",
@@ -68,6 +69,7 @@
       ]
     },
     {
+      "note_id": "8300830d-daef-47c5-9812-be07c8697e9c",
       "source_no": 2,
       "kanji": "乏",
       "han_viet": "PHẠP",
@@ -136,6 +138,7 @@
       ]
     },
     {
+      "note_id": "5d7b23df-a814-4bd3-81c4-3521dfd5af4e",
       "source_no": 3,
       "kanji": "仰",
       "han_viet": "NGƯỠNG",
@@ -213,6 +216,7 @@
       ]
     },
     {
+      "note_id": "41d332a3-5f94-4951-9fc3-d19cbfc0c1d7",
       "source_no": 4,
       "kanji": "伏",
       "han_viet": "PHỤC",
@@ -293,6 +297,7 @@
       ]
     },
     {
+      "note_id": "4a5f75c4-d6eb-47e0-942f-d598f386c2f1",
       "source_no": 5,
       "kanji": "傍",
       "han_viet": "BÀNG",
@@ -370,6 +375,7 @@
       ]
     },
     {
+      "note_id": "6744b56c-1b7e-439e-ba85-22a5db287902",
       "source_no": 6,
       "kanji": "備",
       "han_viet": "BỊ",
@@ -457,6 +463,7 @@
       ]
     },
     {
+      "note_id": "0409e534-dfb5-4bb5-ada7-c7790b18ab6d",
       "source_no": 7,
       "kanji": "兆",
       "han_viet": "TRIỆU",
@@ -543,6 +550,7 @@
       ]
     },
     {
+      "note_id": "dae442a8-2316-43c6-840d-954dc3b26664",
       "source_no": 8,
       "kanji": "克",
       "han_viet": "KHẮC",
@@ -622,6 +630,7 @@
       ]
     },
     {
+      "note_id": "68070692-a048-48a9-aa19-97e1a2806e03",
       "source_no": 9,
       "kanji": "刈",
       "han_viet": "NGẢI",
@@ -696,6 +705,7 @@
       ]
     },
     {
+      "note_id": "c2fe29c4-2e6c-4686-8222-b70374127800",
       "source_no": 10,
       "kanji": "刺",
       "han_viet": "THÍCH",
@@ -785,6 +795,7 @@
       ]
     },
     {
+      "note_id": "ad93b443-31d2-4bed-86b1-9dda4316b4c5",
       "source_no": 11,
       "kanji": "励",
       "han_viet": "LỆ",
@@ -859,6 +870,7 @@
       ]
     },
     {
+      "note_id": "ab4d88a5-04b7-41b3-813e-c1b1a6f558d3",
       "source_no": 12,
       "kanji": "勲",
       "han_viet": "HUÂN",
@@ -902,6 +914,7 @@
       ]
     },
     {
+      "note_id": "bd612194-9078-4db9-9520-e6a96d62ec5d",
       "source_no": 13,
       "kanji": "卑",
       "han_viet": "TI",
@@ -995,6 +1008,7 @@
       ]
     },
     {
+      "note_id": "f988159a-2feb-45e6-a87b-676d7f0b290d",
       "source_no": 14,
       "kanji": "唐",
       "han_viet": "ĐƯỜNG",
@@ -1068,6 +1082,7 @@
       ]
     },
     {
+      "note_id": "da315f62-d948-407a-9526-9428657fe9e0",
       "source_no": 15,
       "kanji": "唱",
       "han_viet": "XƯỚNG",
@@ -1153,6 +1168,7 @@
       ]
     },
     {
+      "note_id": "4bec717a-df33-49e8-8705-b2a3e96b2a79",
       "source_no": 16,
       "kanji": "嚇",
       "han_viet": "HÁCH",
@@ -1214,6 +1230,7 @@
       ]
     },
     {
+      "note_id": "e3c18b64-d258-4c35-a941-2db17b9a66ea",
       "source_no": 17,
       "kanji": "坂",
       "han_viet": "PHẢN",
@@ -1281,6 +1298,7 @@
       ]
     },
     {
+      "note_id": "a1c53a91-779a-4159-9b57-c7a088b5e646",
       "source_no": 18,
       "kanji": "坊",
       "han_viet": "PHƯỜNG",
@@ -1347,6 +1365,7 @@
       ]
     },
     {
+      "note_id": "90aa310f-a626-4157-935b-64835f295c8e",
       "source_no": 19,
       "kanji": "坑",
       "han_viet": "KHANH",
@@ -1412,6 +1431,7 @@
       ]
     },
     {
+      "note_id": "846b6d32-752e-4d3a-a79f-6140bd087f35",
       "source_no": 20,
       "kanji": "垂",
       "han_viet": "THÙY",
@@ -1495,6 +1515,7 @@
       ]
     },
     {
+      "note_id": "84c44511-e929-4a91-aa94-a394378ef9be",
       "source_no": 21,
       "kanji": "域",
       "han_viet": "VỰC",
@@ -1560,6 +1581,7 @@
       ]
     },
     {
+      "note_id": "cff8037e-7ff9-4927-a00c-9bcec42a1fe7",
       "source_no": 22,
       "kanji": "堀",
       "han_viet": "QUẬT",
@@ -1633,6 +1655,7 @@
       ]
     },
     {
+      "note_id": "41fd63b1-1866-4108-8ad2-234530fbf906",
       "source_no": 23,
       "kanji": "堤",
       "han_viet": "ĐÊ",
@@ -1694,6 +1717,7 @@
       ]
     },
     {
+      "note_id": "6bbdec10-5cc0-4286-abc7-7203483c0c0f",
       "source_no": 24,
       "kanji": "塀",
       "han_viet": "BIÊN",
@@ -1730,6 +1754,7 @@
       ]
     },
     {
+      "note_id": "773a5655-8395-4bc5-b02b-939fc91d76ed",
       "source_no": 25,
       "kanji": "塔",
       "han_viet": "THẬP",
@@ -1801,6 +1826,7 @@
       ]
     },
     {
+      "note_id": "3272441c-6f7b-4616-918b-880e72fd0018",
       "source_no": 26,
       "kanji": "塾",
       "han_viet": "THỤC",
@@ -1842,6 +1868,7 @@
       ]
     },
     {
+      "note_id": "7668b2e8-d4fd-4ff0-ba38-1693ab712201",
       "source_no": 27,
       "kanji": "墓",
       "han_viet": "MỘ",
@@ -1933,6 +1960,7 @@
       ]
     },
     {
+      "note_id": "848c59d5-2766-4f06-ba92-95a594bb89fd",
       "source_no": 28,
       "kanji": "奉",
       "han_viet": "PHỤNG",
@@ -2015,6 +2043,7 @@
       ]
     },
     {
+      "note_id": "e49e302d-bf26-4a05-82fc-84ac931c0688",
       "source_no": 29,
       "kanji": "奪",
       "han_viet": "ĐOẠT",
@@ -2112,6 +2141,7 @@
       ]
     },
     {
+      "note_id": "64c055ad-61cf-46bd-9763-5c94b4ac9287",
       "source_no": 30,
       "kanji": "奮",
       "han_viet": "PHẤN",
@@ -2203,6 +2233,7 @@
       ]
     },
     {
+      "note_id": "9e394d9d-f658-4414-9945-48bf9dedc29b",
       "source_no": 31,
       "kanji": "奴",
       "han_viet": "NÔ",
@@ -2259,6 +2290,7 @@
       ]
     },
     {
+      "note_id": "27f030db-e09c-4452-b271-c89795fb9af5",
       "source_no": 32,
       "kanji": "妄",
       "han_viet": "VỌNG",
@@ -2327,6 +2359,7 @@
       ]
     },
     {
+      "note_id": "efd73aae-6ed9-460f-bae3-704ec440e838",
       "source_no": 33,
       "kanji": "妥",
       "han_viet": "THỎA",
@@ -2386,6 +2419,7 @@
       ]
     },
     {
+      "note_id": "3b35d61b-d47b-47bb-a7ae-d11d1c5d2324",
       "source_no": 34,
       "kanji": "姻",
       "han_viet": "NHÂN",
@@ -2433,6 +2467,7 @@
       ]
     },
     {
+      "note_id": "f1887a37-8c67-4234-98e6-7259efa5a9c4",
       "source_no": 35,
       "kanji": "威",
       "han_viet": "UY",
@@ -2520,6 +2555,7 @@
       ]
     },
     {
+      "note_id": "b701c623-decf-4373-aef2-fa5adb52e750",
       "source_no": 36,
       "kanji": "娯",
       "han_viet": "NGU",
@@ -2561,6 +2597,7 @@
       ]
     },
     {
+      "note_id": "215346e5-c04b-4eb6-a73f-730abaf79b1e",
       "source_no": 37,
       "kanji": "嫁",
       "han_viet": "GIÁ",
@@ -2637,6 +2674,7 @@
       ]
     },
     {
+      "note_id": "9bee0327-a923-4bed-a666-ffec3dc45aa7",
       "source_no": 38,
       "kanji": "嫡",
       "han_viet": "ĐÍCH",
@@ -2691,6 +2729,7 @@
       ]
     },
     {
+      "note_id": "e4effe64-8139-4f72-bec8-476e98e1d88f",
       "source_no": 39,
       "kanji": "孫",
       "han_viet": "TÔN",
@@ -2758,6 +2797,7 @@
       ]
     },
     {
+      "note_id": "fda4190e-a5fe-4b05-b624-ea3206fb4912",
       "source_no": 40,
       "kanji": "宰",
       "han_viet": "TỂ",
@@ -2805,6 +2845,7 @@
       ]
     },
     {
+      "note_id": "1a15ca36-bf60-49ea-aef0-fb54a34fc963",
       "source_no": 41,
       "kanji": "宴",
       "han_viet": "YẾN",
@@ -2872,6 +2913,7 @@
       ]
     },
     {
+      "note_id": "4666edf3-1f7c-4d80-b7ed-0261ae3ebb02",
       "source_no": 42,
       "kanji": "尿",
       "han_viet": "NIỆU",
@@ -2967,6 +3009,7 @@
       ]
     },
     {
+      "note_id": "5558c954-a736-4834-b7c1-2ff6192cfd1e",
       "source_no": 43,
       "kanji": "履",
       "han_viet": "LÍ",
@@ -3034,6 +3077,7 @@
       ]
     },
     {
+      "note_id": "249ebbb2-d7ce-4f1a-b5a6-9dddef92c17b",
       "source_no": 44,
       "kanji": "峠",
       "han_viet": "ĐÈO",
@@ -3063,6 +3107,7 @@
       ]
     },
     {
+      "note_id": "35b17903-01fa-4309-8500-bcbfc14b3e30",
       "source_no": 45,
       "kanji": "峡",
       "han_viet": "HẠP",
@@ -3113,6 +3158,7 @@
       ]
     },
     {
+      "note_id": "65d36295-acac-46a1-8eb2-602fd1effc18",
       "source_no": 46,
       "kanji": "峰",
       "han_viet": "PHONG",
@@ -3163,6 +3209,7 @@
       ]
     },
     {
+      "note_id": "f1c77acc-f238-4bd1-b00b-fafee32a88b1",
       "source_no": 47,
       "kanji": "崇",
       "han_viet": "SÙNG",
@@ -3248,6 +3295,7 @@
       ]
     },
     {
+      "note_id": "542b3670-c2b6-44dd-8e50-0c71f24fc4d9",
       "source_no": 48,
       "kanji": "崎",
       "han_viet": "KHI",
@@ -3275,6 +3323,7 @@
       ]
     },
     {
+      "note_id": "1ff07a49-b3d6-49dc-aeb9-096d2b853d82",
       "source_no": 49,
       "kanji": "帆",
       "han_viet": "PHÀM",
@@ -3342,6 +3391,7 @@
       ]
     },
     {
+      "note_id": "7f43bfc2-70ea-442c-b945-1dd3c80ac3f1",
       "source_no": 50,
       "kanji": "幕",
       "han_viet": "MẠC",
@@ -3404,6 +3454,7 @@
       ]
     },
     {
+      "note_id": "e7748c19-c0ab-4365-a731-fa019bc4b148",
       "source_no": 51,
       "kanji": "幻",
       "han_viet": "HUYỀN",
@@ -3501,6 +3552,7 @@
       ]
     },
     {
+      "note_id": "96ffbda5-2171-4db3-962a-429d98953b3d",
       "source_no": 52,
       "kanji": "幽",
       "han_viet": "U",
@@ -3589,6 +3641,7 @@
       ]
     },
     {
+      "note_id": "6c73cbf2-858b-4ecf-b388-e0ad0a209fbb",
       "source_no": 53,
       "kanji": "府",
       "han_viet": "PHỦ",
@@ -3654,6 +3707,7 @@
       ]
     },
     {
+      "note_id": "58d4485c-9d5b-4c87-8c04-5c928698f5d1",
       "source_no": 54,
       "kanji": "庫",
       "han_viet": "KHỐ",
@@ -3734,6 +3788,7 @@
       ]
     },
     {
+      "note_id": "284fed2e-dade-46a0-8055-51f7648505f7",
       "source_no": 55,
       "kanji": "廉",
       "han_viet": "LIÊM",
@@ -3823,6 +3878,7 @@
       ]
     },
     {
+      "note_id": "1fd344a2-1984-47ea-84bd-e35bc42b51e1",
       "source_no": 56,
       "kanji": "弦",
       "han_viet": "HUYỀN",
@@ -3884,6 +3940,7 @@
       ]
     },
     {
+      "note_id": "30112c67-dca2-4307-b32b-f66541f1fe76",
       "source_no": 57,
       "kanji": "弧",
       "han_viet": "HỒ",
@@ -3943,6 +4000,7 @@
       ]
     },
     {
+      "note_id": "8f21d447-b56e-471d-a8f3-22b0ddee62d9",
       "source_no": 58,
       "kanji": "彩",
       "han_viet": "THÁI",
@@ -4022,6 +4080,7 @@
       ]
     },
     {
+      "note_id": "891e7f80-69e1-4204-8772-600d7bc8d655",
       "source_no": 59,
       "kanji": "征",
       "han_viet": "CHINH",
@@ -4081,6 +4140,7 @@
       ]
     },
     {
+      "note_id": "3706383f-5b46-4ed8-819c-30db0a18508f",
       "source_no": 60,
       "kanji": "径",
       "han_viet": "KÍNH",
@@ -4163,6 +4223,7 @@
       ]
     },
     {
+      "note_id": "3f79a98a-0be0-4276-8a6e-98a5603274b4",
       "source_no": 61,
       "kanji": "微",
       "han_viet": "VI",
@@ -4248,6 +4309,7 @@
       ]
     },
     {
+      "note_id": "258edd62-2071-4821-ae1d-1562b5b10d33",
       "source_no": 62,
       "kanji": "徹",
       "han_viet": "TRIỆT",
@@ -4331,6 +4393,7 @@
       ]
     },
     {
+      "note_id": "7cf3e2be-d049-4de8-8c29-b51bf309c26d",
       "source_no": 63,
       "kanji": "忌",
       "han_viet": "KỊ",
@@ -4406,6 +4469,7 @@
       ]
     },
     {
+      "note_id": "1f6ea322-49ee-4aa1-ac1d-d96ecdd96c7c",
       "source_no": 64,
       "kanji": "忍",
       "han_viet": "NHẪN",
@@ -4504,6 +4568,7 @@
       ]
     },
     {
+      "note_id": "a08a5af2-b6f8-4865-8111-333f721353e6",
       "source_no": 65,
       "kanji": "快",
       "han_viet": "KHOÁI",
@@ -4595,6 +4660,7 @@
       ]
     },
     {
+      "note_id": "2851273f-f2ab-483c-b40c-1bcb217f4155",
       "source_no": 66,
       "kanji": "怖",
       "han_viet": "BỐ",
@@ -4690,6 +4756,7 @@
       ]
     },
     {
+      "note_id": "2721fffc-3453-4585-957e-a3a4a81423de",
       "source_no": 67,
       "kanji": "怪",
       "han_viet": "QUÁI",
@@ -4777,6 +4844,7 @@
       ]
     },
     {
+      "note_id": "eb7f3dc4-0d1e-4f2f-8de5-7b27551181bf",
       "source_no": 68,
       "kanji": "恨",
       "han_viet": "HẬN",
@@ -4845,6 +4913,7 @@
       ]
     },
     {
+      "note_id": "6ae5db76-09bd-4a00-8028-6c769e5e55e9",
       "source_no": 69,
       "kanji": "悟",
       "han_viet": "NGỘ",
@@ -4918,6 +4987,7 @@
       ]
     },
     {
+      "note_id": "6d1a6cdc-4d81-48e0-9731-73be049ca5b0",
       "source_no": 70,
       "kanji": "悠",
       "han_viet": "DU",
@@ -4971,6 +5041,7 @@
       ]
     },
     {
+      "note_id": "643f2233-6ea7-4c6d-ad39-467691de8c3b",
       "source_no": 71,
       "kanji": "患",
       "han_viet": "HOẠN",
@@ -5062,6 +5133,7 @@
       ]
     },
     {
+      "note_id": "3d78d7d1-8819-4277-8a98-6ae0ce064d1f",
       "source_no": 72,
       "kanji": "悦",
       "han_viet": "DUYỆT",
@@ -5142,6 +5214,7 @@
       ]
     },
     {
+      "note_id": "fe7f1810-5d2b-48d1-882e-5500cadca8b2",
       "source_no": 73,
       "kanji": "悼",
       "han_viet": "ĐIỆU",
@@ -5203,6 +5276,7 @@
       ]
     },
     {
+      "note_id": "9f43cefd-b95f-4884-8998-68ca6f20b414",
       "source_no": 74,
       "kanji": "慌",
       "han_viet": "HOẢNG",
@@ -5247,6 +5321,7 @@
       ]
     },
     {
+      "note_id": "6d4f1c09-5e86-4adf-9104-fac7ca9e6afd",
       "source_no": 75,
       "kanji": "憤",
       "han_viet": "PHẪN",
@@ -5332,6 +5407,7 @@
       ]
     },
     {
+      "note_id": "eb38d9d5-7381-4a09-bd9a-65cff8d5cdb7",
       "source_no": 76,
       "kanji": "戯",
       "han_viet": "HÍ",
@@ -5408,6 +5484,7 @@
       ]
     },
     {
+      "note_id": "283f560d-d9fd-4269-b63c-ab8debff6604",
       "source_no": 77,
       "kanji": "扉",
       "han_viet": "PHI",
@@ -5463,6 +5540,7 @@
       ]
     },
     {
+      "note_id": "962c83c0-2937-4ce7-a9aa-f1487394f714",
       "source_no": 78,
       "kanji": "抄",
       "han_viet": "SAO",
@@ -5528,6 +5606,7 @@
       ]
     },
     {
+      "note_id": "cb82009d-77fe-48db-9668-7f9ece2d791c",
       "source_no": 79,
       "kanji": "把",
       "han_viet": "BẢ",
@@ -5594,6 +5673,7 @@
       ]
     },
     {
+      "note_id": "32540eb8-c5e4-4848-bd49-59260b6fe831",
       "source_no": 80,
       "kanji": "抗",
       "han_viet": "KHÁNG",
@@ -5691,6 +5771,7 @@
       ]
     },
     {
+      "note_id": "fdaa8725-826f-49c0-bd54-5a33acf0770b",
       "source_no": 81,
       "kanji": "抵",
       "han_viet": "ĐỀ",
@@ -5768,6 +5849,7 @@
       ]
     },
     {
+      "note_id": "62718888-7a9b-40b3-9724-d7b753761527",
       "source_no": null,
       "kanji": "拍",
       "han_viet": "PHÁCH",
@@ -5846,6 +5928,7 @@
       ]
     },
     {
+      "note_id": "1b98d7cc-c188-4379-b4ad-880b975db2f5",
       "source_no": 82,
       "kanji": "拘",
       "han_viet": "CÂU",
@@ -5937,6 +6020,7 @@
       ]
     },
     {
+      "note_id": "deccbe43-51d4-44df-84fc-e8d18eabdd82",
       "source_no": 83,
       "kanji": "拙",
       "han_viet": "CHUYẾT",
@@ -5986,6 +6070,7 @@
       ]
     },
     {
+      "note_id": "f4806d45-8cbe-4c68-bc90-32c511e841b3",
       "source_no": 84,
       "kanji": "拷",
       "han_viet": "KHẢO",
@@ -6021,6 +6106,7 @@
       ]
     },
     {
+      "note_id": "f04c6c9c-27b8-4f64-a2f7-2016b4c765a2",
       "source_no": 85,
       "kanji": "挟",
       "han_viet": "HIỆP",
@@ -6092,6 +6178,7 @@
       ]
     },
     {
+      "note_id": "78d0e1f0-027b-48ac-bd80-3f7568bba912",
       "source_no": 86,
       "kanji": "掃",
       "han_viet": "TẢO",
@@ -6166,6 +6253,7 @@
       ]
     },
     {
+      "note_id": "4913e2a4-72c9-4f6f-9629-196c446f1241",
       "source_no": 87,
       "kanji": "掌",
       "han_viet": "CHƯỞNG",
@@ -6252,6 +6340,7 @@
       ]
     },
     {
+      "note_id": "73ed057f-7360-464b-9e0c-221ce1b5ba3b",
       "source_no": 88,
       "kanji": "排",
       "han_viet": "BÀI",
@@ -6347,6 +6436,7 @@
       ]
     },
     {
+      "note_id": "439ef430-22b4-40a7-be6c-7d6589f61996",
       "source_no": 89,
       "kanji": "掘",
       "han_viet": "QUẬT",
@@ -6438,6 +6528,7 @@
       ]
     },
     {
+      "note_id": "1d993601-1458-4e4e-9cfc-386edf2c7639",
       "source_no": 90,
       "kanji": "揺",
       "han_viet": "DAO",
@@ -6548,6 +6639,7 @@
       ]
     },
     {
+      "note_id": "942921f3-ce3a-4864-b2d5-49b831d38812",
       "source_no": 91,
       "kanji": "携",
       "han_viet": "HUỀ",
@@ -6616,6 +6708,7 @@
       ]
     },
     {
+      "note_id": "22967e2f-7d1f-492a-85ac-d2db9979b506",
       "source_no": 92,
       "kanji": "敬",
       "han_viet": "KÍNH",
@@ -6708,6 +6801,7 @@
       ]
     },
     {
+      "note_id": "dea6ca46-ac9f-43ed-8313-ddced52689ed",
       "source_no": 93,
       "kanji": "暁",
       "han_viet": "HIỂU",
@@ -6777,6 +6871,7 @@
       ]
     },
     {
+      "note_id": "8d58ccce-195b-471a-8a56-a47db3dc18f4",
       "source_no": 94,
       "kanji": "暴",
       "han_viet": "BẠO",
@@ -6876,6 +6971,7 @@
       ]
     },
     {
+      "note_id": "f45cb550-dcba-4199-a1e0-95a5bb4b0e60",
       "source_no": 95,
       "kanji": "曹",
       "han_viet": "TÀO",
@@ -6942,6 +7038,7 @@
       ]
     },
     {
+      "note_id": "819032e4-d697-4e21-8147-ddaf82b649c9",
       "source_no": 96,
       "kanji": "板",
       "han_viet": "BẢN",
@@ -7034,6 +7131,7 @@
       ]
     },
     {
+      "note_id": "39340ad5-6e77-4628-8f2c-000369940089",
       "source_no": 97,
       "kanji": "柳",
       "han_viet": "LIỄU",
@@ -7095,6 +7193,7 @@
       ]
     },
     {
+      "note_id": "2df47f0b-8cf9-41b8-90a9-51a7794fecd8",
       "source_no": 98,
       "kanji": "栽",
       "han_viet": "TÀI",
@@ -7148,6 +7247,7 @@
       ]
     },
     {
+      "note_id": "af29af16-affc-4eb6-b853-8ac55d352956",
       "source_no": 99,
       "kanji": "械",
       "han_viet": "GIỚI",
@@ -7221,6 +7321,7 @@
       ]
     },
     {
+      "note_id": "88621b53-53b9-4f9f-a1b0-360266f4ab6d",
       "source_no": 100,
       "kanji": "棒",
       "han_viet": "BỔNG",
@@ -7298,6 +7399,7 @@
       ]
     },
     {
+      "note_id": "e1210671-e8a7-4cca-82e6-5d33ae930e29",
       "source_no": 101,
       "kanji": "槽",
       "han_viet": "TÀO",
@@ -7353,6 +7455,7 @@
       ]
     },
     {
+      "note_id": "28098005-4859-4509-8215-1dc97418f76f",
       "source_no": 102,
       "kanji": "殿",
       "han_viet": "ĐIỆN",
@@ -7410,6 +7513,7 @@
       ]
     },
     {
+      "note_id": "6f4374e0-d403-4123-8383-0372b717bdec",
       "source_no": 103,
       "kanji": "汁",
       "han_viet": "TRẤP",
@@ -7491,6 +7595,7 @@
       ]
     },
     {
+      "note_id": "c614a6d7-3ae6-42af-90d9-363c025e4625",
       "source_no": 104,
       "kanji": "泌",
       "han_viet": "BÍ",
@@ -7575,6 +7680,7 @@
       ]
     },
     {
+      "note_id": "6d465847-db03-497c-90fa-20c3e259cb4b",
       "source_no": 105,
       "kanji": "洞",
       "han_viet": "ĐỘNG",
@@ -7648,6 +7754,7 @@
       ]
     },
     {
+      "note_id": "9bc40b3a-f1fd-49a1-9b22-240dd27db6cd",
       "source_no": 106,
       "kanji": "浅",
       "han_viet": "THIỂN",
@@ -7739,6 +7846,7 @@
       ]
     },
     {
+      "note_id": "f61274a3-83fd-43f1-ad0d-3eb14ed24a81",
       "source_no": 107,
       "kanji": "雄",
       "han_viet": "HÙNG",
@@ -7814,6 +7922,7 @@
       ]
     },
     {
+      "note_id": "8bb9e803-4a1a-4c72-8504-d0bb831b60e5",
       "source_no": 108,
       "kanji": "雅",
       "han_viet": "NHÃ",
@@ -7881,6 +7990,7 @@
       ]
     },
     {
+      "note_id": "aef06228-cacb-4358-8a0b-8c6d904278cd",
       "source_no": 109,
       "kanji": "震",
       "han_viet": "CHẤN",
@@ -7961,6 +8071,7 @@
       ]
     },
     {
+      "note_id": "6036b8e0-c4c8-4310-956b-43268adbcd10",
       "source_no": 110,
       "kanji": "霜",
       "han_viet": "SƯƠNG",
@@ -8010,6 +8121,7 @@
       ]
     },
     {
+      "note_id": "98dc4898-d65d-4bf1-a30d-15961625737c",
       "source_no": 111,
       "kanji": "飽",
       "han_viet": "BÃO",
@@ -8097,6 +8209,7 @@
       ]
     },
     {
+      "note_id": "0874b169-367c-459e-8628-1041d40de23a",
       "source_no": 112,
       "kanji": "駄",
       "han_viet": "ĐÀ",
@@ -8175,6 +8288,7 @@
       ]
     },
     {
+      "note_id": "7c543fed-704a-4682-8256-7c305dbff41c",
       "source_no": 113,
       "kanji": "騎",
       "han_viet": "KỊ",
@@ -8222,6 +8336,7 @@
       ]
     },
     {
+      "note_id": "c22aa6ea-8f2e-4d89-a301-535fac17d8da",
       "source_no": 114,
       "kanji": "騒",
       "han_viet": "TAO",
@@ -8321,6 +8436,7 @@
       ]
     },
     {
+      "note_id": "9c44ce59-954f-437d-a03e-b175e02de9e8",
       "source_no": 115,
       "kanji": "驚",
       "han_viet": "KINH",
@@ -8419,6 +8535,7 @@
       ]
     },
     {
+      "note_id": "0338ee19-c425-4639-b499-16e8f297cfe8",
       "source_no": 116,
       "kanji": "魂",
       "han_viet": "HỒN",
@@ -8499,6 +8616,7 @@
       ]
     },
     {
+      "note_id": "3111e3e1-061c-467c-91b2-c032bc5a8a64",
       "source_no": 117,
       "kanji": "魅",
       "han_viet": "MỊ",
@@ -8558,6 +8676,7 @@
       ]
     },
     {
+      "note_id": "680496ab-616f-4e96-90fb-eaa8bdc7f73c",
       "source_no": 118,
       "kanji": "魔",
       "han_viet": "MA",
@@ -8641,6 +8760,7 @@
       ]
     },
     {
+      "note_id": "54be0790-c780-4aad-88e0-b460026eed83",
       "source_no": 119,
       "kanji": "麗",
       "han_viet": "LỆ",
@@ -8721,6 +8841,7 @@
       ]
     },
     {
+      "note_id": "587fb63b-2cae-4982-85ff-00b852df4018",
       "source_no": 120,
       "kanji": "鼓",
       "han_viet": "CỔ",
@@ -8794,6 +8915,7 @@
       ]
     },
     {
+      "note_id": "e2005d13-899c-4eb0-8e4e-af24b32b2e29",
       "source_no": 121,
       "kanji": "鼻",
       "han_viet": "TỊ",
@@ -8867,6 +8989,7 @@
       ]
     },
     {
+      "note_id": "51548e8f-1410-4fa7-96eb-04aed9b991dc",
       "source_no": 122,
       "kanji": "退",
       "han_viet": "THOÁI",
@@ -8951,6 +9074,7 @@
       ]
     },
     {
+      "note_id": "eb85bf17-364f-4c3c-9a78-4deb2feaeef7",
       "source_no": 123,
       "kanji": "逐",
       "han_viet": "TRỤC",
@@ -9028,6 +9152,7 @@
       ]
     },
     {
+      "note_id": "5ddbb394-91a8-4f0a-ae50-1ca8f236f5d4",
       "source_no": 124,
       "kanji": "遭",
       "han_viet": "TAO",
@@ -9114,6 +9239,7 @@
       ]
     },
     {
+      "note_id": "3e25c828-1179-4e83-92f2-fedf01e21845",
       "source_no": 125,
       "kanji": "遮",
       "han_viet": "GIÀ",
@@ -9205,6 +9331,7 @@
       ]
     },
     {
+      "note_id": "7ef5553e-2744-48dd-825d-51650770f1d7",
       "source_no": 126,
       "kanji": "郭",
       "han_viet": "QUÁCH",
@@ -9284,6 +9411,7 @@
       ]
     },
     {
+      "note_id": "10bcbce0-7f8c-45b9-9d4b-6abc6bfd86bf",
       "source_no": 127,
       "kanji": "酌",
       "han_viet": "CHƯỚC",
@@ -9363,6 +9491,7 @@
       ]
     },
     {
+      "note_id": "8a069d0d-ecd6-41e3-9098-a67f5a8ae141",
       "source_no": 128,
       "kanji": "酔",
       "han_viet": "TÚY",
@@ -9444,6 +9573,7 @@
       ]
     },
     {
+      "note_id": "922580e4-b28b-4b88-a951-bbde3f9eb8e3",
       "source_no": 129,
       "kanji": "酪",
       "han_viet": "LẠC",
@@ -9503,6 +9633,7 @@
       ]
     },
     {
+      "note_id": "fc6a5f7c-c65e-4995-85c1-47a70795cc4e",
       "source_no": 130,
       "kanji": "酵",
       "han_viet": "DIẾU",
@@ -9598,6 +9729,7 @@
       ]
     },
     {
+      "note_id": "6f8483c9-55f6-450c-b811-ec9b745f27b1",
       "source_no": 131,
       "kanji": "酷",
       "han_viet": "KHỐC",
@@ -9677,6 +9809,7 @@
       ]
     },
     {
+      "note_id": "470df731-8320-4c56-9741-bca99cdcd14f",
       "source_no": 132,
       "kanji": "醜",
       "han_viet": "XÚ",
@@ -9733,6 +9866,7 @@
       ]
     },
     {
+      "note_id": "dc8fe346-bec7-4b0a-a361-b0f61e4c0b1b",
       "source_no": 133,
       "kanji": "銭",
       "han_viet": "TIỀN",
@@ -9802,6 +9936,7 @@
       ]
     },
     {
+      "note_id": "37f65abe-8deb-4301-96f2-c4d204e92eed",
       "source_no": 134,
       "kanji": "鎖",
       "han_viet": "TỎA",
@@ -9882,6 +10017,7 @@
       ]
     },
     {
+      "note_id": "101f32b3-31bf-41ff-a2b6-3013e67fe151",
       "source_no": 135,
       "kanji": "鏡",
       "han_viet": "KÍNH",
@@ -9956,6 +10092,7 @@
       ]
     },
     {
+      "note_id": "33b56e32-8e1d-4e79-9932-7db17da794fc",
       "source_no": 136,
       "kanji": "闘",
       "han_viet": "ĐẤU",
@@ -10048,6 +10185,7 @@
       ]
     },
     {
+      "note_id": "ff49b435-740b-432d-94d4-1b8f8022333c",
       "source_no": 137,
       "kanji": "獄",
       "han_viet": "NGỤC",
@@ -10113,6 +10251,7 @@
       ]
     },
     {
+      "note_id": "bd89f77f-5552-48e9-828c-73611fa45126",
       "source_no": 138,
       "kanji": "獣",
       "han_viet": "THÚ",
@@ -10193,6 +10332,7 @@
       ]
     },
     {
+      "note_id": "e66b56fc-1c7b-40f0-abea-f82cb57d8b19",
       "source_no": 139,
       "kanji": "獲",
       "han_viet": "HOẠCH",
@@ -10278,6 +10418,7 @@
       ]
     },
     {
+      "note_id": "368622a7-497a-429c-9272-ad080083cda1",
       "source_no": 140,
       "kanji": "班",
       "han_viet": "BAN",
@@ -10325,6 +10466,7 @@
       ]
     },
     {
+      "note_id": "f2106b7f-5e29-4f96-ad20-69bee3e0ec9d",
       "source_no": 141,
       "kanji": "琴",
       "han_viet": "CẦM",
@@ -10392,6 +10534,7 @@
       ]
     },
     {
+      "note_id": "0176018b-5b21-494d-abb7-0f220891b838",
       "source_no": 142,
       "kanji": "璽",
       "han_viet": "TỈ",
@@ -10445,6 +10588,7 @@
       ]
     },
     {
+      "note_id": "63158a85-03e0-4887-a845-82dff05f5d1e",
       "source_no": 143,
       "kanji": "瓶",
       "han_viet": "BÌNH",
@@ -10512,6 +10656,7 @@
       ]
     },
     {
+      "note_id": "4895537c-9e9c-4e97-8039-116c2e1cb6c3",
       "source_no": 144,
       "kanji": "癖",
       "han_viet": "PHÍCH",
@@ -10598,6 +10743,7 @@
       ]
     },
     {
+      "note_id": "10d6242e-e845-4e37-926e-c19bb592519d",
       "source_no": 145,
       "kanji": "盆",
       "han_viet": "BỒN",
@@ -10657,6 +10803,7 @@
       ]
     },
     {
+      "note_id": "5b38985e-7b10-4a5c-bf9d-44aeb15cbcd2",
       "source_no": 146,
       "kanji": "盲",
       "han_viet": "MANH",
@@ -10700,6 +10847,7 @@
       ]
     },
     {
+      "note_id": "e4bb585d-3ba3-48b9-9055-527f5d6ce049",
       "source_no": 147,
       "kanji": "矛",
       "han_viet": "MÂU",
@@ -10744,6 +10892,7 @@
       ]
     },
     {
+      "note_id": "1d89caac-ab38-443a-9e6f-74f72a0626fa",
       "source_no": 148,
       "kanji": "砲",
       "han_viet": "PHÁO",
@@ -10803,6 +10952,7 @@
       ]
     },
     {
+      "note_id": "aa0c8d0a-be7a-4f9f-b99d-b27c349aa49b",
       "source_no": 149,
       "kanji": "碑",
       "han_viet": "BI",
@@ -10876,6 +11026,7 @@
       ]
     },
     {
+      "note_id": "eac706ba-bd68-4da9-a585-4c690330221e",
       "source_no": 150,
       "kanji": "祥",
       "han_viet": "TƯỜNG",
@@ -10952,6 +11103,7 @@
       ]
     },
     {
+      "note_id": "6a0a4c48-c098-45f5-aa62-1d6a148596da",
       "source_no": 151,
       "kanji": "秩",
       "han_viet": "TRẬT",
@@ -10999,6 +11151,7 @@
       ]
     },
     {
+      "note_id": "b4363636-d52f-4d68-ba3d-ed8c06668ea7",
       "source_no": 152,
       "kanji": "穀",
       "han_viet": "CỐC",
@@ -11082,6 +11235,7 @@
       ]
     },
     {
+      "note_id": "39b5d53a-8267-4edf-9557-7fbadc5c60cf",
       "source_no": 153,
       "kanji": "穫",
       "han_viet": "HOẠCH",
@@ -11129,6 +11283,7 @@
       ]
     },
     {
+      "note_id": "c6f27ae3-ea3e-4ff9-8e23-9e98e7af8fd9",
       "source_no": 154,
       "kanji": "窮",
       "han_viet": "CÙNG",
@@ -11218,6 +11373,7 @@
       ]
     },
     {
+      "note_id": "6596adf5-4857-4617-b14b-746c16525224",
       "source_no": 155,
       "kanji": "窯",
       "han_viet": "DIÊU",
@@ -11267,6 +11423,7 @@
       ]
     },
     {
+      "note_id": "ffb15ee7-2e2d-4be0-b943-4519a0bfc117",
       "source_no": 156,
       "kanji": "端",
       "han_viet": "ĐOAN",
@@ -11332,6 +11489,7 @@
       ]
     },
     {
+      "note_id": "39819f38-4d89-4cc9-a599-f82d67addd7a",
       "source_no": 157,
       "kanji": "浸",
       "han_viet": "TẨM",
@@ -11430,6 +11588,7 @@
       ]
     },
     {
+      "note_id": "bda7c663-380e-4342-a3a3-8dcea7fdd57d",
       "source_no": 158,
       "kanji": "涙",
       "han_viet": "LỆ",
@@ -11486,6 +11645,7 @@
       ]
     },
     {
+      "note_id": "0317f8d3-ff62-4f43-b9e2-bdb99846551d",
       "source_no": 159,
       "kanji": "渇",
       "han_viet": "KHÁT",
@@ -11565,6 +11725,7 @@
       ]
     },
     {
+      "note_id": "c2505a2d-4cdb-4711-aabc-812c38d6b420",
       "source_no": 160,
       "kanji": "溝",
       "han_viet": "CÂU",
@@ -11620,6 +11781,7 @@
       ]
     },
     {
+      "note_id": "ae77600e-e478-4219-bc19-f801c4fd8c73",
       "source_no": 161,
       "kanji": "滑",
       "han_viet": "GIẢO",
@@ -11701,6 +11863,7 @@
       ]
     },
     {
+      "note_id": "f46df4cd-1c16-4e6a-a485-4e5c0521df85",
       "source_no": 162,
       "kanji": "滴",
       "han_viet": "ĐÍCH",
@@ -11787,6 +11950,7 @@
       ]
     },
     {
+      "note_id": "e6a2db7c-5912-4bd5-8d6d-efabcbc86140",
       "source_no": 163,
       "kanji": "漏",
       "han_viet": "LẬU",
@@ -11868,6 +12032,7 @@
       ]
     },
     {
+      "note_id": "aa6a5485-5252-4de9-90d1-29be923afef6",
       "source_no": 164,
       "kanji": "濁",
       "han_viet": "TRỌC",
@@ -11943,6 +12108,7 @@
       ]
     },
     {
+      "note_id": "648e8815-235e-4cf3-8b3a-03e81b0fe672",
       "source_no": 165,
       "kanji": "烈",
       "han_viet": "LIỆT",
@@ -12028,6 +12194,7 @@
       ]
     },
     {
+      "note_id": "3548f8d3-9127-447c-a654-709b8b42c6c4",
       "source_no": 166,
       "kanji": "焦",
       "han_viet": "TIÊU",
@@ -12122,6 +12289,7 @@
       ]
     },
     {
+      "note_id": "e70f9731-e69d-4986-821a-ab7eb2cc05bd",
       "source_no": 167,
       "kanji": "煩",
       "han_viet": "PHIỀN",
@@ -12211,6 +12379,7 @@
       ]
     },
     {
+      "note_id": "c1dfbe7c-152c-43ee-8f0e-8e46807919b7",
       "source_no": 168,
       "kanji": "煮",
       "han_viet": "CHỬ",
@@ -12281,6 +12450,7 @@
       ]
     },
     {
+      "note_id": "bf8c8411-16d2-4e5a-9cac-df98e6c22959",
       "source_no": 169,
       "kanji": "狩",
       "han_viet": "THÚ",
@@ -12344,6 +12514,7 @@
       ]
     },
     {
+      "note_id": "4333232e-9fe9-4045-9149-442851f09d6d",
       "source_no": 170,
       "kanji": "猛",
       "han_viet": "MÃNH",
@@ -12409,6 +12580,7 @@
       ]
     },
     {
+      "note_id": "5dbea4ae-3796-4f10-ad73-6a1bc1419faf",
       "source_no": 171,
       "kanji": "猟",
       "han_viet": "LIỆP",
@@ -12460,6 +12632,7 @@
       ]
     },
     {
+      "note_id": "91a204b5-31a0-45d0-bd3e-f419fb41c147",
       "source_no": 172,
       "kanji": "糾",
       "han_viet": "CỦ",
@@ -12527,6 +12700,7 @@
       ]
     },
     {
+      "note_id": "2fe7ea3d-ae3c-46e1-9c63-3f898792c59c",
       "source_no": 173,
       "kanji": "紋",
       "han_viet": "VĂN",
@@ -12574,6 +12748,7 @@
       ]
     },
     {
+      "note_id": "34bb5c65-298e-4521-ae1c-0c0692ae6fda",
       "source_no": 174,
       "kanji": "紡",
       "han_viet": "PHƯỞNG",
@@ -12647,6 +12822,7 @@
       ]
     },
     {
+      "note_id": "af67c8ba-fd0d-4fa1-a856-e67a3338e727",
       "source_no": 175,
       "kanji": "累",
       "han_viet": "LŨY",
@@ -12694,6 +12870,7 @@
       ]
     },
     {
+      "note_id": "21b8b6a9-116e-4e9a-bde5-b7e0bf3a2d7f",
       "source_no": 176,
       "kanji": "紺",
       "han_viet": "CÁM",
@@ -12747,6 +12924,7 @@
       ]
     },
     {
+      "note_id": "8dd70d71-7d19-4f51-b40b-a8439c1e067c",
       "source_no": 177,
       "kanji": "絞",
       "han_viet": "GIẢO",
@@ -12816,6 +12994,7 @@
       ]
     },
     {
+      "note_id": "590713ca-11ef-4c93-b35f-cf846fe17daa",
       "source_no": 178,
       "kanji": "絹",
       "han_viet": "QUYÊN",
@@ -12871,6 +13050,7 @@
       ]
     },
     {
+      "note_id": "0ab156be-eacc-4a24-953f-3176b2699c85",
       "source_no": 179,
       "kanji": "縄",
       "han_viet": "THẰNG",
@@ -12933,6 +13113,7 @@
       ]
     },
     {
+      "note_id": "7055ca6f-ab24-4347-85a6-c74e20e4d2d8",
       "source_no": 180,
       "kanji": "縛",
       "han_viet": "PHƯƠC",
@@ -13012,6 +13193,7 @@
       ]
     },
     {
+      "note_id": "a6209dcd-70a5-4f4c-b3af-397cf6c04d5a",
       "source_no": 181,
       "kanji": "繭",
       "han_viet": "KIỂN",
@@ -13056,6 +13238,7 @@
       ]
     },
     {
+      "note_id": "41a77e6e-63b6-4c7a-93c4-5bd33e9f16e3",
       "source_no": 182,
       "kanji": "署",
       "han_viet": "THỰ",
@@ -13133,6 +13316,7 @@
       ]
     },
     {
+      "note_id": "dba53e0a-e736-4089-a9e2-71b0425c59ea",
       "source_no": 183,
       "kanji": "群",
       "han_viet": "QUẦN",
@@ -13221,6 +13405,7 @@
       ]
     },
     {
+      "note_id": "cd6e15fd-91f4-49ff-ae58-c0b4b465b134",
       "source_no": 184,
       "kanji": "翻",
       "han_viet": "PHIÊN",
@@ -13308,6 +13493,7 @@
       ]
     },
     {
+      "note_id": "b0a4dca3-a455-400f-bff4-326c2c355f57",
       "source_no": 185,
       "kanji": "耐",
       "han_viet": "NẠI",
@@ -13363,6 +13549,7 @@
       ]
     },
     {
+      "note_id": "662bbd79-ef78-490e-98e0-f924352b0636",
       "source_no": 186,
       "kanji": "耕",
       "han_viet": "CANH",
@@ -13430,6 +13617,7 @@
       ]
     },
     {
+      "note_id": "433210b7-71f2-4854-b8c4-17e517996cc8",
       "source_no": 187,
       "kanji": "肥",
       "han_viet": "PHÌ",
@@ -13525,6 +13713,7 @@
       ]
     },
     {
+      "note_id": "15226240-8ccc-4d15-bf9f-9e9c0eb65f63",
       "source_no": 188,
       "kanji": "胞",
       "han_viet": "BÀO",
@@ -13602,6 +13791,7 @@
       ]
     },
     {
+      "note_id": "47bd8719-fe80-4d62-b530-f0214861cb66",
       "source_no": 189,
       "kanji": "壮",
       "han_viet": "TRÁNG",
@@ -13693,6 +13883,7 @@
       ]
     },
     {
+      "note_id": "d3110251-bee3-4f1d-b015-67e24b7436f1",
       "source_no": 190,
       "kanji": "干",
       "han_viet": "CAN",
@@ -13781,6 +13972,7 @@
       ]
     },
     {
+      "note_id": "ce4f85e3-24d4-4567-884f-63e61a556b51",
       "source_no": 191,
       "kanji": "机",
       "han_viet": "CƠ",
@@ -13830,6 +14022,7 @@
       ]
     },
     {
+      "note_id": "a73b2fa5-4b30-48e7-b3e2-cbc9437c0ccc",
       "source_no": 192,
       "kanji": "柱",
       "han_viet": "TRỤ",
@@ -13897,6 +14090,7 @@
       ]
     },
     {
+      "note_id": "64d078ba-d0fd-4b75-b5ee-056d9726bcaa",
       "source_no": 193,
       "kanji": "汗",
       "han_viet": "HÃN",
@@ -13976,6 +14170,7 @@
       ]
     },
     {
+      "note_id": "4d4566d6-c371-46cc-8efb-61465c065523",
       "source_no": 194,
       "kanji": "沸",
       "han_viet": "PHÍ",
@@ -14056,6 +14251,7 @@
       ]
     },
     {
+      "note_id": "7529db42-026d-47d0-98f1-cb729dd7b897",
       "source_no": 195,
       "kanji": "濯",
       "han_viet": "TRẠC",
@@ -14136,6 +14332,7 @@
       ]
     },
     {
+      "note_id": "9f7b99cb-e216-4a3a-81c8-74d777fc9217",
       "source_no": 196,
       "kanji": "界",
       "han_viet": "GIỚI",
@@ -14207,6 +14404,7 @@
       ]
     },
     {
+      "note_id": "2e0c3461-0bd4-49a4-a3c0-c2b5179ee60a",
       "source_no": 197,
       "kanji": "畑",
       "han_viet": "VƯỜN",
@@ -14280,6 +14478,7 @@
       ]
     },
     {
+      "note_id": "38bbe048-7d8a-4ef2-932e-58d5793acc2b",
       "source_no": 198,
       "kanji": "略",
       "han_viet": "LƯỢC",
@@ -14366,6 +14565,7 @@
       ]
     },
     {
+      "note_id": "0341e4e7-3ed5-414c-bd12-f5a171ac6b60",
       "source_no": 199,
       "kanji": "畳",
       "han_viet": "ĐIỆP",
@@ -14436,6 +14636,7 @@
       ]
     },
     {
+      "note_id": "938b12bf-2a20-4bdb-bc20-5eaa2bc28417",
       "source_no": 200,
       "kanji": "穴",
       "han_viet": "HUYỆT",
@@ -14497,6 +14698,7 @@
       ]
     },
     {
+      "note_id": "b0272650-94ff-4f3c-aa25-3f6d9e7ffb9e",
       "source_no": 201,
       "kanji": "突",
       "han_viet": "ĐỌT",
@@ -14589,6 +14791,7 @@
       ]
     },
     {
+      "note_id": "a931796a-b256-48fe-a90a-0bffab4e5489",
       "source_no": 202,
       "kanji": "粉",
       "han_viet": "PHẤN",
@@ -14670,6 +14873,7 @@
       ]
     },
     {
+      "note_id": "12583a46-5226-43bc-ad92-82b57d456e76",
       "source_no": 203,
       "kanji": "粒",
       "han_viet": "LẠP",
@@ -14731,6 +14935,7 @@
       ]
     },
     {
+      "note_id": "0ce1c75c-f84c-4763-9430-ea9899b4eedb",
       "source_no": 204,
       "kanji": "肖",
       "han_viet": "TIẾU",
@@ -14768,6 +14973,7 @@
       ]
     },
     {
+      "note_id": "34dc5271-2bd5-403c-b8d4-a44245f3e484",
       "source_no": 205,
       "kanji": "胴",
       "han_viet": "ĐỖNG",
@@ -14851,6 +15057,7 @@
       ]
     },
     {
+      "note_id": "e25945f7-6454-4c47-889b-c88ce1d92939",
       "source_no": 206,
       "kanji": "胸",
       "han_viet": "HUNG",
@@ -14937,6 +15144,7 @@
       ]
     },
     {
+      "note_id": "60f37361-7593-4ca3-ab5a-f996718cbd55",
       "source_no": 207,
       "kanji": "脅",
       "han_viet": "HIẾP",
@@ -15030,6 +15238,7 @@
       ]
     },
     {
+      "note_id": "809affd5-158a-49b9-9b2f-9a30725ea561",
       "source_no": 208,
       "kanji": "脈",
       "han_viet": "MẠCH",
@@ -15103,6 +15312,7 @@
       ]
     },
     {
+      "note_id": "cd636ddf-4d5b-4b83-bd7c-1c901bd3b2ae",
       "source_no": 209,
       "kanji": "腰",
       "han_viet": "YÊU",
@@ -15146,6 +15356,7 @@
       ]
     },
     {
+      "note_id": "ead779ef-f8d7-4077-bd71-bc9c84e3d8d7",
       "source_no": 210,
       "kanji": "腸",
       "han_viet": "TRÀNG",
@@ -15220,6 +15431,7 @@
       ]
     },
     {
+      "note_id": "d37eb5c6-0819-41a0-9b0b-aad6e621a272",
       "source_no": 211,
       "kanji": "膚",
       "han_viet": "PHU",
@@ -15269,6 +15481,7 @@
       ]
     },
     {
+      "note_id": "6988c348-e01e-4564-8edd-3910e52fe745",
       "source_no": 212,
       "kanji": "航",
       "han_viet": "HÀNG",
@@ -15340,6 +15553,7 @@
       ]
     },
     {
+      "note_id": "0d4b81dd-5ea8-4681-849f-ce50af5e3711",
       "source_no": 213,
       "kanji": "賦",
       "han_viet": "PHÚ",
@@ -15412,6 +15626,7 @@
       ]
     },
     {
+      "note_id": "b6939e62-1f21-42cf-9b74-90a9e4e140cd",
       "source_no": 214,
       "kanji": "軌",
       "han_viet": "QUỸ",
@@ -15477,6 +15692,7 @@
       ]
     },
     {
+      "note_id": "1f6b8c1e-5725-4a76-bc0d-3bafd595a7a0",
       "source_no": 215,
       "kanji": "軸",
       "han_viet": "TRỤC",
@@ -15554,6 +15770,7 @@
       ]
     },
     {
+      "note_id": "8326bb26-e82c-43e8-8ebe-b3d180625626",
       "source_no": 216,
       "kanji": "般",
       "han_viet": "BÀN,",
@@ -15637,6 +15854,7 @@
       ]
     },
     {
+      "note_id": "936cfbc5-239b-4af6-b496-668b2daed976",
       "source_no": 217,
       "kanji": "芳",
       "han_viet": "PHƯƠNG",
@@ -15686,6 +15904,7 @@
       ]
     },
     {
+      "note_id": "91239093-b910-41db-8e7c-2406bdbccae4",
       "source_no": 218,
       "kanji": "茂",
       "han_viet": "MẬU",
@@ -15723,6 +15942,7 @@
       ]
     },
     {
+      "note_id": "fdb15606-c9d2-4a3b-a55d-d11b013af3cc",
       "source_no": 219,
       "kanji": "茎",
       "han_viet": "HÀNH",
@@ -15791,6 +16011,7 @@
       ]
     },
     {
+      "note_id": "fc4ba3a5-a7ee-41fc-b423-5c1fb8958fcf",
       "source_no": 220,
       "kanji": "荘",
       "han_viet": "TRANG",
@@ -15843,6 +16064,7 @@
       ]
     },
     {
+      "note_id": "8e8d7a33-bdeb-4803-9954-99e76e99d175",
       "source_no": 221,
       "kanji": "菊",
       "han_viet": "CÚC",
@@ -15890,6 +16112,7 @@
       ]
     },
     {
+      "note_id": "d6b9d070-e72a-426c-aeb3-574362df86e6",
       "source_no": 222,
       "kanji": "葬",
       "han_viet": "TÁNG",
@@ -15951,6 +16174,7 @@
       ]
     },
     {
+      "note_id": "487d2d35-95a5-4d41-b7bf-b52de5909b1c",
       "source_no": 223,
       "kanji": "薪",
       "han_viet": "TÂN",
@@ -16013,6 +16237,7 @@
       ]
     },
     {
+      "note_id": "63470de8-164b-4725-9da2-6bf7b7c8b37a",
       "source_no": 224,
       "kanji": "虐",
       "han_viet": "NGƯỢC",
@@ -16098,6 +16323,7 @@
       ]
     },
     {
+      "note_id": "c0a68b9c-09f3-4a8b-ac47-2d4bafc4b5fe",
       "source_no": 225,
       "kanji": "虜",
       "han_viet": "LỖ",
@@ -16149,6 +16375,7 @@
       ]
     },
     {
+      "note_id": "f4dab1a4-0f35-4e26-9e5a-44e96f8eab54",
       "source_no": 226,
       "kanji": "虞",
       "han_viet": "NGU",
@@ -16182,6 +16409,7 @@
       ]
     },
     {
+      "note_id": "13b47075-1179-4a5a-856b-5c8306bc56cf",
       "source_no": 227,
       "kanji": "蛇",
       "han_viet": "XÀ",
@@ -16252,6 +16480,7 @@
       ]
     },
     {
+      "note_id": "c5af0cb9-ef2c-4309-a5c9-8550c38a62f2",
       "source_no": 228,
       "kanji": "蛍",
       "han_viet": "HUỲNH",
@@ -16319,6 +16548,7 @@
       ]
     },
     {
+      "note_id": "c6fe3ca9-6a4d-4b4d-93b9-8fce9d242359",
       "source_no": 229,
       "kanji": "蛮",
       "han_viet": "MAN",
@@ -16374,6 +16604,7 @@
       ]
     },
     {
+      "note_id": "33686fa1-3b8d-4c29-81fa-a789284a3570",
       "source_no": 230,
       "kanji": "裸",
       "han_viet": "LÕA",
@@ -16447,6 +16678,7 @@
       ]
     },
     {
+      "note_id": "2becef32-a4c6-49be-bf16-e0d1ad780421",
       "source_no": 231,
       "kanji": "襲",
       "han_viet": "TẬP",
@@ -16533,6 +16765,7 @@
       ]
     },
     {
+      "note_id": "af85d247-07d6-4752-ab9b-f609df8d9809",
       "source_no": 232,
       "kanji": "触",
       "han_viet": "XÚC",
@@ -16620,6 +16853,7 @@
       ]
     },
     {
+      "note_id": "bfc04588-829d-4b77-9c58-bb9a90f7c59d",
       "source_no": 233,
       "kanji": "誉",
       "han_viet": "DỰ",
@@ -16694,6 +16928,7 @@
       ]
     },
     {
+      "note_id": "90127b33-222c-4177-8628-6a6047597eed",
       "source_no": 234,
       "kanji": "誤",
       "han_viet": "NGỘ",
@@ -16768,6 +17003,7 @@
       ]
     },
     {
+      "note_id": "9ba5b00f-eb3b-4e93-9d7e-b893ec7847dc",
       "source_no": 235,
       "kanji": "謡",
       "han_viet": "DAO",
@@ -16836,6 +17072,7 @@
       ]
     },
     {
+      "note_id": "24a840dc-8a78-4125-94b2-c91ca53164f9",
       "source_no": 236,
       "kanji": "貧",
       "han_viet": "BẦN",
@@ -16922,6 +17159,7 @@
       ]
     },
     {
+      "note_id": "8914b0da-536a-466d-bc56-b25e9e58d5bd",
       "source_no": 237,
       "kanji": "貫",
       "han_viet": "QUÁN",
@@ -16985,6 +17223,7 @@
       ]
     },
     {
+      "note_id": "bfa8e2f9-082a-429b-82e7-5c206f40c389",
       "source_no": 238,
       "kanji": "賄",
       "han_viet": "HỐI",
@@ -17064,6 +17303,7 @@
       ]
     },
     {
+      "note_id": "0b7b4f27-9143-49ef-a3fd-f0430bba5cf3",
       "source_no": 239,
       "kanji": "賊",
       "han_viet": "TẶC",
@@ -17141,6 +17381,7 @@
       ]
     },
     {
+      "note_id": "1788197f-d398-44be-be90-08385ff54e00",
       "source_no": 240,
       "kanji": "賜",
       "han_viet": "TỨ",
@@ -17204,6 +17445,7 @@
       ]
     },
     {
+      "note_id": "3b3cff87-9619-4755-82d5-b7a819bd8b17",
       "source_no": 241,
       "kanji": "載",
       "han_viet": "TẢI",
@@ -17290,6 +17532,7 @@
       ]
     },
     {
+      "note_id": "4e168996-1c79-4ec3-b0a2-ce2587f2fd9a",
       "source_no": 242,
       "kanji": "辱",
       "han_viet": "NHỤC",
@@ -17381,6 +17624,7 @@
       ]
     },
     {
+      "note_id": "8f591244-0715-4677-8715-12f2205e91ea",
       "source_no": 243,
       "kanji": "釣",
       "han_viet": "ĐIẾU",
@@ -17456,6 +17700,7 @@
       ]
     },
     {
+      "note_id": "e5585a05-30a8-4b87-a030-a8e3a709c36c",
       "source_no": 244,
       "kanji": "佳",
       "han_viet": "GIAI",
@@ -17497,6 +17742,7 @@
       ]
     },
     {
+      "note_id": "25910f5c-0d83-4a99-8ba0-b09b4476fc24",
       "source_no": 245,
       "kanji": "侍",
       "han_viet": "THỊ",
@@ -17578,6 +17824,7 @@
       ]
     },
     {
+      "note_id": "d67f9982-898e-46b2-a922-1f1ce6e067a0",
       "source_no": 246,
       "kanji": "准",
       "han_viet": "CHUẨN",
@@ -17655,6 +17902,7 @@
       ]
     },
     {
+      "note_id": "4d0f17cd-828e-4935-8ccf-a62b0dc2812e",
       "source_no": 247,
       "kanji": "剖",
       "han_viet": "PHẪU",
@@ -17702,6 +17950,7 @@
       ]
     },
     {
+      "note_id": "82a8123a-ba36-4f8d-87aa-1a6526e1df36",
       "source_no": 248,
       "kanji": "勅",
       "han_viet": "SẮC",
@@ -17758,6 +18007,7 @@
       ]
     },
     {
+      "note_id": "5352acd9-c821-4bf7-ae76-3c59744362aa",
       "source_no": 249,
       "kanji": "哀",
       "han_viet": "BI",
@@ -17851,6 +18101,7 @@
       ]
     },
     {
+      "note_id": "73136a21-c7dc-4e76-b2fe-51a1af842750",
       "source_no": 250,
       "kanji": "堕",
       "han_viet": "ĐỌA",
@@ -17932,6 +18183,7 @@
       ]
     },
     {
+      "note_id": "9c83f189-0b29-4529-a9b1-889ef69e7ace",
       "source_no": 251,
       "kanji": "墜",
       "han_viet": "TRỤY",
@@ -18018,6 +18270,7 @@
       ]
     },
     {
+      "note_id": "d090465a-bced-428e-a03b-8ded67e31d1f",
       "source_no": 252,
       "kanji": "奨",
       "han_viet": "TƯỞNG",
@@ -18104,6 +18357,7 @@
       ]
     },
     {
+      "note_id": "25443b23-dc92-4a1a-951d-508ccf005f5a",
       "source_no": 253,
       "kanji": "妃",
       "han_viet": "PHI",
@@ -18153,6 +18407,7 @@
       ]
     },
     {
+      "note_id": "349f3708-c64f-4329-abff-8d8fc6799952",
       "source_no": 254,
       "kanji": "妨",
       "han_viet": "PHƯƠNG",
@@ -18232,6 +18487,7 @@
       ]
     },
     {
+      "note_id": "f6b5b26c-4f62-42b5-905b-6d7a4eecc67c",
       "source_no": 255,
       "kanji": "姓",
       "han_viet": "TÍNH",
@@ -18298,6 +18554,7 @@
       ]
     },
     {
+      "note_id": "e5489783-56db-4709-af89-251e8ff9e420",
       "source_no": 256,
       "kanji": "媒",
       "han_viet": "MÔI",
@@ -18389,6 +18646,7 @@
       ]
     },
     {
+      "note_id": "de3a5fab-5b20-46c9-8766-a9a07caff598",
       "source_no": 257,
       "kanji": "宜",
       "han_viet": "NGHI",
@@ -18469,6 +18727,7 @@
       ]
     },
     {
+      "note_id": "7dbf1d64-c6c0-4f6c-8960-d93950ce16f8",
       "source_no": 258,
       "kanji": "寛",
       "han_viet": "KHOAN",
@@ -18562,6 +18821,7 @@
       ]
     },
     {
+      "note_id": "82147fc4-2f8d-4956-98ca-cc12963b07b3",
       "source_no": 259,
       "kanji": "寡",
       "han_viet": "QUẢ",
@@ -18639,6 +18899,7 @@
       ]
     },
     {
+      "note_id": "4a2fe7d3-491c-4fdc-a3e4-de25de4b7dd5",
       "source_no": 260,
       "kanji": "寧",
       "han_viet": "NINH",
@@ -18724,6 +18985,7 @@
       ]
     },
     {
+      "note_id": "d4a0c853-ea84-4a2b-98d6-f5356cb8b95b",
       "source_no": 261,
       "kanji": "尉",
       "han_viet": "ÚY",
@@ -18784,6 +19046,7 @@
       ]
     },
     {
+      "note_id": "f267e895-3fed-4840-b8f3-61696c60bad4",
       "source_no": 262,
       "kanji": "序",
       "han_viet": "TỰ",
@@ -18864,6 +19127,7 @@
       ]
     },
     {
+      "note_id": "3a670dab-833a-43c0-9426-91a1ec63b1bc",
       "source_no": 263,
       "kanji": "庶",
       "han_viet": "THỨ",
@@ -18917,6 +19181,7 @@
       ]
     },
     {
+      "note_id": "23c1f6c5-d1cd-4112-a9a1-600f45d6a00d",
       "source_no": 264,
       "kanji": "廊",
       "han_viet": "LANG",
@@ -18964,6 +19229,7 @@
       ]
     },
     {
+      "note_id": "73082c75-08ac-4ede-9adc-b42cb10fd087",
       "source_no": 265,
       "kanji": "徐",
       "han_viet": "TỪ",
@@ -19031,6 +19297,7 @@
       ]
     },
     {
+      "note_id": "e3630ea6-d0ea-4ea7-84df-dfcf21138ebd",
       "source_no": 266,
       "kanji": "怠",
       "han_viet": "ĐÃI",
@@ -19135,6 +19402,7 @@
       ]
     },
     {
+      "note_id": "94da794b-d506-4935-87d4-70e012a3dff1",
       "source_no": 267,
       "kanji": "恭",
       "han_viet": "CUNG",
@@ -19196,6 +19464,7 @@
       ]
     },
     {
+      "note_id": "8c11d2c0-e95b-4d10-9b92-b81bc2916e59",
       "source_no": 268,
       "kanji": "惜",
       "han_viet": "TÍCH",
@@ -19276,6 +19545,7 @@
       ]
     },
     {
+      "note_id": "669c3c63-d12c-4ae0-b44f-06981a9f50d4",
       "source_no": 269,
       "kanji": "惨",
       "han_viet": "THẢM",
@@ -19382,6 +19652,7 @@
       ]
     },
     {
+      "note_id": "bff80e5b-8be4-4971-8148-b5acf5a35700",
       "source_no": 270,
       "kanji": "愁",
       "han_viet": "SẦU",
@@ -19474,6 +19745,7 @@
       ]
     },
     {
+      "note_id": "8d8f1d29-2a9d-4945-a706-692f5efe2ce9",
       "source_no": 271,
       "kanji": "愚",
       "han_viet": "NGU",
@@ -19541,6 +19813,7 @@
       ]
     },
     {
+      "note_id": "9c03bc93-25d8-4bbc-adf6-6a1a2f58d1ab",
       "source_no": 272,
       "kanji": "慈",
       "han_viet": "TỪ",
@@ -19614,6 +19887,7 @@
       ]
     },
     {
+      "note_id": "4cfa17e8-4ef2-4207-8808-318ca0ce6405",
       "source_no": 273,
       "kanji": "慰",
       "han_viet": "ÚY",
@@ -19694,6 +19968,7 @@
       ]
     },
     {
+      "note_id": "b71a5f01-9bac-49b4-adb6-7a2724e296fa",
       "source_no": 274,
       "kanji": "憩",
       "han_viet": "KHẾ",
@@ -19768,6 +20043,7 @@
       ]
     },
     {
+      "note_id": "3ce3b25e-d579-4bb2-84a7-4f31de459543",
       "source_no": 275,
       "kanji": "懇",
       "han_viet": "KHẨN",
@@ -19847,6 +20123,7 @@
       ]
     },
     {
+      "note_id": "c8cf7ea8-9c96-424d-9f57-61c9e1073beb",
       "source_no": 276,
       "kanji": "懐",
       "han_viet": "HOÀI",
@@ -19940,6 +20217,7 @@
       ]
     },
     {
+      "note_id": "cba5a485-ed66-4533-b43f-be69a2da794f",
       "source_no": 277,
       "kanji": "披",
       "han_viet": "PHI",
@@ -20029,6 +20307,7 @@
       ]
     },
     {
+      "note_id": "aefd7a06-7c32-4d68-82f2-9667620198bd",
       "source_no": 278,
       "kanji": "抹",
       "han_viet": "MẠT",
@@ -20082,6 +20361,7 @@
       ]
     },
     {
+      "note_id": "5f943f92-662e-46e3-ad18-1d7b5414bd73",
       "source_no": 279,
       "kanji": "抽",
       "han_viet": "TRỪU",
@@ -20167,6 +20447,7 @@
       ]
     },
     {
+      "note_id": "7db1ea17-4763-47c3-baef-6eac03713709",
       "source_no": 280,
       "kanji": "拐",
       "han_viet": "QUẢI",
@@ -20232,6 +20513,7 @@
       ]
     },
     {
+      "note_id": "bd595361-7792-4acc-a736-981826e63319",
       "source_no": 281,
       "kanji": "拓",
       "han_viet": "THÁC",
@@ -20287,6 +20569,7 @@
       ]
     },
     {
+      "note_id": "5d819969-fa09-48e3-a6d3-a38d3f635e82",
       "source_no": 282,
       "kanji": "乾",
       "han_viet": "CAN",
@@ -20365,6 +20648,7 @@
       ]
     },
     {
+      "note_id": "d55f8a98-f2a9-4130-b366-49778672d869",
       "source_no": 283,
       "kanji": "亜",
       "han_viet": "Á",
@@ -20432,6 +20716,7 @@
       ]
     },
     {
+      "note_id": "103e0f30-4895-4b45-b60e-10c7889bccc3",
       "source_no": 284,
       "kanji": "伐",
       "han_viet": "PHẠT",
@@ -20510,6 +20795,7 @@
       ]
     },
     {
+      "note_id": "d76a81c5-7e90-4e8a-b491-9e9bcb8d53cc",
       "source_no": 285,
       "kanji": "凡",
       "han_viet": "PHÀM",
@@ -20586,6 +20872,7 @@
       ]
     },
     {
+      "note_id": "e9efd72c-7111-4e17-bd5c-65b949e2f59e",
       "source_no": 286,
       "kanji": "凸",
       "han_viet": "ĐỘT",
@@ -20677,6 +20964,7 @@
       ]
     },
     {
+      "note_id": "9c2f29a1-94a9-4d5f-9ea6-6cc923270040",
       "source_no": 287,
       "kanji": "凹",
       "han_viet": "AO",
@@ -20746,6 +21034,7 @@
       ]
     },
     {
+      "note_id": "6638b8d4-7cc5-41a0-82b9-1af34aeb6953",
       "source_no": 288,
       "kanji": "匠",
       "han_viet": "TƯỢNG",
@@ -20825,6 +21114,7 @@
       ]
     },
     {
+      "note_id": "8db6075a-0a8e-4f6a-b685-4c62c4d477f0",
       "source_no": 289,
       "kanji": "尺",
       "han_viet": "XÍCH",
@@ -20872,6 +21162,7 @@
       ]
     },
     {
+      "note_id": "6f5e362c-ee87-41a8-8159-10e25068c047",
       "source_no": 290,
       "kanji": "斥",
       "han_viet": "XÍCH",
@@ -20945,6 +21236,7 @@
       ]
     },
     {
+      "note_id": "4516b8b1-92ea-4ed7-98a0-9c87459ea170",
       "source_no": 291,
       "kanji": "括",
       "han_viet": "QUÁT",
@@ -21030,6 +21322,7 @@
       ]
     },
     {
+      "note_id": "1b80ab57-466c-48d9-9899-50683df535d0",
       "source_no": 292,
       "kanji": "搬",
       "han_viet": "BAN",
@@ -21107,6 +21400,7 @@
       ]
     },
     {
+      "note_id": "5f1f9f33-0506-4da2-a34b-f6b43afdfd68",
       "source_no": 293,
       "kanji": "擁",
       "han_viet": "ỦNG",
@@ -21160,6 +21454,7 @@
       ]
     },
     {
+      "note_id": "a7b43497-d721-425b-90d7-f1c77aaab36b",
       "source_no": 294,
       "kanji": "擦",
       "han_viet": "SÁT",
@@ -21231,6 +21526,7 @@
       ]
     },
     {
+      "note_id": "227d69c6-15af-446b-876d-02112a505360",
       "source_no": 295,
       "kanji": "暫",
       "han_viet": "TẠM",
@@ -21280,6 +21576,7 @@
       ]
     },
     {
+      "note_id": "0b8ab572-f17b-44de-a134-a8de5972c1c4",
       "source_no": 296,
       "kanji": "朗",
       "han_viet": "LÃNG",
@@ -21378,6 +21675,7 @@
       ]
     },
     {
+      "note_id": "079e1fc6-8de8-4d6b-b2f9-205e9189f0ca",
       "source_no": 297,
       "kanji": "棟",
       "han_viet": "ĐỐNG",
@@ -21440,6 +21738,7 @@
       ]
     },
     {
+      "note_id": "967c3e92-d462-41a8-b131-5babc59a05ce",
       "source_no": 298,
       "kanji": "楼",
       "han_viet": "LÂU",
@@ -21513,6 +21812,7 @@
       ]
     },
     {
+      "note_id": "89660480-3e09-40af-a545-41e048ced172",
       "source_no": 299,
       "kanji": "欄",
       "han_viet": "LAN",
@@ -21586,6 +21886,7 @@
       ]
     },
     {
+      "note_id": "00bf5cd9-be9d-47fc-8452-56ba52dedae9",
       "source_no": 300,
       "kanji": "款",
       "han_viet": "KHOẢN",
@@ -21663,6 +21964,7 @@
       ]
     },
     {
+      "note_id": "9a0faa99-ef26-4f11-8eaf-db4a9589b92f",
       "source_no": 301,
       "kanji": "殻",
       "han_viet": "XÁC",
@@ -21727,6 +22029,7 @@
       ]
     },
     {
+      "note_id": "5fadb4e6-7366-4419-8f96-1d6465c5413c",
       "source_no": 302,
       "kanji": "没",
       "han_viet": "MỘT",
@@ -21797,6 +22100,7 @@
       ]
     },
     {
+      "note_id": "adc756c7-de6f-4752-8859-e91fc80fab79",
       "source_no": 303,
       "kanji": "涯",
       "han_viet": "NHAI",
@@ -21846,6 +22150,7 @@
       ]
     },
     {
+      "note_id": "c2d89722-5ee2-4abc-93ac-4240e818e856",
       "source_no": 304,
       "kanji": "淡",
       "han_viet": "ĐẠM",
@@ -21931,6 +22236,7 @@
       ]
     },
     {
+      "note_id": "3effd77a-893f-4e63-b3a9-5c5cc15d2ff4",
       "source_no": 305,
       "kanji": "滋",
       "han_viet": "TƯ",
@@ -21984,6 +22290,7 @@
       ]
     },
     {
+      "note_id": "f93b48a8-c1a1-4acb-abb8-827e7e79d313",
       "source_no": 306,
       "kanji": "漂",
       "han_viet": "PHIÊU",
@@ -22075,6 +22382,7 @@
       ]
     },
     {
+      "note_id": "09a964f9-de29-49eb-b2ad-15341d987777",
       "source_no": 307,
       "kanji": "潤",
       "han_viet": "NHUẬN",
@@ -22168,6 +22476,7 @@
       ]
     },
     {
+      "note_id": "dc489ebb-f531-4858-a153-7a41f5070622",
       "source_no": 308,
       "kanji": "灯",
       "han_viet": "ĐĂNG",
@@ -22245,6 +22554,7 @@
       ]
     },
     {
+      "note_id": "2d9043c6-1b55-4757-8a64-7caad16758df",
       "source_no": 309,
       "kanji": "牧",
       "han_viet": "MỤC",
@@ -22324,6 +22634,7 @@
       ]
     },
     {
+      "note_id": "90033225-0a9e-4f26-8cab-44e11298113f",
       "source_no": 310,
       "kanji": "猶",
       "han_viet": "DO",
@@ -22403,6 +22714,7 @@
       ]
     },
     {
+      "note_id": "8733ab62-1c52-46c0-b42a-247d7eaa3cf6",
       "source_no": 311,
       "kanji": "硝",
       "han_viet": "TIÊU",
@@ -22474,6 +22786,7 @@
       ]
     },
     {
+      "note_id": "4a0bdade-d0d2-43a1-bcef-f54be580da5c",
       "source_no": 312,
       "kanji": "硬",
       "han_viet": "NGẠNH",
@@ -22565,6 +22878,7 @@
       ]
     },
     {
+      "note_id": "b911d80f-a4b0-45d6-a615-f67d293b3769",
       "source_no": 313,
       "kanji": "磁",
       "han_viet": "TỪ",
@@ -22636,6 +22950,7 @@
       ]
     },
     {
+      "note_id": "8af25576-fcf0-4759-80ad-792acfed7412",
       "source_no": 314,
       "kanji": "礁",
       "han_viet": "TIỀU",
@@ -22695,6 +23010,7 @@
       ]
     },
     {
+      "note_id": "2a9cc0d3-911f-48a9-af90-f2dec2cf08e2",
       "source_no": 315,
       "kanji": "禅",
       "han_viet": "THIỀN",
@@ -22770,6 +23086,7 @@
       ]
     },
     {
+      "note_id": "fcbea2b1-a0f2-4d61-ab42-ca763360e39d",
       "source_no": 316,
       "kanji": "礎",
       "han_viet": "SỞ",
@@ -22831,6 +23148,7 @@
       ]
     },
     {
+      "note_id": "d2eb7b3c-41ff-4aee-9129-8f9e07f63b84",
       "source_no": 317,
       "kanji": "祈",
       "han_viet": "KÌ",
@@ -22922,6 +23240,7 @@
       ]
     },
     {
+      "note_id": "7564b5c8-2f89-4145-9751-1719b4876a6f",
       "source_no": 318,
       "kanji": "租",
       "han_viet": "TÔ",
@@ -22987,6 +23306,7 @@
       ]
     },
     {
+      "note_id": "e7bff965-519d-4402-ac43-477901f0d153",
       "source_no": 319,
       "kanji": "稚",
       "han_viet": "TRĨ",
@@ -23058,6 +23378,7 @@
       ]
     },
     {
+      "note_id": "f33da033-e286-4f8c-b5b7-09afbcc9ae82",
       "source_no": 320,
       "kanji": "穂",
       "han_viet": "TUỆ",
@@ -23119,6 +23440,7 @@
       ]
     },
     {
+      "note_id": "6f2601ad-1952-4417-bd91-627b88c433b9",
       "source_no": 321,
       "kanji": "穏",
       "han_viet": "ỔN",
@@ -23210,6 +23532,7 @@
       ]
     },
     {
+      "note_id": "0379b017-a5d4-4bfa-9cb9-8db939ebba48",
       "source_no": 322,
       "kanji": "篤",
       "han_viet": "ĐỐC",
@@ -23289,6 +23612,7 @@
       ]
     },
     {
+      "note_id": "f332b4ec-fe49-4ebe-9803-3701b8b6066f",
       "source_no": 323,
       "kanji": "簿",
       "han_viet": "BỘ",
@@ -23360,6 +23684,7 @@
       ]
     },
     {
+      "note_id": "dcb2a9c0-a3c5-4596-b807-4e6c11ea902a",
       "source_no": 324,
       "kanji": "虚",
       "han_viet": "HƯ",
@@ -23417,6 +23742,7 @@
       ]
     },
     {
+      "note_id": "7173254d-aa80-4ae0-a0d4-34872fe0d035",
       "source_no": 325,
       "kanji": "豪",
       "han_viet": "HÀO",
@@ -23514,6 +23840,7 @@
       ]
     },
     {
+      "note_id": "cfdc4726-493d-4279-99a6-435bafdb40b9",
       "source_no": 326,
       "kanji": "粗",
       "han_viet": "THÔ",
@@ -23582,6 +23909,7 @@
       ]
     },
     {
+      "note_id": "05afa32b-21cf-4006-87e3-40486f21e6e2",
       "source_no": 327,
       "kanji": "粙",
       "han_viet": "TÚC",
@@ -23650,6 +23978,7 @@
       ]
     },
     {
+      "note_id": "1b6608d6-1a9d-4391-91e8-72e1064b0d44",
       "source_no": 328,
       "kanji": "粧",
       "han_viet": "TRANG",
@@ -23715,6 +24044,7 @@
       ]
     },
     {
+      "note_id": "655515f3-7573-45ad-87ce-674de66eab07",
       "source_no": 329,
       "kanji": "糧",
       "han_viet": "LƯƠNG",
@@ -23771,6 +24101,7 @@
       ]
     },
     {
+      "note_id": "c488055b-c3e1-4ba5-8d5f-33602d0e7f64",
       "source_no": 330,
       "kanji": "紫",
       "han_viet": "TỬ",
@@ -23850,6 +24181,7 @@
       ]
     },
     {
+      "note_id": "0f9ff284-e65f-46d8-a534-e8c96d811cf3",
       "source_no": 331,
       "kanji": "緯",
       "han_viet": "VĨ",
@@ -23906,6 +24238,7 @@
       ]
     },
     {
+      "note_id": "21e61244-00e8-46b3-8551-ab0d86d557fb",
       "source_no": 332,
       "kanji": "罰",
       "han_viet": "PHẠT",
@@ -23993,6 +24326,7 @@
       ]
     },
     {
+      "note_id": "3d9a1de7-dd4f-4b66-8bce-fc0f060d9f13",
       "source_no": 333,
       "kanji": "謡",
       "han_viet": "DAO",
@@ -24061,6 +24395,7 @@
       ]
     },
     {
+      "note_id": "1b4b2faf-2b48-46da-90d5-d08c6c22dbc1",
       "source_no": 334,
       "kanji": "蒸",
       "han_viet": "CHƯNG",
@@ -24155,6 +24490,7 @@
       ]
     },
     {
+      "note_id": "ad63aa8f-fe82-48fd-b693-c0f3d4f63da5",
       "source_no": 335,
       "kanji": "畔",
       "han_viet": "BẠN",
@@ -24188,6 +24524,7 @@
       ]
     },
     {
+      "note_id": "bda61c3b-cf34-4bcb-952d-853f98c49c48",
       "source_no": 336,
       "kanji": "疫",
       "han_viet": "DỊCH",
@@ -24266,6 +24603,7 @@
       ]
     },
     {
+      "note_id": "59507e14-5900-4b37-a004-744befba8b15",
       "source_no": 337,
       "kanji": "痢",
       "han_viet": "LỊ",
@@ -24307,6 +24645,7 @@
       ]
     },
     {
+      "note_id": "1edf176d-76db-4079-b6ab-2f8193a40a74",
       "source_no": 338,
       "kanji": "痴",
       "han_viet": "SI",
@@ -24381,6 +24720,7 @@
       ]
     },
     {
+      "note_id": "7af441c7-32f9-49c3-866b-493fd9c29f09",
       "source_no": 339,
       "kanji": "羅",
       "han_viet": "LA",
@@ -24430,6 +24770,7 @@
       ]
     },
     {
+      "note_id": "86f3f1a4-45cf-40a2-bd87-d059feb10473",
       "source_no": 340,
       "kanji": "胆",
       "han_viet": "ĐẢM",
@@ -24509,6 +24850,7 @@
       ]
     },
     {
+      "note_id": "a0d007ad-7c99-4275-a3fc-af9e68cf3ac2",
       "source_no": 341,
       "kanji": "胎",
       "han_viet": "THAI",
@@ -24592,6 +24934,7 @@
       ]
     },
     {
+      "note_id": "ba9a993c-eb6a-450b-b0f4-017687bc570d",
       "source_no": 342,
       "kanji": "苗",
       "han_viet": "MIÊU",
@@ -24673,6 +25016,7 @@
       ]
     },
     {
+      "note_id": "79b1c61f-13eb-4a98-bb9d-ba81b62a10f8",
       "source_no": 343,
       "kanji": "黙",
       "han_viet": "MẶC",
@@ -24754,6 +25098,7 @@
       ]
     },
     {
+      "note_id": "3899f70b-b035-4e55-9012-86e2cba0d5ba",
       "source_no": 344,
       "kanji": "鯨",
       "han_viet": "KÌNH",
@@ -24821,6 +25166,7 @@
       ]
     },
     {
+      "note_id": "f4a93c75-944d-4d0a-b3d4-fa18556eef67",
       "source_no": 345,
       "kanji": "髄",
       "han_viet": "TỦY",
@@ -24898,6 +25244,7 @@
       ]
     },
     {
+      "note_id": "a7f7065c-dcaa-49d2-9962-986b38378a78",
       "source_no": 346,
       "kanji": "騰",
       "han_viet": "ĐẰNG",
@@ -24978,6 +25325,7 @@
       ]
     },
     {
+      "note_id": "eaecf98a-60eb-4bdb-b352-c24ea92a8693",
       "source_no": 347,
       "kanji": "騎",
       "han_viet": "KỊ",
@@ -25025,6 +25373,7 @@
       ]
     },
     {
+      "note_id": "3af840db-a1d8-47e4-9209-c24581908389",
       "source_no": 348,
       "kanji": "顕",
       "han_viet": "HIỂN",
@@ -25099,6 +25448,7 @@
       ]
     },
     {
+      "note_id": "75fe7adf-1b4e-44a8-8228-3706383afbe6",
       "source_no": 349,
       "kanji": "頻",
       "han_viet": "TẦN",
@@ -25184,6 +25534,7 @@
       ]
     },
     {
+      "note_id": "07f27fab-03b9-4526-8230-0c67d8f71bd6",
       "source_no": 350,
       "kanji": "随",
       "han_viet": "TÙY",
@@ -25264,6 +25615,7 @@
       ]
     },
     {
+      "note_id": "b651262a-24cf-4db6-9462-b0d445805450",
       "source_no": 351,
       "kanji": "陵",
       "han_viet": "LĂNG",
@@ -25331,6 +25683,7 @@
       ]
     },
     {
+      "note_id": "81260021-3b3f-4555-a36c-93c7852054c4",
       "source_no": 352,
       "kanji": "陳",
       "han_viet": "TRẦN",
@@ -25404,6 +25757,7 @@
       ]
     },
     {
+      "note_id": "5727ce77-9ef3-43d8-8ab7-5cb24fd77559",
       "source_no": 353,
       "kanji": "陪",
       "han_viet": "BỒI",
@@ -25469,6 +25823,7 @@
       ]
     },
     {
+      "note_id": "87284cdc-6cea-4545-af67-1a7e1d1d4b19",
       "source_no": 354,
       "kanji": "陛",
       "han_viet": "BỆ",
@@ -25510,6 +25865,7 @@
       ]
     },
     {
+      "note_id": "d7acc232-426c-45bd-bedf-b89ca949404e",
       "source_no": 355,
       "kanji": "閲",
       "han_viet": "DUYỆT",
@@ -25583,6 +25939,7 @@
       ]
     },
     {
+      "note_id": "434350fc-732a-45ab-b64f-53e87329ff98",
       "source_no": 356,
       "kanji": "閑",
       "han_viet": "NHÀN",
@@ -25660,6 +26017,7 @@
       ]
     },
     {
+      "note_id": "b4e8ceda-c676-4333-a088-5812e48f6624",
       "source_no": 357,
       "kanji": "鎮",
       "han_viet": "TRẤN",
@@ -25741,6 +26099,7 @@
       ]
     },
     {
+      "note_id": "a5a3ead5-4678-4382-ad42-2815274a3f8b",
       "source_no": 358,
       "kanji": "鍛",
       "han_viet": "ĐOÁN",
@@ -25820,6 +26179,7 @@
       ]
     },
     {
+      "note_id": "ca5765e4-9600-4199-91c5-e5318033f116",
       "source_no": 359,
       "kanji": "錯",
       "han_viet": "THÁC",
@@ -25916,6 +26276,7 @@
       ]
     },
     {
+      "note_id": "5d063170-fd38-4b81-89e2-2af4fc1746af",
       "source_no": 360,
       "kanji": "錬",
       "han_viet": "LUYỆN",
@@ -25995,6 +26356,7 @@
       ]
     },
     {
+      "note_id": "0a4b407c-63fd-4cd7-834e-5b297c66b35c",
       "source_no": 361,
       "kanji": "鋭",
       "han_viet": "NHUỆ",
@@ -26086,6 +26448,7 @@
       ]
     },
     {
+      "note_id": "08b1f49b-95db-4d64-b448-9ae54faee4a1",
       "source_no": 362,
       "kanji": "遂",
       "han_viet": "TOẠI",
@@ -26172,6 +26535,7 @@
       ]
     },
     {
+      "note_id": "aad47083-51d7-438f-9de6-fdd9fe618578",
       "source_no": 363,
       "kanji": "迭",
       "han_viet": "ĐIỆT",
@@ -26195,6 +26559,7 @@
       ]
     },
     {
+      "note_id": "de882611-5f83-4d06-8a92-db2570ffb9a5",
       "source_no": 364,
       "kanji": "跳",
       "han_viet": "KHIÊU",
@@ -26264,6 +26629,7 @@
       ]
     },
     {
+      "note_id": "6ceef3a8-3d25-4050-bf79-5f86a4b0791b",
       "source_no": 365,
       "kanji": "諾",
       "han_viet": "NẶC",
@@ -26341,6 +26707,7 @@
       ]
     },
     {
+      "note_id": "7b8abe4c-6971-4ab0-a714-5c1b8939c80b",
       "source_no": 366,
       "kanji": "赦",
       "han_viet": "XÁ",
@@ -26400,6 +26767,7 @@
       ]
     },
     {
+      "note_id": "d148c7b3-279b-4700-a6f0-24bb138ae5f2",
       "source_no": 367,
       "kanji": "誓",
       "han_viet": "THỆ",
@@ -26485,6 +26853,7 @@
       ]
     },
     {
+      "note_id": "a7173683-8113-4748-baa9-0fbee7a8b6f5",
       "source_no": 368,
       "kanji": "諭",
       "han_viet": "DỤ",
@@ -26564,6 +26933,7 @@
       ]
     },
     {
+      "note_id": "5a65116c-19be-4f4a-b4d1-dc317cddfc88",
       "source_no": 369,
       "kanji": "諮",
       "han_viet": "TƯ",
@@ -26613,6 +26983,7 @@
       ]
     },
     {
+      "note_id": "e6f81c25-abf1-4b3a-974d-e62d2a9f3044",
       "source_no": 370,
       "kanji": "謀",
       "han_viet": "MƯU",
@@ -26713,6 +27084,7 @@
       ]
     },
     {
+      "note_id": "ad645f49-bdc0-45bc-91d6-81a4d23ca594",
       "source_no": 371,
       "kanji": "詠",
       "han_viet": "VỊNH",
@@ -26775,6 +27147,7 @@
       ]
     },
     {
+      "note_id": "d9babb37-d89f-4552-939e-57bb016227e1",
       "source_no": 372,
       "kanji": "覇",
       "han_viet": "BÁ",
@@ -26837,6 +27210,7 @@
       ]
     },
     {
+      "note_id": "89d8290f-1433-4f59-a2d7-d05529f0680d",
       "source_no": 373,
       "kanji": "訂",
       "han_viet": "ĐÍNH",
@@ -26908,6 +27282,7 @@
       ]
     },
     {
+      "note_id": "277a994d-c102-4787-9f94-6425f95e7e7c",
       "source_no": 374,
       "kanji": "赴",
       "han_viet": "PHÓ",

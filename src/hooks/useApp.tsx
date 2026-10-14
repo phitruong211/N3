@@ -14,12 +14,14 @@ import type { LearningStorage } from '@/lib/storage';
 import { useAuth } from '@/hooks/useAuth';
 import { useLearningSync } from './useLearningSync';
 import { useSettingsSync } from './useSettingsSync';
+import { useCardNotes } from './useCardNotes';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { pageForLocation, pathForPage } from '@/lib/navigation';
 
 interface AppState {
   storage: LearningStorage;
   learningSync: ReturnType<typeof useLearningSync>;
+  cardNotes: ReturnType<typeof useCardNotes>;
   // <Data>                                 </Data>
   vocabulary: VocabItem[];
   kanji: KanjiItem[];
@@ -90,6 +92,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [sidebarCollapsed, setSidebarCollapsedState] = useState(storage.getSidebarCollapsed);
 
   const learningSync = useLearningSync(storage, Boolean(user), state => { _setBookmarks(state.bookmarks); _setSRSCards(state.srsCards); });
+  const cardNotes = useCardNotes(storage, Boolean(user));
 
   // Load data on mount
   useEffect(() => {
@@ -220,6 +223,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       value={{
         storage,
         learningSync,
+        cardNotes,
         vocabulary,
         kanji,
         grammar,

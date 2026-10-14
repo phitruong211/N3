@@ -1,5 +1,6 @@
 [
   {
+    "note_id": "21983db6-4dd7-4354-915e-a40e2821a395",
     "front": "一",
     "back": "một",
     "reading": "On: イチ、イツ / Kun: ひと、ひとつ",
@@ -19,6 +20,7 @@
     ]
   },
   {
+    "note_id": "376b334e-d853-45ae-b30c-c45c55a7025f",
     "front": "二",
     "back": "hai",
     "reading": "On: ニ / Kun: ふた、ふたつ",
@@ -31,6 +33,7 @@
     ]
   },
   {
+    "note_id": "dc6f121c-5960-4dd9-b2da-d3ded2130367",
     "front": "三",
     "back": "ba",
     "reading": "On: サン / Kun: み、みっつ",
@@ -43,6 +46,7 @@
     ]
   },
   {
+    "note_id": "d2eaef00-5312-4778-a0a0-739bb122696f",
     "front": "四",
     "back": "bốn",
     "reading": "On: シ / Kun: よん、よ、よっつ",
@@ -55,6 +59,7 @@
     ]
   },
   {
+    "note_id": "63fc296f-1f78-4335-b1f7-dc760bc26f39",
     "front": "五",
     "back": "năm",
     "reading": "On: ゴ / Kun: いつ、いつつ",
@@ -67,6 +72,7 @@
     ]
   },
   {
+    "note_id": "5a381500-7295-4a3e-99c7-3336370ae334",
     "front": "六",
     "back": "sáu",
     "reading": "On: ロク / Kun: む、むっつ",
@@ -79,6 +85,7 @@
     ]
   },
   {
+    "note_id": "65a0b573-1b03-412c-9dcc-51000baef436",
     "front": "七",
     "back": "bảy",
     "reading": "On: シチ / Kun: なな、なの",
@@ -91,6 +98,7 @@
     ]
   },
   {
+    "note_id": "e028be38-363d-4e80-bbbc-1a2d72a3112f",
     "front": "八",
     "back": "tám",
     "reading": "On: ハチ / Kun: や、やっつ",
@@ -103,6 +111,7 @@
     ]
   },
   {
+    "note_id": "091b571e-62e0-4877-a7cc-39b72d18b682",
     "front": "九",
     "back": "chín",
     "reading": "On: キュウ、ク / Kun: ここの、ここのつ",
@@ -115,6 +124,7 @@
     ]
   },
   {
+    "note_id": "1fded14f-de4a-4f58-b639-ad268001c278",
     "front": "十",
     "back": "mười",
     "reading": "On: ジュウ、ジッ / Kun: とお、と",
@@ -127,6 +137,7 @@
     ]
   },
   {
+    "note_id": "66118857-7837-4f1b-b799-038c3dc95ad4",
     "front": "百",
     "back": "trăm",
     "reading": "On: ヒャク / Kun: —",
@@ -139,6 +150,7 @@
     ]
   },
   {
+    "note_id": "e0d9e233-809c-4bf9-b6fd-e61b33dec6a4",
     "front": "千",
     "back": "nghìn",
     "reading": "On: セン / Kun: ち",
@@ -151,6 +163,7 @@
     ]
   },
   {
+    "note_id": "68a1f8b7-4eba-48a7-aa6e-20dbcf4e2f64",
     "front": "万",
     "back": "mười nghìn",
     "reading": "On: マン、バン / Kun: よろず",
@@ -163,6 +176,7 @@
     ]
   },
   {
+    "note_id": "48941667-3c82-4e40-b0a5-e0184279d135",
     "front": "円",
     "back": "yên; hình tròn",
     "reading": "On: エン / Kun: まるい",
@@ -175,6 +189,7 @@
     ]
   },
   {
+    "note_id": "d6713f36-3d5c-4cd9-a3c0-e5215994a0a9",
     "front": "日",
     "back": "ngày; mặt trời",
     "reading": "On: ニチ、ジツ / Kun: ひ、か",
@@ -187,6 +202,7 @@
     ]
   },
   {
+    "note_id": "8cdd0110-1c44-4861-b32c-aa3ef4d4d548",
     "front": "月",
     "back": "mặt trăng; tháng",
     "reading": "On: ゲツ、ガツ / Kun: つき",
@@ -199,6 +215,7 @@
     ]
   },
   {
+    "note_id": "be1bac94-022e-4a02-9e42-be24d33478b7",
     "front": "火",
     "back": "lửa",
     "reading": "On: カ / Kun: ひ、ほ",
@@ -211,6 +228,7 @@
     ]
   },
   {
+    "note_id": "d9d8bfc7-6a31-4d9c-be89-bba28b537a2c",
     "front": "水",
     "back": "nước",
     "reading": "On: スイ / Kun: みず",
@@ -230,6 +248,7 @@
     ]
   },
   {
+    "note_id": "b4805e71-5cd0-4272-9574-c90c63c25b0f",
     "front": "木",
     "back": "cây; gỗ",
     "reading": "On: モク、ボク / Kun: き、こ",
@@ -242,6 +261,7 @@
     ]
   },
   {
+    "note_id": "4abbbc72-5739-4b60-9479-a0bbcdab151d",
     "front": "金",
     "back": "vàng; tiền",
     "reading": "On: キン、コン / Kun: かね",
@@ -254,6 +274,7 @@
     ]
   },
   {
+    "note_id": "29bd7292-7e43-48cd-8547-374479a4cf82",
     "front": "土",
     "back": "đất",
     "reading": "On: ド、ト / Kun: つち",
@@ -266,6 +287,7 @@
     ]
   },
   {
+    "note_id": "361075ea-30f8-4e01-a8ed-697570f3d6fb",
     "front": "曜",
     "back": "thứ (trong tuần)",
     "reading": "On: ヨウ / Kun: —",
@@ -278,6 +300,7 @@
     ]
   },
   {
+    "note_id": "0483c0b1-94bf-40d0-ae69-7649f0fe034e",
     "front": "年",
     "back": "năm",
     "reading": "On: ネン / Kun: とし",
@@ -290,6 +313,7 @@
     ]
   },
   {
+    "note_id": "f3a69e55-89b7-4fef-9e64-2a147ba0a52b",
     "front": "時",
     "back": "thời gian; giờ",
     "reading": "On: ジ / Kun: とき",
@@ -309,6 +333,7 @@
     ]
   },
   {
+    "note_id": "a43ae39a-c3f7-4bd5-9913-53f84b8b6127",
     "front": "分",
     "back": "chia; phút",
     "reading": "On: ブン、フン、ブ / Kun: わける、わかる",
@@ -328,6 +353,7 @@
     ]
   },
   {
+    "note_id": "e3e34e34-72a1-40d0-8b09-36023ddbad1d",
     "front": "半",
     "back": "một nửa; rưỡi",
     "reading": "On: ハン / Kun: なかば",
@@ -340,6 +366,7 @@
     ]
   },
   {
+    "note_id": "82d48090-f490-4c08-ab7d-fdd145c28104",
     "front": "今",
     "back": "bây giờ",
     "reading": "On: コン、キン / Kun: いま",
@@ -352,6 +379,7 @@
     ]
   },
   {
+    "note_id": "6683a74c-3eb4-4cd2-99e8-ac198b736fd7",
     "front": "先",
     "back": "trước; đầu tiên",
     "reading": "On: セン / Kun: さき",
@@ -364,6 +392,7 @@
     ]
   },
   {
+    "note_id": "08269955-2466-488d-945e-fbe3ae70817f",
     "front": "前",
     "back": "trước",
     "reading": "On: ゼン / Kun: まえ",
@@ -376,6 +405,7 @@
     ]
   },
   {
+    "note_id": "52b5dc41-a6ca-43c7-8d16-c4847bbb956f",
     "front": "後",
     "back": "sau",
     "reading": "On: ゴ、コウ / Kun: あと、うしろ",
@@ -388,6 +418,7 @@
     ]
   },
   {
+    "note_id": "e24a2f62-f3ee-4f6c-a277-27b11862700a",
     "front": "午",
     "back": "trưa",
     "reading": "On: ゴ / Kun: —",
@@ -400,6 +431,7 @@
     ]
   },
   {
+    "note_id": "5523746e-f3ba-4536-b174-138c810a16a8",
     "front": "間",
     "back": "khoảng; giữa",
     "reading": "On: カン、ケン / Kun: あいだ、ま",
@@ -419,6 +451,7 @@
     ]
   },
   {
+    "note_id": "11123e6d-5591-4409-983e-018a091beff5",
     "front": "人",
     "back": "người",
     "reading": "On: ジン、ニン / Kun: ひと",
@@ -431,6 +464,7 @@
     ]
   },
   {
+    "note_id": "7c1f044e-df42-4e24-a6ce-78c55d1a7e69",
     "front": "男",
     "back": "nam giới",
     "reading": "On: ダン、ナン / Kun: おとこ",
@@ -443,6 +477,7 @@
     ]
   },
   {
+    "note_id": "9a7343a7-db4b-48e4-9217-48279f7b7f2f",
     "front": "女",
     "back": "nữ giới",
     "reading": "On: ジョ、ニョ / Kun: おんな",
@@ -455,6 +490,7 @@
     ]
   },
   {
+    "note_id": "df9cf1c8-ab1c-458f-a017-d4be3f1590f0",
     "front": "子",
     "back": "con; đứa trẻ",
     "reading": "On: シ、ス / Kun: こ",
@@ -467,6 +503,7 @@
     ]
   },
   {
+    "note_id": "b3822726-ea1c-4c73-b5ec-8034a1f36144",
     "front": "父",
     "back": "cha",
     "reading": "On: フ / Kun: ちち、とう",
@@ -486,6 +523,7 @@
     ]
   },
   {
+    "note_id": "706c394b-614c-4153-b7f6-8eb4e5579c85",
     "front": "母",
     "back": "mẹ",
     "reading": "On: ボ / Kun: はは、かあ",
@@ -505,6 +543,7 @@
     ]
   },
   {
+    "note_id": "320c182a-abb0-49dd-bb7a-241bda3200e6",
     "front": "友",
     "back": "bạn bè",
     "reading": "On: ユウ / Kun: とも",
@@ -517,6 +556,7 @@
     ]
   },
   {
+    "note_id": "565c4a01-02cf-42e2-a13b-d0f83bff4180",
     "front": "名",
     "back": "tên",
     "reading": "On: メイ、ミョウ / Kun: な",
@@ -529,6 +569,7 @@
     ]
   },
   {
+    "note_id": "f2b5043c-8224-479e-af18-cb6b25e356e5",
     "front": "私",
     "back": "tôi; riêng tư",
     "reading": "On: シ / Kun: わたし、わたくし",
@@ -541,6 +582,7 @@
     ]
   },
   {
+    "note_id": "e31de917-5ae8-4cbd-bc8a-2f1032e5fd09",
     "front": "上",
     "back": "trên",
     "reading": "On: ジョウ、ショウ / Kun: うえ、あげる、のぼる",
@@ -560,6 +602,7 @@
     ]
   },
   {
+    "note_id": "534728ed-993a-45b2-8610-e38e0ad94c7c",
     "front": "下",
     "back": "dưới",
     "reading": "On: カ、ゲ / Kun: した、さげる、くだる",
@@ -579,6 +622,7 @@
     ]
   },
   {
+    "note_id": "edd383ba-038b-4975-b0a2-40909e9f9330",
     "front": "左",
     "back": "trái",
     "reading": "On: サ / Kun: ひだり",
@@ -591,6 +635,7 @@
     ]
   },
   {
+    "note_id": "86ef6dd2-8936-4105-b538-170e2ee42dce",
     "front": "右",
     "back": "phải",
     "reading": "On: ウ、ユウ / Kun: みぎ",
@@ -603,6 +648,7 @@
     ]
   },
   {
+    "note_id": "363d939f-4a3e-483d-ab82-7aa6f7dd2e81",
     "front": "中",
     "back": "trong; giữa",
     "reading": "On: チュウ、ジュウ / Kun: なか",
@@ -615,6 +661,7 @@
     ]
   },
   {
+    "note_id": "4444233a-3c97-41de-bc68-4454f0f1fc96",
     "front": "外",
     "back": "ngoài",
     "reading": "On: ガイ、ゲ / Kun: そと、ほか",
@@ -627,6 +674,7 @@
     ]
   },
   {
+    "note_id": "d661d483-8618-49d3-9740-af8f62722b01",
     "front": "東",
     "back": "hướng đông",
     "reading": "On: トウ / Kun: ひがし",
@@ -639,6 +687,7 @@
     ]
   },
   {
+    "note_id": "927a260e-96d0-4431-9a0a-3fdeafdb406a",
     "front": "西",
     "back": "hướng tây",
     "reading": "On: セイ、サイ / Kun: にし",
@@ -651,6 +700,7 @@
     ]
   },
   {
+    "note_id": "b39ccfdf-369a-47d7-8ccc-6f72beeb2254",
     "front": "南",
     "back": "hướng nam",
     "reading": "On: ナン / Kun: みなみ",
@@ -663,6 +713,7 @@
     ]
   },
   {
+    "note_id": "e9d71026-2f69-4bdb-a362-deef9eefd8e2",
     "front": "北",
     "back": "hướng bắc",
     "reading": "On: ホク / Kun: きた",
@@ -675,6 +726,7 @@
     ]
   },
   {
+    "note_id": "6312d2b3-b528-4cea-9441-9dd7004bd1d0",
     "front": "大",
     "back": "to; lớn",
     "reading": "On: ダイ、タイ / Kun: おおきい",
@@ -687,6 +739,7 @@
     ]
   },
   {
+    "note_id": "33f25f77-c633-479e-8730-4c172d12b909",
     "front": "小",
     "back": "nhỏ",
     "reading": "On: ショウ / Kun: ちいさい、こ",
@@ -699,6 +752,7 @@
     ]
   },
   {
+    "note_id": "37cce1cd-a187-44a3-85b6-581e2f4d62ae",
     "front": "多",
     "back": "nhiều",
     "reading": "On: タ / Kun: おおい",
@@ -718,6 +772,7 @@
     ]
   },
   {
+    "note_id": "5a4ac548-6b7c-4b33-a90a-63b983ac1cfb",
     "front": "少",
     "back": "ít",
     "reading": "On: ショウ / Kun: すくない、すこし",
@@ -737,6 +792,7 @@
     ]
   },
   {
+    "note_id": "2671f020-0a19-46ac-9228-6795718e6145",
     "front": "長",
     "back": "dài; người đứng đầu",
     "reading": "On: チョウ / Kun: ながい",
@@ -749,6 +805,7 @@
     ]
   },
   {
+    "note_id": "7e31a4fc-5921-4ff7-98f9-b251503c65a0",
     "front": "新",
     "back": "mới",
     "reading": "On: シン / Kun: あたらしい、あらた",
@@ -761,6 +818,7 @@
     ]
   },
   {
+    "note_id": "3a09a9b7-1f66-45e5-aa40-4edc97391f94",
     "front": "古",
     "back": "cũ; cổ",
     "reading": "On: コ / Kun: ふるい",
@@ -773,6 +831,7 @@
     ]
   },
   {
+    "note_id": "a72a6a0f-d6ed-4a73-902c-1af21b4f963a",
     "front": "高",
     "back": "cao; đắt",
     "reading": "On: コウ / Kun: たかい",
@@ -785,6 +844,7 @@
     ]
   },
   {
+    "note_id": "79260ddb-3398-4487-9327-54c7a7eced7b",
     "front": "安",
     "back": "rẻ; yên ổn",
     "reading": "On: アン / Kun: やすい",
@@ -797,6 +857,7 @@
     ]
   },
   {
+    "note_id": "47c399aa-7b35-4c52-a9c9-c1bba5b433c8",
     "front": "山",
     "back": "núi",
     "reading": "On: サン / Kun: やま",
@@ -809,6 +870,7 @@
     ]
   },
   {
+    "note_id": "466ad462-0394-487b-bd08-2f7e5838b632",
     "front": "川",
     "back": "sông",
     "reading": "On: セン / Kun: かわ",
@@ -821,6 +883,7 @@
     ]
   },
   {
+    "note_id": "37a068c2-d677-4cea-8693-5615a7233b74",
     "front": "田",
     "back": "ruộng",
     "reading": "On: デン / Kun: た",
@@ -833,6 +896,7 @@
     ]
   },
   {
+    "note_id": "68a47961-c90a-4c94-afbb-42dd15899d68",
     "front": "天",
     "back": "trời",
     "reading": "On: テン / Kun: あま、あめ",
@@ -845,6 +909,7 @@
     ]
   },
   {
+    "note_id": "f5e44299-21cf-4102-a158-52a7d4c2bc34",
     "front": "気",
     "back": "khí; tinh thần",
     "reading": "On: キ、ケ / Kun: —",
@@ -857,6 +922,7 @@
     ]
   },
   {
+    "note_id": "d5cfacd1-b969-46b5-ab3c-2d2357e292a7",
     "front": "雨",
     "back": "mưa",
     "reading": "On: ウ / Kun: あめ、あま",
@@ -869,6 +935,7 @@
     ]
   },
   {
+    "note_id": "3899e0ac-d9d2-41c7-835a-48b389505381",
     "front": "空",
     "back": "bầu trời; trống",
     "reading": "On: クウ / Kun: そら、あく、から",
@@ -881,6 +948,7 @@
     ]
   },
   {
+    "note_id": "3eafef3e-77a3-48d2-9db1-9900378c3fed",
     "front": "本",
     "back": "sách; gốc",
     "reading": "On: ホン / Kun: もと",
@@ -893,6 +961,7 @@
     ]
   },
   {
+    "note_id": "e2629413-7df8-4340-b2b9-3e0adacb2da2",
     "front": "語",
     "back": "ngôn ngữ",
     "reading": "On: ゴ / Kun: かたる",
@@ -905,6 +974,7 @@
     ]
   },
   {
+    "note_id": "b2da4fdd-2f9d-4bec-9015-97a24ff6bb35",
     "front": "文",
     "back": "văn; câu",
     "reading": "On: ブン、モン / Kun: ふみ",
@@ -917,6 +987,7 @@
     ]
   },
   {
+    "note_id": "4ebf5e31-47c3-4969-b6b1-bf56adf5ae67",
     "front": "字",
     "back": "chữ",
     "reading": "On: ジ / Kun: あざ",
@@ -929,6 +1000,7 @@
     ]
   },
   {
+    "note_id": "6117ffdd-e5f6-4a71-8404-7c854a9999eb",
     "front": "読",
     "back": "đọc",
     "reading": "On: ドク / Kun: よむ",
@@ -941,6 +1013,7 @@
     ]
   },
   {
+    "note_id": "d1f47e98-2217-43ff-b003-0bb7a7e83684",
     "front": "書",
     "back": "viết; sách",
     "reading": "On: ショ / Kun: かく",
@@ -953,6 +1026,7 @@
     ]
   },
   {
+    "note_id": "3501e68c-91e9-4137-b23e-b8f609fc410a",
     "front": "話",
     "back": "nói; chuyện",
     "reading": "On: ワ / Kun: はなす、はなし",
@@ -972,6 +1046,7 @@
     ]
   },
   {
+    "note_id": "ae1d3db1-9092-4ab9-8191-d8b37cb9c0e6",
     "front": "聞",
     "back": "nghe; hỏi",
     "reading": "On: ブン、モン / Kun: きく、きこえる",
@@ -991,6 +1066,7 @@
     ]
   },
   {
+    "note_id": "ddbc6153-5b4c-475c-8561-05fa16baf987",
     "front": "見",
     "back": "nhìn; xem",
     "reading": "On: ケン / Kun: みる、みえる",
@@ -1010,6 +1086,7 @@
     ]
   },
   {
+    "note_id": "72e87bed-9e93-4b01-8821-73208164141b",
     "front": "言",
     "back": "nói",
     "reading": "On: ゲン、ゴン / Kun: いう、こと",
@@ -1029,6 +1106,7 @@
     ]
   },
   {
+    "note_id": "c342870d-6e4a-4352-8cbd-4d116555ade8",
     "front": "学",
     "back": "học",
     "reading": "On: ガク / Kun: まなぶ",
@@ -1048,6 +1126,7 @@
     ]
   },
   {
+    "note_id": "1e2e8cbb-b252-47af-95c3-e52aa03f30b6",
     "front": "校",
     "back": "trường",
     "reading": "On: コウ / Kun: —",
@@ -1060,6 +1139,7 @@
     ]
   },
   {
+    "note_id": "843525bf-8459-40fb-b684-c6a32f05c9ea",
     "front": "生",
     "back": "sống; sinh ra",
     "reading": "On: セイ、ショウ / Kun: いきる、うまれる、なま",
@@ -1079,6 +1159,7 @@
     ]
   },
   {
+    "note_id": "f570aef7-62e1-4c81-ab90-4e62a9f51525",
     "front": "会",
     "back": "gặp; hội họp",
     "reading": "On: カイ、エ / Kun: あう",
@@ -1091,6 +1172,7 @@
     ]
   },
   {
+    "note_id": "bc1926dd-10a2-4eee-a940-8286729096e0",
     "front": "社",
     "back": "công ty; đền thờ",
     "reading": "On: シャ / Kun: やしろ",
@@ -1103,6 +1185,7 @@
     ]
   },
   {
+    "note_id": "8623b25a-021b-429c-8ea9-4435e0d6ac28",
     "front": "店",
     "back": "cửa hàng",
     "reading": "On: テン / Kun: みせ",
@@ -1115,6 +1198,7 @@
     ]
   },
   {
+    "note_id": "e6a7e1b8-fb10-4d9b-a023-4dc05947aa9b",
     "front": "駅",
     "back": "nhà ga",
     "reading": "On: エキ / Kun: —",
@@ -1127,6 +1211,7 @@
     ]
   },
   {
+    "note_id": "d73f4e24-9e58-4445-ab68-cae58a8a2fc9",
     "front": "食",
     "back": "ăn",
     "reading": "On: ショク、ジキ / Kun: たべる、くう",
@@ -1146,6 +1231,7 @@
     ]
   },
   {
+    "note_id": "582a62aa-24a3-4b00-8020-e0e7618746aa",
     "front": "飲",
     "back": "uống",
     "reading": "On: イン / Kun: のむ",
@@ -1158,6 +1244,7 @@
     ]
   },
   {
+    "note_id": "43c97ef0-80bc-4c85-b8fe-c045bdcca9b5",
     "front": "買",
     "back": "mua",
     "reading": "On: バイ / Kun: かう",
@@ -1170,6 +1257,7 @@
     ]
   },
   {
+    "note_id": "634c9fd2-32fd-45aa-a154-54b2845270da",
     "front": "行",
     "back": "đi; thực hiện",
     "reading": "On: コウ、ギョウ / Kun: いく、おこなう",
@@ -1189,6 +1277,7 @@
     ]
   },
   {
+    "note_id": "db1e9cd9-11a4-47ca-9682-d1a85def6114",
     "front": "来",
     "back": "đến",
     "reading": "On: ライ / Kun: くる",
@@ -1208,6 +1297,7 @@
     ]
   },
   {
+    "note_id": "0a0b9cd3-7ebf-459e-a84f-d127af664fc5",
     "front": "帰",
     "back": "trở về",
     "reading": "On: キ / Kun: かえる",
@@ -1227,6 +1317,7 @@
     ]
   },
   {
+    "note_id": "018e1f63-ff03-4d08-bcee-55c2e21f38bb",
     "front": "入",
     "back": "vào",
     "reading": "On: ニュウ / Kun: はいる、いれる",
@@ -1239,6 +1330,7 @@
     ]
   },
   {
+    "note_id": "6d996fe1-d8fe-4d8e-8489-45644b663fed",
     "front": "出",
     "back": "ra",
     "reading": "On: シュツ / Kun: でる、だす",
@@ -1251,6 +1343,7 @@
     ]
   },
   {
+    "note_id": "cda0b82a-4fa9-4eb4-99c7-21cc024a2941",
     "front": "休",
     "back": "nghỉ",
     "reading": "On: キュウ / Kun: やすむ",
@@ -1270,6 +1363,7 @@
     ]
   },
   {
+    "note_id": "65214e8d-f886-40eb-82e3-8cd6ef7ee32d",
     "front": "立",
     "back": "đứng",
     "reading": "On: リツ、リュウ / Kun: たつ",
@@ -1282,6 +1376,7 @@
     ]
   },
   {
+    "note_id": "1cc7da27-eba5-4960-9bbe-4d0802a1752d",
     "front": "車",
     "back": "xe",
     "reading": "On: シャ / Kun: くるま",
@@ -1301,6 +1396,7 @@
     ]
   },
   {
+    "note_id": "3592f77e-cc89-4f85-a0e8-ae7319d9c04b",
     "front": "電",
     "back": "điện",
     "reading": "On: デン / Kun: —",
@@ -1313,6 +1409,7 @@
     ]
   },
   {
+    "note_id": "1d99042c-9a04-458c-b4e0-b1b02436564f",
     "front": "道",
     "back": "đường đi",
     "reading": "On: ドウ、トウ / Kun: みち",
@@ -1325,6 +1422,7 @@
     ]
   },
   {
+    "note_id": "ff9fc7fb-7494-47d9-8f44-541c74d3994d",
     "front": "国",
     "back": "đất nước",
     "reading": "On: コク / Kun: くに",
@@ -1337,6 +1435,7 @@
     ]
   },
   {
+    "note_id": "0b80b429-344d-4baf-b438-903ce848f084",
     "front": "白",
     "back": "trắng",
     "reading": "On: ハク、ビャク / Kun: しろ、しろい",
@@ -1349,6 +1448,7 @@
     ]
   },
   {
+    "note_id": "df30bb65-3c36-4fe9-8b43-b2cda8efb543",
     "front": "黒",
     "back": "đen",
     "reading": "On: コク / Kun: くろ、くろい",
@@ -1361,6 +1461,7 @@
     ]
   },
   {
+    "note_id": "243f3c92-3bb2-48fa-8cea-8432b16028d7",
     "front": "赤",
     "back": "đỏ",
     "reading": "On: セキ、シャク / Kun: あか、あかい",
@@ -1373,6 +1474,7 @@
     ]
   },
   {
+    "note_id": "67148956-b638-4725-96a8-e48d4381603d",
     "front": "青",
     "back": "xanh lam",
     "reading": "On: セイ、ショウ / Kun: あお、あおい",
@@ -1385,6 +1487,7 @@
     ]
   },
   {
+    "note_id": "76f59dc9-0713-4c0a-bc09-4162bc89dc25",
     "front": "目",
     "back": "mắt",
     "reading": "On: モク、ボク / Kun: め",
@@ -1397,6 +1500,7 @@
     ]
   },
   {
+    "note_id": "a119085d-3508-489c-9874-d1ca922c3e76",
     "front": "耳",
     "back": "tai",
     "reading": "On: ジ / Kun: みみ",
@@ -1409,6 +1513,7 @@
     ]
   },
   {
+    "note_id": "58d96179-460b-42af-8cbd-c5995e95419f",
     "front": "口",
     "back": "miệng; cửa",
     "reading": "On: コウ、ク / Kun: くち",
@@ -1421,6 +1526,7 @@
     ]
   },
   {
+    "note_id": "cc10ab0f-ba4e-4a19-a0df-4b1806a4190a",
     "front": "手",
     "back": "tay",
     "reading": "On: シュ / Kun: て",
@@ -1433,6 +1539,7 @@
     ]
   },
   {
+    "note_id": "48bdb895-0ef1-4f5f-85b2-7846333cef9e",
     "front": "足",
     "back": "chân; đủ",
     "reading": "On: ソク / Kun: あし、たりる",
@@ -1445,6 +1552,7 @@
     ]
   },
   {
+    "note_id": "8bbabfaa-0abd-4098-a394-7535dc392e6c",
     "front": "力",
     "back": "sức mạnh",
     "reading": "On: リョク、リキ / Kun: ちから",
@@ -1457,6 +1565,7 @@
     ]
   },
   {
+    "note_id": "da1ce949-560e-47bb-882a-2b379aedeeb9",
     "front": "犬",
     "back": "chó",
     "reading": "On: ケン / Kun: いぬ",
@@ -1469,6 +1578,7 @@
     ]
   },
   {
+    "note_id": "76fadf26-af5c-4ecd-82ee-203e7d39e082",
     "front": "魚",
     "back": "cá",
     "reading": "On: ギョ / Kun: さかな、うお",
@@ -1481,6 +1591,7 @@
     ]
   },
   {
+    "note_id": "c6fe8ca0-7a30-4bcb-b4ff-324418e3af80",
     "front": "花",
     "back": "hoa",
     "reading": "On: カ / Kun: はな",
@@ -1500,6 +1611,7 @@
     ]
   },
   {
+    "note_id": "4e38bf37-eac0-4dbe-ac30-c602f64db09f",
     "front": "何",
     "back": "cái gì",
     "reading": "On: カ / Kun: なに、なん",
@@ -1519,6 +1631,7 @@
     ]
   },
   {
+    "note_id": "cc1a5377-ea9b-4a6b-8c02-155cab7ed76e",
     "front": "一つ",
     "back": "một cái",
     "reading": "ひとつ",
@@ -1532,6 +1645,7 @@
     ]
   },
   {
+    "note_id": "70775f52-4758-4565-b09f-4b47d5544811",
     "front": "一日",
     "back": "ngày mùng một",
     "reading": "ついたち",
@@ -1552,6 +1666,7 @@
     ]
   },
   {
+    "note_id": "0d66fb5b-3b4d-4080-b491-13024164b2b9",
     "front": "二つ",
     "back": "hai cái",
     "reading": "ふたつ",
@@ -1565,6 +1680,7 @@
     ]
   },
   {
+    "note_id": "2d9cf2e0-31bf-4023-a798-3ba53599627c",
     "front": "二人",
     "back": "hai người",
     "reading": "ふたり",
@@ -1578,6 +1694,7 @@
     ]
   },
   {
+    "note_id": "939ff47a-c80c-44f5-9529-1c2027b762d6",
     "front": "三つ",
     "back": "ba cái",
     "reading": "みっつ",
@@ -1591,6 +1708,7 @@
     ]
   },
   {
+    "note_id": "37ab348b-9265-432d-8a7f-3c452fd34b85",
     "front": "三日",
     "back": "ngày mùng ba",
     "reading": "みっか",
@@ -1604,6 +1722,7 @@
     ]
   },
   {
+    "note_id": "787f29c1-affb-4ded-86c0-639140bbec27",
     "front": "四つ",
     "back": "bốn cái",
     "reading": "よっつ",
@@ -1617,6 +1736,7 @@
     ]
   },
   {
+    "note_id": "a5ce3b1e-72e5-4893-a810-b37d8a217dd2",
     "front": "四日",
     "back": "ngày mùng bốn",
     "reading": "よっか",
@@ -1630,6 +1750,7 @@
     ]
   },
   {
+    "note_id": "0bedf668-bc5d-47b2-9f1f-2f9eaabf4c41",
     "front": "五つ",
     "back": "năm cái",
     "reading": "いつつ",
@@ -1643,6 +1764,7 @@
     ]
   },
   {
+    "note_id": "51fc2ea4-32e4-4f85-b72c-6a9f5943838a",
     "front": "五日",
     "back": "ngày mùng năm",
     "reading": "いつか",
@@ -1656,6 +1778,7 @@
     ]
   },
   {
+    "note_id": "735715b7-4025-463c-b777-4eb7efab385f",
     "front": "六つ",
     "back": "sáu cái",
     "reading": "むっつ",
@@ -1669,6 +1792,7 @@
     ]
   },
   {
+    "note_id": "4fa1e739-408b-46b9-9b0a-b09ba8c84ba2",
     "front": "六月",
     "back": "tháng sáu",
     "reading": "ろくがつ",
@@ -1682,6 +1806,7 @@
     ]
   },
   {
+    "note_id": "ae92586d-f78e-409b-9fd5-878ebc8f5d62",
     "front": "七つ",
     "back": "bảy cái",
     "reading": "ななつ",
@@ -1695,6 +1820,7 @@
     ]
   },
   {
+    "note_id": "4ab73bf0-c77e-47ed-a3a6-e4b0cefbd38a",
     "front": "七日",
     "back": "ngày mùng bảy",
     "reading": "なのか",
@@ -1708,6 +1834,7 @@
     ]
   },
   {
+    "note_id": "5e742512-329a-4e2a-8864-5179d941ee2c",
     "front": "八つ",
     "back": "tám cái",
     "reading": "やっつ",
@@ -1721,6 +1848,7 @@
     ]
   },
   {
+    "note_id": "639c89d5-9791-4ee5-8f73-dcd3d0364851",
     "front": "八日",
     "back": "ngày mùng tám",
     "reading": "ようか",
@@ -1734,6 +1862,7 @@
     ]
   },
   {
+    "note_id": "859b96d8-7183-418c-b2c3-89be713e1052",
     "front": "九つ",
     "back": "chín cái",
     "reading": "ここのつ",
@@ -1747,6 +1876,7 @@
     ]
   },
   {
+    "note_id": "42cb7d87-4324-47a1-9281-4acfffaf09c8",
     "front": "九日",
     "back": "ngày mùng chín",
     "reading": "ここのか",
@@ -1760,6 +1890,7 @@
     ]
   },
   {
+    "note_id": "b34f8bf3-ee33-454a-892c-670fff3e18f6",
     "front": "十日",
     "back": "ngày mùng mười",
     "reading": "とおか",
@@ -1773,6 +1904,7 @@
     ]
   },
   {
+    "note_id": "bce6292f-977c-46d5-9c11-38e5039a994e",
     "front": "十分",
     "back": "mười phút",
     "reading": "じゅっぷん",
@@ -1786,6 +1918,7 @@
     ]
   },
   {
+    "note_id": "798514a8-0790-40b0-b722-acc344da82f9",
     "front": "百円",
     "back": "một trăm yên",
     "reading": "ひゃくえん",
@@ -1799,6 +1932,7 @@
     ]
   },
   {
+    "note_id": "d1a16ac3-000f-4adc-a9d0-4b391da47c74",
     "front": "三百",
     "back": "ba trăm",
     "reading": "さんびゃく",
@@ -1812,6 +1946,7 @@
     ]
   },
   {
+    "note_id": "eb8a88d5-7a99-4a78-a6f9-7a73ce97a137",
     "front": "千円",
     "back": "một nghìn yên",
     "reading": "せんえん",
@@ -1825,6 +1960,7 @@
     ]
   },
   {
+    "note_id": "6110ac6a-3273-4bc0-b5eb-a23cd3cca6f9",
     "front": "三千",
     "back": "ba nghìn",
     "reading": "さんぜん",
@@ -1838,6 +1974,7 @@
     ]
   },
   {
+    "note_id": "d488d77d-f8d6-4f31-9154-d9eb84b2f39d",
     "front": "一万",
     "back": "mười nghìn",
     "reading": "いちまん",
@@ -1851,6 +1988,7 @@
     ]
   },
   {
+    "note_id": "06c1eaec-823b-451e-8ffe-01ecb0b6737f",
     "front": "万円",
     "back": "mười nghìn yên",
     "reading": "まんえん",
@@ -1864,6 +2002,7 @@
     ]
   },
   {
+    "note_id": "9fc3b3b5-4b56-4483-8c48-f25f769de787",
     "front": "円",
     "back": "đồng yên",
     "reading": "えん",
@@ -1877,6 +2016,7 @@
     ]
   },
   {
+    "note_id": "c7f480b7-09da-4b81-b1ee-0dcec5694591",
     "front": "日曜日",
     "back": "chủ nhật",
     "reading": "にちようび",
@@ -1890,6 +2030,7 @@
     ]
   },
   {
+    "note_id": "5ed2ee31-e4c5-4c2c-9209-4837df1d1812",
     "front": "毎日",
     "back": "mỗi ngày",
     "reading": "まいにち",
@@ -1903,6 +2044,7 @@
     ]
   },
   {
+    "note_id": "f6ab8c09-5c59-4c79-9011-43de9e2c5771",
     "front": "月曜日",
     "back": "thứ hai",
     "reading": "げつようび",
@@ -1916,6 +2058,7 @@
     ]
   },
   {
+    "note_id": "1a0355a4-6796-49ae-b327-331296b69a89",
     "front": "今月",
     "back": "tháng này",
     "reading": "こんげつ",
@@ -1929,6 +2072,7 @@
     ]
   },
   {
+    "note_id": "eb56f2f0-463d-4307-a8fb-abaf40728c8d",
     "front": "火曜日",
     "back": "thứ ba",
     "reading": "かようび",
@@ -1942,6 +2086,7 @@
     ]
   },
   {
+    "note_id": "8c6c5a46-28fc-457f-b16e-22fdd3b9deec",
     "front": "火山",
     "back": "núi lửa",
     "reading": "かざん",
@@ -1955,6 +2100,7 @@
     ]
   },
   {
+    "note_id": "c411e6ec-5d57-47a9-a3cc-000504cc08fd",
     "front": "水",
     "back": "nước",
     "reading": "みず",
@@ -1975,6 +2121,7 @@
     ]
   },
   {
+    "note_id": "98da9dab-eefb-442f-a840-cc4d6012748b",
     "front": "水曜日",
     "back": "thứ tư",
     "reading": "すいようび",
@@ -1988,6 +2135,7 @@
     ]
   },
   {
+    "note_id": "5c79300e-8fbf-4a7a-add6-4cd4ff926cbd",
     "front": "木",
     "back": "cây",
     "reading": "き",
@@ -2001,6 +2149,7 @@
     ]
   },
   {
+    "note_id": "a4a88c11-f6a7-43c8-b80c-a995dd0327d6",
     "front": "木曜日",
     "back": "thứ năm",
     "reading": "もくようび",
@@ -2014,6 +2163,7 @@
     ]
   },
   {
+    "note_id": "8ffe5270-7318-4c25-8686-8399fa5421b6",
     "front": "お金",
     "back": "tiền",
     "reading": "おかね",
@@ -2027,6 +2177,7 @@
     ]
   },
   {
+    "note_id": "04cb68c6-3f9a-4e12-aca6-68b415afa3a6",
     "front": "金曜日",
     "back": "thứ sáu",
     "reading": "きんようび",
@@ -2040,6 +2191,7 @@
     ]
   },
   {
+    "note_id": "1bcb37fe-94d1-4fd1-b2ac-552996a8eb28",
     "front": "土",
     "back": "đất",
     "reading": "つち",
@@ -2053,6 +2205,7 @@
     ]
   },
   {
+    "note_id": "5ebe1e05-07d2-4945-bc5f-19fbc1aa05bc",
     "front": "土曜日",
     "back": "thứ bảy",
     "reading": "どようび",
@@ -2066,6 +2219,7 @@
     ]
   },
   {
+    "note_id": "d8aca64b-bc3e-4631-a698-c18d68cb4353",
     "front": "今年",
     "back": "năm nay",
     "reading": "ことし",
@@ -2079,6 +2233,7 @@
     ]
   },
   {
+    "note_id": "a3fb7a25-7127-44fc-b0d9-ad84c7941855",
     "front": "来年",
     "back": "năm sau",
     "reading": "らいねん",
@@ -2092,6 +2247,7 @@
     ]
   },
   {
+    "note_id": "79e12e7e-d029-4621-813d-8a3dfcf8f8a9",
     "front": "何時",
     "back": "mấy giờ",
     "reading": "なんじ",
@@ -2112,6 +2268,7 @@
     ]
   },
   {
+    "note_id": "575cd470-8429-4021-9b07-26037ba73cec",
     "front": "時間",
     "back": "khoảng thời gian",
     "reading": "じかん",
@@ -2132,6 +2289,7 @@
     ]
   },
   {
+    "note_id": "82d51d3a-b25a-4281-8f9b-c0b480cc9b0b",
     "front": "一分",
     "back": "một phút",
     "reading": "いっぷん",
@@ -2145,6 +2303,7 @@
     ]
   },
   {
+    "note_id": "ba208709-53f4-441f-b763-e566bdd344cb",
     "front": "分かる",
     "back": "hiểu",
     "reading": "わかる",
@@ -2165,6 +2324,7 @@
     ]
   },
   {
+    "note_id": "86241620-c3e7-48b0-9841-61d379d80607",
     "front": "半分",
     "back": "một nửa",
     "reading": "はんぶん",
@@ -2178,6 +2338,7 @@
     ]
   },
   {
+    "note_id": "a22f7223-8276-4b4b-972d-ad4c6471d430",
     "front": "二時半",
     "back": "hai giờ rưỡi",
     "reading": "にじはん",
@@ -2191,6 +2352,7 @@
     ]
   },
   {
+    "note_id": "c527873c-895c-4820-86ec-0a2286f3f0df",
     "front": "今",
     "back": "bây giờ",
     "reading": "いま",
@@ -2204,6 +2366,7 @@
     ]
   },
   {
+    "note_id": "7737afe0-3f74-4d46-8257-e154fcadd5b8",
     "front": "今日",
     "back": "hôm nay",
     "reading": "きょう",
@@ -2217,6 +2380,7 @@
     ]
   },
   {
+    "note_id": "ebdb24f1-a291-469a-b39d-8548f775fc72",
     "front": "先生",
     "back": "giáo viên",
     "reading": "せんせい",
@@ -2230,6 +2394,7 @@
     ]
   },
   {
+    "note_id": "061e4280-38e1-4c69-8bcb-ad1db2c53c82",
     "front": "先週",
     "back": "tuần trước",
     "reading": "せんしゅう",
@@ -2243,6 +2408,7 @@
     ]
   },
   {
+    "note_id": "a55d5bc5-2fb7-487d-92ad-5bf73a4b6836",
     "front": "名前",
     "back": "tên",
     "reading": "なまえ",
@@ -2256,6 +2422,7 @@
     ]
   },
   {
+    "note_id": "f759af11-b848-475b-b484-ed6eabf33084",
     "front": "午前",
     "back": "trước 12 giờ trưa",
     "reading": "ごぜん",
@@ -2269,6 +2436,7 @@
     ]
   },
   {
+    "note_id": "9c153a4e-1aed-4174-b45a-7821bc2f0c67",
     "front": "午後",
     "back": "sau 12 giờ trưa",
     "reading": "ごご",
@@ -2282,6 +2450,7 @@
     ]
   },
   {
+    "note_id": "2ac4cbec-8c26-41ab-9c68-1c1cc569c821",
     "front": "後ろ",
     "back": "phía sau",
     "reading": "うしろ",
@@ -2295,6 +2464,7 @@
     ]
   },
   {
+    "note_id": "0cca57d8-57eb-413f-b6a9-6c63c61c0594",
     "front": "一週間",
     "back": "một tuần (khoảng)",
     "reading": "いっしゅうかん",
@@ -2308,6 +2478,7 @@
     ]
   },
   {
+    "note_id": "edb012a8-293c-4824-80b7-c7f8f43f00fb",
     "front": "日本人",
     "back": "người Nhật",
     "reading": "にほんじん",
@@ -2321,6 +2492,7 @@
     ]
   },
   {
+    "note_id": "e9f8a992-81ef-4daf-8acd-31f118d7a218",
     "front": "一人",
     "back": "một người",
     "reading": "ひとり",
@@ -2334,6 +2506,7 @@
     ]
   },
   {
+    "note_id": "bc023422-49e4-4b27-a120-cdb9d71c25c1",
     "front": "男の子",
     "back": "bé trai",
     "reading": "おとこのこ",
@@ -2347,6 +2520,7 @@
     ]
   },
   {
+    "note_id": "b634dcb7-011c-4f8e-bdb8-dd73ff745e59",
     "front": "男の人",
     "back": "người đàn ông",
     "reading": "おとこのひと",
@@ -2360,6 +2534,7 @@
     ]
   },
   {
+    "note_id": "14520c10-b600-445a-9044-1ff10798bdf4",
     "front": "女の子",
     "back": "bé gái",
     "reading": "おんなのこ",
@@ -2373,6 +2548,7 @@
     ]
   },
   {
+    "note_id": "25d0af81-f8fc-4cd8-aa90-d20cc0dc03fa",
     "front": "女の人",
     "back": "người phụ nữ",
     "reading": "おんなのひと",
@@ -2386,6 +2562,7 @@
     ]
   },
   {
+    "note_id": "d555f987-ef96-4bb8-a674-44b00c384825",
     "front": "子供",
     "back": "trẻ em",
     "reading": "こども",
@@ -2399,6 +2576,7 @@
     ]
   },
   {
+    "note_id": "2529b5b9-74f1-4a5d-b665-b1fa5b2f7677",
     "front": "父",
     "back": "bố của mình",
     "reading": "ちち",
@@ -2419,6 +2597,7 @@
     ]
   },
   {
+    "note_id": "9b15ea52-ece8-4bb3-8d10-7860c1ed8944",
     "front": "お父さん",
     "back": "bố (lịch sự)",
     "reading": "おとうさん",
@@ -2439,6 +2618,7 @@
     ]
   },
   {
+    "note_id": "edab050d-bf59-45cc-a5ad-be61bc3ee2d2",
     "front": "母",
     "back": "mẹ của mình",
     "reading": "はは",
@@ -2459,6 +2639,7 @@
     ]
   },
   {
+    "note_id": "497c960b-0a23-429b-bf02-4140b72f916e",
     "front": "お母さん",
     "back": "mẹ (lịch sự)",
     "reading": "おかあさん",
@@ -2479,6 +2660,7 @@
     ]
   },
   {
+    "note_id": "b281ffa7-64fa-4a1c-a4cb-d8962d9b0cbc",
     "front": "友達",
     "back": "bạn bè",
     "reading": "ともだち",
@@ -2492,6 +2674,7 @@
     ]
   },
   {
+    "note_id": "4c855221-6408-4f21-aeea-78ead1cd4894",
     "front": "友人",
     "back": "người bạn",
     "reading": "ゆうじん",
@@ -2505,6 +2688,7 @@
     ]
   },
   {
+    "note_id": "766a94cf-bafd-4403-a6f5-2b97e5d851ad",
     "front": "有名",
     "back": "nổi tiếng",
     "reading": "ゆうめい",
@@ -2518,6 +2702,7 @@
     ]
   },
   {
+    "note_id": "237b457c-b566-461e-94ef-8203ecb8e4ac",
     "front": "私",
     "back": "tôi",
     "reading": "わたし",
@@ -2531,6 +2716,7 @@
     ]
   },
   {
+    "note_id": "2fa96902-59e2-4f13-93c9-7de518c88bf5",
     "front": "私立",
     "back": "tư thục",
     "reading": "しりつ",
@@ -2544,6 +2730,7 @@
     ]
   },
   {
+    "note_id": "0e3f65e6-6012-40af-ac3d-b351a93e3427",
     "front": "上",
     "back": "bên trên",
     "reading": "うえ",
@@ -2557,6 +2744,7 @@
     ]
   },
   {
+    "note_id": "ed95fd9e-f0cb-4609-8ef5-51d47cb30ec9",
     "front": "上手",
     "back": "giỏi",
     "reading": "じょうず",
@@ -2577,6 +2765,7 @@
     ]
   },
   {
+    "note_id": "4558718b-b302-4573-97e6-451c0cc89845",
     "front": "下",
     "back": "bên dưới",
     "reading": "した",
@@ -2590,6 +2779,7 @@
     ]
   },
   {
+    "note_id": "6770899b-b6ac-4598-9662-44772501b408",
     "front": "地下鉄",
     "back": "tàu điện ngầm",
     "reading": "ちかてつ",
@@ -2610,6 +2800,7 @@
     ]
   },
   {
+    "note_id": "0042e993-621e-4df3-966b-f2ad5a8940c9",
     "front": "左",
     "back": "bên trái",
     "reading": "ひだり",
@@ -2623,6 +2814,7 @@
     ]
   },
   {
+    "note_id": "c758c4ae-aa48-4809-ab78-438978f15984",
     "front": "左手",
     "back": "tay trái",
     "reading": "ひだりて",
@@ -2636,6 +2828,7 @@
     ]
   },
   {
+    "note_id": "4af71979-b98b-4791-9d3c-62b90d8872d3",
     "front": "右",
     "back": "bên phải",
     "reading": "みぎ",
@@ -2649,6 +2842,7 @@
     ]
   },
   {
+    "note_id": "0079a752-856f-43e0-8677-a7b5e51c0133",
     "front": "右手",
     "back": "tay phải",
     "reading": "みぎて",
@@ -2662,6 +2856,7 @@
     ]
   },
   {
+    "note_id": "b15cb67f-93ad-43d7-962a-82318191ffe9",
     "front": "中",
     "back": "bên trong",
     "reading": "なか",
@@ -2675,6 +2870,7 @@
     ]
   },
   {
+    "note_id": "7292e8f5-786a-4ad7-9551-754b3b1aa1fb",
     "front": "中国",
     "back": "Trung Quốc",
     "reading": "ちゅうごく",
@@ -2688,6 +2884,7 @@
     ]
   },
   {
+    "note_id": "78d1b38e-34eb-438c-a041-28559d1fb5fc",
     "front": "外",
     "back": "bên ngoài",
     "reading": "そと",
@@ -2701,6 +2898,7 @@
     ]
   },
   {
+    "note_id": "a194ed53-4cc9-4ca5-afff-a5cf03daab1a",
     "front": "外国",
     "back": "nước ngoài",
     "reading": "がいこく",
@@ -2714,6 +2912,7 @@
     ]
   },
   {
+    "note_id": "c57e9b19-e567-4675-8177-7adf4494ffbe",
     "front": "東",
     "back": "hướng đông",
     "reading": "ひがし",
@@ -2727,6 +2926,7 @@
     ]
   },
   {
+    "note_id": "9fdb3636-4b60-4d7b-ab9c-b03c14d47018",
     "front": "東京",
     "back": "Tokyo",
     "reading": "とうきょう",
@@ -2740,6 +2940,7 @@
     ]
   },
   {
+    "note_id": "ac0c9acf-a2d6-4bf1-bc6f-c0708b01a8a5",
     "front": "西",
     "back": "hướng tây",
     "reading": "にし",
@@ -2753,6 +2954,7 @@
     ]
   },
   {
+    "note_id": "24746731-ff7d-4e86-bf1e-c2b257a4f651",
     "front": "西口",
     "back": "cửa phía tây",
     "reading": "にしぐち",
@@ -2766,6 +2968,7 @@
     ]
   },
   {
+    "note_id": "2348ac86-127e-45b0-846d-a49223a08486",
     "front": "南",
     "back": "hướng nam",
     "reading": "みなみ",
@@ -2779,6 +2982,7 @@
     ]
   },
   {
+    "note_id": "27776047-3170-4a8c-a04a-aa95943e5972",
     "front": "南口",
     "back": "cửa phía nam",
     "reading": "みなみぐち",
@@ -2792,6 +2996,7 @@
     ]
   },
   {
+    "note_id": "fe44f536-f75d-4a5e-b7f5-c87105f1ad74",
     "front": "北",
     "back": "hướng bắc",
     "reading": "きた",
@@ -2805,6 +3010,7 @@
     ]
   },
   {
+    "note_id": "54500913-3590-4fee-8a47-09f2e71f2dd1",
     "front": "北口",
     "back": "cửa phía bắc",
     "reading": "きたぐち",
@@ -2818,6 +3024,7 @@
     ]
   },
   {
+    "note_id": "4fc23e8a-8555-4d37-8b28-2f7a3d676838",
     "front": "大学",
     "back": "đại học",
     "reading": "だいがく",
@@ -2831,6 +3038,7 @@
     ]
   },
   {
+    "note_id": "5d398e4a-70b5-4941-956c-e51f3535383f",
     "front": "大きい",
     "back": "to lớn",
     "reading": "おおきい",
@@ -2844,6 +3052,7 @@
     ]
   },
   {
+    "note_id": "7b9dedd7-5147-4475-89e3-c0e796563d12",
     "front": "小さい",
     "back": "nhỏ",
     "reading": "ちいさい",
@@ -2857,6 +3066,7 @@
     ]
   },
   {
+    "note_id": "3822b72d-e9d2-4608-9058-d65177bed091",
     "front": "小学校",
     "back": "trường tiểu học",
     "reading": "しょうがっこう",
@@ -2870,6 +3080,7 @@
     ]
   },
   {
+    "note_id": "087a9339-65e5-49b8-8515-7a89545a22ef",
     "front": "多い",
     "back": "nhiều",
     "reading": "おおい",
@@ -2890,6 +3101,7 @@
     ]
   },
   {
+    "note_id": "16a4e2f8-d7c1-46b8-8d62-773d1787e76c",
     "front": "多分",
     "back": "có lẽ",
     "reading": "たぶん",
@@ -2910,6 +3122,7 @@
     ]
   },
   {
+    "note_id": "60b92ae2-2409-4d2d-9ba5-cb141c0d2c09",
     "front": "少ない",
     "back": "ít",
     "reading": "すくない",
@@ -2930,6 +3143,7 @@
     ]
   },
   {
+    "note_id": "e7d2e44d-0f7a-4b9f-a5e7-f0ff9a295d9d",
     "front": "少し",
     "back": "một ít",
     "reading": "すこし",
@@ -2950,6 +3164,7 @@
     ]
   },
   {
+    "note_id": "90f45da2-9ec9-444a-a900-3d0c417e1ff9",
     "front": "長い",
     "back": "dài",
     "reading": "ながい",
@@ -2963,6 +3178,7 @@
     ]
   },
   {
+    "note_id": "ca2a847b-5849-4bf0-a574-8f9fc83283fc",
     "front": "社長",
     "back": "giám đốc công ty",
     "reading": "しゃちょう",
@@ -2976,6 +3192,7 @@
     ]
   },
   {
+    "note_id": "bbd2449c-d653-46b3-8890-762047643c04",
     "front": "新しい",
     "back": "mới",
     "reading": "あたらしい",
@@ -2989,6 +3206,7 @@
     ]
   },
   {
+    "note_id": "86bf22b3-c176-4990-a1c4-2abd9c762846",
     "front": "新聞",
     "back": "báo",
     "reading": "しんぶん",
@@ -3002,6 +3220,7 @@
     ]
   },
   {
+    "note_id": "134199fb-2e8f-4b3d-946f-a1f21cd82e55",
     "front": "古い",
     "back": "cũ",
     "reading": "ふるい",
@@ -3015,6 +3234,7 @@
     ]
   },
   {
+    "note_id": "7f9290e8-ecb1-4855-aa58-62c23d82ec99",
     "front": "中古",
     "back": "đồ đã qua sử dụng",
     "reading": "ちゅうこ",
@@ -3028,6 +3248,7 @@
     ]
   },
   {
+    "note_id": "eca8b9cb-38a2-480b-9d92-b39c1037144c",
     "front": "高い",
     "back": "cao",
     "reading": "たかい",
@@ -3041,6 +3262,7 @@
     ]
   },
   {
+    "note_id": "904985da-66e5-4478-a108-2afeb0c087f6",
     "front": "高校",
     "back": "trường cấp ba",
     "reading": "こうこう",
@@ -3054,6 +3276,7 @@
     ]
   },
   {
+    "note_id": "e48cbb58-153c-47e9-baa8-1edd1f0aaa7d",
     "front": "安い",
     "back": "rẻ",
     "reading": "やすい",
@@ -3067,6 +3290,7 @@
     ]
   },
   {
+    "note_id": "2442c59a-2791-4358-88e4-368dda7a624c",
     "front": "安心",
     "back": "yên tâm",
     "reading": "あんしん",
@@ -3080,6 +3304,7 @@
     ]
   },
   {
+    "note_id": "c77775d8-4eb1-48d9-abb8-5e0af0c2bdcb",
     "front": "山",
     "back": "núi",
     "reading": "やま",
@@ -3093,6 +3318,7 @@
     ]
   },
   {
+    "note_id": "f3d9743b-4886-42d8-8119-ba1486323f44",
     "front": "川",
     "back": "sông",
     "reading": "かわ",
@@ -3106,6 +3332,7 @@
     ]
   },
   {
+    "note_id": "bbb26e50-a901-4d60-989a-5e37362ec72e",
     "front": "山川",
     "back": "núi sông",
     "reading": "やまかわ",
@@ -3119,6 +3346,7 @@
     ]
   },
   {
+    "note_id": "617830ce-e29e-4102-af0e-6059390333bf",
     "front": "田んぼ",
     "back": "ruộng lúa",
     "reading": "たんぼ",
@@ -3132,6 +3360,7 @@
     ]
   },
   {
+    "note_id": "10347b69-b45f-4b54-a230-bc1d2a83089e",
     "front": "田中",
     "back": "họ Tanaka",
     "reading": "たなか",
@@ -3145,6 +3374,7 @@
     ]
   },
   {
+    "note_id": "5e97e6e3-22c7-415c-beeb-ae7c627460c2",
     "front": "天気",
     "back": "thời tiết",
     "reading": "てんき",
@@ -3158,6 +3388,7 @@
     ]
   },
   {
+    "note_id": "c9c34e9e-e8cd-4947-a614-49aad59597af",
     "front": "天国",
     "back": "thiên đường",
     "reading": "てんごく",
@@ -3171,6 +3402,7 @@
     ]
   },
   {
+    "note_id": "3a7ad517-fd18-45f9-b493-1e612a71f04e",
     "front": "元気",
     "back": "khỏe",
     "reading": "げんき",
@@ -3184,6 +3416,7 @@
     ]
   },
   {
+    "note_id": "8f1a94bc-cdaf-4c6f-9f33-984232825194",
     "front": "雨",
     "back": "mưa",
     "reading": "あめ",
@@ -3197,6 +3430,7 @@
     ]
   },
   {
+    "note_id": "03e46743-a2e5-4c6c-8fda-ad3cd745c42d",
     "front": "大雨",
     "back": "mưa to",
     "reading": "おおあめ",
@@ -3210,6 +3444,7 @@
     ]
   },
   {
+    "note_id": "3f4647da-be62-4fbd-bff7-128826631464",
     "front": "空",
     "back": "bầu trời",
     "reading": "そら",
@@ -3223,6 +3458,7 @@
     ]
   },
   {
+    "note_id": "11315c32-eee0-485f-8aef-dc4838b80a22",
     "front": "空港",
     "back": "sân bay",
     "reading": "くうこう",
@@ -3236,6 +3472,7 @@
     ]
   },
   {
+    "note_id": "ff842bf7-8a4a-4165-b52c-2bfb66362587",
     "front": "本",
     "back": "sách",
     "reading": "ほん",
@@ -3249,6 +3486,7 @@
     ]
   },
   {
+    "note_id": "01e2296c-0509-473f-a3cc-f049149c6cdf",
     "front": "日本",
     "back": "Nhật Bản",
     "reading": "にほん",
@@ -3262,6 +3500,7 @@
     ]
   },
   {
+    "note_id": "dcfc36a6-3095-4fec-b77b-7f8a0d6df954",
     "front": "日本語",
     "back": "tiếng Nhật",
     "reading": "にほんご",
@@ -3275,6 +3514,7 @@
     ]
   },
   {
+    "note_id": "60199425-b0d2-4630-ba47-29df03e41c6a",
     "front": "英語",
     "back": "tiếng Anh",
     "reading": "えいご",
@@ -3288,6 +3528,7 @@
     ]
   },
   {
+    "note_id": "5e662692-b5b7-4cf2-b8f9-4ea1c6e3687e",
     "front": "文",
     "back": "câu văn",
     "reading": "ぶん",
@@ -3301,6 +3542,7 @@
     ]
   },
   {
+    "note_id": "69e83bc1-5bd8-4138-9716-97d430456fb1",
     "front": "作文",
     "back": "bài văn",
     "reading": "さくぶん",
@@ -3314,6 +3556,7 @@
     ]
   },
   {
+    "note_id": "0673e862-8533-4b86-ae40-038077b77c51",
     "front": "漢字",
     "back": "chữ Hán",
     "reading": "かんじ",
@@ -3327,6 +3570,7 @@
     ]
   },
   {
+    "note_id": "a000c0e1-75b3-4270-81d2-b4ef445dadd2",
     "front": "文字",
     "back": "ký tự",
     "reading": "もじ",
@@ -3340,6 +3584,7 @@
     ]
   },
   {
+    "note_id": "defa095a-1233-47f9-bd61-04227239a967",
     "front": "読む",
     "back": "đọc",
     "reading": "よむ",
@@ -3353,6 +3598,7 @@
     ]
   },
   {
+    "note_id": "7a064d9d-cd0f-48df-bc03-5da0fe7b87a2",
     "front": "読書",
     "back": "đọc sách",
     "reading": "どくしょ",
@@ -3366,6 +3612,7 @@
     ]
   },
   {
+    "note_id": "6b9c66d0-03fd-40d9-9daf-f4c65ea2d4e3",
     "front": "書く",
     "back": "viết",
     "reading": "かく",
@@ -3379,6 +3626,7 @@
     ]
   },
   {
+    "note_id": "04758c17-7fa3-448c-ad0f-0472ba8c87e4",
     "front": "辞書",
     "back": "từ điển",
     "reading": "じしょ",
@@ -3392,6 +3640,7 @@
     ]
   },
   {
+    "note_id": "ea89394b-74e0-4d33-acbb-953397b82378",
     "front": "話す",
     "back": "nói",
     "reading": "はなす",
@@ -3412,6 +3661,7 @@
     ]
   },
   {
+    "note_id": "d308941a-a157-4722-af02-0f44c417443d",
     "front": "電話",
     "back": "điện thoại",
     "reading": "でんわ",
@@ -3425,6 +3675,7 @@
     ]
   },
   {
+    "note_id": "ff1a792c-d1c0-48ab-849e-59275536cc58",
     "front": "聞く",
     "back": "nghe",
     "reading": "きく",
@@ -3445,6 +3696,7 @@
     ]
   },
   {
+    "note_id": "165eb091-d393-4461-babb-24013d48984d",
     "front": "見る",
     "back": "xem",
     "reading": "みる",
@@ -3465,6 +3717,7 @@
     ]
   },
   {
+    "note_id": "3d47e1b0-36fe-498a-af92-ff7c0e2794ce",
     "front": "見せる",
     "back": "cho xem",
     "reading": "みせる",
@@ -3485,6 +3738,7 @@
     ]
   },
   {
+    "note_id": "5b8e929c-4168-4195-bb21-68ad3afa4c27",
     "front": "言う",
     "back": "nói",
     "reading": "いう",
@@ -3505,6 +3759,7 @@
     ]
   },
   {
+    "note_id": "ebcf5c2b-01b5-49a9-a532-fc3117dab349",
     "front": "言葉",
     "back": "lời nói",
     "reading": "ことば",
@@ -3518,6 +3773,7 @@
     ]
   },
   {
+    "note_id": "d1331810-ca2c-4f10-b7ad-94db8435dbef",
     "front": "学生",
     "back": "học sinh/sinh viên",
     "reading": "がくせい",
@@ -3538,6 +3794,7 @@
     ]
   },
   {
+    "note_id": "ef4d1203-289d-464c-9741-97a9ca71644e",
     "front": "学校",
     "back": "trường học",
     "reading": "がっこう",
@@ -3551,6 +3808,7 @@
     ]
   },
   {
+    "note_id": "899cf9bd-cd55-43b7-a838-89f2c9bc1b34",
     "front": "会う",
     "back": "gặp",
     "reading": "あう",
@@ -3564,6 +3822,7 @@
     ]
   },
   {
+    "note_id": "80f7096f-05ab-4746-9a55-f6c6f27aac8e",
     "front": "会社",
     "back": "công ty",
     "reading": "かいしゃ",
@@ -3577,6 +3836,7 @@
     ]
   },
   {
+    "note_id": "c69c5a88-f303-4c6b-8aa0-ff20cecedfd2",
     "front": "店",
     "back": "cửa hàng",
     "reading": "みせ",
@@ -3590,6 +3850,7 @@
     ]
   },
   {
+    "note_id": "8e76a0b7-4d07-4a2d-8e1a-a3d5d8b9cab7",
     "front": "店員",
     "back": "nhân viên cửa hàng",
     "reading": "てんいん",
@@ -3603,6 +3864,7 @@
     ]
   },
   {
+    "note_id": "8507db8f-7cbc-4aa2-b2df-daf32c748571",
     "front": "駅",
     "back": "nhà ga",
     "reading": "えき",
@@ -3616,6 +3878,7 @@
     ]
   },
   {
+    "note_id": "edea2d05-4d52-406c-8f5a-e39491a81d7e",
     "front": "駅前",
     "back": "trước nhà ga",
     "reading": "えきまえ",
@@ -3629,6 +3892,7 @@
     ]
   },
   {
+    "note_id": "013c2617-367b-4976-84ce-b8e836dbdbd4",
     "front": "食べる",
     "back": "ăn",
     "reading": "たべる",
@@ -3642,6 +3906,7 @@
     ]
   },
   {
+    "note_id": "236e9a43-38df-4c79-8c8b-31cd938d41d3",
     "front": "食堂",
     "back": "nhà ăn",
     "reading": "しょくどう",
@@ -3662,6 +3927,7 @@
     ]
   },
   {
+    "note_id": "1cc0ba2f-7f8b-49ca-b00e-72a9cf5436be",
     "front": "飲む",
     "back": "uống",
     "reading": "のむ",
@@ -3675,6 +3941,7 @@
     ]
   },
   {
+    "note_id": "a1058763-beca-4167-a557-c66c0705e765",
     "front": "飲み物",
     "back": "đồ uống",
     "reading": "のみもの",
@@ -3688,6 +3955,7 @@
     ]
   },
   {
+    "note_id": "2afba84f-94d0-418f-8c58-107949b2d9c1",
     "front": "買う",
     "back": "mua",
     "reading": "かう",
@@ -3701,6 +3969,7 @@
     ]
   },
   {
+    "note_id": "d7747507-4501-4300-8a90-d03c0dc428bf",
     "front": "買い物",
     "back": "mua sắm",
     "reading": "かいもの",
@@ -3714,6 +3983,7 @@
     ]
   },
   {
+    "note_id": "8e35f672-7c71-40a5-91c4-f914998b3878",
     "front": "行く",
     "back": "đi",
     "reading": "いく",
@@ -3734,6 +4004,7 @@
     ]
   },
   {
+    "note_id": "7f1b4611-f0f3-4ac9-8536-cad6acc86e3d",
     "front": "銀行",
     "back": "ngân hàng",
     "reading": "ぎんこう",
@@ -3747,6 +4018,7 @@
     ]
   },
   {
+    "note_id": "a84be1b7-44ff-414c-bf03-29e35b219d58",
     "front": "来る",
     "back": "đến",
     "reading": "くる",
@@ -3767,6 +4039,7 @@
     ]
   },
   {
+    "note_id": "6b2ed4b6-9ef4-49eb-9e7f-ee193f9a0649",
     "front": "帰る",
     "back": "trở về",
     "reading": "かえる",
@@ -3787,6 +4060,7 @@
     ]
   },
   {
+    "note_id": "d0e3aa27-3e0e-45b2-87c8-4028d6aa0c94",
     "front": "帰国",
     "back": "về nước",
     "reading": "きこく",
@@ -3800,6 +4074,7 @@
     ]
   },
   {
+    "note_id": "10c3ece4-4634-425a-9073-fd17c246d3f3",
     "front": "入る",
     "back": "đi vào",
     "reading": "はいる",
@@ -3813,6 +4088,7 @@
     ]
   },
   {
+    "note_id": "861a849c-409d-4d7b-a3a2-4922d30aef5e",
     "front": "入口",
     "back": "lối vào",
     "reading": "いりぐち",
@@ -3826,6 +4102,7 @@
     ]
   },
   {
+    "note_id": "830315b5-e282-49d6-864c-43533f9fa34c",
     "front": "出る",
     "back": "ra",
     "reading": "でる",
@@ -3839,6 +4116,7 @@
     ]
   },
   {
+    "note_id": "e47c38e6-d07a-44d5-9879-0516ea498137",
     "front": "出口",
     "back": "lối ra",
     "reading": "でぐち",
@@ -3852,6 +4130,7 @@
     ]
   },
   {
+    "note_id": "4ce87f31-e409-43f1-b1c2-77c395571fe0",
     "front": "休む",
     "back": "nghỉ",
     "reading": "やすむ",
@@ -3865,6 +4144,7 @@
     ]
   },
   {
+    "note_id": "34008cb1-6538-4a02-8ab6-acadb46c0efa",
     "front": "休み",
     "back": "ngày nghỉ",
     "reading": "やすみ",
@@ -3885,6 +4165,7 @@
     ]
   },
   {
+    "note_id": "0d6ef855-6ab4-46ea-ad89-86a521abe92a",
     "front": "立つ",
     "back": "đứng",
     "reading": "たつ",
@@ -3898,6 +4179,7 @@
     ]
   },
   {
+    "note_id": "c84df0af-3851-4637-b606-e01ef802a24c",
     "front": "国立",
     "back": "quốc lập",
     "reading": "こくりつ",
@@ -3911,6 +4193,7 @@
     ]
   },
   {
+    "note_id": "467ce71c-b016-43c3-8db8-3d62f1aee2bb",
     "front": "車",
     "back": "ô tô",
     "reading": "くるま",
@@ -3924,6 +4207,7 @@
     ]
   },
   {
+    "note_id": "ccecd01a-2f14-4673-8bfa-12ad67fedb70",
     "front": "電車",
     "back": "tàu điện",
     "reading": "でんしゃ",
@@ -3944,6 +4228,7 @@
     ]
   },
   {
+    "note_id": "83f24038-32c4-4dfe-9bd0-70b04aa96305",
     "front": "電気",
     "back": "điện",
     "reading": "でんき",
@@ -3957,6 +4242,7 @@
     ]
   },
   {
+    "note_id": "56326be0-2c1c-483e-bd57-a0d9cf06fc90",
     "front": "道",
     "back": "đường",
     "reading": "みち",
@@ -3970,6 +4256,7 @@
     ]
   },
   {
+    "note_id": "3378d86e-f99a-4039-8452-53a7fa30252f",
     "front": "北海道",
     "back": "Hokkaido",
     "reading": "ほっかいどう",
@@ -3983,6 +4270,7 @@
     ]
   },
   {
+    "note_id": "8b7c6f8a-3c86-4cb2-9857-ce2d20d9042d",
     "front": "国",
     "back": "đất nước",
     "reading": "くに",
@@ -3996,6 +4284,7 @@
     ]
   },
   {
+    "note_id": "fb2230f9-2241-449a-b81a-d4ef753509db",
     "front": "白",
     "back": "màu trắng",
     "reading": "しろ",
@@ -4009,6 +4298,7 @@
     ]
   },
   {
+    "note_id": "ca3233f4-1141-43d5-829f-4b5da7c2a6d7",
     "front": "白い",
     "back": "trắng",
     "reading": "しろい",
@@ -4022,6 +4312,7 @@
     ]
   },
   {
+    "note_id": "348b6c32-3831-405c-926a-d4788e280bfe",
     "front": "黒",
     "back": "màu đen",
     "reading": "くろ",
@@ -4035,6 +4326,7 @@
     ]
   },
   {
+    "note_id": "93ef92ed-ff5e-4fc8-a03e-782aed6ec8ea",
     "front": "黒い",
     "back": "đen",
     "reading": "くろい",
@@ -4048,6 +4340,7 @@
     ]
   },
   {
+    "note_id": "f2184052-cdd7-423a-8430-59b293ed1ad1",
     "front": "赤",
     "back": "màu đỏ",
     "reading": "あか",
@@ -4061,6 +4354,7 @@
     ]
   },
   {
+    "note_id": "83a22614-fbba-416c-a0d3-088a23ddff65",
     "front": "赤い",
     "back": "đỏ",
     "reading": "あかい",
@@ -4074,6 +4368,7 @@
     ]
   },
   {
+    "note_id": "dd6110c2-3a48-456d-b956-c39bf9cdac81",
     "front": "青",
     "back": "màu xanh",
     "reading": "あお",
@@ -4087,6 +4382,7 @@
     ]
   },
   {
+    "note_id": "87a99256-33b2-40d2-896b-3b4665bf4c07",
     "front": "青い",
     "back": "xanh lam",
     "reading": "あおい",
@@ -4100,6 +4396,7 @@
     ]
   },
   {
+    "note_id": "41e61232-e294-4d38-a49f-04897d1a4708",
     "front": "目",
     "back": "mắt",
     "reading": "め",
@@ -4113,6 +4410,7 @@
     ]
   },
   {
+    "note_id": "37220894-bf03-4325-98f0-703e0a26a6a6",
     "front": "目の前",
     "back": "ngay trước mắt",
     "reading": "めのまえ",
@@ -4126,6 +4424,7 @@
     ]
   },
   {
+    "note_id": "1e2d52bf-3409-4be2-813d-ab33d9407145",
     "front": "耳",
     "back": "tai",
     "reading": "みみ",
@@ -4139,6 +4438,7 @@
     ]
   },
   {
+    "note_id": "c4cbc85d-bea2-47a2-9478-ffc8dce0ccac",
     "front": "耳鼻科",
     "back": "khoa tai mũi họng",
     "reading": "じびか",
@@ -4152,6 +4452,7 @@
     ]
   },
   {
+    "note_id": "5e0a300c-e200-4328-932d-af3e5514b483",
     "front": "口",
     "back": "miệng",
     "reading": "くち",
@@ -4165,6 +4466,7 @@
     ]
   },
   {
+    "note_id": "dfe17325-c828-4a94-ad7a-10d16c355621",
     "front": "手",
     "back": "tay",
     "reading": "て",
@@ -4178,6 +4480,7 @@
     ]
   },
   {
+    "note_id": "7d1b3a97-279e-4542-b145-20f63271a0d7",
     "front": "手紙",
     "back": "thư tay",
     "reading": "てがみ",
@@ -4191,6 +4494,7 @@
     ]
   },
   {
+    "note_id": "948543ad-5b7c-4191-849c-5cab7a7c4395",
     "front": "足",
     "back": "chân",
     "reading": "あし",
@@ -4204,6 +4508,7 @@
     ]
   },
   {
+    "note_id": "7c25be83-0b10-45bf-bedf-c299b91182de",
     "front": "足りる",
     "back": "đủ",
     "reading": "たりる",
@@ -4217,6 +4522,7 @@
     ]
   },
   {
+    "note_id": "f0003b43-bed3-46bd-8d0d-1616c177341b",
     "front": "力",
     "back": "sức mạnh",
     "reading": "ちから",
@@ -4230,6 +4536,7 @@
     ]
   },
   {
+    "note_id": "df7d8571-7c01-4985-8252-97a070bb410c",
     "front": "能力",
     "back": "năng lực",
     "reading": "のうりょく",
@@ -4243,6 +4550,7 @@
     ]
   },
   {
+    "note_id": "e9111430-36ce-48ed-a3fb-47cd201a8842",
     "front": "犬",
     "back": "chó",
     "reading": "いぬ",
@@ -4256,6 +4564,7 @@
     ]
   },
   {
+    "note_id": "5af64b10-f27c-490b-89f3-bf42f041c444",
     "front": "子犬",
     "back": "chó con",
     "reading": "こいぬ",
@@ -4269,6 +4578,7 @@
     ]
   },
   {
+    "note_id": "16b2192e-4a8f-4539-af24-d9d3351b5789",
     "front": "魚",
     "back": "cá",
     "reading": "さかな",
@@ -4282,6 +4592,7 @@
     ]
   },
   {
+    "note_id": "2c5eb545-fab5-4854-912c-fd1ec1d0e6d0",
     "front": "金魚",
     "back": "cá vàng",
     "reading": "きんぎょ",
@@ -4295,6 +4606,7 @@
     ]
   },
   {
+    "note_id": "fb381c70-c833-43fa-853e-e6c6c82c6e3e",
     "front": "花",
     "back": "hoa",
     "reading": "はな",
@@ -4315,6 +4627,7 @@
     ]
   },
   {
+    "note_id": "03f27269-8607-49aa-9f90-e67b55a213f0",
     "front": "花見",
     "back": "ngắm hoa",
     "reading": "はなみ",
@@ -4328,6 +4641,7 @@
     ]
   },
   {
+    "note_id": "59d438e5-78c2-4a7b-97b0-7a38f2fa9706",
     "front": "何",
     "back": "cái gì",
     "reading": "なに",

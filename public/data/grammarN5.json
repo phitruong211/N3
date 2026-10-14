@@ -1,5 +1,6 @@
 [
   {
+    "note_id": "16c189c0-ee89-42dc-a3b8-4db21231b3ac",
     "front": "N1 は N2 です",
     "back": "N1 là N2\n\n【Cấu trúc】\nN1 + は + N2 + です\n\n【Cách dùng】\nGiới thiệu hoặc xác nhận danh tính, nghề nghiệp, sự vật",
     "reading": "N1 は N2 です",
@@ -19,6 +20,7 @@
     ]
   },
   {
+    "note_id": "7f54e6d0-353f-492d-a862-106156c6a06a",
     "front": "N1 は N2 じゃありません",
     "back": "N1 không phải là N2\n\n【Cấu trúc】\nN1 + は + N2 + じゃありません\n\n【Cách dùng】\nPhủ định lịch sự, dùng ではありません trong ngữ cảnh trang trọng hơn",
     "reading": "N1 は N2 じゃありません",
@@ -38,6 +40,7 @@
     ]
   },
   {
+    "note_id": "3c1ad69e-bd8d-4875-9f61-9edefa8909b0",
     "front": "N1 は N2 でした",
     "back": "N1 đã là N2\n\n【Cấu trúc】\nN1 + は + N2 + でした\n\n【Cách dùng】\nQuá khứ khẳng định của câu danh từ",
     "reading": "N1 は N2 でした",
@@ -57,6 +60,7 @@
     ]
   },
   {
+    "note_id": "98082957-8e01-4994-a2ae-10b367cd426b",
     "front": "N1 は N2 じゃありませんでした",
     "back": "N1 trước đây không phải N2\n\n【Cấu trúc】\nN1 + は + N2 + じゃありませんでした\n\n【Cách dùng】\nQuá khứ phủ định của câu danh từ",
     "reading": "N1 は N2 じゃありませんでした",
@@ -76,6 +80,7 @@
     ]
   },
   {
+    "note_id": "fe292c4e-4d37-4eba-bd6e-08eb7297ea29",
     "front": "～か",
     "back": "Có ... không? (câu hỏi)\n\n【Cấu trúc】\nCâu lịch sự + か\n\n【Cách dùng】\nĐặt câu hỏi, không cần dấu ? trong tiếng Nhật",
     "reading": "～か",
@@ -95,6 +100,7 @@
     ]
   },
   {
+    "note_id": "c56e9ce2-2831-421e-8a33-d51db7bca8d7",
     "front": "～も",
     "back": "Cũng; cả\n\n【Cấu trúc】\nN + も\n\n【Cách dùng】\nĐưa thêm một đối tượng có cùng đặc điểm",
     "reading": "～も",
@@ -114,6 +120,7 @@
     ]
   },
   {
+    "note_id": "e932c8f5-a3d7-463c-ba6b-3e9fc353397f",
     "front": "～の (sở hữu)",
     "back": "Của ...\n\n【Cấu trúc】\nN1 + の + N2\n\n【Cách dùng】\nChỉ quan hệ sở hữu, quan hệ thuộc về hoặc bổ nghĩa danh từ",
     "reading": "～の (sở hữu)",
@@ -133,6 +140,7 @@
     ]
   },
   {
+    "note_id": "3b9c2d8b-647f-418a-bcfe-671a5bd2466e",
     "front": "～の (thay danh từ)",
     "back": "Cái ...; của ...\n\n【Cấu trúc】\nTừ bổ nghĩa + の\n\n【Cách dùng】\nThay cho danh từ đã biết, tránh lặp lại",
     "reading": "～の (thay danh từ)",
@@ -152,6 +160,7 @@
     ]
   },
   {
+    "note_id": "05c392bd-378c-43e8-b6d3-75c97e3e7aee",
     "front": "～は (chủ đề)",
     "back": "Về ... thì ...\n\n【Cấu trúc】\nN + は + thông tin\n\n【Cách dùng】\nNêu chủ đề đang nói đến",
     "reading": "～は (chủ đề)",
@@ -171,6 +180,7 @@
     ]
   },
   {
+    "note_id": "bdef8302-26e2-4606-9d9f-918b94beb488",
     "front": "～が (chủ ngữ)",
     "back": "Chỉ chủ ngữ; thông tin mới\n\n【Cấu trúc】\nN + が + vị ngữ\n\n【Cách dùng】\nĐánh dấu chủ thể, thường trong câu tồn tại hay miêu tả",
     "reading": "～が (chủ ngữ)",
@@ -190,6 +200,7 @@
     ]
   },
   {
+    "note_id": "67af5ca3-ac06-4906-ab4e-7c0e871127e7",
     "front": "～を (tân ngữ)",
     "back": "Đánh dấu đối tượng chịu tác động\n\n【Cấu trúc】\nN + を + V\n\n【Cách dùng】\nĐứng sau tân ngữ trực tiếp của động từ",
     "reading": "～を (tân ngữ)",
@@ -209,6 +220,7 @@
     ]
   },
   {
+    "note_id": "378e6084-3fa2-4974-90f9-4a62f8fee17e",
     "front": "～に (thời điểm)",
     "back": "Vào lúc ...\n\n【Cấu trúc】\nThời điểm cụ thể + に + V\n\n【Cách dùng】\nChỉ mốc thời gian xảy ra hành động",
     "reading": "～に (thời điểm)",
@@ -228,6 +240,7 @@
     ]
   },
   {
+    "note_id": "a2b326aa-dd2e-4c8c-a1dc-4bb9d0d915be",
     "front": "～に (đích đến)",
     "back": "Đến ...\n\n【Cấu trúc】\nĐịa điểm + に + 行く/来る/帰る\n\n【Cách dùng】\nĐánh dấu nơi đến của chuyển động",
     "reading": "～に (đích đến)",
@@ -247,6 +260,7 @@
     ]
   },
   {
+    "note_id": "ba9be5fc-e51e-41d0-a062-2109435e2b2b",
     "front": "～に (nơi tồn tại)",
     "back": "Ở tại ...\n\n【Cấu trúc】\nĐịa điểm + に + いる/ある\n\n【Cách dùng】\nĐánh dấu vị trí tồn tại",
     "reading": "～に (nơi tồn tại)",
@@ -266,6 +280,7 @@
     ]
   },
   {
+    "note_id": "64324412-81d5-4775-8821-ebf5c07b1959",
     "front": "～へ",
     "back": "Về phía; đến ...\n\n【Cấu trúc】\nĐịa điểm + へ + V chuyển động\n\n【Cách dùng】\nNhấn mạnh hướng chuyển động",
     "reading": "～へ",
@@ -285,6 +300,7 @@
     ]
   },
   {
+    "note_id": "e141ddf2-60e6-43b5-b940-4c95f8226805",
     "front": "～で (nơi hành động)",
     "back": "Tại ...\n\n【Cấu trúc】\nĐịa điểm + で + V hành động\n\n【Cách dùng】\nChỉ nơi diễn ra hành động",
     "reading": "～で (nơi hành động)",
@@ -304,6 +320,7 @@
     ]
   },
   {
+    "note_id": "e0f96ae7-dcd6-48dc-9092-eb32840ad65b",
     "front": "～で (phương tiện)",
     "back": "Bằng ...\n\n【Cấu trúc】\nPhương tiện/công cụ + で + V\n\n【Cách dùng】\nChỉ phương tiện hoặc dụng cụ thực hiện hành động",
     "reading": "～で (phương tiện)",
@@ -323,6 +340,7 @@
     ]
   },
   {
+    "note_id": "3e17b368-47d9-4caa-bd1d-1784c689fa8e",
     "front": "～と (cùng với)",
     "back": "Cùng với ...\n\n【Cấu trúc】\nN + と + V\n\n【Cách dùng】\nChỉ người cùng thực hiện hành động",
     "reading": "～と (cùng với)",
@@ -342,6 +360,7 @@
     ]
   },
   {
+    "note_id": "9d874ef2-22bb-4143-8b1c-ce94f0b862e7",
     "front": "～と (liệt kê đầy đủ)",
     "back": "Và\n\n【Cấu trúc】\nN1 + と + N2\n\n【Cách dùng】\nLiệt kê hai hoặc nhiều danh từ theo danh sách xác định",
     "reading": "～と (liệt kê đầy đủ)",
@@ -361,6 +380,7 @@
     ]
   },
   {
+    "note_id": "9fe8065b-e4d9-4aa5-9034-df7aab4f0516",
     "front": "～や～など",
     "back": "... và ... v.v.\n\n【Cấu trúc】\nN1 + や + N2 + など\n\n【Cách dùng】\nLiệt kê ví dụ không đầy đủ",
     "reading": "～や～など",
@@ -380,6 +400,7 @@
     ]
   },
   {
+    "note_id": "3502a455-3739-4750-a574-cedaa6287346",
     "front": "～から (mốc bắt đầu)",
     "back": "Từ ...\n\n【Cấu trúc】\nThời gian/nơi chốn + から\n\n【Cách dùng】\nChỉ thời điểm hay địa điểm bắt đầu",
     "reading": "～から (mốc bắt đầu)",
@@ -399,6 +420,7 @@
     ]
   },
   {
+    "note_id": "98cedfc4-a8e3-4886-9634-0b745140fc16",
     "front": "～まで (mốc kết thúc)",
     "back": "Đến ...\n\n【Cấu trúc】\nThời gian/nơi chốn + まで\n\n【Cách dùng】\nChỉ điểm kết thúc một khoảng",
     "reading": "～まで (mốc kết thúc)",
@@ -418,6 +440,7 @@
     ]
   },
   {
+    "note_id": "3a16ccb9-a72d-4660-8e03-88de46d81895",
     "front": "～から～まで",
     "back": "Từ ... đến ...\n\n【Cấu trúc】\nA + から + B + まで\n\n【Cách dùng】\nNêu khoảng thời gian hoặc không gian",
     "reading": "～から～まで",
@@ -437,6 +460,7 @@
     ]
   },
   {
+    "note_id": "88a0f2e5-9b24-4393-bf12-48537ac81e91",
     "front": "～ね",
     "back": "Nhỉ; nhé\n\n【Cấu trúc】\nCâu + ね\n\n【Cách dùng】\nMong người nghe đồng tình hoặc xác nhận",
     "reading": "～ね",
@@ -461,6 +485,7 @@
     ]
   },
   {
+    "note_id": "5a972539-6e6d-40b4-96a8-092310a35644",
     "front": "～よ",
     "back": "Đấy; nhé\n\n【Cấu trúc】\nCâu + よ\n\n【Cách dùng】\nĐưa thông tin hoặc nhấn mạnh điều người nghe có thể chưa biết",
     "reading": "～よ",
@@ -480,6 +505,7 @@
     ]
   },
   {
+    "note_id": "479670cd-3cc6-4239-afbd-fbed4712f369",
     "front": "これ／それ／あれ",
     "back": "Cái này / cái đó / cái kia\n\n【Cấu trúc】\nこれ・それ・あれ + は ...\n\n【Cách dùng】\nĐại từ chỉ vật theo khoảng cách với người nói/nghe",
     "reading": "これ／それ／あれ",
@@ -499,6 +525,7 @@
     ]
   },
   {
+    "note_id": "b0f21ddd-c9fc-485a-a0b5-c5fd01a75b97",
     "front": "この／その／あの + N",
     "back": "N này / đó / kia\n\n【Cấu trúc】\nこの・その・あの + N\n\n【Cách dùng】\nTừ chỉ định đứng trước danh từ, không đứng một mình",
     "reading": "この／その／あの + N",
@@ -518,6 +545,7 @@
     ]
   },
   {
+    "note_id": "4b0f0db9-1d28-4da3-8636-f6636cf9ae81",
     "front": "ここ／そこ／あそこ",
     "back": "Chỗ này / đó / kia\n\n【Cấu trúc】\nここ・そこ・あそこ + は ...\n\n【Cách dùng】\nChỉ địa điểm theo vị trí của người nói và người nghe",
     "reading": "ここ／そこ／あそこ",
@@ -537,6 +565,7 @@
     ]
   },
   {
+    "note_id": "67c5dbf6-bdbd-43ed-9495-cf4a30abef0c",
     "front": "こちら／そちら／あちら",
     "back": "Phía này / đó / kia (lịch sự)\n\n【Cấu trúc】\nこちら・そちら・あちら\n\n【Cách dùng】\nChỉ phương hướng, nơi chốn hoặc người theo lối lịch sự",
     "reading": "こちら／そちら／あちら",
@@ -556,6 +585,7 @@
     ]
   },
   {
+    "note_id": "68e71ee6-bb40-4cae-9f8c-8b671680609d",
     "front": "どれ／どの + N",
     "back": "Cái nào / N nào\n\n【Cấu trúc】\nどれ hoặc どの + N\n\n【Cách dùng】\nHỏi lựa chọn; どの luôn đi với danh từ",
     "reading": "どれ／どの + N",
@@ -575,6 +605,7 @@
     ]
   },
   {
+    "note_id": "b6dd5d33-d6f7-4bed-8086-b41a0bba9ba5",
     "front": "だれ／どなた",
     "back": "Ai (thông thường / lịch sự)\n\n【Cấu trúc】\nだれ・どなた + ですか\n\n【Cách dùng】\nHỏi về một người",
     "reading": "だれ／どなた",
@@ -594,6 +625,7 @@
     ]
   },
   {
+    "note_id": "e61af564-79da-4334-adcd-fa9bb2b23be7",
     "front": "何（なに／なん）",
     "back": "Cái gì; bao nhiêu (tùy cách đọc)\n\n【Cấu trúc】\n何 + danh từ/trợ từ\n\n【Cách dùng】\n何 thường đọc なん trước です, giờ, phút, số đếm; đọc なに ở nhiều trường hợp khác",
     "reading": "何（なに／なん）",
@@ -613,6 +645,7 @@
     ]
   },
   {
+    "note_id": "13b04443-b24d-4832-a863-41333d484bb5",
     "front": "どこ／どちら",
     "back": "Ở đâu (thường / lịch sự)\n\n【Cấu trúc】\nどこ・どちら + ですか\n\n【Cách dùng】\nHỏi địa điểm; どちら còn hỏi phương hướng/lựa chọn",
     "reading": "どこ／どちら",
@@ -632,6 +665,7 @@
     ]
   },
   {
+    "note_id": "0e3d95ef-371b-458d-934f-358a28f638f2",
     "front": "いくら",
     "back": "Bao nhiêu tiền\n\n【Cấu trúc】\nN + は + いくらですか\n\n【Cách dùng】\nHỏi giá cả",
     "reading": "いくら",
@@ -651,6 +685,7 @@
     ]
   },
   {
+    "note_id": "e78dbbe2-9dd7-4817-af58-165764760c80",
     "front": "いくつ／何歳",
     "back": "Bao nhiêu cái / bao nhiêu tuổi\n\n【Cấu trúc】\nいくつ・何歳 + ですか\n\n【Cách dùng】\nいくつ có thể hỏi số lượng hoặc tuổi; 何歳 hỏi tuổi",
     "reading": "いくつ／何歳",
@@ -670,6 +705,7 @@
     ]
   },
   {
+    "note_id": "f50b7b61-451e-4dc4-a995-880aabeaacfa",
     "front": "N があります",
     "back": "Có N (vật vô tri, thực vật)\n\n【Cấu trúc】\nN + が + あります\n\n【Cách dùng】\nDiễn tả sự tồn tại của đồ vật, cây cối, sự việc",
     "reading": "N があります",
@@ -689,6 +725,7 @@
     ]
   },
   {
+    "note_id": "bbf6491d-5670-451a-a400-83369177563f",
     "front": "N がいます",
     "back": "Có N (người, động vật)\n\n【Cấu trúc】\nN + が + います\n\n【Cách dùng】\nDiễn tả sự tồn tại của sinh vật có khả năng chuyển động",
     "reading": "N がいます",
@@ -708,6 +745,7 @@
     ]
   },
   {
+    "note_id": "ea2549d6-e543-4a97-9986-e05c84e21dc6",
     "front": "場所 に N があります／います",
     "back": "Ở địa điểm có N\n\n【Cấu trúc】\nĐịa điểm + に + N + が + ある/いる\n\n【Cách dùng】\nMẫu câu tồn tại, chủ ngữ là thứ tồn tại",
     "reading": "場所 に N があります／います",
@@ -727,6 +765,7 @@
     ]
   },
   {
+    "note_id": "5e700818-0f76-41f6-90f3-870a6e5f050f",
     "front": "N は 場所 に あります／います",
     "back": "N ở địa điểm\n\n【Cấu trúc】\nN + は + địa điểm + に + ある/いる\n\n【Cách dùng】\nHỏi hoặc trình bày vị trí của vật/người đã biết",
     "reading": "N は 場所 に あります／います",
@@ -746,6 +785,7 @@
     ]
   },
   {
+    "note_id": "08b6c78d-cba0-402d-b580-65e218adbb43",
     "front": "N の 上／下／中／前／後ろ",
     "back": "Trên/dưới/trong/trước/sau N\n\n【Cấu trúc】\nN + の + từ chỉ vị trí + に/で\n\n【Cách dùng】\nXác định vị trí theo một vật hay địa điểm làm mốc",
     "reading": "N の 上／下／中／前／後ろ",
@@ -765,6 +805,7 @@
     ]
   },
   {
+    "note_id": "5034721b-283b-4359-95b1-c23114533cfc",
     "front": "N が好きです",
     "back": "Thích N\n\n【Cấu trúc】\nN + が + 好きです\n\n【Cách dùng】\nDiễn tả sở thích; 好き là tính từ đuôi な",
     "reading": "N が好きです",
@@ -784,6 +825,7 @@
     ]
   },
   {
+    "note_id": "f5193142-62ea-417b-b4d9-68d4af64e885",
     "front": "N が嫌いです",
     "back": "Ghét/không thích N\n\n【Cấu trúc】\nN + が + 嫌いです\n\n【Cách dùng】\nDiễn tả sự không thích",
     "reading": "N が嫌いです",
@@ -803,6 +845,7 @@
     ]
   },
   {
+    "note_id": "84084546-7635-414a-92bb-70f050eb184a",
     "front": "N が上手／下手です",
     "back": "Giỏi/kém N\n\n【Cấu trúc】\nN + が + 上手/下手 + です\n\n【Cách dùng】\nNêu mức độ thành thạo kỹ năng",
     "reading": "N が上手／下手です",
@@ -822,6 +865,7 @@
     ]
   },
   {
+    "note_id": "e9abce62-69f3-43b9-a7f4-1ee1a168df24",
     "front": "N が分かります",
     "back": "Hiểu N\n\n【Cấu trúc】\nN + が + 分かります\n\n【Cách dùng】\nNêu điều hiểu hay không hiểu",
     "reading": "N が分かります",
@@ -841,6 +885,7 @@
     ]
   },
   {
+    "note_id": "da73458b-91c0-4f63-863e-58ebf681c509",
     "front": "N が欲しいです",
     "back": "Muốn có N\n\n【Cấu trúc】\nN + が + 欲しいです\n\n【Cách dùng】\nDiễn tả mong muốn sở hữu một thứ",
     "reading": "N が欲しいです",
@@ -860,6 +905,7 @@
     ]
   },
   {
+    "note_id": "0557c6df-a08d-405e-9b3b-1d97398156da",
     "front": "N は 形容詞 です",
     "back": "N thì ... (miêu tả)\n\n【Cấu trúc】\nN + は + tính từ + です\n\n【Cách dùng】\nĐưa nhận xét về đặc tính",
     "reading": "N は 形容詞 です",
@@ -879,6 +925,7 @@
     ]
   },
   {
+    "note_id": "7247b3c0-668c-419d-9832-98c51ea2eccd",
     "front": "い形容詞 + です",
     "back": "Tính từ đuôi い (lịch sự)\n\n【Cấu trúc】\nAい + です\n\n【Cách dùng】\nMiêu tả tính chất, giữ nguyên い trước です",
     "reading": "い形容詞 + です",
@@ -898,6 +945,7 @@
     ]
   },
   {
+    "note_id": "1ee29628-5718-4361-b9e1-b04b4a851fad",
     "front": "い形容詞 + くないです",
     "back": "Không ... (tính từ い)\n\n【Cấu trúc】\nAい bỏ い + くないです\n\n【Cách dùng】\nPhủ định tính từ đuôi い",
     "reading": "い形容詞 + くないです",
@@ -917,6 +965,7 @@
     ]
   },
   {
+    "note_id": "2f731365-dd3b-46eb-8c79-061f7a4ad52c",
     "front": "い形容詞 + かったです",
     "back": "Đã ... (tính từ い)\n\n【Cấu trúc】\nAい bỏ い + かったです\n\n【Cách dùng】\nQuá khứ khẳng định của tính từ đuôi い",
     "reading": "い形容詞 + かったです",
@@ -936,6 +985,7 @@
     ]
   },
   {
+    "note_id": "c9f08313-f93b-4ef8-8377-3e36f83eec65",
     "front": "い形容詞 + くなかったです",
     "back": "Đã không ... (tính từ い)\n\n【Cấu trúc】\nAい bỏ い + くなかったです\n\n【Cách dùng】\nQuá khứ phủ định của tính từ đuôi い",
     "reading": "い形容詞 + くなかったです",
@@ -955,6 +1005,7 @@
     ]
   },
   {
+    "note_id": "fa17e5cf-6a7e-4655-be3d-bef37a72f7bd",
     "front": "な形容詞 + です",
     "back": "Tính từ đuôi な (lịch sự)\n\n【Cấu trúc】\nAな bỏ な + です\n\n【Cách dùng】\nMiêu tả đặc tính; trước danh từ cần な",
     "reading": "な形容詞 + です",
@@ -974,6 +1025,7 @@
     ]
   },
   {
+    "note_id": "90bf3c63-0fac-4fa9-8543-abd780192c53",
     "front": "な形容詞 + じゃありません",
     "back": "Không ... (tính từ な)\n\n【Cấu trúc】\nAな bỏ な + じゃありません\n\n【Cách dùng】\nPhủ định của tính từ đuôi な",
     "reading": "な形容詞 + じゃありません",
@@ -993,6 +1045,7 @@
     ]
   },
   {
+    "note_id": "c395847a-493a-43a0-b80a-add56f1e6eb6",
     "front": "な形容詞 + でした",
     "back": "Đã ... (tính từ な)\n\n【Cấu trúc】\nAな bỏ な + でした\n\n【Cách dùng】\nQuá khứ khẳng định tính từ な",
     "reading": "な形容詞 + でした",
@@ -1012,6 +1065,7 @@
     ]
   },
   {
+    "note_id": "f531b1e3-32cc-4658-a7bc-af81f2dac4ae",
     "front": "な形容詞 + じゃありませんでした",
     "back": "Đã không ... (tính từ な)\n\n【Cấu trúc】\nAな bỏ な + じゃありませんでした\n\n【Cách dùng】\nQuá khứ phủ định tính từ な",
     "reading": "な形容詞 + じゃありませんでした",
@@ -1031,6 +1085,7 @@
     ]
   },
   {
+    "note_id": "46ae2652-91d9-4e79-9983-8c1aba420732",
     "front": "い形容詞 + N",
     "back": "N có tính chất ...\n\n【Cấu trúc】\nAい + N\n\n【Cách dùng】\nBổ nghĩa trực tiếp danh từ bằng tính từ đuôi い",
     "reading": "い形容詞 + N",
@@ -1050,6 +1105,7 @@
     ]
   },
   {
+    "note_id": "4258c141-c612-4a9e-a02f-1432324ac72f",
     "front": "な形容詞 + な + N",
     "back": "N có tính chất ...\n\n【Cấu trúc】\nAな + な + N\n\n【Cách dùng】\nBổ nghĩa danh từ bằng tính từ đuôi な",
     "reading": "な形容詞 + な + N",
@@ -1069,6 +1125,7 @@
     ]
   },
   {
+    "note_id": "9d252712-2dc1-4e65-9df2-578e96b6b84b",
     "front": "い形容詞 + くて",
     "back": "... và ... (tính từ い)\n\n【Cấu trúc】\nAい bỏ い + くて + vế sau\n\n【Cách dùng】\nNối tính chất có quan hệ đồng hướng hoặc liệt kê",
     "reading": "い形容詞 + くて",
@@ -1088,6 +1145,7 @@
     ]
   },
   {
+    "note_id": "d15f3b2b-dd3d-4da4-ab1b-7aed8dd1fc26",
     "front": "な形容詞／N + で",
     "back": "... và ... (tính từ な/danh từ)\n\n【Cấu trúc】\nAな/N + で + vế sau\n\n【Cách dùng】\nNối đặc tính hay tình trạng bằng danh từ hoặc tính từ な",
     "reading": "な形容詞／N + で",
@@ -1107,6 +1165,7 @@
     ]
   },
   {
+    "note_id": "d2499744-b0f8-4a92-a43d-187f86e1b59d",
     "front": "とても／あまり",
     "back": "Rất / không ... lắm\n\n【Cấu trúc】\nとても + khẳng định; あまり + phủ định\n\n【Cách dùng】\nĐối lập cường độ miêu tả",
     "reading": "とても／あまり",
@@ -1126,6 +1185,7 @@
     ]
   },
   {
+    "note_id": "bfa081be-c636-4da5-81ba-4bf8933ee539",
     "front": "ぜんぜん + phủ định",
     "back": "Hoàn toàn không ...\n\n【Cấu trúc】\nぜんぜん + dạng phủ định\n\n【Cách dùng】\nPhủ định hoàn toàn; cách dùng cơ bản",
     "reading": "ぜんぜん + phủ định",
@@ -1145,6 +1205,7 @@
     ]
   },
   {
+    "note_id": "ad4b3a9f-2d47-4268-a66d-19edc6041bf3",
     "front": "V ます",
     "back": "Làm ... (lịch sự)\n\n【Cấu trúc】\nV dạng ます\n\n【Cách dùng】\nThể hiện hành động hiện tại hoặc tương lai theo ngữ cảnh",
     "reading": "V ます",
@@ -1164,6 +1225,7 @@
     ]
   },
   {
+    "note_id": "e9054c6f-4870-4798-aac6-78c375be5f4d",
     "front": "V ません",
     "back": "Không làm ... (lịch sự)\n\n【Cấu trúc】\nV dạng ません\n\n【Cách dùng】\nPhủ định hiện tại/tương lai của động từ",
     "reading": "V ません",
@@ -1183,6 +1245,7 @@
     ]
   },
   {
+    "note_id": "3069b16f-f33d-4c4e-9b72-05d0e0538eda",
     "front": "V ました",
     "back": "Đã làm ... (lịch sự)\n\n【Cấu trúc】\nV dạng ました\n\n【Cách dùng】\nKhẳng định quá khứ của động từ",
     "reading": "V ました",
@@ -1202,6 +1265,7 @@
     ]
   },
   {
+    "note_id": "3a9cdfa4-5fc3-45f5-83c5-4b7996ba9eed",
     "front": "V ませんでした",
     "back": "Đã không làm ...\n\n【Cấu trúc】\nV dạng ませんでした\n\n【Cách dùng】\nPhủ định quá khứ của động từ",
     "reading": "V ませんでした",
@@ -1221,6 +1285,7 @@
     ]
   },
   {
+    "note_id": "df224fb0-ea9c-4383-8a7d-0615ceb66353",
     "front": "V ませんか",
     "back": "Cùng ... nhé? (lời mời)\n\n【Cấu trúc】\nV bỏ ます + ませんか\n\n【Cách dùng】\nRủ hoặc mời người khác cùng làm gì",
     "reading": "V ませんか",
@@ -1245,6 +1310,7 @@
     ]
   },
   {
+    "note_id": "ff4225ae-5617-4d58-9459-738b891798df",
     "front": "V ましょう",
     "back": "Chúng ta hãy ...\n\n【Cấu trúc】\nV bỏ ます + ましょう\n\n【Cách dùng】\nĐề nghị cùng thực hiện hành động",
     "reading": "V ましょう",
@@ -1264,6 +1330,7 @@
     ]
   },
   {
+    "note_id": "410f9978-9f8b-48d4-81bf-4d9aef29303a",
     "front": "V ましょうか",
     "back": "Để tôi ... nhé?\n\n【Cấu trúc】\nV bỏ ます + ましょうか\n\n【Cách dùng】\nĐề nghị làm gì giúp ai hoặc đề nghị cùng làm",
     "reading": "V ましょうか",
@@ -1283,6 +1350,7 @@
     ]
   },
   {
+    "note_id": "411237fb-eaea-475c-94cd-35a27e409b2d",
     "front": "V てください",
     "back": "Hãy / làm ơn ...\n\n【Cấu trúc】\nV thể て + ください\n\n【Cách dùng】\nYêu cầu hoặc đề nghị lịch sự",
     "reading": "V てください",
@@ -1302,6 +1370,7 @@
     ]
   },
   {
+    "note_id": "f235fd04-e155-4e43-a7a2-0cb5048b08ef",
     "front": "V ないでください",
     "back": "Xin đừng ...\n\n【Cấu trúc】\nV thể ない + でください\n\n【Cách dùng】\nYêu cầu không thực hiện hành động",
     "reading": "V ないでください",
@@ -1321,6 +1390,7 @@
     ]
   },
   {
+    "note_id": "7ed2ab9d-a799-45bc-a7f3-37caff4dab5b",
     "front": "V てもいいです",
     "back": "Được phép ...\n\n【Cấu trúc】\nV thể て + もいいです\n\n【Cách dùng】\nNói về sự cho phép",
     "reading": "V てもいいです",
@@ -1340,6 +1410,7 @@
     ]
   },
   {
+    "note_id": "c4717a41-728a-40c1-901b-00403444d757",
     "front": "V てもいいですか",
     "back": "Tôi có thể ... không?\n\n【Cấu trúc】\nV thể て + もいいですか\n\n【Cách dùng】\nXin phép thực hiện hành động",
     "reading": "V てもいいですか",
@@ -1359,6 +1430,7 @@
     ]
   },
   {
+    "note_id": "bce4a3e7-78e8-4ac6-a560-b2ad91143271",
     "front": "V てはいけません",
     "back": "Không được ...\n\n【Cấu trúc】\nV thể て + はいけません\n\n【Cách dùng】\nDiễn tả điều cấm hoặc quy định",
     "reading": "V てはいけません",
@@ -1378,6 +1450,7 @@
     ]
   },
   {
+    "note_id": "9e07bc73-154f-4228-b12f-07c20260477e",
     "front": "V ています (đang làm)",
     "back": "Đang ...\n\n【Cấu trúc】\nV thể て + います\n\n【Cách dùng】\nDiễn tả hành động đang diễn ra",
     "reading": "V ています (đang làm)",
@@ -1397,6 +1470,7 @@
     ]
   },
   {
+    "note_id": "6fd7343a-add2-47aa-bf33-17d0957a5283",
     "front": "V ています (trạng thái)",
     "back": "Đang ở trạng thái ...\n\n【Cấu trúc】\nV thể て + います\n\n【Cách dùng】\nDiễn tả trạng thái còn duy trì sau hành động",
     "reading": "V ています (trạng thái)",
@@ -1416,6 +1490,7 @@
     ]
   },
   {
+    "note_id": "6b94bce1-9ae3-42ad-9372-a2c1f75419f3",
     "front": "V てから",
     "back": "Sau khi ... thì ...\n\n【Cấu trúc】\nV thể て + から + V\n\n【Cách dùng】\nHành động sau xảy ra khi hành động trước hoàn tất",
     "reading": "V てから",
@@ -1435,6 +1510,7 @@
     ]
   },
   {
+    "note_id": "cb7697ce-a846-4081-8501-a52a6d5023cc",
     "front": "V に行きます／来ます",
     "back": "Đi/đến để làm ...\n\n【Cấu trúc】\nV bỏ ます + に + 行く/来る\n\n【Cách dùng】\nDiễn tả mục đích đi hoặc đến",
     "reading": "V に行きます／来ます",
@@ -1454,6 +1530,7 @@
     ]
   },
   {
+    "note_id": "5182b0cf-e2cb-4bd7-85d8-c83ac3b5983e",
     "front": "N に行きます (mục đích)",
     "back": "Đi để ... (danh từ hành động)\n\n【Cấu trúc】\nN chỉ hoạt động + に + 行きます\n\n【Cách dùng】\nDùng danh từ hoạt động làm mục đích di chuyển",
     "reading": "N に行きます (mục đích)",
@@ -1473,6 +1550,7 @@
     ]
   },
   {
+    "note_id": "38ef2e39-88fd-47e4-b903-5be332781eeb",
     "front": "V たいです",
     "back": "Muốn làm ...\n\n【Cấu trúc】\nV bỏ ます + たいです\n\n【Cách dùng】\nDiễn tả mong muốn làm gì (thường là người nói)",
     "reading": "V たいです",
@@ -1492,6 +1570,7 @@
     ]
   },
   {
+    "note_id": "eeb86f59-74ea-4dfc-861c-f0f3a770e279",
     "front": "V たくないです",
     "back": "Không muốn làm ...\n\n【Cấu trúc】\nV bỏ ます + たくないです\n\n【Cách dùng】\nPhủ định mong muốn",
     "reading": "V たくないです",
@@ -1511,6 +1590,7 @@
     ]
   },
   {
+    "note_id": "95c47717-f04e-4509-b473-109e399fd587",
     "front": "V たかったです",
     "back": "Đã muốn làm ...\n\n【Cấu trúc】\nV bỏ ます + たかったです\n\n【Cách dùng】\nQuá khứ của mong muốn",
     "reading": "V たかったです",
@@ -1530,6 +1610,7 @@
     ]
   },
   {
+    "note_id": "62e78124-c194-4e78-b6a2-be454e14b53c",
     "front": "N をください",
     "back": "Cho tôi N\n\n【Cấu trúc】\nN + を + ください\n\n【Cách dùng】\nYêu cầu, mua hoặc xin một vật",
     "reading": "N をください",
@@ -1549,6 +1630,7 @@
     ]
   },
   {
+    "note_id": "494e7c82-bb05-448e-b716-70ac0202b740",
     "front": "N にします",
     "back": "Tôi chọn N\n\n【Cấu trúc】\nN + にします\n\n【Cách dùng】\nQuyết định lựa chọn món ăn, phương án, đồ vật",
     "reading": "N にします",
@@ -1568,6 +1650,7 @@
     ]
   },
   {
+    "note_id": "a44ae3fd-aa7e-46ed-8c53-23abaa0ca7c1",
     "front": "N になります",
     "back": "Trở thành N\n\n【Cấu trúc】\nN + に + なります\n\n【Cách dùng】\nDiễn tả sự thay đổi thành danh từ",
     "reading": "N になります",
@@ -1587,6 +1670,7 @@
     ]
   },
   {
+    "note_id": "654ed875-5630-487a-b5d5-de2e90b85693",
     "front": "い形容詞 + くなります",
     "back": "Trở nên ...\n\n【Cấu trúc】\nAい bỏ い + くなります\n\n【Cách dùng】\nThay đổi trạng thái của tính từ い",
     "reading": "い形容詞 + くなります",
@@ -1606,6 +1690,7 @@
     ]
   },
   {
+    "note_id": "f7014bba-0861-46b9-86aa-53908a729185",
     "front": "な形容詞 + になります",
     "back": "Trở nên ...\n\n【Cấu trúc】\nAな bỏ な + になります\n\n【Cách dùng】\nThay đổi trạng thái của tính từ な",
     "reading": "な形容詞 + になります",
@@ -1625,6 +1710,7 @@
     ]
   },
   {
+    "note_id": "1272eba4-47d4-4804-bf27-e2ed8f3f946c",
     "front": "N より N のほうが ...",
     "back": "N này ... hơn N kia\n\n【Cấu trúc】\nN1 + より + N2 + のほうが + A\n\n【Cách dùng】\nSo sánh hai đối tượng, N2 có mức độ cao hơn",
     "reading": "N より N のほうが ...",
@@ -1644,6 +1730,7 @@
     ]
   },
   {
+    "note_id": "f814866c-6ee8-4edf-a8aa-659fc580ef24",
     "front": "N と N と どちらが ...",
     "back": "N nào ... hơn?\n\n【Cấu trúc】\nN1 + と + N2 + と + どちらが + A\n\n【Cách dùng】\nHỏi so sánh giữa hai đối tượng",
     "reading": "N と N と どちらが ...",
@@ -1663,6 +1750,7 @@
     ]
   },
   {
+    "note_id": "5e3f36aa-f627-4742-bab5-f7b343105ce8",
     "front": "N で いちばん ...",
     "back": "... nhất trong N\n\n【Cấu trúc】\nNhóm + で + いちばん + A\n\n【Cách dùng】\nDiễn tả cấp cao nhất trong phạm vi",
     "reading": "N で いちばん ...",
@@ -1682,6 +1770,7 @@
     ]
   },
   {
+    "note_id": "4aa9305f-06e7-4421-8236-53f725f079a6",
     "front": "N のほうが ...",
     "back": "N ... hơn\n\n【Cấu trúc】\nN + のほうが + A\n\n【Cách dùng】\nNêu bên có tính chất nổi trội trong so sánh đã có ngữ cảnh",
     "reading": "N のほうが ...",
@@ -1701,6 +1790,7 @@
     ]
   },
   {
+    "note_id": "f29469d5-8517-4724-9e6a-b4a399cefc13",
     "front": "～くらい／ぐらい",
     "back": "Khoảng ...; cỡ ...\n\n【Cấu trúc】\nSố lượng/độ dài thời gian + くらい/ぐらい\n\n【Cách dùng】\nƯớc lượng con số hoặc khoảng thời gian",
     "reading": "～くらい／ぐらい",
@@ -1720,6 +1810,7 @@
     ]
   },
   {
+    "note_id": "c14bb9b1-a8f9-47c6-8759-ef44f87bf386",
     "front": "～ごろ",
     "back": "Vào khoảng ... (thời điểm)\n\n【Cấu trúc】\nGiờ/thời điểm + ごろ\n\n【Cách dùng】\nƯớc lượng thời điểm cụ thể, khác くらい chỉ khoảng lượng",
     "reading": "～ごろ",
@@ -1739,6 +1830,7 @@
     ]
   },
   {
+    "note_id": "56963e37-2796-49f8-8c9b-f2b6c8499bfc",
     "front": "～だけ",
     "back": "Chỉ ...\n\n【Cấu trúc】\nN/đơn vị + だけ\n\n【Cách dùng】\nGiới hạn số lượng hoặc đối tượng",
     "reading": "～だけ",
@@ -1758,6 +1850,7 @@
     ]
   },
   {
+    "note_id": "026d53b0-7aa2-413b-981e-f6482a311be1",
     "front": "～から (lý do)",
     "back": "Vì ... nên ...\n\n【Cấu trúc】\nMệnh đề lý do + から + kết quả\n\n【Cách dùng】\nGiải thích nguyên nhân; khác から chỉ mốc bắt đầu",
     "reading": "～から (lý do)",
@@ -1777,6 +1870,7 @@
     ]
   },
   {
+    "note_id": "b6368792-b1e5-4247-b0cb-ed84587a1be2",
     "front": "～が (nhưng)",
     "back": "Nhưng ...\n\n【Cấu trúc】\nMệnh đề + が + mệnh đề\n\n【Cách dùng】\nNối hai mệnh đề tương phản (lịch sự hơn けど)",
     "reading": "～が (nhưng)",
@@ -1796,6 +1890,7 @@
     ]
   },
   {
+    "note_id": "8c3b4bb3-d548-4c3d-80a4-e2bba2ba3ed2",
     "front": "～そして",
     "back": "Và; rồi\n\n【Cấu trúc】\nCâu 1。 そして、câu 2。\n\n【Cách dùng】\nNối hai thông tin hay chuỗi sự việc",
     "reading": "～そして",
@@ -1815,6 +1910,7 @@
     ]
   },
   {
+    "note_id": "006f8056-5cda-487a-a348-3bf4b40d6959",
     "front": "～それから",
     "back": "Sau đó\n\n【Cấu trúc】\nCâu 1。 それから、câu 2。\n\n【Cách dùng】\nNối các hành động theo trình tự thời gian",
     "reading": "～それから",
@@ -1834,6 +1930,7 @@
     ]
   },
   {
+    "note_id": "b19d1f55-3547-4ea6-ae25-2f85752824d9",
     "front": "～でも",
     "back": "Nhưng; tuy nhiên\n\n【Cấu trúc】\nCâu 1。 でも、câu 2。\n\n【Cách dùng】\nNối ý trái ngược trong hội thoại thân mật",
     "reading": "～でも",
@@ -1853,6 +1950,7 @@
     ]
   },
   {
+    "note_id": "bbfc881f-5787-4f1b-87d5-01c95055427a",
     "front": "～でしょう (phỏng đoán)",
     "back": "Có lẽ; chắc là ...\n\n【Cấu trúc】\nCâu thông thường + でしょう\n\n【Cách dùng】\nPhỏng đoán một cách tương đối mềm; danh từ và tính từ な bỏ だ",
     "reading": "～でしょう (phỏng đoán)",
@@ -1872,6 +1970,7 @@
     ]
   },
   {
+    "note_id": "760e517e-6fd0-46b1-906e-69ff8ca8e02e",
     "front": "V る 前に",
     "back": "Trước khi làm ...\n\n【Cấu trúc】\nV thể từ điển + 前に\n\n【Cách dùng】\nHành động ở vế sau xảy ra trước hành động ở vế trước",
     "reading": "V る 前に",
@@ -1891,6 +1990,7 @@
     ]
   },
   {
+    "note_id": "8b3330dd-a960-40fd-98e5-a1b72e9cc7c0",
     "front": "N の前に",
     "back": "Trước N\n\n【Cấu trúc】\nN + の + 前に\n\n【Cách dùng】\nDiễn tả mốc thời gian hoặc vị trí trước danh từ",
     "reading": "N の前に",
@@ -1910,6 +2010,7 @@
     ]
   },
   {
+    "note_id": "2f19f0bf-47ad-40bf-aa9b-848e0e094018",
     "front": "N／期間 に ～回",
     "back": "... lần trong khoảng ...\n\n【Cấu trúc】\nKhoảng thời gian + に + số lần + 回 + V\n\n【Cách dùng】\nDiễn tả tần suất",
     "reading": "N／期間 に ～回",
@@ -1929,6 +2030,7 @@
     ]
   },
   {
+    "note_id": "96c16fdd-2e7e-46b6-becd-778c131a7286",
     "front": "まだ V ていません",
     "back": "Vẫn chưa làm ...\n\n【Cấu trúc】\nまだ + V thể て + いません\n\n【Cách dùng】\nHành động chưa hoàn thành tại thời điểm nói",
     "reading": "まだ V ていません",
@@ -1948,6 +2050,7 @@
     ]
   },
   {
+    "note_id": "99c88a22-0a64-4e84-9599-825b85ad7526",
     "front": "もう V ました",
     "back": "Đã làm ... rồi\n\n【Cấu trúc】\nもう + V thể ました\n\n【Cách dùng】\nNhấn mạnh hành động đã hoàn thành",
     "reading": "もう V ました",
@@ -1967,6 +2070,7 @@
     ]
   },
   {
+    "note_id": "fd33321c-d91a-45b4-9293-31011b768d5e",
     "front": "N ができます",
     "back": "Có thể làm N; N được hoàn thành\n\n【Cấu trúc】\nN chỉ kỹ năng/hoạt động + が + できます\n\n【Cách dùng】\nNêu năng lực, khả năng (ví dụ スキーができる)",
     "reading": "N ができます",
@@ -1986,6 +2090,7 @@
     ]
   },
   {
+    "note_id": "e2a6ac5d-de7d-418b-a2e9-070c49550195",
     "front": "V 辞書形 + ことができます",
     "back": "Có thể làm ...\n\n【Cấu trúc】\nV thể từ điển + ことができます\n\n【Cách dùng】\nNói về khả năng thực hiện hành động",
     "reading": "V 辞書形 + ことができます",
@@ -2005,6 +2110,7 @@
     ]
   },
   {
+    "note_id": "f816f39d-4b19-4e87-b5fb-fcae7fa359ba",
     "front": "V 辞書形 + こと",
     "back": "Việc làm ... (danh từ hóa)\n\n【Cấu trúc】\nV thể từ điển + こと\n\n【Cách dùng】\nBiến mệnh đề động từ thành danh từ để sử dụng trong câu",
     "reading": "V 辞書形 + こと",
@@ -2024,6 +2130,7 @@
     ]
   },
   {
+    "note_id": "67488fa8-3a16-4e63-9c66-3f018a5199b0",
     "front": "N も N も",
     "back": "Cả ... lẫn ...\n\n【Cấu trúc】\nN1 + も + N2 + も\n\n【Cách dùng】\nKhẳng định nhiều đối tượng cùng thuộc một nhóm",
     "reading": "N も N も",

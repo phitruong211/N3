@@ -1,5 +1,6 @@
 [
   {
+    "note_id": "e7ad5a6b-5c92-46f6-92e0-ad529e093ead",
     "tu_chinh": "任",
     "han_viet": "Nhiệm",
     "tu_lien_quan": [
@@ -9,6 +10,7 @@
     ]
   },
   {
+    "note_id": "e305e069-7256-439e-8d97-977e8e3f3955",
     "tu_chinh": "信",
     "han_viet": "Tín",
     "tu_lien_quan": [
@@ -19,6 +21,7 @@
     ]
   },
   {
+    "note_id": "473cb958-ea0a-4f11-950b-35f24da60996",
     "tu_chinh": "伸",
     "han_viet": "Thân",
     "tu_lien_quan": [
@@ -27,6 +30,7 @@
     ]
   },
   {
+    "note_id": "f680964c-7341-4099-adc3-ebb8933ee4e9",
     "tu_chinh": "代",
     "han_viet": "Đại",
     "tu_lien_quan": [
@@ -38,6 +42,7 @@
     ]
   },
   {
+    "note_id": "865e0144-c195-48ce-adea-420cbfdab006",
     "tu_chinh": "付",
     "han_viet": "Phó",
     "tu_lien_quan": [
@@ -47,6 +52,7 @@
     ]
   },
   {
+    "note_id": "14138a7d-a587-4fce-9c4f-8a922e45cf40",
     "tu_chinh": "件",
     "han_viet": "Kiện",
     "tu_lien_quan": [
@@ -56,6 +62,7 @@
     ]
   },
   {
+    "note_id": "e9c0f943-58fc-4609-a20b-c41e1fc6f154",
     "tu_chinh": "位",
     "han_viet": "Vị",
     "tu_lien_quan": [
@@ -65,6 +72,7 @@
     ]
   },
   {
+    "note_id": "075c9202-95fc-4184-9673-cadc96f02cc5",
     "tu_chinh": "倍",
     "han_viet": "Bội",
     "tu_lien_quan": [
@@ -74,6 +82,7 @@
     ]
   },
   {
+    "note_id": "c0bd3200-0aee-45e3-86de-2c6718768aa5",
     "tu_chinh": "保",
     "han_viet": "Bảo",
     "tu_lien_quan": [
@@ -83,6 +92,7 @@
     ]
   },
   {
+    "note_id": "0cd28148-3c60-417f-810f-a9d3a53ef82e",
     "tu_chinh": "個",
     "han_viet": "Cá",
     "tu_lien_quan": [
@@ -92,6 +102,7 @@
     ]
   },
   {
+    "note_id": "a75cc442-c707-4016-bbd4-600292ebec13",
     "tu_chinh": "仲",
     "han_viet": "Trọng",
     "tu_lien_quan": [
@@ -101,6 +112,7 @@
     ]
   },
   {
+    "note_id": "ed2be47c-261c-47c3-8ae6-cec2012204d8",
     "tu_chinh": "借",
     "han_viet": "Tá",
     "tu_lien_quan": [
@@ -109,6 +121,7 @@
     ]
   },
   {
+    "note_id": "25a929e4-1b6b-42f9-9606-f97deed3ad36",
     "tu_chinh": "供",
     "han_viet": "Cung",
     "tu_lien_quan": [
@@ -118,6 +131,7 @@
     ]
   },
   {
+    "note_id": "abce2fe9-0236-490d-ad76-0ec50615bfdc",
     "tu_chinh": "他",
     "han_viet": "Tha",
     "tu_lien_quan": [
@@ -126,6 +140,7 @@
     ]
   },
   {
+    "note_id": "70fbad32-cb2d-4972-9a28-cd85124e752e",
     "tu_chinh": "候",
     "han_viet": "Hậu",
     "tu_lien_quan": [
@@ -135,6 +150,7 @@
     ]
   },
   {
+    "note_id": "9e1c0919-3e38-4823-bf32-0db1db8585d0",
     "tu_chinh": "価",
     "han_viet": "Giá",
     "tu_lien_quan": [
@@ -143,6 +159,7 @@
     ]
   },
   {
+    "note_id": "39c29d78-8260-40f6-a9a9-05b7e1f5a928",
     "tu_chinh": "便",
     "han_viet": "Tiện",
     "tu_lien_quan": [
@@ -152,6 +169,7 @@
     ]
   },
   {
+    "note_id": "bb4439c0-e518-4ecf-81af-ec237c21cc56",
     "tu_chinh": "停",
     "han_viet": "Đình",
     "tu_lien_quan": [
@@ -161,6 +179,7 @@
     ]
   },
   {
+    "note_id": "8c6baea1-72f4-4ce5-a249-e3e0748ff186",
     "tu_chinh": "係",
     "han_viet": "Hệ",
     "tu_lien_quan": [
@@ -170,6 +189,7 @@
     ]
   },
   {
+    "note_id": "ee938e8e-8d6a-498e-b4bc-7de7acd37e04",
     "tu_chinh": "優",
     "han_viet": "Ưu",
     "tu_lien_quan": [
@@ -181,6 +201,7 @@
     ]
   },
   {
+    "note_id": "b7efdad4-3b81-45a1-8bd5-6e2edb902723",
     "tu_chinh": "悲",
     "han_viet": "Bi",
     "tu_lien_quan": [
@@ -190,6 +211,7 @@
     ]
   },
   {
+    "note_id": "81030723-b5a6-4de1-8edb-4c598d5f1625",
     "tu_chinh": "性",
     "han_viet": "Tính",
     "tu_lien_quan": [
@@ -200,6 +222,7 @@
     ]
   },
   {
+    "note_id": "5496957c-d0fc-4649-b51a-30efcc52c2ab",
     "tu_chinh": "悩",
     "han_viet": "Não",
     "tu_lien_quan": [
@@ -209,6 +232,7 @@
     ]
   },
   {
+    "note_id": "4ea75ec7-88b2-4c5c-a389-d6e9a451e2e0",
     "tu_chinh": "情",
     "han_viet": "Tình",
     "tu_lien_quan": [
@@ -218,6 +242,7 @@
     ]
   },
   {
+    "note_id": "36ef2ec1-581d-4d91-9a57-9e995560a8e1",
     "tu_chinh": "精",
     "han_viet": "Tinh",
     "tu_lien_quan": [
@@ -226,6 +251,7 @@
     ]
   },
   {
+    "note_id": "cab1df3f-b243-4081-89d8-fdf6467e31b6",
     "tu_chinh": "支",
     "han_viet": "Chi",
     "tu_lien_quan": [
@@ -235,6 +261,7 @@
     ]
   },
   {
+    "note_id": "1553dbcd-cb84-4f36-8f31-94580828bd57",
     "tu_chinh": "技",
     "han_viet": "Kỹ",
     "tu_lien_quan": [
@@ -243,6 +270,7 @@
     ]
   },
   {
+    "note_id": "4e23fa14-7de0-4ec3-981a-5d2db79ebf2c",
     "tu_chinh": "席",
     "han_viet": "Tịch",
     "tu_lien_quan": [
@@ -252,6 +280,7 @@
     ]
   },
   {
+    "note_id": "30e454d2-b3cb-4d4b-9d29-4e15ed1f4bd3",
     "tu_chinh": "度",
     "han_viet": "Độ",
     "tu_lien_quan": [
@@ -261,6 +290,7 @@
     ]
   },
   {
+    "note_id": "abbc6232-89b9-4163-b1bf-4401202644f8",
     "tu_chinh": "渡",
     "han_viet": "Độ",
     "tu_lien_quan": [
@@ -269,6 +299,7 @@
     ]
   },
   {
+    "note_id": "2c0b0fff-8090-42d8-be36-27a07eb10a3f",
     "tu_chinh": "幸",
     "han_viet": "Hạnh",
     "tu_lien_quan": [
@@ -278,6 +309,7 @@
     ]
   },
   {
+    "note_id": "fd151ed4-976a-4515-959a-b4aa05063ffe",
     "tu_chinh": "報",
     "han_viet": "Báo",
     "tu_lien_quan": [
@@ -287,6 +319,7 @@
     ]
   },
   {
+    "note_id": "79613759-b707-465c-8860-d73d64ad0db9",
     "tu_chinh": "洗",
     "han_viet": "Tẩy",
     "tu_lien_quan": [
@@ -296,6 +329,7 @@
     ]
   },
   {
+    "note_id": "c03ecd36-6fd4-4382-94ab-08e433c57816",
     "tu_chinh": "汚",
     "han_viet": "Ô",
     "tu_lien_quan": [
@@ -305,6 +339,7 @@
     ]
   },
   {
+    "note_id": "7f129c3f-2ca3-482f-9b60-1409fb6f35d3",
     "tu_chinh": "活",
     "han_viet": "Hoạt",
     "tu_lien_quan": [
@@ -313,6 +348,7 @@
     ]
   },
   {
+    "note_id": "16cb4507-410d-4fa5-8e9e-0b55332613ce",
     "tu_chinh": "液",
     "han_viet": "Dịch",
     "tu_lien_quan": [
@@ -322,6 +358,7 @@
     ]
   },
   {
+    "note_id": "b0b8f0e9-8197-4f18-924a-1ab235b0e846",
     "tu_chinh": "流",
     "han_viet": "Lưu",
     "tu_lien_quan": [
@@ -331,6 +368,7 @@
     ]
   },
   {
+    "note_id": "a90cff55-462c-4744-aee8-86970c3ad4c3",
     "tu_chinh": "涙",
     "han_viet": "Lệ",
     "tu_lien_quan": [
@@ -338,6 +376,7 @@
     ]
   },
   {
+    "note_id": "a10d4971-1d69-446f-bc47-ce96f162bfb4",
     "tu_chinh": "深",
     "han_viet": "Thâm",
     "tu_lien_quan": [
@@ -347,6 +386,7 @@
     ]
   },
   {
+    "note_id": "9d3d1905-3040-4b08-82ef-5ef6737fdc93",
     "tu_chinh": "消",
     "han_viet": "Tiêu",
     "tu_lien_quan": [
@@ -356,6 +396,7 @@
     ]
   },
   {
+    "note_id": "2b2aea05-0975-4146-95ad-e1a3935eff2f",
     "tu_chinh": "法",
     "han_viet": "Pháp",
     "tu_lien_quan": [
@@ -365,6 +406,7 @@
     ]
   },
   {
+    "note_id": "2372804b-0737-435c-96bc-1acefaa29d33",
     "tu_chinh": "決",
     "han_viet": "Quyết",
     "tu_lien_quan": [
@@ -374,6 +416,7 @@
     ]
   },
   {
+    "note_id": "a24006ce-63c6-40dd-b218-df3bc4d1437f",
     "tu_chinh": "浅",
     "han_viet": "Thiển",
     "tu_lien_quan": [
@@ -382,6 +425,7 @@
     ]
   },
   {
+    "note_id": "6f2abf61-3146-441b-81b3-8d5af8f95329",
     "tu_chinh": "満",
     "han_viet": "Mãn",
     "tu_lien_quan": [
@@ -391,6 +435,7 @@
     ]
   },
   {
+    "note_id": "45764684-63ae-4d05-aae3-95409ce6c7b8",
     "tu_chinh": "演",
     "han_viet": "Diễn",
     "tu_lien_quan": [
@@ -400,6 +445,7 @@
     ]
   },
   {
+    "note_id": "1025662e-e5c8-417a-ad3d-a59c802337fe",
     "tu_chinh": "混",
     "han_viet": "Hỗn",
     "tu_lien_quan": [
@@ -409,6 +455,7 @@
     ]
   },
   {
+    "note_id": "2e09f226-7089-4de3-b795-4b933fbe7e34",
     "tu_chinh": "湿",
     "han_viet": "Thấp",
     "tu_lien_quan": [
@@ -418,6 +465,7 @@
     ]
   },
   {
+    "note_id": "736e5b77-e956-4296-ba5b-de5616903ccb",
     "tu_chinh": "温",
     "han_viet": "Ôn",
     "tu_lien_quan": [
@@ -427,6 +475,7 @@
     ]
   },
   {
+    "note_id": "069dc4c2-bd71-4e9e-b4ab-fa8a56932d80",
     "tu_chinh": "塩",
     "han_viet": "Diêm",
     "tu_lien_quan": [
@@ -436,6 +485,7 @@
     ]
   },
   {
+    "note_id": "10a74ce5-7d1c-46cf-8cac-21d40aa950dc",
     "tu_chinh": "賃",
     "han_viet": "Nhâm",
     "tu_lien_quan": [
@@ -444,6 +494,7 @@
     ]
   },
   {
+    "note_id": "635873bf-b5aa-403d-8062-beab9c4dc5cf",
     "tu_chinh": "貸",
     "han_viet": "Thải",
     "tu_lien_quan": [
@@ -453,6 +504,7 @@
     ]
   },
   {
+    "note_id": "899d558b-8b4d-4e8f-afe8-01bd91eb1017",
     "tu_chinh": "貧",
     "han_viet": "Bần",
     "tu_lien_quan": [
@@ -461,6 +513,7 @@
     ]
   },
   {
+    "note_id": "ff4bee8a-a7cb-4774-ac6c-245a28314e01",
     "tu_chinh": "費",
     "han_viet": "Phí",
     "tu_lien_quan": [
@@ -471,6 +524,7 @@
     ]
   },
   {
+    "note_id": "680833a8-0946-436e-9db0-5badb6c76534",
     "tu_chinh": "賛",
     "han_viet": "Tán",
     "tu_lien_quan": [
@@ -478,6 +532,7 @@
     ]
   },
   {
+    "note_id": "9d386cf2-9dcb-4e2a-8acf-a42d26f49e41",
     "tu_chinh": "財",
     "han_viet": "Tài",
     "tu_lien_quan": [
@@ -487,6 +542,7 @@
     ]
   },
   {
+    "note_id": "eeae0a27-0334-4c90-82b2-39b6b708065a",
     "tu_chinh": "貯",
     "han_viet": "Trữ",
     "tu_lien_quan": [
@@ -496,6 +552,7 @@
     ]
   },
   {
+    "note_id": "31364c46-756f-40f9-af45-001914a702fd",
     "tu_chinh": "敗",
     "han_viet": "Bại",
     "tu_lien_quan": [
@@ -505,6 +562,7 @@
     ]
   },
   {
+    "note_id": "961a30f1-e808-4a35-a2c7-1c4ee0c8905d",
     "tu_chinh": "績",
     "han_viet": "Tích",
     "tu_lien_quan": [
@@ -513,6 +571,7 @@
     ]
   },
   {
+    "note_id": "798f695b-3109-425f-aa63-a332965f1816",
     "tu_chinh": "積",
     "han_viet": "Tích",
     "tu_lien_quan": [
@@ -522,6 +581,7 @@
     ]
   },
   {
+    "note_id": "d2b11cf8-6879-4e29-837c-0bf9fb58957d",
     "tu_chinh": "改",
     "han_viet": "Cải",
     "tu_lien_quan": [
@@ -530,6 +590,7 @@
     ]
   },
   {
+    "note_id": "8e27e981-58fd-4d53-b0fa-a67181b8c009",
     "tu_chinh": "配",
     "han_viet": "Phối",
     "tu_lien_quan": [
@@ -540,6 +601,7 @@
     ]
   },
   {
+    "note_id": "1a96735b-f4e6-4e66-96e4-0d3304b13084",
     "tu_chinh": "記",
     "han_viet": "Ký",
     "tu_lien_quan": [
@@ -549,6 +611,7 @@
     ]
   },
   {
+    "note_id": "ea48f4b9-a078-4512-9856-7055236ee2ee",
     "tu_chinh": "仮",
     "han_viet": "Giả",
     "tu_lien_quan": [
@@ -558,6 +621,7 @@
     ]
   },
   {
+    "note_id": "1803ba51-0528-4054-b37f-4cce79b52e5a",
     "tu_chinh": "坂",
     "han_viet": "Phản",
     "tu_lien_quan": [
@@ -566,6 +630,7 @@
     ]
   },
   {
+    "note_id": "dd95aa12-c550-4b9e-a72f-a91dc250480d",
     "tu_chinh": "返",
     "han_viet": "Phản",
     "tu_lien_quan": [
@@ -576,6 +641,7 @@
     ]
   },
   {
+    "note_id": "96a80799-ee75-44de-b418-ad01ad3cb3a5",
     "tu_chinh": "札",
     "han_viet": "Trát",
     "tu_lien_quan": [
@@ -584,6 +650,7 @@
     ]
   },
   {
+    "note_id": "61725fa0-eb5b-49e0-bd91-29fd7f42da94",
     "tu_chinh": "材",
     "han_viet": "Tài",
     "tu_lien_quan": [
@@ -593,6 +660,7 @@
     ]
   },
   {
+    "note_id": "a781a1f1-7936-43d8-bb8e-7fc0ada3e495",
     "tu_chinh": "枚",
     "han_viet": "Mai",
     "tu_lien_quan": [
@@ -601,6 +669,7 @@
     ]
   },
   {
+    "note_id": "d40099c1-900a-46f6-86b4-6921abb6aebe",
     "tu_chinh": "機",
     "han_viet": "Cơ",
     "tu_lien_quan": [
@@ -610,6 +679,7 @@
     ]
   },
   {
+    "note_id": "a44915f2-78bd-4fd2-9964-7f597e87aaa8",
     "tu_chinh": "横",
     "han_viet": "Hoành",
     "tu_lien_quan": [
@@ -618,6 +688,7 @@
     ]
   },
   {
+    "note_id": "7661f4ff-ec8f-4fa2-ab1f-1bcec6cdee26",
     "tu_chinh": "根",
     "han_viet": "Căn",
     "tu_lien_quan": [
@@ -627,6 +698,7 @@
     ]
   },
   {
+    "note_id": "a0b61648-de37-4b8b-bad8-42a33b402114",
     "tu_chinh": "相",
     "han_viet": "Tương/Tướng",
     "tu_lien_quan": [
@@ -637,6 +709,7 @@
     ]
   },
   {
+    "note_id": "3f6c186d-582a-475e-bcdc-99741e3894ce",
     "tu_chinh": "想",
     "han_viet": "Tưởng",
     "tu_lien_quan": [
@@ -646,6 +719,7 @@
     ]
   },
   {
+    "note_id": "48273dbd-624e-48c1-acd3-c3b6e4c6369f",
     "tu_chinh": "科",
     "han_viet": "Khoa",
     "tu_lien_quan": [
@@ -655,6 +729,7 @@
     ]
   },
   {
+    "note_id": "c33dc543-4d29-4f0a-9f85-aff1f9982d24",
     "tu_chinh": "秒",
     "han_viet": "Miểu",
     "tu_lien_quan": [
@@ -663,6 +738,7 @@
     ]
   },
   {
+    "note_id": "635dc447-8ed0-4ddf-a009-20c1cfacd8e7",
     "tu_chinh": "移",
     "han_viet": "Di",
     "tu_lien_quan": [
@@ -672,6 +748,7 @@
     ]
   },
   {
+    "note_id": "661fc5f2-3ba5-4e65-9c6e-28356e7e00c5",
     "tu_chinh": "税",
     "han_viet": "Thuế",
     "tu_lien_quan": [
@@ -680,6 +757,7 @@
     ]
   },
   {
+    "note_id": "92dd1045-8e6c-4a36-bc70-0eb926b5c7c2",
     "tu_chinh": "協",
     "han_viet": "Hiệp",
     "tu_lien_quan": [
@@ -687,6 +765,7 @@
     ]
   },
   {
+    "note_id": "e28c3e51-ab9a-4402-a74b-a4d621bdf0e7",
     "tu_chinh": "加",
     "han_viet": "Gia",
     "tu_lien_quan": [
@@ -696,6 +775,7 @@
     ]
   },
   {
+    "note_id": "73a593c4-86cb-4472-992e-d37900d8a5e2",
     "tu_chinh": "助",
     "han_viet": "Trợ",
     "tu_lien_quan": [
@@ -705,6 +785,7 @@
     ]
   },
   {
+    "note_id": "b3edea0d-9651-4ce7-b3d5-574ce2cb262e",
     "tu_chinh": "効",
     "han_viet": "Hiệu",
     "tu_lien_quan": [
@@ -714,6 +795,7 @@
     ]
   },
   {
+    "note_id": "8537defd-05c3-4c6e-b16f-5c0c27fc9eaa",
     "tu_chinh": "勤",
     "han_viet": "Cần",
     "tu_lien_quan": [
@@ -723,6 +805,7 @@
     ]
   },
   {
+    "note_id": "900cfbb4-595a-4ade-b3d4-6b49f01c91ed",
     "tu_chinh": "紹",
     "han_viet": "Thiệu",
     "tu_lien_quan": [
@@ -731,6 +814,7 @@
     ]
   },
   {
+    "note_id": "0aa1ae96-4b2e-400d-9830-bda5e1186a03",
     "tu_chinh": "給",
     "han_viet": "Cấp",
     "tu_lien_quan": [
@@ -740,6 +824,7 @@
     ]
   },
   {
+    "note_id": "0f527e2b-d3f0-422d-b56e-6702023eaaf3",
     "tu_chinh": "結",
     "han_viet": "Kết",
     "tu_lien_quan": [
@@ -749,6 +834,7 @@
     ]
   },
   {
+    "note_id": "d65520fe-8b15-4adc-9d1d-0de2817ddaf3",
     "tu_chinh": "約",
     "han_viet": "Ước",
     "tu_lien_quan": [
@@ -758,6 +844,7 @@
     ]
   },
   {
+    "note_id": "137b81bc-da4f-43dc-b42a-cb67d9866aa6",
     "tu_chinh": "続",
     "han_viet": "Tục",
     "tu_lien_quan": [
@@ -767,6 +854,7 @@
     ]
   },
   {
+    "note_id": "0e4cbe7b-7e05-4f0e-bf53-d8d65add2914",
     "tu_chinh": "経",
     "han_viet": "Kinh",
     "tu_lien_quan": [
@@ -776,6 +864,7 @@
     ]
   },
   {
+    "note_id": "ca14d745-c241-4af8-b161-5bbc4cae7d71",
     "tu_chinh": "泉",
     "han_viet": "Tuyền",
     "tu_lien_quan": [
@@ -784,6 +873,7 @@
     ]
   },
   {
+    "note_id": "c23964b3-5f1c-4e79-a8c5-583860d79885",
     "tu_chinh": "線",
     "han_viet": "Tuyến",
     "tu_lien_quan": [
@@ -793,6 +883,7 @@
     ]
   },
   {
+    "note_id": "c1142712-3694-4b69-b951-a6054e81324c",
     "tu_chinh": "込",
     "han_viet": "Vào",
     "tu_lien_quan": [
@@ -802,6 +893,7 @@
     ]
   },
   {
+    "note_id": "67380089-5279-424a-a017-fbad982e5707",
     "tu_chinh": "遊",
     "han_viet": "Du",
     "tu_lien_quan": [
@@ -810,6 +902,7 @@
     ]
   },
   {
+    "note_id": "a7366104-fd4f-4a74-a18d-f886e833c90b",
     "tu_chinh": "過",
     "han_viet": "Quá",
     "tu_lien_quan": [
@@ -819,6 +912,7 @@
     ]
   },
   {
+    "note_id": "ec4c160a-a678-451f-bb55-600e0c2b45b4",
     "tu_chinh": "逆",
     "han_viet": "Nghịch",
     "tu_lien_quan": [
@@ -828,6 +922,7 @@
     ]
   },
   {
+    "note_id": "569ecbcb-4760-4fad-8ed4-09662ebe60d0",
     "tu_chinh": "迎",
     "han_viet": "Nghênh",
     "tu_lien_quan": [
@@ -836,6 +931,7 @@
     ]
   },
   {
+    "note_id": "3083c7ef-f5d3-4a98-a9c0-58f5caddf4f0",
     "tu_chinh": "退",
     "han_viet": "Thoái",
     "tu_lien_quan": [
@@ -845,6 +941,7 @@
     ]
   },
   {
+    "note_id": "23b780cb-88c8-4e1c-81d3-07d41f4f3143",
     "tu_chinh": "選",
     "han_viet": "Tuyển",
     "tu_lien_quan": [
@@ -854,6 +951,7 @@
     ]
   },
   {
+    "note_id": "5d67cf45-876f-458c-a99c-4c364658ccb2",
     "tu_chinh": "緑",
     "han_viet": "Lục",
     "tu_lien_quan": [
@@ -862,6 +960,7 @@
     ]
   },
   {
+    "note_id": "e33cb432-d8f5-4354-a193-7086e5f1c4b4",
     "tu_chinh": "録",
     "han_viet": "Lục",
     "tu_lien_quan": [
@@ -871,6 +970,7 @@
     ]
   },
   {
+    "note_id": "9c7d7d4b-47cd-4f5f-8e60-636a64966a8f",
     "tu_chinh": "訓",
     "han_viet": "Huấn",
     "tu_lien_quan": [
@@ -879,6 +979,7 @@
     ]
   },
   {
+    "note_id": "eb55e93f-70b0-4346-81f6-0197f861eb42",
     "tu_chinh": "調",
     "han_viet": "Điều",
     "tu_lien_quan": [
@@ -888,6 +989,7 @@
     ]
   },
   {
+    "note_id": "83cd0e02-5c78-42ba-b255-8f06d294d6f9",
     "tu_chinh": "談",
     "han_viet": "Đàm",
     "tu_lien_quan": [
@@ -896,6 +998,7 @@
     ]
   },
   {
+    "note_id": "6bfdc6e0-d683-4b2f-9c6e-23a5fb936af0",
     "tu_chinh": "訳",
     "han_viet": "Dịch",
     "tu_lien_quan": [
@@ -905,6 +1008,7 @@
     ]
   },
   {
+    "note_id": "70d46749-07a5-45f6-87cd-b2cbe8f059ac",
     "tu_chinh": "誌",
     "han_viet": "Chí",
     "tu_lien_quan": [
@@ -913,6 +1017,7 @@
     ]
   },
   {
+    "note_id": "d1be32c4-7e67-4b8e-91fc-57a07ce08a04",
     "tu_chinh": "議",
     "han_viet": "Nghị",
     "tu_lien_quan": [
@@ -922,6 +1027,7 @@
     ]
   },
   {
+    "note_id": "132d860c-78c5-474a-963c-91e011257a80",
     "tu_chinh": "確",
     "han_viet": "Xác",
     "tu_lien_quan": [
@@ -931,6 +1037,7 @@
     ]
   },
   {
+    "note_id": "eae1bc0a-091e-4f3b-bbd5-98798e4754ff",
     "tu_chinh": "進",
     "han_viet": "Tiến",
     "tu_lien_quan": [
@@ -940,6 +1047,7 @@
     ]
   },
   {
+    "note_id": "c6b6ee86-a411-4a37-8c08-75301a2feab4",
     "tu_chinh": "集",
     "han_viet": "Tập",
     "tu_lien_quan": [
@@ -948,6 +1056,7 @@
     ]
   },
   {
+    "note_id": "e51ad8fe-dcd7-40e1-b91f-97c9ca2985b4",
     "tu_chinh": "雑",
     "han_viet": "Tạp",
     "tu_lien_quan": [
@@ -957,6 +1066,7 @@
     ]
   },
   {
+    "note_id": "be64efe5-e87e-4484-9166-aed364f483fb",
     "tu_chinh": "完",
     "han_viet": "Hoàn",
     "tu_lien_quan": [
@@ -965,6 +1075,7 @@
     ]
   },
   {
+    "note_id": "87bc71e2-2906-4745-8778-60e0ff9a0aa9",
     "tu_chinh": "空",
     "han_viet": "Không",
     "tu_lien_quan": [
@@ -973,6 +1084,7 @@
     ]
   },
   {
+    "note_id": "aab9e709-2453-48a8-96e2-9b31b1260db9",
     "tu_chinh": "守",
     "han_viet": "Thủ",
     "tu_lien_quan": [
@@ -982,6 +1094,7 @@
     ]
   },
   {
+    "note_id": "ca870ec9-ab35-406d-8026-c5720fc4f4e2",
     "tu_chinh": "実",
     "han_viet": "Thực",
     "tu_lien_quan": [
@@ -991,6 +1104,7 @@
     ]
   },
   {
+    "note_id": "b35a7b82-4926-45d8-8dad-bb6866c64c8c",
     "tu_chinh": "突",
     "han_viet": "Đột",
     "tu_lien_quan": [
@@ -999,6 +1113,7 @@
     ]
   },
   {
+    "note_id": "3992b50f-1deb-43d9-9b60-c5d8262ad249",
     "tu_chinh": "宅",
     "han_viet": "Trạch",
     "tu_lien_quan": [
@@ -1008,6 +1123,7 @@
     ]
   },
   {
+    "note_id": "6a4f8410-0953-4f2e-95af-e959809c4ff0",
     "tu_chinh": "定",
     "han_viet": "Định",
     "tu_lien_quan": [
@@ -1017,6 +1133,7 @@
     ]
   },
   {
+    "note_id": "9c9f31a0-f2ac-4556-823c-1bc87a886190",
     "tu_chinh": "官",
     "han_viet": "Quan",
     "tu_lien_quan": [
@@ -1024,6 +1141,7 @@
     ]
   },
   {
+    "note_id": "f4c72dc1-5858-437a-b147-da385382e7c7",
     "tu_chinh": "追",
     "han_viet": "Truy",
     "tu_lien_quan": [
@@ -1032,6 +1150,7 @@
     ]
   },
   {
+    "note_id": "4281cc1d-72ad-433d-9d47-014aae8a12ba",
     "tu_chinh": "師",
     "han_viet": "Sư",
     "tu_lien_quan": [
@@ -1040,6 +1159,7 @@
     ]
   },
   {
+    "note_id": "7262fafc-d4a5-493c-9f61-1a498f70cd58",
     "tu_chinh": "容",
     "han_viet": "Dung",
     "tu_lien_quan": [
@@ -1049,6 +1169,7 @@
     ]
   },
   {
+    "note_id": "6d35a993-830f-4fb4-9bd7-dbb3cb896ec8",
     "tu_chinh": "浴",
     "han_viet": "Dục",
     "tu_lien_quan": [
@@ -1057,6 +1178,7 @@
     ]
   },
   {
+    "note_id": "b35c1032-72d5-4eef-a17f-91c2a3735d1d",
     "tu_chinh": "老",
     "han_viet": "Lão",
     "tu_lien_quan": [
@@ -1065,6 +1187,7 @@
     ]
   },
   {
+    "note_id": "058a4b11-09a6-41cf-8299-fdba63ee06e3",
     "tu_chinh": "注",
     "han_viet": "Chú",
     "tu_lien_quan": [
@@ -1074,6 +1197,7 @@
     ]
   },
   {
+    "note_id": "28927b82-ff9d-4b54-8f51-b5a61c11389e",
     "tu_chinh": "柱",
     "han_viet": "Trụ",
     "tu_lien_quan": [
@@ -1082,6 +1206,7 @@
     ]
   },
   {
+    "note_id": "742d9fd3-50dc-4003-bf6b-5ac80513e369",
     "tu_chinh": "駐",
     "han_viet": "Trú",
     "tu_lien_quan": [
@@ -1091,6 +1216,7 @@
     ]
   },
   {
+    "note_id": "401f6ab7-d410-4762-a4bb-ff446db4a427",
     "tu_chinh": "規",
     "han_viet": "Quy",
     "tu_lien_quan": [
@@ -1099,6 +1225,7 @@
     ]
   },
   {
+    "note_id": "e731110b-a51e-4bf7-a8fd-0a83e7a3393b",
     "tu_chinh": "現",
     "han_viet": "Hiện",
     "tu_lien_quan": [
@@ -1108,6 +1235,7 @@
     ]
   },
   {
+    "note_id": "12a99f5a-113a-44a9-85af-691536bcf8aa",
     "tu_chinh": "覚",
     "han_viet": "Giác",
     "tu_lien_quan": [
@@ -1117,6 +1245,7 @@
     ]
   },
   {
+    "note_id": "eec31b8f-fb75-4012-90d4-83ef6c03dc24",
     "tu_chinh": "観",
     "han_viet": "Quan",
     "tu_lien_quan": [
@@ -1128,6 +1257,7 @@
     ]
   },
   {
+    "note_id": "a550d280-9ad4-4d31-bfab-391b92aa9985",
     "tu_chinh": "簡",
     "han_viet": "Giản",
     "tu_lien_quan": [
@@ -1136,6 +1266,7 @@
     ]
   },
   {
+    "note_id": "4cbc4379-65f3-4861-9970-409c50de2fb9",
     "tu_chinh": "関",
     "han_viet": "Quan",
     "tu_lien_quan": [
@@ -1145,6 +1276,7 @@
     ]
   },
   {
+    "note_id": "dfbf3f7f-02ae-471f-ac4e-3a79af0dbf23",
     "tu_chinh": "眠",
     "han_viet": "Miên",
     "tu_lien_quan": [
@@ -1154,6 +1286,7 @@
     ]
   },
   {
+    "note_id": "eca2f6ab-80db-46ee-8419-0776a55ed3ee",
     "tu_chinh": "暖",
     "han_viet": "Noãn",
     "tu_lien_quan": [
@@ -1163,6 +1296,7 @@
     ]
   },
   {
+    "note_id": "23898740-1ad3-4dae-8f0b-5537f6803ecf",
     "tu_chinh": "複",
     "han_viet": "Phức",
     "tu_lien_quan": [
@@ -1171,6 +1305,7 @@
     ]
   },
   {
+    "note_id": "27b2cc23-87e3-4c61-8380-d194691d8d4e",
     "tu_chinh": "復",
     "han_viet": "Phục",
     "tu_lien_quan": [
@@ -1180,6 +1315,7 @@
     ]
   },
   {
+    "note_id": "1d54d11e-be28-40c3-8081-ee8dfbbe5f55",
     "tu_chinh": "腹",
     "han_viet": "Phúc",
     "tu_lien_quan": [
@@ -1190,6 +1326,7 @@
     ]
   },
   {
+    "note_id": "ce045e5c-419a-4752-8b59-bb30244aae46",
     "tu_chinh": "布",
     "han_viet": "Bố",
     "tu_lien_quan": [
@@ -1199,6 +1336,7 @@
     ]
   },
   {
+    "note_id": "3e76a288-8c5b-409c-b815-a3eb78e1ff58",
     "tu_chinh": "怖",
     "han_viet": "Bố",
     "tu_lien_quan": [
@@ -1207,6 +1345,7 @@
     ]
   },
   {
+    "note_id": "12bdc8c7-ab95-40d1-985d-7bd9538c8272",
     "tu_chinh": "希",
     "han_viet": "Hy",
     "tu_lien_quan": [
@@ -1214,6 +1353,7 @@
     ]
   },
   {
+    "note_id": "07c61208-b8d8-4d4a-836e-6866a8d9ec64",
     "tu_chinh": "厚",
     "han_viet": "Hậu",
     "tu_lien_quan": [
@@ -1222,6 +1362,7 @@
     ]
   },
   {
+    "note_id": "05f8b384-d7db-4552-9e9a-0b65fd1bef6b",
     "tu_chinh": "原",
     "han_viet": "Nguyên",
     "tu_lien_quan": [
@@ -1231,6 +1372,7 @@
     ]
   },
   {
+    "note_id": "2399bcbb-f837-42ac-a2c9-ef16e0921c61",
     "tu_chinh": "圧",
     "han_viet": "Áp",
     "tu_lien_quan": [
@@ -1240,6 +1382,7 @@
     ]
   },
   {
+    "note_id": "45f3a5d6-8929-4739-ba52-b17a329ece5b",
     "tu_chinh": "成",
     "han_viet": "Thành",
     "tu_lien_quan": [
@@ -1249,6 +1392,7 @@
     ]
   },
   {
+    "note_id": "401f7a59-909b-447d-9c26-47bd64939e6e",
     "tu_chinh": "感",
     "han_viet": "Cảm",
     "tu_lien_quan": [
@@ -1258,6 +1402,7 @@
     ]
   },
   {
+    "note_id": "23230b4f-1642-478b-ab8a-e8566a4f81b4",
     "tu_chinh": "減",
     "han_viet": "Giảm",
     "tu_lien_quan": [
@@ -1266,6 +1411,7 @@
     ]
   },
   {
+    "note_id": "534aa937-d7f5-4df0-9b29-c3bcafbddbfb",
     "tu_chinh": "越",
     "han_viet": "Việt",
     "tu_lien_quan": [
@@ -1275,6 +1421,7 @@
     ]
   },
   {
+    "note_id": "c7b9de6f-4a3c-476b-acc6-936eb46d1ab0",
     "tu_chinh": "超",
     "han_viet": "Siêu",
     "tu_lien_quan": [
@@ -1284,6 +1431,7 @@
     ]
   },
   {
+    "note_id": "ebf92211-6b87-4507-bade-a65b74e6c4af",
     "tu_chinh": "向",
     "han_viet": "Hướng",
     "tu_lien_quan": [
@@ -1293,6 +1441,7 @@
     ]
   },
   {
+    "note_id": "16edbf2c-e281-4b23-a6d4-95af56a5d83b",
     "tu_chinh": "困",
     "han_viet": "Khốn",
     "tu_lien_quan": [
@@ -1301,6 +1450,7 @@
     ]
   },
   {
+    "note_id": "6491dd8d-6869-46ad-8922-15d2a9770cba",
     "tu_chinh": "因",
     "han_viet": "Nhân",
     "tu_lien_quan": [
@@ -1308,6 +1458,7 @@
     ]
   },
   {
+    "note_id": "b0797f20-7607-4ec5-ac42-5cf9c13718e3",
     "tu_chinh": "回",
     "han_viet": "Hồi",
     "tu_lien_quan": [
@@ -1317,6 +1468,7 @@
     ]
   },
   {
+    "note_id": "0d57ab1d-46e9-4508-a4f9-19be37c1467f",
     "tu_chinh": "固",
     "han_viet": "Cố",
     "tu_lien_quan": [
@@ -1327,6 +1479,7 @@
     ]
   },
   {
+    "note_id": "76c19bad-c6f8-46aa-b355-fcb51ad83be9",
     "tu_chinh": "図",
     "han_viet": "Đồ",
     "tu_lien_quan": [
@@ -1336,6 +1489,7 @@
     ]
   },
   {
+    "note_id": "9c2c3723-b58c-43bc-9442-0d7c08103a8f",
     "tu_chinh": "歯",
     "han_viet": "Xỉ",
     "tu_lien_quan": [
@@ -1345,6 +1499,7 @@
     ]
   },
   {
+    "note_id": "7ea3b425-dbee-41da-8dce-844cb5e6de6d",
     "tu_chinh": "座",
     "han_viet": "Tọa",
     "tu_lien_quan": [
@@ -1354,6 +1509,7 @@
     ]
   },
   {
+    "note_id": "c9e4c37e-0278-42c4-bb0e-958f0c25b9be",
     "tu_chinh": "庭",
     "han_viet": "Đình",
     "tu_lien_quan": [
@@ -1363,6 +1519,7 @@
     ]
   },
   {
+    "note_id": "7174cea9-41a8-410b-9f73-b42e33128b30",
     "tu_chinh": "痛",
     "han_viet": "Thống",
     "tu_lien_quan": [
@@ -1372,6 +1529,7 @@
     ]
   },
   {
+    "note_id": "41991a4e-1736-4a18-a973-ac63b9f328f1",
     "tu_chinh": "疲",
     "han_viet": "Bì",
     "tu_lien_quan": [
@@ -1380,6 +1538,7 @@
     ]
   },
   {
+    "note_id": "6936283f-ce72-47cc-aef4-684312635be5",
     "tu_chinh": "彼",
     "han_viet": "Bỉ",
     "tu_lien_quan": [
@@ -1389,6 +1548,7 @@
     ]
   },
   {
+    "note_id": "81afed46-49b4-4d63-9d72-6d922d7a07ee",
     "tu_chinh": "波",
     "han_viet": "Ba",
     "tu_lien_quan": [
@@ -1399,6 +1559,7 @@
     ]
   },
   {
+    "note_id": "abd8975a-1749-4e14-9534-3dcb555ea76f",
     "tu_chinh": "皿",
     "han_viet": "Mãnh",
     "tu_lien_quan": [
@@ -1408,6 +1569,7 @@
     ]
   },
   {
+    "note_id": "61f21edc-3fab-46d5-8afb-988bf80755bc",
     "tu_chinh": "血",
     "han_viet": "Huyết",
     "tu_lien_quan": [
@@ -1418,6 +1580,7 @@
     ]
   },
   {
+    "note_id": "301ed296-0791-4ee9-a70f-fd9ca54398b9",
     "tu_chinh": "冊",
     "han_viet": "Sách",
     "tu_lien_quan": [
@@ -1426,6 +1589,7 @@
     ]
   },
   {
+    "note_id": "9d944e8e-683a-41ff-8f41-438a7b6e3fd3",
     "tu_chinh": "曲",
     "han_viet": "Khúc",
     "tu_lien_quan": [
@@ -1435,6 +1599,7 @@
     ]
   },
   {
+    "note_id": "327eb995-9a96-426e-a07b-88fe4a835f3b",
     "tu_chinh": "燃",
     "han_viet": "Nhiên",
     "tu_lien_quan": [
@@ -1444,6 +1609,7 @@
     ]
   },
   {
+    "note_id": "ab789311-6e05-420e-8283-732149e03754",
     "tu_chinh": "熱",
     "han_viet": "Nhiệt",
     "tu_lien_quan": [
@@ -1453,6 +1619,7 @@
     ]
   },
   {
+    "note_id": "804c3637-4ba1-441e-b931-efa5aa87f9f6",
     "tu_chinh": "焼",
     "han_viet": "Thiêu",
     "tu_lien_quan": [
@@ -1463,6 +1630,7 @@
     ]
   },
   {
+    "note_id": "99ed9f52-0aea-487b-a7d2-fb737558987d",
     "tu_chinh": "干",
     "han_viet": "Can",
     "tu_lien_quan": [
@@ -1470,6 +1638,7 @@
     ]
   },
   {
+    "note_id": "56848053-340f-4b88-bc77-8c1602384299",
     "tu_chinh": "刊",
     "han_viet": "San",
     "tu_lien_quan": [
@@ -1478,6 +1647,7 @@
     ]
   },
   {
+    "note_id": "77ccd5e2-1d92-41ea-af37-ae45c4fa80ae",
     "tu_chinh": "汗",
     "han_viet": "Hãn",
     "tu_lien_quan": [
@@ -1485,6 +1655,7 @@
     ]
   },
   {
+    "note_id": "06dd9d9e-e897-4c28-aca8-e6422e2f324a",
     "tu_chinh": "平",
     "han_viet": "Bình",
     "tu_lien_quan": [
@@ -1494,6 +1665,7 @@
     ]
   },
   {
+    "note_id": "3518207e-4830-4544-a8b9-ce9116306c10",
     "tu_chinh": "欠",
     "han_viet": "Khiếm",
     "tu_lien_quan": [
@@ -1503,6 +1675,7 @@
     ]
   },
   {
+    "note_id": "6133fccd-f46d-4b83-8569-7bbf12288de8",
     "tu_chinh": "次",
     "han_viet": "Thứ",
     "tu_lien_quan": [
@@ -1512,6 +1685,7 @@
     ]
   },
   {
+    "note_id": "d70374a0-da08-4d8b-acc1-dcb579683cfd",
     "tu_chinh": "姿",
     "han_viet": "Tư",
     "tu_lien_quan": [
@@ -1520,6 +1694,7 @@
     ]
   },
   {
+    "note_id": "62a13e53-a3d3-4905-89cb-9ecb0f5baa4a",
     "tu_chinh": "欲",
     "han_viet": "Dục",
     "tu_lien_quan": [
@@ -1529,6 +1704,7 @@
     ]
   },
   {
+    "note_id": "7e6464c3-1616-4702-bae9-c22921797463",
     "tu_chinh": "吹",
     "han_viet": "Xuy",
     "tu_lien_quan": [
@@ -1536,6 +1712,7 @@
     ]
   },
   {
+    "note_id": "68e25980-4e7b-44d5-943c-efed97f9814a",
     "tu_chinh": "頭",
     "han_viet": "Đầu",
     "tu_lien_quan": [
@@ -1545,6 +1722,7 @@
     ]
   },
   {
+    "note_id": "ac4feeee-8dbb-4e23-b2b7-85a15a72f880",
     "tu_chinh": "順",
     "han_viet": "Thuận",
     "tu_lien_quan": [
@@ -1553,6 +1731,7 @@
     ]
   },
   {
+    "note_id": "5358617f-382d-4e65-8902-76529036941f",
     "tu_chinh": "願",
     "han_viet": "Nguyện",
     "tu_lien_quan": [
@@ -1562,6 +1741,7 @@
     ]
   },
   {
+    "note_id": "270a51b6-8d5e-4959-b39e-682eaa6cfb51",
     "tu_chinh": "類",
     "han_viet": "Loại",
     "tu_lien_quan": [
@@ -1571,6 +1751,7 @@
     ]
   },
   {
+    "note_id": "ec9768ab-d364-4347-9c32-e00c5206eb97",
     "tu_chinh": "数",
     "han_viet": "Số",
     "tu_lien_quan": [
@@ -1580,6 +1761,7 @@
     ]
   },
   {
+    "note_id": "09f8ebaf-0e44-48b5-8bba-7ace505432c7",
     "tu_chinh": "断",
     "han_viet": "Đoạn/Đoán",
     "tu_lien_quan": [
@@ -1589,6 +1771,7 @@
     ]
   },
   {
+    "note_id": "7f070ad0-c3e4-4c74-bef3-0db41e3c8ab3",
     "tu_chinh": "以",
     "han_viet": "Dĩ",
     "tu_lien_quan": [
@@ -1598,6 +1781,7 @@
     ]
   },
   {
+    "note_id": "3090e76f-0144-4969-b615-099da9305333",
     "tu_chinh": "似",
     "han_viet": "Tự",
     "tu_lien_quan": [
@@ -1606,6 +1790,7 @@
     ]
   },
   {
+    "note_id": "688f46cd-92de-4839-9fa8-1b9023726514",
     "tu_chinh": "建",
     "han_viet": "Kiến",
     "tu_lien_quan": [
@@ -1615,6 +1800,7 @@
     ]
   },
   {
+    "note_id": "71d28751-77e1-4eff-865a-35b9046b19b3",
     "tu_chinh": "律",
     "han_viet": "Luật",
     "tu_lien_quan": [
@@ -1623,6 +1809,7 @@
     ]
   },
   {
+    "note_id": "fcce782d-9c6c-4144-be5c-7cc9d8705f68",
     "tu_chinh": "健",
     "han_viet": "Kiện",
     "tu_lien_quan": [
@@ -1631,6 +1818,7 @@
     ]
   },
   {
+    "note_id": "1bd11686-e3b1-43c3-960d-1c056483774e",
     "tu_chinh": "卒",
     "han_viet": "Tốt",
     "tu_lien_quan": [
@@ -1638,6 +1826,7 @@
     ]
   },
   {
+    "note_id": "bdbc4696-394f-4d60-90f5-a5e8129b0cdc",
     "tu_chinh": "式",
     "han_viet": "Thức",
     "tu_lien_quan": [
@@ -1646,6 +1835,7 @@
     ]
   },
   {
+    "note_id": "fd8d4d50-2693-4ed5-b580-1d75f104f9d7",
     "tu_chinh": "未",
     "han_viet": "Vị",
     "tu_lien_quan": [
@@ -1655,6 +1845,7 @@
     ]
   },
   {
+    "note_id": "3e3585ca-e890-426e-86d5-370599a5f523",
     "tu_chinh": "失",
     "han_viet": "Thất",
     "tu_lien_quan": [
@@ -1664,6 +1855,7 @@
     ]
   },
   {
+    "note_id": "c556c4c3-bc3d-4ff1-8da5-c9db89ac5901",
     "tu_chinh": "運",
     "han_viet": "Vận",
     "tu_lien_quan": [
@@ -1673,6 +1865,7 @@
     ]
   },
   {
+    "note_id": "5615b500-f3c0-4cae-89cf-bfa52ae38618",
     "tu_chinh": "軍",
     "han_viet": "Quân",
     "tu_lien_quan": [
@@ -1681,6 +1874,7 @@
     ]
   },
   {
+    "note_id": "a03e4a04-9f3d-49d4-ba46-90ecea9600dd",
     "tu_chinh": "庫",
     "han_viet": "Khố",
     "tu_lien_quan": [
@@ -1691,6 +1885,7 @@
     ]
   },
   {
+    "note_id": "d454521b-61a7-42fa-93c8-77989fafe8ff",
     "tu_chinh": "軽",
     "han_viet": "Khinh",
     "tu_lien_quan": [
@@ -1700,6 +1895,7 @@
     ]
   },
   {
+    "note_id": "379beb53-8c57-4e2f-a079-593d9a040baa",
     "tu_chinh": "輸",
     "han_viet": "Thâu",
     "tu_lien_quan": [
@@ -1708,6 +1904,7 @@
     ]
   },
   {
+    "note_id": "d77de5b4-d90d-42b1-b480-e548591f6e84",
     "tu_chinh": "乗",
     "han_viet": "Thừa",
     "tu_lien_quan": [
@@ -1717,6 +1914,7 @@
     ]
   },
   {
+    "note_id": "9997599e-e302-49a9-93f2-80f3978fe96b",
     "tu_chinh": "郵",
     "han_viet": "Bưu",
     "tu_lien_quan": [
@@ -1725,6 +1923,7 @@
     ]
   },
   {
+    "note_id": "24cd53fa-a076-421b-8dda-704bd462481f",
     "tu_chinh": "身",
     "han_viet": "Thân",
     "tu_lien_quan": [
@@ -1734,6 +1933,7 @@
     ]
   },
   {
+    "note_id": "26e175a6-2256-4002-8e39-c1efbb5c6a27",
     "tu_chinh": "検",
     "han_viet": "Kiểm",
     "tu_lien_quan": [
@@ -1743,6 +1943,7 @@
     ]
   },
   {
+    "note_id": "d8c2f1fe-9bb6-4b4c-9577-339f712cb22d",
     "tu_chinh": "険",
     "han_viet": "Hiểm",
     "tu_lien_quan": [
@@ -1752,6 +1953,7 @@
     ]
   },
   {
+    "note_id": "527afcfc-2bad-4913-842d-d64d699cef43",
     "tu_chinh": "案",
     "han_viet": "Án",
     "tu_lien_quan": [
@@ -1761,6 +1963,7 @@
     ]
   },
   {
+    "note_id": "21e2d38b-808d-4c38-8de0-cb1c0c203e76",
     "tu_chinh": "角",
     "han_viet": "Giác",
     "tu_lien_quan": [
@@ -1771,6 +1974,7 @@
     ]
   },
   {
+    "note_id": "b2cc5a6a-9e5a-4002-80d1-504468360108",
     "tu_chinh": "触",
     "han_viet": "Xúc",
     "tu_lien_quan": [
@@ -1780,6 +1984,7 @@
     ]
   },
   {
+    "note_id": "a9e586e2-be51-4fa9-935c-26e789e7f16a",
     "tu_chinh": "解",
     "han_viet": "Giải",
     "tu_lien_quan": [
@@ -1790,6 +1995,7 @@
     ]
   },
   {
+    "note_id": "b5f90c3f-646a-4f03-93ae-b770df985b44",
     "tu_chinh": "苦",
     "han_viet": "Khổ",
     "tu_lien_quan": [
@@ -1799,6 +2005,7 @@
     ]
   },
   {
+    "note_id": "b1dff2f9-5727-4f97-8b06-44728e426111",
     "tu_chinh": "葉",
     "han_viet": "Diệp",
     "tu_lien_quan": [
@@ -1808,6 +2015,7 @@
     ]
   },
   {
+    "note_id": "4d240296-0bc7-4122-88b2-63b0a59d846a",
     "tu_chinh": "初",
     "han_viet": "Sơ",
     "tu_lien_quan": [
@@ -1817,6 +2025,7 @@
     ]
   },
   {
+    "note_id": "d4aae8e1-081a-4bb3-b879-1c3b429d60fc",
     "tu_chinh": "券",
     "han_viet": "Khoán",
     "tu_lien_quan": [
@@ -1825,6 +2034,7 @@
     ]
   },
   {
+    "note_id": "685c28f6-5048-4f6b-aa37-602ad4ee9bfb",
     "tu_chinh": "測",
     "han_viet": "Trắc",
     "tu_lien_quan": [
@@ -1833,6 +2043,7 @@
     ]
   },
   {
+    "note_id": "28300fb2-4ef1-439f-a3c1-9bd0199f9600",
     "tu_chinh": "側",
     "han_viet": "Trắc",
     "tu_lien_quan": [
@@ -1842,6 +2053,7 @@
     ]
   },
   {
+    "note_id": "aeb2da48-f005-4ea8-a4b7-45d6bbda5644",
     "tu_chinh": "割",
     "han_viet": "Cát",
     "tu_lien_quan": [
@@ -1851,6 +2063,7 @@
     ]
   },
   {
+    "note_id": "248c2952-3a5b-4b24-aa2c-841a91618739",
     "tu_chinh": "型",
     "han_viet": "Hình",
     "tu_lien_quan": [
@@ -1859,6 +2072,7 @@
     ]
   },
   {
+    "note_id": "a1e37eaa-1ae3-4745-b835-d0e245aa9edf",
     "tu_chinh": "刻",
     "han_viet": "Khắc",
     "tu_lien_quan": [
@@ -1868,6 +2082,7 @@
     ]
   },
   {
+    "note_id": "0bfe3ecf-1fa5-45c1-b772-31279f585d12",
     "tu_chinh": "制",
     "han_viet": "Chế",
     "tu_lien_quan": [
@@ -1876,6 +2091,7 @@
     ]
   },
   {
+    "note_id": "7a3c175e-ca11-48c8-9c2c-224789b376ac",
     "tu_chinh": "製",
     "han_viet": "Chế",
     "tu_lien_quan": [
@@ -1884,6 +2100,7 @@
     ]
   },
   {
+    "note_id": "d44fb3c4-93ae-4db8-b959-49a903dc27df",
     "tu_chinh": "到",
     "han_viet": "Đáo",
     "tu_lien_quan": [
@@ -1892,6 +2109,7 @@
     ]
   },
   {
+    "note_id": "04e72061-29f8-4093-be47-df02e2fd6601",
     "tu_chinh": "倒",
     "han_viet": "Đảo",
     "tu_lien_quan": [
@@ -1901,6 +2119,7 @@
     ]
   },
   {
+    "note_id": "93aeb0a5-e32a-42a7-be78-032b489997ec",
     "tu_chinh": "由",
     "han_viet": "Do",
     "tu_lien_quan": [
@@ -1910,6 +2129,7 @@
     ]
   },
   {
+    "note_id": "36979634-6ace-4ee5-a6ae-6c7e53c0d756",
     "tu_chinh": "申",
     "han_viet": "Thân",
     "tu_lien_quan": [
@@ -1919,6 +2139,7 @@
     ]
   },
   {
+    "note_id": "c8bba436-c815-4603-9bf9-475784c78385",
     "tu_chinh": "留",
     "han_viet": "Lưu",
     "tu_lien_quan": [
@@ -1927,6 +2148,7 @@
     ]
   },
   {
+    "note_id": "b2316b9e-47ff-497b-a5c7-8d376c1f54d3",
     "tu_chinh": "番",
     "han_viet": "Phiên",
     "tu_lien_quan": [
@@ -1936,6 +2158,7 @@
     ]
   },
   {
+    "note_id": "46d15b32-25ce-41a3-b984-334b6e028443",
     "tu_chinh": "理",
     "han_viet": "Lý",
     "tu_lien_quan": [
@@ -1945,6 +2168,7 @@
     ]
   },
   {
+    "note_id": "00cbdb08-cb6c-4bc9-9450-2874d5a85249",
     "tu_chinh": "面",
     "han_viet": "Diện",
     "tu_lien_quan": [
@@ -1954,6 +2178,7 @@
     ]
   },
   {
+    "note_id": "0e0b6920-9424-4fc4-882c-ffc6258a5441",
     "tu_chinh": "包",
     "han_viet": "Bao",
     "tu_lien_quan": [
@@ -1962,6 +2187,7 @@
     ]
   },
   {
+    "note_id": "889dc167-73b5-40c8-a3d8-92d0c0b276b7",
     "tu_chinh": "商",
     "han_viet": "Thương",
     "tu_lien_quan": [
@@ -1970,6 +2196,7 @@
     ]
   },
   {
+    "note_id": "602e57f2-7640-426e-93ed-420c8f3711a3",
     "tu_chinh": "章",
     "han_viet": "Chương",
     "tu_lien_quan": [
@@ -1978,6 +2205,7 @@
     ]
   },
   {
+    "note_id": "e1fafce7-83e5-4591-ac69-73b3775e0d89",
     "tu_chinh": "整",
     "han_viet": "Chỉnh",
     "tu_lien_quan": [
@@ -1987,6 +2215,7 @@
     ]
   },
   {
+    "note_id": "c09e4e45-ce27-4f66-9400-ba863bb800c6",
     "tu_chinh": "算",
     "han_viet": "Toán",
     "tu_lien_quan": [
@@ -1996,6 +2225,7 @@
     ]
   },
   {
+    "note_id": "c0e9dad8-376c-40c1-a6e7-4ef572864069",
     "tu_chinh": "等",
     "han_viet": "Đẳng",
     "tu_lien_quan": [
@@ -2005,6 +2235,7 @@
     ]
   },
   {
+    "note_id": "c4755e44-5177-4319-bc5a-24bee66d0753",
     "tu_chinh": "命",
     "han_viet": "Mệnh",
     "tu_lien_quan": [
@@ -2012,6 +2243,7 @@
     ]
   },
   {
+    "note_id": "3763fc11-bcf8-4e6c-88df-9afd99fc7f26",
     "tu_chinh": "令",
     "han_viet": "Lệnh",
     "tu_lien_quan": [
@@ -2020,6 +2252,7 @@
     ]
   },
   {
+    "note_id": "74729b9a-d009-4d15-9c9d-389c1192d74d",
     "tu_chinh": "冷",
     "han_viet": "Lãnh",
     "tu_lien_quan": [
@@ -2030,6 +2263,7 @@
     ]
   },
   {
+    "note_id": "5e38c845-f351-4440-a3b4-f14b4a7b6beb",
     "tu_chinh": "煙",
     "han_viet": "Yên",
     "tu_lien_quan": [
@@ -2038,6 +2272,7 @@
     ]
   },
   {
+    "note_id": "e6e1298d-582e-4178-8649-033497e224bb",
     "tu_chinh": "伝",
     "han_viet": "Truyền",
     "tu_lien_quan": [
@@ -2047,6 +2282,7 @@
     ]
   },
   {
+    "note_id": "9e102931-d39a-4813-9a56-0e87fad84aea",
     "tu_chinh": "転",
     "han_viet": "Chuyển",
     "tu_lien_quan": [
@@ -2056,6 +2292,7 @@
     ]
   },
   {
+    "note_id": "5508c272-7412-4f42-8fdf-75e975fe33d9",
     "tu_chinh": "芸",
     "han_viet": "Nghệ",
     "tu_lien_quan": [
@@ -2065,6 +2302,7 @@
     ]
   },
   {
+    "note_id": "4ecada71-b0c1-4365-9bde-980f86f376c6",
     "tu_chinh": "共",
     "han_viet": "Cộng",
     "tu_lien_quan": [
@@ -2074,6 +2312,7 @@
     ]
   },
   {
+    "note_id": "da2b84f9-9c0b-4969-b7fd-7aaa1589b648",
     "tu_chinh": "期",
     "han_viet": "Kỳ",
     "tu_lien_quan": [
@@ -2083,6 +2322,7 @@
     ]
   },
   {
+    "note_id": "df650032-6078-4f18-89dd-60da16b88b43",
     "tu_chinh": "残",
     "han_viet": "Tàn",
     "tu_lien_quan": [
@@ -2092,6 +2332,7 @@
     ]
   },
   {
+    "note_id": "bf3dd1b7-2891-489d-848b-f666f9da0fbe",
     "tu_chinh": "独",
     "han_viet": "Độc",
     "tu_lien_quan": [
@@ -2101,6 +2342,7 @@
     ]
   },
   {
+    "note_id": "35acf569-ae70-4a8f-8ecd-d6fd7c03cd51",
     "tu_chinh": "岩",
     "han_viet": "Nham",
     "tu_lien_quan": [
@@ -2110,6 +2352,7 @@
     ]
   },
   {
+    "note_id": "d97c69f8-d1cd-4ba7-9025-f2bbfa500f30",
     "tu_chinh": "張",
     "han_viet": "Trương",
     "tu_lien_quan": [
@@ -2118,6 +2361,7 @@
     ]
   },
   {
+    "note_id": "de0bf684-d8c6-4623-9a44-c0ba217937fa",
     "tu_chinh": "疑",
     "han_viet": "Nghi",
     "tu_lien_quan": [
@@ -2126,6 +2370,7 @@
     ]
   },
   {
+    "note_id": "b7a7ba94-cb1a-4941-aefe-cf1f922f7f0e",
     "tu_chinh": "飛",
     "han_viet": "Phi",
     "tu_lien_quan": [
@@ -2135,6 +2380,7 @@
     ]
   },
   {
+    "note_id": "d2a0e583-6d2a-46a8-92e8-8572d66decd3",
     "tu_chinh": "器",
     "han_viet": "Khí",
     "tu_lien_quan": [

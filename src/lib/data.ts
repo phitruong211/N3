@@ -10,7 +10,7 @@ import type {
   VerbInfo, AlternateReading, Variant, RelatedWord, VocabMetadata,
   LegacyVerbVariant,
 } from '../types';
-import { normalizeGrammarCard, type GrammarCardData } from './grammarData';
+import { normalizeGrammarCard, type GrammarCardData } from './grammarData.ts';
 
 // ─── Helpers ────────────────────────────────────────────────
 
@@ -34,6 +34,7 @@ async function fetchArray<T>(path: string): Promise<T[]> {
 // ─── Vocabulary ─────────────────────────────────────────────
 
 interface RawVocabN3 {
+  note_id?: string;
   id: number;
   stt_goc?: number | string;
   bai?: number;
@@ -61,6 +62,7 @@ interface RawVocabN3 {
 }
 
 interface RawVocabN4 {
+  note_id?: string;
   kanji?: string;
   phien_am?: string;
   nghia?: string;
@@ -139,6 +141,7 @@ export async function loadVocabulary(): Promise<VocabItem[]> {
     return {
       // Core
       id: `vocab-n3-${index}`,
+      noteId: item.note_id,
       numericId: item.id,
       bai,
       tu: item.tu,
@@ -179,6 +182,7 @@ export async function loadVocabulary(): Promise<VocabItem[]> {
 
     return {
       id: `vocab-n4-${index}`,
+      noteId: item.note_id,
       numericId: index + 10000,
       bai: null,
       tu,
@@ -222,6 +226,7 @@ interface RawKanjiVocab {
 }
 
 interface RawKanji {
+  note_id?: string;
   kanji?: string;
   tu_chinh?: string;
   han_viet?: string;
@@ -233,6 +238,7 @@ interface RawKanji {
 let _kanjiCache: KanjiItem[] | null = null;
 
 interface RawKanjiN2 {
+  note_id?: string;
   kanji?: string;
   han_viet?: string;
   onyomi?: string[];
@@ -245,6 +251,7 @@ interface RawKanjiN2File {
 }
 
 interface RawKanjiN4Card {
+  note_id?: string;
   front?: string;
   back?: string;
   reading?: string;
@@ -287,6 +294,7 @@ export async function loadKanji(): Promise<KanjiItem[]> {
 
     return {
       id: `kanji-${index}`,
+      noteId: item.note_id,
       kanji: kanjiChar,
       hanViet: hanVietStr,
       level: 'N3',
@@ -304,6 +312,7 @@ export async function loadKanji(): Promise<KanjiItem[]> {
 
   const n2Kanji: KanjiItem[] = n2File.data.map((item, index) => ({
     id: `kanji-n2-${index}`,
+    noteId: item.note_id,
     kanji: item.kanji || '',
     hanViet: item.han_viet || '',
     level: 'N2',
@@ -319,6 +328,7 @@ export async function loadKanji(): Promise<KanjiItem[]> {
 
   const n4Kanji: KanjiItem[] = rawN4.filter(item => item.type === 'KANJI' && item.front).map(item => ({
     id: `kanji-n4-${encodeURIComponent(item.front || '')}`,
+    noteId: item.note_id,
     kanji: item.front || '',
     hanViet: item.han_viet || '',
     meaning: item.back || '',

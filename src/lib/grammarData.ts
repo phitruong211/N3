@@ -1,6 +1,7 @@
 import type { GrammarItem, GrammarExample } from '../types';
 
 export interface GrammarCardData {
+  note_id?: string;
   front: string;
   back: string;
   reading?: string;
@@ -25,6 +26,7 @@ export function normalizeGrammarCard(item: GrammarCardData, level: 'N2' | 'N3' |
   return {
     // A new dataset must not inherit progress for an unrelated old row at the same position.
     id: `grammar-${level.toLowerCase()}-card-${encodeURIComponent(item.front)}`,
+    noteId: item.note_id,
     numericId: index + 1, bai, stt: index + 1, cap_do: level,
     nhom_chuc_nang: '', mau_ngu_phap: item.front, phien_am: reading,
     cong_thuc: structure, nghia_cot_loi: meaning, giai_thich_toi_uu: usage,

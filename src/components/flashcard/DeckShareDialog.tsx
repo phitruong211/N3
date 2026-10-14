@@ -3,9 +3,11 @@ import { Copy, Share2, Link2, Link2Off } from 'lucide-react';
 import { AppDialog } from '@/components/ui/AppDialog';
 import { enableShare, revokeShare, shareStatus, shareUrl, groupShareStatus, enableGroupShare, revokeGroupShare, groupShareUrl, type GroupShareLink } from '@/lib/deckSharing';
 import './sharing.css';
+import { useApp } from '@/hooks/useApp';
 
 type Props = { deck: { id: string; name: string; cardCount?: number }; kind?: 'deck' | 'group'; onClose: () => void };
 export function DeckShareDialog({ deck, kind = 'deck', onClose }: Props) {
+  const { cardNotes } = useApp();
   const group = kind === 'group';
   const [token, setToken] = useState<string | null>(null);
   const [counts, setCounts] = useState<GroupShareLink | null>(null);
@@ -15,6 +17,8 @@ export function DeckShareDialog({ deck, kind = 'deck', onClose }: Props) {
   const [notice, setNotice] = useState('');
   const [attempt, setAttempt] = useState(0);
   const [confirmRevoke, setConfirmRevoke] = useState(false);
+  const [includePersonalNotes, setIncludePersonalNotes] = useState(false);
+  const [savedPersonalNotes, setSavedPersonalNotes] = useState(false);
   const locked = useRef(false);
   const alive = useRef(true);
   const input = useRef<HTMLInputElement>(null);
@@ -24,7 +28,7 @@ export function DeckShareDialog({ deck, kind = 'deck', onClose }: Props) {
     let valid = true;
     setLoading(true); setError('');
     (group ? groupShareStatus(deck.id) : shareStatus(deck.id)).then(result => {
-      if (valid) { setToken(result.token); if ('deckCount' in result) setCounts(result as GroupShareLink); }
+      if (valid) { setToken(result.token); setIncludePersonalNotes(Boolean(result.includePersonalNotes)); setSavedPersonalNotes(Boolean(result.includePersonalNotes)); if ('deckCount' in result) setCounts(result as GroupShareLink); }
     }).catch(e => { if (valid) setError(e.message); }).finally(() => { if (valid) setLoading(false); });
     return () => { valid = false; };
   }, [deck.id, group, attempt]);
@@ -34,10 +38,11 @@ export function DeckShareDialog({ deck, kind = 'deck', onClose }: Props) {
     try {
       if (revoke) {
         await (group ? revokeGroupShare(deck.id) : revokeShare(deck.id));
-        if (alive.current) { setToken(null); setConfirmRevoke(false); setNotice('Đã tắt liên kết. Bản người nhận đã lưu vẫn được giữ.'); }
+        if (alive.current) { setToken(null); setIncludePersonalNotes(false); setSavedPersonalNotes(false); setConfirmRevoke(false); setNotice('Đã tắt liên kết. Bản người nhận đã lưu vẫn được giữ.'); }
       } else {
-        const result = await (group ? enableGroupShare(deck.id) : enableShare(deck.id));
-        if (alive.current) { setToken(result.token); if ('deckCount' in result) setCounts(result as GroupShareLink); setNotice('Liên kết đã sẵn sàng.'); }
+        if (includePersonalNotes) await cardNotes.flush();
+        const result = await (group ? enableGroupShare(deck.id, includePersonalNotes) : enableShare(deck.id, includePersonalNotes));
+        if (alive.current) { setToken(result.token); setSavedPersonalNotes(includePersonalNotes); if ('deckCount' in result) setCounts(result as GroupShareLink); setNotice('Đã lưu tùy chọn chia sẻ.'); }
       }
     } catch (e) { if (alive.current) setError((e as Error).message); }
     finally { locked.current = false; if (alive.current) setBusy(false); }
@@ -67,7 +72,9 @@ export function DeckShareDialog({ deck, kind = 'deck', onClose }: Props) {
       {error && <div role="alert" className="space-y-2"><p className="text-sm text-[var(--color-error)]">{error}</p><button type="button" className="study-button" disabled={busy} onClick={() => setAttempt(v => v + 1)}>Thử lại</button></div>}
       {notice && <p role="status" className="study-copy text-xs">{notice}</p>}
       <details className="share-options"><summary>Tùy chọn chia sẻ</summary>
-        <p>Nội dung, ghi chú, giao diện và tên hiển thị của bạn được chia sẻ. Lịch ôn luôn riêng. Liên kết hiển thị nội dung hiện tại; các bản đã nhận không tự cập nhật.</p>
+        <p>Nội dung, ghi chú gốc, giao diện và tên hiển thị của bạn được chia sẻ. Lịch ôn luôn riêng. Các bản đã nhận không tự cập nhật.</p>
+        <label className="my-3 flex items-start gap-3"><input type="checkbox" checked={includePersonalNotes} disabled={loading || busy} onChange={event => setIncludePersonalNotes(event.target.checked)}/><span>Kèm ghi chú của tôi<span className="mt-1 block text-xs">Khi bật, người nhận mới sẽ nhận cả ghi chú cá nhân đã đồng bộ. Tắt không xóa ghi chú trong bản họ đã nhận.</span></span></label>
+        {token && includePersonalNotes !== savedPersonalNotes && <button className="study-button" disabled={busy} onClick={() => void changeSharing()}>Lưu tùy chọn chia sẻ</button>}
         {token && (confirmRevoke ? <div className="space-y-3"><p>Tắt liên kết này? Người nhận sẽ không thể xem hoặc lưu thêm. Chia sẻ lại sẽ tạo liên kết mới.</p><div className="flex flex-wrap gap-2"><button type="button" className="study-button" disabled={busy} onClick={() => void changeSharing(true)}>{busy ? 'Đang tắt…' : 'Tắt liên kết'}</button><button type="button" className="study-button" disabled={busy} onClick={() => setConfirmRevoke(false)}>Giữ liên kết</button></div></div> : <button type="button" className="study-button" disabled={busy} onClick={() => setConfirmRevoke(true)}><Link2Off size={16}/>Ngừng chia sẻ</button>)}
       </details>
     </div>

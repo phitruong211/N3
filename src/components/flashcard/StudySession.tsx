@@ -11,6 +11,7 @@ import { defaultDeckTemplate, normalizeDeckTemplate, type DeckTemplateConfig } f
 import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
 import { CardFace, DeckCustomizeDialog } from "./CardPresentation";
+import { useStudyNote, NoteButton, PersonalNoteView, PersonalNoteEditor } from './PersonalCardNote';
 import { Maximize2, Minimize2, Shuffle, X, Settings2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -96,6 +97,7 @@ export function StudySession({
   const [slideDirection, setSlideDirection] = useState(1);
   const scheduled = mode === 'anki' ? nextReadyCard(reviewQueue) : null;
   const current = mode === 'anki' ? scheduled?.card : sessionCards[index];
+  const personalNote = useStudyNote(current);
   const currentCardKey = current ? `${current.type}:${current.id}` : null;
   const flipped = currentCardKey !== null && revealedCardKey === currentCardKey;
   const elapsed = useActiveElapsedMinutes(
@@ -301,6 +303,8 @@ export function StudySession({
       if (e.key === "Escape") {
         e.preventDefault();
         finish();
+      } else if (e.key.toLowerCase() === 'n' && !e.ctrlKey && !e.metaKey && !e.altKey && personalNote.key) {
+        e.preventDefault(); personalNote.setOpen(true);
       } else if (mode === "flashcards" && e.key === "ArrowRight") {
         e.preventDefault();
         next();
@@ -381,6 +385,7 @@ export function StudySession({
           </div>}
         </div>
         <div className="flex items-center gap-2">
+          <NoteButton note={personalNote}/>
           <button className="study-button !min-h-10 !px-3" disabled={busy} aria-label="Tùy chỉnh thẻ" onClick={() => { setError(""); setCustomizing(true); }}>
             <Settings2 size={17} /><span className="hidden sm:inline">Tùy chỉnh</span>
           </button>
@@ -426,7 +431,7 @@ export function StudySession({
               if (info.offset.x <= -SWIPE_THRESHOLD) moveCard("next");
               else if (info.offset.x >= SWIPE_THRESHOLD) moveCard("previous");
             }}
-            className={`relative flex h-full w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center ${flipped && (current.type === "GRAMMAR" || current.extraData?.examples) ? "justify-start" : "justify-center"} overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 sm:rounded-3xl sm:p-12 ${activeStyle.theme === "dark" ? "bg-slate-900 text-white" : activeStyle.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
+            className={`relative flex h-full w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center ${flipped && (current.type === "GRAMMAR" || current.extraData?.examples || personalNote.entry?.text) ? "justify-start" : "justify-center"} overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 sm:rounded-3xl sm:p-12 ${activeStyle.theme === "dark" ? "bg-slate-900 text-white" : activeStyle.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
             role="button"
             tabIndex={0}
             aria-disabled={busy}
@@ -453,6 +458,7 @@ export function StudySession({
               side={activeSide}
               showExampleReadings={settings.showFuriganaBack}
             />
+            {flipped && <PersonalNoteView note={personalNote}/>}
             {!flipped && (
               <span className="absolute bottom-5 text-xs text-[var(--color-text-tertiary)] sm:hidden">
                 Chạm để lật · Vuốt để chuyển thẻ
@@ -494,6 +500,7 @@ export function StudySession({
           finally { setSavingTemplate(false); }
         }}
       />}
+      <PersonalNoteEditor note={personalNote} card={current}/>
       <div className="flex min-h-16 shrink-0 flex-wrap items-center justify-center gap-3 border-t border-[var(--color-border)] px-3 py-3 sm:px-8">
         {mode === "anki" ? (
           flipped ? (

@@ -3,6 +3,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useApp } from "@/hooks/useApp";
 import { createLearningStorage } from "@/lib/storage";
 import { readLearning } from "@/hooks/useLearningSync";
+import { GuestCardNotesTransfer } from './GuestCardNotesTransfer';
 import type { LearningData } from "@/lib/learningSync";
 import LearningSyncPanel, {
   type LearningMigrationSource,
@@ -239,6 +240,7 @@ export function AccountLearningStatus() {
         beforeTransfer={sync.beforeTransfer}
         afterTransfer={sync.afterTransfer}
       />
+      <GuestCardNotesTransfer/>
     </div>
   );
 }

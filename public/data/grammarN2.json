@@ -1,5 +1,6 @@
 [
   {
+    "note_id": "dd0dec16-69d2-4f23-b555-5dc3190eb426",
     "front": "～あげく",
     "back": "Cuối cùng thì…; sau một quá trình dài lại dẫn đến…\n\n【Cấu trúc】\nVた + あげく / Nの + あげく\n\n【Cách dùng】\nDùng khi sau nhiều cân nhắc, nỗ lực hoặc diễn biến kéo dài cuối cùng xuất hiện kết quả B.\n\n【Sắc thái】\nKết quả thường không như mong đợi hoặc mang sắc thái tiêu cực; văn viết hơn ～末に.\n\n【Phân biệt】\n～末に trung tính hơn và có thể đi với kết quả tốt; ～あげく thường nhấn kết cục đáng tiếc.",
     "reading": "～あげく",
@@ -19,6 +20,7 @@
     ]
   },
   {
+    "note_id": "ce0fc894-71ca-4c2d-a53d-ca9b46893e73",
     "front": "あるいは",
     "back": "Hoặc; hay là; có lẽ\n\n【Cấu trúc】\nN / mệnh đề + あるいは + N / mệnh đề\n\n【Cách dùng】\nDùng nối hai khả năng/lựa chọn hoặc đưa ra một khả năng phỏng đoán.\n\n【Sắc thái】\nKhá trang trọng và thiên văn viết hơn それとも; nghĩa “có lẽ” thường gặp trong văn viết.\n\n【Phân biệt】\nそれとも thường dùng trong câu hỏi chọn lựa hội thoại; あるいは trang trọng và phạm vi rộng hơn.",
     "reading": "あるいは",
@@ -38,6 +40,7 @@
     ]
   },
   {
+    "note_id": "27b469a4-bda4-4db0-bd8b-a4aced1cac86",
     "front": "～ばかり",
     "back": "Khoảng; chừng…\n\n【Cấu trúc】\nSố lượng / khoảng thời gian + ばかり\n\n【Cách dùng】\nDùng để nói số lượng hoặc thời gian xấp xỉ.\n\n【Sắc thái】\nHơi văn viết/cổ hơn ～ぐらい・ほど trong nghĩa “khoảng”.\n\n【Phân biệt】\n～ぐらい rất thông dụng trong hội thoại; ～ばかり trong nghĩa xấp xỉ mang sắc thái văn viết hơn.",
     "reading": "～ばかり",
@@ -57,6 +60,7 @@
     ]
   },
   {
+    "note_id": "2f9d739a-663f-4705-b11c-4c99a6f3ac8b",
     "front": "～ばかりだ",
     "back": "Cứ ngày càng… theo một chiều hướng\n\n【Cấu trúc】\nV辞書形 + ばかりだ\n\n【Cách dùng】\nDùng khi tình trạng tiếp tục biến đổi theo một hướng từ hiện tại.\n\n【Sắc thái】\nRất thường dùng cho xu hướng xấu/đáng lo; người nói nhìn thấy sự thay đổi một chiều.\n\n【Phân biệt】\n～一方だ gần nghĩa; 一方だ trang trọng hơn, còn ばかりだ thường mang cảm giác chủ quan rõ.",
     "reading": "～ばかりだ",
@@ -76,6 +80,7 @@
     ]
   },
   {
+    "note_id": "7420d009-885c-4c07-8d6a-262d4a817999",
     "front": "～ばかりか",
     "back": "Không những… mà còn…\n\n【Cấu trúc】\nN / 普通形 + ばかりか、～も / さえ / まで\n\n【Cách dùng】\nMở rộng từ A sang B với mức độ/phạm vi lớn hơn dự kiến.\n\n【Sắc thái】\nTrang trọng hơn ～だけでなく; B thường gây bất ngờ hoặc mạnh hơn A.\n\n【Phân biệt】\n～だけでなく trung tính; ～ばかりか có sắc thái nhấn mạnh “không chỉ thế mà còn”.",
     "reading": "～ばかりか",
@@ -95,6 +100,7 @@
     ]
   },
   {
+    "note_id": "cd4e7268-bebe-4f60-adc4-5c9457e90a61",
     "front": "～ばかりに",
     "back": "Chỉ vì… mà…\n\n【Cấu trúc】\n普通形 + ばかりに\n\n【Cách dùng】\nDùng khi một nguyên nhân A dẫn đến kết quả xấu B và người nói tiếc nuối.\n\n【Sắc thái】\nNhấn rằng chỉ vì đúng một nguyên nhân đó mà kết cục xấu xảy ra.\n\n【Phân biệt】\n～ために chỉ nguyên nhân trung tính hơn; ～ばかりに có nuối tiếc/trách móc.",
     "reading": "～ばかりに",
@@ -114,6 +120,7 @@
     ]
   },
   {
+    "note_id": "43006012-c954-4528-b928-45bf82a49d91",
     "front": "ちなみに",
     "back": "Nhân tiện; tiện đây nói thêm\n\n【Cấu trúc】\nちなみに + mệnh đề\n\n【Cách dùng】\nDùng thêm thông tin liên quan nhẹ với nội dung vừa nói.\n\n【Sắc thái】\nKhông đổi chủ đề hoàn toàn; giống một ghi chú bổ sung.\n\n【Phân biệt】\nところで chuyển sang chủ đề mới rõ hơn; ちなみに chỉ thêm thông tin bên lề liên quan.",
     "reading": "ちなみに",
@@ -133,6 +140,7 @@
     ]
   },
   {
+    "note_id": "cfe93891-8e76-4fbc-ae07-de9f623d07f1",
     "front": "ちっとも～ない",
     "back": "Hoàn toàn không…; chẳng… chút nào\n\n【Cấu trúc】\nちっとも + Vない / Aくない\n\n【Cách dùng】\nNhấn phủ định hoàn toàn trong hội thoại.\n\n【Sắc thái】\nKhẩu ngữ, có thể mang bất mãn/ngạc nhiên.\n\n【Phân biệt】\n少しも～ない trung tính hơn; ちっとも～ない hội thoại và cảm xúc hơn.",
     "reading": "ちっとも～ない",
@@ -152,6 +160,7 @@
     ]
   },
   {
+    "note_id": "05d3dce9-3933-40a5-b026-a1e9bca487a0",
     "front": "～だけあって",
     "back": "Quả đúng là…; đúng là xứng với…\n\n【Cấu trúc】\n普通形 / N + だけあって\n\n【Cách dùng】\nDùng khi kết quả B phù hợp với giá trị, kinh nghiệm hoặc danh tiếng ở A.\n\n【Sắc thái】\nThể hiện đánh giá “quả không hổ danh”; thường là kết quả tích cực.\n\n【Phân biệt】\n～だけに nhấn nguyên nhân; ～だけあって nhấn kết quả đúng như kỳ vọng.",
     "reading": "～だけあって",
@@ -171,6 +180,7 @@
     ]
   },
   {
+    "note_id": "b5b64651-641c-4eee-a013-5fc9ef721f46",
     "front": "～だけましだ",
     "back": "Ít ra còn đỡ vì…\n\n【Cấu trúc】\n普通形 + だけましだ\n\n【Cách dùng】\nDùng đánh giá tình huống A vẫn còn tốt hơn một tình huống tệ hơn được ngầm so sánh.\n\n【Sắc thái】\nMang sắc thái chấp nhận miễn cưỡng: không tốt nhưng “còn đỡ”.\n\n【Phân biệt】\n～ほうがまし thường so trực tiếp hai lựa chọn; ～だけましだ đánh giá phần còn đáng mừng.",
     "reading": "～だけましだ",
@@ -190,6 +200,7 @@
     ]
   },
   {
+    "note_id": "0f9fefde-02dd-4fdb-b75c-1ff8578325b0",
     "front": "～だけに",
     "back": "Chính vì… nên càng…\n\n【Cấu trúc】\n普通形 / N + だけに\n\n【Cách dùng】\nDùng khi chính đặc điểm A khiến kết quả/cảm xúc B càng mạnh hoặc hợp lý.\n\n【Sắc thái】\nA tạo kỳ vọng cao nên B thường được nhấn mạnh mạnh hơn.\n\n【Phân biệt】\n～だけあって = quả đúng như mong đợi; ～だけに = chính vì A nên B càng….",
     "reading": "～だけに",
@@ -209,6 +220,7 @@
     ]
   },
   {
+    "note_id": "a7c3f24e-2ea8-41de-803b-53624a495c3c",
     "front": "～だけのことはある",
     "back": "Quả không uổng…; đúng là xứng đáng…\n\n【Cấu trúc】\n普通形 + だけのことはある\n\n【Cách dùng】\nDùng xác nhận kết quả tốt chứng minh công sức, danh tiếng hoặc giá trị trước đó là có lý.\n\n【Sắc thái】\nMang ý “không phải vô ích/không phải tự nhiên mà có”.\n\n【Phân biệt】\n～だけあって rất gần; だけのことはある nhấn giá trị/công sức đã bỏ ra được chứng minh.",
     "reading": "～だけのことはある",
@@ -228,6 +240,7 @@
     ]
   },
   {
+    "note_id": "1a76ba41-5ea2-41b0-901f-556a0b64c12f",
     "front": "～だけは",
     "back": "Làm hết mức có thể; ít nhất phần… thì…\n\n【Cấu trúc】\nV辞書形 + だけは + V\n\n【Cách dùng】\nDùng khi đã làm trong phạm vi có thể hoặc muốn nhấn ít nhất phần A đã được thực hiện.\n\n【Sắc thái】\nThường lặp lại cùng động từ và mang ý “đã làm hết mức rồi”.\n\n【Phân biệt】\nできるだけ = càng… càng tốt; VるだけはV = đã làm hết phần có thể.",
     "reading": "～だけは",
@@ -247,6 +260,7 @@
     ]
   },
   {
+    "note_id": "5ecb1440-856f-40a9-9056-0182a6aceb2c",
     "front": "だって",
     "back": "Vì… mà; nhưng mà; ngay cả…\n\n【Cấu trúc】\nだって + mệnh đề / N + だって\n\n【Cách dùng】\nTrong hội thoại dùng để nêu lý do biện hộ hoặc mang nghĩa “ngay cả N cũng”.\n\n【Sắc thái】\nRất khẩu ngữ; dễ mang cảm giác phản bác, biện minh hoặc nhấn mạnh.\n\n【Phân biệt】\nでも trung tính hơn; だって thân mật và có cảm xúc mạnh hơn.",
     "reading": "だって",
@@ -266,6 +280,7 @@
     ]
   },
   {
+    "note_id": "cbb1ac4b-0c47-4ab1-bb4c-ee3f56bdf96a",
     "front": "～でしかない",
     "back": "Chỉ là…; chẳng qua chỉ là…\n\n【Cấu trúc】\nN + でしかない\n\n【Cách dùng】\nDùng giới hạn bản chất của sự vật ở mức A, phủ nhận việc đánh giá cao hơn.\n\n【Sắc thái】\nThường mang sắc thái hạ thấp/khách quan hóa.\n\n【Phân biệt】\n～に過ぎない gần nghĩa và trang trọng hơn; でしかない trực tiếp hơn.",
     "reading": "～でしかない",
@@ -285,6 +300,7 @@
     ]
   },
   {
+    "note_id": "81c377c6-b37b-401f-a356-c1c735f072f9",
     "front": "～どころではない",
     "back": "Không phải lúc để…; còn lâu mới…\n\n【Cấu trúc】\nN / V辞書形 + どころではない\n\n【Cách dùng】\nDùng khi hoàn cảnh khiến hoàn toàn không thể nghĩ đến hoặc thực hiện A.\n\n【Sắc thái】\nMạnh hơn “không thể”; A thậm chí không nằm trong phạm vi có thể cân nhắc.\n\n【Phân biệt】\n～どころか phủ định A rồi đưa B trái hẳn; ～どころではない nhấn hoàn cảnh không cho phép A.",
     "reading": "～どころではない",
@@ -304,6 +320,7 @@
     ]
   },
   {
+    "note_id": "f1f2c972-79d6-4798-b904-ed437d122306",
     "front": "～どころか",
     "back": "Đâu chỉ…; chẳng những không… mà ngược lại…\n\n【Cấu trúc】\nN / 普通形 + どころか\n\n【Cách dùng】\nDùng phủ định hoặc vượt xa mức A rồi đưa ra B mạnh/trái hơn.\n\n【Sắc thái】\nTạo tương phản mạnh, thường gây bất ngờ.\n\n【Phân biệt】\n～ばかりか mở rộng A→B; ～どころか có thể phủ định hoàn toàn A.",
     "reading": "～どころか",
@@ -323,6 +340,7 @@
     ]
   },
   {
+    "note_id": "3c1a0a59-f388-486b-ab1b-f04672456219",
     "front": "どうやら",
     "back": "Có vẻ; hình như; bằng cách nào đó\n\n【Cấu trúc】\nどうやら + mệnh đề\n\n【Cách dùng】\nDùng khi suy đoán từ dấu hiệu/thông tin hoặc nói đã xoay xở làm được việc gì.\n\n【Sắc thái】\nĐộ chắc chắn vừa phải, dựa trên dấu hiệu chứ không khẳng định tuyệt đối.\n\n【Phân biệt】\nどうも～らしい gần nghĩa; どうやら thường hàm ý đã có đủ dấu hiệu để kết luận sơ bộ.",
     "reading": "どうやら",
@@ -342,6 +360,7 @@
     ]
   },
   {
+    "note_id": "2f5c4d83-a7bf-492f-8a3d-8288eb4e39b1",
     "front": "どうせ",
     "back": "Dù sao thì; đằng nào cũng…\n\n【Cấu trúc】\nどうせ + mệnh đề\n\n【Cách dùng】\nDùng khi cho rằng kết quả đã gần như định sẵn nên hành động/đánh giá hiện tại không thay đổi được nhiều.\n\n【Sắc thái】\nThường có sắc thái buông xuôi, bi quan hoặc “đằng nào cũng”.\n\n【Phân biệt】\nいずれ trung tính “sớm muộn”; どうせ thường có thái độ chủ quan/bất cần.",
     "reading": "どうせ",
@@ -361,6 +380,7 @@
     ]
   },
   {
+    "note_id": "1731872e-78f7-41d5-ab82-61bbc05b5a5c",
     "front": "～得ない",
     "back": "Không thể xảy ra; không thể làm\n\n【Cấu trúc】\nVます bỏ ます + 得ない\n\n【Cách dùng】\nDùng nói một khả năng về logic/thực tế là không thể xảy ra.\n\n【Sắc thái】\nVăn viết, khách quan; thường dùng với động từ như あり得ない、考え得ない.\n\n【Phân biệt】\nV可能形 nói khả năng của chủ thể; ～得ない thường phán đoán khả năng xảy ra nói chung.",
     "reading": "～えない",
@@ -380,6 +400,7 @@
     ]
   },
   {
+    "note_id": "14c94952-acd0-45c2-a1e8-6feab5b82749",
     "front": "～得る",
     "back": "Có thể xảy ra; có khả năng…\n\n【Cấu trúc】\nVます bỏ ます + 得る\n\n【Cách dùng】\nDùng nói khả năng một sự việc có thể xảy ra hoặc được thực hiện về mặt lý luận.\n\n【Sắc thái】\nKhá văn viết; 得る đọc える hoặc うる tùy từ/cách dùng, phủ định thường là えない.\n\n【Phân biệt】\nV可能形 thiên khả năng cá nhân; ～得る thường nói khả năng khách quan.",
     "reading": "～える／～うる",
@@ -399,6 +420,7 @@
     ]
   },
   {
+    "note_id": "f0ce17dc-df35-4118-8aef-228d18e5a73d",
     "front": "再び",
     "back": "Lại; một lần nữa\n\n【Cấu trúc】\n再び + V\n\n【Cách dùng】\nDùng nói một việc xảy ra trở lại sau một khoảng gián đoạn.\n\n【Sắc thái】\nTrang trọng/văn viết hơn また.\n\n【Phân biệt】\nまた thông dụng trong hội thoại; 再び thường dùng trong văn viết, tin tức, phát biểu.",
     "reading": "ふたたび",
@@ -418,6 +440,7 @@
     ]
   },
   {
+    "note_id": "c52cf01d-cbd5-42fc-84fe-3f32caab9d8b",
     "front": "～ふうに",
     "back": "Theo cách…; kiểu như…\n\n【Cấu trúc】\nこの/その/あの/どんな + ふうに / mệnh đề + ふうに\n\n【Cách dùng】\nDùng mô tả phương thức, dáng vẻ hoặc cách làm.\n\n【Sắc thái】\nHội thoại tự nhiên; có thể dùng khi minh họa “hãy làm theo kiểu này”.\n\n【Phân biệt】\n～ように trang trọng và phạm vi rộng hơn; ～ふうに thiên “kiểu/cách như thế”.",
     "reading": "～ふうに",
@@ -437,6 +460,7 @@
     ]
   },
   {
+    "note_id": "650a3813-bbfe-41b0-b2c7-e059a41ed175",
     "front": "～がきっかけで / ～をきっかけに",
     "back": "Nhân dịp; lấy… làm bước ngoặt/khởi điểm\n\n【Cấu trúc】\nN + がきっかけで / N + をきっかけに\n\n【Cách dùng】\nDùng khi sự kiện A trở thành nguyên nhân khởi đầu cho thay đổi/hành động B.\n\n【Sắc thái】\n“きっかけ” là điểm khởi phát, không nhất thiết là nguyên nhân trực tiếp hoàn toàn.\n\n【Phân biệt】\n～を契機に trang trọng hơn và thường dùng cho biến chuyển lớn/chính thức.",
     "reading": "～がきっかけで／～をきっかけに",
@@ -456,6 +480,7 @@
     ]
   },
   {
+    "note_id": "26903815-119d-483f-a564-d6abbb073c3e",
     "front": "～げ",
     "back": "Có vẻ…; trông như đang có cảm xúc…\n\n【Cấu trúc】\nAい bỏ い + げ / Aな + げ / Vたい bỏ い + げ\n\n【Cách dùng】\nGắn vào từ biểu thị cảm xúc/trạng thái để mô tả vẻ bề ngoài quan sát được.\n\n【Sắc thái】\nKhông dùng tự do với mọi tính từ; thường gặp 寂しげ、不安げ、自信ありげ.\n\n【Phân biệt】\n～そうだ rộng hơn cho vẻ ngoài; ～げ thường giới hạn ở cảm xúc/trạng thái và hơi văn viết.",
     "reading": "～げ",
@@ -475,6 +500,7 @@
     ]
   },
   {
+    "note_id": "86963829-f568-4880-8c25-05838d38362f",
     "front": "逆に",
     "back": "Ngược lại; trái lại\n\n【Cấu trúc】\n逆に + mệnh đề\n\n【Cách dùng】\nDùng chuyển sang kết quả/quan điểm ngược với điều vừa nêu.\n\n【Sắc thái】\nTrung tính, dùng cả nói và viết.\n\n【Phân biệt】\n一方で chỉ hai mặt song song; 逆に nhấn hướng/kết quả đối lập trực tiếp.",
     "reading": "ぎゃくに",
@@ -494,6 +520,7 @@
     ]
   },
   {
+    "note_id": "a46b325a-8673-4b0f-83e6-c45fb9bfde78",
     "front": "～反面",
     "back": "Mặt khác; tuy… nhưng ở mặt ngược lại…\n\n【Cấu trúc】\n普通形 / Nである + 反面\n\n【Cách dùng】\nDùng trình bày hai mặt trái ngược cùng tồn tại của một sự vật.\n\n【Sắc thái】\nVăn viết và phân tích hơn 一方で; thường là ưu điểm–nhược điểm.\n\n【Phân biệt】\n一方で rộng hơn; 反面 nhấn hai mặt trái ngược của cùng một đối tượng.",
     "reading": "～はんめん",
@@ -513,6 +540,7 @@
     ]
   },
   {
+    "note_id": "622bc387-fbef-422b-9ce5-61a93ab1df35",
     "front": "果たして",
     "back": "Quả nhiên; liệu thực sự…?\n\n【Cấu trúc】\n果たして + mệnh đề\n\n【Cách dùng】\nDùng xác nhận “đúng như dự đoán” hoặc trong câu hỏi tu từ để nghi ngờ liệu điều gì có thật không.\n\n【Sắc thái】\nKhá văn viết/kịch tính; thường xuất hiện với ～だろうか.\n\n【Phân biệt】\n本当に trung tính “thật sự”; 果たして tạo cảm giác kiểm chứng/kết quả đúng như dự đoán.",
     "reading": "はたして",
@@ -532,6 +560,7 @@
     ]
   },
   {
+    "note_id": "ad894c62-f728-48bb-a2ae-89419b8e1a14",
     "front": "一応",
     "back": "Tạm thời; đại khái; dù sao cũng thử/kiểm tra cho chắc\n\n【Cấu trúc】\n一応 + V / 一応の + N\n\n【Cách dùng】\nDùng khi làm ở mức tối thiểu/tạm chấp nhận được hoặc làm “cho chắc”.\n\n【Sắc thái】\nHàm ý chưa hoàn hảo hoặc chưa chắc cần thiết nhưng vẫn làm trước.\n\n【Phân biệt】\nとりあえず thiên “trước mắt hãy làm”; 一応 nhấn mức tối thiểu hoặc kiểm tra cho chắc.",
     "reading": "いちおう",
@@ -551,6 +580,7 @@
     ]
   },
   {
+    "note_id": "53f60132-c893-4d19-99c4-578acbe6b92b",
     "front": "～以外",
     "back": "Ngoài… ra; ngoại trừ…\n\n【Cấu trúc】\nN + 以外（に/の）\n\n【Cách dùng】\nDùng loại trừ A hoặc nói mọi thứ bên ngoài phạm vi A.\n\n【Sắc thái】\nTrung tính, dùng rộng.\n\n【Phân biệt】\n～を除いて là “ngoại trừ” rõ và trang trọng hơn; 以外 còn có nghĩa “ngoài A ra”.",
     "reading": "～いがい",
@@ -570,6 +600,7 @@
     ]
   },
   {
+    "note_id": "5c61c6b2-152f-4540-84bf-7f4b008d5e9f",
     "front": "～以上に",
     "back": "Hơn cả…; vượt hơn mức…\n\n【Cấu trúc】\nN / 普通形 + 以上に\n\n【Cách dùng】\nDùng khi B vượt quá mức độ/đánh giá A.\n\n【Sắc thái】\nTrang trọng hơn より và thường nhấn “hơn cả mong đợi/tiêu chuẩn”.\n\n【Phân biệt】\nより chỉ so sánh đơn thuần; 以上に nhấn vượt mức A rõ rệt.",
     "reading": "～いじょうに",
@@ -589,6 +620,7 @@
     ]
   },
   {
+    "note_id": "ee1a8b6b-7d79-423b-89c3-b5ae065e63d9",
     "front": "～以上は",
     "back": "Một khi đã… thì…; vì đã… nên…\n\n【Cấu trúc】\n普通形 + 以上（は）\n\n【Cách dùng】\nDùng khi từ sự thật/ quyết định A suy ra trách nhiệm, quyết tâm hoặc kết luận B.\n\n【Sắc thái】\nTrang trọng và mạnh; B thường là nghĩa vụ/ý chí.\n\n【Phân biệt】\n～からには gần nghĩa; 以上は hơi văn viết và logic hơn.",
     "reading": "～いじょうは",
@@ -608,6 +640,7 @@
     ]
   },
   {
+    "note_id": "12b035ec-91cd-44e1-8306-d437717bfc9b",
     "front": "いきなり",
     "back": "Đột nhiên; không báo trước\n\n【Cấu trúc】\nいきなり + V\n\n【Cách dùng】\nDùng khi hành động/sự việc xảy ra bất ngờ, không có bước chuẩn bị.\n\n【Sắc thái】\nHội thoại, nhấn sự bất ngờ do thiếu quá trình dẫn nhập.\n\n【Phân biệt】\n突然 gần nghĩa và trung tính hơn; いきなり thường nhấn “bỏ qua bước trước”.",
     "reading": "いきなり",
@@ -627,6 +660,7 @@
     ]
   },
   {
+    "note_id": "31d55a52-efe7-44a8-9eb4-6e3ddf11dbb1",
     "front": "一気に",
     "back": "Một mạch; một hơi; cùng lúc\n\n【Cấu trúc】\n一気に + V\n\n【Cách dùng】\nDùng khi thực hiện/biến đổi nhanh trong một lần, không ngắt quãng.\n\n【Sắc thái】\nNhấn tốc độ và sự liên tục.\n\n【Phân biệt】\n急に chỉ đột ngột; 一気に nhấn hoàn thành/biến đổi trong một mạch.",
     "reading": "いっきに",
@@ -646,6 +680,7 @@
     ]
   },
   {
+    "note_id": "704e77dc-ba7b-4b80-8a87-320829f326c9",
     "front": "～一方で",
     "back": "Mặt khác; trong khi đó\n\n【Cấu trúc】\n普通形 / Nである + 一方（で）\n\n【Cách dùng】\nDùng nêu hai mặt, hai xu hướng hoặc hai sự việc đối lập/song song.\n\n【Sắc thái】\nKhá khách quan; phù hợp văn viết và thuyết trình.\n\n【Phân biệt】\n反面 thường là hai mặt trái ngược cùng một đối tượng; 一方で có phạm vi rộng hơn.",
     "reading": "～いっぽうで",
@@ -665,6 +700,7 @@
     ]
   },
   {
+    "note_id": "98535973-7047-4a02-a8ba-1e587270f04c",
     "front": "いわゆる",
     "back": "Cái gọi là…; thường gọi là…\n\n【Cấu trúc】\nいわゆる + N\n\n【Cách dùng】\nDùng giới thiệu tên gọi/khái niệm được xã hội thường gọi như vậy.\n\n【Sắc thái】\nKhá văn viết; đôi khi tạo khoảng cách với thuật ngữ được nhắc tới.\n\n【Phân biệt】\nいわば = có thể nói là; いわゆる = cái thường được gọi là.",
     "reading": "いわゆる",
@@ -684,6 +720,7 @@
     ]
   },
   {
+    "note_id": "6e9c3303-a307-453e-a147-41e6af71667c",
     "front": "いよいよ",
     "back": "Cuối cùng cũng; ngày càng đến giai đoạn quyết định\n\n【Cấu trúc】\nいよいよ + mệnh đề\n\n【Cách dùng】\nDùng khi thời điểm quan trọng sắp đến hoặc mức độ tiến triển ngày càng rõ.\n\n【Sắc thái】\nCó cảm giác chờ đợi/căng thẳng “cuối cùng thì đã đến lúc”.\n\n【Phân biệt】\nとうとう nhấn kết quả cuối cùng; いよいよ nhấn giai đoạn quyết định bắt đầu/đang đến.",
     "reading": "いよいよ",
@@ -703,6 +740,7 @@
     ]
   },
   {
+    "note_id": "20bd5bfb-d23f-46d3-a22c-8081eb135431",
     "front": "～上（じょう）",
     "back": "Về mặt…; xét trên phương diện…\n\n【Cấu trúc】\nN + 上（じょう）\n\n【Cách dùng】\nDùng chỉ phương diện/quan điểm như 法律上、教育上、仕事上.\n\n【Sắc thái】\nTrang trọng, thường gặp trong văn viết/chuyên môn.\n\n【Phân biệt】\n～の面で trung tính hơn; ～上 thường tạo từ ghép mang tính lĩnh vực.",
     "reading": "～じょう",
@@ -722,6 +760,7 @@
     ]
   },
   {
+    "note_id": "c926a302-d8b3-4870-8f1e-167129484b89",
     "front": "～かのようだ / ～かのように",
     "back": "Như thể…; cứ như là…\n\n【Cấu trúc】\n普通形 + かのようだ / かのように / かのような\n\n【Cách dùng】\nDùng ví von một sự việc trông/cảm giác giống điều không nhất thiết là thật.\n\n【Sắc thái】\nTrang trọng/văn viết hơn ～みたいに.\n\n【Phân biệt】\n～ように chỉ “như”; ～かのように nhấn “cứ như thể thật vậy”.",
     "reading": "～かのようだ／～かのように",
@@ -741,6 +780,7 @@
     ]
   },
   {
+    "note_id": "db9060ba-62b1-47d7-9423-94480358659e",
     "front": "～かと思ったら / ～かと思うと",
     "back": "Vừa mới… thì đã…\n\n【Cấu trúc】\nVた + かと思ったら / かと思うと\n\n【Cách dùng】\nDùng khi B xảy ra gần như ngay sau A, thường bất ngờ hoặc tương phản.\n\n【Sắc thái】\nHai hành động nối rất nhanh; chủ ngữ thường không phải ý chí có chủ định của người nói.\n\n【Phân biệt】\n～たとたん nhấn đúng khoảnh khắc; ～かと思ったら còn nhấn sự thay đổi bất ngờ/tương phản.",
     "reading": "～かとおもったら／～かとおもうと",
@@ -760,6 +800,7 @@
     ]
   },
   {
+    "note_id": "d4167350-d416-4e99-9fe4-05117719013a",
     "front": "～か～ないかのうちに",
     "back": "Vừa… thì ngay…; chưa kịp… đã…\n\n【Cấu trúc】\nV辞書形 + か + Vない形 + かのうちに\n\n【Cách dùng】\nDùng khi B xảy ra gần như đồng thời với việc A vừa hoàn tất/bắt đầu.\n\n【Sắc thái】\nKhoảng thời gian cực ngắn, nhanh hơn cách nói ～たら.\n\n【Phân biệt】\n～たとたん cũng “ngay khi”; mẫu này nhấn A chưa kịp xác định xong thì B đã xảy ra.",
     "reading": "～か～ないかのうちに",
@@ -779,6 +820,7 @@
     ]
   },
   {
+    "note_id": "05c40265-4a11-4197-b33a-77f47cd2ae7e",
     "front": "かえって",
     "back": "Trái lại; ngược lại lại…\n\n【Cấu trúc】\nかえって + mệnh đề\n\n【Cách dùng】\nDùng khi kết quả thực tế trái với mục đích/dự đoán ban đầu.\n\n【Sắc thái】\nThường mang ý “làm A tưởng tốt nhưng lại thành B”.\n\n【Phân biệt】\n逆に là “ngược lại” nói chung; かえって thường nhấn kết quả trái mong đợi.",
     "reading": "かえって",
@@ -798,6 +840,7 @@
     ]
   },
   {
+    "note_id": "abdc1890-b0b4-4790-a205-09baca73d24a",
     "front": "～限り",
     "back": "Chừng nào còn…; trong phạm vi…\n\n【Cấu trúc】\n普通形 / Nである + 限り\n\n【Cách dùng】\nDùng giới hạn điều kiện/thời gian/phạm vi mà B có hiệu lực.\n\n【Sắc thái】\nTùy ngữ cảnh có nghĩa “chừng nào còn A” hoặc “trong phạm vi biết/thấy”.\n\n【Phân biệt】\n～うちは thiên trạng thái tạm thời; ～限り nhấn ranh giới/điều kiện.",
     "reading": "～かぎり",
@@ -817,6 +860,7 @@
     ]
   },
   {
+    "note_id": "5612abb5-b936-4649-8af1-96dac2d137eb",
     "front": "～甲斐がある",
     "back": "Đáng công…; công sức có kết quả\n\n【Cấu trúc】\nVた / Nの + 甲斐がある\n\n【Cách dùng】\nDùng khi công sức/hành động A mang lại kết quả xứng đáng.\n\n【Sắc thái】\nThường thể hiện sự hài lòng; phủ định là 甲斐がない.\n\n【Phân biệt】\n～だけのことはある nhấn “quả không uổng”; 甲斐がある nhấn giá trị/công sức đáng bỏ ra.",
     "reading": "～かいがある",
@@ -836,6 +880,7 @@
     ]
   },
   {
+    "note_id": "3c141893-f59f-4d9f-9a29-e0144ddc876d",
     "front": "～かねない",
     "back": "Có nguy cơ…; có thể sẽ…\n\n【Cấu trúc】\nVます bỏ ます + かねない\n\n【Cách dùng】\nDùng dự đoán khả năng xảy ra một kết quả xấu/đáng lo.\n\n【Sắc thái】\nKhá trang trọng; không dùng cho kết quả tích cực thông thường.\n\n【Phân biệt】\n～恐れがある khách quan/chính thức hơn; ～かねない thường đánh giá nguy cơ từ hành động/tình huống.",
     "reading": "～かねない",
@@ -855,6 +900,7 @@
     ]
   },
   {
+    "note_id": "e89bef71-2b01-45b2-b348-571b17eb3f8a",
     "front": "～かねる",
     "back": "Khó có thể…; không thể…\n\n【Cấu trúc】\nVます bỏ ます + かねる\n\n【Cách dùng】\nDùng từ chối hoặc nói khó thực hiện A vì lý do lập trường, quy định, tâm lý.\n\n【Sắc thái】\nLịch sự/gián tiếp; rất thường trong công việc, dịch vụ.\n\n【Phân biệt】\nできない trực tiếp; ～かねる mềm và trang trọng hơn.",
     "reading": "～かねる",
@@ -874,6 +920,7 @@
     ]
   },
   {
+    "note_id": "875a7620-b624-40a8-aba6-238db8379b8f",
     "front": "～から言うと",
     "back": "Xét từ…; nói từ góc độ…\n\n【Cấu trúc】\nN + から言うと / から言えば / から言って\n\n【Cách dùng】\nDùng đưa ra đánh giá dựa trên một tiêu chí/góc nhìn.\n\n【Sắc thái】\nKhá trung tính; không dùng trực tiếp để nêu quan điểm của một người cụ thể như 私から言うと trong nhiều ngữ cảnh tự nhiên.\n\n【Phân biệt】\n～から見ると có thể là góc nhìn người/quan sát; から言うと thiên tiêu chí đánh giá.",
     "reading": "～からいうと",
@@ -893,6 +940,7 @@
     ]
   },
   {
+    "note_id": "b4e157f8-53f4-4aad-b364-4aa0a73b7783",
     "front": "～からこそ",
     "back": "Chính vì… nên…\n\n【Cấu trúc】\n普通形 + からこそ\n\n【Cách dùng】\nDùng nhấn mạnh A chính là lý do đặc biệt dẫn đến B.\n\n【Sắc thái】\nこそ tạo nhấn mạnh mạnh, thường để phản bác hoặc khẳng định giá trị của nguyên nhân.\n\n【Phân biệt】\n～から chỉ nguyên nhân; ～からこそ = chính vì A chứ không phải lý do khác.",
     "reading": "～からこそ",
@@ -912,6 +960,7 @@
     ]
   },
   {
+    "note_id": "c4a7b2a0-0964-405c-8c20-97124dc63bda",
     "front": "～から見ると",
     "back": "Nhìn từ…; xét theo…\n\n【Cấu trúc】\nN + から見ると / から見れば / から見て\n\n【Cách dùng】\nDùng đánh giá từ góc nhìn của người hoặc căn cứ quan sát.\n\n【Sắc thái】\nCó thể dùng cho góc nhìn cá nhân hay dấu hiệu quan sát được.\n\n【Phân biệt】\n～からすると gần nghĩa; から見ると nhấn “nhìn từ góc độ”.",
     "reading": "～からみると",
@@ -931,6 +980,7 @@
     ]
   },
   {
+    "note_id": "14d2a4ba-e0df-4b28-9de9-166fcc6e996e",
     "front": "～からには",
     "back": "Một khi đã… thì…\n\n【Cấu trúc】\n普通形 + からには\n\n【Cách dùng】\nDùng từ sự thật/quyết định A suy ra trách nhiệm, quyết tâm hoặc kết quả đương nhiên B.\n\n【Sắc thái】\nThường đi với ～べきだ、～なければならない、～つもりだ.\n\n【Phân biệt】\n～以上は trang trọng hơn; ～からには thường tự nhiên hơn trong hội thoại.",
     "reading": "～からには",
@@ -950,6 +1000,7 @@
     ]
   },
   {
+    "note_id": "4c8af387-7142-4fcc-a232-43a2141bf414",
     "front": "～からして",
     "back": "Ngay từ… đã…; xét từ…\n\n【Cấu trúc】\nN + からして\n\n【Cách dùng】\nDùng lấy một ví dụ/đặc điểm A làm căn cứ suy ra toàn thể hoặc đánh giá B.\n\n【Sắc thái】\nThường chọn A là điểm tiêu biểu “ngay từ A đã…”.\n\n【Phân biệt】\n～からすると chỉ căn cứ đánh giá; ～からして còn có nghĩa “ngay cả A cũng”.",
     "reading": "～からして",
@@ -969,6 +1020,7 @@
     ]
   },
   {
+    "note_id": "de5497dd-d361-4140-ab69-6277a6c24a5c",
     "front": "～からすると / ～からすれば",
     "back": "Xét từ…; căn cứ vào…\n\n【Cấu trúc】\nN + からすると / からすれば\n\n【Cách dùng】\nDùng suy luận/đánh giá dựa trên A hoặc từ lập trường của A.\n\n【Sắc thái】\nKhá khách quan và thường dùng trong phân tích.\n\n【Phân biệt】\n～から見ると gần nghĩa; からすると nhấn căn cứ suy luận hơn hành động “nhìn”.",
     "reading": "～からすると／～からすれば",
@@ -988,6 +1040,7 @@
     ]
   },
   {
+    "note_id": "de56c5f1-a410-41f0-9fef-11ec0588fa5b",
     "front": "～からといって",
     "back": "Chỉ vì… không có nghĩa là…\n\n【Cấu trúc】\n普通形 + からといって、～とは限らない / ～わけではない\n\n【Cách dùng】\nDùng bác bỏ suy luận đơn giản A→B.\n\n【Sắc thái】\nThường vế sau là phủ định/không chấp nhận kết luận quá mức.\n\n【Phân biệt】\n～ても = dù A thì B; ～からといって = chỉ vì A không thể suy ra B.",
     "reading": "～からといって",
@@ -1007,6 +1060,7 @@
     ]
   },
   {
+    "note_id": "f900d19f-4f1d-4a7a-9d2d-222faf9dea1e",
     "front": "～っこない",
     "back": "Chắc chắn không thể…; không đời nào…\n\n【Cấu trúc】\nVます bỏ ます + っこない\n\n【Cách dùng】\nDùng phủ định mạnh khả năng thực hiện/xảy ra.\n\n【Sắc thái】\nRất khẩu ngữ và chủ quan.\n\n【Phân biệt】\n～はずがない cũng phủ định mạnh nhưng lý luận hơn; っこない thân mật/cảm tính.",
     "reading": "～っこない",
@@ -1026,6 +1080,7 @@
     ]
   },
   {
+    "note_id": "a4f114ec-4d2c-40dc-beba-d8eda620534c",
     "front": "～ことだ",
     "back": "Nên…; hãy…\n\n【Cấu trúc】\nV辞書形 / Vない + ことだ\n\n【Cách dùng】\nDùng đưa lời khuyên chung hoặc nhắc nhở người nghe nên/không nên làm gì.\n\n【Sắc thái】\nHơi mang giọng người trên/giảng giải; không phù hợp mọi quan hệ.\n\n【Phân biệt】\n～たほうがいい mềm và hội thoại hơn; ～ことだ mang tính lời khuyên nguyên tắc.",
     "reading": "～ことだ",
@@ -1045,6 +1100,7 @@
     ]
   },
   {
+    "note_id": "17ff74a8-b6ba-4602-a298-05513123f937",
     "front": "～ことだから",
     "back": "Vì là… nên chắc hẳn…\n\n【Cấu trúc】\nNの + ことだから\n\n【Cách dùng】\nDùng suy đoán B dựa trên tính cách/đặc trưng đã biết rõ của người A.\n\n【Sắc thái】\nThường A là người quen thuộc và B là kết luận “với người ấy thì chắc…”.\n\n【Phân biệt】\n～から chỉ nguyên nhân; ～ことだから hàm ý “vì đúng là con người/đặc điểm ấy”.",
     "reading": "～ことだから",
@@ -1064,6 +1120,7 @@
     ]
   },
   {
+    "note_id": "31af065d-a2db-43b6-b9b7-bd8d5340ccac",
     "front": "～ことか",
     "back": "Biết bao…; biết chừng nào…\n\n【Cấu trúc】\nどんなに / 何度 / どれほど + 普通形 + ことか\n\n【Cách dùng】\nDùng cảm thán mức độ cảm xúc/sự việc mạnh.\n\n【Sắc thái】\nKhá văn viết; thường đi với từ nghi vấn chỉ mức độ.\n\n【Phân biệt】\n～ことだろう gần nghĩa cảm thán; ～ことか trực tiếp cảm xúc hơn.",
     "reading": "～ことか",
@@ -1083,6 +1140,7 @@
     ]
   },
   {
+    "note_id": "59361eb3-b9d6-4b8b-b86d-f1e743c28aad",
     "front": "～ことなく",
     "back": "Mà không…; không hề…\n\n【Cấu trúc】\nV辞書形 + ことなく\n\n【Cách dùng】\nDùng nói B xảy ra mà không thực hiện A.\n\n【Sắc thái】\nVăn viết/trang trọng hơn ～ないで / ～ずに.\n\n【Phân biệt】\n～ずに khá trang trọng nhưng vẫn thông dụng; ～ことなく mang tính văn viết rõ.",
     "reading": "～ことなく",
@@ -1102,6 +1160,7 @@
     ]
   },
   {
+    "note_id": "54de7bb7-a929-447e-a214-2bb23e15b5ef",
     "front": "～ことに",
     "back": "Thật… là…; điều đáng… là…\n\n【Cấu trúc】\nAい / Aな / Vた + ことに\n\n【Cách dùng】\nDùng đặt cảm xúc/đánh giá của người nói lên đầu câu trước khi nêu sự việc.\n\n【Sắc thái】\nVăn viết, thường với 驚いたことに、残念なことに、幸いなことに.\n\n【Phân biệt】\n～ことには…ない là cấu trúc khác; mẫu này là bình luận cảm xúc.",
     "reading": "～ことに",
@@ -1121,6 +1180,7 @@
     ]
   },
   {
+    "note_id": "54fd4238-94bf-404f-bb78-9145b0d1104f",
     "front": "～ことにはならない",
     "back": "Không có nghĩa là…; chưa thể coi là…\n\n【Cấu trúc】\n普通形 + ことにはならない\n\n【Cách dùng】\nDùng phủ nhận việc từ A có thể kết luận ngay là B đã được thực hiện/đạt được.\n\n【Sắc thái】\nKhá lý luận, thường dùng khi tiêu chuẩn chưa đủ.\n\n【Phân biệt】\n～わけではない phủ định cách hiểu; ～ことにはならない nhấn kết quả/định nghĩa chưa được hình thành.",
     "reading": "～ことにはならない",
@@ -1140,6 +1200,7 @@
     ]
   },
   {
+    "note_id": "4a4b1606-3391-4bb0-8e43-db7dd17b2713",
     "front": "～くせして",
     "back": "Mặc dù… vậy mà…\n\n【Cấu trúc】\n普通形 + くせして\n\n【Cách dùng】\nDùng trách móc người có hành vi B trái với đặc điểm/sự thật A.\n\n【Sắc thái】\nKhẩu ngữ, chê trách mạnh; gần ～くせに.\n\n【Phân biệt】\n～のに trung tính hơn; ～くせして mang thái độ khó chịu/mỉa mai rõ.",
     "reading": "～くせして",
@@ -1159,6 +1220,7 @@
     ]
   },
   {
+    "note_id": "b9f6d0f5-b5f0-4412-b8f1-96b5c17c86e9",
     "front": "～まだしも",
     "back": "Nếu là… thì còn đỡ/chấp nhận được, nhưng…\n\n【Cấu trúc】\nN / 普通形 + ならまだしも\n\n【Cách dùng】\nDùng nói A còn có thể chấp nhận, còn B thì khó chấp nhận hơn nhiều.\n\n【Sắc thái】\nThường dùng để phê bình sự vượt quá mức hợp lý.\n\n【Phân biệt】\n～だけましだ đánh giá hiện trạng “còn đỡ”; ～ならまだしも đặt A làm mức còn chấp nhận được.",
     "reading": "～まだしも",
@@ -1178,6 +1240,7 @@
     ]
   },
   {
+    "note_id": "8be40e4e-1cea-42c9-9a73-74bfb8c7dcaa",
     "front": "～まい",
     "back": "Sẽ không…; chắc không…\n\n【Cấu trúc】\nV辞書形 + まい / する→するまい・すまい\n\n【Cách dùng】\nDùng biểu thị ý định phủ định hoặc suy đoán phủ định.\n\n【Sắc thái】\nVăn viết/trang trọng; ý chí “quyết không” hoặc “chắc không”.\n\n【Phân biệt】\n～ないつもりだ = dự định không; ～まい mạnh/văn viết hơn.",
     "reading": "～まい",
@@ -1197,6 +1260,7 @@
     ]
   },
   {
+    "note_id": "b32285c4-293d-4b29-8627-cd79f51fd908",
     "front": "～ままに",
     "back": "Theo đúng như…; cứ để theo…\n\n【Cấu trúc】\nV辞書形 / Vられる / Nの + ままに\n\n【Cách dùng】\nDùng thực hiện hành động B theo ý chí, chỉ dẫn hoặc dòng diễn biến A mà không chống lại.\n\n【Sắc thái】\nCó sắc thái “để mặc/theo đúng như A dẫn dắt”.\n\n【Phân biệt】\n～とおりに = theo đúng nội dung/quy trình; ～ままに thiên thuận theo ý/chuyển động/trạng thái.",
     "reading": "～ままに",
@@ -1216,6 +1280,7 @@
     ]
   },
   {
+    "note_id": "9f3d5291-f5d6-49cc-9143-f507702d6893",
     "front": "全く～ない",
     "back": "Hoàn toàn không…\n\n【Cấu trúc】\n全く + Vない / Aくない\n\n【Cách dùng】\nNhấn phủ định toàn bộ.\n\n【Sắc thái】\nTrung tính hơn ちっとも; dùng cả nói và viết.\n\n【Phân biệt】\nちっとも～ない khẩu ngữ hơn; 全く～ない mạnh nhưng trung tính.",
     "reading": "まったく～ない",
@@ -1235,6 +1300,7 @@
     ]
   },
   {
+    "note_id": "1174d877-a0aa-483b-b29f-91bb933f9c2a",
     "front": "～もかまわず",
     "back": "Bất chấp…; không quan tâm đến…\n\n【Cấu trúc】\nN + もかまわず\n\n【Cách dùng】\nDùng khi hành động B được thực hiện mà không để ý đến A vốn đáng lẽ phải quan tâm.\n\n【Sắc thái】\nThường mang phê bình hoặc nhấn quyết tâm mạnh.\n\n【Phân biệt】\n～を問わず = không phân biệt điều kiện; ～もかまわず = bất chấp/không thèm để ý.",
     "reading": "～もかまわず",
@@ -1254,6 +1320,7 @@
     ]
   },
   {
+    "note_id": "e3cff1c0-9ef1-45c3-95e4-bdce1d7b7a05",
     "front": "～も当然だ",
     "back": "… cũng là điều đương nhiên; không lạ khi…\n\n【Cấu trúc】\n普通形 + のも当然だ / ～ても当然だ\n\n【Cách dùng】\nDùng đánh giá một phản ứng/kết quả là hợp lý trong hoàn cảnh A.\n\n【Sắc thái】\nNhấn “có lý do đầy đủ nên như vậy là đương nhiên”.\n\n【Phân biệt】\n～はずだ là suy luận; ～も当然だ là đánh giá tính hợp lý/tự nhiên.",
     "reading": "～もとうぜんだ",
@@ -1273,6 +1340,7 @@
     ]
   },
   {
+    "note_id": "997ab17e-f4f2-4e0c-aa5e-353c59698f1a",
     "front": "～もの / ～もん",
     "back": "Vì… mà; tại vì…\n\n【Cấu trúc】\n普通形 + もの / もん\n\n【Cách dùng】\nDùng nêu lý do, thường để giải thích/biện minh ở cuối câu.\n\n【Sắc thái】\nもん rất khẩu ngữ và trẻ con/thân mật; dễ nghe như viện cớ.\n\n【Phân biệt】\n～から trung tính; ～もの/もん có cảm xúc và tự biện hộ hơn.",
     "reading": "～もの／～もん",
@@ -1292,6 +1360,7 @@
     ]
   },
   {
+    "note_id": "ec86e6a7-5c39-4c9b-8168-cda8f65bfd5c",
     "front": "～ものだ",
     "back": "Thường là…; hồi trước thường…; thật là…\n\n【Cấu trúc】\nV辞書形 / Vた + ものだ\n\n【Cách dùng】\nDùng nêu bản chất/quy luật, hồi tưởng thói quen quá khứ hoặc cảm thán.\n\n【Sắc thái】\nTùy ngữ cảnh: quy luật mang tính khái quát; Vたものだ gợi hoài niệm.\n\n【Phân biệt】\n～ことだ thiên lời khuyên; ～ものだ thường nói quy luật/ký ức/cảm thán.",
     "reading": "～ものだ",
@@ -1311,6 +1380,7 @@
     ]
   },
   {
+    "note_id": "bf3e9053-7c1b-4ea4-ab50-b5f348e3dedb",
     "front": "～ものだから",
     "back": "Vì…; bởi vì…\n\n【Cấu trúc】\n普通形 + ものだから / もので\n\n【Cách dùng】\nDùng giải thích nguyên nhân mang tính cá nhân, thường cho một kết quả không mong muốn hoặc lời xin lỗi.\n\n【Sắc thái】\nCó sắc thái biện minh: “vì hoàn cảnh là như thế nên…”.\n\n【Phân biệt】\n～ので trung tính hơn; ～ものだから dễ mang ý giải thích/biện hộ.",
     "reading": "～ものだから",
@@ -1330,6 +1400,7 @@
     ]
   },
   {
+    "note_id": "586032dc-37f3-4b5b-8533-735be445184c",
     "front": "～ものではない",
     "back": "Không nên…; không phải thứ có thể…\n\n【Cấu trúc】\nV辞書形 + ものではない\n\n【Cách dùng】\nDùng nói chuẩn mực chung rằng một hành động là không nên làm hoặc không phù hợp.\n\n【Sắc thái】\nMang tính giáo huấn/quy tắc xã hội hơn cấm đoán cá nhân.\n\n【Phân biệt】\n～てはいけない là cấm trực tiếp; ～ものではない nói “về nguyên tắc không nên”.",
     "reading": "～ものではない",
@@ -1349,6 +1420,7 @@
     ]
   },
   {
+    "note_id": "2675bb2c-b3a0-44c6-8123-b3187e6a5ea2",
     "front": "～ものがある",
     "back": "Có điều gì đó rất…; có sức…\n\n【Cấu trúc】\n普通形 + ものがある\n\n【Cách dùng】\nDùng đánh giá mạnh rằng A gây một ấn tượng/cảm xúc đáng kể.\n\n【Sắc thái】\nMang tính nhận xét chủ quan nhưng thường dùng trong văn viết/phê bình.\n\n【Phân biệt】\n～感じがする chỉ “có cảm giác”; ～ものがある nhấn giá trị/ấn tượng mạnh hơn.",
     "reading": "～ものがある",
@@ -1368,6 +1440,7 @@
     ]
   },
   {
+    "note_id": "13b8f1e2-9129-4156-b827-5e04e866723e",
     "front": "～ものか / ～もんか",
     "back": "Đời nào…; tuyệt đối không…\n\n【Cấu trúc】\n普通形 + ものか / もんか\n\n【Cách dùng】\nDùng phủ định mạnh hoặc phản bác một ý kiến bằng câu hỏi tu từ.\n\n【Sắc thái】\nCảm xúc rất mạnh; もんか khẩu ngữ hơn, có thể thô nếu dùng không đúng ngữ cảnh.\n\n【Phân biệt】\n～わけがない lý luận hơn; ～ものか là phản ứng cảm xúc “đời nào”.",
     "reading": "～ものか／～もんか",
@@ -1387,6 +1460,7 @@
     ]
   },
   {
+    "note_id": "5dec96f0-7038-405a-9ab2-3217ebf20465",
     "front": "～ものなら",
     "back": "Nếu có thể… thì…; nếu mà dám/có thể…\n\n【Cấu trúc】\nV可能形 + ものなら / V意向形 + ものなら\n\n【Cách dùng】\nDùng giả định một việc rất khó/không thực tế; đôi khi với ý thách thức.\n\n【Sắc thái】\nThường hàm ý điều kiện A khó xảy ra.\n\n【Phân biệt】\n～なら là điều kiện trung tính; ～ものなら nhấn khả năng rất thấp hoặc thách thức.",
     "reading": "～ものなら",
@@ -1406,6 +1480,7 @@
     ]
   },
   {
+    "note_id": "89dc1ac5-5ece-4900-a5dc-de5afc1f4f0e",
     "front": "～ものの",
     "back": "Mặc dù… nhưng…\n\n【Cấu trúc】\n普通形 + ものの\n\n【Cách dùng】\nDùng thừa nhận A nhưng thực tế B không như mong đợi/không tiến triển tương ứng.\n\n【Sắc thái】\nVăn viết hơn ～けれども; thường B là kết quả không đầy đủ.\n\n【Phân biệt】\n～のに có cảm xúc nghịch lý hơn; ～ものの bình tĩnh, văn viết.",
     "reading": "～ものの",
@@ -1425,6 +1500,7 @@
     ]
   },
   {
+    "note_id": "f9b86df7-6916-4e5f-bb43-b4f82190ce65",
     "front": "もっとも",
     "back": "Tuy nhiên; nói vậy nhưng…\n\n【Cấu trúc】\nMệnh đề。もっとも、mệnh đề\n\n【Cách dùng】\nDùng thêm điều kiện/ngoại lệ làm yếu hoặc điều chỉnh phát biểu trước.\n\n【Sắc thái】\nKhá văn viết; giống “tuy nhiên, cần nói thêm rằng…”.\n\n【Phân biệt】\nただし thường nêu điều kiện/quy định rõ; もっとも bổ sung ngoại lệ/điều chỉnh.",
     "reading": "もっとも",
@@ -1444,6 +1520,7 @@
     ]
   },
   {
+    "note_id": "f300c116-0c20-43e7-bdc9-ca28500a4dbf",
     "front": "もう少しで～",
     "back": "Suýt nữa thì…\n\n【Cấu trúc】\nもう少しで + V辞書形 / Vるところだった\n\n【Cách dùng】\nDùng khi một việc gần xảy ra nhưng cuối cùng không xảy ra.\n\n【Sắc thái】\nThường nói tình huống nguy hiểm/đáng tiếc vừa tránh được.\n\n【Phân biệt】\n危うく cũng “suýt nữa”, trang trọng và thường đi với kết quả xấu.",
     "reading": "もうすこしで～",
@@ -1463,6 +1540,7 @@
     ]
   },
   {
+    "note_id": "846cc36f-04f9-4958-8f49-af85e018f6bb",
     "front": "～ないではいられない",
     "back": "Không thể không…; không kìm được phải…\n\n【Cấu trúc】\nVない + ではいられない\n\n【Cách dùng】\nDùng khi cảm xúc/bản năng mạnh khiến tự nhiên phải làm A.\n\n【Sắc thái】\nKhông phải nghĩa vụ bên ngoài mà là không kiềm chế được từ bên trong.\n\n【Phân biệt】\n～ざるを得ない = không còn lựa chọn do hoàn cảnh; ～ないではいられない = không kìm được.",
     "reading": "～ないではいられない",
@@ -1482,6 +1560,7 @@
     ]
   },
   {
+    "note_id": "7d26dfda-77d8-45bc-92fa-e1c92e784d44",
     "front": "～ないことには～ない",
     "back": "Nếu không… thì không thể…\n\n【Cấu trúc】\nVない + ことには + Vない\n\n【Cách dùng】\nDùng nói A là điều kiện tiên quyết, nếu chưa có A thì không thể biết/làm B.\n\n【Sắc thái】\nNhấn điều kiện bắt buộc mạnh.\n\n【Phân biệt】\n～てからでないと tương tự nhưng nhấn trình tự “sau khi A mới B”; ないことには nhấn điều kiện cần.",
     "reading": "～ないことには～ない",
@@ -1501,6 +1580,7 @@
     ]
   },
   {
+    "note_id": "cc320e67-e139-4517-82a2-7e1942c5dc13",
     "front": "～中を / ～中では",
     "back": "Giữa lúc/trong hoàn cảnh…\n\n【Cấu trúc】\nNの / Vている + 中を / 中では\n\n【Cách dùng】\nDùng nói một hành động diễn ra giữa hoàn cảnh A, thường A khó khăn/bất tiện.\n\n【Sắc thái】\n中を thường gợi ý “bất chấp/giữa lúc”; 中では xác định phạm vi hoàn cảnh.\n\n【Phân biệt】\n～最中に nhấn đúng lúc đang diễn ra; ～中を nhấn đi xuyên/hoạt động trong hoàn cảnh.",
     "reading": "～なかを／～なかでは",
@@ -1520,6 +1600,7 @@
     ]
   },
   {
+    "note_id": "543d9e44-c921-4579-ad47-93968b881eab",
     "front": "～なくはない / ～なくもない",
     "back": "Không phải là không…; cũng có thể…\n\n【Cấu trúc】\nVない形 + なくはない / なくもない\nAい: ～くなくはない\nAな/N: ～でなくはない\n\n【Cách dùng】\nDùng phủ định kép để nói khả năng/ý muốn có nhưng không mạnh hoặc có điều kiện.\n\n【Sắc thái】\nTránh khẳng định trực tiếp; sắc thái dè dặt “không phải là không”.\n\n【Phân biệt】\n～こともできる là khả năng trung tính; ～なくはない hàm ý miễn cưỡng/không hoàn toàn.",
     "reading": "～なくはない／～なくもない",
@@ -1539,6 +1620,7 @@
     ]
   },
   {
+    "note_id": "dd4636c8-5963-4334-b2dc-529d5f063bdc",
     "front": "～なくて済む",
     "back": "Không cần phải… mà vẫn ổn\n\n【Cấu trúc】\nVない + なくて済む\n\n【Cách dùng】\nDùng khi một việc vốn có thể phải làm nhưng may mắn không cần làm.\n\n【Sắc thái】\nThường có sắc thái nhẹ nhõm.\n\n【Phân biệt】\n～ずに済む trang trọng hơn nhưng nghĩa gần như giống nhau.",
     "reading": "～なくてすむ",
@@ -1558,6 +1640,7 @@
     ]
   },
   {
+    "note_id": "ef48dcba-04f9-4207-86b5-26ea2bef05cd",
     "front": "何も～ない",
     "back": "Không… gì cả; không cần phải…\n\n【Cấu trúc】\n何も + Vない\n\n【Cách dùng】\nPhủ định toàn bộ đối tượng; trong 何も～ことはない còn có nghĩa “không cần phải”.\n\n【Sắc thái】\nTùy mẫu có thể là phủ định đơn thuần hoặc trấn an “không cần”.\n\n【Phân biệt】\n何一つ～ない mạnh hơn “không một thứ gì”; 何も～ない phổ thông.",
     "reading": "なにも～ない",
@@ -1577,6 +1660,7 @@
     ]
   },
   {
+    "note_id": "605e592e-d6df-407a-9aba-c7fd8ecd041a",
     "front": "なお",
     "back": "Vẫn còn; hơn nữa; xin lưu ý thêm\n\n【Cấu trúc】\nなお + mệnh đề\n\n【Cách dùng】\nDùng nói trạng thái vẫn tiếp tục hoặc bổ sung thông tin trong văn viết/thông báo.\n\n【Sắc thái】\nTrang trọng; nghĩa “hơn nữa” thường gặp trong văn bản chính thức.\n\n【Phân biệt】\nさらに nhấn thêm mức độ; なお thường bổ sung chú thích/thông tin.",
     "reading": "なお",
@@ -1596,6 +1680,7 @@
     ]
   },
   {
+    "note_id": "3679a1f1-3dc0-4a3b-b7b7-5d6b130e74d9",
     "front": "～ねばならない",
     "back": "Phải…; bắt buộc phải…\n\n【Cấu trúc】\nVない bỏ ない + ねばならない（する→せねばならない）\n\n【Cách dùng】\nDùng diễn tả nghĩa vụ cần thực hiện.\n\n【Sắc thái】\nVăn viết/trang trọng, cứng hơn ～なければならない.\n\n【Phân biệt】\n～なければならない trung tính hơn; ～ねばならない thường trong phát biểu/văn viết.",
     "reading": "～ねばならない",
@@ -1615,6 +1700,7 @@
     ]
   },
   {
+    "note_id": "c10cf6d7-eeb9-49df-9998-77a78c1a0ad3",
     "front": "～にあたって",
     "back": "Nhân dịp; khi bắt đầu/đối mặt với…\n\n【Cấu trúc】\nN + にあたって / V辞書形 + にあたって\n\n【Cách dùng】\nDùng trước một sự kiện quan trọng để nói chuẩn bị, thái độ hoặc hành động cần thiết.\n\n【Sắc thái】\nTrang trọng, thường với sự kiện đặc biệt như khai trương, thi, bắt đầu dự án.\n\n【Phân biệt】\n～に際して gần nghĩa; にあたって thường nhấn sự chuẩn bị/đối mặt tích cực.",
     "reading": "～にあたって",
@@ -1634,6 +1720,7 @@
     ]
   },
   {
+    "note_id": "3f2bd9cd-a7f8-4986-bd71-4a66b4d551fc",
     "front": "～にほかならない",
     "back": "Không gì khác ngoài…; chính là…\n\n【Cấu trúc】\nN / 普通形 + にほかならない\n\n【Cách dùng】\nDùng khẳng định mạnh bản chất/nguyên nhân thật sự của một việc.\n\n【Sắc thái】\nTrang trọng, văn viết; mang tính kết luận.\n\n【Phân biệt】\n～でしかない có thể hạ thấp “chỉ là”; にほかならない khẳng định “chính là”.",
     "reading": "～にほかならない",
@@ -1653,6 +1740,7 @@
     ]
   },
   {
+    "note_id": "a56492ac-b607-499b-9efa-7fcd3e99d26c",
     "front": "～に限らず",
     "back": "Không chỉ… mà…\n\n【Cấu trúc】\nN + に限らず\n\n【Cách dùng】\nDùng mở rộng phạm vi từ A sang những đối tượng khác.\n\n【Sắc thái】\nKhá trang trọng; thường theo sau bằng ～も、すべて.\n\n【Phân biệt】\n～だけでなく trung tính; に限らず nhấn phạm vi không bị giới hạn ở A.",
     "reading": "～にかぎらず",
@@ -1672,6 +1760,7 @@
     ]
   },
   {
+    "note_id": "8abee073-d2b4-4165-b507-d6e09f18c16f",
     "front": "～に限る",
     "back": "Tốt nhất là…; không gì bằng…\n\n【Cấu trúc】\nN / V辞書形 / Vない + に限る\n\n【Cách dùng】\nDùng người nói khẳng định lựa chọn A là tốt nhất theo kinh nghiệm/cảm nhận.\n\n【Sắc thái】\nChủ quan, thường trong hội thoại.\n\n【Phân biệt】\n～に越したことはない dè dặt “tốt hơn nếu”; ～に限る khẳng định mạnh “tốt nhất”.",
     "reading": "～にかぎる",
@@ -1691,6 +1780,7 @@
     ]
   },
   {
+    "note_id": "62c5da05-170d-4927-8407-dd7bfbeb8a9a",
     "front": "～に限って",
     "back": "Riêng đúng…; chính lúc…; riêng người đó thì không…\n\n【Cấu trúc】\nN + に限って\n\n【Cách dùng】\nDùng nhấn một trường hợp đặc biệt, thường xảy ra trái mong đợi; cũng dùng tin tưởng “riêng A thì không thể”.\n\n【Sắc thái】\nHay đi với chuyện xui xẻo hoặc ngoại lệ bất ngờ.\n\n【Phân biệt】\n～だけ chỉ giới hạn trung tính; に限って thêm sắc thái đặc biệt/bất ngờ.",
     "reading": "～にかぎって",
@@ -1710,6 +1800,7 @@
     ]
   },
   {
+    "note_id": "e4c8bb61-2f31-42a5-bfc7-0dc8e069eb6c",
     "front": "～に関わらず",
     "back": "Bất kể…; không phụ thuộc vào…\n\n【Cấu trúc】\nN / V辞書・ない + に関わらず\n\n【Cách dùng】\nDùng nói kết quả B không thay đổi dù điều kiện A thế nào.\n\n【Sắc thái】\nTrang trọng, khách quan; hay dùng với cặp đối lập 有無、男女、晴雨.\n\n【Phân biệt】\n～を問わず cũng “bất kể” nhưng thường đi với danh mục/tiêu chí phân loại.",
     "reading": "～にかかわらず",
@@ -1729,6 +1820,7 @@
     ]
   },
   {
+    "note_id": "d413c817-3f99-4390-83de-37e1d5e2b99a",
     "front": "～に関わる",
     "back": "Liên quan đến; ảnh hưởng đến vấn đề quan trọng\n\n【Cấu trúc】\nN + に関わる\n\n【Cách dùng】\nDùng nói vấn đề có liên hệ trực tiếp, thường với chuyện quan trọng như tính mạng, danh dự, tương lai.\n\n【Sắc thái】\nTrang trọng và nặng hơn ～に関する.\n\n【Phân biệt】\n～に関する chỉ “liên quan/chủ đề”; に関わる thường hàm ý ảnh hưởng thực tế.",
     "reading": "～にかかわる",
@@ -1748,6 +1840,7 @@
     ]
   },
   {
+    "note_id": "80b461f6-e048-4aaa-8d4f-6e68942655f9",
     "front": "～に決まっている",
     "back": "Chắc chắn là…; rõ ràng là…\n\n【Cấu trúc】\n普通形 + に決まっている\n\n【Cách dùng】\nDùng người nói khẳng định mạnh một phán đoán.\n\n【Sắc thái】\nChủ quan, khẩu ngữ hơn ～に相違ない.\n\n【Phân biệt】\n～はずだ dựa trên lý luận; に決まっている là tin chắc mạnh của người nói.",
     "reading": "～にきまっている",
@@ -1767,6 +1860,7 @@
     ]
   },
   {
+    "note_id": "b255206e-b40c-4905-9e0a-32ed34723494",
     "front": "～に越したことはない",
     "back": "Tốt nhất là…; nếu được thì nên…\n\n【Cấu trúc】\n普通形 / N + に越したことはない\n\n【Cách dùng】\nDùng nói A là phương án tốt hơn/an toàn hơn, dù không nhất thiết bắt buộc.\n\n【Sắc thái】\nMềm và thực tế: “càng A thì càng tốt”.\n\n【Phân biệt】\n～に限る mạnh “A là tốt nhất”; に越したことはない dè dặt hơn.",
     "reading": "～にこしたことはない",
@@ -1786,6 +1880,7 @@
     ]
   },
   {
+    "note_id": "e91711d3-1b2d-4a65-9422-f25ef981c5c3",
     "front": "～に応えて",
     "back": "Đáp lại…; đáp ứng…\n\n【Cấu trúc】\nN + に応えて / に応える + N\n\n【Cách dùng】\nDùng khi hành động B được thực hiện để đáp lại kỳ vọng, yêu cầu, ủng hộ ở A.\n\n【Sắc thái】\nThường với 期待、要望、声、応援.\n\n【Phân biệt】\n～に応じて = tùy theo/đáp ứng theo điều kiện; に応えて nhấn đáp lại mong đợi/yêu cầu.",
     "reading": "～にこたえて",
@@ -1805,6 +1900,7 @@
     ]
   },
   {
+    "note_id": "892fa4e2-ec2e-4166-987c-869ea01ab9ca",
     "front": "～に加えて",
     "back": "Thêm vào…; ngoài… còn…\n\n【Cấu trúc】\nN + に加えて\n\n【Cách dùng】\nDùng bổ sung B vào A, thường hai yếu tố cùng loại/cùng hướng.\n\n【Sắc thái】\nKhá trang trọng và phù hợp văn viết.\n\n【Phân biệt】\nそれに hội thoại hơn; に加えて cấu trúc danh từ và trang trọng hơn.",
     "reading": "～にくわえて",
@@ -1824,6 +1920,7 @@
     ]
   },
   {
+    "note_id": "0794530e-c761-449c-8fb1-4805ffeeb1c0",
     "front": "～に基づいて",
     "back": "Dựa trên; căn cứ vào…\n\n【Cấu trúc】\nN + に基づいて / に基づく + N\n\n【Cách dùng】\nDùng khi hành động/phán đoán được xây dựng trên dữ liệu, quy tắc, sự thật, kế hoạch.\n\n【Sắc thái】\nTrang trọng, khách quan.\n\n【Phân biệt】\n～をもとに cũng “dựa trên” nhưng linh hoạt/sáng tạo hơn; に基づいて nhấn căn cứ chính thức.",
     "reading": "～にもとづいて",
@@ -1843,6 +1940,7 @@
     ]
   },
   {
+    "note_id": "01588308-f6db-44f9-b2b1-b882d5e18b50",
     "front": "～に向かって",
     "back": "Hướng về; tiến về phía…\n\n【Cấu trúc】\nN + に向かって\n\n【Cách dùng】\nDùng cho hướng di chuyển vật lý hoặc hướng lời nói/hành động tới đối tượng.\n\n【Sắc thái】\nNhấn hướng đích.\n\n【Phân biệt】\n～へ chỉ đích đến đơn giản; に向かって nhấn quá trình/hướng đang tiến tới.",
     "reading": "～にむかって",
@@ -1862,6 +1960,7 @@
     ]
   },
   {
+    "note_id": "5cec5a8a-538e-4b95-9eef-d5a0c41019f5",
     "front": "～に応じて",
     "back": "Tùy theo; tương ứng với…\n\n【Cấu trúc】\nN + に応じて / に応じた + N\n\n【Cách dùng】\nDùng khi B thay đổi/được điều chỉnh phù hợp với A.\n\n【Sắc thái】\nTrang trọng, khách quan.\n\n【Phân biệt】\n～によって có thể chỉ nguyên nhân/phương tiện; に応じて nhấn sự điều chỉnh tương ứng.",
     "reading": "～におうじて",
@@ -1881,6 +1980,7 @@
     ]
   },
   {
+    "note_id": "582b0754-de75-49ba-bdaa-094cacfbd6e5",
     "front": "～に際して",
     "back": "Khi; nhân dịp…\n\n【Cấu trúc】\nN / V辞書形 + に際して\n\n【Cách dùng】\nDùng tại thời điểm một sự kiện đặc biệt/chính thức xảy ra.\n\n【Sắc thái】\nTrang trọng hơn ～とき; thường trong thông báo, nghi thức.\n\n【Phân biệt】\n～にあたって thường nhấn chuẩn bị/đối mặt; に際して nhấn thời điểm/dịp.",
     "reading": "～にさいして",
@@ -1900,6 +2000,7 @@
     ]
   },
   {
+    "note_id": "897038f8-42b3-4329-95a4-dbaa8cc0ed2c",
     "front": "～に先立ち",
     "back": "Trước khi…; trước một sự kiện quan trọng\n\n【Cấu trúc】\nN / V辞書形 + に先立ち / に先立って\n\n【Cách dùng】\nDùng nói hành động chuẩn bị xảy ra trước A.\n\n【Sắc thái】\nRất trang trọng; thường với sự kiện chính thức.\n\n【Phân biệt】\n～前に trung tính; に先立ち nhấn tính chuẩn bị/chính thức.",
     "reading": "～にさきだち",
@@ -1919,6 +2020,7 @@
     ]
   },
   {
+    "note_id": "94fa75f7-59d7-4533-b1e7-aaf0a4e01639",
     "front": "～にせよ / ～にしろ",
     "back": "Dù…; cho dù…\n\n【Cấu trúc】\n普通形 + にせよ / にしろ\n\n【Cách dùng】\nDùng nhượng bộ: dù giả sử A đúng thì kết luận B vẫn không đổi.\n\n【Sắc thái】\nにせよ trang trọng hơn; にしろ hội thoại hơn.\n\n【Phân biệt】\n～ても gần nghĩa nhưng trung tính hơn; にせよ/にしろ có sắc thái “dù xét thế nào”.",
     "reading": "～にせよ／～にしろ",
@@ -1938,6 +2040,7 @@
     ]
   },
   {
+    "note_id": "65d06fd7-8990-41bc-b5a0-69abfd2ec615",
     "front": "～にしろ～にしろ",
     "back": "Dù là A hay B…\n\n【Cấu trúc】\nA + にしろ + B + にしろ\n\n【Cách dùng】\nDùng nêu hai trường hợp đại diện rồi nói kết luận chung không thay đổi.\n\n【Sắc thái】\nHội thoại/trung tính; にせよ～にせよ trang trọng hơn.\n\n【Phân biệt】\n～ても～ても gần nghĩa nhưng ít mang sắc thái lựa chọn hai trường hợp đại diện.",
     "reading": "～にしろ～にしろ",
@@ -1957,6 +2060,7 @@
     ]
   },
   {
+    "note_id": "eb4139fe-2273-40d9-9860-645a8cbc4cc0",
     "front": "～にしたら / ～にすれば",
     "back": "Đứng từ phía…; đối với…\n\n【Cấu trúc】\nN + にしたら / にすれば\n\n【Cách dùng】\nDùng suy xét cảm xúc/quan điểm nếu đứng ở vị trí của người A.\n\n【Sắc thái】\nThường A là người chịu ảnh hưởng; mang tính đồng cảm/đổi góc nhìn.\n\n【Phân biệt】\n～から見ると chỉ góc nhìn nói chung; にしたら nhấn đặt mình vào vị trí A.",
     "reading": "～にしたら／～にすれば",
@@ -1976,6 +2080,7 @@
     ]
   },
   {
+    "note_id": "da444424-cb5f-4697-b1b9-bfadb4678c91",
     "front": "～にしても～にしても",
     "back": "Dù A hay B…\n\n【Cấu trúc】\nA + にしても + B + にしても\n\n【Cách dùng】\nDùng nêu hai khả năng rồi đưa ra kết luận chung.\n\n【Sắc thái】\nTrung tính; thường với hai ví dụ đối lập/đại diện.\n\n【Phân biệt】\n～にしろ～にしろ gần nghĩa; にしても thường mềm và tự nhiên hơn.",
     "reading": "～にしても～にしても",
@@ -1995,6 +2100,7 @@
     ]
   },
   {
+    "note_id": "eaf6a7f5-6795-423b-80d8-ea5d2195a0d1",
     "front": "～に沿って",
     "back": "Theo; dọc theo; phù hợp với…\n\n【Cấu trúc】\nN + に沿って / に沿った + N\n\n【Cách dùng】\nDùng theo đường tuyến vật lý hoặc theo chính sách, kế hoạch, mong muốn.\n\n【Sắc thái】\nNhấn bám sát đường/hướng/chuẩn đã có.\n\n【Phân biệt】\n～に基づいて = dựa trên căn cứ; に沿って = đi theo định hướng/quy tắc.",
     "reading": "～にそって",
@@ -2014,6 +2120,7 @@
     ]
   },
   {
+    "note_id": "1462289e-6b8e-4e6f-aad9-254fd6d40fed",
     "front": "～に相違ない",
     "back": "Chắc chắn; không nghi ngờ gì…\n\n【Cấu trúc】\n普通形 + に相違ない\n\n【Cách dùng】\nDùng khẳng định mạnh phán đoán là đúng.\n\n【Sắc thái】\nRất trang trọng/văn viết.\n\n【Phân biệt】\n～に決まっている chủ quan/khẩu ngữ; に相違ない trang trọng và khách quan hơn.",
     "reading": "～にそういない",
@@ -2033,6 +2140,7 @@
     ]
   },
   {
+    "note_id": "0d416ecb-bc0c-494d-9b5c-00e0e9068761",
     "front": "～に過ぎない",
     "back": "Chỉ là…; không hơn gì…\n\n【Cấu trúc】\nN / 普通形 + に過ぎない\n\n【Cách dùng】\nDùng giới hạn giá trị/số lượng/bản chất ở mức thấp A.\n\n【Sắc thái】\nTrang trọng, thường mang ý hạ thấp hoặc khách quan hóa.\n\n【Phân biệt】\n～でしかない gần nghĩa; に過ぎない văn viết hơn.",
     "reading": "～にすぎない",
@@ -2052,6 +2160,7 @@
     ]
   },
   {
+    "note_id": "f7ac631f-e643-48eb-a138-ec88f354d286",
     "front": "～に伴って",
     "back": "Cùng với…; kéo theo…\n\n【Cấu trúc】\nN / V辞書形 + に伴って\n\n【Cách dùng】\nDùng khi sự thay đổi A kéo theo B biến đổi cùng.\n\n【Sắc thái】\nTrang trọng; thường cho thay đổi xã hội, quy mô, hiện tượng.\n\n【Phân biệt】\n～につれて gần nghĩa nhưng tự nhiên hơn với thay đổi dần; に伴って nhấn quan hệ đi kèm.",
     "reading": "～にともなって",
@@ -2071,6 +2180,7 @@
     ]
   },
   {
+    "note_id": "773e953e-2698-4c58-b4a8-72e6daa86074",
     "front": "～につけ",
     "back": "Mỗi khi…; dù A hay B…\n\n【Cấu trúc】\nV辞書形 + につけ / AにつけBにつけ\n\n【Cách dùng】\nDùng khi mỗi lần gặp A thì cảm xúc/suy nghĩ B tự nhiên nảy sinh; hoặc dù trường hợp nào trong hai trường hợp.\n\n【Sắc thái】\nThường đi với cảm xúc, ký ức; văn viết hơn ～たびに.\n\n【Phân biệt】\n～たびに chỉ lặp lại sự kiện; につけ thường kéo theo cảm xúc/đánh giá.",
     "reading": "～につけ",
@@ -2090,6 +2200,7 @@
     ]
   },
   {
+    "note_id": "cfa516db-7652-4854-93ba-176e43887ec0",
     "front": "～につき",
     "back": "Vì…; mỗi…\n\n【Cấu trúc】\nN + につき\n\n【Cách dùng】\nTrong thông báo: nêu lý do; trong số lượng: “mỗi A”.\n\n【Sắc thái】\nRất trang trọng/biển báo, văn hành chính.\n\n【Phân biệt】\n～ので là lý do thông thường; ～につき thường không dùng hội thoại hàng ngày.",
     "reading": "～につき",
@@ -2109,6 +2220,7 @@
     ]
   },
   {
+    "note_id": "2e2af357-e41c-480d-9189-06079b516595",
     "front": "～にわたって",
     "back": "Suốt; trải rộng qua…\n\n【Cấu trúc】\nN + にわたって / にわたる + N\n\n【Cách dùng】\nDùng cho phạm vi thời gian, không gian, lĩnh vực kéo dài/rộng.\n\n【Sắc thái】\nTrang trọng, nhấn độ rộng/toàn bộ phạm vi.\n\n【Phân biệt】\n～の間 chỉ khoảng thời gian; にわたって nhấn quy mô rộng/kéo dài.",
     "reading": "～にわたって",
@@ -2128,6 +2240,7 @@
     ]
   },
   {
+    "note_id": "bf293298-7913-47d5-8217-13e56dd1ade3",
     "front": "～にもかかわらず",
     "back": "Mặc dù…; bất chấp…\n\n【Cấu trúc】\n普通形 / N + にもかかわらず\n\n【Cách dùng】\nDùng nêu B trái với điều bình thường được dự đoán từ A.\n\n【Sắc thái】\nTrang trọng/văn viết hơn ～のに.\n\n【Phân biệt】\n～のに thường có cảm xúc người nói; にもかかわらず khách quan và trang trọng hơn.",
     "reading": "～にもかかわらず",
@@ -2147,6 +2260,7 @@
     ]
   },
   {
+    "note_id": "ad387bfd-17ae-4ce6-a58c-f2b0a6104ce2",
     "front": "～にて",
     "back": "Tại; bằng; với\n\n【Cấu trúc】\nN + にて\n\n【Cách dùng】\nTrợ từ trang trọng thay cho で trong thông báo/văn bản.\n\n【Sắc thái】\nRất trang trọng, hiếm trong hội thoại.\n\n【Phân biệt】\nで là dạng trung tính; にて dùng văn bản, sự kiện, thông báo.",
     "reading": "～にて",
@@ -2166,6 +2280,7 @@
     ]
   },
   {
+    "note_id": "5bfc5e5f-893b-443a-ae62-9fa8685a9d06",
     "front": "～のももっともだ",
     "back": "… cũng là điều dễ hiểu; không trách được…\n\n【Cấu trúc】\n普通形 + のももっともだ\n\n【Cách dùng】\nDùng công nhận phản ứng/hành động A có lý do hợp lý.\n\n【Sắc thái】\nThể hiện sự thấu hiểu: “như vậy cũng phải”.\n\n【Phân biệt】\n～のも当然だ mạnh tính đương nhiên; ～のももっともだ nhấn lý do hợp lý/dễ thông cảm.",
     "reading": "～のももっともだ",
@@ -2185,6 +2300,7 @@
     ]
   },
   {
+    "note_id": "3a111fc0-d8b0-4123-afd0-332971508a9d",
     "front": "～のもとで",
     "back": "Dưới sự…; trong điều kiện/sự chỉ đạo của…\n\n【Cấu trúc】\nN + のもとで / のもとに\n\n【Cách dùng】\nDùng nói hành động diễn ra dưới quyền, hướng dẫn, điều kiện, chính sách hoặc lý tưởng A.\n\n【Sắc thái】\nTrang trọng.\n\n【Phân biệt】\n～の下で có thể nghĩa vật lý “ở dưới”; のもとで thường nghĩa trừu tượng.",
     "reading": "～のもとで",
@@ -2204,6 +2320,7 @@
     ]
   },
   {
+    "note_id": "68532103-ff73-481c-ba4b-3dbfc925e590",
     "front": "～の上では",
     "back": "Xét trên…; theo…\n\n【Cấu trúc】\nNの + 上では / V辞書形 + 上では\n\n【Cách dùng】\nDùng nói từ góc độ lý thuyết, quy định, dữ liệu hoặc bề ngoài.\n\n【Sắc thái】\nThường hàm ý thực tế có thể khác với “trên giấy tờ/lý thuyết”.\n\n【Phân biệt】\n～上（じょう） là dạng ghép; ～の上では thường tạo đối chiếu với thực tế.",
     "reading": "～のうえでは",
@@ -2223,6 +2340,7 @@
     ]
   },
   {
+    "note_id": "b6ccf234-1c5e-4d5b-9ab9-c1f9dab43392",
     "front": "～のみ",
     "back": "Chỉ; duy nhất\n\n【Cấu trúc】\nN / V辞書形 + のみ\n\n【Cách dùng】\nDạng trang trọng của だけ.\n\n【Sắc thái】\nThường dùng trong văn bản, thông báo, văn viết.\n\n【Phân biệt】\nだけ trung tính/hội thoại; のみ trang trọng.",
     "reading": "～のみ",
@@ -2242,6 +2360,7 @@
     ]
   },
   {
+    "note_id": "decffc50-15c3-4682-8ec4-f549ca0551ba",
     "front": "～のみならず",
     "back": "Không chỉ… mà còn…\n\n【Cấu trúc】\nN / 普通形 + のみならず、～も\n\n【Cách dùng】\nDùng mở rộng từ A sang B.\n\n【Sắc thái】\nRất trang trọng/văn viết hơn だけでなく.\n\n【Phân biệt】\n～ばかりか cũng nhấn mạnh; のみならず mang văn phong chính thức hơn.",
     "reading": "～のみならず",
@@ -2261,6 +2380,7 @@
     ]
   },
   {
+    "note_id": "9f1d44db-1acc-445a-85e8-2d78af1e251f",
     "front": "～ぬ",
     "back": "Không… (dạng phủ định cổ/văn viết)\n\n【Cấu trúc】\nVない bỏ ない + ぬ（する→せぬ）\n\n【Cách dùng】\nDùng như ない trong một số văn viết, thành ngữ, cách nói cố định.\n\n【Sắc thái】\nCổ/trang trọng; không dùng thay ない tự do trong hội thoại hiện đại.\n\n【Phân biệt】\n～ず cũng là phủ định cổ; ぬ thường đứng trước danh từ hoặc kết câu trong văn phong cổ.",
     "reading": "～ぬ",
@@ -2280,6 +2400,7 @@
     ]
   },
   {
+    "note_id": "96f5907b-5a67-4fc7-b839-10c8fb97ec8c",
     "front": "～抜きにして / ～抜きで",
     "back": "Không có…; bỏ… ra\n\n【Cấu trúc】\nN + 抜きにして / 抜きで\n\n【Cách dùng】\nDùng nói loại bỏ A khỏi phạm vi, không tính/không dùng A.\n\n【Sắc thái】\nKhá trực tiếp; thường gặp như 冗談抜きで、朝食抜きで.\n\n【Phân biệt】\n～を除いて chỉ loại trừ khỏi tập hợp; 抜きで còn có nghĩa “không dùng/không có thành phần A”.",
     "reading": "～ぬきにして／～ぬきで",
@@ -2299,6 +2420,7 @@
     ]
   },
   {
+    "note_id": "d4a136ec-cdf4-4a87-8326-a7c99017ba46",
     "front": "～抜く",
     "back": "Làm đến cùng; hoàn thành triệt để\n\n【Cấu trúc】\nVます bỏ ます + 抜く\n\n【Cách dùng】\nDùng khi kiên trì thực hiện A từ đầu đến cuối dù khó khăn.\n\n【Sắc thái】\nNhấn ý chí, sự bền bỉ và hoàn tất trọn vẹn.\n\n【Phân biệt】\n～上げる nhấn hoàn thành sản phẩm; ～抜く nhấn kiên trì vượt khó đến cùng.",
     "reading": "～ぬく",
@@ -2318,6 +2440,7 @@
     ]
   },
   {
+    "note_id": "27af51ff-cc26-4a44-bd60-d381161b4588",
     "front": "～を契機に",
     "back": "Lấy… làm bước ngoặt/cơ hội\n\n【Cấu trúc】\nN + を契機に / を契機として\n\n【Cách dùng】\nDùng khi sự kiện A trở thành bước ngoặt dẫn đến thay đổi B.\n\n【Sắc thái】\nTrang trọng hơn ～をきっかけに; thường trong văn viết/sự kiện lớn.\n\n【Phân biệt】\n～をきっかけに phổ thông hơn; を契機に mang sắc thái chính thức, bước ngoặt.",
     "reading": "～をけいきに",
@@ -2337,6 +2460,7 @@
     ]
   },
   {
+    "note_id": "41f8d6fe-70ba-4542-9026-21b189fead94",
     "front": "～をめぐって",
     "back": "Xoay quanh; liên quan đến…\n\n【Cấu trúc】\nN + をめぐって / をめぐる + N\n\n【Cách dùng】\nDùng khi nhiều người/ý kiến/hành động tập trung quanh một vấn đề A.\n\n【Sắc thái】\nThường với tranh luận, xung đột, thương lượng.\n\n【Phân biệt】\n～について chỉ “về”; をめぐって nhấn nhiều phía tranh luận/diễn biến quanh chủ đề.",
     "reading": "～をめぐって",
@@ -2356,6 +2480,7 @@
     ]
   },
   {
+    "note_id": "82212513-c6c1-4e55-9f47-dcf4f266fec0",
     "front": "～をもとに",
     "back": "Dựa trên; lấy… làm cơ sở/nguyên liệu\n\n【Cấu trúc】\nN + をもとに / をもとにして\n\n【Cách dùng】\nDùng khi tạo ra B dựa trên tư liệu, trải nghiệm, sự thật A.\n\n【Sắc thái】\nCho phép biến đổi/sáng tạo từ cơ sở A.\n\n【Phân biệt】\n～に基づいて nhấn căn cứ chính thức/chính xác; をもとに linh hoạt, có thể sáng tạo.",
     "reading": "～をもとに",
@@ -2375,6 +2500,7 @@
     ]
   },
   {
+    "note_id": "dbbd8f8a-f3c3-4e05-9643-d7be825b80a9",
     "front": "～を除いて",
     "back": "Ngoại trừ…\n\n【Cấu trúc】\nN + を除いて\n\n【Cách dùng】\nDùng loại A ra khỏi toàn bộ phạm vi.\n\n【Sắc thái】\nTrung tính-trang trọng.\n\n【Phân biệt】\n～以外 = ngoài A ra; を除いて nhấn thao tác loại trừ A.",
     "reading": "～をのぞいて",
@@ -2394,6 +2520,7 @@
     ]
   },
   {
+    "note_id": "16471043-4641-4b81-a5e5-879ed8569b6c",
     "front": "～を問わず",
     "back": "Bất kể; không phân biệt…\n\n【Cấu trúc】\nN + を問わず\n\n【Cách dùng】\nDùng nói tiêu chí A không ảnh hưởng đến điều kiện/kết quả B.\n\n【Sắc thái】\nTrang trọng; thường với 年齢、性別、経験、昼夜.\n\n【Phân biệt】\n～に関わらず gần nghĩa; を問わず thường đi với tiêu chí phân loại rõ.",
     "reading": "～をとわず",
@@ -2413,6 +2540,7 @@
     ]
   },
   {
+    "note_id": "2a3a5f39-4316-4901-b788-2cb3e8c371bb",
     "front": "お～願う",
     "back": "Xin vui lòng…; kính nhờ…\n\n【Cấu trúc】\nお + Vます bỏ ます + 願う / ご + N + 願う\n\n【Cách dùng】\nCách yêu cầu trang trọng, lịch sự trong thông báo hoặc giao tiếp công việc.\n\n【Sắc thái】\nTrang trọng hơn ～てください; thường dùng với hành động khách hàng/người nghe.\n\n【Phân biệt】\nお～ください cũng kính ngữ yêu cầu; お～願う mang sắc thái “kính nhờ”.",
     "reading": "お～ねがう",
@@ -2432,6 +2560,7 @@
     ]
   },
   {
+    "note_id": "080e2709-c2b2-48cc-98c2-c32ca7d0f007",
     "front": "おまけに",
     "back": "Hơn nữa; đã thế còn…\n\n【Cấu trúc】\nMệnh đề。おまけに、mệnh đề\n\n【Cách dùng】\nDùng thêm một yếu tố cùng chiều với điều trước, thường làm tình hình nổi bật hơn.\n\n【Sắc thái】\nHay dùng khi các điểm đều xấu: “đã thế còn…”, nhưng cũng có thể tích cực.\n\n【Phân biệt】\nその上 trang trọng/trung tính hơn; おまけに hội thoại và cảm xúc hơn.",
     "reading": "おまけに",
@@ -2451,6 +2580,7 @@
     ]
   },
   {
+    "note_id": "769e342f-8a87-4d8a-9d3b-2e73fc2ac58a",
     "front": "恐らく",
     "back": "Có lẽ; rất có thể\n\n【Cấu trúc】\n恐らく + ～だろう / と思う\n\n【Cách dùng】\nDùng phỏng đoán có xác suất khá cao.\n\n【Sắc thái】\nTrang trọng hơn たぶん; thường đi với だろう.\n\n【Phân biệt】\nたぶん hội thoại hơn; 恐らく nghiêm túc/văn viết hơn.",
     "reading": "おそらく",
@@ -2470,6 +2600,7 @@
     ]
   },
   {
+    "note_id": "3da1dea6-6cd6-4042-b405-0bae623e5823",
     "front": "～恐れがある",
     "back": "Có nguy cơ; e rằng…\n\n【Cấu trúc】\nV辞書形 / Nの + 恐れがある\n\n【Cách dùng】\nDùng cảnh báo khả năng xảy ra kết quả xấu/nguy hiểm.\n\n【Sắc thái】\nRất trang trọng, khách quan; thường trong tin tức, cảnh báo, báo cáo.\n\n【Phân biệt】\n～かねない cũng chỉ nguy cơ; 恐れがある chính thức và khách quan hơn.",
     "reading": "～おそれがある",
@@ -2489,6 +2620,7 @@
     ]
   },
   {
+    "note_id": "37b22e81-f925-4b09-9140-5b456c4f9b2c",
     "front": "及び",
     "back": "Và; cũng như\n\n【Cấu trúc】\nN + 及び + N\n\n【Cách dùng】\nLiên từ trang trọng nối các mục cùng cấp.\n\n【Sắc thái】\nVăn hành chính/pháp lý; không tự nhiên trong hội thoại thường ngày.\n\n【Phân biệt】\nと / そして phổ thông; 及び chính thức hơn.",
     "reading": "および",
@@ -2508,6 +2640,7 @@
     ]
   },
   {
+    "note_id": "5ec110b3-b528-484e-a21c-26d05199fcdd",
     "front": "ろくに～ない",
     "back": "Không… tử tế/đầy đủ; hầu như không…\n\n【Cấu trúc】\nろくに + Vない\n\n【Cách dùng】\nDùng phê bình rằng hành động A không được thực hiện đủ/tử tế.\n\n【Sắc thái】\nThường mang bất mãn, đánh giá tiêu cực.\n\n【Phân biệt】\nあまり～ない chỉ mức độ ít; ろくに～ない hàm ý “không ra hồn”.",
     "reading": "ろくに～ない",
@@ -2527,6 +2660,7 @@
     ]
   },
   {
+    "note_id": "711ec694-896a-4b2f-8547-9f73b7500265",
     "front": "幸いなことに",
     "back": "May mắn thay…\n\n【Cấu trúc】\n幸いなことに + mệnh đề\n\n【Cách dùng】\nDùng người nói đánh giá kết quả là may mắn.\n\n【Sắc thái】\nTrang trọng hơn 幸い; thường mở đầu câu.\n\n【Phân biệt】\n運よく gần nghĩa nhưng khẩu ngữ hơn.",
     "reading": "さいわいなことに",
@@ -2546,6 +2680,7 @@
     ]
   },
   {
+    "note_id": "604b0ac1-cd74-463f-a611-6481a86426bd",
     "front": "～せいか",
     "back": "Có lẽ vì…\n\n【Cấu trúc】\n普通形 + せいか\n\n【Cách dùng】\nDùng khi nghi ngờ A có thể là nguyên nhân của B, thường B không tốt.\n\n【Sắc thái】\nKhông khẳng định nguyên nhân chắc chắn; giữ sắc thái tiêu cực của せい.\n\n【Phân biệt】\n～からか trung tính hơn; ～せいか thường gợi nguyên nhân không mong muốn.",
     "reading": "～せいか",
@@ -2565,6 +2700,7 @@
     ]
   },
   {
+    "note_id": "ebf75676-37d7-495c-81fd-9eaaa68c7df1",
     "front": "せっかく",
     "back": "Cất công; hiếm khi có dịp; đã mất công…\n\n【Cấu trúc】\nせっかく + V / せっかくの + N\n\n【Cách dùng】\nDùng khi một cơ hội/công sức quý giá đã có và người nói muốn tận dụng hoặc tiếc nếu lãng phí.\n\n【Sắc thái】\nThường đi với ～のに để tiếc nuối, hoặc ～から để khuyên tận dụng.\n\n【Phân biệt】\nわざわざ nhấn cố ý bỏ công làm; せっかく nhấn giá trị của cơ hội/công sức.",
     "reading": "せっかく",
@@ -2584,6 +2720,7 @@
     ]
   },
   {
+    "note_id": "f46e2ce2-2a32-4238-a832-083f0b495d0f",
     "front": "せめて",
     "back": "Ít nhất thì…\n\n【Cấu trúc】\nせめて + số lượng / N / mệnh đề\n\n【Cách dùng】\nDùng nêu mức tối thiểu mong muốn khi điều tốt hơn khó đạt.\n\n【Sắc thái】\nMang ước muốn/nhượng bộ: “ít nhất cũng…”.\n\n【Phân biệt】\n少なくとも thiên tiêu chuẩn khách quan; せめて thiên mong muốn cảm xúc.",
     "reading": "せめて",
@@ -2603,6 +2740,7 @@
     ]
   },
   {
+    "note_id": "017a5452-1eed-4329-bbdb-b6f40d799479",
     "front": "～次第",
     "back": "Ngay sau khi…; tùy thuộc vào…\n\n【Cấu trúc】\nVます bỏ ます + 次第 / N + 次第\n\n【Cách dùng】\nV+次第: ngay khi A xong thì làm B; N次第: kết quả tùy A.\n\n【Sắc thái】\nVăn viết/công việc; V次第 thường B là hành động có chủ ý.\n\n【Phân biệt】\n～たらすぐ phổ thông; ～次第 trang trọng và kế hoạch hơn.",
     "reading": "～しだい",
@@ -2622,6 +2760,7 @@
     ]
   },
   {
+    "note_id": "0a397a0e-b78f-46dd-8e43-aa5d801cb63e",
     "front": "～次第で",
     "back": "Tùy vào…; phụ thuộc vào…\n\n【Cấu trúc】\nN + 次第で / 次第では\n\n【Cách dùng】\nDùng nói kết quả B thay đổi theo yếu tố A.\n\n【Sắc thái】\nTrang trọng; 次第では = tùy trường hợp có thể….\n\n【Phân biệt】\n～によって gần nghĩa nhưng rộng hơn; 次第で nhấn yếu tố quyết định kết quả.",
     "reading": "～しだいで",
@@ -2641,6 +2780,7 @@
     ]
   },
   {
+    "note_id": "a9bb6d9e-e69a-4f46-a1ab-bc186f3fbb9b",
     "front": "次第に",
     "back": "Dần dần\n\n【Cấu trúc】\n次第に + V / A\n\n【Cách dùng】\nDùng nói biến đổi diễn ra từ từ theo thời gian.\n\n【Sắc thái】\nKhá văn viết hơn だんだん.\n\n【Phân biệt】\nだんだん hội thoại hơn; 次第に thường dùng văn viết/báo cáo.",
     "reading": "しだいに",
@@ -2660,6 +2800,7 @@
     ]
   },
   {
+    "note_id": "b1da2e39-e93d-4b35-98c4-feeb8eb7d95b",
     "front": "しかも",
     "back": "Hơn nữa; lại còn; vậy mà\n\n【Cấu trúc】\nMệnh đề + しかも + mệnh đề\n\n【Cách dùng】\nDùng thêm thông tin B đáng chú ý cùng chiều với A hoặc làm tương phản mạnh hơn.\n\n【Sắc thái】\nMạnh hơn そして; thường mang ý “không chỉ thế”.\n\n【Phân biệt】\nその上 gần nghĩa nhưng văn viết hơn; しかも dùng rộng trong nói/viết.",
     "reading": "しかも",
@@ -2679,6 +2820,7 @@
     ]
   },
   {
+    "note_id": "ee52608b-f8fd-46b1-9373-4390cb1abb20",
     "front": "その上",
     "back": "Hơn nữa; thêm vào đó\n\n【Cấu trúc】\nMệnh đề。その上、mệnh đề\n\n【Cách dùng】\nDùng thêm một thông tin cùng hướng để tăng sức nặng.\n\n【Sắc thái】\nTrang trọng/trung tính hơn おまけに.\n\n【Phân biệt】\nしかも nhấn mạnh hơn; その上 đơn giản là bổ sung thêm.",
     "reading": "そのうえ",
@@ -2698,6 +2840,7 @@
     ]
   },
   {
+    "note_id": "c4a4491d-e88d-47a8-acd1-edded3b95463",
     "front": "それなのに",
     "back": "Thế mà; vậy mà\n\n【Cấu trúc】\nMệnh đề。それなのに、mệnh đề\n\n【Cách dùng】\nDùng nối B trái rõ với điều dự đoán từ A.\n\n【Sắc thái】\nCó cảm xúc ngạc nhiên/bất mãn.\n\n【Phân biệt】\nそれでも = dù vậy vẫn; それなのに = mặc dù sự thật A như thế mà B trái dự đoán.",
     "reading": "それなのに",
@@ -2717,6 +2860,7 @@
     ]
   },
   {
+    "note_id": "e14c56b9-9fcc-4136-8db4-4ff35a512bbf",
     "front": "それなら",
     "back": "Nếu vậy thì; nếu thế\n\n【Cấu trúc】\nそれなら + mệnh đề\n\n【Cách dùng】\nDùng phản ứng với thông tin vừa nghe và đưa ra đề nghị/kết luận dựa trên thông tin đó.\n\n【Sắc thái】\nHội thoại tự nhiên.\n\n【Phân biệt】\nでは/それでは trang trọng hơn; それなら thường dùng khi đáp lại người khác.",
     "reading": "それなら",
@@ -2736,6 +2880,7 @@
     ]
   },
   {
+    "note_id": "eeaaeedf-6498-40c7-a717-b7f892c32c6e",
     "front": "それにしても",
     "back": "Dù vậy; thế nhưng mà; dù xét thế nào\n\n【Cấu trúc】\nそれにしても + mệnh đề\n\n【Cách dùng】\nDùng thừa nhận tình huống trước nhưng bày tỏ cảm xúc/đánh giá mạnh về mức độ thực tế.\n\n【Sắc thái】\nThường là ngạc nhiên, phê bình “dù vậy thì cũng…”.\n\n【Phân biệt】\nそれでも = dù vậy vẫn tiếp tục; それにしても = dù vậy vẫn thấy mức này đáng nói.",
     "reading": "それにしても",
@@ -2755,6 +2900,7 @@
     ]
   },
   {
+    "note_id": "8cb7275a-5eb0-45cf-9243-a99302512513",
     "front": "そう言えば",
     "back": "Nói mới nhớ; nhắc mới nhớ\n\n【Cấu trúc】\nそう言えば + mệnh đề\n\n【Cách dùng】\nDùng khi điều vừa nghe khiến nhớ ra thông tin liên quan.\n\n【Sắc thái】\nChuyển chủ đề nhẹ nhưng vẫn có liên hệ.\n\n【Phân biệt】\nちなみに thêm thông tin đã nghĩ sẵn; そういえば là vừa được gợi nhớ.",
     "reading": "そういえば",
@@ -2774,6 +2920,7 @@
     ]
   },
   {
+    "note_id": "1a5b8033-e395-4969-90b4-92739fc25993",
     "front": "そうすると",
     "back": "Nếu làm vậy thì; sau đó thì; như vậy suy ra…\n\n【Cấu trúc】\nそうすると + mệnh đề\n\n【Cách dùng】\nDùng nói kết quả xảy ra sau hành động trước hoặc suy luận từ thông tin vừa nêu.\n\n【Sắc thái】\nQuan hệ nhân quả/trình tự rõ.\n\n【Phân biệt】\nすると có chức năng tương tự nhưng そうすると nhắc lại cả tình huống trước.",
     "reading": "そうすると",
@@ -2793,6 +2940,7 @@
     ]
   },
   {
+    "note_id": "95cbf0fc-cbb4-4f0b-a36a-8d93a0556b7d",
     "front": "～末に",
     "back": "Sau cùng; cuối cùng sau một quá trình…\n\n【Cấu trúc】\nVた + 末に / Nの + 末に\n\n【Cách dùng】\nDùng khi sau thời gian dài cân nhắc/nỗ lực A xuất hiện kết quả B.\n\n【Sắc thái】\nB có thể tốt hoặc xấu; văn viết.\n\n【Phân biệt】\n～あげく thường nghiêng kết quả xấu; ～末に trung tính hơn.",
     "reading": "～すえに",
@@ -2812,6 +2960,7 @@
     ]
   },
   {
+    "note_id": "f58b4586-b9f8-4092-a92a-beac407dd537",
     "front": "少しも～ない",
     "back": "Không một chút nào\n\n【Cấu trúc】\n少しも + Vない / Aくない\n\n【Cách dùng】\nNhấn phủ định hoàn toàn về mức độ.\n\n【Sắc thái】\nTrung tính hơn ちっとも～ない.\n\n【Phân biệt】\nちっとも khẩu ngữ/cảm xúc hơn; 少しも dùng cả văn viết.",
     "reading": "すこしも～ない",
@@ -2831,6 +2980,7 @@
     ]
   },
   {
+    "note_id": "e541e276-398b-44e7-bced-bc839b8a729e",
     "front": "少なくとも",
     "back": "Ít nhất; tối thiểu\n\n【Cấu trúc】\n少なくとも + số lượng / mệnh đề\n\n【Cách dùng】\nDùng nêu mức tối thiểu khách quan hoặc điều chắc chắn tối thiểu.\n\n【Sắc thái】\nKhách quan hơn せめて.\n\n【Phân biệt】\nせめて = mong muốn tối thiểu; 少なくとも = giới hạn/đánh giá tối thiểu.",
     "reading": "すくなくとも",
@@ -2850,6 +3000,7 @@
     ]
   },
   {
+    "note_id": "ed203b37-9a4b-46bb-8b15-da2ac8b188bc",
     "front": "直ちに",
     "back": "Ngay lập tức; trực tiếp\n\n【Cấu trúc】\n直ちに + V\n\n【Cách dùng】\nDùng yêu cầu/hành động ngay, thường trong thông báo chính thức.\n\n【Sắc thái】\nTrang trọng, mạnh hơn すぐ.\n\n【Phân biệt】\nすぐ phổ thông; 直ちに thường trong hướng dẫn, cảnh báo, tin tức.",
     "reading": "ただちに",
@@ -2869,6 +3020,7 @@
     ]
   },
   {
+    "note_id": "de916aef-7334-4421-b06b-258888790f16",
     "front": "～たまえ",
     "back": "Hãy…; làm đi\n\n【Cấu trúc】\nVます bỏ ます + たまえ\n\n【Cách dùng】\nMệnh lệnh của người trên với người dưới, hoặc văn phong cũ.\n\n【Sắc thái】\nRất mạnh/cổ; có thể nghe kiêu căng trong giao tiếp hiện đại.\n\n【Phân biệt】\n～なさい mềm hơn; ～たまえ mang vị thế trên-dưới rõ.",
     "reading": "～たまえ",
@@ -2888,6 +3040,7 @@
     ]
   },
   {
+    "note_id": "c6a2f307-b7ee-43a6-bc3b-489a04d75857",
     "front": "～てばかりはいられない",
     "back": "Không thể cứ mãi…\n\n【Cấu trúc】\nVて + ばかりはいられない\n\n【Cách dùng】\nDùng khi nhận ra không thể tiếp tục chỉ làm A và cần chuyển sang hành động khác.\n\n【Sắc thái】\nThường thể hiện quyết tâm thay đổi.\n\n【Phân biệt】\n～てはいられない = không thể ở trạng thái A nữa; thêm ばかり nhấn “cứ chỉ A mãi”.",
     "reading": "～てばかりはいられない",
@@ -2907,6 +3060,7 @@
     ]
   },
   {
+    "note_id": "e7ac8625-8a45-4126-8130-a4802809804c",
     "front": "～てでも",
     "back": "Dù phải… cũng; bằng mọi giá\n\n【Cấu trúc】\nVて + でも\n\n【Cách dùng】\nDùng khi sẵn sàng dùng biện pháp cực đoan/khó khăn A để đạt mục tiêu B.\n\n【Sắc thái】\nÝ chí rất mạnh.\n\n【Phân biệt】\n～ても = dù A; ～てでも = dù phải làm A bằng mọi giá.",
     "reading": "～てでも",
@@ -2926,6 +3080,7 @@
     ]
   },
   {
+    "note_id": "c358d981-51f2-4ace-906c-74d8411bebf7",
     "front": "～て以来",
     "back": "Kể từ khi… đến nay\n\n【Cấu trúc】\nVて / N + 以来\n\n【Cách dùng】\nDùng khi từ mốc A đến hiện tại một trạng thái/hành động B tiếp tục.\n\n【Sắc thái】\nTrang trọng hơn ～てから; thường B có tính liên tục.\n\n【Phân biệt】\n～てから chỉ trình tự/thời điểm; ～て以来 nhấn kéo dài đến nay.",
     "reading": "～ていらい",
@@ -2945,6 +3100,7 @@
     ]
   },
   {
+    "note_id": "8c355e0a-bd03-43e5-b8e9-c53586559018",
     "front": "～ていては",
     "back": "Nếu cứ… thì…\n\n【Cấu trúc】\nVている → Vていては\n\n【Cách dùng】\nDùng cảnh báo rằng nếu tiếp tục trạng thái/hành động A thì kết quả xấu B sẽ xảy ra.\n\n【Sắc thái】\nThường là phê bình/khuyên thay đổi.\n\n【Phân biệt】\n～たら chỉ điều kiện; ～ていては nhấn “cứ tiếp tục như thế”.",
     "reading": "～ていては",
@@ -2964,6 +3120,7 @@
     ]
   },
   {
+    "note_id": "020d6d9b-a1d7-4a20-81a1-7a4a68dfc8d5",
     "front": "～てこそ",
     "back": "Chỉ khi… mới…; chính nhờ… mới…\n\n【Cấu trúc】\nVて + こそ\n\n【Cách dùng】\nDùng nhấn A là điều kiện thiết yếu để B có giá trị/ý nghĩa.\n\n【Sắc thái】\nこそ tạo nhấn mạnh mạnh.\n\n【Phân biệt】\n～てはじめて = sau khi A mới nhận ra B; ～てこそ = chỉ có A thì B mới thực sự.",
     "reading": "～てこそ",
@@ -2983,6 +3140,7 @@
     ]
   },
   {
+    "note_id": "9e56f075-a732-4cd4-973f-326a4b478d47",
     "front": "～てまで",
     "back": "Đến mức phải…; thậm chí làm… để…\n\n【Cấu trúc】\nVて + まで\n\n【Cách dùng】\nDùng nói thực hiện A là mức cực đoan để đạt B, thường người nói cho là quá mức.\n\n【Sắc thái】\nHay mang phê bình/không tán thành.\n\n【Phân biệt】\n～てでも thể hiện quyết tâm tích cực; ～てまで thường nhìn hành động là quá đáng.",
     "reading": "～てまで",
@@ -3002,6 +3160,7 @@
     ]
   },
   {
+    "note_id": "f6bfd814-ad71-47bc-874a-99bb599588fc",
     "front": "～てならない",
     "back": "Rất… không chịu được; cứ… mãi\n\n【Cấu trúc】\nVて / Aくて / Aで + ならない\n\n【Cách dùng】\nDùng khi cảm xúc/cảm giác tự nhiên rất mạnh, khó kiểm soát.\n\n【Sắc thái】\nThường với 心配、残念、気になる; hơi văn viết.\n\n【Phân biệt】\n～てたまらない mạnh về cảm giác trực tiếp; ～てならない thường là cảm xúc/tâm lý.",
     "reading": "～てならない",
@@ -3021,6 +3180,7 @@
     ]
   },
   {
+    "note_id": "f00b7ca2-435e-4447-823b-70598c4f2f4c",
     "front": "～てたまらない",
     "back": "Rất… không chịu nổi\n\n【Cấu trúc】\nVて / Aくて / Aで + たまらない\n\n【Cách dùng】\nDùng diễn tả cảm giác, mong muốn hoặc trạng thái mạnh đến mức không chịu nổi.\n\n【Sắc thái】\nMạnh và trực tiếp; chủ yếu cảm giác của người nói.\n\n【Phân biệt】\n～てしょうがない gần nghĩa và hội thoại hơn; ～てならない thiên cảm xúc tâm lý.",
     "reading": "～てたまらない",
@@ -3040,6 +3200,7 @@
     ]
   },
   {
+    "note_id": "e89682cf-b865-4a9a-8604-30497e275a77",
     "front": "～て当然だ",
     "back": "… là điều đương nhiên\n\n【Cấu trúc】\nVて + 当然だ / Aくて当然だ\n\n【Cách dùng】\nDùng đánh giá kết quả/trạng thái B là tự nhiên, hợp lý từ hoàn cảnh A.\n\n【Sắc thái】\nKhá mạnh, mang tính đánh giá chuẩn mực.\n\n【Phân biệt】\n～のも当然だ nhận xét một phản ứng cụ thể; ～て当然だ gắn trực tiếp tính “đương nhiên” vào trạng thái/hành động.",
     "reading": "～てとうぜんだ",
@@ -3059,6 +3220,7 @@
     ]
   },
   {
+    "note_id": "525802bb-0cdd-473d-8759-5d2758167f2d",
     "front": "～ては / ～では",
     "back": "Cứ mỗi khi… thì…; nếu… thì…\n\n【Cấu trúc】\nVて + は / Nで + は\n\n【Cách dùng】\nDùng nói một điều kiện lặp đi lặp lại hoặc tình trạng A dẫn đến kết quả B, thường không tốt.\n\n【Sắc thái】\nTrong mẫu lặp, nhấn tính tái diễn; trong điều kiện thường có sắc thái cảnh báo.\n\n【Phân biệt】\n～たら chỉ điều kiện một lần; ～ては có thể nhấn thói quen/kết quả lặp lại.",
     "reading": "～ては／～では",
@@ -3078,6 +3240,7 @@
     ]
   },
   {
+    "note_id": "41489a2f-e995-4deb-813a-9a1f27a68b65",
     "front": "～てはいられない",
     "back": "Không thể cứ…; không còn lúc để…\n\n【Cấu trúc】\nVて + はいられない\n\n【Cách dùng】\nDùng khi hoàn cảnh khiến không thể tiếp tục trạng thái/hành động A nữa.\n\n【Sắc thái】\nThường thể hiện cấp bách và quyết tâm hành động.\n\n【Phân biệt】\n～てばかりはいられない nhấn “không thể cứ chỉ làm A”; ～てはいられない rộng hơn.",
     "reading": "～てはいられない",
@@ -3097,6 +3260,7 @@
     ]
   },
   {
+    "note_id": "279842f8-22d4-4975-b5ab-0eaf189e2dc8",
     "front": "～てはならない",
     "back": "Không được…; tuyệt đối không nên…\n\n【Cấu trúc】\nVて + はならない\n\n【Cách dùng】\nDùng cấm đoán theo quy tắc, đạo đức hoặc nguyên tắc.\n\n【Sắc thái】\nTrang trọng và cứng hơn ～てはいけない.\n\n【Phân biệt】\n～てはいけない thông dụng; ～てはならない thường trong quy định/phát biểu nghiêm túc.",
     "reading": "～てはならない",
@@ -3116,6 +3280,7 @@
     ]
   },
   {
+    "note_id": "cf5d7fb6-5525-4483-8bd6-20d44ce960ed",
     "front": "～ては～ては",
     "back": "Cứ… rồi lại…\n\n【Cấu trúc】\nVては + V、Vては + V\n\n【Cách dùng】\nDùng diễn tả hai hành động/trạng thái lặp đi lặp lại.\n\n【Sắc thái】\nThường tạo cảm giác chu kỳ kéo dài, đôi khi mệt mỏi/đơn điệu.\n\n【Phân biệt】\n～たり～たり chỉ liệt kê; ～ては～ては nhấn lặp đi lặp lại.",
     "reading": "～ては～ては",
@@ -3135,6 +3300,7 @@
     ]
   },
   {
+    "note_id": "404bb43c-7be0-45bc-89e3-0ed2576dcdd7",
     "front": "～と同時に",
     "back": "Đồng thời với…; vừa… vừa…\n\n【Cấu trúc】\nN / V辞書形 + と同時に\n\n【Cách dùng】\nDùng khi hai sự việc xảy ra cùng lúc hoặc một người có đồng thời hai thuộc tính/vai trò.\n\n【Sắc thái】\nKhá trang trọng, khách quan.\n\n【Phân biệt】\n～ながら thường cùng chủ thể và hành động song song; と同時に rộng hơn.",
     "reading": "～とどうじに",
@@ -3154,6 +3320,7 @@
     ]
   },
   {
+    "note_id": "fe2e543d-978a-4921-9785-79f07f666832",
     "front": "～といった",
     "back": "Như…; chẳng hạn như…\n\n【Cấu trúc】\nN + といった + N\n\n【Cách dùng】\nDùng nêu một số ví dụ tiêu biểu để đại diện cho nhóm lớn hơn.\n\n【Sắc thái】\nTrang trọng hơn ～など.\n\n【Phân biệt】\n～など liệt kê linh hoạt; ～といった thường đứng trước danh từ khái quát.",
     "reading": "～といった",
@@ -3173,6 +3340,7 @@
     ]
   },
   {
+    "note_id": "5de2ae2b-10f1-4a16-b3a2-fa93126c8e46",
     "front": "～というふうに",
     "back": "Theo kiểu…; theo cách rằng…\n\n【Cấu trúc】\nMệnh đề + というふうに\n\n【Cách dùng】\nDùng minh họa cách thức, xu hướng hoặc kiểu phân loại/hành động.\n\n【Sắc thái】\nThường dùng khi giải thích bằng ví dụ cụ thể.\n\n【Phân biệt】\n～ように rộng hơn; というふうに có sắc thái “theo kiểu/cách như vừa nêu”.",
     "reading": "～というふうに",
@@ -3192,6 +3360,7 @@
     ]
   },
   {
+    "note_id": "e14f2957-a1ed-4784-89eb-cd7400d3608b",
     "front": "～ということは",
     "back": "Như vậy có nghĩa là…\n\n【Cấu trúc】\n普通形 + ということは\n\n【Cách dùng】\nDùng suy luận/kết luận từ thông tin vừa biết.\n\n【Sắc thái】\nHay dùng trong hội thoại để xác nhận hệ quả logic.\n\n【Phân biệt】\nつまり tóm tắt trực tiếp; ということは thường suy ra một điều mới từ dữ kiện.",
     "reading": "～ということは",
@@ -3211,6 +3380,7 @@
     ]
   },
   {
+    "note_id": "f7ee0cb3-619a-41cc-9e7e-2a0f0e813d22",
     "front": "～というものだ",
     "back": "Đó mới gọi là…; quả là…\n\n【Cấu trúc】\n普通形 / N + というものだ\n\n【Cách dùng】\nDùng người nói đưa ra đánh giá/kết luận mạnh về bản chất của sự việc.\n\n【Sắc thái】\nMang tính phán xét hoặc định nghĩa chủ quan.\n\n【Phân biệt】\n～ということだ thiên thông tin/kết luận; ～というものだ thể hiện đánh giá “đó mới là…”.",
     "reading": "～というものだ",
@@ -3230,6 +3400,7 @@
     ]
   },
   {
+    "note_id": "a775950a-03d4-4dff-b458-69d939c0b0ef",
     "front": "～というものではない",
     "back": "Không hẳn cứ… là…; không phải lúc nào cũng…\n\n【Cấu trúc】\n普通形 + というものではない\n\n【Cách dùng】\nDùng phủ nhận một quan niệm/quy tắc quá đơn giản hoặc tuyệt đối.\n\n【Sắc thái】\nMang tính lý luận, thường sửa một cách hiểu phiến diện.\n\n【Phân biệt】\n～わけではない phủ định một kết luận cụ thể; というものではない thường phủ định nguyên tắc chung.",
     "reading": "～というものではない",
@@ -3249,6 +3420,7 @@
     ]
   },
   {
+    "note_id": "30b70164-af84-4ac0-8a14-01e05389e2f6",
     "front": "～と考えられる",
     "back": "Được cho là…; có thể suy ra rằng…\n\n【Cấu trúc】\n普通形 + と考えられる\n\n【Cách dùng】\nDùng nêu nhận định khách quan dựa trên dữ liệu/lý luận.\n\n【Sắc thái】\nVăn viết, học thuật; tránh nêu chủ thể “tôi”.\n\n【Phân biệt】\n～と思われる tương tự nhưng thiên “được cho là/có vẻ”; と考えられる nhấn suy luận logic.",
     "reading": "～とかんがえられる",
@@ -3268,6 +3440,7 @@
     ]
   },
   {
+    "note_id": "4b8703cb-f06c-4d58-acd7-3b1ff90af327",
     "front": "～とか（で）",
     "back": "Nghe nói là…\n\n【Cấu trúc】\n普通形 + とか（で）\n\n【Cách dùng】\nDùng truyền đạt thông tin nghe được nhưng người nói không khẳng định chắc nguồn/độ chính xác.\n\n【Sắc thái】\nKhẩu ngữ, nhẹ hơn ～そうだ.\n\n【Phân biệt】\n～そうだ truyền đạt tin rõ hơn; ～とか mang sắc thái “nghe đâu”.",
     "reading": "～とか（で）",
@@ -3287,6 +3460,7 @@
     ]
   },
   {
+    "note_id": "1076926a-31a6-4574-8776-033bdfc761b3",
     "front": "とっくに",
     "back": "Từ lâu rồi; đã từ lâu\n\n【Cấu trúc】\nとっくに + Vた / trạng thái\n\n【Cách dùng】\nDùng nói một việc đã hoàn tất lâu hơn so với thời điểm người khác nghĩ.\n\n【Sắc thái】\nHội thoại, có thể hàm ý “muộn rồi/đã từ lâu”.\n\n【Phân biệt】\nもう chỉ “đã”; とっくに nhấn đã từ khá lâu.",
     "reading": "とっくに",
@@ -3306,6 +3480,7 @@
     ]
   },
   {
+    "note_id": "beab4cee-3d75-47e1-8e0a-4f7af6aadaf7",
     "front": "～ところだった",
     "back": "Suýt nữa thì…; vừa định…\n\n【Cấu trúc】\nV辞書形 + ところだった\n\n【Cách dùng】\nDùng khi hành động/sự việc A gần xảy ra nhưng được tránh hoặc chưa xảy ra.\n\n【Sắc thái】\nRất thường với もう少しで、危うく.\n\n【Phân biệt】\n～そうになった cũng “suýt”; ところだった nhấn sát thời điểm xảy ra.",
     "reading": "～ところだった",
@@ -3325,6 +3500,7 @@
     ]
   },
   {
+    "note_id": "f83b9cbf-8784-4de6-8780-d19bd13f70d4",
     "front": "～ところに",
     "back": "Đúng lúc… thì…\n\n【Cấu trúc】\nV辞書形 / Vている / Vた + ところに\n\n【Cách dùng】\nDùng khi sự việc B xảy đến đúng vào giai đoạn A.\n\n【Sắc thái】\nB thường là yếu tố từ bên ngoài xen vào.\n\n【Phân biệt】\n～最中に nhấn giữa quá trình; ところに nhấn đúng thời điểm/giai đoạn.",
     "reading": "～ところに",
@@ -3344,6 +3520,7 @@
     ]
   },
   {
+    "note_id": "da31edf4-fae6-40ea-921c-63ce4579038c",
     "front": "～ところを見ると",
     "back": "Xét từ việc…; nhìn vào… thì…\n\n【Cấu trúc】\n普通形 + ところを見ると\n\n【Cách dùng】\nDùng suy đoán B dựa trên dấu hiệu/hành vi A quan sát được.\n\n【Sắc thái】\nMang tính suy luận từ bằng chứng cụ thể.\n\n【Phân biệt】\n～から見ると thiên góc nhìn; ところを見ると nhấn căn cứ là hiện tượng quan sát được.",
     "reading": "～ところをみると",
@@ -3363,6 +3540,7 @@
     ]
   },
   {
+    "note_id": "cd4b589c-9ced-486b-abed-fe700a9ee403",
     "front": "～とも",
     "back": "Dù…; cho dù…\n\n【Cấu trúc】\nAく + とも / V意向形 + とも\n\n【Cách dùng】\nDùng nhượng bộ mạnh: dù A đến mức nào thì B vẫn không thay đổi.\n\n【Sắc thái】\nVăn viết/cứng; hay trong どんなに～とも、何があろうとも.\n\n【Phân biệt】\n～ても phổ thông hơn; ～とも trang trọng và quyết liệt hơn.",
     "reading": "～とも",
@@ -3382,6 +3560,7 @@
     ]
   },
   {
+    "note_id": "c922e775-dea4-4556-b8da-053cd7661a50",
     "front": "～として～ない",
     "back": "Không một… nào; hoàn toàn không…\n\n【Cấu trúc】\n一 + 助数詞 + として + Vない\n\n【Cách dùng】\nDùng phủ định toàn bộ, nhấn không có dù chỉ một trường hợp/đơn vị.\n\n【Sắc thái】\nTrang trọng và mạnh.\n\n【Phân biệt】\n一つも～ない phổ thông; ～として～ない văn viết hơn.",
     "reading": "～として～ない",
@@ -3401,6 +3580,7 @@
     ]
   },
   {
+    "note_id": "8f036d51-74a4-48c7-b563-3662b938d1ed",
     "front": "～としても",
     "back": "Cho dù giả sử…; ngay cả nếu…\n\n【Cấu trúc】\n普通形 + としても\n\n【Cách dùng】\nDùng đặt giả định A rồi nói B vẫn không thay đổi.\n\n【Sắc thái】\nMang tính giả định lý luận, thường A chưa chắc là sự thật.\n\n【Phân biệt】\n～ても rộng hơn; ～としても nhấn “giả sử cho là A”.",
     "reading": "～としても",
@@ -3420,6 +3600,7 @@
     ]
   },
   {
+    "note_id": "aa786372-95ac-40f3-9c7f-ec88ba1eb266",
     "front": "～つつ",
     "back": "Vừa… vừa…\n\n【Cấu trúc】\nVます bỏ ます + つつ\n\n【Cách dùng】\nDùng nói hai hành động diễn ra song song, thường cùng chủ thể.\n\n【Sắc thái】\nVăn viết/trang trọng hơn ～ながら.\n\n【Phân biệt】\n～ながら phổ thông; ～つつ có phong cách văn viết.",
     "reading": "～つつ",
@@ -3439,6 +3620,7 @@
     ]
   },
   {
+    "note_id": "13445993-c564-4250-b93c-7fe4b7bdc8c9",
     "front": "～つつある",
     "back": "Đang dần…; đang trong quá trình…\n\n【Cấu trúc】\nVます bỏ ます + つつある\n\n【Cách dùng】\nDùng mô tả sự biến đổi đang tiến triển.\n\n【Sắc thái】\nTrang trọng, thường trong tin tức/báo cáo; hợp với xu hướng xã hội.\n\n【Phân biệt】\n～ている rộng hơn; ～つつある nhấn quá trình biến đổi dần.",
     "reading": "～つつある",
@@ -3458,6 +3640,7 @@
     ]
   },
   {
+    "note_id": "4a0bcfe6-4ab8-409b-ae2b-a52ea76cff46",
     "front": "～上は",
     "back": "Một khi đã… thì…\n\n【Cấu trúc】\nVた / V辞書形 + 上は\n\n【Cách dùng】\nDùng khi A đã thành sự thật/quyết định, nên B là trách nhiệm hoặc quyết tâm tất yếu.\n\n【Sắc thái】\nTrang trọng, cứng; B thường là nghĩa vụ/ý chí.\n\n【Phân biệt】\n～からには gần nghĩa nhưng hội thoại hơn; 上は văn viết và quyết liệt.",
     "reading": "～うえは",
@@ -3477,6 +3660,7 @@
     ]
   },
   {
+    "note_id": "f082c616-4d99-4e5f-991c-fd5ec2cc0c1f",
     "front": "～はもとより",
     "back": "Không chỉ… mà đương nhiên cả…\n\n【Cấu trúc】\nN + はもとより、Nも\n\n【Cách dùng】\nDùng coi A là điều hiển nhiên rồi mở rộng tới B.\n\n【Sắc thái】\nTrang trọng/văn viết hơn はもちろん.\n\n【Phân biệt】\nはもちろん phổ thông hơn; はもとより chính thức hơn.",
     "reading": "～はもとより",
@@ -3496,6 +3680,7 @@
     ]
   },
   {
+    "note_id": "2b60fa72-cb7a-441d-920b-c8621cc06926",
     "front": "～はともかく",
     "back": "Tạm gác… sang một bên; chưa bàn đến…\n\n【Cấu trúc】\nN / 普通形 + はともかく（として）\n\n【Cách dùng】\nDùng tạm không xét A để tập trung vào B.\n\n【Sắc thái】\nTrung tính; có thể hàm ý A chưa chắc tốt/không quan trọng bằng B.\n\n【Phân biệt】\n～は別として trang trọng hơn; はともかく hội thoại hơn.",
     "reading": "～はともかく",
@@ -3515,6 +3700,7 @@
     ]
   },
   {
+    "note_id": "5298376d-0613-40fc-ac7a-aebd6495e5dc",
     "front": "わずかに",
     "back": "Chỉ một chút; chỉ ít ỏi\n\n【Cấu trúc】\nわずかに + số lượng / V\n\n【Cách dùng】\nDùng nhấn lượng/chênh lệch rất nhỏ.\n\n【Sắc thái】\nKhá văn viết hơn 少し.\n\n【Phân biệt】\nほんの少し hội thoại hơn; わずかに thường trong báo cáo/số liệu.",
     "reading": "わずかに",
@@ -3534,6 +3720,7 @@
     ]
   },
   {
+    "note_id": "e48e95e4-1a0c-4a16-9f9a-3a83fbcaf545",
     "front": "やがて",
     "back": "Chẳng bao lâu; rồi cuối cùng…\n\n【Cấu trúc】\nやがて + V\n\n【Cách dùng】\nDùng khi sau một khoảng thời gian, sự việc B sẽ/đã xảy ra.\n\n【Sắc thái】\nVăn viết, có cảm giác quá trình tự nhiên dẫn đến kết quả.\n\n【Phân biệt】\nまもなく = sắp ngay; やがて có thể khoảng thời gian dài hơn và nhấn kết cục.",
     "reading": "やがて",
@@ -3553,6 +3740,7 @@
     ]
   },
   {
+    "note_id": "b55ad6fa-9f96-4a28-bbee-f3ce5a28b245",
     "front": "～やら～やら",
     "back": "Nào là… nào là…\n\n【Cấu trúc】\nN / 普通形 + やら + N / 普通形 + やら\n\n【Cách dùng】\nDùng liệt kê một số ví dụ trong tình trạng nhiều thứ lẫn lộn.\n\n【Sắc thái】\nThường mang cảm xúc bối rối, phiền phức; không liệt kê hết.\n\n【Phân biệt】\n～たり～たり trung tính; ～やら～やら có cảm giác lộn xộn/cảm xúc.",
     "reading": "～やら～やら",
@@ -3572,6 +3760,7 @@
     ]
   },
   {
+    "note_id": "295ed403-1e7a-44be-a0f8-1024aabc81bc",
     "front": "よほど / よっぽど",
     "back": "Rất; đến mức đáng kể; chắc hẳn rất…\n\n【Cấu trúc】\nよほど + A / V / ～ない限り\n\n【Cách dùng】\nDùng nhấn mức độ mạnh hoặc suy đoán rằng phải có lý do/mức độ đáng kể.\n\n【Sắc thái】\nよっぽど khẩu ngữ hơn; đôi khi có nghĩa “trừ khi rất…”.\n\n【Phân biệt】\nとても chỉ mức độ cao; よほど thường gắn với so sánh/suy luận về mức độ bất thường.",
     "reading": "よほど／よっぽど",
@@ -3591,6 +3780,7 @@
     ]
   },
   {
+    "note_id": "a78a1256-5da4-4ee6-b76d-fd77971ff8c3",
     "front": "～より",
     "back": "Từ… (thời gian/nơi/người); bằng…\n\n【Cấu trúc】\nN + より\n\n【Cách dùng】\nCách trang trọng của から để chỉ điểm xuất phát/nguồn trong thông báo, thư từ.\n\n【Sắc thái】\nVăn viết/trang trọng trong nghĩa “từ”.\n\n【Phân biệt】\nから phổ thông; より trong nghĩa này thường thấy ở thông báo, thư tín.",
     "reading": "～より",
@@ -3610,6 +3800,7 @@
     ]
   },
   {
+    "note_id": "72f70778-3e88-4a14-b83c-5a356557e6b9",
     "front": "～よりほかない",
     "back": "Không còn cách nào khác ngoài…\n\n【Cấu trúc】\nV辞書形 + よりほかない\n\n【Cách dùng】\nDùng khi không có lựa chọn khả thi nào khác.\n\n【Sắc thái】\nTrang trọng hơn ～しかない.\n\n【Phân biệt】\n～しかない phổ thông; よりほかない văn viết hơn.",
     "reading": "～よりほかない",
@@ -3629,6 +3820,7 @@
     ]
   },
   {
+    "note_id": "28c1f4d5-6ff4-4c1d-9162-b84bd7081f8e",
     "front": "～ようでは",
     "back": "Nếu cứ như… thì…\n\n【Cấu trúc】\n普通形 + ようでは\n\n【Cách dùng】\nDùng đánh giá nếu tình trạng A cứ ở mức đó thì kết quả B sẽ xấu/khó chấp nhận.\n\n【Sắc thái】\nThường mang phê bình/cảnh báo.\n\n【Phân biệt】\n～ていては gần nghĩa; ようでは nhấn tình trạng/biểu hiện được đánh giá.",
     "reading": "～ようでは",
@@ -3648,6 +3840,7 @@
     ]
   },
   {
+    "note_id": "4225e00d-1188-4002-83f4-e8694249d051",
     "front": "～ようではないか",
     "back": "Hãy cùng…; chẳng phải nên… sao\n\n【Cấu trúc】\nV意向形 + ではないか\n\n【Cách dùng】\nDùng kêu gọi người nghe cùng thực hiện hành động.\n\n【Sắc thái】\nTrang trọng/diễn thuyết hơn ～ましょう.\n\n【Phân biệt】\n～ましょう trung tính; ～ようではないか có tính kêu gọi tập thể mạnh.",
     "reading": "～ようではないか",
@@ -3667,6 +3860,7 @@
     ]
   },
   {
+    "note_id": "7f61cddf-efc8-4c2a-a83c-e31dc81beb99",
     "front": "～ようか～まいか",
     "back": "Có nên… hay không…\n\n【Cấu trúc】\nV意向形 + か + V辞書形 + まいか\n\n【Cách dùng】\nDùng khi phân vân giữa làm và không làm.\n\n【Sắc thái】\nVăn viết/độc thoại; biểu hiện do dự.\n\n【Phân biệt】\n～かどうか trung tính “có hay không”; ～ようか～まいか nhấn quyết định ý chí.",
     "reading": "～ようか～まいか",
@@ -3686,6 +3880,7 @@
     ]
   },
   {
+    "note_id": "e96e0cb7-d41c-43e1-a4ff-3a74603aaaa2",
     "front": "要するに",
     "back": "Tóm lại; nói ngắn gọn là…\n\n【Cấu trúc】\n要するに + mệnh đề\n\n【Cách dùng】\nDùng tóm tắt nội dung phức tạp thành kết luận chính.\n\n【Sắc thái】\nKhá logic/trình bày; dùng cả nói và viết.\n\n【Phân biệt】\nつまり cũng “tức là”; 要するに nhấn tóm lược toàn bộ.",
     "reading": "ようするに",
@@ -3705,6 +3900,7 @@
     ]
   },
   {
+    "note_id": "9b8b3361-baf0-4a74-8522-9be6dc63c9b0",
     "front": "～ざるを得ない",
     "back": "Không còn cách nào khác ngoài phải…\n\n【Cấu trúc】\nVない bỏ ない + ざるを得ない（する→せざるを得ない）\n\n【Cách dùng】\nDùng khi hoàn cảnh ép phải làm A dù không muốn.\n\n【Sắc thái】\nTrang trọng, nhấn tính bất đắc dĩ.\n\n【Phân biệt】\n～しかない chỉ không có lựa chọn; ざるを得ない nhấn bị hoàn cảnh ép buộc.",
     "reading": "～ざるをえない",
@@ -3724,6 +3920,7 @@
     ]
   },
   {
+    "note_id": "a8830725-b862-4dee-be07-c17ad79d5288",
     "front": "～ずに済む",
     "back": "Không phải…; tránh được việc…\n\n【Cấu trúc】\nVない bỏ ない + ずに済む（する→せずに済む）\n\n【Cách dùng】\nDùng khi may mắn không cần làm một việc đáng lẽ có thể phải làm.\n\n【Sắc thái】\nHơi trang trọng hơn ～なくて済む.\n\n【Phân biệt】\n～なくて済む nghĩa gần như nhau, hội thoại hơn.",
     "reading": "～ずにすむ",
@@ -3743,6 +3940,7 @@
     ]
   },
   {
+    "note_id": "45a6e65e-13a0-4332-9586-febbdb878301",
     "front": "～一方だ",
     "back": "Cứ ngày càng…; chỉ tiếp tục…\n\n【Cấu trúc】\nV辞書形 + 一方だ\n\n【Cách dùng】\nDùng khi xu hướng A tiếp tục thay đổi theo một hướng, thường không dừng.\n\n【Sắc thái】\nHay dùng cho thay đổi tiêu cực nhưng không bắt buộc; sắc thái “càng ngày càng”.",
     "reading": "～いっぽうだ",
@@ -3762,6 +3960,7 @@
     ]
   },
   {
+    "note_id": "a24e2b94-7540-45d5-8b15-7282ce36961f",
     "front": "～か何か",
     "back": "… hay gì đó\n\n【Cấu trúc】\nN + か何か\n\n【Cách dùng】\nDùng đưa ra A như một ví dụ không xác định rõ, ngụ ý A hoặc thứ tương tự.\n\n【Sắc thái】\nKhẩu ngữ, làm đề xuất/nhận định bớt cứng.",
     "reading": "～かなにか",
@@ -3781,6 +3980,7 @@
     ]
   },
   {
+    "note_id": "97bf45b8-8f49-472d-bb1a-5aea56279a69",
     "front": "～ことになっている",
     "back": "Theo quy định/lịch thì…\n\n【Cấu trúc】\nV辞書形 / Vない + ことになっている\n\n【Cách dùng】\nDùng nói quy tắc, lịch trình hoặc hệ thống đã được thiết lập.\n\n【Sắc thái】\nKhách quan; không nhấn ai quyết định.",
     "reading": "～ことになっている",
@@ -3800,6 +4000,7 @@
     ]
   },
   {
+    "note_id": "07a84df1-98d6-41f1-94c9-c04507b18184",
     "front": "～も～ば～も",
     "back": "Cả… lẫn…; vừa… vừa…\n\n【Cấu trúc】\nN1 も V/Aば、N2 も…\n\n【Cách dùng】\nDùng liệt kê hai mặt/đặc điểm đều đúng, có thể tốt hoặc xấu.\n\n【Sắc thái】\nCấu trúc cân xứng, thường nhấn “cả A lẫn B”.",
     "reading": "～も～ば～も",
@@ -3819,6 +4020,7 @@
     ]
   },
   {
+    "note_id": "40620bc2-cf11-491a-ba5a-a7bce721759d",
     "front": "～に反して",
     "back": "Trái với…\n\n【Cấu trúc】\nN + に反して / に反する + N\n\n【Cách dùng】\nDùng khi kết quả/thực tế B trái với dự đoán, quy tắc, mong đợi A.\n\n【Sắc thái】\nKhá trang trọng; thường với 予想、期待、意志、規則.",
     "reading": "～にはんして",
@@ -3838,6 +4040,7 @@
     ]
   },
   {
+    "note_id": "2a777741-9da1-47f4-a3e6-4648afa3d814",
     "front": "～にかけて（は）",
     "back": "Xét về…; khi nói đến… thì…\n\n【Cấu trúc】\nN + にかけて（は）\n\n【Cách dùng】\nDùng nêu lĩnh vực A mà ai đó đặc biệt giỏi/đáng chú ý.\n\n【Sắc thái】\nHay đi với đánh giá ưu thế: “riêng về A thì…”.\n\n【Phân biệt】\nKhông nhầm ～から～にかけて chỉ phạm vi từ A đến B.",
     "reading": "～にかけて（は）",
@@ -3857,6 +4060,7 @@
     ]
   },
   {
+    "note_id": "0b4a5487-cf9b-4bec-8830-4d7a7e90c2d7",
     "front": "～に従って / ～に従い",
     "back": "Theo…; cùng với… thì…\n\n【Cấu trúc】\nN / V辞書形 + にしたがって\n\n【Cách dùng】\nDùng nói B thay đổi tương ứng khi A thay đổi; hoặc hành động theo quy tắc/chỉ dẫn A.\n\n【Sắc thái】\nKhá trang trọng; hai nghĩa chính: “cùng với” và “tuân theo”.",
     "reading": "～にしたがって / ～にしたがい",
@@ -3876,6 +4080,7 @@
     ]
   },
   {
+    "note_id": "60934b35-8651-4942-82dc-4981e43d925e",
     "front": "～を中心に",
     "back": "Lấy… làm trung tâm; chủ yếu quanh…\n\n【Cấu trúc】\nN + を中心に / を中心として\n\n【Cách dùng】\nDùng nói hoạt động/phạm vi tập trung chủ yếu vào A.\n\n【Sắc thái】\nKhá trang trọng; A là điểm trung tâm, còn có các yếu tố xung quanh.",
     "reading": "～をちゅうしんに",
@@ -3895,6 +4100,7 @@
     ]
   },
   {
+    "note_id": "2df2a961-5869-4be4-ad19-6066a4cb83f7",
     "front": "～を込めて",
     "back": "Gửi gắm/đặt… vào…\n\n【Cấu trúc】\nN + を込めて\n\n【Cách dùng】\nDùng nói đưa cảm xúc, ý nghĩa, lời chúc vào hành động/vật.\n\n【Sắc thái】\nThường với 心、感謝、願い、愛.",
     "reading": "～をこめて",
@@ -3914,6 +4120,7 @@
     ]
   },
   {
+    "note_id": "c2ea0c90-509f-4e9d-a2d0-cbf268887328",
     "front": "～を通じて / ～を通して",
     "back": "Thông qua…; suốt…\n\n【Cấu trúc】\nN + を通じて / を通して\n\n【Cách dùng】\nDùng chỉ phương tiện/trung gian để đạt B, hoặc toàn bộ một khoảng thời gian.\n\n【Sắc thái】\nを通じて hơi trang trọng; hai mẫu thường gần nghĩa.",
     "reading": "～をつうじて / ～をとおして",
@@ -3933,6 +4140,7 @@
     ]
   },
   {
+    "note_id": "f276e331-1ae7-4190-a328-cecfdc5549c4",
     "front": "～際に",
     "back": "Khi…; nhân dịp…\n\n【Cấu trúc】\nV辞書形/た + 際に\nNの + 際に\n\n【Cách dùng】\nDùng chỉ thời điểm khi A xảy ra, thường trong tình huống trang trọng/hướng dẫn.\n\n【Sắc thái】\nTrang trọng hơn ～とき; hay gặp trong thông báo, quy định.",
     "reading": "～さいに",
@@ -3952,6 +4160,7 @@
     ]
   },
   {
+    "note_id": "aef3360c-04ba-45f1-88fd-0b1c4d86083a",
     "front": "～最中だ / ～最中に",
     "back": "Đúng giữa lúc…\n\n【Cấu trúc】\nVている + 最中に\nNの + 最中に\n\n【Cách dùng】\nDùng khi B chen vào đúng lúc A đang diễn ra mạnh/ở giữa quá trình.\n\n【Sắc thái】\nNhấn “đúng giữa lúc”, thường B là sự việc xen vào/bất ngờ, nhưng “gây phiền” không phải điều kiện bắt buộc.",
     "reading": "～さいちゅうだ／～さいちゅうに",
@@ -3971,6 +4180,7 @@
     ]
   },
   {
+    "note_id": "0f5dd281-4024-4441-a7ab-fbe1e863e808",
     "front": "～そうもない / ～そうにない",
     "back": "Có vẻ khó mà…; không có dấu hiệu sẽ…\n\n【Cấu trúc】\nVます bỏ ます + そうもない / そうにない\n\n【Cách dùng】\nDùng dự đoán từ tình hình hiện tại rằng A khó có khả năng xảy ra.\n\n【Sắc thái】\nMạnh hơn chỉ ～そうではない, thường là “xem ra không thể/không có dấu hiệu”.",
     "reading": "～そうもない / ～そうにない",
@@ -3990,6 +4200,7 @@
     ]
   },
   {
+    "note_id": "d957aa2d-4509-4a7a-9d3c-b6594dd366a2",
     "front": "～たとたん",
     "back": "Ngay khi vừa… thì…\n\n【Cấu trúc】\nVた + とたん（に）\n\n【Cách dùng】\nDùng khi B xảy ra ngay lập tức sau A, thường bất ngờ.\n\n【Sắc thái】\nHai sự việc sát nhau; vế B thường không phải hành động có chủ ý đã dự tính.",
     "reading": "～たとたん",
@@ -4009,6 +4220,7 @@
     ]
   },
   {
+    "note_id": "8502ae1d-8b5f-4d3b-8713-37a2feffc363",
     "front": "～たって",
     "back": "Dù có…; cho dù…\n\n【Cấu trúc】\nVた + って\nAくたって\nN/Aな + だって\n\n【Cách dùng】\nKhẩu ngữ của ～ても/～でも, dùng khi kết quả B không đổi dù A.\n\n【Sắc thái】\nThân mật, mạnh và hội thoại hơn ～ても.",
     "reading": "～たって",
@@ -4028,6 +4240,7 @@
     ]
   },
   {
+    "note_id": "74105152-df5e-4c2a-9192-0d1bc95fe881",
     "front": "～てはじめて",
     "back": "Chỉ sau khi… mới…\n\n【Cấu trúc】\nVて + はじめて\n\n【Cách dùng】\nDùng khi chỉ nhờ trải nghiệm/sự kiện A mà lần đầu nhận ra hoặc đạt B.\n\n【Sắc thái】\nNhấn A là điều kiện mốc làm B lần đầu xuất hiện/được hiểu.",
     "reading": "～てはじめて",
@@ -4047,6 +4260,7 @@
     ]
   },
   {
+    "note_id": "edb9edd9-ad96-4001-b2d8-6c2b509cf696",
     "front": "～てしょうがない / ～てしかたがない",
     "back": "… không chịu nổi; cực kỳ…\n\n【Cấu trúc】\nVて / Aくて / N/Aなで + しょうがない/しかたがない\n\n【Cách dùng】\nDùng khi cảm xúc, cảm giác hoặc trạng thái mạnh đến mức người nói không kiểm soát được.\n\n【Sắc thái】\nMang tính chủ quan mạnh; thường với 嬉しい、心配、眠い、会いたい.",
     "reading": "～てしょうがない / ～てしかたがない",
@@ -4066,6 +4280,7 @@
     ]
   },
   {
+    "note_id": "1233729b-4b9f-4258-a966-02f35d11411a",
     "front": "～てもしょうがない / ～てもしかたがない",
     "back": "Có… cũng vô ích; không còn cách nào\n\n【Cấu trúc】\nVても + しょうがない/しかたがない\n\n【Cách dùng】\nDùng khi hành động A không thay đổi được kết quả hoặc tình hình không thể tránh.\n\n【Sắc thái】\nThể hiện chấp nhận bất lực; khác ～てしょうがない là “cực kỳ…”.",
     "reading": "～てもしょうがない / ～てもしかたがない",
@@ -4085,6 +4300,7 @@
     ]
   },
   {
+    "note_id": "48a22073-9fc2-49ac-9470-a300a23f74cc",
     "front": "～途中で / ～途中に",
     "back": "Trên đường/đang giữa chừng…\n\n【Cấu trúc】\nV辞書形 + 途中で/に\nNの + 途中で/に\n\n【Cách dùng】\nDùng khi B xảy ra lúc A chưa hoàn thành hoặc trên đường đến đâu đó.\n\n【Sắc thái】\n途中で thường nhấn nơi/thời điểm xảy ra hành động B; 途中に thiên về vị trí nằm giữa đường.",
     "reading": "～とちゅうで / ～とちゅうに",
@@ -4104,6 +4320,7 @@
     ]
   },
   {
+    "note_id": "132dcebc-80c2-45e3-97ae-16461ef0f811",
     "front": "～つもりで",
     "back": "Với ý định/tâm thế là…\n\n【Cấu trúc】\nV thể thường + つもりで\nNの + つもりで\n\n【Cách dùng】\nDùng làm B với tâm thế coi như/định A, dù thực tế có thể không phải A.\n\n【Sắc thái】\nNhấn thái độ, tinh thần khi thực hiện hành động.",
     "reading": "～つもりで",
@@ -4123,6 +4340,7 @@
     ]
   },
   {
+    "note_id": "fd4c4244-e3a5-446f-97ad-38989bf8b68b",
     "front": "～上で",
     "back": "Sau khi… rồi; trong việc…\n\n【Cấu trúc】\nVた + 上で\nV辞書形 + 上で\nNの + 上で\n\n【Cách dùng】\nVた上で: sau khi A rồi mới B. V辞書形/Nの上で: trong quá trình/xét về việc A.\n\n【Sắc thái】\nKhá trang trọng; thường dùng cho quyết định/thủ tục quan trọng.",
     "reading": "～うえで",
@@ -4142,6 +4360,7 @@
     ]
   },
   {
+    "note_id": "e350677f-5aaf-4754-b1a9-c9c83fa5244b",
     "front": "～上に",
     "back": "Không những… mà còn…\n\n【Cấu trúc】\nV/A thể thường + 上に\nN/Aな + である/な + 上に\n\n【Cách dùng】\nDùng cộng thêm B cùng hướng với A, thường để tăng đánh giá tốt hoặc xấu.\n\n【Sắc thái】\nHai đặc điểm thường cùng chiều; trang trọng hơn し.",
     "reading": "～うえに",
@@ -4161,6 +4380,7 @@
     ]
   },
   {
+    "note_id": "47e45e12-a5c5-455b-b0f9-f97aa0f5817f",
     "front": "～は別として",
     "back": "Tạm gác… sang một bên; chưa bàn đến…\n\n【Cấu trúc】\nN + は別として\n\n【Cách dùng】\nDùng loại A khỏi phạm vi bàn luận để tập trung vào phần còn lại.\n\n【Sắc thái】\nKhá khách quan, thường dùng khi đánh giá/phân tích.",
     "reading": "～はべつとして",
@@ -4180,6 +4400,7 @@
     ]
   },
   {
+    "note_id": "c25fb462-803c-4aac-a899-64c608d7e5eb",
     "front": "～ようがない",
     "back": "Không có cách nào để…\n\n【Cấu trúc】\nVます bỏ ます + ようがない\n\n【Cách dùng】\nDùng khi không tồn tại phương pháp/khả năng thực hiện A.\n\n【Sắc thái】\nKhách quan hơn “không muốn”; nghĩa là dù muốn cũng không biết/có cách.",
     "reading": "～ようがない",
@@ -4199,6 +4420,7 @@
     ]
   },
   {
+    "note_id": "93e67986-a3ab-4063-b424-cf3628fa0132",
     "front": "～ないわけにはいかない",
     "back": "Không thể không… / buộc phải…\n\n【Cấu trúc】\nVない + わけにはいかない\n\n【Cách dùng】\nDùng khi trách nhiệm, đạo lý hoặc hoàn cảnh khiến chủ thể buộc phải làm V.\n\n【Sắc thái】\nKhông phải nghĩa vụ pháp lý cứng; thường là áp lực hoàn cảnh/xã hội/nội tâm.\n\n【Phân biệt】\n～なければならない = phải làm; ～ないわけにはいかない = hoàn cảnh khiến “không thể không làm”.",
     "reading": "～ないわけにはいかない",
@@ -4218,6 +4440,7 @@
     ]
   },
   {
+    "note_id": "27afacea-704e-4685-a2a4-997feb947b80",
     "front": "～ばと思う",
     "back": "Mong/hy vọng rằng…\n\n【Cấu trúc】\nVば / Aければ / N・Aななら + と思う\n\n【Cách dùng】\nDùng nói mong muốn hoặc hy vọng một kết quả xảy ra; thường gặp trong cách nói lịch sự như ～ていただければと思います.\n\n【Sắc thái】\nMềm và khiêm nhường hơn nói yêu cầu trực tiếp.\n\n【Phân biệt】\n～ばいい/～といい cũng diễn tả hy vọng; ～ばと思う thường gắn trực tiếp với thái độ người nói và hay dùng trong lời lịch sự.",
     "reading": "～ばとおもう",
@@ -4237,6 +4460,7 @@
     ]
   },
   {
+    "note_id": "18130d1b-de24-418d-8bce-e3d8aa8a0822",
     "front": "～てこのかた",
     "back": "Kể từ khi… đến nay\n\n【Cấu trúc】\nVて + このかた\n\n【Cách dùng】\nDùng khi từ mốc A trong quá khứ đến hiện tại trạng thái B vẫn tiếp tục.\n\n【Sắc thái】\nVăn viết; thường khoảng thời gian tương đối dài.\n\n【Phân biệt】\n～て以来 gần nghĩa và thông dụng hơn; ～てこのかた có sắc thái văn viết/cổ hơn.",
     "reading": "～てこのかた",
@@ -4256,6 +4480,7 @@
     ]
   },
   {
+    "note_id": "0382083a-a56e-4f84-88ac-86a20678813e",
     "front": "～ようとしている",
     "back": "Đang định/sắp…\n\n【Cấu trúc】\nV意向形 + としている\n\n【Cách dùng】\nDùng khi một hành động sắp bắt đầu hoặc chủ thể đang cố thực hiện nó.\n\n【Sắc thái】\nNhấn giai đoạn ngay trước khi hành động xảy ra hoặc nỗ lực đang diễn ra.\n\n【Phân biệt】\n～ようと思っている = có ý định; ～ようとしている = đang ngay lúc định/cố làm.",
     "reading": "～ようとしている",
@@ -4275,6 +4500,7 @@
     ]
   },
   {
+    "note_id": "edfd82c6-664b-481e-b541-4aefa301fb94",
     "front": "～振りに",
     "back": "Lần đầu sau…; sau một khoảng… mới…\n\n【Cấu trúc】\nKhoảng thời gian + ぶりに / ぶりの + N\n\n【Cách dùng】\nDùng khi một việc xảy ra lại sau một khoảng thời gian không xảy ra.\n\n【Sắc thái】\nNhấn khoảng gián đoạn giữa hai lần.\n\n【Phân biệt】\n～以来 nhấn trạng thái kéo dài từ mốc; ～ぶりに nhấn tái diễn sau khoảng cách.",
     "reading": "～ぶりに",
@@ -4294,6 +4520,7 @@
     ]
   },
   {
+    "note_id": "baa5686b-6b06-4b55-98b9-c6dcb16b3ea3",
     "front": "未だに",
     "back": "Đến giờ vẫn…; đến nay vẫn chưa…\n\n【Cấu trúc】\n未だに + V / Vない\n\n【Cách dùng】\nDùng khi trạng thái kéo dài đến hiện tại lâu hơn mong đợi.\n\n【Sắc thái】\nThường gợi ngạc nhiên, khó hiểu hoặc tiếc nuối.\n\n【Phân biệt】\nまだ trung tính; 未だに nhấn “đến tận bây giờ vẫn”.",
     "reading": "いまだに",
@@ -4313,6 +4540,7 @@
     ]
   },
   {
+    "note_id": "c2cf78c6-4b90-48ef-8c29-68ba07b6aff6",
     "front": "いつの間にか",
     "back": "Lúc nào không hay; chẳng biết từ bao giờ\n\n【Cấu trúc】\nいつの間にか + mệnh đề\n\n【Cách dùng】\nDùng khi thay đổi xảy ra mà người nói không nhận ra thời điểm.\n\n【Sắc thái】\nNhấn sự vô thức/không để ý.\n\n【Phân biệt】\n気づかないうちに gần nghĩa; いつの間にか tự nhiên hơn trong kể chuyện.",
     "reading": "いつのまにか",
@@ -4332,6 +4560,7 @@
     ]
   },
   {
+    "note_id": "b351a025-766d-4efb-bbaa-169774e70b02",
     "front": "一旦",
     "back": "Một khi; tạm thời một lần\n\n【Cấu trúc】\n一旦 + V / 一旦～たら\n\n【Cách dùng】\nDùng khi một việc tạm dừng/thực hiện trước, hoặc “một khi đã A thì…”.\n\n【Sắc thái】\nHai nghĩa chính: tạm thời; hoặc sau khi A xảy ra thì khó đảo ngược.\n\n【Phân biệt】\nひとまず thiên “trước mắt”; 一旦 có thể nhấn điểm chuyển trạng thái.",
     "reading": "いったん",
@@ -4351,6 +4580,7 @@
     ]
   },
   {
+    "note_id": "640a5297-0ab6-442f-91fc-7469e756d429",
     "front": "～つつも",
     "back": "Mặc dù… nhưng vẫn…\n\n【Cấu trúc】\nVます bỏ ます + つつも\n\n【Cách dùng】\nDùng nêu hành động/trạng thái B trái với điều người nói biết/đang làm ở A.\n\n【Sắc thái】\nVăn viết; thường có mâu thuẫn nội tâm.\n\n【Phân biệt】\n～ながらも gần nghĩa; ～つつも trang trọng hơn.",
     "reading": "～つつも",
@@ -4370,6 +4600,7 @@
     ]
   },
   {
+    "note_id": "d61ac2ef-b0e7-4d1b-9bf3-e94a96929d4e",
     "front": "～傾向がある",
     "back": "Có xu hướng…\n\n【Cấu trúc】\nNの / V辞書形 + 傾向がある\n\n【Cách dùng】\nDùng mô tả xu hướng thường thấy từ dữ liệu/quan sát.\n\n【Sắc thái】\nKhách quan, phù hợp văn viết/báo cáo.\n\n【Phân biệt】\n～がち thường xu hướng tiêu cực của cá nhân; 傾向がある khách quan và rộng hơn.",
     "reading": "～けいこうがある",
@@ -4389,6 +4620,7 @@
     ]
   },
   {
+    "note_id": "0f65cff6-779a-4e5a-a508-683b3a0353ea",
     "front": "～に値する",
     "back": "Đáng để…; xứng đáng với…\n\n【Cấu trúc】\nN / V辞書形 + に値する\n\n【Cách dùng】\nDùng đánh giá người/sự vật xứng đáng nhận một đánh giá hoặc hành động.\n\n【Sắc thái】\nTrang trọng, thường với 評価、尊敬、注目、信頼.\n\n【Phân biệt】\n～価値がある gần nghĩa; に値する trang trọng và đánh giá mạnh hơn.",
     "reading": "～にあたいする",
@@ -4408,6 +4640,7 @@
     ]
   },
   {
+    "note_id": "c9a58fe0-24db-4953-a822-f9f2e654e70b",
     "front": "～というわけではない",
     "back": "Không có nghĩa là…; không hẳn là…\n\n【Cấu trúc】\n普通形 + というわけではない\n\n【Cách dùng】\nDùng phủ định một cách hiểu/kết luận quá rộng từ điều vừa nói.\n\n【Sắc thái】\nLý luận và rõ hơn ～わけではない; thường sửa hiểu lầm.\n\n【Phân biệt】\n～というものではない phủ định quy luật chung; ～というわけではない phủ định kết luận cụ thể.",
     "reading": "～というわけではない",
@@ -4427,6 +4660,7 @@
     ]
   },
   {
+    "note_id": "1e5a3f8d-03c7-46ee-a371-7a54123a73e8",
     "front": "確かに",
     "back": "Đúng là; quả thật\n\n【Cấu trúc】\n確かに + mệnh đề\n\n【Cách dùng】\nDùng công nhận một phần sự thật trước khi bổ sung/đối lập ý khác.\n\n【Sắc thái】\nThường trong mẫu 確かにAが、B để nhượng bộ hợp lý.\n\n【Phân biệt】\nもちろん = đương nhiên; 確かに = công nhận dựa trên thực tế.",
     "reading": "たしかに",
@@ -4446,6 +4680,7 @@
     ]
   },
   {
+    "note_id": "4100f7a3-5f77-473b-8f93-7e2f800f00df",
     "front": "万が一",
     "back": "Lỡ như; trong trường hợp cực kỳ hiếm\n\n【Cấu trúc】\n万が一 + mệnh đề\n\n【Cách dùng】\nDùng giả định một tình huống rất khó xảy ra nhưng cần chuẩn bị.\n\n【Sắc thái】\nNhấn xác suất thấp và tính dự phòng.\n\n【Phân biệt】\nもし = nếu; 万が一 = nếu lỡ trường hợp rất hiếm xảy ra.",
     "reading": "まんがいち",
@@ -4465,6 +4700,7 @@
     ]
   },
   {
+    "note_id": "17022058-bb8d-45fe-83c7-02c45227863e",
     "front": "なにやら",
     "back": "Cái gì đó; hình như có gì…\n\n【Cấu trúc】\nなにやら + N / mệnh đề\n\n【Cách dùng】\nDùng khi người nói cảm nhận có điều gì nhưng chưa xác định rõ.\n\n【Sắc thái】\nMơ hồ, văn viết hơn なんだか.\n\n【Phân biệt】\nなんだか khẩu ngữ; なにやら thường văn kể/chữ viết.",
     "reading": "なにやら",
@@ -4484,6 +4720,7 @@
     ]
   },
   {
+    "note_id": "b6bc3783-d3ad-4687-901b-8afbf00bfca9",
     "front": "おおよそ",
     "back": "Khoảng chừng; đại khái; nói chung\n\n【Cấu trúc】\nおおよそ + số lượng / mệnh đề\n\n【Cách dùng】\nDùng nêu số liệu xấp xỉ hoặc nhận định tổng quát.\n\n【Sắc thái】\nKhá trang trọng hơn だいたい.\n\n【Phân biệt】\nだいたい hội thoại hơn; おおよそ thường trong văn bản/số liệu.",
     "reading": "おおよそ",
@@ -4503,6 +4740,7 @@
     ]
   },
   {
+    "note_id": "0a8a3d0f-eb51-4daf-8136-cd25b9445b7e",
     "front": "～に任せる",
     "back": "Giao cho…; để tùy vào…\n\n【Cấu trúc】\nN + に任せる / Nに + Vるのを任せる\n\n【Cách dùng】\nDùng giao quyền/quyết định/công việc cho người hoặc yếu tố A.\n\n【Sắc thái】\nMang ý tin tưởng hoặc không can thiệp.\n\n【Phân biệt】\n～に頼る = dựa vào; 任せる = giao quyền xử lý.",
     "reading": "～にまかせる",
@@ -4522,6 +4760,7 @@
     ]
   },
   {
+    "note_id": "0fd349ca-0851-49b4-b0cd-b3b466864a0e",
     "front": "～結果",
     "back": "Kết quả là…; sau khi…\n\n【Cấu trúc】\nVた / Nの + 結果\n\n【Cách dùng】\nDùng nêu kết quả thu được sau hành động, khảo sát, cân nhắc A.\n\n【Sắc thái】\nKhá khách quan, thường trong báo cáo.\n\n【Phân biệt】\n～末に nhấn quá trình dài; ～結果 chỉ đơn giản nêu kết quả sau A.",
     "reading": "～けっか",
@@ -4541,6 +4780,7 @@
     ]
   },
   {
+    "note_id": "054f314d-d078-4ec7-a4b0-9ac395fc9807",
     "front": "従って",
     "back": "Vì vậy; do đó\n\n【Cấu trúc】\nMệnh đề。従って、mệnh đề\n\n【Cách dùng】\nDùng nối nguyên nhân/lý luận A với kết luận B.\n\n【Sắc thái】\nTrang trọng, logic, văn viết.\n\n【Phân biệt】\nだから hội thoại; したがって dùng báo cáo/lập luận.",
     "reading": "したがって",
@@ -4560,6 +4800,7 @@
     ]
   },
   {
+    "note_id": "a6c1d4ba-0593-42bf-ac9f-fc62c91dabc9",
     "front": "思うように",
     "back": "Theo ý muốn; như mong đợi\n\n【Cấu trúc】\n思うように + V / 思うような + N\n\n【Cách dùng】\nDùng khi kết quả/hành động diễn ra hoặc không diễn ra đúng như mong muốn.\n\n【Sắc thái】\nRất thường ở phủ định: 思うように～ない.\n\n【Phân biệt】\n予定どおり = theo kế hoạch khách quan; 思うように = theo mong muốn chủ quan.",
     "reading": "おもうように",
@@ -4579,6 +4820,7 @@
     ]
   },
   {
+    "note_id": "b3f5f89c-5c93-4d8e-8901-6a8c33a1a406",
     "front": "～という点から考えると",
     "back": "Xét từ khía cạnh…\n\n【Cấu trúc】\nN / 普通形 + という点から考えると\n\n【Cách dùng】\nDùng đánh giá một vấn đề từ một khía cạnh cụ thể.\n\n【Sắc thái】\nPhong cách phân tích, học thuật.\n\n【Phân biệt】\n～から言うと ngắn gọn hơn; mẫu này làm rõ “xét từ điểm/khía cạnh”.",
     "reading": "～というてんからかんがえると",
@@ -4598,6 +4840,7 @@
     ]
   },
   {
+    "note_id": "b151b117-98f5-443e-a5a1-31d5078f6f6a",
     "front": "～てちょうだい",
     "back": "Hãy… cho tôi; làm… nhé\n\n【Cấu trúc】\nVて + ちょうだい\n\n【Cách dùng】\nCách yêu cầu thân mật, thường người trên/nữ giới với người thân hoặc trẻ em.\n\n【Sắc thái】\nMềm hơn mệnh lệnh nhưng không lịch sự với người trên.\n\n【Phân biệt】\n～てください lịch sự/trung tính hơn.",
     "reading": "～てちょうだい",
@@ -4617,6 +4860,7 @@
     ]
   },
   {
+    "note_id": "19df7727-21e2-413d-b199-b1445239936b",
     "front": "～のではないでしょうか",
     "back": "Có lẽ…; chẳng phải… sao?\n\n【Cấu trúc】\n普通形 + のではないでしょうか\n\n【Cách dùng】\nDùng đưa ý kiến/phỏng đoán mềm, mời người nghe đồng tình.\n\n【Sắc thái】\nLịch sự, giảm mức khẳng định.\n\n【Phân biệt】\n～と思います nói trực tiếp ý kiến; ～のではないでしょうか mềm và mang tính đề xuất/xác nhận.",
     "reading": "～のではないでしょうか",
@@ -4636,6 +4880,7 @@
     ]
   },
   {
+    "note_id": "c94eb2f4-b7df-483e-8ecf-da74f7dda439",
     "front": "～ものですから",
     "back": "Vì… nên… (xin giải thích/biện minh)\n\n【Cấu trúc】\n普通形 + ものですから\n\n【Cách dùng】\nDùng đưa lý do một cách lịch sự, thường khi xin lỗi hoặc giải thích.\n\n【Sắc thái】\nLịch sự hơn ものだから nhưng vẫn có sắc thái biện minh.\n\n【Phân biệt】\n～ので trung tính; ～ものですから nhấn hoàn cảnh khiến người nói “đành vậy”.",
     "reading": "～ものですから",
@@ -4655,6 +4900,7 @@
     ]
   },
   {
+    "note_id": "1408d886-f0ec-4db4-9b1b-f579c15999a1",
     "front": "さすが",
     "back": "Quả đúng là; không hổ danh\n\n【Cấu trúc】\nさすが（に） + mệnh đề / さすが + N\n\n【Cách dùng】\nDùng khi kết quả phù hợp với danh tiếng/kỳ vọng; đôi khi “ngay cả… cũng”.\n\n【Sắc thái】\nThể hiện ấn tượng/khâm phục; tùy ngữ cảnh có thể nhượng bộ.\n\n【Phân biệt】\n～だけあって cấu trúc nguyên nhân rõ hơn; さすが là trạng từ đánh giá.",
     "reading": "さすが",
@@ -4674,6 +4920,7 @@
     ]
   },
   {
+    "note_id": "f50d7f96-540f-47b3-aec4-d9385a6cfcb5",
     "front": "～ことは～が",
     "back": "Đúng là… nhưng…\n\n【Cấu trúc】\nV/A + ことは + V/A + が\n\n【Cách dùng】\nDùng thừa nhận A ở một mức nào đó rồi nêu hạn chế B.\n\n【Sắc thái】\nNhượng bộ nhẹ, thường trong hội thoại.\n\n【Phân biệt】\n確かにAがB tương tự; ～ことは～が lặp lại từ để nhấn thừa nhận có điều kiện.",
     "reading": "～ことは～が",
@@ -4693,6 +4940,7 @@
     ]
   },
   {
+    "note_id": "d7a0f760-92c3-4e76-91d1-aa6e95e58876",
     "front": "さらに",
     "back": "Hơn nữa; thêm nữa; còn hơn\n\n【Cấu trúc】\nさらに + V/A/N\n\n【Cách dùng】\nDùng bổ sung thông tin hoặc tăng mức độ.\n\n【Sắc thái】\nKhá trung tính-văn viết; có thể chỉ “thêm một bước”.\n\n【Phân biệt】\nその上 bổ sung một ý; さらに còn dùng tăng mức độ trực tiếp.",
     "reading": "さらに",
@@ -4712,6 +4960,7 @@
     ]
   },
   {
+    "note_id": "b8e37853-833a-4512-87ca-3c6f3049a734",
     "front": "せいぜい",
     "back": "Nhiều nhất; cùng lắm\n\n【Cấu trúc】\nせいぜい + số lượng / V\n\n【Cách dùng】\nDùng nêu giới hạn tối đa thấp hơn mong đợi.\n\n【Sắc thái】\nCó thể mang sắc thái xem nhẹ hoặc thực tế.\n\n【Phân biệt】\n多くても = dù nhiều cũng; せいぜい tự nhiên và cô đọng hơn.",
     "reading": "せいぜい",
@@ -4731,6 +4980,7 @@
     ]
   },
   {
+    "note_id": "f1de0afd-b184-4910-9886-3a57cd10c90f",
     "front": "たちまち",
     "back": "Trong chớp mắt; lập tức\n\n【Cấu trúc】\nたちまち + V\n\n【Cách dùng】\nDùng khi sự thay đổi xảy ra cực nhanh.\n\n【Sắc thái】\nVăn viết/kể chuyện, đôi khi kịch tính.\n\n【Phân biệt】\nすぐ phổ thông; たちまち nhấn tốc độ thay đổi rõ rệt.",
     "reading": "たちまち",
@@ -4750,6 +5000,7 @@
     ]
   },
   {
+    "note_id": "5291b925-2418-484f-90f7-1fd7d8f540ff",
     "front": "何から何まで",
     "back": "Từ A đến Z; mọi thứ\n\n【Cấu trúc】\n何から何まで + mệnh đề\n\n【Cách dùng】\nDùng nhấn toàn bộ mọi chi tiết/phạm vi.\n\n【Sắc thái】\nThường thể hiện biết ơn hoặc phê bình “tất cả mọi thứ”.\n\n【Phân biệt】\n全部 chỉ “tất cả”; 何から何まで nhấn từng thứ từ đầu đến cuối.",
     "reading": "なにからなにまで",
@@ -4769,6 +5020,7 @@
     ]
   },
   {
+    "note_id": "c20b7218-a15f-428d-8372-3ed813dcce2a",
     "front": "何より",
     "back": "Hơn hết; quan trọng nhất; đáng mừng nhất\n\n【Cấu trúc】\n何より + mệnh đề / 何よりも + N\n\n【Cách dùng】\nDùng nhấn yếu tố quan trọng/đáng mừng nhất so với mọi thứ khác.\n\n【Sắc thái】\nThường trong đánh giá tích cực.\n\n【Phân biệt】\n一番 chỉ xếp hạng; 何より mang cảm xúc “trên hết”.",
     "reading": "なにより",
@@ -4788,6 +5040,7 @@
     ]
   },
   {
+    "note_id": "ad199ac1-da49-422e-89f9-3ec014a23ab8",
     "front": "何と言っても",
     "back": "Dù nói gì thì…; trên hết vẫn là…\n\n【Cấu trúc】\n何と言っても + mệnh đề\n\n【Cách dùng】\nDùng nhấn yếu tố quan trọng/đặc trưng nhất sau khi cân nhắc mọi mặt.\n\n【Sắc thái】\nHội thoại tự nhiên, có tính kết luận.\n\n【Phân biệt】\n何より gần nghĩa “hơn hết”; 何と言っても nhấn “dù nói thế nào”.",
     "reading": "なんといっても",
@@ -4807,6 +5060,7 @@
     ]
   },
   {
+    "note_id": "3dff6188-9a35-4bf8-97bc-2de20e6d1140",
     "front": "何しろ",
     "back": "Dù sao; vì dù gì cũng…\n\n【Cấu trúc】\n何しろ + mệnh đề\n\n【Cách dùng】\nDùng đưa lý do mạnh khiến kết luận phía sau dễ hiểu.\n\n【Sắc thái】\nHội thoại, giống “vì dù sao thì…”.\n\n【Phân biệt】\nなにせ gần nghĩa và khẩu ngữ hơn; 何しろ thường mở lời giải thích.",
     "reading": "なにしろ",
@@ -4826,6 +5080,7 @@
     ]
   },
   {
+    "note_id": "8c40518c-79c1-46d7-89ff-ba37e2cd6a81",
     "front": "しかしながら",
     "back": "Tuy nhiên; mặc dù vậy\n\n【Cấu trúc】\nしかしながら + mệnh đề\n\n【Cách dùng】\nDùng nối hai ý đối lập trong văn viết.\n\n【Sắc thái】\nTrang trọng hơn しかし.\n\n【Phân biệt】\nでも hội thoại; しかしながら chính thức/văn viết.",
     "reading": "しかしながら",
@@ -4845,6 +5100,7 @@
     ]
   },
   {
+    "note_id": "fee4a5db-bd50-4bc5-b292-615397c80c27",
     "front": "～ならともかく",
     "back": "Nếu là… thì còn được, nhưng…\n\n【Cấu trúc】\nN / 普通形 + ならともかく\n\n【Cách dùng】\nDùng cho rằng A còn có thể chấp nhận/hiểu được, nhưng B thì không.\n\n【Sắc thái】\nThường phê bình mức B quá mức/không phù hợp.\n\n【Phân biệt】\n～ならまだしも rất gần; ならともかく hơi trung tính hơn và nghĩa “tạm gác A”.",
     "reading": "～ならともかく",
@@ -4864,6 +5120,7 @@
     ]
   },
   {
+    "note_id": "421541a5-7051-4ddc-84eb-8f57fbcf5aeb",
     "front": "～ざる",
     "back": "Không… (dạng phủ định văn viết cổ)\n\n【Cấu trúc】\nVない bỏ ない + ざる + N（する→せざる）\n\n【Cách dùng】\nDùng như dạng bổ nghĩa phủ định cổ của ～ない, thường trong văn viết/thành ngữ.\n\n【Sắc thái】\nTrang trọng/cổ; nhiều cụm đã cố định như 知られざる、思わざる.\n\n【Phân biệt】\n～ぬ cũng là phủ định cổ; ～ざる thường đứng trước danh từ hoặc trong ざるを得ない.",
     "reading": "～ざる",
@@ -4883,6 +5140,7 @@
     ]
   },
   {
+    "note_id": "5d2e10c1-bb9c-4a05-996b-2347fa0ae9ec",
     "front": "後の + N / あと～",
     "back": "Phần còn lại; còn… nữa; sau… nữa\n\n【Cấu trúc】\nあと + の + N / あと + số lượng / あとは～\n\n【Cách dùng】\nDùng chỉ phần còn lại sau một mốc hoặc số lượng còn thiếu/còn lại.\n\n【Sắc thái】\nNghĩa cốt lõi là “phần ở sau/còn lại”; hình thức thay đổi theo danh từ hay số lượng.\n\n【Phân biệt】\n残り thiên “phần còn lại” trực tiếp; あと còn dùng chỉ thời gian/số lượng còn lại.",
     "reading": "あとの～／あと～",
@@ -4902,6 +5160,7 @@
     ]
   },
   {
+    "note_id": "f901473a-62fa-4ab0-a0da-8739ce6cc72f",
     "front": "～手前",
     "back": "Vì đã… trước mặt/người khác nên…; xét từ vị thế…\n\n【Cấu trúc】\nVた / V辞書形 + 手前 / Nの + 手前\n\n【Cách dùng】\nDùng khi vì vị thế, thể diện, lời đã nói hay hoàn cảnh đối diện A mà khó làm khác đi.\n\n【Sắc thái】\nThường kéo theo nghĩa vụ “đã ở thế này thì phải…”, hoặc giữ thể diện trước người khác.\n\n【Phân biệt】\n～からには nhấn trách nhiệm do sự thật A; ～手前 thêm sắc thái thể diện/vị thế trước người khác.",
     "reading": "～てまえ",
@@ -4921,6 +5180,7 @@
     ]
   },
   {
+    "note_id": "ae522a2e-eae9-4028-aa5c-a9c26c7e6888",
     "front": "～が気になる",
     "back": "Bận tâm về…; để ý đến…\n\n【Cấu trúc】\nN + が気になる\n\n【Cách dùng】\nDùng khi A khiến người nói quan tâm, lo lắng hoặc cứ nghĩ tới.\n\n【Sắc thái】\nKhông nhất thiết tiêu cực; có thể là tò mò/quan tâm.\n\n【Phân biệt】\n～を心配する nghiêng lo lắng rõ; 気になる rộng hơn, từ tò mò đến bận tâm.",
     "reading": "～がきになる",
@@ -4940,6 +5200,7 @@
     ]
   },
   {
+    "note_id": "2a3f3cfd-4ea3-4804-85c8-6b560195403c",
     "front": "～に気を付ける",
     "back": "Chú ý; cẩn thận với…\n\n【Cấu trúc】\nN / V辞書形こと + に気を付ける\n\n【Cách dùng】\nDùng nhắc tránh nguy hiểm, sai sót hoặc chú ý đến một điểm.\n\n【Sắc thái】\nRất thông dụng; có thể là lời khuyên nhẹ hoặc cảnh báo.\n\n【Phân biệt】\n～に注意する trang trọng/khách quan hơn; 気を付ける tự nhiên trong hội thoại.",
     "reading": "～にきをつける",
@@ -4959,6 +5220,7 @@
     ]
   },
   {
+    "note_id": "7d4dcb4f-0f34-4993-8d7c-238949640ccc",
     "front": "～より仕方がない",
     "back": "Không còn cách nào khác ngoài…\n\n【Cấu trúc】\nV辞書形 + より仕方がない\n\n【Cách dùng】\nDùng khi không có lựa chọn nào khác khả thi ngoài A.\n\n【Sắc thái】\nKhá văn viết; mang cảm giác bất đắc dĩ.\n\n【Phân biệt】\n～よりほかない gần như đồng nghĩa; ～しかない phổ thông hơn.",
     "reading": "～よりしかたがない",
@@ -4978,6 +5240,7 @@
     ]
   },
   {
+    "note_id": "b1159547-22ad-42f9-8383-68820fb129ca",
     "front": "～てからでないと / ～てからでなければ",
     "back": "Nếu chưa… thì không thể…\n\n【Cấu trúc】\nVて + からでないと / からでなければ + phủ định\n\n【Cách dùng】\nDùng nói A là điều kiện/trình tự bắt buộc trước khi B có thể xảy ra.\n\n【Sắc thái】\nVế B thường là phủ định khả năng/không thể quyết định.\n\n【Phân biệt】\n～ないことには～ない nhấn điều kiện cần nói chung; ～てからでないと nhấn phải hoàn thành A trước.",
     "reading": "～てからでないと／～てからでなければ",
@@ -4997,6 +5260,7 @@
     ]
   },
   {
+    "note_id": "0be6fefd-8a19-4e8b-8764-d544401775aa",
     "front": "～の内で",
     "back": "Trong số…; trong phạm vi…\n\n【Cấu trúc】\nNの + うちで\n\n【Cách dùng】\nDùng chọn/so sánh một phần tử trong một nhóm/phạm vi A.\n\n【Sắc thái】\nTrung tính; rất thường đi với 一番.\n\n【Phân biệt】\n～の中で gần nghĩa; うちで thường tự nhiên với tập hợp hữu hạn/những lựa chọn đang xét.",
     "reading": "～のうちで",
@@ -5016,6 +5280,7 @@
     ]
   },
   {
+    "note_id": "2187ba5d-1127-46f7-9151-f771848bfdde",
     "front": "～がけに",
     "back": "Trên đường/đúng lúc bắt đầu hoặc kết thúc…\n\n【Cấu trúc】\nVます bỏ ます + がけに / N + がけ\n\n【Cách dùng】\nDùng cho hành động xảy ra đúng lúc đang bắt đầu/rời đi/kết thúc một chuyển động, như 出かけがけ、帰りがけ.\n\n【Sắc thái】\nThường gắn với các động từ di chuyển; mang nghĩa “tiện lúc/đúng lúc”.\n\n【Phân biệt】\n～途中で chỉ giữa quá trình; ～がけに gần đầu/cuối một hành động di chuyển.",
     "reading": "～がけに",
@@ -5035,6 +5300,7 @@
     ]
   },
   {
+    "note_id": "c441b110-3b2c-49aa-9779-a823cc8366f1",
     "front": "～もまた",
     "back": "… cũng vậy; cũng lại là…\n\n【Cấu trúc】\nN + もまた + vị ngữ\n\n【Cách dùng】\nDùng nhấn rằng A cũng thuộc cùng nhận định với đối tượng trước đó.\n\n【Sắc thái】\nTrang trọng hơn chỉ も; thường trong văn viết/lập luận.\n\n【Phân biệt】\nも đơn thuần “cũng”; もまた nhấn sự tương đồng rõ hơn.",
     "reading": "～もまた",
@@ -5054,6 +5320,7 @@
     ]
   },
   {
+    "note_id": "034b720f-b5e3-4857-97a7-996cb2dae9e3",
     "front": "それとも",
     "back": "Hay là…; hoặc là…\n\n【Cấu trúc】\nCâu hỏi A + それとも + B\n\n【Cách dùng】\nDùng đưa ra hai hay nhiều lựa chọn trong câu hỏi.\n\n【Sắc thái】\nChủ yếu trong câu nghi vấn; nối lựa chọn rõ ràng.\n\n【Phân biệt】\nあるいは dùng được cả văn viết và câu trần thuật; それとも chủ yếu câu hỏi.",
     "reading": "それとも",
@@ -5073,6 +5340,7 @@
     ]
   },
   {
+    "note_id": "99fe2d0f-e4fd-49c0-a7c6-d386af913f2b",
     "front": "～としては",
     "back": "Với tư cách là…; xét trên lập trường…\n\n【Cấu trúc】\nN + としては\n\n【Cách dùng】\nDùng đánh giá từ vai trò/lập trường A, hoặc nói mức độ so với chuẩn của A.\n\n【Sắc thái】\nCó thể mang nghĩa “đối với một A thì khá…”.\n\n【Phân biệt】\n～にとって nói ý nghĩa đối với A; としては nhấn vai trò/tiêu chuẩn của A.",
     "reading": "～としては",
@@ -5092,6 +5360,7 @@
     ]
   },
   {
+    "note_id": "6a4ef933-4dd6-40e7-b12c-d0318282bcfa",
     "front": "～には",
     "back": "Để… thì; đối với… thì\n\n【Cấu trúc】\nV辞書形 + には / N + には\n\n【Cách dùng】\nDùng nêu điều kiện cần cho mục đích A hoặc đánh dấu đối tượng/phạm vi được đem ra đối chiếu.\n\n【Sắc thái】\nは thêm sắc thái chủ đề/đối chiếu vào に.\n\n【Phân biệt】\n～ためには nhấn mục đích rõ hơn; には ngắn gọn và còn dùng cho “đối với”.",
     "reading": "～には",
@@ -5111,6 +5380,7 @@
     ]
   },
   {
+    "note_id": "3510deec-4575-4f3b-a106-5256f4dd1dd8",
     "front": "～たったの",
     "back": "Chỉ vỏn vẹn…\n\n【Cấu trúc】\nたったの + số lượng / N\n\n【Cách dùng】\nDùng nhấn số lượng rất ít so với kỳ vọng.\n\n【Sắc thái】\nMạnh hơn ただの/わずか; thường gây ngạc nhiên.\n\n【Phân biệt】\nわずか chỉ lượng ít, hơi văn viết; たったの mang cảm xúc “chỉ có từng ấy”.",
     "reading": "～たったの",
@@ -5130,6 +5400,7 @@
     ]
   },
   {
+    "note_id": "55ee5061-3890-4c72-a155-a21c850e1be7",
     "front": "～気",
     "back": "Có ý định/tâm thế…\n\n【Cấu trúc】\nV辞書形 + 気 / Vない + 気\n\n【Cách dùng】\nDùng nói ý định, động lực hoặc tâm thế làm A.\n\n【Sắc thái】\nThường trong ～気がある/ない、～気でいる.\n\n【Phân biệt】\n～つもり là dự định cụ thể hơn; ～気 thiên ý chí/tâm thế.",
     "reading": "～き",
@@ -5149,6 +5420,7 @@
     ]
   },
   {
+    "note_id": "c3735d56-febb-497b-b337-3f2406370ac7",
     "front": "～弱",
     "back": "Chưa tới…; hơi dưới…\n\n【Cấu trúc】\nSố lượng + 弱\n\n【Cách dùng】\nDùng nói số lượng thấp hơn con số tròn một chút.\n\n【Sắc thái】\nThường trong số liệu, tin tức, văn viết.\n\n【Phân biệt】\n～足らず cũng “chưa đến” nhưng cách dùng khác; 弱 gắn sau số lượng.",
     "reading": "～じゃく",
@@ -5168,6 +5440,7 @@
     ]
   },
   {
+    "note_id": "d433c016-397b-4b5d-ac66-f099da29cd5e",
     "front": "～強",
     "back": "Hơn… một chút\n\n【Cấu trúc】\nSố lượng + 強\n\n【Cách dùng】\nDùng nói số lượng cao hơn con số tròn một chút.\n\n【Sắc thái】\nThường trong số liệu, báo cáo.\n\n【Phân biệt】\n～弱 = hơi dưới; ～強 = hơi trên.",
     "reading": "～きょう",
@@ -5187,6 +5460,7 @@
     ]
   },
   {
+    "note_id": "19e09c7a-bb21-41d5-9628-6e428a718315",
     "front": "～うちに",
     "back": "Trong lúc còn…; tranh thủ trước khi…; trong khi… thì dần…\n\n【Cấu trúc】\nV辞書形 / Vている / Vない / A / Nの + うちに\n\n【Cách dùng】\nDùng tranh thủ làm B trước khi trạng thái A thay đổi, hoặc nói biến đổi B tự nhiên xảy ra trong quá trình A.\n\n【Sắc thái】\nCó hai nghĩa chính: “trước khi mất cơ hội” và “trong quá trình thì dần thay đổi”.\n\n【Phân biệt】\n～間に chỉ một thời điểm trong khoảng; ～うちに thường gắn với sự thay đổi/cơ hội tạm thời.",
     "reading": "～うちに",

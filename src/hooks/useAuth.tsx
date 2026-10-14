@@ -4,6 +4,7 @@ import { createLearningStorage, type LearningStorage } from '@/lib/storage';
 import type { ImportedCard, ImportPreview } from '@/lib/ankiImport';
 import type { PageId } from '@/types';
 import { readGuestSession, writeGuestSession } from '@/lib/guestSession';
+import { CARD_NOTES_STORAGE_KEY, type NoteEntry } from '@/lib/cardNotes';
 
 export type ImportDraft = { preview: ImportPreview | null; name: string; creatingDeck: boolean; mode: 'flashcards' | 'anki'; manualCards?: ImportedCard[]; allowEmpty?: boolean; importSeed?: string };
 type AuthPrompt = 'choice' | 'login' | 'register' | null;
@@ -107,7 +108,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setResumePage('dashboard');
     // P3 / FR-GUEST-07,08: connect consent + idempotent server migration here only after the sync API exists.
     const guestStorage = createLearningStorage('guest');
-    setGuestNotice(guestStorage.getBookmarks().length > 0 || guestStorage.getStudyDays().length > 0 || (['vocabulary', 'kanji', 'grammar'] as const).some(type => guestStorage.getSRSCards(type).length > 0) || ['nhat-listening-v1', 'nhat-jlpt-listening-scores-v1'].some(key => Object.keys(guestStorage.getJSON(key, {})).length > 0));
+    setGuestNotice(guestStorage.getBookmarks().length > 0 || guestStorage.getStudyDays().length > 0 || (['vocabulary', 'kanji', 'grammar'] as const).some(type => guestStorage.getSRSCards(type).length > 0) || ['nhat-listening-v1', 'nhat-jlpt-listening-scores-v1'].some(key => Object.keys(guestStorage.getJSON(key, {})).length > 0) || Object.values(guestStorage.getJSON<Record<string, NoteEntry>>(CARD_NOTES_STORAGE_KEY, {})).some(note => note.text?.trim()));
     writeGuestSession(false);
     setUser(account); setGuest(false); setSessionKey(sessionIdentity()!); setPrompt(null); setRestoreError(null);
   }

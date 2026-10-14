@@ -1,13 +1,13 @@
 import { apiRequest, ApiError } from './api';
 
-export interface ShareLink { token: string | null }
+export interface ShareLink { token: string | null; includePersonalNotes?: boolean }
 export interface SharedDeckPreview {
   name: string; description: string | null; author: string; cardCount: number;
   previewCount: number; page: number; size: number; totalPages: number;
   cards: Array<{ front: string; back: string; reading: string | null; kind: string; dictionarySource?: boolean }>;
 }
 export const shareStatus = (id: string) => apiRequest<ShareLink>(`/decks/${id}/share`);
-export const enableShare = (id: string) => apiRequest<ShareLink>(`/decks/${id}/share`, { method: 'PUT' });
+export const enableShare = (id: string, includePersonalNotes = false) => apiRequest<ShareLink>(`/decks/${id}/share`, { method: 'PUT', body: JSON.stringify({ includePersonalNotes }) });
 export const revokeShare = (id: string) => apiRequest<void>(`/decks/${id}/share`, { method: 'DELETE' });
 export const saveSharedDeck = (token: string) => apiRequest<{ deckId: string; alreadySaved: boolean }>(`/shared-decks/${encodeURIComponent(token)}/copy`, { method: 'POST' });
 export const shareUrl = (token: string) => `${window.location.origin}/shared/${encodeURIComponent(token)}`;
@@ -22,7 +22,7 @@ export interface SharedGroupPreview {
   decks: Array<{ id: string; name: string; description: string | null; cardCount: number }>;
 }
 export const groupShareStatus = (id: string) => apiRequest<GroupShareLink>(`/deck-groups/${id}/share`);
-export const enableGroupShare = (id: string) => apiRequest<GroupShareLink>(`/deck-groups/${id}/share`, { method: 'PUT' });
+export const enableGroupShare = (id: string, includePersonalNotes = false) => apiRequest<GroupShareLink>(`/deck-groups/${id}/share`, { method: 'PUT', body: JSON.stringify({ includePersonalNotes }) });
 export const revokeGroupShare = (id: string) => apiRequest<void>(`/deck-groups/${id}/share`, { method: 'DELETE' });
 export const saveSharedGroup = (token: string) => apiRequest<{ groupId: string; deckIds: string[]; alreadySaved: boolean }>(`/shared-deck-groups/${encodeURIComponent(token)}/copy`, { method: 'POST' });
 export const groupShareUrl = (token: string) => `${window.location.origin}/shared/groups/${encodeURIComponent(token)}`;

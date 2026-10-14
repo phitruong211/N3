@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 artifacts/deck-sharing/
+artifacts/card-notes/
 *.local
 
 # Local environment files (keep the example file tracked)

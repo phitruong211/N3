@@ -2,6 +2,7 @@ import type { VocabItem, KanjiItem, GrammarItem } from "../types";
 import type { ImportedCard } from "./ankiImport";
 export type CardSource = "BUILT_IN" | "MANUAL" | "IMPORT";
 export interface CardView {
+  noteIdentity?: string;
   id: string;
   deckId: string;
   front: string;
@@ -33,6 +34,7 @@ export function vocabularyCard(
 ): CardView {
   return {
     id: item.id,
+    noteIdentity: item.noteId,
     deckId,
     front: item.tu,
     back: item.meaning,
@@ -55,6 +57,7 @@ export function kanjiCard(
     id: item.id,
     deckId,
     front: item.kanji,
+    noteIdentity: item.noteId,
     back: [item.hanViet, item.meaning].filter(Boolean).join(" · "),
     reading: [...(item.onyomi || []), ...(item.kunyomi || [])].join("・"),
     note: item.vocabulary
@@ -77,6 +80,7 @@ export function grammarCard(
     id: item.id,
     deckId,
     front: item.pattern,
+    noteIdentity: item.noteId,
     back: item.cardBack ?? [item.meaning, item.structure, item.usage ? `【Cách dùng】\n${item.usage}` : ""].filter(Boolean).join("\n\n"),
     reading: item.reading,
     note: [
