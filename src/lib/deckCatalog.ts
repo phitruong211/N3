@@ -1,7 +1,7 @@
 import type { Bookmark, GrammarItem, KanjiItem, VocabItem } from '../types/index.ts';
 import { grammarCard, kanjiCard, vocabularyCard, type CardView, type DeckSummary } from './cards.ts';
 
-export type DeckLevel = 'N4' | 'N3' | 'N2';
+export type DeckLevel = 'N5' | 'N4' | 'N3' | 'N2';
 export type DeckKind = 'vocabulary' | 'kanji' | 'grammar';
 export interface BuiltInDeckDefinition {
   id: string;
@@ -11,7 +11,8 @@ export interface BuiltInDeckDefinition {
   cards: CardView[];
 }
 
-const levelOrder: Record<DeckLevel, number> = { N4: 0, N3: 1, N2: 2 };
+export const builtInLevels = ['N5', 'N4', 'N3', 'N2'] as const;
+const levelOrder: Record<DeckLevel, number> = { N5: 0, N4: 1, N3: 2, N2: 3 };
 const kindOrder: Record<DeckKind, number> = { vocabulary: 0, kanji: 1, grammar: 2 };
 
 export function sortDeckDefinitions<T extends { level: DeckLevel; kind: DeckKind }>(decks: T[]): T[] {
@@ -23,8 +24,8 @@ export function deckCapabilities(source: 'BUILT_IN' | 'MANUAL' | 'IMPORT' | 'SAV
   return { canStudy: totalCards > 0, canManage: personal, canReorder: personal };
 }
 
-export function buildBuiltInDecks(vocabulary: VocabItem[], kanji: KanjiItem[], grammar: GrammarItem[]): BuiltInDeckDefinition[] {
-  const decks: BuiltInDeckDefinition[] = [];
+export function buildBuiltInDecks(vocabulary: VocabItem[], kanji: KanjiItem[], grammar: GrammarItem[], additionalDecks: BuiltInDeckDefinition[] = []): BuiltInDeckDefinition[] {
+  const decks: BuiltInDeckDefinition[] = [...additionalDecks];
   for (const level of ['N4', 'N3'] as const) {
     const id = `vocab${level}`;
     decks.push({ id, name: `Từ vựng ${level}`, level, kind: 'vocabulary', cards: vocabulary.filter(item => (item.level || 'N3') === level).map((item, index) => vocabularyCard(item, id, index)) });

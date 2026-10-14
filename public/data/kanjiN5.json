@@ -1,0 +1,4350 @@
+[
+  {
+    "front": "一",
+    "back": "một",
+    "reading": "On: イチ、イツ / Kun: ひと、ひとつ",
+    "han_viet": "Nhất",
+    "note": "Từ liên quan: 一つ（ひとつ）: một cái; 一日（ついたち）: ngày mùng một\n【Cách đọc cần nhớ】一日 (ついたち, ngày mùng 1) khác 一日 (いちにち, một ngày); 一人 (ひとり).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "今日は十月一日です。",
+        "reading": "きょうはじゅうがつついたちです。",
+        "meaning": "Hôm nay là ngày 1 tháng 10."
+      }
+    ]
+  },
+  {
+    "front": "二",
+    "back": "hai",
+    "reading": "On: ニ / Kun: ふた、ふたつ",
+    "han_viet": "Nhị",
+    "note": "Từ liên quan: 二つ（ふたつ）: hai cái; 二人（ふたり）: hai người\n【Cách đọc cần nhớ】二人 đọc ふたり; 二日 đọc ふつか.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "三",
+    "back": "ba",
+    "reading": "On: サン / Kun: み、みっつ",
+    "han_viet": "Tam",
+    "note": "Từ liên quan: 三つ（みっつ）: ba cái; 三日（みっか）: ngày mùng ba\n【Cách đọc cần nhớ】三日 đọc みっか; 三つ đọc みっつ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "四",
+    "back": "bốn",
+    "reading": "On: シ / Kun: よん、よ、よっつ",
+    "han_viet": "Tứ",
+    "note": "Từ liên quan: 四つ（よっつ）: bốn cái; 四日（よっか）: ngày mùng bốn\n【Cách đọc cần nhớ】四日 đọc よっか; 四つ đọc よっつ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "五",
+    "back": "năm",
+    "reading": "On: ゴ / Kun: いつ、いつつ",
+    "han_viet": "Ngũ",
+    "note": "Từ liên quan: 五つ（いつつ）: năm cái; 五日（いつか）: ngày mùng năm\n【Cách đọc cần nhớ】五日 đọc いつか; 五つ đọc いつつ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "六",
+    "back": "sáu",
+    "reading": "On: ロク / Kun: む、むっつ",
+    "han_viet": "Lục",
+    "note": "Từ liên quan: 六つ（むっつ）: sáu cái; 六月（ろくがつ）: tháng sáu\n【Cách đọc cần nhớ】六日 đọc むいか; 六つ đọc むっつ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "七",
+    "back": "bảy",
+    "reading": "On: シチ / Kun: なな、なの",
+    "han_viet": "Thất",
+    "note": "Từ liên quan: 七つ（ななつ）: bảy cái; 七日（なのか）: ngày mùng bảy\n【Cách đọc cần nhớ】七日 đọc なのか; 七つ đọc ななつ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "八",
+    "back": "tám",
+    "reading": "On: ハチ / Kun: や、やっつ",
+    "han_viet": "Bát",
+    "note": "Từ liên quan: 八つ（やっつ）: tám cái; 八日（ようか）: ngày mùng tám\n【Cách đọc cần nhớ】八日 đọc ようか; 八つ đọc やっつ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "九",
+    "back": "chín",
+    "reading": "On: キュウ、ク / Kun: ここの、ここのつ",
+    "han_viet": "Cửu",
+    "note": "Từ liên quan: 九つ（ここのつ）: chín cái; 九日（ここのか）: ngày mùng chín\n【Cách đọc cần nhớ】九日 đọc ここのか; 九つ đọc ここのつ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "十",
+    "back": "mười",
+    "reading": "On: ジュウ、ジッ / Kun: とお、と",
+    "han_viet": "Thập",
+    "note": "Từ liên quan: 十日（とおか）: ngày mùng mười; 十分（じゅっぷん）: mười phút\n【Cách đọc cần nhớ】十日 đọc とおか; 十 cái đồ vật đọc とお.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "百",
+    "back": "trăm",
+    "reading": "On: ヒャク / Kun: —",
+    "han_viet": "Bách",
+    "note": "Từ liên quan: 百円（ひゃくえん）: một trăm yên; 三百（さんびゃく）: ba trăm\n【Chữ dễ nhầm】白: trắng; 百: trăm, có thêm nét ngang phía trên.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "千",
+    "back": "nghìn",
+    "reading": "On: セン / Kun: ち",
+    "han_viet": "Thiên",
+    "note": "Từ liên quan: 千円（せんえん）: một nghìn yên; 三千（さんぜん）: ba nghìn\n【Chữ dễ nhầm】千: nghìn, nét đầu nghiêng; 干: khô/can, nét đầu ngang (干 không nằm trong danh sách N5 hiện tại).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "万",
+    "back": "mười nghìn",
+    "reading": "On: マン、バン / Kun: よろず",
+    "han_viet": "Vạn",
+    "note": "Từ liên quan: 一万（いちまん）: mười nghìn; 万円（まんえん）: mười nghìn yên",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "円",
+    "back": "yên; hình tròn",
+    "reading": "On: エン / Kun: まるい",
+    "han_viet": "Viên",
+    "note": "Từ liên quan: 百円（ひゃくえん）: một trăm yên; 円（えん）: đồng yên",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "日",
+    "back": "ngày; mặt trời",
+    "reading": "On: ニチ、ジツ / Kun: ひ、か",
+    "han_viet": "Nhật",
+    "note": "Từ liên quan: 日曜日（にちようび）: chủ nhật; 毎日（まいにち）: mỗi ngày\n【Chữ dễ nhầm】日: ngày/mặt trời, có một nét ngang trong; 目: mắt, có hai nét ngang trong.\n【Chữ dễ nhầm】口: miệng, không có nét ngang ở giữa; 日: ngày, có nét ngang ở giữa.\n【Đối chiếu】日: ngày/mặt trời; 月: tháng/mặt trăng. 日曜日 vs 月曜日.\n【Cách đọc cần nhớ】今日 đọc きょう; 昨日 きのう; 明日 あした; 日曜日 にちようび.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "月",
+    "back": "mặt trăng; tháng",
+    "reading": "On: ゲツ、ガツ / Kun: つき",
+    "han_viet": "Nguyệt",
+    "note": "Từ liên quan: 月曜日（げつようび）: thứ hai; 今月（こんげつ）: tháng này\n【Đối chiếu】年: năm; 月: tháng hoặc mặt trăng theo ngữ cảnh.\n【Đối chiếu】日: ngày/mặt trời; 月: tháng/mặt trăng. 日曜日 vs 月曜日.\n【Cách đọc cần nhớ】月 (つき) là mặt trăng; 月 (がつ) chỉ tháng trong ngày tháng, 月曜日 (げつようび).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "火",
+    "back": "lửa",
+    "reading": "On: カ / Kun: ひ、ほ",
+    "han_viet": "Hỏa",
+    "note": "Từ liên quan: 火曜日（かようび）: thứ ba; 火山（かざん）: núi lửa\n【Đối chiếu】火: lửa; 水: nước.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "水",
+    "back": "nước",
+    "reading": "On: スイ / Kun: みず",
+    "han_viet": "Thủy",
+    "note": "Từ liên quan: 水（みず）: nước; 水曜日（すいようび）: thứ tư\n【Đối chiếu】火: lửa; 水: nước.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "水を飲みます。",
+        "reading": "みずをのみます。",
+        "meaning": "Tôi uống nước."
+      }
+    ]
+  },
+  {
+    "front": "木",
+    "back": "cây; gỗ",
+    "reading": "On: モク、ボク / Kun: き、こ",
+    "han_viet": "Mộc",
+    "note": "Từ liên quan: 木（き）: cây; 木曜日（もくようび）: thứ năm\n【Chữ dễ nhầm】木: cây; 本: gốc/sách, thêm nét ngang nhỏ dưới tâm.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "金",
+    "back": "vàng; tiền",
+    "reading": "On: キン、コン / Kun: かね",
+    "han_viet": "Kim",
+    "note": "Từ liên quan: お金（おかね）: tiền; 金曜日（きんようび）: thứ sáu\n【Cách đọc cần nhớ】金 (かね) = tiền/vàng; 金曜日 (きんようび) = thứ sáu.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "土",
+    "back": "đất",
+    "reading": "On: ド、ト / Kun: つち",
+    "han_viet": "Thổ",
+    "note": "Từ liên quan: 土（つち）: đất; 土曜日（どようび）: thứ bảy\n【Chữ dễ nhầm】土: đất, nét ngang phía dưới dài hơn; 士: sĩ, nét ngang phía trên dài hơn (士 không nằm trong danh sách N5 hiện tại).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "曜",
+    "back": "thứ (trong tuần)",
+    "reading": "On: ヨウ / Kun: —",
+    "han_viet": "Diệu",
+    "note": "Từ liên quan: 日曜日（にちようび）: chủ nhật; 月曜日（げつようび）: thứ hai",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "年",
+    "back": "năm",
+    "reading": "On: ネン / Kun: とし",
+    "han_viet": "Niên",
+    "note": "Từ liên quan: 今年（ことし）: năm nay; 来年（らいねん）: năm sau\n【Đối chiếu】年: năm; 月: tháng hoặc mặt trăng theo ngữ cảnh.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "時",
+    "back": "thời gian; giờ",
+    "reading": "On: ジ / Kun: とき",
+    "han_viet": "Thời",
+    "note": "Từ liên quan: 何時（なんじ）: mấy giờ; 時間（じかん）: khoảng thời gian\n【Cách đọc cần nhớ】一時 (いちじ) = 1 giờ; 一時間 (いちじかん) = trong một tiếng.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "今は三時です。",
+        "reading": "いまはさんじです。",
+        "meaning": "Bây giờ là ba giờ."
+      }
+    ]
+  },
+  {
+    "front": "分",
+    "back": "chia; phút",
+    "reading": "On: ブン、フン、ブ / Kun: わける、わかる",
+    "han_viet": "Phân",
+    "note": "Từ liên quan: 一分（いっぷん）: một phút; 分かる（わかる）: hiểu\n【Cách đọc cần nhớ】五分 (ごふん) = năm phút; 十分 (じゅっぷん) = mười phút, 十分 (じゅうぶん) còn có nghĩa đầy đủ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "この問題が分かりません。",
+        "reading": "このもんだいがわかりません。",
+        "meaning": "Tôi không hiểu câu hỏi này."
+      }
+    ]
+  },
+  {
+    "front": "半",
+    "back": "một nửa; rưỡi",
+    "reading": "On: ハン / Kun: なかば",
+    "han_viet": "Bán",
+    "note": "Từ liên quan: 半分（はんぶん）: một nửa; 二時半（にじはん）: hai giờ rưỡi",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "今",
+    "back": "bây giờ",
+    "reading": "On: コン、キン / Kun: いま",
+    "han_viet": "Kim",
+    "note": "Từ liên quan: 今（いま）: bây giờ; 今日（きょう）: hôm nay\n【Chữ dễ nhầm】今: hiện tại; 令: mệnh lệnh, có nét ngang trong (令 là phần mở rộng).\n【Cách đọc cần nhớ】今日 (きょう) = hôm nay; 今 (いま) = bây giờ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "先",
+    "back": "trước; đầu tiên",
+    "reading": "On: セン / Kun: さき",
+    "han_viet": "Tiên",
+    "note": "Từ liên quan: 先生（せんせい）: giáo viên; 先週（せんしゅう）: tuần trước\n【Chữ dễ nhầm】先: trước; 生: sống/sinh, nét ngang và chân chữ khác nhau.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "前",
+    "back": "trước",
+    "reading": "On: ゼン / Kun: まえ",
+    "han_viet": "Tiền",
+    "note": "Từ liên quan: 名前（なまえ）: tên; 午前（ごぜん）: trước 12 giờ trưa\n【Đối chiếu】前: phía trước, trước thời điểm; 後: phía sau/sau thời điểm.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "後",
+    "back": "sau",
+    "reading": "On: ゴ、コウ / Kun: あと、うしろ",
+    "han_viet": "Hậu",
+    "note": "Từ liên quan: 午後（ごご）: sau 12 giờ trưa; 後ろ（うしろ）: phía sau\n【Đối chiếu】前: phía trước, trước thời điểm; 後: phía sau/sau thời điểm.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "午",
+    "back": "trưa",
+    "reading": "On: ゴ / Kun: —",
+    "han_viet": "Ngọ",
+    "note": "Từ liên quan: 午前（ごぜん）: buổi sáng (trước 12h); 午後（ごご）: buổi chiều (sau 12h)\n【Chữ dễ nhầm】午: buổi trưa; 牛: con bò, nét dọc vượt quá nét ngang trên.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "間",
+    "back": "khoảng; giữa",
+    "reading": "On: カン、ケン / Kun: あいだ、ま",
+    "han_viet": "Gian",
+    "note": "Từ liên quan: 時間（じかん）: khoảng thời gian; 一週間（いっしゅうかん）: một tuần (khoảng)\n【Chữ dễ nhầm】聞: nghe, bên trong là 耳 (tai); 間: khoảng, bên trong là 日 (mặt trời).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "二時間勉強しました。",
+        "reading": "にじかんべんきょうしました。",
+        "meaning": "Tôi đã học hai tiếng."
+      }
+    ]
+  },
+  {
+    "front": "人",
+    "back": "người",
+    "reading": "On: ジン、ニン / Kun: ひと",
+    "han_viet": "Nhân",
+    "note": "Từ liên quan: 日本人（にほんじん）: người Nhật; 一人（ひとり）: một người\n【Chữ dễ nhầm】人: người, nét thứ nhất dài xuống trái; 入: vào, nét phải thường trội/chiều nét khác.\n【Cách đọc cần nhớ】一人 (ひとり), 二人 (ふたり) là cách đọc đặc biệt.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "男",
+    "back": "nam giới",
+    "reading": "On: ダン、ナン / Kun: おとこ",
+    "han_viet": "Nam",
+    "note": "Từ liên quan: 男の子（おとこのこ）: bé trai; 男の人（おとこのひと）: người đàn ông\n【Đối chiếu】男: nam; 女: nữ. Tổ hợp 男の人/女の人.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "女",
+    "back": "nữ giới",
+    "reading": "On: ジョ、ニョ / Kun: おんな",
+    "han_viet": "Nữ",
+    "note": "Từ liên quan: 女の子（おんなのこ）: bé gái; 女の人（おんなのひと）: người phụ nữ\n【Đối chiếu】男: nam; 女: nữ. Tổ hợp 男の人/女の人.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "子",
+    "back": "con; đứa trẻ",
+    "reading": "On: シ、ス / Kun: こ",
+    "han_viet": "Tử",
+    "note": "Từ liên quan: 子供（こども）: trẻ em; 女の子（おんなのこ）: bé gái",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "父",
+    "back": "cha",
+    "reading": "On: フ / Kun: ちち、とう",
+    "han_viet": "Phụ",
+    "note": "Từ liên quan: 父（ちち）: bố của mình; お父さん（おとうさん）: bố (lịch sự)\n【Đối chiếu】父: bố mình (khi nói người ngoài); 母: mẹ mình; dạng gọi trực tiếp お父さん/お母さん.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "父は会社員です。",
+        "reading": "ちちはかいしゃいんです。",
+        "meaning": "Bố tôi là nhân viên công ty."
+      }
+    ]
+  },
+  {
+    "front": "母",
+    "back": "mẹ",
+    "reading": "On: ボ / Kun: はは、かあ",
+    "han_viet": "Mẫu",
+    "note": "Từ liên quan: 母（はは）: mẹ của mình; お母さん（おかあさん）: mẹ (lịch sự)\n【Đối chiếu】父: bố mình (khi nói người ngoài); 母: mẹ mình; dạng gọi trực tiếp お父さん/お母さん.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "母は先生です。",
+        "reading": "はははせんせいです。",
+        "meaning": "Mẹ tôi là giáo viên."
+      }
+    ]
+  },
+  {
+    "front": "友",
+    "back": "bạn bè",
+    "reading": "On: ユウ / Kun: とも",
+    "han_viet": "Hữu",
+    "note": "Từ liên quan: 友達（ともだち）: bạn bè; 友人（ゆうじん）: người bạn",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "名",
+    "back": "tên",
+    "reading": "On: メイ、ミョウ / Kun: な",
+    "han_viet": "Danh",
+    "note": "Từ liên quan: 名前（なまえ）: tên; 有名（ゆうめい）: nổi tiếng\n【Chữ dễ nhầm】名: tên, phần trên 夕; 各: mỗi, phần trên 夂 (各 là phần mở rộng).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "私",
+    "back": "tôi; riêng tư",
+    "reading": "On: シ / Kun: わたし、わたくし",
+    "han_viet": "Tư",
+    "note": "Từ liên quan: 私（わたし）: tôi; 私立（しりつ）: tư thục",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "上",
+    "back": "trên",
+    "reading": "On: ジョウ、ショウ / Kun: うえ、あげる、のぼる",
+    "han_viet": "Thượng",
+    "note": "Từ liên quan: 上（うえ）: bên trên; 上手（じょうず）: giỏi\n【Chữ dễ nhầm】上: trên, nét ngắn ở phía trên đường ngang; 下: dưới, nét ngắn ở phía dưới đường ngang.\n【Đối chiếu】上 là trên/đi lên; 下 là dưới/đi xuống.\n【Cách đọc cần nhớ】上 (うえ) = phía trên; 上手 (じょうず) = giỏi.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "田中さんは日本語が上手です。",
+        "reading": "たなかさんはにほんごがじょうずです。",
+        "meaning": "Anh Tanaka giỏi tiếng Nhật."
+      }
+    ]
+  },
+  {
+    "front": "下",
+    "back": "dưới",
+    "reading": "On: カ、ゲ / Kun: した、さげる、くだる",
+    "han_viet": "Hạ",
+    "note": "Từ liên quan: 下（した）: bên dưới; 地下鉄（ちかてつ）: tàu điện ngầm\n【Chữ dễ nhầm】上: trên, nét ngắn ở phía trên đường ngang; 下: dưới, nét ngắn ở phía dưới đường ngang.\n【Đối chiếu】上 là trên/đi lên; 下 là dưới/đi xuống.\n【Cách đọc cần nhớ】下 (した) = phía dưới; 下手 (へた) = kém; 下さい (ください) = xin hãy.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "地下鉄に乗ります。",
+        "reading": "ちかてつにのります。",
+        "meaning": "Tôi đi tàu điện ngầm."
+      }
+    ]
+  },
+  {
+    "front": "左",
+    "back": "trái",
+    "reading": "On: サ / Kun: ひだり",
+    "han_viet": "Tả",
+    "note": "Từ liên quan: 左（ひだり）: bên trái; 左手（ひだりて）: tay trái\n【Chữ dễ nhầm】左: trái, phần dưới giống 工; 右: phải, phần dưới là 口.\n【Đối chiếu】左: trái; 右: phải. Hay xuất hiện khi chỉ đường.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "右",
+    "back": "phải",
+    "reading": "On: ウ、ユウ / Kun: みぎ",
+    "han_viet": "Hữu",
+    "note": "Từ liên quan: 右（みぎ）: bên phải; 右手（みぎて）: tay phải\n【Chữ dễ nhầm】左: trái, phần dưới giống 工; 右: phải, phần dưới là 口.\n【Đối chiếu】左: trái; 右: phải. Hay xuất hiện khi chỉ đường.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "中",
+    "back": "trong; giữa",
+    "reading": "On: チュウ、ジュウ / Kun: なか",
+    "han_viet": "Trung",
+    "note": "Từ liên quan: 中（なか）: bên trong; 中国（ちゅうごく）: Trung Quốc",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "外",
+    "back": "ngoài",
+    "reading": "On: ガイ、ゲ / Kun: そと、ほか",
+    "han_viet": "Ngoại",
+    "note": "Từ liên quan: 外（そと）: bên ngoài; 外国（がいこく）: nước ngoài",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "東",
+    "back": "hướng đông",
+    "reading": "On: トウ / Kun: ひがし",
+    "han_viet": "Đông",
+    "note": "Từ liên quan: 東（ひがし）: hướng đông; 東京（とうきょう）: Tokyo\n【Chữ dễ nhầm】東: đông, có yếu tố 木 dưới 日; 車: xe, các nét cấu tạo khác, nét ngang dưới gần đáy.\n【Đối chiếu】東: đông; 西: tây.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "西",
+    "back": "hướng tây",
+    "reading": "On: セイ、サイ / Kun: にし",
+    "han_viet": "Tây",
+    "note": "Từ liên quan: 西（にし）: hướng tây; 西口（にしぐち）: cửa phía tây\n【Đối chiếu】東: đông; 西: tây.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "南",
+    "back": "hướng nam",
+    "reading": "On: ナン / Kun: みなみ",
+    "han_viet": "Nam",
+    "note": "Từ liên quan: 南（みなみ）: hướng nam; 南口（みなみぐち）: cửa phía nam\n【Đối chiếu】南: nam; 北: bắc.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "北",
+    "back": "hướng bắc",
+    "reading": "On: ホク / Kun: きた",
+    "han_viet": "Bắc",
+    "note": "Từ liên quan: 北（きた）: hướng bắc; 北口（きたぐち）: cửa phía bắc\n【Đối chiếu】南: nam; 北: bắc.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "大",
+    "back": "to; lớn",
+    "reading": "On: ダイ、タイ / Kun: おおきい",
+    "han_viet": "Đại",
+    "note": "Từ liên quan: 大学（だいがく）: đại học; 大きい（おおきい）: to lớn\n【Chữ dễ nhầm】大: lớn; 犬: chó, có thêm chấm phía trên bên phải.\n【Đối chiếu】大: lớn; 小: nhỏ. Đại diện cho cặp tính từ 大きい/小さい.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "小",
+    "back": "nhỏ",
+    "reading": "On: ショウ / Kun: ちいさい、こ",
+    "han_viet": "Tiểu",
+    "note": "Từ liên quan: 小さい（ちいさい）: nhỏ; 小学校（しょうがっこう）: trường tiểu học\n【Đối chiếu】大: lớn; 小: nhỏ. Đại diện cho cặp tính từ 大きい/小さい.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "多",
+    "back": "nhiều",
+    "reading": "On: タ / Kun: おおい",
+    "han_viet": "Đa",
+    "note": "Từ liên quan: 多い（おおい）: nhiều; 多分（たぶん）: có lẽ\n【Đối chiếu】多: nhiều (多い); 少: ít (少ない), một chút (少し).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "この町は人が多いです。",
+        "reading": "このまちはひとがおおいです。",
+        "meaning": "Thị trấn này đông người."
+      }
+    ]
+  },
+  {
+    "front": "少",
+    "back": "ít",
+    "reading": "On: ショウ / Kun: すくない、すこし",
+    "han_viet": "Thiểu",
+    "note": "Từ liên quan: 少ない（すくない）: ít; 少し（すこし）: một ít\n【Đối chiếu】多: nhiều (多い); 少: ít (少ない), một chút (少し).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "今日は人が少ないです。",
+        "reading": "きょうはひとがすくないです。",
+        "meaning": "Hôm nay ít người."
+      }
+    ]
+  },
+  {
+    "front": "長",
+    "back": "dài; người đứng đầu",
+    "reading": "On: チョウ / Kun: ながい",
+    "han_viet": "Trường",
+    "note": "Từ liên quan: 長い（ながい）: dài; 社長（しゃちょう）: giám đốc công ty",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "新",
+    "back": "mới",
+    "reading": "On: シン / Kun: あたらしい、あらた",
+    "han_viet": "Tân",
+    "note": "Từ liên quan: 新しい（あたらしい）: mới; 新聞（しんぶん）: báo\n【Đối chiếu】新しい: mới; 古い: cũ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "古",
+    "back": "cũ; cổ",
+    "reading": "On: コ / Kun: ふるい",
+    "han_viet": "Cổ",
+    "note": "Từ liên quan: 古い（ふるい）: cũ; 中古（ちゅうこ）: đồ đã qua sử dụng\n【Đối chiếu】新しい: mới; 古い: cũ.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "高",
+    "back": "cao; đắt",
+    "reading": "On: コウ / Kun: たかい",
+    "han_viet": "Cao",
+    "note": "Từ liên quan: 高い（たかい）: cao; 高校（こうこう）: trường cấp ba\n【Đối chiếu】高い: cao/đắt; 安い: rẻ, 安 còn có nghĩa yên ổn.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "安",
+    "back": "rẻ; yên ổn",
+    "reading": "On: アン / Kun: やすい",
+    "han_viet": "An",
+    "note": "Từ liên quan: 安い（やすい）: rẻ; 安心（あんしん）: yên tâm\n【Đối chiếu】高い: cao/đắt; 安い: rẻ, 安 còn có nghĩa yên ổn.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "山",
+    "back": "núi",
+    "reading": "On: サン / Kun: やま",
+    "han_viet": "Sơn",
+    "note": "Từ liên quan: 山（やま）: núi; 火山（かざん）: núi lửa\n【Chữ dễ nhầm】出: ra, gồm hình hai 山 lồng nhau; 山: núi, ba nét dọc như đỉnh núi.\n【Đối chiếu】山: núi; 川: sông.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "川",
+    "back": "sông",
+    "reading": "On: セン / Kun: かわ",
+    "han_viet": "Xuyên",
+    "note": "Từ liên quan: 川（かわ）: sông; 山川（やまかわ）: núi sông\n【Đối chiếu】山: núi; 川: sông.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "田",
+    "back": "ruộng",
+    "reading": "On: デン / Kun: た",
+    "han_viet": "Điền",
+    "note": "Từ liên quan: 田んぼ（たんぼ）: ruộng lúa; 田中（たなか）: họ Tanaka",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "天",
+    "back": "trời",
+    "reading": "On: テン / Kun: あま、あめ",
+    "han_viet": "Thiên",
+    "note": "Từ liên quan: 天気（てんき）: thời tiết; 天国（てんごく）: thiên đường\n【Chữ dễ nhầm】天: trời, nét trên dài; 夫: chồng, nét giữa dài (夫 là phần mở rộng).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "気",
+    "back": "khí; tinh thần",
+    "reading": "On: キ、ケ / Kun: —",
+    "han_viet": "Khí",
+    "note": "Từ liên quan: 元気（げんき）: khỏe; 天気（てんき）: thời tiết",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "雨",
+    "back": "mưa",
+    "reading": "On: ウ / Kun: あめ、あま",
+    "han_viet": "Vũ",
+    "note": "Từ liên quan: 雨（あめ）: mưa; 大雨（おおあめ）: mưa to",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "空",
+    "back": "bầu trời; trống",
+    "reading": "On: クウ / Kun: そら、あく、から",
+    "han_viet": "Không",
+    "note": "Từ liên quan: 空（そら）: bầu trời; 空港（くうこう）: sân bay\n【Cách đọc cần nhớ】空 (そら) = bầu trời; 空く (あく) = trống/chỗ còn.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "本",
+    "back": "sách; gốc",
+    "reading": "On: ホン / Kun: もと",
+    "han_viet": "Bản",
+    "note": "Từ liên quan: 本（ほん）: sách; 日本（にほん）: Nhật Bản\n【Chữ dễ nhầm】木: cây; 本: gốc/sách, thêm nét ngang nhỏ dưới tâm.\n【Cách đọc cần nhớ】本 (ほん) = sách; 一本 (いっぽん) = một vật dài theo loại từ 〜本.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "語",
+    "back": "ngôn ngữ",
+    "reading": "On: ゴ / Kun: かたる",
+    "han_viet": "Ngữ",
+    "note": "Từ liên quan: 日本語（にほんご）: tiếng Nhật; 英語（えいご）: tiếng Anh\n【Chữ dễ nhầm】読: đọc, bên phải 売; 語: ngôn ngữ, bên phải 吾.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "文",
+    "back": "văn; câu",
+    "reading": "On: ブン、モン / Kun: ふみ",
+    "han_viet": "Văn",
+    "note": "Từ liên quan: 文（ぶん）: câu văn; 作文（さくぶん）: bài văn",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "字",
+    "back": "chữ",
+    "reading": "On: ジ / Kun: あざ",
+    "han_viet": "Tự",
+    "note": "Từ liên quan: 漢字（かんじ）: chữ Hán; 文字（もじ）: ký tự",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "読",
+    "back": "đọc",
+    "reading": "On: ドク / Kun: よむ",
+    "han_viet": "Độc",
+    "note": "Từ liên quan: 読む（よむ）: đọc; 読書（どくしょ）: đọc sách\n【Chữ dễ nhầm】読: đọc, bên phải 売; 語: ngôn ngữ, bên phải 吾.\n【Đối chiếu】書く: viết; 読む: đọc.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "書",
+    "back": "viết; sách",
+    "reading": "On: ショ / Kun: かく",
+    "han_viet": "Thư",
+    "note": "Từ liên quan: 書く（かく）: viết; 辞書（じしょ）: từ điển\n【Đối chiếu】書く: viết; 読む: đọc.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "話",
+    "back": "nói; chuyện",
+    "reading": "On: ワ / Kun: はなす、はなし",
+    "han_viet": "Thoại",
+    "note": "Từ liên quan: 話す（はなす）: nói; 電話（でんわ）: điện thoại\n【Đối chiếu】話す: nói; 聞く: nghe/hỏi. 聞こえる: nghe thấy.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "友達と日本語で話します。",
+        "reading": "ともだちとにほんごではなします。",
+        "meaning": "Tôi nói chuyện với bạn bằng tiếng Nhật."
+      }
+    ]
+  },
+  {
+    "front": "聞",
+    "back": "nghe; hỏi",
+    "reading": "On: ブン、モン / Kun: きく、きこえる",
+    "han_viet": "Văn",
+    "note": "Từ liên quan: 聞く（きく）: nghe; 新聞（しんぶん）: báo\n【Chữ dễ nhầm】聞: nghe, bên trong là 耳 (tai); 間: khoảng, bên trong là 日 (mặt trời).\n【Đối chiếu】話す: nói; 聞く: nghe/hỏi. 聞こえる: nghe thấy.\n【Cách đọc cần nhớ】聞く (きく) = nghe/hỏi; 聞こえる (きこえる) = nghe thấy.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "音楽を聞きます。",
+        "reading": "おんがくをききます。",
+        "meaning": "Tôi nghe nhạc."
+      }
+    ]
+  },
+  {
+    "front": "見",
+    "back": "nhìn; xem",
+    "reading": "On: ケン / Kun: みる、みえる",
+    "han_viet": "Kiến",
+    "note": "Từ liên quan: 見る（みる）: xem; 見せる（みせる）: cho xem\n【Chữ dễ nhầm】見: thấy, dưới là 儿; 貝: vỏ sò, phía dưới gồm nét dạng 八 (貝 là phần mở rộng).\n【Cách đọc cần nhớ】見る (みる) = chủ động xem; 見える (みえる) = nhìn thấy được.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "映画を見ます。",
+        "reading": "えいがをみます。",
+        "meaning": "Tôi xem phim."
+      }
+    ]
+  },
+  {
+    "front": "言",
+    "back": "nói",
+    "reading": "On: ゲン、ゴン / Kun: いう、こと",
+    "han_viet": "Ngôn",
+    "note": "Từ liên quan: 言う（いう）: nói; 言葉（ことば）: lời nói",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "先生は「おはよう」と言いました。",
+        "reading": "せんせいは「おはよう」といいました。",
+        "meaning": "Giáo viên nói “Chào buổi sáng”."
+      }
+    ]
+  },
+  {
+    "front": "学",
+    "back": "học",
+    "reading": "On: ガク / Kun: まなぶ",
+    "han_viet": "Học",
+    "note": "Từ liên quan: 学生（がくせい）: học sinh/sinh viên; 学校（がっこう）: trường học\n【Đối chiếu】生: sống/sinh, xuất hiện 学生; 学: học, xuất hiện 学校.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "私は学生です。",
+        "reading": "わたしはがくせいです。",
+        "meaning": "Tôi là học sinh/sinh viên."
+      }
+    ]
+  },
+  {
+    "front": "校",
+    "back": "trường",
+    "reading": "On: コウ / Kun: —",
+    "han_viet": "Hiệu",
+    "note": "Từ liên quan: 学校（がっこう）: trường học; 高校（こうこう）: trường cấp ba",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "生",
+    "back": "sống; sinh ra",
+    "reading": "On: セイ、ショウ / Kun: いきる、うまれる、なま",
+    "han_viet": "Sinh",
+    "note": "Từ liên quan: 先生（せんせい）: giáo viên; 学生（がくせい）: học sinh/sinh viên\n【Chữ dễ nhầm】先: trước; 生: sống/sinh, nét ngang và chân chữ khác nhau.\n【Đối chiếu】生: sống/sinh, xuất hiện 学生; 学: học, xuất hiện 学校.\n【Cách đọc cần nhớ】学生 (がくせい), 先生 (せんせい), 生まれる (うまれる): một chữ có nhiều cách đọc.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "私は学生です。",
+        "reading": "わたしはがくせいです。",
+        "meaning": "Tôi là học sinh/sinh viên."
+      }
+    ]
+  },
+  {
+    "front": "会",
+    "back": "gặp; hội họp",
+    "reading": "On: カイ、エ / Kun: あう",
+    "han_viet": "Hội",
+    "note": "Từ liên quan: 会う（あう）: gặp; 会社（かいしゃ）: công ty",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "社",
+    "back": "công ty; đền thờ",
+    "reading": "On: シャ / Kun: やしろ",
+    "han_viet": "Xã",
+    "note": "Từ liên quan: 会社（かいしゃ）: công ty; 社長（しゃちょう）: giám đốc công ty",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "店",
+    "back": "cửa hàng",
+    "reading": "On: テン / Kun: みせ",
+    "han_viet": "Điếm",
+    "note": "Từ liên quan: 店（みせ）: cửa hàng; 店員（てんいん）: nhân viên cửa hàng",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "駅",
+    "back": "nhà ga",
+    "reading": "On: エキ / Kun: —",
+    "han_viet": "Dịch",
+    "note": "Từ liên quan: 駅（えき）: nhà ga; 駅前（えきまえ）: trước nhà ga",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "食",
+    "back": "ăn",
+    "reading": "On: ショク、ジキ / Kun: たべる、くう",
+    "han_viet": "Thực",
+    "note": "Từ liên quan: 食べる（たべる）: ăn; 食堂（しょくどう）: nhà ăn",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "学校の食堂で食べます。",
+        "reading": "がっこうのしょくどうでたべます。",
+        "meaning": "Tôi ăn ở nhà ăn của trường."
+      }
+    ]
+  },
+  {
+    "front": "飲",
+    "back": "uống",
+    "reading": "On: イン / Kun: のむ",
+    "han_viet": "Ẩm",
+    "note": "Từ liên quan: 飲む（のむ）: uống; 飲み物（のみもの）: đồ uống",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "買",
+    "back": "mua",
+    "reading": "On: バイ / Kun: かう",
+    "han_viet": "Mãi",
+    "note": "Từ liên quan: 買う（かう）: mua; 買い物（かいもの）: mua sắm",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "行",
+    "back": "đi; thực hiện",
+    "reading": "On: コウ、ギョウ / Kun: いく、おこなう",
+    "han_viet": "Hành",
+    "note": "Từ liên quan: 行く（いく）: đi; 銀行（ぎんこう）: ngân hàng\n【Đối chiếu】行く: đi; 来る: đến.\n【Cách đọc cần nhớ】行く (いく) và 行う (おこなう) cùng chữ nhưng khác nghĩa và cách đọc.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "明日、学校に行きます。",
+        "reading": "あした、がっこうにいきます。",
+        "meaning": "Ngày mai tôi đến trường."
+      }
+    ]
+  },
+  {
+    "front": "来",
+    "back": "đến",
+    "reading": "On: ライ / Kun: くる",
+    "han_viet": "Lai",
+    "note": "Từ liên quan: 来る（くる）: đến; 来年（らいねん）: năm sau\n【Đối chiếu】行く: đi; 来る: đến.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "友達が家に来ます。",
+        "reading": "ともだちがいえにきます。",
+        "meaning": "Bạn tôi đến nhà."
+      }
+    ]
+  },
+  {
+    "front": "帰",
+    "back": "trở về",
+    "reading": "On: キ / Kun: かえる",
+    "han_viet": "Quy",
+    "note": "Từ liên quan: 帰る（かえる）: trở về; 帰国（きこく）: về nước",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "六時に家に帰ります。",
+        "reading": "ろくじにいえにかえります。",
+        "meaning": "Tôi về nhà lúc 6 giờ."
+      }
+    ]
+  },
+  {
+    "front": "入",
+    "back": "vào",
+    "reading": "On: ニュウ / Kun: はいる、いれる",
+    "han_viet": "Nhập",
+    "note": "Từ liên quan: 入る（はいる）: đi vào; 入口（いりぐち）: lối vào\n【Chữ dễ nhầm】人: người, nét thứ nhất dài xuống trái; 入: vào, nét phải thường trội/chiều nét khác.\n【Đối chiếu】入: vào; 出: ra. Ví dụ 入口 = lối vào, 出口 = lối ra.\n【Cách đọc cần nhớ】入る (はいる) = đi vào; 入れる (いれる) = cho vào.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "出",
+    "back": "ra",
+    "reading": "On: シュツ / Kun: でる、だす",
+    "han_viet": "Xuất",
+    "note": "Từ liên quan: 出る（でる）: ra; 出口（でぐち）: lối ra\n【Chữ dễ nhầm】出: ra, gồm hình hai 山 lồng nhau; 山: núi, ba nét dọc như đỉnh núi.\n【Đối chiếu】入: vào; 出: ra. Ví dụ 入口 = lối vào, 出口 = lối ra.\n【Cách đọc cần nhớ】出る (でる) = tự ra; 出す (だす) = đưa/lấy ra.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "休",
+    "back": "nghỉ",
+    "reading": "On: キュウ / Kun: やすむ",
+    "han_viet": "Hưu",
+    "note": "Từ liên quan: 休む（やすむ）: nghỉ; 休み（やすみ）: ngày nghỉ\n【Chữ dễ nhầm】休: nghỉ, bên phải 木; 体: cơ thể, bên phải 本 (体 là phần mở rộng).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "明日は休みです。",
+        "reading": "あしたはやすみです。",
+        "meaning": "Ngày mai là ngày nghỉ."
+      }
+    ]
+  },
+  {
+    "front": "立",
+    "back": "đứng",
+    "reading": "On: リツ、リュウ / Kun: たつ",
+    "han_viet": "Lập",
+    "note": "Từ liên quan: 立つ（たつ）: đứng; 国立（こくりつ）: quốc lập",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "車",
+    "back": "xe",
+    "reading": "On: シャ / Kun: くるま",
+    "han_viet": "Xa",
+    "note": "Từ liên quan: 車（くるま）: ô tô; 電車（でんしゃ）: tàu điện\n【Chữ dễ nhầm】東: đông, có yếu tố 木 dưới 日; 車: xe, các nét cấu tạo khác, nét ngang dưới gần đáy.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "電車で学校へ行きます。",
+        "reading": "でんしゃでがっこうへいきます。",
+        "meaning": "Tôi đến trường bằng tàu điện."
+      }
+    ]
+  },
+  {
+    "front": "電",
+    "back": "điện",
+    "reading": "On: デン / Kun: —",
+    "han_viet": "Điện",
+    "note": "Từ liên quan: 電気（でんき）: điện; 電話（でんわ）: điện thoại",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "道",
+    "back": "đường đi",
+    "reading": "On: ドウ、トウ / Kun: みち",
+    "han_viet": "Đạo",
+    "note": "Từ liên quan: 道（みち）: đường; 北海道（ほっかいどう）: Hokkaido",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "国",
+    "back": "đất nước",
+    "reading": "On: コク / Kun: くに",
+    "han_viet": "Quốc",
+    "note": "Từ liên quan: 国（くに）: đất nước; 外国（がいこく）: nước ngoài",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "白",
+    "back": "trắng",
+    "reading": "On: ハク、ビャク / Kun: しろ、しろい",
+    "han_viet": "Bạch",
+    "note": "Từ liên quan: 白（しろ）: màu trắng; 白い（しろい）: trắng\n【Chữ dễ nhầm】白: trắng; 百: trăm, có thêm nét ngang phía trên.\n【Đối chiếu】白: trắng; 黒: đen.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "黒",
+    "back": "đen",
+    "reading": "On: コク / Kun: くろ、くろい",
+    "han_viet": "Hắc",
+    "note": "Từ liên quan: 黒（くろ）: màu đen; 黒い（くろい）: đen\n【Đối chiếu】白: trắng; 黒: đen.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "赤",
+    "back": "đỏ",
+    "reading": "On: セキ、シャク / Kun: あか、あかい",
+    "han_viet": "Xích",
+    "note": "Từ liên quan: 赤（あか）: màu đỏ; 赤い（あかい）: đỏ\n【Đối chiếu】赤: đỏ; 青: xanh (đặc biệt xanh lam; 青信号 là đèn xanh giao thông).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "青",
+    "back": "xanh lam",
+    "reading": "On: セイ、ショウ / Kun: あお、あおい",
+    "han_viet": "Thanh",
+    "note": "Từ liên quan: 青（あお）: màu xanh; 青い（あおい）: xanh lam\n【Đối chiếu】赤: đỏ; 青: xanh (đặc biệt xanh lam; 青信号 là đèn xanh giao thông).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "目",
+    "back": "mắt",
+    "reading": "On: モク、ボク / Kun: め",
+    "han_viet": "Mục",
+    "note": "Từ liên quan: 目（め）: mắt; 目の前（めのまえ）: ngay trước mắt\n【Chữ dễ nhầm】日: ngày/mặt trời, có một nét ngang trong; 目: mắt, có hai nét ngang trong.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "耳",
+    "back": "tai",
+    "reading": "On: ジ / Kun: みみ",
+    "han_viet": "Nhĩ",
+    "note": "Từ liên quan: 耳（みみ）: tai; 耳鼻科（じびか）: khoa tai mũi họng",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "口",
+    "back": "miệng; cửa",
+    "reading": "On: コウ、ク / Kun: くち",
+    "han_viet": "Khẩu",
+    "note": "Từ liên quan: 口（くち）: miệng; 入口（いりぐち）: lối vào\n【Chữ dễ nhầm】口: miệng, không có nét ngang ở giữa; 日: ngày, có nét ngang ở giữa.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "手",
+    "back": "tay",
+    "reading": "On: シュ / Kun: て",
+    "han_viet": "Thủ",
+    "note": "Từ liên quan: 手（て）: tay; 手紙（てがみ）: thư tay",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "足",
+    "back": "chân; đủ",
+    "reading": "On: ソク / Kun: あし、たりる",
+    "han_viet": "Túc",
+    "note": "Từ liên quan: 足（あし）: chân; 足りる（たりる）: đủ",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "力",
+    "back": "sức mạnh",
+    "reading": "On: リョク、リキ / Kun: ちから",
+    "han_viet": "Lực",
+    "note": "Từ liên quan: 力（ちから）: sức mạnh; 能力（のうりょく）: năng lực",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "犬",
+    "back": "chó",
+    "reading": "On: ケン / Kun: いぬ",
+    "han_viet": "Khuyển",
+    "note": "Từ liên quan: 犬（いぬ）: chó; 子犬（こいぬ）: chó con\n【Chữ dễ nhầm】大: lớn; 犬: chó, có thêm chấm phía trên bên phải.",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "魚",
+    "back": "cá",
+    "reading": "On: ギョ / Kun: さかな、うお",
+    "han_viet": "Ngư",
+    "note": "Từ liên quan: 魚（さかな）: cá; 金魚（きんぎょ）: cá vàng",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ]
+  },
+  {
+    "front": "花",
+    "back": "hoa",
+    "reading": "On: カ / Kun: はな",
+    "han_viet": "Hoa",
+    "note": "Từ liên quan: 花（はな）: hoa; 花見（はなみ）: ngắm hoa",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "花がきれいです。",
+        "reading": "はながきれいです。",
+        "meaning": "Hoa đẹp."
+      }
+    ]
+  },
+  {
+    "front": "何",
+    "back": "cái gì",
+    "reading": "On: カ / Kun: なに、なん",
+    "han_viet": "Hà",
+    "note": "Từ liên quan: 何（なに）: cái gì; 何時（なんじ）: mấy giờ\n【Cách đọc cần nhớ】何 (なに/なん) tùy từ theo sau; 何時 (なんじ), 何人 (なんにん).",
+    "type": "KANJI",
+    "tags": [
+      "N5",
+      "kanji"
+    ],
+    "examples": [
+      {
+        "japanese": "これは何ですか。",
+        "reading": "これはなんですか。",
+        "meaning": "Đây là cái gì?"
+      }
+    ]
+  },
+  {
+    "front": "一つ",
+    "back": "một cái",
+    "reading": "ひとつ",
+    "han_viet": "Nhất",
+    "note": "Từ liên quan đến Kanji 一（Nhất）\n【Phân biệt từ gần nghĩa】一つ cần phân biệt với 一、一人; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "一日",
+    "back": "ngày mùng một",
+    "reading": "ついたち",
+    "han_viet": "Nhất Nhật",
+    "note": "Từ liên quan đến Kanji 一（Nhất）\n【Phân biệt từ gần nghĩa】一日 cần phân biệt với 二十日、二日; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】ついたち = ngày mùng một; いちにち = một ngày, đọc khác tùy nghĩa.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "今日は十月一日です。",
+        "reading": "きょうはじゅうがつついたちです。",
+        "meaning": "Hôm nay là ngày 1 tháng 10."
+      }
+    ]
+  },
+  {
+    "front": "二つ",
+    "back": "hai cái",
+    "reading": "ふたつ",
+    "han_viet": "Nhị",
+    "note": "Từ liên quan đến Kanji 二（Nhị）\n【Phân biệt từ gần nghĩa】二つ cần phân biệt với 二、二人; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "二人",
+    "back": "hai người",
+    "reading": "ふたり",
+    "han_viet": "Nhị Nhân",
+    "note": "Từ liên quan đến Kanji 二（Nhị）\n【Phân biệt từ gần nghĩa】二人 cần phân biệt với 二、二つ; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Đọc đặc biệt ふたり = hai người.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "三つ",
+    "back": "ba cái",
+    "reading": "みっつ",
+    "han_viet": "Tam",
+    "note": "Từ liên quan đến Kanji 三（Tam）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "三日",
+    "back": "ngày mùng ba",
+    "reading": "みっか",
+    "han_viet": "Tam Nhật",
+    "note": "Từ liên quan đến Kanji 三（Tam）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "四つ",
+    "back": "bốn cái",
+    "reading": "よっつ",
+    "han_viet": "Tứ",
+    "note": "Từ liên quan đến Kanji 四（Tứ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "四日",
+    "back": "ngày mùng bốn",
+    "reading": "よっか",
+    "han_viet": "Tứ Nhật",
+    "note": "Từ liên quan đến Kanji 四（Tứ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "五つ",
+    "back": "năm cái",
+    "reading": "いつつ",
+    "han_viet": "Ngũ",
+    "note": "Từ liên quan đến Kanji 五（Ngũ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "五日",
+    "back": "ngày mùng năm",
+    "reading": "いつか",
+    "han_viet": "Ngũ Nhật",
+    "note": "Từ liên quan đến Kanji 五（Ngũ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "六つ",
+    "back": "sáu cái",
+    "reading": "むっつ",
+    "han_viet": "Lục",
+    "note": "Từ liên quan đến Kanji 六（Lục）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "六月",
+    "back": "tháng sáu",
+    "reading": "ろくがつ",
+    "han_viet": "Lục Nguyệt",
+    "note": "Từ liên quan đến Kanji 六（Lục）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "七つ",
+    "back": "bảy cái",
+    "reading": "ななつ",
+    "han_viet": "Thất",
+    "note": "Từ liên quan đến Kanji 七（Thất）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "七日",
+    "back": "ngày mùng bảy",
+    "reading": "なのか",
+    "han_viet": "Thất Nhật",
+    "note": "Từ liên quan đến Kanji 七（Thất）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "八つ",
+    "back": "tám cái",
+    "reading": "やっつ",
+    "han_viet": "Bát",
+    "note": "Từ liên quan đến Kanji 八（Bát）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "八日",
+    "back": "ngày mùng tám",
+    "reading": "ようか",
+    "han_viet": "Bát Nhật",
+    "note": "Từ liên quan đến Kanji 八（Bát）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "九つ",
+    "back": "chín cái",
+    "reading": "ここのつ",
+    "han_viet": "Cửu",
+    "note": "Từ liên quan đến Kanji 九（Cửu）\n【Phân biệt từ gần nghĩa】九つ cần phân biệt với 十; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "九日",
+    "back": "ngày mùng chín",
+    "reading": "ここのか",
+    "han_viet": "Cửu Nhật",
+    "note": "Từ liên quan đến Kanji 九（Cửu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "十日",
+    "back": "ngày mùng mười",
+    "reading": "とおか",
+    "han_viet": "Thập Nhật",
+    "note": "Từ liên quan đến Kanji 十（Thập）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "十分",
+    "back": "mười phút",
+    "reading": "じゅっぷん",
+    "han_viet": "Thập Phân",
+    "note": "Từ liên quan đến Kanji 十（Thập）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "百円",
+    "back": "một trăm yên",
+    "reading": "ひゃくえん",
+    "han_viet": "Bách Viên",
+    "note": "Từ liên quan đến Kanji 百（Bách）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "三百",
+    "back": "ba trăm",
+    "reading": "さんびゃく",
+    "han_viet": "Tam Bách",
+    "note": "Từ liên quan đến Kanji 百（Bách）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "千円",
+    "back": "một nghìn yên",
+    "reading": "せんえん",
+    "han_viet": "Thiên Viên",
+    "note": "Từ liên quan đến Kanji 千（Thiên）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "三千",
+    "back": "ba nghìn",
+    "reading": "さんぜん",
+    "han_viet": "Tam Thiên",
+    "note": "Từ liên quan đến Kanji 千（Thiên）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "一万",
+    "back": "mười nghìn",
+    "reading": "いちまん",
+    "han_viet": "Nhất Vạn",
+    "note": "Từ liên quan đến Kanji 万（Vạn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "万円",
+    "back": "mười nghìn yên",
+    "reading": "まんえん",
+    "han_viet": "Vạn Viên",
+    "note": "Từ liên quan đến Kanji 万（Vạn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "円",
+    "back": "đồng yên",
+    "reading": "えん",
+    "han_viet": "Viên",
+    "note": "Từ liên quan đến Kanji 円（Viên）\n【Phân biệt từ gần nghĩa】円 cần phân biệt với お金、値段; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "日曜日",
+    "back": "chủ nhật",
+    "reading": "にちようび",
+    "han_viet": "Nhật Diệu Nhật",
+    "note": "Từ liên quan đến Kanji 日（Nhật）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "毎日",
+    "back": "mỗi ngày",
+    "reading": "まいにち",
+    "han_viet": "Mỗi Nhật",
+    "note": "Từ liên quan đến Kanji 日（Nhật）\n【Phân biệt từ gần nghĩa】毎日 cần phân biệt với 毎年、毎月、毎週; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "月曜日",
+    "back": "thứ hai",
+    "reading": "げつようび",
+    "han_viet": "Nguyệt Diệu Nhật",
+    "note": "Từ liên quan đến Kanji 月（Nguyệt）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "今月",
+    "back": "tháng này",
+    "reading": "こんげつ",
+    "han_viet": "Kim Nguyệt",
+    "note": "Từ liên quan đến Kanji 月（Nguyệt）\n【Phân biệt từ gần nghĩa】今月 cần phân biệt với 先月、来月; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "火曜日",
+    "back": "thứ ba",
+    "reading": "かようび",
+    "han_viet": "Hỏa Diệu Nhật",
+    "note": "Từ liên quan đến Kanji 火（Hỏa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "火山",
+    "back": "núi lửa",
+    "reading": "かざん",
+    "han_viet": "Hỏa Sơn",
+    "note": "Từ liên quan đến Kanji 火（Hỏa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "水",
+    "back": "nước",
+    "reading": "みず",
+    "han_viet": "Thủy",
+    "note": "Từ liên quan đến Kanji 水（Thủy）\n【Phân biệt từ gần nghĩa】水 cần phân biệt với お湯; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "水を飲みます。",
+        "reading": "みずをのみます。",
+        "meaning": "Tôi uống nước."
+      }
+    ]
+  },
+  {
+    "front": "水曜日",
+    "back": "thứ tư",
+    "reading": "すいようび",
+    "han_viet": "Thủy Diệu Nhật",
+    "note": "Từ liên quan đến Kanji 水（Thủy）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "木",
+    "back": "cây",
+    "reading": "き",
+    "han_viet": "Mộc",
+    "note": "Từ liên quan đến Kanji 木（Mộc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "木曜日",
+    "back": "thứ năm",
+    "reading": "もくようび",
+    "han_viet": "Mộc Diệu Nhật",
+    "note": "Từ liên quan đến Kanji 木（Mộc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "お金",
+    "back": "tiền",
+    "reading": "おかね",
+    "han_viet": "Kim",
+    "note": "Từ liên quan đến Kanji 金（Kim）\n【Phân biệt từ gần nghĩa】お金 cần phân biệt với 値段、円; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "金曜日",
+    "back": "thứ sáu",
+    "reading": "きんようび",
+    "han_viet": "Kim Diệu Nhật",
+    "note": "Từ liên quan đến Kanji 金（Kim）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "土",
+    "back": "đất",
+    "reading": "つち",
+    "han_viet": "Thổ",
+    "note": "Từ liên quan đến Kanji 土（Thổ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "土曜日",
+    "back": "thứ bảy",
+    "reading": "どようび",
+    "han_viet": "Thổ Diệu Nhật",
+    "note": "Từ liên quan đến Kanji 土（Thổ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "今年",
+    "back": "năm nay",
+    "reading": "ことし",
+    "han_viet": "Kim Niên",
+    "note": "Từ liên quan đến Kanji 年（Niên）\n【Phân biệt từ gần nghĩa】今年 cần phân biệt với 去年、来年; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "来年",
+    "back": "năm sau",
+    "reading": "らいねん",
+    "han_viet": "Lai Niên",
+    "note": "Từ liên quan đến Kanji 年（Niên）\n【Phân biệt từ gần nghĩa】来年 cần phân biệt với 今年、去年; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "何時",
+    "back": "mấy giờ",
+    "reading": "なんじ",
+    "han_viet": "Hà Thời",
+    "note": "Từ liên quan đến Kanji 時（Thời）\n【Phân biệt từ gần nghĩa】何時 cần phân biệt với 何、何分、何日; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "今、何時ですか。",
+        "reading": "いま、なんじですか。",
+        "meaning": "Bây giờ là mấy giờ?"
+      }
+    ]
+  },
+  {
+    "front": "時間",
+    "back": "khoảng thời gian",
+    "reading": "じかん",
+    "han_viet": "Thời Gian",
+    "note": "Từ liên quan đến Kanji 時（Thời）\n【Phân biệt từ gần nghĩa】時間 cần phân biệt với 時; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Độ dài tính bằng giờ, khác 時 là mốc giờ.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "二時間勉強しました。",
+        "reading": "にじかんべんきょうしました。",
+        "meaning": "Tôi đã học hai tiếng."
+      }
+    ]
+  },
+  {
+    "front": "一分",
+    "back": "một phút",
+    "reading": "いっぷん",
+    "han_viet": "Nhất Phân",
+    "note": "Từ liên quan đến Kanji 分（Phân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "分かる",
+    "back": "hiểu",
+    "reading": "わかる",
+    "han_viet": "Phân",
+    "note": "Từ liên quan đến Kanji 分（Phân）\n【Phân biệt từ gần nghĩa】分かる cần phân biệt với 知る; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "この問題が分かりません。",
+        "reading": "このもんだいがわかりません。",
+        "meaning": "Tôi không hiểu câu hỏi này."
+      }
+    ]
+  },
+  {
+    "front": "半分",
+    "back": "một nửa",
+    "reading": "はんぶん",
+    "han_viet": "Bán Phân",
+    "note": "Từ liên quan đến Kanji 半（Bán）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "二時半",
+    "back": "hai giờ rưỡi",
+    "reading": "にじはん",
+    "han_viet": "Nhị Thời Bán",
+    "note": "Từ liên quan đến Kanji 半（Bán）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "今",
+    "back": "bây giờ",
+    "reading": "いま",
+    "han_viet": "Kim",
+    "note": "Từ liên quan đến Kanji 今（Kim）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "今日",
+    "back": "hôm nay",
+    "reading": "きょう",
+    "han_viet": "Kim Nhật",
+    "note": "Từ liên quan đến Kanji 今（Kim）\n【Phân biệt từ gần nghĩa】今日 cần phân biệt với 一昨日、明後日、明日、昨日; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Đọc đặc biệt きょう = hôm nay.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "先生",
+    "back": "giáo viên",
+    "reading": "せんせい",
+    "han_viet": "Tiên Sinh",
+    "note": "Từ liên quan đến Kanji 先（Tiên）\n【Phân biệt từ gần nghĩa】先生 cần phân biệt với 生徒; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Đọc せんせい, dùng gọi người làm nghề được kính trọng.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "先週",
+    "back": "tuần trước",
+    "reading": "せんしゅう",
+    "han_viet": "Tiên Chu",
+    "note": "Từ liên quan đến Kanji 先（Tiên）\n【Phân biệt từ gần nghĩa】先週 cần phân biệt với 今週、来週; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "名前",
+    "back": "tên",
+    "reading": "なまえ",
+    "han_viet": "Danh Tiền",
+    "note": "Từ liên quan đến Kanji 前（Tiền）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "午前",
+    "back": "trước 12 giờ trưa",
+    "reading": "ごぜん",
+    "han_viet": "Ngọ Tiền",
+    "note": "Từ liên quan đến Kanji 前（Tiền）\n【Phân biệt từ gần nghĩa】午前 cần phân biệt với 朝、毎朝; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Trước 12 giờ trưa, 7時午前 thường dùng 午前7時.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "午後",
+    "back": "sau 12 giờ trưa",
+    "reading": "ごご",
+    "han_viet": "Ngọ Hậu",
+    "note": "Từ liên quan đến Kanji 後（Hậu）\n【Phân biệt từ gần nghĩa】午後 cần phân biệt với 昼; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Sau 12 giờ trưa, ví dụ 午後3時.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "後ろ",
+    "back": "phía sau",
+    "reading": "うしろ",
+    "han_viet": "Hậu",
+    "note": "Từ liên quan đến Kanji 後（Hậu）\n【Phân biệt từ gần nghĩa】後ろ cần phân biệt với 前; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "一週間",
+    "back": "một tuần (khoảng)",
+    "reading": "いっしゅうかん",
+    "han_viet": "Nhất Chu Gian",
+    "note": "Từ liên quan đến Kanji 間（Gian）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "日本人",
+    "back": "người Nhật",
+    "reading": "にほんじん",
+    "han_viet": "Nhật Bản Nhân",
+    "note": "Từ liên quan đến Kanji 人（Nhân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "一人",
+    "back": "một người",
+    "reading": "ひとり",
+    "han_viet": "Nhất Nhân",
+    "note": "Từ liên quan đến Kanji 人（Nhân）\n【Phân biệt từ gần nghĩa】一人 cần phân biệt với 一、一つ; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Đọc đặc biệt ひとり = một người.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "男の子",
+    "back": "bé trai",
+    "reading": "おとこのこ",
+    "han_viet": "Nam Tử",
+    "note": "Từ liên quan đến Kanji 男（Nam）\n【Phân biệt từ gần nghĩa】男の子 cần phân biệt với 人、男、男の人; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "男の人",
+    "back": "người đàn ông",
+    "reading": "おとこのひと",
+    "han_viet": "Nam Nhân",
+    "note": "Từ liên quan đến Kanji 男（Nam）\n【Phân biệt từ gần nghĩa】男の人 cần phân biệt với 人、男、男の子; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "女の子",
+    "back": "bé gái",
+    "reading": "おんなのこ",
+    "han_viet": "Nữ Tử",
+    "note": "Từ liên quan đến Kanji 女（Nữ）\n【Phân biệt từ gần nghĩa】女の子 cần phân biệt với 女、女の人; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "女の人",
+    "back": "người phụ nữ",
+    "reading": "おんなのひと",
+    "han_viet": "Nữ Nhân",
+    "note": "Từ liên quan đến Kanji 女（Nữ）\n【Phân biệt từ gần nghĩa】女の人 cần phân biệt với 女、女の子; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "子供",
+    "back": "trẻ em",
+    "reading": "こども",
+    "han_viet": null,
+    "note": "Từ liên quan đến Kanji 子（Tử）\n【Phân biệt từ gần nghĩa】子供 cần phân biệt với 大人; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "父",
+    "back": "bố của mình",
+    "reading": "ちち",
+    "han_viet": "Phụ",
+    "note": "Từ liên quan đến Kanji 父（Phụ）\n【Phân biệt từ gần nghĩa】父 cần phân biệt với お父さん; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "父は会社員です。",
+        "reading": "ちちはかいしゃいんです。",
+        "meaning": "Bố tôi là nhân viên công ty."
+      }
+    ]
+  },
+  {
+    "front": "お父さん",
+    "back": "bố (lịch sự)",
+    "reading": "おとうさん",
+    "han_viet": "Phụ",
+    "note": "Từ liên quan đến Kanji 父（Phụ）\n【Phân biệt từ gần nghĩa】お父さん cần phân biệt với 父; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "お父さんはお元気ですか。",
+        "reading": "おとうさんはおげんきですか。",
+        "meaning": "Bố anh/chị có khỏe không?"
+      }
+    ]
+  },
+  {
+    "front": "母",
+    "back": "mẹ của mình",
+    "reading": "はは",
+    "han_viet": "Mẫu",
+    "note": "Từ liên quan đến Kanji 母（Mẫu）\n【Phân biệt từ gần nghĩa】母 cần phân biệt với お母さん; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "母は先生です。",
+        "reading": "はははせんせいです。",
+        "meaning": "Mẹ tôi là giáo viên."
+      }
+    ]
+  },
+  {
+    "front": "お母さん",
+    "back": "mẹ (lịch sự)",
+    "reading": "おかあさん",
+    "han_viet": "Mẫu",
+    "note": "Từ liên quan đến Kanji 母（Mẫu）\n【Phân biệt từ gần nghĩa】お母さん cần phân biệt với 母; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "お母さん、ありがとう。",
+        "reading": "おかあさん、ありがとう。",
+        "meaning": "Mẹ ơi, con cảm ơn."
+      }
+    ]
+  },
+  {
+    "front": "友達",
+    "back": "bạn bè",
+    "reading": "ともだち",
+    "han_viet": "Hữu Đạt",
+    "note": "Từ liên quan đến Kanji 友（Hữu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "友人",
+    "back": "người bạn",
+    "reading": "ゆうじん",
+    "han_viet": "Hữu Nhân",
+    "note": "Từ liên quan đến Kanji 友（Hữu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "有名",
+    "back": "nổi tiếng",
+    "reading": "ゆうめい",
+    "han_viet": "Hữu Danh",
+    "note": "Từ liên quan đến Kanji 名（Danh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "私",
+    "back": "tôi",
+    "reading": "わたし",
+    "han_viet": "Tư",
+    "note": "Từ liên quan đến Kanji 私（Tư）\n【Cách dùng】Phổ biến, trung tính; trong giao tiếp thân mật có thể lược chủ ngữ.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "私立",
+    "back": "tư thục",
+    "reading": "しりつ",
+    "han_viet": "Tư Lập",
+    "note": "Từ liên quan đến Kanji 私（Tư）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "上",
+    "back": "bên trên",
+    "reading": "うえ",
+    "han_viet": "Thượng",
+    "note": "Từ liên quan đến Kanji 上（Thượng）\n【Phân biệt từ gần nghĩa】上 cần phân biệt với 下、中、外; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "上手",
+    "back": "giỏi",
+    "reading": "じょうず",
+    "han_viet": "Thượng Thủ",
+    "note": "Từ liên quan đến Kanji 上（Thượng）\n【Phân biệt từ gần nghĩa】上手 cần phân biệt với 下手; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Đọc じょうず, giỏi; không đọc kiểu ghép đơn lẻ うえて.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "田中さんは日本語が上手です。",
+        "reading": "たなかさんはにほんごがじょうずです。",
+        "meaning": "Anh Tanaka giỏi tiếng Nhật."
+      }
+    ]
+  },
+  {
+    "front": "下",
+    "back": "bên dưới",
+    "reading": "した",
+    "han_viet": "Hạ",
+    "note": "Từ liên quan đến Kanji 下（Hạ）\n【Phân biệt từ gần nghĩa】下 cần phân biệt với 上、中、外; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "地下鉄",
+    "back": "tàu điện ngầm",
+    "reading": "ちかてつ",
+    "han_viet": "Địa Hạ Thiết",
+    "note": "Từ liên quan đến Kanji 下（Hạ）\n【Phân biệt từ gần nghĩa】地下鉄 cần phân biệt với 新幹線、電車; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "地下鉄に乗ります。",
+        "reading": "ちかてつにのります。",
+        "meaning": "Tôi đi tàu điện ngầm."
+      }
+    ]
+  },
+  {
+    "front": "左",
+    "back": "bên trái",
+    "reading": "ひだり",
+    "han_viet": "Tả",
+    "note": "Từ liên quan đến Kanji 左（Tả）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "左手",
+    "back": "tay trái",
+    "reading": "ひだりて",
+    "han_viet": "Tả Thủ",
+    "note": "Từ liên quan đến Kanji 左（Tả）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "右",
+    "back": "bên phải",
+    "reading": "みぎ",
+    "han_viet": "Hữu",
+    "note": "Từ liên quan đến Kanji 右（Hữu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "右手",
+    "back": "tay phải",
+    "reading": "みぎて",
+    "han_viet": "Hữu Thủ",
+    "note": "Từ liên quan đến Kanji 右（Hữu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "中",
+    "back": "bên trong",
+    "reading": "なか",
+    "han_viet": "Trung",
+    "note": "Từ liên quan đến Kanji 中（Trung）\n【Phân biệt từ gần nghĩa】中 cần phân biệt với 上、下、外; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "中国",
+    "back": "Trung Quốc",
+    "reading": "ちゅうごく",
+    "han_viet": "Trung Quốc",
+    "note": "Từ liên quan đến Kanji 中（Trung）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "外",
+    "back": "bên ngoài",
+    "reading": "そと",
+    "han_viet": "Ngoại",
+    "note": "Từ liên quan đến Kanji 外（Ngoại）\n【Phân biệt từ gần nghĩa】外 cần phân biệt với 上、下、中; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "外国",
+    "back": "nước ngoài",
+    "reading": "がいこく",
+    "han_viet": "Ngoại Quốc",
+    "note": "Từ liên quan đến Kanji 外（Ngoại）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "東",
+    "back": "hướng đông",
+    "reading": "ひがし",
+    "han_viet": "Đông",
+    "note": "Từ liên quan đến Kanji 東（Đông）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "東京",
+    "back": "Tokyo",
+    "reading": "とうきょう",
+    "han_viet": "Đông Kinh",
+    "note": "Từ liên quan đến Kanji 東（Đông）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "西",
+    "back": "hướng tây",
+    "reading": "にし",
+    "han_viet": "Tây",
+    "note": "Từ liên quan đến Kanji 西（Tây）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "西口",
+    "back": "cửa phía tây",
+    "reading": "にしぐち",
+    "han_viet": "Tây Khẩu",
+    "note": "Từ liên quan đến Kanji 西（Tây）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "南",
+    "back": "hướng nam",
+    "reading": "みなみ",
+    "han_viet": "Nam",
+    "note": "Từ liên quan đến Kanji 南（Nam）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "南口",
+    "back": "cửa phía nam",
+    "reading": "みなみぐち",
+    "han_viet": "Nam Khẩu",
+    "note": "Từ liên quan đến Kanji 南（Nam）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "北",
+    "back": "hướng bắc",
+    "reading": "きた",
+    "han_viet": "Bắc",
+    "note": "Từ liên quan đến Kanji 北（Bắc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "北口",
+    "back": "cửa phía bắc",
+    "reading": "きたぐち",
+    "han_viet": "Bắc Khẩu",
+    "note": "Từ liên quan đến Kanji 北（Bắc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "大学",
+    "back": "đại học",
+    "reading": "だいがく",
+    "han_viet": "Đại Học",
+    "note": "Từ liên quan đến Kanji 大（Đại）\n【Phân biệt từ gần nghĩa】大学 cần phân biệt với 学校、教室; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "大きい",
+    "back": "to lớn",
+    "reading": "おおきい",
+    "han_viet": "Đại",
+    "note": "Từ liên quan đến Kanji 大（Đại）\n【Phân biệt từ gần nghĩa】大きい cần phân biệt với 小さい; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "小さい",
+    "back": "nhỏ",
+    "reading": "ちいさい",
+    "han_viet": "Tiểu",
+    "note": "Từ liên quan đến Kanji 小（Tiểu）\n【Phân biệt từ gần nghĩa】小さい cần phân biệt với 大きい; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "小学校",
+    "back": "trường tiểu học",
+    "reading": "しょうがっこう",
+    "han_viet": "Tiểu Học Hiệu",
+    "note": "Từ liên quan đến Kanji 小（Tiểu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "多い",
+    "back": "nhiều",
+    "reading": "おおい",
+    "han_viet": "Đa",
+    "note": "Từ liên quan đến Kanji 多（Đa）\n【Phân biệt từ gần nghĩa】多い cần phân biệt với たくさん; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "この町は人が多いです。",
+        "reading": "このまちはひとがおおいです。",
+        "meaning": "Thị trấn này đông người."
+      }
+    ]
+  },
+  {
+    "front": "多分",
+    "back": "có lẽ",
+    "reading": "たぶん",
+    "han_viet": "Đa Phân",
+    "note": "Từ liên quan đến Kanji 多（Đa）\n【Phân biệt từ gần nghĩa】多分 cần phân biệt với もちろん; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "多分、明日は雨です。",
+        "reading": "たぶん、あしたはあめです。",
+        "meaning": "Có lẽ ngày mai trời mưa."
+      }
+    ]
+  },
+  {
+    "front": "少ない",
+    "back": "ít",
+    "reading": "すくない",
+    "han_viet": "Thiểu",
+    "note": "Từ liên quan đến Kanji 少（Thiểu）\n【Phân biệt từ gần nghĩa】少ない cần phân biệt với 少し; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "今日は人が少ないです。",
+        "reading": "きょうはひとがすくないです。",
+        "meaning": "Hôm nay ít người."
+      }
+    ]
+  },
+  {
+    "front": "少し",
+    "back": "một ít",
+    "reading": "すこし",
+    "han_viet": "Thiểu",
+    "note": "Từ liên quan đến Kanji 少（Thiểu）\n【Phân biệt từ gần nghĩa】少し cần phân biệt với ちょっと、少ない; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "日本語が少し分かります。",
+        "reading": "にほんごがすこしわかります。",
+        "meaning": "Tôi hiểu một ít tiếng Nhật."
+      }
+    ]
+  },
+  {
+    "front": "長い",
+    "back": "dài",
+    "reading": "ながい",
+    "han_viet": "Trường",
+    "note": "Từ liên quan đến Kanji 長（Trường）\n【Phân biệt từ gần nghĩa】長い cần phân biệt với 短い; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "社長",
+    "back": "giám đốc công ty",
+    "reading": "しゃちょう",
+    "han_viet": "Xã Trường",
+    "note": "Từ liên quan đến Kanji 長（Trường）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "新しい",
+    "back": "mới",
+    "reading": "あたらしい",
+    "han_viet": "Tân",
+    "note": "Từ liên quan đến Kanji 新（Tân）\n【Phân biệt từ gần nghĩa】新しい cần phân biệt với 古い; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Tính từ い, từ trái nghĩa 古い.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "新聞",
+    "back": "báo",
+    "reading": "しんぶん",
+    "han_viet": "Tân Văn",
+    "note": "Từ liên quan đến Kanji 新（Tân）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "古い",
+    "back": "cũ",
+    "reading": "ふるい",
+    "han_viet": "Cổ",
+    "note": "Từ liên quan đến Kanji 古（Cổ）\n【Phân biệt từ gần nghĩa】古い cần phân biệt với 新しい; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Tính từ い, từ trái nghĩa 新しい.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "中古",
+    "back": "đồ đã qua sử dụng",
+    "reading": "ちゅうこ",
+    "han_viet": "Trung Cổ",
+    "note": "Từ liên quan đến Kanji 古（Cổ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "高い",
+    "back": "cao",
+    "reading": "たかい",
+    "han_viet": "Cao",
+    "note": "Từ liên quan đến Kanji 高（Cao）\n【Phân biệt từ gần nghĩa】高い cần phân biệt với 安い; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Cao hoặc đắt, dựa vào danh từ: 背が高い/値段が高い.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "高校",
+    "back": "trường cấp ba",
+    "reading": "こうこう",
+    "han_viet": "Cao Hiệu",
+    "note": "Từ liên quan đến Kanji 高（Cao）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "安い",
+    "back": "rẻ",
+    "reading": "やすい",
+    "han_viet": "An",
+    "note": "Từ liên quan đến Kanji 安（An）\n【Phân biệt từ gần nghĩa】安い cần phân biệt với 高い; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Giá rẻ; khác 安心 (yên tâm) cùng chữ 安.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "安心",
+    "back": "yên tâm",
+    "reading": "あんしん",
+    "han_viet": null,
+    "note": "Từ liên quan đến Kanji 安（An）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "山",
+    "back": "núi",
+    "reading": "やま",
+    "han_viet": "Sơn",
+    "note": "Từ liên quan đến Kanji 山（Sơn）\n【Phân biệt từ gần nghĩa】山 cần phân biệt với 川、森; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "川",
+    "back": "sông",
+    "reading": "かわ",
+    "han_viet": "Xuyên",
+    "note": "Từ liên quan đến Kanji 川（Xuyên）\n【Phân biệt từ gần nghĩa】川 cần phân biệt với 山、森; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "山川",
+    "back": "núi sông",
+    "reading": "やまかわ",
+    "han_viet": "Sơn Xuyên",
+    "note": "Từ liên quan đến Kanji 川（Xuyên）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "田んぼ",
+    "back": "ruộng lúa",
+    "reading": "たんぼ",
+    "han_viet": "Điền",
+    "note": "Từ liên quan đến Kanji 田（Điền）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "田中",
+    "back": "họ Tanaka",
+    "reading": "たなか",
+    "han_viet": "Điền Trung",
+    "note": "Từ liên quan đến Kanji 田（Điền）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "天気",
+    "back": "thời tiết",
+    "reading": "てんき",
+    "han_viet": "Thiên Khí",
+    "note": "Từ liên quan đến Kanji 天（Thiên）\n【Phân biệt từ gần nghĩa】天気 cần phân biệt với 晴れ、曇り; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "天国",
+    "back": "thiên đường",
+    "reading": "てんごく",
+    "han_viet": "Thiên Quốc",
+    "note": "Từ liên quan đến Kanji 天（Thiên）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "元気",
+    "back": "khỏe",
+    "reading": "げんき",
+    "han_viet": "Nguyên Khí",
+    "note": "Từ liên quan đến Kanji 気（Khí）\n【Cách dùng】Mẫu: お元気ですか = bạn có khỏe không?",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "雨",
+    "back": "mưa",
+    "reading": "あめ",
+    "han_viet": "Vũ",
+    "note": "Từ liên quan đến Kanji 雨（Vũ）\n【Phân biệt từ gần nghĩa】雨 cần phân biệt với 雪、風; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "大雨",
+    "back": "mưa to",
+    "reading": "おおあめ",
+    "han_viet": "Đại Vũ",
+    "note": "Từ liên quan đến Kanji 雨（Vũ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "空",
+    "back": "bầu trời",
+    "reading": "そら",
+    "han_viet": "Không",
+    "note": "Từ liên quan đến Kanji 空（Không）\n【Phân biệt từ gần nghĩa】空 cần phân biệt với 太陽、月; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "空港",
+    "back": "sân bay",
+    "reading": "くうこう",
+    "han_viet": "Không Cảng",
+    "note": "Từ liên quan đến Kanji 空（Không）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "本",
+    "back": "sách",
+    "reading": "ほん",
+    "han_viet": "Bản",
+    "note": "Từ liên quan đến Kanji 本（Bản）\n【Phân biệt từ gần nghĩa】本 cần phân biệt với 教科書、辞書; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "日本",
+    "back": "Nhật Bản",
+    "reading": "にほん",
+    "han_viet": "Nhật Bản",
+    "note": "Từ liên quan đến Kanji 本（Bản）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "日本語",
+    "back": "tiếng Nhật",
+    "reading": "にほんご",
+    "han_viet": "Nhật Bản Ngữ",
+    "note": "Từ liên quan đến Kanji 語（Ngữ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "英語",
+    "back": "tiếng Anh",
+    "reading": "えいご",
+    "han_viet": "Anh Ngữ",
+    "note": "Từ liên quan đến Kanji 語（Ngữ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "文",
+    "back": "câu văn",
+    "reading": "ぶん",
+    "han_viet": "Văn",
+    "note": "Từ liên quan đến Kanji 文（Văn）\n【Phân biệt từ gần nghĩa】文 cần phân biệt với 平仮名、文字、漢字、片仮名; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "作文",
+    "back": "bài văn",
+    "reading": "さくぶん",
+    "han_viet": "Tác Văn",
+    "note": "Từ liên quan đến Kanji 文（Văn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "漢字",
+    "back": "chữ Hán",
+    "reading": "かんじ",
+    "han_viet": "Hán Tự",
+    "note": "Từ liên quan đến Kanji 字（Tự）\n【Phân biệt từ gần nghĩa】漢字 cần phân biệt với 平仮名、文、文字、片仮名; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "文字",
+    "back": "ký tự",
+    "reading": "もじ",
+    "han_viet": "Văn Tự",
+    "note": "Từ liên quan đến Kanji 字（Tự）\n【Phân biệt từ gần nghĩa】文字 cần phân biệt với 平仮名、文、漢字、片仮名; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "読む",
+    "back": "đọc",
+    "reading": "よむ",
+    "han_viet": "Độc",
+    "note": "Từ liên quan đến Kanji 読（Độc）\n【Cách dùng】Mẫu: 本を読む = đọc sách.\n【Cách đọc/cách dùng】Tha động từ: 本を読む.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "読書",
+    "back": "đọc sách",
+    "reading": "どくしょ",
+    "han_viet": "Độc Thư",
+    "note": "Từ liên quan đến Kanji 読（Độc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "書く",
+    "back": "viết",
+    "reading": "かく",
+    "han_viet": "Thư",
+    "note": "Từ liên quan đến Kanji 書（Thư）\n【Cách dùng】Mẫu: 名前を書く = viết tên.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "辞書",
+    "back": "từ điển",
+    "reading": "じしょ",
+    "han_viet": "Từ Thư",
+    "note": "Từ liên quan đến Kanji 書（Thư）\n【Phân biệt từ gần nghĩa】辞書 cần phân biệt với 教科書、本; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "話す",
+    "back": "nói",
+    "reading": "はなす",
+    "han_viet": "Thoại",
+    "note": "Từ liên quan đến Kanji 話（Thoại）\n【Phân biệt từ gần nghĩa】話す cần phân biệt với 言う; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Nói chuyện/trao đổi, khác 言う nhấn lời nói.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "友達と日本語で話します。",
+        "reading": "ともだちとにほんごではなします。",
+        "meaning": "Tôi nói chuyện với bạn bằng tiếng Nhật."
+      }
+    ]
+  },
+  {
+    "front": "電話",
+    "back": "điện thoại",
+    "reading": "でんわ",
+    "han_viet": "Điện Thoại",
+    "note": "Từ liên quan đến Kanji 話（Thoại）\n【Phân biệt từ gần nghĩa】電話 cần phân biệt với 電話する; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "聞く",
+    "back": "nghe",
+    "reading": "きく",
+    "han_viet": "Văn",
+    "note": "Từ liên quan đến Kanji 聞（Văn）\n【Phân biệt từ gần nghĩa】聞く cần phân biệt với 聞こえる; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Chủ động nghe/hỏi, khác 聞こえる = tự nghe thấy.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "音楽を聞きます。",
+        "reading": "おんがくをききます。",
+        "meaning": "Tôi nghe nhạc."
+      }
+    ]
+  },
+  {
+    "front": "見る",
+    "back": "xem",
+    "reading": "みる",
+    "han_viet": "Kiến",
+    "note": "Từ liên quan đến Kanji 見（Kiến）\n【Phân biệt từ gần nghĩa】見る cần phân biệt với 見える、見せる; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Chủ động xem, khác 見える = nhìn thấy được.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "映画を見ます。",
+        "reading": "えいがをみます。",
+        "meaning": "Tôi xem phim."
+      }
+    ]
+  },
+  {
+    "front": "見せる",
+    "back": "cho xem",
+    "reading": "みせる",
+    "han_viet": "Kiến",
+    "note": "Từ liên quan đến Kanji 見（Kiến）\n【Phân biệt từ gần nghĩa】見せる cần phân biệt với 見える、見る; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "写真を見せてください。",
+        "reading": "しゃしんをみせてください。",
+        "meaning": "Hãy cho tôi xem ảnh."
+      }
+    ]
+  },
+  {
+    "front": "言う",
+    "back": "nói",
+    "reading": "いう",
+    "han_viet": "Ngôn",
+    "note": "Từ liên quan đến Kanji 言（Ngôn）\n【Phân biệt từ gần nghĩa】言う cần phân biệt với 話す; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "先生は「おはよう」と言いました。",
+        "reading": "せんせいは「おはよう」といいました。",
+        "meaning": "Giáo viên nói “Chào buổi sáng”."
+      }
+    ]
+  },
+  {
+    "front": "言葉",
+    "back": "lời nói",
+    "reading": "ことば",
+    "han_viet": null,
+    "note": "Từ liên quan đến Kanji 言（Ngôn）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "学生",
+    "back": "học sinh/sinh viên",
+    "reading": "がくせい",
+    "han_viet": "Học Sinh",
+    "note": "Từ liên quan đến Kanji 学（Học）\n【Phân biệt từ gần nghĩa】学生 cần phân biệt với 大学生、生徒; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Đọc がくせい, học sinh/sinh viên.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "私は学生です。",
+        "reading": "わたしはがくせいです。",
+        "meaning": "Tôi là học sinh/sinh viên."
+      }
+    ]
+  },
+  {
+    "front": "学校",
+    "back": "trường học",
+    "reading": "がっこう",
+    "han_viet": "Học Hiệu",
+    "note": "Từ liên quan đến Kanji 学（Học）\n【Phân biệt từ gần nghĩa】学校 cần phân biệt với 大学、教室; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Đọc がっこう; có âm ngắt っ.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "会う",
+    "back": "gặp",
+    "reading": "あう",
+    "han_viet": "Hội",
+    "note": "Từ liên quan đến Kanji 会（Hội）\n【Cách dùng】Mẫu: 友達に会う — gặp bạn bè.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "会社",
+    "back": "công ty",
+    "reading": "かいしゃ",
+    "han_viet": "Hội Xã",
+    "note": "Từ liên quan đến Kanji 会（Hội）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "店",
+    "back": "cửa hàng",
+    "reading": "みせ",
+    "han_viet": "Điếm",
+    "note": "Từ liên quan đến Kanji 店（Điếm）\n【Phân biệt từ gần nghĩa】店 cần phân biệt với スーパー、デパート; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "店員",
+    "back": "nhân viên cửa hàng",
+    "reading": "てんいん",
+    "han_viet": "Điếm Viên",
+    "note": "Từ liên quan đến Kanji 店（Điếm）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "駅",
+    "back": "nhà ga",
+    "reading": "えき",
+    "han_viet": "Dịch",
+    "note": "Từ liên quan đến Kanji 駅（Dịch）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "駅前",
+    "back": "trước nhà ga",
+    "reading": "えきまえ",
+    "han_viet": "Dịch Tiền",
+    "note": "Từ liên quan đến Kanji 駅（Dịch）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "食べる",
+    "back": "ăn",
+    "reading": "たべる",
+    "han_viet": "Thực",
+    "note": "Từ liên quan đến Kanji 食（Thực）\n【Cách dùng】Mẫu: パンを食べる = ăn bánh mì.\n【Cách đọc/cách dùng】Tha động từ: N を食べる.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "食堂",
+    "back": "nhà ăn",
+    "reading": "しょくどう",
+    "han_viet": null,
+    "note": "Từ liên quan đến Kanji 食（Thực）\n【Phân biệt từ gần nghĩa】食堂 cần phân biệt với レストラン、喫茶店; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "学校の食堂で食べます。",
+        "reading": "がっこうのしょくどうでたべます。",
+        "meaning": "Tôi ăn ở nhà ăn của trường."
+      }
+    ]
+  },
+  {
+    "front": "飲む",
+    "back": "uống",
+    "reading": "のむ",
+    "han_viet": "Ẩm",
+    "note": "Từ liên quan đến Kanji 飲（Ẩm）\n【Cách dùng】Mẫu: 水を飲む = uống nước.\n【Cách đọc/cách dùng】Tha động từ: N を飲む.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "飲み物",
+    "back": "đồ uống",
+    "reading": "のみもの",
+    "han_viet": "Ẩm Vật",
+    "note": "Từ liên quan đến Kanji 飲（Ẩm）\n【Phân biệt từ gần nghĩa】飲み物 cần phân biệt với 食べ物; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "買う",
+    "back": "mua",
+    "reading": "かう",
+    "han_viet": "Mãi",
+    "note": "Từ liên quan đến Kanji 買（Mãi）\n【Phân biệt từ gần nghĩa】買う cần phân biệt với 売る、払う; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "買い物",
+    "back": "mua sắm",
+    "reading": "かいもの",
+    "han_viet": "Mãi Vật",
+    "note": "Từ liên quan đến Kanji 買（Mãi）\n【Phân biệt từ gần nghĩa】買い物 cần phân biệt với 買い物する; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "行く",
+    "back": "đi",
+    "reading": "いく",
+    "han_viet": "Hành",
+    "note": "Từ liên quan đến Kanji 行（Hành）\n【Phân biệt từ gần nghĩa】行く cần phân biệt với 帰る、来る; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Đi, khác 来る = đến.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "明日、学校に行きます。",
+        "reading": "あした、がっこうにいきます。",
+        "meaning": "Ngày mai tôi đến trường."
+      }
+    ]
+  },
+  {
+    "front": "銀行",
+    "back": "ngân hàng",
+    "reading": "ぎんこう",
+    "han_viet": "Ngân Hành",
+    "note": "Từ liên quan đến Kanji 行（Hành）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "来る",
+    "back": "đến",
+    "reading": "くる",
+    "han_viet": "Lai",
+    "note": "Từ liên quan đến Kanji 来（Lai）\n【Phân biệt từ gần nghĩa】来る cần phân biệt với 帰る、行く; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "友達が家に来ます。",
+        "reading": "ともだちがいえにきます。",
+        "meaning": "Bạn tôi đến nhà."
+      }
+    ]
+  },
+  {
+    "front": "帰る",
+    "back": "trở về",
+    "reading": "かえる",
+    "han_viet": "Quy",
+    "note": "Từ liên quan đến Kanji 帰（Quy）\n【Phân biệt từ gần nghĩa】帰る cần phân biệt với 来る、行く; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Về, khác 行く = đi.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "六時に家に帰ります。",
+        "reading": "ろくじにいえにかえります。",
+        "meaning": "Tôi về nhà lúc 6 giờ."
+      }
+    ]
+  },
+  {
+    "front": "帰国",
+    "back": "về nước",
+    "reading": "きこく",
+    "han_viet": "Quy Quốc",
+    "note": "Từ liên quan đến Kanji 帰（Quy）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "入る",
+    "back": "đi vào",
+    "reading": "はいる",
+    "han_viet": "Nhập",
+    "note": "Từ liên quan đến Kanji 入（Nhập）\n【Phân biệt từ gần nghĩa】入る cần phân biệt với 出る; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "入口",
+    "back": "lối vào",
+    "reading": "いりぐち",
+    "han_viet": "Nhập Khẩu",
+    "note": "Từ liên quan đến Kanji 入（Nhập）\n【Phân biệt từ gần nghĩa】入口 cần phân biệt với 出口; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Đọc いりぐち = lối vào.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "出る",
+    "back": "ra",
+    "reading": "でる",
+    "han_viet": "Xuất",
+    "note": "Từ liên quan đến Kanji 出（Xuất）\n【Phân biệt từ gần nghĩa】出る cần phân biệt với 入る; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "出口",
+    "back": "lối ra",
+    "reading": "でぐち",
+    "han_viet": "Xuất Khẩu",
+    "note": "Từ liên quan đến Kanji 出（Xuất）\n【Phân biệt từ gần nghĩa】出口 cần phân biệt với 入口; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.\n【Cách đọc/cách dùng】Đọc でぐち = lối ra.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "休む",
+    "back": "nghỉ",
+    "reading": "やすむ",
+    "han_viet": "Hưu",
+    "note": "Từ liên quan đến Kanji 休（Hưu）\n【Phân biệt từ gần nghĩa】休む cần phân biệt với 休み; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "休み",
+    "back": "ngày nghỉ",
+    "reading": "やすみ",
+    "han_viet": "Hưu",
+    "note": "Từ liên quan đến Kanji 休（Hưu）\n【Phân biệt từ gần nghĩa】休み cần phân biệt với 休みの日、休む、休日; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "明日は休みです。",
+        "reading": "あしたはやすみです。",
+        "meaning": "Ngày mai là ngày nghỉ."
+      }
+    ]
+  },
+  {
+    "front": "立つ",
+    "back": "đứng",
+    "reading": "たつ",
+    "han_viet": "Lập",
+    "note": "Từ liên quan đến Kanji 立（Lập）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "国立",
+    "back": "quốc lập",
+    "reading": "こくりつ",
+    "han_viet": "Quốc Lập",
+    "note": "Từ liên quan đến Kanji 立（Lập）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "車",
+    "back": "ô tô",
+    "reading": "くるま",
+    "han_viet": "Xa",
+    "note": "Từ liên quan đến Kanji 車（Xa）\n【Phân biệt từ gần nghĩa】車 cần phân biệt với 自動車、自転車; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "電車",
+    "back": "tàu điện",
+    "reading": "でんしゃ",
+    "han_viet": "Điện Xa",
+    "note": "Từ liên quan đến Kanji 車（Xa）\n【Phân biệt từ gần nghĩa】電車 cần phân biệt với 地下鉄、新幹線; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "電車で学校へ行きます。",
+        "reading": "でんしゃでがっこうへいきます。",
+        "meaning": "Tôi đến trường bằng tàu điện."
+      }
+    ]
+  },
+  {
+    "front": "電気",
+    "back": "điện",
+    "reading": "でんき",
+    "han_viet": "Điện Khí",
+    "note": "Từ liên quan đến Kanji 電（Điện）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "道",
+    "back": "đường",
+    "reading": "みち",
+    "han_viet": "Đạo",
+    "note": "Từ liên quan đến Kanji 道（Đạo）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "北海道",
+    "back": "Hokkaido",
+    "reading": "ほっかいどう",
+    "han_viet": "Bắc Hải Đạo",
+    "note": "Từ liên quan đến Kanji 道（Đạo）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "国",
+    "back": "đất nước",
+    "reading": "くに",
+    "han_viet": "Quốc",
+    "note": "Từ liên quan đến Kanji 国（Quốc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "白",
+    "back": "màu trắng",
+    "reading": "しろ",
+    "han_viet": "Bạch",
+    "note": "Từ liên quan đến Kanji 白（Bạch）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "白い",
+    "back": "trắng",
+    "reading": "しろい",
+    "han_viet": "Bạch",
+    "note": "Từ liên quan đến Kanji 白（Bạch）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "黒",
+    "back": "màu đen",
+    "reading": "くろ",
+    "han_viet": "Hắc",
+    "note": "Từ liên quan đến Kanji 黒（Hắc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "黒い",
+    "back": "đen",
+    "reading": "くろい",
+    "han_viet": "Hắc",
+    "note": "Từ liên quan đến Kanji 黒（Hắc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "赤",
+    "back": "màu đỏ",
+    "reading": "あか",
+    "han_viet": "Xích",
+    "note": "Từ liên quan đến Kanji 赤（Xích）\n【Phân biệt từ gần nghĩa】赤 cần phân biệt với 青、黄色; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "赤い",
+    "back": "đỏ",
+    "reading": "あかい",
+    "han_viet": "Xích",
+    "note": "Từ liên quan đến Kanji 赤（Xích）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "青",
+    "back": "màu xanh",
+    "reading": "あお",
+    "han_viet": "Thanh",
+    "note": "Từ liên quan đến Kanji 青（Thanh）\n【Phân biệt từ gần nghĩa】青 cần phân biệt với 赤、黄色; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "青い",
+    "back": "xanh lam",
+    "reading": "あおい",
+    "han_viet": "Thanh",
+    "note": "Từ liên quan đến Kanji 青（Thanh）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "目",
+    "back": "mắt",
+    "reading": "め",
+    "han_viet": "Mục",
+    "note": "Từ liên quan đến Kanji 目（Mục）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "目の前",
+    "back": "ngay trước mắt",
+    "reading": "めのまえ",
+    "han_viet": "Mục Tiền",
+    "note": "Từ liên quan đến Kanji 目（Mục）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "耳",
+    "back": "tai",
+    "reading": "みみ",
+    "han_viet": "Nhĩ",
+    "note": "Từ liên quan đến Kanji 耳（Nhĩ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "耳鼻科",
+    "back": "khoa tai mũi họng",
+    "reading": "じびか",
+    "han_viet": "Nhĩ Tị Khoa",
+    "note": "Từ liên quan đến Kanji 耳（Nhĩ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "口",
+    "back": "miệng",
+    "reading": "くち",
+    "han_viet": "Khẩu",
+    "note": "Từ liên quan đến Kanji 口（Khẩu）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "手",
+    "back": "tay",
+    "reading": "て",
+    "han_viet": "Thủ",
+    "note": "Từ liên quan đến Kanji 手（Thủ）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "手紙",
+    "back": "thư tay",
+    "reading": "てがみ",
+    "han_viet": "Thủ Chỉ",
+    "note": "Từ liên quan đến Kanji 手（Thủ）\n【Phân biệt từ gần nghĩa】手紙 cần phân biệt với 紙; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "足",
+    "back": "chân",
+    "reading": "あし",
+    "han_viet": "Túc",
+    "note": "Từ liên quan đến Kanji 足（Túc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "足りる",
+    "back": "đủ",
+    "reading": "たりる",
+    "han_viet": "Túc",
+    "note": "Từ liên quan đến Kanji 足（Túc）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "力",
+    "back": "sức mạnh",
+    "reading": "ちから",
+    "han_viet": "Lực",
+    "note": "Từ liên quan đến Kanji 力（Lực）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "能力",
+    "back": "năng lực",
+    "reading": "のうりょく",
+    "han_viet": null,
+    "note": "Từ liên quan đến Kanji 力（Lực）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "犬",
+    "back": "chó",
+    "reading": "いぬ",
+    "han_viet": "Khuyển",
+    "note": "Từ liên quan đến Kanji 犬（Khuyển）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "子犬",
+    "back": "chó con",
+    "reading": "こいぬ",
+    "han_viet": "Tử Khuyển",
+    "note": "Từ liên quan đến Kanji 犬（Khuyển）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "魚",
+    "back": "cá",
+    "reading": "さかな",
+    "han_viet": "Ngư",
+    "note": "Từ liên quan đến Kanji 魚（Ngư）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "金魚",
+    "back": "cá vàng",
+    "reading": "きんぎょ",
+    "han_viet": "Kim Ngư",
+    "note": "Từ liên quan đến Kanji 魚（Ngư）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "花",
+    "back": "hoa",
+    "reading": "はな",
+    "han_viet": "Hoa",
+    "note": "Từ liên quan đến Kanji 花（Hoa）\n【Phân biệt từ gần nghĩa】花 cần phân biệt với 鼻; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "花がきれいです。",
+        "reading": "はながきれいです。",
+        "meaning": "Hoa đẹp."
+      }
+    ]
+  },
+  {
+    "front": "花見",
+    "back": "ngắm hoa",
+    "reading": "はなみ",
+    "han_viet": "Hoa Kiến",
+    "note": "Từ liên quan đến Kanji 花（Hoa）",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ]
+  },
+  {
+    "front": "何",
+    "back": "cái gì",
+    "reading": "なに",
+    "han_viet": "Hà",
+    "note": "Từ liên quan đến Kanji 何（Hà）\n【Phân biệt từ gần nghĩa】何 cần phân biệt với 何分、何日、何時; xem thẻ từ vựng cùng tên để học cách dùng chi tiết.",
+    "type": "VOCABULARY",
+    "tags": [
+      "N5",
+      "kanji",
+      "từ liên quan"
+    ],
+    "examples": [
+      {
+        "japanese": "これは何ですか。",
+        "reading": "これはなんですか。",
+        "meaning": "Đây là cái gì?"
+      }
+    ]
+  }
+]

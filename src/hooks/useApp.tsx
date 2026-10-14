@@ -8,6 +8,8 @@
 import React, { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react';
 import type { VocabItem, KanjiItem, GrammarItem, PageId, AppSettings, SRSCard, Bookmark, NavigationTarget } from '@/types';
 import { loadVocabulary, loadKanji, loadGrammar } from '@/lib/data';
+import { loadN5Decks } from '@/lib/n5Decks';
+import type { BuiltInDeckDefinition } from '@/lib/deckCatalog';
 import type { LearningStorage } from '@/lib/storage';
 import { useAuth } from '@/hooks/useAuth';
 import { useLearningSync } from './useLearningSync';
@@ -22,6 +24,7 @@ interface AppState {
   vocabulary: VocabItem[];
   kanji: KanjiItem[];
   grammar: GrammarItem[];
+  n5Decks: BuiltInDeckDefinition[];
   loading: boolean;
   loadError: string | null;
   retryLoad: () => void;
@@ -65,6 +68,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [vocabulary, setVocabulary] = useState<VocabItem[]>([]);
   const [kanji, setKanji] = useState<KanjiItem[]>([]);
   const [grammar, setGrammar] = useState<GrammarItem[]>([]);
+  const [n5Decks, setN5Decks] = useState<BuiltInDeckDefinition[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
@@ -92,12 +96,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     let active = true;
     setLoading(true);
     setLoadError(null);
-    Promise.all([loadVocabulary(), loadKanji(), loadGrammar()])
-      .then(([v, k, g]) => {
+    Promise.all([loadVocabulary(), loadKanji(), loadGrammar(), loadN5Decks()])
+      .then(([v, k, g, n5]) => {
         if (!active) return;
         setVocabulary(v);
         setKanji(k);
         setGrammar(g);
+        setN5Decks(n5);
         setLoading(false);
       })
       .catch((err) => {
@@ -218,6 +223,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         vocabulary,
         kanji,
         grammar,
+        n5Decks,
         loading,
         loadError,
         retryLoad,

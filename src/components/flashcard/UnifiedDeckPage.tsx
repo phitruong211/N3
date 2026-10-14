@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useApp, useLearningStorage } from '@/hooks/useApp';
 import type { CardView } from '@/lib/cards';
 import { defaultDeckTemplate, type DeckTemplateConfig } from '@/lib/ankiImport';
-import { buildBuiltInDecks, buildSavedDeck, deckSummary, type BuiltInDeckDefinition } from '@/lib/deckCatalog';
+import { buildBuiltInDecks, buildSavedDeck, builtInLevels, deckSummary, type BuiltInDeckDefinition } from '@/lib/deckCatalog';
 import { buildFreeStudyQueue, lessonOptions } from '@/lib/studySetup';
 import { buildScheduledDeckQueue, type DeckScheduleSummary } from '@/lib/deckSchedule';
 import { builtInDeckResumeKey, resolveResumeIndex } from '@/lib/studyResume';
@@ -15,12 +15,12 @@ import { StudySetupSheet } from './StudySetupSheet';
 export type DeckPageMode = 'free' | 'scheduled';
 
 export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
-  const { vocabulary, kanji, grammar, bookmarks, srsCards, settings } = useApp();
+  const { vocabulary, kanji, grammar, n5Decks, bookmarks, srsCards, settings } = useApp();
   const { getJSON, setJSON } = useLearningStorage();
   const [setupDeck, setSetupDeck] = useState<BuiltInDeckDefinition | null>(null);
   const [session, setSession] = useState<{ id: string; name: string; cards: CardView[]; template: DeckTemplateConfig; initialIndex: number; mode: 'flashcards' | 'anki' } | null>(null);
 
-  const decks = useMemo(() => buildBuiltInDecks(vocabulary, kanji, grammar), [vocabulary, kanji, grammar]);
+  const decks = useMemo(() => buildBuiltInDecks(vocabulary, kanji, grammar, n5Decks), [vocabulary, kanji, grammar, n5Decks]);
   const saved = useMemo(() => buildSavedDeck(decks, bookmarks), [decks, bookmarks]);
   const progressById = useMemo(() => new Map(srsCards.map(card => [`${card.deckType.toUpperCase()}:${card.cardId}`, card])), [srsCards]);
 
@@ -83,7 +83,7 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     <ImportedDecks mode={mode} leadingDeck={saved.cards.length ? card(saved, true) : undefined}/>
 
     <section aria-labelledby="built-in-decks"><div className="mb-4 flex flex-wrap items-end justify-between gap-2"><div><p className="study-eyebrow">THƯ VIỆN</p><h2 id="built-in-decks" className="mt-1 text-xl font-semibold">Bộ có sẵn</h2></div><p className="text-xs text-[var(--color-text-tertiary)]">Nội dung chuẩn · chỉ đọc</p></div>
-      <div className="space-y-7">{(['N4', 'N3', 'N2'] as const).map(level => {
+      <div className="space-y-7">{builtInLevels.map(level => {
         const levelDecks = decks.filter(deck => deck.level === level);
         if (!levelDecks.length) return null;
         return <section key={level} aria-labelledby={`deck-level-${level}`}><div className="mb-3 flex items-center gap-3"><h3 id={`deck-level-${level}`} className="text-sm font-semibold text-[var(--color-text-secondary)]">Trình độ {level}</h3><span className="h-px flex-1 bg-[var(--color-border)]"/></div><DeckGrid>{levelDecks.map(deck => card(deck))}</DeckGrid></section>;
