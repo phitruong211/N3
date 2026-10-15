@@ -27,7 +27,7 @@ try {
       await session.waitFor();
       await session.getByRole('button', { name: 'Hiện đáp án', exact: true }).first().click();
       if (route === '/review') {
-        await session.getByRole('button', { name: /3 · Được/ }).click();
+        await session.getByRole('button', { name: /3 · Tốt/ }).click();
         await page.waitForFunction(() => Object.keys(localStorage).some(key =>
           key.startsWith('guest:srs_cards_') && JSON.parse(localStorage.getItem(key)).some(card => card.cardId.startsWith('grammarN5') || card.cardId.startsWith('kanjiN5') || card.cardId.startsWith('vocabN5'))));
       }

@@ -216,8 +216,8 @@ try {
   await nav("Ôn ngắt quãng");
   await page.locator("article").filter({ has: page.getByRole("heading", { name: "Từ vựng N3", exact: true }) }).getByRole("button", { name: "Ôn ngay →", exact: true }).click();
   for (let i = 0; i < 20; i++) {
-    await page.locator("button").filter({ hasText: /^Hiện đáp án$/ }).click();
-    await page.getByRole("button", { name: /3 · Được/ }).click();
+    await page.locator("button").filter({ hasText: /^Hiện đáp án/ }).click();
+    await page.getByRole("button", { name: /3 · Tốt/ }).click();
   }
   await page
     .getByRole("heading", { name: "Đã hoàn thành", exact: true })

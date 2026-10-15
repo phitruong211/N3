@@ -1,0 +1,9 @@
+.deck-library-card { display: flex; flex-direction: column; min-height: 250px; padding: 24px; border-radius: 18px; font-family: 'Be Vietnam Pro', sans-serif; transition: border-color .18s, box-shadow .18s; }
+.deck-library-card:hover { border-color: var(--color-border-strong); box-shadow: 0 8px 24px #00000006; }
+.deck-library-title { margin-top: 18px; font-size: 1.2rem; font-weight: 650; line-height: 1.4; color: var(--color-text); }
+.deck-library-total { font-size: 1.5rem; font-weight: 600; letter-spacing: -.04em; }
+.deck-library-metrics { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 20px; margin-top: 18px; padding: 16px; border-radius: 10px; background: var(--color-surface-alt); }
+.deck-library-card .deck-library-action { display: flex; justify-content: center; align-items: center; width: 100%; min-height: 46px; padding: 10px 16px; border-radius: 10px; background: var(--color-text); color: var(--color-surface); text-decoration: none; transition: opacity .15s; }
+.deck-library-card .deck-library-action:hover { opacity: .85; }
+.deck-library-card .deck-library-action:disabled { opacity: .4; cursor: not-allowed; }
+@media(max-width:640px) { .deck-library-card { padding: 20px; min-height: 220px; } }

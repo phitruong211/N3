@@ -103,3 +103,12 @@ export const nearestFutureDue = <T>(queue: ReviewQueue<T>) => queue.futureLearni
   .map(key => queue.progressByKey.get(key)?.dueAt)
   .filter((value): value is string => Boolean(value))
   .sort()[0] ?? null;
+
+/** Progress counts unique cards; repeated answers do not inflate the denominator. */
+export function reviewSessionSummary<T>(queue: ReviewQueue<T>) {
+  const active = new Set([...queue.ready, ...queue.futureLearning]);
+  const total = new Set([...active, ...queue.answeredToday]).size;
+  const fresh = queue.ready.filter(key => !queue.progressByKey.get(key) || queue.progressByKey.get(key)?.state === 'new').length;
+  return { total, reviewed: queue.answeredToday.size, fresh,
+    due: queue.ready.length - fresh, waiting: queue.futureLearning.length };
+}

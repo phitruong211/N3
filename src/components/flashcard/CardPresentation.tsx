@@ -102,7 +102,7 @@ function Examples({ value, showReading }: { value: unknown; showReading: boolean
     <p className="text-xs font-semibold opacity-60">Ví dụ · bấm mắt để xem nghĩa</p>
     {examples.map((example, index) => <div key={index} className="rounded-xl bg-black/5 p-4">
       <div lang="ja" className="font-jp whitespace-pre-wrap break-words text-base leading-relaxed sm:text-lg">{index + 1}. <FuriganaText text={example.japanese} show={showReading} /></div>
-      {showReading && example.reading && <p lang="ja" className="font-jp mt-1 text-sm text-[var(--color-accent)]">{example.reading}</p>}
+      {showReading && example.reading && <p lang="ja" className="card-reading font-jp mt-1 text-sm text-[var(--color-accent)]">{example.reading}</p>}
       <ExampleMeaning meaning={example.meaning} label={`ví dụ ${index + 1}`} />
     </div>)}
   </div>;
@@ -240,7 +240,7 @@ export function CardFace({
               field === "notes"
                 ? "whitespace-pre-wrap break-words rounded-xl bg-black/5 p-4 text-base"
                 : field === "reading"
-                  ? "font-jp text-lg text-[var(--color-accent)]"
+                  ? "card-reading font-jp text-lg text-[var(--color-accent)]"
                   : field === "hanViet"
                     ? "text-base font-medium text-[var(--color-kanji)]"
                   : field === "kind" || field === "deckName"
@@ -501,11 +501,12 @@ export function DeckCustomizeDialog({
                 <select
                   className="study-input mt-1"
                   value={activeStyle.fontFamily}
+                  aria-label="Font chữ"
                   onChange={(event) => updateActiveStyle({ fontFamily: event.target.value as DeckTemplateConfig[typeof activeSide]["style"]["fontFamily"] })}
                 >
                   <option value="default">Mặc định</option>
-                  <option value="notoSansJp">Noto Sans JP</option>
-                  <option value="notoSerifJp">Noto Serif JP</option>
+                  <option value="notoSansJp">Gothic · Noto Sans JP</option>
+                  <option value="notoSerifJp">Mincho · Noto Serif JP</option>
                   <option value="delaGothicOne">Dela Gothic One</option>
                   <option value="system">Font hệ thống</option>
                 </select>

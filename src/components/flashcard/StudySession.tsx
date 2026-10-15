@@ -8,7 +8,7 @@ import {
 } from "@/hooks/useActiveElapsedMinutes";
 import { createSRSCard, getNextIntervals, processReview } from "@/lib/srs";
 import { legacyToFsrsProgress, progressToSrsCard } from "@/lib/fsrsProgress";
-import { applyReviewedProgress, createReviewQueue, nearestFutureDue, nextReadyCard, promoteDueCards } from "@/lib/liveReviewQueue";
+import { applyReviewedProgress, createReviewQueue, nearestFutureDue, nextReadyCard, promoteDueCards, reviewSessionSummary } from "@/lib/liveReviewQueue";
 import { progressToSrs, type ApiProgress } from "@/lib/api";
 import { defaultDeckTemplate, normalizeDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { presentationCard, type CardView } from "@/lib/cards";
@@ -16,7 +16,10 @@ import type { Rating, SRSCard } from "@/types";
 import { CardFace, DeckCustomizeDialog } from "./CardPresentation";
 import { useStudyNote, NoteButton, PersonalNoteView, PersonalNoteEditor } from './PersonalCardNote';
 import { Maximize2, Minimize2, Shuffle, X, Settings2 } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import "./studySession.css";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+
+import { StudyClock, useStudySeconds } from "./StudyClock";
 
 const SWIPE_THRESHOLD = 50;
 
@@ -70,10 +73,20 @@ export function StudySession({
 }) {
   const { settings, srsCards, updateSRSCard, learningSync, reviewOutbox } = useApp();
   const { user } = useAuth();
+  const prefersReducedMotion = useReducedMotion();
+  const reduceMotion = settings.reducedMotion || Boolean(prefersReducedMotion);
   const { recordStudyActivity, recordFreeStudyActivity, getJSON, setJSON } = useLearningStorage();
   const templateKey = `study_template_${cards[0]?.source === "BUILT_IN" ? deckName : cards[0]?.deckId || deckName}`;
-  const [template, setTemplate] = useState(() => cards[0]?.source === "BUILT_IN"
-    ? normalizeDeckTemplate(getJSON(templateKey, initialTemplate)) : initialTemplate);
+  const [template, setTemplate] = useState(() => {
+    if (cards[0]?.source !== 'BUILT_IN') return initialTemplate;
+    const stored = getJSON<DeckTemplateConfig | null>(templateKey, null);
+    if (stored) return normalizeDeckTemplate(stored);
+    // New Kanji sessions start with legible strokes; saved size/font choices remain authoritative.
+    if (cards[0]?.type === 'KANJI' && initialTemplate.front.style.fontSize === defaultDeckTemplate().front.style.fontSize && initialTemplate.front.style.fontFamily === 'default') {
+      return { ...initialTemplate, front: { ...initialTemplate.front, style: { ...initialTemplate.front.style, fontSize: 64, fontFamily: 'notoSerifJp' as const } } };
+    }
+    return initialTemplate;
+  });
   const [customizing, setCustomizing] = useState(false);
   const [savingTemplate, setSavingTemplate] = useState(false);
   const [sessionCards, setSessionCards] = useState(() => [...cards]);
@@ -105,6 +118,7 @@ export function StudySession({
   const personalNote = useStudyNote(current);
   const currentCardKey = current ? `${current.type}:${current.id}` : null;
   const flipped = currentCardKey !== null && revealedCardKey === currentCardKey;
+  const studySeconds = useStudySeconds(Boolean(current) && !done && !customizing && !personalNote.open);
   const readReviewTiming = useReviewTiming(currentCardKey, flipped, customizing || personalNote.open || busy || done);
   const elapsed = useActiveElapsedMinutes(
     current ? `${current.type}:${current.id}` : null,
@@ -320,7 +334,7 @@ export function StudySession({
   }, []);
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
-      if (done || busy) return;
+      if (done || busy || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
       if (
         (e.target as HTMLElement).closest(
           'input,textarea,select,[contenteditable="true"]',
@@ -328,6 +342,8 @@ export function StudySession({
         document.querySelector("dialog[open]")
       )
         return;
+      // Space/Enter on native controls must retain their normal activation behavior.
+      if ((e.key === ' ' || e.key === 'Enter') && (e.target as HTMLElement).closest('button,a')) return;
       if (e.key === "Escape") {
         e.preventDefault();
         finish();
@@ -339,7 +355,7 @@ export function StudySession({
       } else if (mode === "flashcards" && e.key === "ArrowLeft") {
         e.preventDefault();
         previous();
-      } else if (e.key === " ") {
+      } else if (e.key === " " || e.key === "Enter") {
         e.preventDefault();
         if (!flipped) setRevealedCardKey(currentCardKey);
         else if (mode === "flashcards") next();
@@ -357,10 +373,14 @@ export function StudySession({
     window.addEventListener("keydown", key);
     return () => window.removeEventListener("keydown", key);
   });
+  const summary = reviewSessionSummary(reviewQueue);
+  const progressValue = mode === 'anki' ? summary.reviewed : index + 1;
+  const progressTotal = mode === 'anki' ? summary.total : sessionCards.length;
   const futureDue = mode === 'anki' ? nearestFutureDue(reviewQueue) : null;
   if (!done && mode === 'anki' && !current && futureDue) {
     const seconds = Math.max(0, Math.ceil((Date.parse(futureDue) - clock) / 1000));
     return <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 bg-[var(--color-bg)] p-6 text-center">
+      <StudyClock seconds={studySeconds}/>
       <p className="study-eyebrow">THẺ QUÊN SẼ QUAY LẠI</p>
       <h2 className="text-3xl font-semibold">Tiếp tục sau {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, '0')}</h2>
       <p className="study-copy max-w-xl">Bạn đã xem hết các thẻ đang sẵn sàng. Có thể chờ để học lại đúng lịch hoặc kết thúc và quay lại sau.</p>
@@ -373,8 +393,9 @@ export function StudySession({
   if (done || !current)
     return (
       <div className="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-5 bg-[var(--color-bg)] p-6 text-center">
+        <StudyClock seconds={studySeconds}/>
         <h2 className="text-2xl font-semibold">Đã hoàn thành</h2>
-        <p>{mode === 'flashcards' ? `Đã xem ${stats.count}/${sessionCards.length} thẻ · ${stats.minutes.toFixed(1)} phút` : `${reviewQueue.answeredToday.size} thẻ · ${stats.count} lượt trả lời · ${stats.count ? Math.round((stats.correct / stats.count) * 100) : 0}% chính xác · ${stats.minutes.toFixed(1)} phút`}</p>
+        <p>{mode === 'flashcards' ? `Đã xem ${stats.count}/${sessionCards.length} thẻ · ${(studySeconds / 60).toFixed(1)} phút` : `${reviewQueue.answeredToday.size} thẻ · ${stats.count} lượt trả lời · ${stats.count ? Math.round((stats.correct / stats.count) * 100) : 0}% chính xác · ${(studySeconds / 60).toFixed(1)} phút`}</p>
         <button className="study-button study-button-primary" onClick={finish}>
           Về danh sách bộ thẻ
         </button>
@@ -391,56 +412,40 @@ export function StudySession({
   return (
     <section
       ref={sessionRef}
-      className="fixed inset-0 z-50 flex min-h-0 flex-col bg-[var(--color-bg)] select-none"
+      className="study-session fixed inset-0 z-50 flex min-h-0 flex-col bg-[var(--color-bg)] select-none"
+      data-reduced-motion={reduceMotion || undefined}
+      data-fullscreen={fullscreen || undefined}
       aria-label="Phiên học thẻ"
     >
-      <header className="grid shrink-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-3 py-2 sm:px-8 sm:py-4">
-        <button className="study-button" disabled={busy} onClick={finish}>
-          <X size={18} />
-          <span className="hidden sm:inline">Thoát (Esc)</span>
-        </button>
-        <div className="flex min-w-0 items-center justify-center gap-3 sm:gap-5">
-          <p className="truncate text-xs font-semibold text-[var(--color-text-secondary)] sm:text-sm">
-            {deckName} · {mode === 'anki'
-              ? <><span className="text-[var(--color-accent)]">{stats.count}</span> lượt đã trả lời</>
-              : <><span className="text-[var(--color-accent)]">{index + 1}</span>/{sessionCards.length}</>}
-          </p>
-          {mode === 'flashcards' && <div className="hidden h-2 w-28 overflow-hidden rounded-full bg-[var(--color-surface-alt)] sm:block lg:w-64">
-            <div
-              className="h-full rounded-full bg-[var(--color-accent)] transition-[width] duration-300"
-              style={{ width: `${((index + 1) / sessionCards.length) * 100}%` }}
-            />
-          </div>}
-        </div>
-        <div className="flex items-center gap-2">
-          <NoteButton note={personalNote}/>
-          <button className="study-button !min-h-10 !px-3" disabled={busy} aria-label="Tùy chỉnh thẻ" onClick={() => { setError(""); setCustomizing(true); }}>
-            <Settings2 size={17} /><span className="hidden sm:inline">Tùy chỉnh</span>
+      <header className="study-session-header">
+        <div className="study-session-toolbar">
+          <button className="study-session-end" disabled={busy} onClick={finish} title="Kết thúc phiên (Esc)" aria-label="Kết thúc phiên">
+            <X size={17} /><span>Kết thúc phiên</span>
           </button>
-          {mode === "flashcards" && (
-            <button
-              className={`study-button !min-h-10 !px-3 ${shuffled ? "study-button-primary" : ""}`}
-              aria-label="Xáo trộn"
-              aria-pressed={shuffled}
-              onClick={toggleShuffle}
-            >
-              <Shuffle size={17} />
-              <span className="hidden sm:inline">Xáo trộn</span>
+          <div className="study-session-heading">
+            <p className="study-session-deck">{deckName}</p>
+            <p className="study-session-count"><strong>{progressValue}<span> / {progressTotal}</span></strong> {mode === 'anki' ? 'thẻ đã ôn' : 'thẻ'}
+
+            </p>
+          </div>
+          <div className="study-session-tools">
+            <StudyClock seconds={studySeconds}/>
+            <NoteButton note={personalNote} compact/>
+            <button className="study-session-tool" disabled={busy} title="Tùy chỉnh thẻ" aria-label="Tùy chỉnh thẻ" onClick={() => { setError(""); setCustomizing(true); }}><Settings2 size={18}/></button>
+            {mode === 'flashcards' && <button className="study-session-tool" title="Xáo trộn thẻ" aria-label="Xáo trộn" aria-pressed={shuffled} onClick={toggleShuffle}><Shuffle size={18}/></button>}
+            <button className="study-session-tool" onClick={() => void toggleFullscreen()} title={fullscreen ? 'Thu nhỏ màn hình' : 'Toàn màn hình'} aria-label={fullscreen ? 'Thu nhỏ màn hình' : 'Toàn màn hình'}>
+              {fullscreen ? <Minimize2 size={18}/> : <Maximize2 size={18}/>}
             </button>
-          )}
-          <button
-            className="study-button !min-h-10 !px-3"
-            onClick={() => void toggleFullscreen()}
-            aria-label={fullscreen ? "Thoát toàn màn hình" : "Toàn màn hình"}
-          >
-            {fullscreen ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
-            <span className="hidden lg:inline">
-              {fullscreen ? "Thoát toàn màn hình" : "Toàn màn hình"}
-            </span>
-          </button>
+          </div>
         </div>
+        <div className="study-session-progress" role="progressbar" aria-label={mode === 'anki' ? 'Số thẻ đã ôn trong phiên' : 'Vị trí trong bộ thẻ'} aria-valuenow={progressValue} aria-valuemin={0} aria-valuemax={progressTotal} aria-valuetext={`${progressValue} trên ${progressTotal} thẻ`}>
+          <div style={{ width: `${progressTotal ? progressValue / progressTotal * 100 : 0}%` }}/>
+        </div>
+
       </header>
-      <div className="relative flex min-h-0 flex-1 items-stretch justify-center overflow-hidden px-3 py-2 sm:px-6 sm:py-4">
+      <div className="study-session-workspace">
+
+      <div className="study-session-stage">
         <AnimatePresence initial={false} custom={slideDirection} mode="popLayout">
           <motion.div
             key={`${current.type}:${current.id}`}
@@ -449,35 +454,40 @@ export function StudySession({
             initial={mode === "flashcards" ? "enter" : false}
             animate="center"
             exit={mode === "flashcards" ? "exit" : undefined}
-            transition={settings.reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 390, damping: 34, mass: 0.72 }}
+            transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 390, damping: 34, mass: 0.72 }}
             drag={mode === "flashcards" ? "x" : false}
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.22}
             dragMomentum={false}
-            whileDrag={settings.reducedMotion ? undefined : { scale: 0.985 }}
+            whileDrag={reduceMotion ? undefined : { scale: 0.985 }}
             onDragEnd={(_, info) => {
               if (info.offset.x <= -SWIPE_THRESHOLD) moveCard("next");
               else if (info.offset.x >= SWIPE_THRESHOLD) moveCard("previous");
             }}
-            className={`relative flex h-full w-full max-w-5xl cursor-pointer touch-pan-y flex-col items-center ${flipped && (current.type === "GRAMMAR" || current.extraData?.examples || personalNote.entry?.text) ? "justify-start" : "justify-center"} overflow-y-auto rounded-2xl border border-[var(--color-border)] p-6 sm:rounded-3xl sm:p-12 ${activeStyle.theme === "dark" ? "bg-slate-900 text-white" : activeStyle.theme === "blue" ? "bg-blue-50 text-slate-900" : "bg-[var(--color-surface)]"}`}
+            className={`study-session-card ${flipped && (current.type === "GRAMMAR" || current.extraData?.examples || current.extraData?.kanjiVocabulary || personalNote.entry?.text) ? "study-session-card-rich" : ""}`}
+            data-card-theme={activeStyle.theme}
             role="button"
             tabIndex={0}
             aria-disabled={busy}
             onKeyDown={event => {
-              if (event.key === "Enter" && event.target === event.currentTarget) {
+              if (event.ctrlKey || event.metaKey || event.altKey) return;
+              if ((event.key === "Enter" || event.key === " ") && event.target === event.currentTarget) {
                 event.preventDefault();
-                if (!busy) setRevealedCardKey(value => mode === "anki" || value !== currentCardKey ? currentCardKey : null);
+                event.stopPropagation();
+                if (!busy && !event.repeat) setRevealedCardKey(value => mode === "anki" || value !== currentCardKey ? currentCardKey : null);
               }
             }}
             aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
-            onClick={() => !busy &&
-              setRevealedCardKey((value) =>
-                mode === "anki" || value !== currentCardKey
-                  ? currentCardKey
-                  : null,
-              )
-            }
+            onClick={event => {
+              if (busy || (event.target as HTMLElement).closest('button,a,input,textarea,select')) return;
+              setRevealedCardKey(value => mode === "anki" || value !== currentCardKey ? currentCardKey : null);
+            }}
           >
+
+            <motion.div key={`${currentCardKey}:${activeSide}`} className="study-session-face"
+              initial={reduceMotion ? false : { opacity: 0.35, rotateY: -8, y: 3 }}
+              animate={{ opacity: 1, rotateY: 0, y: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2, ease: 'easeOut' }}>
             <CardFace
               card={presentationCard(current)}
               deckName={deckName}
@@ -487,11 +497,8 @@ export function StudySession({
               showExampleReadings={settings.showFuriganaBack}
             />
             {flipped && <PersonalNoteView note={personalNote}/>}
-            {!flipped && (
-              <span className="absolute bottom-5 text-xs text-[var(--color-text-tertiary)] sm:hidden">
-                Chạm để lật · Vuốt để chuyển thẻ
-              </span>
-            )}
+            </motion.div>
+
           </motion.div>
         </AnimatePresence>
       </div>
@@ -529,29 +536,24 @@ export function StudySession({
         }}
       />}
       <PersonalNoteEditor note={personalNote} card={current}/>
-      <div className="flex min-h-16 shrink-0 flex-wrap items-center justify-center gap-3 border-t border-[var(--color-border)] px-3 py-3 sm:px-8">
+      <div className={`study-session-actions ${mode === "anki" && !flipped ? "study-session-actions-hidden" : ""} ${mode === "anki" && flipped ? "study-session-ratings" : ""}`} aria-label={mode === "anki" && flipped ? "Đánh giá mức độ ghi nhớ" : "Điều khiển thẻ"}>
         {mode === "anki" ? (
           flipped ? (
             (["again", "hard", "good", "easy"] as Rating[]).map((rating, i) => (
               <button
                 key={rating}
+                aria-keyshortcuts={String(i + 1)}
+                aria-label={`${i + 1} · ${["Quên", "Khó", "Tốt", "Dễ"][i]} (${intervals?.[rating]})`}
                 disabled={busy}
                 title={["Không nhớ hoặc trả lời sai", "Nhớ đúng nhưng khó khăn", "Nhớ đúng bình thường", "Nhớ đúng và dễ dàng"][i]}
-                className="study-button"
+                className={`study-session-rating study-session-rating-${rating}`}
                 onClick={() => void rate(rating)}
               >
-                {i + 1} · {["Lại", "Khó", "Được", "Dễ"][i]} (
-                {intervals?.[rating]})
+                <span className="study-session-rating-title"><kbd>{i + 1}</kbd>{["Quên", "Khó", "Tốt", "Dễ"][i]}</span>
+                <span className="study-session-interval">{intervals?.[rating]}</span>
               </button>
             ))
-          ) : (
-            <button
-              className="study-button study-button-primary"
-              onClick={() => setRevealedCardKey(currentCardKey)}
-            >
-              Hiện đáp án
-            </button>
-          )
+          ) : null
         ) : (
           <>
             <button
@@ -585,7 +587,7 @@ export function StudySession({
               />
             </label>
             <button
-              className="study-button study-button-primary hidden w-32 shrink-0 whitespace-nowrap sm:inline-flex"
+              className="study-button study-button-primary study-session-free-next shrink-0 whitespace-nowrap"
               onClick={() =>
                 flipped ? next() : setRevealedCardKey(currentCardKey)
               }
@@ -595,9 +597,11 @@ export function StudySession({
                   ? "Hoàn thành"
                   : "Thẻ tiếp"
                 : "Hiện đáp án"}
+              {!flipped && <kbd className="study-session-keyhint">Space</kbd>}
             </button>
           </>
         )}
+      </div>
       </div>
     </section>
   );

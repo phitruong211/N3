@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createReviewQueue, nextReadyCard, applyReviewedProgress, promoteDueCards } from '../src/lib/liveReviewQueue.ts';
+import { createReviewQueue, nextReadyCard, applyReviewedProgress, promoteDueCards, reviewSessionSummary } from '../src/lib/liveReviewQueue.ts';
 
 const now = new Date('2026-10-10T00:00:00.000Z');
 const card = { id: 'one' };
@@ -59,4 +59,15 @@ test('multiple due cards retain priority and prevent premature completion after 
     new Date('2026-10-10T00:02:00Z'));
   assert.deepEqual(next.ready, ['relearning','learning','review']);
   assert.equal(next.futureLearning.length, 0);
+});
+
+test('session progress counts unique cards and keeps repeated learning separate from new cards', () => {
+  let queue = createReviewQueue({cards: [{id:'one'}, {id:'two'}, {id:'excluded'}], keyFor:c=>c.id, now, dailyNewLimit:2});
+  assert.deepEqual(reviewSessionSummary(queue), {total:2, reviewed:0, fresh:2, due:0, waiting:0});
+  queue = applyReviewedProgress(queue, 'one', progress, now);
+  assert.deepEqual(reviewSessionSummary(queue), {total:2, reviewed:1, fresh:1, due:0, waiting:1});
+  queue = promoteDueCards(queue, new Date('2026-10-10T00:01:00Z'));
+  assert.deepEqual(reviewSessionSummary(queue), {total:2, reviewed:1, fresh:1, due:1, waiting:0});
+  queue = applyReviewedProgress(queue, 'one', {...progress,repetitions:2,dueAt:'2026-10-10T00:02:00Z'}, new Date('2026-10-10T00:01:00Z'));
+  assert.deepEqual(reviewSessionSummary(queue), {total:2, reviewed:1, fresh:1, due:0, waiting:1});
 });

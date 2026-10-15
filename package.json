@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "test:guest": "node tests/guestFlow.browser.mjs",
     "test:companion": "node tests/catCompanion.browser.mjs",
+    "test:study-ui": "node tests/studySessionUI.browser.mjs",
     "test:review-outbox": "node tests/reviewOutbox.browser.mjs",
     "test:integration": "node tests/srsIntegration.browser.mjs",
     "test:scale": "node tests/srsScale.api.mjs",

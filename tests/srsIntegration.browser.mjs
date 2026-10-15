@@ -129,7 +129,7 @@ try {
     .getByRole("button", { name: "Hiện đáp án", exact: true })
     .first()
     .click();
-  await page.getByRole("button", { name: /3 · Được/ }).click();
+  await page.getByRole("button", { name: /3 · Tốt/ }).click();
   await page
     .getByRole("heading", { name: "Đã hoàn thành", exact: true })
     .waitFor();

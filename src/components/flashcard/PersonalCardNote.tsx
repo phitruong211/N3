@@ -25,9 +25,9 @@ export function useStudyNote(card: CardView | undefined) {
   return { store: cardNotes, key, entry: key ? entries[key] : undefined, open, setOpen };
 }
 
-export function NoteButton({ note }: { note: ReturnType<typeof useStudyNote> }) {
-  return <button type="button" className="study-button note-toolbar-button !min-h-10 !px-3" aria-label="Ghi chú cá nhân" title="Ghi chú (N)" disabled={!note.key} onClick={() => note.setOpen(true)}>
-    <NotebookPen size={17}/><span className="hidden sm:inline">Ghi chú</span>{(note.entry?.text || note.key && note.store.draft(note.key)) && <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" aria-label="Đã có ghi chú hoặc bản nháp"/>}
+export function NoteButton({ note, compact = false }: { note: ReturnType<typeof useStudyNote>; compact?: boolean }) {
+  return <button type="button" className={compact ? "study-session-tool note-toolbar-button" : "study-button note-toolbar-button !min-h-10 !px-3"} aria-label="Ghi chú cá nhân" title="Ghi chú (N)" disabled={!note.key} onClick={() => note.setOpen(true)}>
+    <NotebookPen size={17}/>{!compact && <span className="hidden sm:inline">Ghi chú</span>}{(note.entry?.text || note.key && note.store.draft(note.key)) && <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" aria-label="Đã có ghi chú hoặc bản nháp"/>}
   </button>;
 }
 

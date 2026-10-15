@@ -17,7 +17,7 @@ export function FuriganaText({
 }) {
   if (allowMarkup && hasCardMarkup(text)) return <>
     <RichCardContent value={text} showRuby={show} renderText={value => <FuriganaText text={value} show={show} allowMarkup={false} />} />
-    {show && reading && <span className="mt-2 block text-[0.46em] font-normal text-[var(--color-accent)]">{reading}</span>}
+    {show && reading && <span className="card-reading mt-2 block text-[0.46em] font-normal text-[var(--color-accent)]">{reading}</span>}
   </>;
   const stored = parseStoredFurigana(storedSegments);
   const resolved = stored.length
@@ -39,7 +39,7 @@ export function FuriganaText({
           : resolved.text}
       </span>
       {!hasRuby && reading && (
-        <span className="mt-2 block text-[0.46em] font-normal not-italic leading-relaxed text-[var(--color-accent)]">
+        <span className="card-reading mt-2 block text-[0.46em] font-normal not-italic leading-relaxed text-[var(--color-accent)]">
           {reading}
         </span>
       )}
