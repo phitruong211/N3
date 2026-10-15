@@ -1,14 +1,14 @@
 export const DECK_WIDGETS_KEY = 'deck-group-widgets-v1';
 export type WidgetSize = 'small' | 'medium' | 'large';
 export interface DeckWidgetStyle { size: WidgetSize; color: string; opacity: number; blur: number }
-export const DEFAULT_WIDGET_STYLE: DeckWidgetStyle = { size: 'small', color: '#8b93a1', opacity: 30, blur: 24 };
+export const DEFAULT_WIDGET_STYLE: DeckWidgetStyle = { size: 'small', color: '#b5cee8', opacity: 30, blur: 24 };
 export const WIDGET_COLORS = [
-  { value: '#8b93a1', label: 'Sương' },
-  { value: '#65a8ed', label: 'Xanh trời' },
-  { value: '#59c5a2', label: 'Bạc hà' },
-  { value: '#e8b768', label: 'Mơ vàng' },
-  { value: '#e58fa6', label: 'Hồng đào' },
-  { value: '#aa94e8', label: 'Lavender' },
+  { value: '#b5cee8', label: 'Sương' },
+  { value: '#56b8ff', label: 'Xanh trời' },
+  { value: '#4edbb3', label: 'Bạc hà' },
+  { value: '#ffd080', label: 'Mơ vàng' },
+  { value: '#ff9cba', label: 'Hồng đào' },
+  { value: '#b4a0ff', label: 'Lavender' },
 ];
 
 

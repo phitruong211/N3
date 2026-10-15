@@ -28,3 +28,11 @@ test('replayed receipt never overwrites newer confirmed card progress', () => {
 test('revision metadata alone does not trigger another snapshot PUT', () => {
   assert.equal(sameLearningData(data(), { ...data(), revision: 5 }), true);
 });
+test('confirmed undo replaces a locally modified higher-repetition card while retaining other cards', () => {
+  const before = { cardId: 'one', deckType: 'kanji', reps: 1 };
+  const local = { ...data(), srsCards: [{ ...before, reps: 2 }, { cardId: 'other', deckType: 'kanji', reps: 4 }] };
+  const remote = { ...data(), revision: 4, srsCards: [before] };
+  const result = mergeReviewSnapshot(local, data(), remote, [before], true);
+  assert.equal(result.srsCards.find(card => card.cardId === 'one').reps, 1);
+  assert.equal(result.srsCards.find(card => card.cardId === 'other').reps, 4);
+});

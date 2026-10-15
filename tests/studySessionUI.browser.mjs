@@ -93,6 +93,50 @@ try {
   assert.ok(await page.locator('.study-session-face').evaluate(el=>getComputedStyle(el.firstElementChild.querySelector('[style*="font-family"]')).fontFamily.includes('Noto Sans JP')));
   await page.keyboard.press('3');await page.locator('.study-session-card ruby').filter({hasText:'先生'}).first().waitFor();
   assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'2');
+  // Two separate Space presses reveal then rate Good; holding Space cannot rate twice.
+  await page.goto(base);await card().waitFor();await card().focus();
+  await page.keyboard.press('Space');await page.getByRole('button',{name:/3 · Tốt/}).waitFor();
+  await page.keyboard.down('Space');
+  await page.locator('.study-session-card ruby').filter({hasText:'学校'}).first().waitFor();
+  await page.keyboard.down('Space');await page.keyboard.up('Space');
+  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'1');
+  assert.equal(await page.getByRole('button',{name:/3 · Tốt/}).count(),0);
+  // Undo restores the previous answer, queue and daily counters, then permits a new rating.
+  const day = () => page.evaluate(() => JSON.parse(localStorage.getItem('guest:n3_study_days') || '[]')[0]);
+  const beforeUndoDay = await day();
+  const logs = () => page.evaluate(() => JSON.parse(localStorage.getItem('guest:guest_review_logs') || '[]'));
+  await page.keyboard.press('Backspace');
+  await page.locator('.study-session-card ruby').filter({hasText:'日本'}).first().waitFor();
+  await page.getByRole('button',{name:/3 · Tốt/}).waitFor();
+  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'0');
+  assert.equal((await logs()).length,0);
+  assert.equal((await day()).cardsReviewed,0);
+  assert.equal((await day()).newCardsLearned,0);
+  assert.equal((await day()).timeSpent,beforeUndoDay.timeSpent);
+  assert.equal(await page.getByRole('button',{name:'Quay lại lượt vừa trả lời (Backspace)',exact:true}).isDisabled(),true);
+  await page.keyboard.press('1');
+  await page.locator('.study-session-card ruby').filter({hasText:'学校'}).first().waitFor();
+  assert.equal((await logs()).length,1);
+  await page.keyboard.press('Backspace');
+  await page.getByRole('button',{name:/4 · Dễ/}).waitFor();
+  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'0');
+  assert.equal((await logs()).length,0);
+  for (let i=0;i<3;i++) {
+    if (i) { await card().focus();await page.keyboard.press('Space'); }
+    await page.getByRole('button',{name:/4 · Dễ/}).click();
+  }
+  await page.getByRole('heading',{name:'Đã hoàn thành',exact:true}).waitFor();
+  await page.getByText(/3 thẻ · 3 lượt trả lời · 100%/).waitFor();
+  assert.equal((await logs()).length,3);
+  await page.keyboard.press('Backspace');
+  await card().getByText('Giáo viên',{exact:true}).waitFor();
+  await page.getByRole('button',{name:/4 · Dễ/}).waitFor();
+  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'2');
+  assert.equal((await logs()).length,2);
+  await page.getByRole('button',{name:/4 · Dễ/}).click();
+  await page.getByRole('heading',{name:'Đã hoàn thành',exact:true}).waitFor();
+  await page.getByRole('button',{name:'Quay lại lượt vừa trả lời (Backspace)',exact:true}).click();
+  await page.getByRole('button',{name:/4 · Dễ/}).waitFor();
   // Mobile, short landscape and free study all keep action targets inside the viewport.
   for (const viewport of [{width:390,height:844},{width:320,height:568},{width:844,height:390}]) {
     await page.setViewportSize(viewport);await page.goto(base);await card().waitFor();
@@ -107,8 +151,15 @@ try {
   assert.equal(await page.locator('.study-session').getAttribute('data-reduced-motion'),'true');
   await page.keyboard.press('Space');await page.getByRole('button',{name:/4 · Dễ/}).waitFor();
   await page.setViewportSize({width:390,height:844});await page.goto(base+'?mode=flashcards');await card().waitFor();
-  const freeNext=page.locator('.study-session-free-next');assert.ok(await freeNext.isVisible());
-  await freeNext.focus();await page.keyboard.press('Enter');await page.locator('.study-session-card').getByText(/Nhật Bản/).first().waitFor();
+  const freeNext=page.locator('.study-session-free-next');assert.equal(await freeNext.count(),0);
+  assert.equal(await page.getByRole('button',{name:'Thẻ trước',exact:true}).isVisible(),true);
+  for (const control of await page.locator('.study-free-controls button').all()) {
+    const box=await control.boundingBox();assert.ok(box.height>=44 && box.x>=0 && box.x+box.width<=390);
+  }
+  await page.screenshot({path:'artifacts/study-session-ui/free-controls-mobile.png'});
+
+  await card().focus();await page.keyboard.press('Enter');await page.locator('.study-session-card').getByText(/Nhật Bản/).first().waitFor();
+  assert.equal(await freeNext.isVisible(),true);
   await freeNext.focus();await page.keyboard.press('Enter');await page.locator('.study-session-card ruby').filter({hasText:'学校'}).first().waitFor();
   await page.getByRole('button',{name:'Kết thúc phiên',exact:true}).click();
   assert.equal(await page.evaluate(()=>window.sessionExited),true);

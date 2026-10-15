@@ -149,3 +149,18 @@ test('applying server learning does not echo writes, and subscriptions stay scop
   a.saveBookmarks([bookmark('local')]); await Promise.resolve(); assert.equal(changes, 1);
   stop(); a.recordStudyActivity(1, 1, 1, 0.1, 'srs'); await Promise.resolve(); assert.equal(changes, 1);
 });
+
+test('undo activity reverses only its original day once, retaining time and unrelated reviews', () => {
+  const storage = createLearningStorage('guest');
+  storage.setJSON('n3_study_days', [{date:'2026-10-15',cardsReviewed:3,srsReviewed:2,flashcardReviewed:1,newCardsLearned:2,accuracy:2/3,timeSpent:7}]);
+  const activity = {date:'2026-10-15',isNew:true,correct:true};
+  storage.undoReviewActivity('review-id',activity);
+  storage.undoReviewActivity('review-id',activity);
+  const result=storage.getStudyDays()[0];
+  assert.equal(result.cardsReviewed,2);
+  assert.equal(result.srsReviewed,1);
+  assert.equal(result.flashcardReviewed,1);
+  assert.equal(result.newCardsLearned,1);
+  assert.equal(result.accuracy,.5);
+  assert.equal(result.timeSpent,7);
+});

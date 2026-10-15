@@ -21,7 +21,8 @@
     "test:dictionary": "node tests/dictionary.browser.mjs",
     "test:dictionary:integration": "node tests/dictionary.integration.browser.mjs",
     "test:dictionary:benchmark": "node tests/dictionary.benchmark.mjs",
-    "test:sharing:integration": "node tests/deckSharing.integration.browser.mjs"
+    "test:sharing:integration": "node tests/deckSharing.integration.browser.mjs",
+    "test:review-undo": "node tests/reviewUndo.browser.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

@@ -64,3 +64,57 @@ test('server conflict retains the operation and every subsequent rating', async 
   await assert.rejects(f.engine.drain());
   assert.deepEqual(f.read().items.map(value => value.id), ['one', 'two']);
 });
+
+test('undo cancels an unclaimed review and durably restores its projection without sending', async () => {
+  const f = fixture(async () => { throw new Error('must not send'); });
+  const review = item('undo-local');
+  await f.engine.enqueue(review);
+  await f.engine.requestUndo(review);
+  assert.equal(f.read().undo.local, true);
+  await assert.rejects(f.engine.enqueue(item('blocked')), /hoàn tác/);
+  await f.engine.drain();
+  assert.equal(f.read().lastUndo.id, review.id);
+  assert.equal(projectedReview(f.read(), 'BUILT_IN', review.optimistic).reps, 0);
+});
+
+test('undo waits for an in-flight review and reverses only after its acknowledgement', async () => {
+  let release;
+  const calls = [];
+  const f = fixture(async items => {
+    calls.push('send');
+    await new Promise(resolve => { release = resolve; });
+    return items.map(value => value.optimistic);
+  });
+  f.options.undo = async review => { calls.push('undo'); return review.card; };
+  f.options.applyUndo = () => { calls.push('apply'); };
+  const review = item('undo-flight');
+  await f.engine.enqueue(review);
+  const flight = f.engine.drain();
+  await new Promise(resolve => setImmediate(resolve));
+  await f.engine.requestUndo(review);
+  assert.equal(f.read().undo.local, false);
+  assert.deepEqual(calls, ['send']);
+  release(); await flight;
+  assert.deepEqual(calls, ['send', 'undo', 'apply']);
+  assert.equal(f.read().lastUndo.card.reps, 0);
+});
+
+test('lost undo response retries after reload and local effect failure reuses persisted result', async () => {
+  const review = item('lost-undo');
+  const initial = { ...emptyOutbox(), confirmed: { 'BUILT_IN:vocabulary:c1': review.optimistic } };
+  const f = fixture(async () => [], initial);
+  f.options.undo = async () => { throw new Error('response lost'); };
+  await f.engine.requestUndo(review);
+  await assert.rejects(f.engine.drain(), /lost/);
+  const resumed = fixture(async () => [], f.read());
+  let requests = 0;
+  resumed.options.undo = async () => { requests++; return review.card; };
+  resumed.options.applyUndo = () => { throw new Error('storage full'); };
+  await assert.rejects(resumed.engine.drain(), /storage/);
+  assert.ok(resumed.read().undo.result);
+  resumed.options.applyUndo = () => {};
+  await resumed.engine.drain();
+  assert.equal(requests, 1);
+  await resumed.engine.requestUndo(review);await resumed.engine.drain();
+  assert.equal(requests, 1);
+});

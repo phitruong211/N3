@@ -313,6 +313,20 @@ export function createLearningStorage(scope: StorageScope) {
     setJSON(KEYS.STUDY_DAYS, days);
   }
 
+  function undoReviewActivity(id: string, activity: { date: string; isNew: boolean; correct: boolean }): void {
+    const days = getStudyDays() as (StudyDay & { undoneReviews?: string[] })[];
+    const day = days.find(value => value.date === activity.date);
+    if (!day || day.undoneReviews?.includes(id)) return;
+    const previous = day.cardsReviewed;
+    day.cardsReviewed = Math.max(0, previous - 1);
+    day.srsReviewed = Math.max(0, (day.srsReviewed ?? 0) - 1);
+    day.newCardsLearned = Math.max(0, day.newCardsLearned - Number(activity.isNew));
+    day.accuracy = day.cardsReviewed ? Math.max(0, Math.min(1, (day.accuracy * previous - Number(activity.correct)) / day.cardsReviewed)) : 0;
+    day.undoneReviews = [...(day.undoneReviews ?? []), id];
+    setJSONStrict(KEYS.STUDY_DAYS, days);
+    if (!silent) queueMicrotask(() => listeners.forEach(listener => listener()));
+  }
+
   function recordFreeStudyActivity(viewed: number, timeSpent: number): void {
     const days = getStudyDays();
     const today = formatDate(new Date());
@@ -463,7 +477,7 @@ export function createLearningStorage(scope: StorageScope) {
     return [...Object.values(KEYS), 'n3_srs_cards', 'nhat-listening-v1', 'nhat-jlpt-listening-scores-v1', 'learning_revision', 'learning_base', 'learning_dirty', 'learning_local_backup', 'learning_conflict_backup', 'settings_pending', 'review_outbox_v1'].map(key => localStorage.removeItem(key)).every(Boolean);
   }
 
-  return { setJSONStrict, scope, subscribeLearning, withoutLearningEvents, getSRSKey, getSRSCards, saveSRSCards, getSRSCard, upsertSRSCard, getOrCreateSRSCard, migrateV1, getBookmarks, saveBookmarks, toggleBookmark, isBookmarked, getSettings, saveSettings, updateSetting, getStudyDays, recordStudyActivity, recordFreeStudyActivity, getLastPage, setLastPage, getSidebarCollapsed, setSidebarCollapsed, getLastVocabIndex, setLastVocabIndex, getLastKanjiIndex, setLastKanjiIndex, getLastGrammarIndex, setLastGrammarIndex, getLastActiveDeck, setLastActiveDeck, calculateStreak, applyTheme, resetAllData, getJSON, setJSON };
+  return { setJSONStrict, scope, subscribeLearning, withoutLearningEvents, getSRSKey, getSRSCards, saveSRSCards, getSRSCard, upsertSRSCard, getOrCreateSRSCard, migrateV1, getBookmarks, saveBookmarks, toggleBookmark, isBookmarked, getSettings, saveSettings, updateSetting, getStudyDays, undoReviewActivity, recordStudyActivity, recordFreeStudyActivity, getLastPage, setLastPage, getSidebarCollapsed, setSidebarCollapsed, getLastVocabIndex, setLastVocabIndex, getLastKanjiIndex, setLastKanjiIndex, getLastGrammarIndex, setLastGrammarIndex, getLastActiveDeck, setLastActiveDeck, calculateStreak, applyTheme, resetAllData, getJSON, setJSON };
 }
 
 export type LearningStorage = ReturnType<typeof createLearningStorage>;

@@ -13,11 +13,11 @@ function mergeChanges<T>(local: T[], base: T[], remote: T[], key: (value: T) => 
 }
 
 /** Apply only local changes since the last confirmed snapshot, preserving other devices' work. */
-export function mergeReviewSnapshot(local: LearningData, base: LearningData, remote: LearningSnapshot, acknowledged: SRSCard[]): LearningData {
+export function mergeReviewSnapshot(local: LearningData, base: LearningData, remote: LearningSnapshot, acknowledged: SRSCard[], force = false): LearningData {
   const bookmarks = mergeChanges<Bookmark>(local.bookmarks, base.bookmarks, remote.bookmarks, value => `${value.itemType}:${value.itemId}`);
   const cards = mergeChanges(local.srsCards, base.srsCards, remote.srsCards, cardKey);
   for (const card of [...remote.srsCards, ...acknowledged]) {
-    if ((cards.get(cardKey(card))?.reps ?? -1) <= card.reps) cards.set(cardKey(card), card);
+    if ((force && acknowledged.includes(card)) || (cards.get(cardKey(card))?.reps ?? -1) <= card.reps) cards.set(cardKey(card), card);
   }
   const days = new Map(remote.studyDays.map(day => [day.date, day]));
   const oldDays = new Map(base.studyDays.map(day => [day.date, day]));

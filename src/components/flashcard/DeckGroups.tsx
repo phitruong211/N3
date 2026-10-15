@@ -350,7 +350,7 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
         ...(onShareGroup ? [{ id: 'share', label: 'Chia sẻ nhóm', disabled: saving || busy || groupLoading, onSelect: () => onShareGroup(group) }] : []),
         { id: 'up', label: 'Đưa lên', disabled: !editingLayout || saving || busy || groupLoading || index === 0, onSelect: () => shiftGroup(group, -1) },
         { id: 'down', label: 'Đưa xuống', disabled: !editingLayout || saving || busy || groupLoading || index === groups.length - 1, onSelect: () => shiftGroup(group, 1) },
-        { id: 'customize-widget', label: 'Tùy chỉnh widget', onSelect: () => { setEditingLayout(true); setCustomizingWidget(group); } },
+        { id: 'customize-widget', label: 'Tùy chỉnh widget', onSelect: () => { setCustomizingWidget(group); } },
         { id: 'reset', label: 'Đặt lại kích thước', disabled: !sizing.sizes[group.id], onSelect: () => sizing.reset(group.id) },
         { id: 'dissolve', label: 'Giải tán nhóm', destructive: true, disabled: saving || busy || groupLoading, onSelect: () => { setError(''); setRemoving(group); } },
       ]}/>;
@@ -363,6 +363,7 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
       } as CSSProperties} data-widget-size={style.size} data-widget-id={group.id}
       className={`deck-folder ${customizingWidget?.id === group.id ? 'is-selected' : ''} ${editingLayout ? 'is-layout-editing' : ''} ${widgetDrag === group.id ? 'is-widget-moving' : ''} ${widgetTarget === group.id ? 'is-widget-target' : ''} ${sizing.resizing === group.id ? 'is-resizing' : ''} ${opened.has(group.id) ? 'is-open' : ''} ${targetKey === `group:${group.id}` ? 'is-target' : ''}`}
       data-deck-drop={!editingLayout ? `group:${group.id}` : undefined} data-group-id={group.id}>
+      <div className="widget-water" aria-hidden="true">{[0, 1, 2, 3, 4].map(drop => <span className="widget-water-drop" key={drop}/>)}</div>
       {editingLayout && <div className="widget-edit-controls">
         <button className="widget-move-handle widget-icon-button" aria-label={`Kéo để di chuyển ${group.name}`} title="Kéo để đổi chỗ · Phím mũi tên để sắp xếp" disabled={saving || busy || Boolean(sizing.resizing)} onPointerDown={event => beginWidgetDrag(event, group)}
           onKeyDown={event => { if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].includes(event.key)) { event.preventDefault(); shiftGroup(group, ['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1); } }}><Grip size={18}/></button>

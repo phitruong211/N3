@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useApp, useLearningStorage } from "@/hooks/useApp";
-import { projectedReview } from '@/lib/reviewOutbox';
+import { projectedReview, type QueuedReview } from '@/lib/reviewOutbox';
 import { useReviewTiming } from '@/hooks/useReviewTiming';
 import { useAuth } from '@/hooks/useAuth';
 import {
   useActiveElapsedMinutes,
 } from "@/hooks/useActiveElapsedMinutes";
-import { createSRSCard, getNextIntervals, processReview } from "@/lib/srs";
+import { createSRSCard, formatDate, getNextIntervals, processReview } from "@/lib/srs";
 import { legacyToFsrsProgress, progressToSrsCard } from "@/lib/fsrsProgress";
 import { applyReviewedProgress, createReviewQueue, nearestFutureDue, nextReadyCard, promoteDueCards, reviewSessionSummary } from "@/lib/liveReviewQueue";
 import { progressToSrs, type ApiProgress } from "@/lib/api";
@@ -15,7 +15,7 @@ import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
 import { CardFace, DeckCustomizeDialog } from "./CardPresentation";
 import { useStudyNote, NoteButton, PersonalNoteView, PersonalNoteEditor } from './PersonalCardNote';
-import { Maximize2, Minimize2, Shuffle, X, Settings2 } from "lucide-react";
+import { Maximize2, Minimize2, Shuffle, X, Settings2, Undo2, ArrowLeft, ArrowRight } from "lucide-react";
 import "./studySession.css";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
@@ -75,7 +75,7 @@ export function StudySession({
   const { user } = useAuth();
   const prefersReducedMotion = useReducedMotion();
   const reduceMotion = settings.reducedMotion || Boolean(prefersReducedMotion);
-  const { recordStudyActivity, recordFreeStudyActivity, getJSON, setJSON } = useLearningStorage();
+  const { recordStudyActivity, recordFreeStudyActivity, undoReviewActivity, getJSON, setJSON } = useLearningStorage();
   const templateKey = `study_template_${cards[0]?.source === "BUILT_IN" ? deckName : cards[0]?.deckId || deckName}`;
   const [template, setTemplate] = useState(() => {
     if (cards[0]?.source !== 'BUILT_IN') return initialTemplate;
@@ -110,6 +110,11 @@ export function StudySession({
   const [done, setDone] = useState(false);
   const [clock, setClock] = useState(() => Date.now());
   const [stats, setStats] = useState({ count: 0, correct: 0, minutes: 0 });
+  const [receipt, setReceipt] = useState<{ item: QueuedReview; queue: typeof reviewQueue; stats: typeof stats } | null>(null);
+  const [undoing, setUndoing] = useState(false);
+  const [undoError, setUndoError] = useState("");
+  const undoPending = undoing || reviewOutbox.undoPending;
+  const blocked = busy || undoPending;
   const viewed = useRef(new Set<string>());
   const lock = useRef(false);
   const [slideDirection, setSlideDirection] = useState(1);
@@ -231,23 +236,27 @@ export function StudySession({
     setJumpValue(String(nextIndex + 1));
   }
   async function rate(rating: Rating) {
-    if (lock.current || !current || !state || !flipped) return;
+    if (lock.current || undoPending || !current || !state || !flipped) return;
     const timing = readReviewTiming();
     lock.current = true;
     setBusy(true);
     setError("");
     try {
       const minutes = elapsed();
-      const saved = processReview(state, rating, new Date(), settings);
+      const now = new Date();
+      const saved = processReview(state, rating, now, settings);
+      const item: QueuedReview = {
+        id: crypto.randomUUID(),
+        source: current.source === 'BUILT_IN' ? 'BUILT_IN' : 'PERSONAL',
+        card: { ...state }, rating, optimistic: { ...saved }, timing,
+        responseTimeMs: Math.round(minutes * 60000),
+        activity: { date: formatDate(now), isNew: state.state === 'new', correct: rating !== 'again' },
+      };
       if (user) {
-        await reviewOutbox.enqueue({ id: crypto.randomUUID(),
-          source: current.source === 'BUILT_IN' ? 'BUILT_IN' : 'PERSONAL',
-          card: state, rating, optimistic: saved, timing,
-          responseTimeMs: Math.round(minutes * 60000),
-        });
+        await reviewOutbox.enqueue(item);
       } else {
         const guestLogs = getJSON<unknown[]>('guest_review_logs', []);
-        setJSON('guest_review_logs', [...guestLogs, { cardId: current.id, deckType: type, rating,
+        setJSON('guest_review_logs', [...guestLogs, { id: item.id, cardId: current.id, deckType: type, rating,
           ...timing, reviewedAt: new Date().toISOString(), schedulerVersion: 'fsrs-6/ts-fsrs-5.4.2' }]);
         updateSRSCard(saved);
       }
@@ -258,6 +267,8 @@ export function StudySession({
         minutes,
         "srs",
       );
+      setReceipt({ item, queue: reviewQueue, stats: { ...stats } });
+      setUndoError("");
       setStats((s) => ({
         count: s.count + 1,
         correct: s.correct + (rating === "again" ? 0 : 1),
@@ -278,6 +289,51 @@ export function StudySession({
       setBusy(false);
     }
   }
+  async function undoLastReview() {
+    if (!receipt || lock.current || undoing) return;
+    lock.current = true;
+    setUndoing(true);
+    setUndoError("");
+    try {
+      const { item, queue, stats: previousStats } = receipt;
+      let restored = item.card;
+      if (user) restored = await reviewOutbox.undo(item);
+      else {
+        updateSRSCard(restored);
+        const logs = getJSON<Array<{ id?: string }>>('guest_review_logs', []);
+        setJSON('guest_review_logs', logs.filter(log => log.id !== item.id));
+        if (item.activity) undoReviewActivity(item.id, item.activity);
+      }
+      setReviewQueue({
+        ...queue,
+        progressByKey: new Map(queue.progressByKey).set(item.card.cardId, legacyToFsrsProgress(restored)),
+        ready: [item.card.cardId, ...queue.ready.filter(key => key !== item.card.cardId)],
+        futureLearning: queue.futureLearning.filter(key => key !== item.card.cardId),
+      });
+      setStats(value => ({ ...previousStats, minutes: value.minutes }));
+      const restoredCard = queue.cardsByKey.get(item.card.cardId)!;
+      setRevealedCardKey(`${restoredCard.type}:${restoredCard.id}`);
+      setDone(false);
+      setError("");
+      setReceipt(null);
+    } catch (reason) {
+      setUndoError(reason instanceof Error ? reason.message : "Chưa hoàn tác được. Thử lại.");
+    } finally {
+      lock.current = false;
+      setUndoing(false);
+    }
+  }
+  const undoButton = mode === 'anki' ? <button
+    className="study-session-tool"
+    title="Quay lại lượt vừa trả lời (Backspace)"
+    aria-label="Quay lại lượt vừa trả lời (Backspace)"
+    aria-keyshortcuts="Backspace"
+    disabled={!receipt || busy || undoing}
+    onClick={() => void undoLastReview()}
+  ><Undo2 size={18}/></button> : null;
+  const undoStatus = undoing ? <p role="status" className="study-undo-status">Đang hoàn tác…</p>
+    : undoError ? <p role="alert" className="study-undo-status">{undoError} <button onClick={() => void undoLastReview()}>Thử lại</button></p>
+    : undoPending ? <p role="status" className="study-undo-status">Đang chờ hoàn tất hoàn tác.</p> : null;
   const outboxData = reviewOutbox.data;
   useEffect(() => {
     if (mode !== 'anki') return;
@@ -334,14 +390,20 @@ export function StudySession({
   }, []);
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
-      if (done || busy || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
+      if (busy || undoing || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
       if (
         (e.target as HTMLElement).closest(
           'input,textarea,select,[contenteditable="true"]',
         ) ||
-        document.querySelector("dialog[open]")
+        customizing || personalNote.open || document.querySelector('dialog[open],[role="dialog"]')
       )
         return;
+      if (e.key === 'Backspace' && mode === 'anki' && receipt) {
+        e.preventDefault();
+        void undoLastReview();
+        return;
+      }
+      if (done || undoPending) return;
       // Space/Enter on native controls must retain their normal activation behavior.
       if ((e.key === ' ' || e.key === 'Enter') && (e.target as HTMLElement).closest('button,a')) return;
       if (e.key === "Escape") {
@@ -359,6 +421,7 @@ export function StudySession({
         e.preventDefault();
         if (!flipped) setRevealedCardKey(currentCardKey);
         else if (mode === "flashcards") next();
+        else if (e.key === " ") void rate("good");
       } else if (
         mode === "anki" &&
         flipped &&
@@ -381,6 +444,7 @@ export function StudySession({
     const seconds = Math.max(0, Math.ceil((Date.parse(futureDue) - clock) / 1000));
     return <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 bg-[var(--color-bg)] p-6 text-center">
       <StudyClock seconds={studySeconds}/>
+      {undoButton}{undoStatus}
       <p className="study-eyebrow">THẺ QUÊN SẼ QUAY LẠI</p>
       <h2 className="text-3xl font-semibold">Tiếp tục sau {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, '0')}</h2>
       <p className="study-copy max-w-xl">Bạn đã xem hết các thẻ đang sẵn sàng. Có thể chờ để học lại đúng lịch hoặc kết thúc và quay lại sau.</p>
@@ -394,6 +458,7 @@ export function StudySession({
     return (
       <div className="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-5 bg-[var(--color-bg)] p-6 text-center">
         <StudyClock seconds={studySeconds}/>
+        {undoButton}{undoStatus}
         <h2 className="text-2xl font-semibold">Đã hoàn thành</h2>
         <p>{mode === 'flashcards' ? `Đã xem ${stats.count}/${sessionCards.length} thẻ · ${(studySeconds / 60).toFixed(1)} phút` : `${reviewQueue.answeredToday.size} thẻ · ${stats.count} lượt trả lời · ${stats.count ? Math.round((stats.correct / stats.count) * 100) : 0}% chính xác · ${(studySeconds / 60).toFixed(1)} phút`}</p>
         <button className="study-button study-button-primary" onClick={finish}>
@@ -419,7 +484,7 @@ export function StudySession({
     >
       <header className="study-session-header">
         <div className="study-session-toolbar">
-          <button className="study-session-end" disabled={busy} onClick={finish} title="Kết thúc phiên (Esc)" aria-label="Kết thúc phiên">
+          <button className="study-session-end" disabled={blocked} onClick={finish} title="Kết thúc phiên (Esc)" aria-label="Kết thúc phiên">
             <X size={17} /><span>Kết thúc phiên</span>
           </button>
           <div className="study-session-heading">
@@ -430,8 +495,9 @@ export function StudySession({
           </div>
           <div className="study-session-tools">
             <StudyClock seconds={studySeconds}/>
+            {undoButton}
             <NoteButton note={personalNote} compact/>
-            <button className="study-session-tool" disabled={busy} title="Tùy chỉnh thẻ" aria-label="Tùy chỉnh thẻ" onClick={() => { setError(""); setCustomizing(true); }}><Settings2 size={18}/></button>
+            <button className="study-session-tool" disabled={blocked} title="Tùy chỉnh thẻ" aria-label="Tùy chỉnh thẻ" onClick={() => { setError(""); setCustomizing(true); }}><Settings2 size={18}/></button>
             {mode === 'flashcards' && <button className="study-session-tool" title="Xáo trộn thẻ" aria-label="Xáo trộn" aria-pressed={shuffled} onClick={toggleShuffle}><Shuffle size={18}/></button>}
             <button className="study-session-tool" onClick={() => void toggleFullscreen()} title={fullscreen ? 'Thu nhỏ màn hình' : 'Toàn màn hình'} aria-label={fullscreen ? 'Thu nhỏ màn hình' : 'Toàn màn hình'}>
               {fullscreen ? <Minimize2 size={18}/> : <Maximize2 size={18}/>}
@@ -468,18 +534,21 @@ export function StudySession({
             data-card-theme={activeStyle.theme}
             role="button"
             tabIndex={0}
-            aria-disabled={busy}
+            aria-disabled={blocked}
             onKeyDown={event => {
               if (event.ctrlKey || event.metaKey || event.altKey) return;
               if ((event.key === "Enter" || event.key === " ") && event.target === event.currentTarget) {
                 event.preventDefault();
                 event.stopPropagation();
-                if (!busy && !event.repeat) setRevealedCardKey(value => mode === "anki" || value !== currentCardKey ? currentCardKey : null);
+                if (!blocked && !event.repeat) {
+                  if (mode === "anki" && flipped && event.key === " ") void rate("good");
+                  else setRevealedCardKey(value => mode === "anki" || value !== currentCardKey ? currentCardKey : null);
+                }
               }
             }}
             aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
             onClick={event => {
-              if (busy || (event.target as HTMLElement).closest('button,a,input,textarea,select')) return;
+              if (blocked || (event.target as HTMLElement).closest('button,a,input,textarea,select')) return;
               setRevealedCardKey(value => mode === "anki" || value !== currentCardKey ? currentCardKey : null);
             }}
           >
@@ -502,6 +571,7 @@ export function StudySession({
           </motion.div>
         </AnimatePresence>
       </div>
+      {undoStatus}
       {error && (
         <p role="alert" className="shrink-0 px-4 text-center text-[var(--color-error)]">
           {error}
@@ -536,7 +606,7 @@ export function StudySession({
         }}
       />}
       <PersonalNoteEditor note={personalNote} card={current}/>
-      <div className={`study-session-actions ${mode === "anki" && !flipped ? "study-session-actions-hidden" : ""} ${mode === "anki" && flipped ? "study-session-ratings" : ""}`} aria-label={mode === "anki" && flipped ? "Đánh giá mức độ ghi nhớ" : "Điều khiển thẻ"}>
+      <div className={`study-session-actions ${mode === "flashcards" ? "study-free-controls" : ""} ${mode === "anki" && !flipped ? "study-session-actions-hidden" : ""} ${mode === "anki" && flipped ? "study-session-ratings" : ""}`} aria-label={mode === "anki" && flipped ? "Đánh giá mức độ ghi nhớ" : "Điều khiển thẻ"}>
         {mode === "anki" ? (
           flipped ? (
             (["again", "hard", "good", "easy"] as Rating[]).map((rating, i) => (
@@ -544,7 +614,7 @@ export function StudySession({
                 key={rating}
                 aria-keyshortcuts={String(i + 1)}
                 aria-label={`${i + 1} · ${["Quên", "Khó", "Tốt", "Dễ"][i]} (${intervals?.[rating]})`}
-                disabled={busy}
+                disabled={blocked}
                 title={["Không nhớ hoặc trả lời sai", "Nhớ đúng nhưng khó khăn", "Nhớ đúng bình thường", "Nhớ đúng và dễ dàng"][i]}
                 className={`study-session-rating study-session-rating-${rating}`}
                 onClick={() => void rate(rating)}
@@ -557,16 +627,18 @@ export function StudySession({
         ) : (
           <>
             <button
-              className="study-button hidden sm:inline-flex"
+              className="study-button study-free-previous"
+              aria-label="Thẻ trước"
+              title="Thẻ trước (←)"
               disabled={!index}
               onClick={previous}
             >
-              Thẻ trước
+              <ArrowLeft size={18}/><span>Thẻ trước</span>
             </button>
-            <label className="study-copy inline-flex shrink-0 items-center whitespace-nowrap">
-              Đến thẻ{" "}
+            <label className="study-free-position">
+              <span className="sr-only">Đến thẻ</span>
               <input
-                className="study-input !w-24"
+                className="study-free-index"
                 type="text"
                 inputMode="numeric"
                 pattern="[0-9]*"
@@ -585,20 +657,16 @@ export function StudySession({
                   }
                 }}
               />
+              <span className="study-free-total">/ {sessionCards.length}</span>
             </label>
-            <button
+            {flipped && <button
               className="study-button study-button-primary study-session-free-next shrink-0 whitespace-nowrap"
-              onClick={() =>
-                flipped ? next() : setRevealedCardKey(currentCardKey)
-              }
+              onClick={next}
             >
-              {flipped
-                ? index + 1 === sessionCards.length
-                  ? "Hoàn thành"
-                  : "Thẻ tiếp"
-                : "Hiện đáp án"}
-              {!flipped && <kbd className="study-session-keyhint">Space</kbd>}
-            </button>
+              {index + 1 === sessionCards.length ? "Hoàn thành" : "Thẻ tiếp"}
+              <span className="study-free-shortcut" aria-hidden="true">Space</span>
+              {flipped && <ArrowRight size={17} aria-hidden="true"/>}
+            </button>}
           </>
         )}
       </div>
