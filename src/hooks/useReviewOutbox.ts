@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { ApiError, reviewCard } from '@/lib/api';
-import { reviewBuiltInBatch } from '@/lib/learningSync';
+import { ApiError, apiRequest, progressToSrs, reviewCard, type ApiProgress } from '@/lib/api';
+import { reviewBuiltInBatch, undoBuiltInReview } from '@/lib/learningSync';
 import { createReviewOutbox, emptyOutbox, projectedReview, REVIEW_OUTBOX_KEY, type QueuedReview, type ReviewOutboxData } from '@/lib/reviewOutbox';
 import type { LearningStorage } from '@/lib/storage';
 import type { useLearningSync } from './useLearningSync';
@@ -27,6 +27,28 @@ export function useReviewOutbox(storage: LearningStorage, enabled: boolean, sync
       const item = items[0];
       const saved = await reviewCard(item.card.cardId, item.rating, item.id, item.responseTimeMs, item.timing, item.card.reps);
       return [{ ...saved, deckType: item.card.deckType }];
+    },
+    undo: async (item) => {
+      if (item.source === 'BUILT_IN') return undoBuiltInReview(item);
+      const result = await apiRequest<{ progress: ApiProgress }>(`/anki/cards/${item.card.cardId}/reviews/${item.id}/undo`, { method: 'POST' });
+      return { ...progressToSrs(item.card.cardId, result.progress), deckType: item.card.deckType };
+    },
+    applyUndo: async (item, restored) => {
+      if (item.activity) storage.undoReviewActivity(item.id, item.activity);
+      if (item.source === 'BUILT_IN') {
+        const localOnly = storage.getJSON<ReviewOutboxData>(REVIEW_OUTBOX_KEY, emptyOutbox()).undo?.local;
+        if (localOnly) {
+          syncRef.current.restoreLocalReview(restored);
+          return restored;
+        }
+        const cards = await syncRef.current.syncReviews(async () => {
+          const { getLearningState } = await import('@/lib/learningSync');
+          const state = await getLearningState();
+          const effective = state.srsCards.find(card => card.cardId === restored.cardId && card.deckType === restored.deckType) ?? restored;
+          return { state, cards: [effective] };
+        }, true);
+        return cards[0];
+      }
     },
   }));
   useEffect(() => {
@@ -69,12 +91,20 @@ export function useReviewOutbox(storage: LearningStorage, enabled: boolean, sync
     };
   }, [enabled, sync.initialized, engine, storage]);
   return {
-    data, error, pending: data.items.length,
+    data, error, pending: data.items.length, undoPending: Boolean(data.undo),
     retry: () => wake.current(),
     project: (source: string, card: QueuedReview['card']) => projectedReview(data, source, card),
     enqueue: async (item: QueuedReview) => {
       await engine.enqueue(item);
       wake.current();
+    },
+    undo: async (item: QueuedReview) => {
+      if (!active.current) throw new Error('Chưa sẵn sàng đồng bộ. Vui lòng thử lại.');
+      await engine.requestUndo(item);
+      await engine.drain();
+      const result = storage.getJSON<ReviewOutboxData>(REVIEW_OUTBOX_KEY, emptyOutbox()).lastUndo;
+      if (result?.id !== item.id) throw new Error('Chưa hoàn tất hoàn tác. Vui lòng thử lại.');
+      return result.card;
     },
   };
 }

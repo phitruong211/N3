@@ -127,14 +127,15 @@ try {
   assert.ok(Math.abs(firstWidget.y-secondWidget.y)<2);
   assert.ok(secondWidget.x>firstWidget.x+firstWidget.width);
   await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
+  const gridBeforeCustomize=await page.locator('.deck-folder-grid').boundingBox();
   await page.getByRole('button',{name:'Tùy chỉnh widget Từ vựng N3',exact:true}).click();
-  const custom = page.getByRole('complementary',{name:'Tùy chỉnh widget',exact:true});
+  const custom = page.getByRole('complementary',{name:'Giao diện thẻ',exact:true});
   await custom.getByRole('button',{name:/Vừa/}).click();
   await custom.getByRole('button',{name:'Lavender',exact:true}).click();
   await custom.getByRole('slider',{name:'Độ trong suốt của thẻ',exact:true}).focus();await page.keyboard.press('Home');
   for(let step=0;step<35;step++)await page.keyboard.press('ArrowRight');
   const widgetKey = 'user:fixture:deck-group-widgets-v1';
-  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,widgetKey),{size:'medium',color:'#aa94e8',opacity:35,blur:24});
+  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,widgetKey),{size:'medium',color:'#b4a0ff',opacity:35,blur:24});
   assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).opacity),'1');
   assert.equal(await custom.locator('.widget-color-options button').count(),6);
   assert.equal(await custom.locator('.widget-style-preview').count(),0);
@@ -142,11 +143,11 @@ try {
   assert.equal(await page.locator('#group-g1').evaluate(el=>el.style.getPropertyValue('--tint')),'#608c9b');
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1.color,widgetKey),'#608c9b');
   assert.equal(await page.locator('dialog[open]').count(),0);
-  assert.equal(await page.locator('#group-g1 .widget-content').evaluate(el=>getComputedStyle(el).opacity),'0.45');
+  assert.equal(await page.locator('#group-g1 .widget-content').evaluate(el=>getComputedStyle(el).opacity),'1');
   assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).borderStyle),'solid');
   assert.equal(await custom.evaluate(el=>getComputedStyle(el).position),'fixed');
   const panelBox=await custom.boundingBox(),gridBox=await page.locator('.deck-folder-grid').boundingBox();
-  assert.equal(Math.round(panelBox.width),320);assert.ok(gridBox.x+gridBox.width+16<=panelBox.x);
+  assert.equal(Math.round(panelBox.width),300);assert.equal(Math.round(gridBox.width),Math.round(gridBeforeCustomize.width));
   for(const name of ['Độ trong suốt của thẻ']) {
     const slider=custom.getByRole('slider',{name,exact:true});await slider.focus();
     assert.equal(await slider.evaluate(el=>getComputedStyle(el).outlineWidth),'2px');
@@ -181,6 +182,7 @@ try {
   await page.getByRole('button',{name:/Từ vựng N3.*2 bộ/}).click();
   await page.getByRole('heading',{name:'Bài 1 · Khởi đầu'}).waitFor();
   await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
+
   await page.getByRole('button',{name:'Tùy chỉnh widget Từ vựng N3',exact:true}).click();
   await custom.getByRole('button',{name:/Lớn/}).click();
   await custom.getByRole('button',{name:'Xong',exact:true}).click();
@@ -217,12 +219,20 @@ try {
   // Reset appearance restores responsive presets. Capture the board in both themes.
   await page.getByLabel('Thao tác nhóm Từ vựng N3').click();await page.getByRole('menuitem',{name:'Tùy chỉnh widget',exact:true}).click();
   await custom.getByRole('button',{name:'Đặt lại',exact:true}).click();await custom.getByRole('button',{name:'Xong',exact:true}).click();
-  await page.getByRole('button',{name:'Xong',exact:true}).click();
+  await page.getByRole('button',{name:'Sắp xếp',exact:true}).waitFor();
   await mkdir('artifacts/deck-groups',{recursive:true});
   await page.waitForFunction(()=>{const a=document.querySelector('#group-g1').getBoundingClientRect(),b=document.querySelector('#group-g2').getBoundingClientRect();return Math.abs(a.y-b.y)<2&&a.right+10<=b.left;});
   await page.screenshot({path:'artifacts/deck-groups/widgets-desktop.png',fullPage:true});
   await page.emulateMedia({colorScheme:'dark'});
+  await page.evaluate(()=>document.documentElement.classList.add('dark'));
+  const lavaPosition = () => page.locator('#group-g1').evaluate(el=>getComputedStyle(el,'::before').backgroundPosition);
+  const lavaBefore = await lavaPosition();
+  await page.waitForTimeout(300);
+  assert.notEqual(await lavaPosition(),lavaBefore);
   await page.screenshot({path:'artifacts/deck-groups/widgets-dark.png',fullPage:true});
+  await page.emulateMedia({reducedMotion:'reduce'});
+  assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
+  await page.evaluate(()=>document.documentElement.classList.remove('dark'));
   await page.setViewportSize({width:360,height:844});await page.emulateMedia({reducedMotion:'reduce'});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.screenshot({path:'artifacts/deck-groups/widgets-mobile.png',fullPage:true});

@@ -18,7 +18,7 @@ export function DeckWidgetCustomize({ name, value, anchor, onChange, onReset, on
       const box = anchor.current?.getBoundingClientRect();
       if (box && panel.current) {
         panel.current.style.setProperty('--panel-right', `${Math.max(16, innerWidth - box.right)}px`);
-        panel.current.style.setProperty('--panel-top', `${Math.max(24, Math.min(box.top, innerHeight - 520))}px`);
+        panel.current.style.setProperty('--panel-top', `${Math.max(24, Math.min(box.top, innerHeight - 420))}px`);
       }
     };
     place(); const observer = new ResizeObserver(place);
@@ -28,7 +28,7 @@ export function DeckWidgetCustomize({ name, value, anchor, onChange, onReset, on
   }, [anchor]);
 
   return <aside ref={panel} className="deck-widget-customizer" aria-labelledby={title}>
-    <header className="widget-panel-header"><div><h3 id={title}>Tùy chỉnh widget</h3><p>{name}</p></div>
+    <header className="widget-panel-header"><div><h3 id={title}>Giao diện thẻ</h3><p>{name}</p></div>
       <button type="button" data-panel-close className="widget-icon-button" aria-label="Đóng bảng tùy chỉnh" onClick={onClose}><X size={18}/></button></header>
     <div className="widget-panel-body">
       <fieldset className="widget-control"><legend>Kích thước</legend><div className="widget-size-options">
@@ -39,12 +39,12 @@ export function DeckWidgetCustomize({ name, value, anchor, onChange, onReset, on
         {WIDGET_COLORS.map(color => <button key={color.value} type="button" title={color.label} aria-label={color.label} aria-pressed={value.color === color.value}
           style={{ '--swatch': color.value } as CSSProperties} onClick={() => onChange({ color: color.value })}/>)}
       </div>
-        <label className="widget-custom-color"><span>Chọn từ bảng màu <code>{value.color.toUpperCase()}</code></span>
+        <label className="widget-custom-color"><span>Màu riêng</span>
           <input type="color" aria-label="Chọn màu widget từ bảng màu" value={value.color} onChange={event => onChange({ color: event.target.value })}/>
         </label>
       </fieldset>
       <label className="widget-control widget-slider"><span>Độ trong suốt của thẻ <span>{100 - value.opacity}%</span></span><input aria-label="Độ trong suốt của thẻ" type="range" min={30} max={95} step={1} value={100 - value.opacity} onChange={event => onChange({ opacity: 100 - Number(event.target.value) })}/></label>
-      <p className="widget-panel-note">Chữ và nút luôn rõ nét. Thay đổi được lưu trên thiết bị này.</p>
+
     </div>
     <footer className="widget-panel-footer"><button type="button" className="widget-pill" onClick={onReset}>Đặt lại</button><button type="button" className="widget-pill widget-pill-primary" onClick={onClose}>Xong</button></footer>
   </aside>;

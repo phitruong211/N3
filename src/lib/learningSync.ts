@@ -1,5 +1,6 @@
 import { apiRequest } from './api';
 import type { Bookmark, SRSCard, StudyDay } from '@/types';
+import type { QueuedReview } from './reviewOutbox';
 
 export interface LearningData { bookmarks: Bookmark[]; srsCards: SRSCard[]; studyDays: StudyDay[] }
 export interface LearningSnapshot extends LearningData { revision: number }
@@ -20,7 +21,7 @@ export async function migrationKey(accountId: string, sourceId: string, data: Le
   return `${sourceId.slice(0, 20)}:${Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')}`;
 }
 
-export async function reviewBuiltInBatch(items: import('./reviewOutbox').QueuedReview[]) {
+export async function reviewBuiltInBatch(items: QueuedReview[]) {
   return apiRequest<{ state: LearningSnapshot; cards: SRSCard[] }>('/users/me/learning/reviews/batch', {
     method: 'POST', body: JSON.stringify({ reviews: items.map(item => ({
       cardId: item.card.cardId, deckType: item.card.deckType,
@@ -28,4 +29,12 @@ export async function reviewBuiltInBatch(items: import('./reviewOutbox').QueuedR
         expectedRepetitions: item.card.reps, responseTimeMs: item.responseTimeMs, ...item.timing },
     })) }),
   });
+}
+
+/** Hoàn tác lượt ôn built-in theo clientReviewId; trả về state hợp lệ và thẻ đã khôi phục. */
+export async function undoBuiltInReview(item: QueuedReview): Promise<SRSCard> {
+  const result = await apiRequest<{ state: LearningSnapshot; card: SRSCard }>(
+    `/users/me/learning/reviews/${item.id}/undo`, { method: 'POST' }
+  );
+  return result.card;
 }

@@ -222,15 +222,27 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [upsertSRSCard]);
 
   const visibleCards = useMemo(() => {
-    const cards = new Map(srsCards.map(card => [`${card.deckType}:${card.cardId}`, card]));
-    const candidates = [...Object.entries(reviewOutbox.data.confirmed).filter(([key]) => key.startsWith('BUILT_IN:')).map(([, card]) => card),
-      ...reviewOutbox.data.items.filter(item => item.source === 'BUILT_IN').map(item => item.optimistic)];
-    for (const card of candidates) {
-      const key = `${card.deckType}:${card.cardId}`;
-      if ((cards.get(key)?.reps ?? -1) <= card.reps) cards.set(key, card);
-    }
-    return [...cards.values()];
-  }, [srsCards, reviewOutbox.data]);
+    return reviewOutbox.project
+      ? (() => {
+        const all = new Map(srsCards.map(card => [`${card.deckType}:${card.cardId}`, card]));
+        // Apply outbox-confirmed and in-flight optimistic values, respecting undo cutoffs.
+        const candidates = [
+          ...Object.entries(reviewOutbox.data.confirmed)
+            .filter(([key]) => key.startsWith('BUILT_IN:'))
+            .map(([, card]) => card),
+          ...reviewOutbox.data.items.filter(i => i.source === 'BUILT_IN').map(i => i.optimistic),
+        ];
+        for (const card of candidates) {
+          const key = `${card.deckType}:${card.cardId}`;
+          // Use projectedReview logic: honours reverted cutoff so undo result wins.
+          const projected = reviewOutbox.project('BUILT_IN', card);
+          const existing = all.get(key);
+          all.set(key, reviewOutbox.project('BUILT_IN', existing ?? projected));
+        }
+        return [...all.values()];
+      })()
+      : srsCards;
+  }, [srsCards, reviewOutbox.data, reviewOutbox.project]);
   return (
     <AppContext.Provider
       value={{

@@ -71,12 +71,12 @@ export function useLearningSync(
     [storage],
   );
   const flush = useCallback(async (force = false) => {
-    if (!enabled || (paused.current && !force) || storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).items.length) return;
+    if (!enabled || (paused.current && !force) || (storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).items.length || storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).undo)) return;
     if (flight.current) return flight.current;
     if (revision.current === null)
       throw new Error("Chưa tải được tiến độ tài khoản.");
     const run = async () => {
-      while (alive.current && !storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).items.length && storage.getJSON("learning_dirty", false)) {
+      while (alive.current && !(storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).items.length || storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).undo) && storage.getJSON("learning_dirty", false)) {
         const data = readLearning(storage);
         setStatus("pending");
         const sent = await putLearningState({
@@ -134,7 +134,7 @@ export function useLearningSync(
         storage.setJSON("learning_local_backup", data);
         apply(state);
       } else if (storage.getJSON("learning_dirty", false)) {
-        if (storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).items.length) return;
+        if ((storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).items.length || storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).undo)) return;
         if (revision.current !== state.revision)
           throw new Error(
             "Tiến độ đã thay đổi trên thiết bị khác. Bản chưa gửi vẫn được giữ trên thiết bị này.",
@@ -193,7 +193,7 @@ export function useLearningSync(
     };
   }, [enabled, storage, load, flush]);
   const beforeTransfer = useCallback(async () => {
-    if (paused.current || storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).items.length) throw new Error("Còn lượt ôn đang đồng bộ, vui lòng đợi.");
+    if (paused.current || (storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).items.length || storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).undo)) throw new Error("Còn lượt ôn đang đồng bộ, vui lòng đợi.");
     loadVersion.current++;
     paused.current = true;
     try {
@@ -225,7 +225,7 @@ export function useLearningSync(
       paused.current = false;
     }
   }, [storage, apply]);
-  const syncReviews = useCallback(async (send: () => Promise<{ state: LearningSnapshot; cards: import('@/types').SRSCard[] }>) => {
+  const syncReviews = useCallback(async (send: () => Promise<{ state: LearningSnapshot; cards: import('@/types').SRSCard[] }>, force = false) => {
     if (paused.current) throw new Error('Đang đồng bộ tiến độ. Sẽ thử lại.');
     paused.current = true;
     loadVersion.current++;
@@ -235,7 +235,7 @@ export function useLearningSync(
       if (!alive.current) return result.cards;
       const local = readLearning(storage);
       const base = storage.getJSON<LearningData>('learning_base', local);
-      const next = mergeReviewSnapshot(local, base, result.state, result.cards);
+      const next = mergeReviewSnapshot(local, base, result.state, result.cards, force);
       storage.withoutLearningEvents(() => {
         storage.saveBookmarks(next.bookmarks);
         for (const type of ['vocabulary', 'kanji', 'grammar'] as const) storage.saveSRSCards(type, next.srsCards.filter(card => card.deckType === type));
@@ -252,7 +252,15 @@ export function useLearningSync(
       return result.cards;
     } finally { paused.current = false; }
   }, [storage]);
+  const restoreLocalReview = useCallback((card: import('@/types').SRSCard) => {
+    const local = readLearning(storage);
+    const next = { ...local, srsCards: [...local.srsCards.filter(value => value.cardId !== card.cardId || value.deckType !== card.deckType), card] };
+    storage.withoutLearningEvents(() => storage.saveSRSCards(card.deckType, next.srsCards.filter(value => value.deckType === card.deckType)));
+    storage.setJSON('learning_dirty', true);
+    applyRef.current(next);
+  }, [storage]);
   return {
+    restoreLocalReview,
     syncReviews,
     status,
     initialized,
