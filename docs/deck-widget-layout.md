@@ -35,3 +35,5 @@ Vệt sáng được giới hạn trong vùng bộ thẻ, không phủ sidebar. 
 Widget kế thừa bảng màu trong Cài đặt (Sáng, Tối, Đọc sách, Tương phản cao) từ các biến --color-* chung; không ghi đè nền trang hoặc tự chọn theo màu hệ điều hành.
 
 Bảng tùy chỉnh dùng một thanh “Độ trong suốt của thẻ” (30–95%, mặc định 70%). Giá trị tăng làm nền trong hơn, lưu dưới dạng opacity = 100 − độ trong suốt để tương thích dữ liệu cũ. Bỏ thanh chỉnh blur; blur đã lưu được giữ nguyên. Chữ và nút không đổi độ đục.
+
+Đã bỏ hoàn toàn lớp vệt sáng phía sau lưới để không loang màu ngoài thẻ. Màu và phản sáng dùng background của chính thẻ, cắt theo góc bo; khoảng trống giữ nền từ Cài đặt.

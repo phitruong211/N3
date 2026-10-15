@@ -308,6 +308,7 @@ try {
   await page.screenshot({path:'artifacts/deck-groups/glass-mobile-panel.png',fullPage:true});
   await custom.getByRole('button',{name:'Đóng bảng tùy chỉnh',exact:true}).click();
   assert.equal(await custom.count(),0);assert.deepEqual(errors,[]);
+  assert.equal(await page.locator('.widget-board-backdrop').count(),0);
   for (const theme of ['light','dark','reading','high-contrast']) {
     await page.evaluate(theme=>{document.documentElement.className=theme;},theme);
     const palette=await page.locator('.deck-groups-library').evaluate(el=>{

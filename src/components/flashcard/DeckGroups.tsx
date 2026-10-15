@@ -334,7 +334,6 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
   const toolbar = <div className="widget-toolbar-actions">{arrangeButton}{createMenu}</div>;
 
   return <div className={`deck-groups-library sm:col-span-2 xl:col-span-3 ${drag ? "is-drag-active" : ""} ${sizing.resizing ? "is-resizing" : ""}`} data-study-mode={mode} data-reduced-motion={reducedMotion || systemReducedMotion || undefined} aria-busy={saving}>
-    <div className="widget-board-backdrop" aria-hidden="true"><span/><span/></div>
     {toolbarTarget ? createPortal(toolbar, toolbarTarget) : toolbarTarget === undefined ? <div className="deck-library-toolbar"><p className="widget-library-summary">{summary}</p>{toolbar}</div> : null}
     {summaryTarget && createPortal(summary, summaryTarget)}
     {error && <p role="alert" className="text-sm text-[var(--color-error)]">{error} <button className="underline" onClick={() => { setError(''); setRevision(v => v + 1); onChange(); }}>Thử lại</button></p>}
