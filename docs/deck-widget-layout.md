@@ -31,3 +31,7 @@ Mở nhóm vẫn dùng dữ liệu/phân trang cũ. Các hàng bộ con gọi c�
 `tests/deckWidgets.test.mjs` kiểm tra dữ liệu lưu không hợp lệ, màu cũ, giới hạn, độ tương phản và thứ tự bất biến. `tests/deckGroups.browser.mjs` kiểm tra ba kích thước, sáu màu gợi ý và bảng chọn màu tùy ý, bảng không modal/không phủ lưới, focus/Esc, reload, kéo/resize/cancel/bàn phím/cảm ứng, luồng nhóm cũ và 360 px ở sáng/tối. Có thể đặt `PLAYWRIGHT_CHANNEL=msedge` để dùng Edge cài sẵn. Ảnh kiểm tra nằm tại `artifacts/deck-groups/glass-*.png`.
 
 Vệt sáng được giới hạn trong vùng bộ thẻ, không phủ sidebar. Bề mặt kính có lớp phản sáng chéo và viền sáng mảnh; nền tối được nâng lên màu than xanh #151b1e. Màu đã lưu vẫn giữ nguyên; chọn màu gợi ý để áp dụng bảng màu mới.
+
+Widget kế thừa bảng màu trong Cài đặt (Sáng, Tối, Đọc sách, Tương phản cao) từ các biến --color-* chung; không ghi đè nền trang hoặc tự chọn theo màu hệ điều hành.
+
+Bảng tùy chỉnh dùng một thanh “Độ trong suốt của thẻ” (30–95%, mặc định 70%). Giá trị tăng làm nền trong hơn, lưu dưới dạng opacity = 100 − độ trong suốt để tương thích dữ liệu cũ. Bỏ thanh chỉnh blur; blur đã lưu được giữ nguyên. Chữ và nút không đổi độ đục.

@@ -24,7 +24,7 @@ type Props = {
 };
 type Target = { groupId: string | null; beforeId?: string; key: string };
 type Drag = { deck: PersonalDeck; x: number; y: number };
-function usesLightTheme() { return document.documentElement.classList.contains('light') || (!document.documentElement.classList.contains('dark') && matchMedia('(prefers-color-scheme: light)').matches); }
+function usesLightTheme() { return !document.documentElement.classList.contains('dark'); }
 
 export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = false, onChange, renderDeck, deckActions, createActions = [], toolbarTarget, storage, onShareGroup, requestedGroup, onGroupOpened, onReviewGroup, summaryTarget }: Props) {
   const sizing = useDeckGroupSizes(storage);

@@ -131,10 +131,8 @@ try {
   const custom = page.getByRole('complementary',{name:'Tùy chỉnh widget',exact:true});
   await custom.getByRole('button',{name:/Vừa/}).click();
   await custom.getByRole('button',{name:'Lavender',exact:true}).click();
-  await custom.getByRole('slider',{name:'Độ đậm của nền',exact:true}).focus();await page.keyboard.press('Home');
-  for(let step=0;step<30;step++)await page.keyboard.press('ArrowRight');
-  await custom.getByRole('slider',{name:'Độ mờ phía sau',exact:true}).focus();await page.keyboard.press('Home');
-  for(let step=0;step<24;step++)await page.keyboard.press('ArrowRight');
+  await custom.getByRole('slider',{name:'Độ trong suốt của thẻ',exact:true}).focus();await page.keyboard.press('Home');
+  for(let step=0;step<35;step++)await page.keyboard.press('ArrowRight');
   const widgetKey = 'user:fixture:deck-group-widgets-v1';
   assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,widgetKey),{size:'medium',color:'#aa94e8',opacity:35,blur:24});
   assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).opacity),'1');
@@ -149,7 +147,7 @@ try {
   assert.equal(await custom.evaluate(el=>getComputedStyle(el).position),'fixed');
   const panelBox=await custom.boundingBox(),gridBox=await page.locator('.deck-folder-grid').boundingBox();
   assert.equal(Math.round(panelBox.width),320);assert.ok(gridBox.x+gridBox.width+16<=panelBox.x);
-  for(const name of ['Độ đậm của nền','Độ mờ phía sau']) {
+  for(const name of ['Độ trong suốt của thẻ']) {
     const slider=custom.getByRole('slider',{name,exact:true});await slider.focus();
     assert.equal(await slider.evaluate(el=>getComputedStyle(el).outlineWidth),'2px');
     assert.equal(await slider.evaluate(el=>getComputedStyle(el).outlineOffset),'2px');
@@ -295,7 +293,7 @@ try {
   assert.equal(await page.getByRole('button',{name:'Tùy chỉnh widget FPT',exact:true}).evaluate(el=>el===document.activeElement),true);
   await page.getByRole('button',{name:'Xong',exact:true}).click();
   await page.emulateMedia({colorScheme:'light'});
-  assert.equal(await page.locator('.deck-groups-library').evaluate(el=>getComputedStyle(el).getPropertyValue('--bg').trim()),'#eceeeb');
+  assert.equal(await page.locator('.deck-groups-library').evaluate(el=>getComputedStyle(el).getPropertyValue('--bg').trim()),'#F7F6F2');
   await page.screenshot({path:'artifacts/deck-groups/glass-light.png',fullPage:true});
   await page.setViewportSize({width:360,height:844});await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
@@ -310,5 +308,15 @@ try {
   await page.screenshot({path:'artifacts/deck-groups/glass-mobile-panel.png',fullPage:true});
   await custom.getByRole('button',{name:'Đóng bảng tùy chỉnh',exact:true}).click();
   assert.equal(await custom.count(),0);assert.deepEqual(errors,[]);
+  for (const theme of ['light','dark','reading','high-contrast']) {
+    await page.evaluate(theme=>{document.documentElement.className=theme;},theme);
+    const palette=await page.locator('.deck-groups-library').evaluate(el=>{
+      const css=getComputedStyle(el);
+      return ['--bg','--color-bg','--ink','--color-text','--panel','--color-surface'].map(key=>css.getPropertyValue(key).trim());
+    });
+    assert.equal(palette[0],palette[1],theme+' background');
+    assert.equal(palette[2],palette[3],theme+' text');
+    assert.equal(palette[4],palette[5],theme+' panel');
+  }
   console.log('PASS: widget lock/side-by-side/color/transparency/blur/persistence, pointer and keyboard reorder/cancel, resize, groups CRUD, study actions, deck move/rollback, mobile touch drag and reduced motion');
 } finally { await browser?.close(); await server.close(); }

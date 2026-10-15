@@ -1,14 +1,15 @@
-/* Personal library: one accent, glass widgets and a quiet, scoped palette. */
+/* Use the same settings palette as the rest of the app, including reading mode. */
 .deck-personal-library,.deck-groups-library,.deck-widget-menu {
-  --bg:#151b1e; --ink:#eef1ef; --ink2:#a3aca7; --line:rgba(255,255,255,.09); --hi:rgba(255,255,255,.10);
-  --panel:#161a19; --accent:#8fd0b0; --accent-ink:#0d100f; --glow-left:#2d5a4a; --glow-right:#4a3f6b;
-  font-family:'Be Vietnam Pro',system-ui,sans-serif; color:var(--ink); color-scheme:dark;
+  --bg:var(--color-bg); --ink:var(--color-text); --ink2:var(--color-text-secondary);
+  --line:var(--color-border); --hi:rgba(255,255,255,.4);
+  --panel:var(--color-surface); --accent:var(--color-accent); --accent-ink:var(--color-text-inverse);
+  --glow-left:#a9d6c3; --glow-right:#cdc3ec;
+  font-family:'Be Vietnam Pro',system-ui,sans-serif; color:var(--ink); color-scheme:light;
 }
-@media(prefers-color-scheme:light) {
-  .deck-personal-library,.deck-groups-library,.deck-widget-menu { --bg:#eceeeb; --ink:#171a18; --ink2:#5d6762; --line:rgba(23,26,24,.10); --hi:rgba(255,255,255,.7); --panel:#fbfcfb; --accent:#1f6f54; --accent-ink:#fff; --glow-left:#a9d6c3; --glow-right:#cdc3ec; color-scheme:light; }
+.dark :is(.deck-personal-library,.deck-groups-library,.deck-widget-menu) {
+  --hi:rgba(255,255,255,.10); --glow-left:#2d5a4a; --glow-right:#4a3f6b; color-scheme:dark;
 }
-.light .deck-personal-library,.light .deck-groups-library,.light .deck-widget-menu { --bg:#eceeeb; --ink:#171a18; --ink2:#5d6762; --line:rgba(23,26,24,.10); --hi:rgba(255,255,255,.7); --panel:#fbfcfb; --accent:#1f6f54; --accent-ink:#fff; --glow-left:#a9d6c3; --glow-right:#cdc3ec; color-scheme:light; }
-.dark .deck-personal-library,.dark .deck-groups-library,.dark .deck-widget-menu { --bg:#151b1e; --ink:#eef1ef; --ink2:#a3aca7; --line:rgba(255,255,255,.09); --hi:rgba(255,255,255,.10); --panel:#161a19; --accent:#8fd0b0; --accent-ink:#0d100f; --glow-left:#2d5a4a; --glow-right:#4a3f6b; color-scheme:dark; }
+.high-contrast .widget-board-backdrop { display:none; }
 .deck-personal-library { position:relative; isolation:isolate; background:transparent; }
 .deck-personal-header { display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
 .deck-personal-header h2 { font-size:28px; line-height:1.35; font-weight:600; letter-spacing:-.02em; }
@@ -156,11 +157,6 @@
 @media(prefers-reduced-motion:reduce) { .deck-groups-library * { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
 .deck-groups-library[data-reduced-motion=true] * { animation:none!important; transition:none!important; }
 
-:root { --deck-page-bg:#151b1e; }
-@media(prefers-color-scheme:light) { :root { --deck-page-bg:#eceeeb; } }
-:root.light { --deck-page-bg:#eceeeb; }
-:root.dark { --deck-page-bg:#151b1e; }
-body:has(.deck-personal-library),#main-content:has(.deck-personal-library) { background:var(--deck-page-bg); }
 .deck-widget-menu { background:var(--panel); border-color:var(--line); color:var(--ink); }
 .deck-widget-menu button:hover,.deck-widget-menu button:focus-visible { background:color-mix(in srgb,var(--ink) 6%,transparent); }
 .deck-widget-menu button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; box-shadow:none; }

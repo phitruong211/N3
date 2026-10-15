@@ -43,8 +43,7 @@ export function DeckWidgetCustomize({ name, value, anchor, onChange, onReset, on
           <input type="color" aria-label="Chọn màu widget từ bảng màu" value={value.color} onChange={event => onChange({ color: event.target.value })}/>
         </label>
       </fieldset>
-      <label className="widget-control widget-slider"><span>Độ đậm của nền <span>{value.opacity}%</span></span><input aria-label="Độ đậm của nền" type="range" min={5} max={70} step={1} value={value.opacity} onChange={event => onChange({ opacity: Number(event.target.value) })}/></label>
-      <label className="widget-control widget-slider"><span>Độ mờ phía sau <span>{value.blur}px</span></span><input aria-label="Độ mờ phía sau" type="range" min={0} max={40} step={1} value={value.blur} onChange={event => onChange({ blur: Number(event.target.value) })}/></label>
+      <label className="widget-control widget-slider"><span>Độ trong suốt của thẻ <span>{100 - value.opacity}%</span></span><input aria-label="Độ trong suốt của thẻ" type="range" min={30} max={95} step={1} value={100 - value.opacity} onChange={event => onChange({ opacity: 100 - Number(event.target.value) })}/></label>
       <p className="widget-panel-note">Chữ và nút luôn rõ nét. Thay đổi được lưu trên thiết bị này.</p>
     </div>
     <footer className="widget-panel-footer"><button type="button" className="widget-pill" onClick={onReset}>Đặt lại</button><button type="button" className="widget-pill widget-pill-primary" onClick={onClose}>Xong</button></footer>
