@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DeckShareDialog } from './DeckShareDialog';
 import { AppLoading } from '@/components/ui/AppLoading';
 import { useAuth } from "@/hooks/useAuth";
@@ -91,6 +91,8 @@ export function ImportedDecks({
   const storage = useLearningStorage();
   const { getJSON, setJSON } = storage;
   const [toolbarTarget, setToolbarTarget] = useState<HTMLDivElement | null>(null);
+  const [summaryTarget, setSummaryTarget] = useState<HTMLParagraphElement | null>(null);
+  const navigate = useNavigate();
   const { user, requestAuth, draft, setDraft } = useAuth();
   const initial = useRef(draft?.mode === draftMode ? draft : null).current;
   const [decks, setDecks] = useState<Page<PersonalDeck>>(emptyPage);
@@ -530,11 +532,11 @@ export function ImportedDecks({
       />
     );
   return (
-    <section className="space-y-5" aria-label="Bộ thẻ của bạn" data-reduced-motion={settings.reducedMotion || undefined}>
-      <div className="flex items-end justify-between gap-3">
+    <section className="deck-personal-library space-y-5" aria-label="Bộ thẻ của bạn" data-reduced-motion={settings.reducedMotion || undefined}>
+      <div className="deck-personal-header">
         <div>
-          <p className="study-eyebrow">CỦA BẠN</p>
-          <h2 className="mt-1 text-xl font-semibold">{mode === "free" ? "Bộ thẻ của bạn" : "Bộ cần ôn"}</h2>
+          <h2>{mode === "free" ? "Bộ thẻ của bạn" : "Bộ cần ôn"}</h2>
+          {!active && !creating && !preview && user && <p ref={setSummaryTarget} className="widget-library-summary"/>}
         </div>
         {!active && !creating && !preview && <div ref={setToolbarTarget} className="shrink-0">
           {!user && mode === 'free' && <OverflowMenu label="Tạo mới" triggerContent={<><Plus size={18}/>Tạo mới<ChevronDown size={15}/></>} actions={[
@@ -1016,7 +1018,7 @@ export function ImportedDecks({
             {leadingDeck}
 
             {user && <DeckGroups key={user.id} rootDecks={decks.content} reload={reload} mode={mode} busy={busy || loading} reducedMotion={settings.reducedMotion}
-              storage={storage} toolbarTarget={toolbarTarget} onShareGroup={setSharingGroup} requestedGroup={requestedGroup}
+              storage={storage} toolbarTarget={toolbarTarget} summaryTarget={summaryTarget} onReviewGroup={group => navigate(`/review?group=${encodeURIComponent(group.id)}`)} onShareGroup={setSharingGroup} requestedGroup={requestedGroup}
               onGroupOpened={() => setSearchParams(current => { const next = new URLSearchParams(current); next.delete('group'); return next; }, { replace: true })}
               createActions={mode === 'free' ? [
                 { id: 'create', label: 'Tạo bộ thẻ', disabled: busy, onSelect: openCreator },
@@ -1027,9 +1029,14 @@ export function ImportedDecks({
                 ...(deck.sourceType === 'IMPORT' ? [{ id: 'share', label: 'Chia sẻ bộ thẻ', disabled: busy, onSelect: () => setSharing(deck) }] : []),
                 { id: 'customize', label: 'Tùy chỉnh giao diện', disabled: busy, onSelect: () => setCustomizing(deck) },
               ]}
-              onChange={() => setReload(value => value + 1)} renderDeck={(deck, menu) => {
+              onChange={() => setReload(value => value + 1)} renderDeck={(deck, menu, compact) => {
                 const badge = personalDeckBadge(deck);
                 const needed = readyCount(deck);
+                if (compact) return <article className="widget-deck-row">
+                  <h3><button type="button" aria-label={`${mode === 'free' ? 'Bắt đầu học' : 'Ôn ngay'} ${deck.name}`} disabled={busy || (mode === 'free' ? !deck.cardCount : !needed)}
+                    onClick={() => void (mode === 'free' ? openFreeStudy(deck) : startScheduledStudy(deck))}>{deck.name}</button></h3>
+                  <span>{deck.cardCount.toLocaleString('vi-VN')} thẻ</span>{menu}
+                </article>;
                 return (
                   <article
                     key={deck.id}

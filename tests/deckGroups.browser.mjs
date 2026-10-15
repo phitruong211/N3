@@ -6,18 +6,18 @@ import { chromium } from 'playwright';
 const server = await createServer({ server: { host: '127.0.0.1', port: 0, open: false } });
 server.middlewares.use(async (request, response, next) => {
   if (!request.url?.startsWith('/__deck-groups__')) return next();
-  const html = `<html><body><div id="root"></div><script type="module">
+  const html = `<html><head><style>body{margin:0;background:#0d100f}@media(prefers-color-scheme:light){body{background:#eceeeb}}</style></head><body><div id="root"></div><script type="module">
     import React,{useState,useEffect} from 'react'; import {createRoot} from 'react-dom/client';
     import {DeckGroups} from '/src/components/flashcard/DeckGroups.tsx';
     import {createLearningStorage} from '/src/lib/storage.ts'; const storage=createLearningStorage('user:fixture');
     import {listDeckPage} from '/src/lib/deckApi.ts'; import {currentUser} from '/src/lib/api.ts'; import '/src/index.css';
     localStorage.setItem('auth:refresh_token','fixture');localStorage.setItem('auth:access_token','fixture');
     await currentUser();
-    function App(){ const [reload,setReload]=useState(0); const [decks,setDecks]=useState([]);const [mode,setMode]=useState('free');
+    function App(){ const [reload,setReload]=useState(0); const [decks,setDecks]=useState([]);const [mode,setMode]=useState('free'); const [toolbar,setToolbar]=useState(null);const [summary,setSummary]=useState(null);
       useEffect(()=>{ listDeckPage(0,'position,asc',null).then(p=>setDecks(p.content)); },[reload]);
       const h=React.createElement;
-      return h('main',{style:{maxWidth:1120,margin:'40px auto',padding:20}},h('h1',null,'Thư viện của bạn'),h('button',{className:'study-button',onClick:()=>setMode(mode==='free'?'scheduled':'free')},'Đổi chế độ'),
-        h(DeckGroups,{rootDecks:decks,reload,mode,busy:false,storage,onChange:()=>setReload(v=>v+1),renderDeck:(deck,menu)=>h('article',{className:'study-panel deck-hover-card'},menu,h('h3',null,deck.name),h('p',null,deck.cardCount+' thẻ'),h('button',{className:'study-button',onClick:()=>window.started=deck.id},mode==='free'?'Bắt đầu học':'Ôn ngay'))}));
+      return h('main',{className:'deck-personal-library',style:{maxWidth:1120,margin:'40px auto',padding:20}},h('div',{className:'deck-personal-header'},h('div',null,h('h1',{className:'text-[28px] font-semibold'},'Bộ thẻ của bạn'),h('p',{ref:setSummary,className:'widget-library-summary'})),h('div',{ref:setToolbar})),h('button',{className:'study-button',onClick:()=>setMode(mode==='free'?'scheduled':'free')},'Đổi chế độ'),
+        h(DeckGroups,{toolbarTarget:toolbar,summaryTarget:summary,rootDecks:decks,reload,mode,busy:false,storage,onChange:()=>setReload(v=>v+1),renderDeck:(deck,menu,compact)=>compact?h('article',{className:'widget-deck-row'},h('h3',null,deck.name),h('span',null,deck.cardCount+' thẻ'),h('button',{'aria-label':mode==='free'?'Bắt đầu học':'Ôn ngay',onClick:()=>window.started=deck.id},'↗'),menu):h('article',{className:'study-panel deck-hover-card'},menu,h('h3',null,deck.name),h('p',null,deck.cardCount+' thẻ'),h('button',{className:'study-button',onClick:()=>window.started=deck.id},mode==='free'?'Bắt đầu học':'Ôn ngay'))}));
     }createRoot(document.getElementById('root')).render(React.createElement(App));
   </script></body></html>`;
   response.setHeader('Content-Type', 'text/html'); response.end(await server.transformIndexHtml(request.url, html));
@@ -28,11 +28,12 @@ let decks = [
   { id: 'd1', name: 'Bài 1 · Khởi đầu', groupId: null, version: 0, cardCount: 30, dueCount: 5, position: 0 },
   { id: 'd2', name: 'Bài 2 · Cuộc sống', groupId: 'g1', version: 0, cardCount: 24, dueCount: 3, position: 0 },
 ];
-let failNextMove = false; let moveCount = 0;
+let failNextMove = false; let moveCount = 0; let widgetOrderCount = 0;
 let browser;
 try {
-  await server.listen(); browser = await chromium.launch();
+  await server.listen(); browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL || undefined });
   const page = await browser.newPage({ viewport: { width: 1280, height: 1000 }, hasTouch: true });
+  await page.emulateMedia({colorScheme:'dark'});
   const errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.route('**/api/v1/**', async route => {
     const url = new URL(route.request().url()); const path = url.pathname.replace('/api/v1',''); const method = route.request().method();
@@ -56,7 +57,10 @@ try {
       if(failNextMove){failNextMove=false;return route.fulfill({status:409,contentType:'application/json',body:JSON.stringify({message:'Dữ liệu đã thay đổi. Hãy thử lại.'})});}
       const deck=decks.find(d=>d.id===path.split('/')[2]);assert.equal(body.version,deck.version);
       deck.groupId=body.groupId;deck.version++;moveCount++;
-    } else if (path !== '/deck-groups/order') throw new Error('Unexpected '+method+' '+path);
+    } else if (path === '/deck-groups/order') {
+      assert.deepEqual([...body.ids].sort(),groups.map(g=>g.id).sort());
+      groups = body.ids.map((id,position)=>({...groups.find(g=>g.id===id),position})); widgetOrderCount++;
+    } else throw new Error('Unexpected '+method+' '+path);
     return route.fulfill({ status:204 });
   });
   await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/__deck-groups__`);
@@ -71,7 +75,7 @@ try {
   await folder().getByRole('button',{name:'Bắt đầu học'}).click(); assert.equal(await page.evaluate(()=>window.started),'d2');
   await page.getByRole('button',{name:'Đổi chế độ'}).click();
   await folder().getByRole('button',{name:'Ôn ngay'}).click(); assert.equal(await page.evaluate(()=>window.started),'d2');
-  assert.match(await folder().innerText(),/3 cần ôn/);
+  assert.equal(decks.find(d=>d.id==='d2').dueCount,3);
   async function moveByMenu(name, groupId) {
     await page.getByRole('button',{name:'Thao tác với bộ '+name,exact:true}).click();
     await page.getByRole('menuitem',{name:'Chuyển đến nhóm…'}).click();
@@ -113,6 +117,75 @@ try {
   await page.getByLabel('Thao tác nhóm Ngữ pháp').click();await page.getByRole('menuitem',{name:'Đổi tên',exact:true}).click();
   await page.getByRole('textbox',{name:'Tên nhóm'}).fill('Luyện thi');await page.getByRole('button',{name:'Lưu nhóm'}).click();
   await page.getByRole('button',{name:/Luyện thi.*0 bộ/}).waitFor();
+  if(await page.locator('#group-g1 .deck-folder-toggle').getAttribute('aria-expanded')==='true')await page.locator('#group-g1 .deck-folder-toggle').click();
+  // Widgets are side-by-side and locked until editing is explicitly enabled.
+  assert.equal(await page.getByRole('button',{name:/Kéo để di chuyển/}).count(),0);
+  assert.equal(await page.getByRole('button',{name:/Đổi kích thước nhóm/}).count(),0);
+  await page.waitForFunction(()=>{const a=document.querySelector('#group-g1').getBoundingClientRect(),b=document.querySelector('#group-g2').getBoundingClientRect();return Math.abs(a.y-b.y)<2&&a.right+10<=b.left;});
+  const firstWidget = await page.locator('#group-g1').boundingBox();
+  const secondWidget = await page.locator('#group-g2').boundingBox();
+  assert.ok(Math.abs(firstWidget.y-secondWidget.y)<2);
+  assert.ok(secondWidget.x>firstWidget.x+firstWidget.width);
+  await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
+  await page.getByRole('button',{name:'Tùy chỉnh widget Từ vựng N3',exact:true}).click();
+  const custom = page.getByRole('complementary',{name:'Tùy chỉnh widget',exact:true});
+  await custom.getByRole('button',{name:/Vừa/}).click();
+  await custom.getByRole('button',{name:'Lavender',exact:true}).click();
+  await custom.getByRole('slider',{name:'Độ đậm của nền',exact:true}).focus();await page.keyboard.press('Home');
+  for(let step=0;step<30;step++)await page.keyboard.press('ArrowRight');
+  await custom.getByRole('slider',{name:'Độ mờ phía sau',exact:true}).focus();await page.keyboard.press('Home');
+  for(let step=0;step<24;step++)await page.keyboard.press('ArrowRight');
+  const widgetKey = 'user:fixture:deck-group-widgets-v1';
+  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,widgetKey),{size:'medium',color:'#a398bd',opacity:35,blur:24});
+  assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).opacity),'1');
+  assert.equal(await custom.locator('.widget-color-options button').count(),6);
+  assert.equal(await custom.locator('.widget-style-preview').count(),0);
+  await custom.getByLabel('Chọn màu widget từ bảng màu').fill('#608c9b');
+  assert.equal(await page.locator('#group-g1').evaluate(el=>el.style.getPropertyValue('--tint')),'#608c9b');
+  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1.color,widgetKey),'#608c9b');
+  assert.equal(await page.locator('dialog[open]').count(),0);
+  assert.equal(await page.locator('#group-g1 .widget-content').evaluate(el=>getComputedStyle(el).opacity),'0.45');
+  assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).borderStyle),'solid');
+  assert.equal(await custom.evaluate(el=>getComputedStyle(el).position),'fixed');
+  const panelBox=await custom.boundingBox(),gridBox=await page.locator('.deck-folder-grid').boundingBox();
+  assert.equal(Math.round(panelBox.width),320);assert.ok(gridBox.x+gridBox.width+16<=panelBox.x);
+  for(const name of ['Độ đậm của nền','Độ mờ phía sau']) {
+    const slider=custom.getByRole('slider',{name,exact:true});await slider.focus();
+    assert.equal(await slider.evaluate(el=>getComputedStyle(el).outlineWidth),'2px');
+    assert.equal(await slider.evaluate(el=>getComputedStyle(el).outlineOffset),'2px');
+  }
+  await mkdir('artifacts/deck-groups',{recursive:true});
+  await page.screenshot({path:'artifacts/deck-groups/widgets-customize.png',fullPage:true});
+  await custom.getByRole('button',{name:'Xong',exact:true}).click();
+  // Pointer reorder, cancellation and keyboard alternative do not move any deck between groups.
+  async function dragWidget(from,to,escape=false) {
+    const grip=await page.getByRole('button',{name:'Kéo để di chuyển '+from,exact:true}).boundingBox();
+    const target=await page.locator('#group-'+to).boundingBox();
+    await page.mouse.move(grip.x+12,grip.y+12);await page.mouse.down();
+    await page.mouse.move(target.x+target.width-30,target.y+target.height/2,{steps:10});
+    if(escape)await page.keyboard.press('Escape');
+    await page.mouse.up();
+  }
+  await dragWidget('Từ vựng N3','g2',true);assert.equal(widgetOrderCount,0);
+  await dragWidget('Từ vựng N3','g2');
+  await page.waitForFunction(()=>document.querySelector('.deck-folder').id==='group-g2');assert.equal(widgetOrderCount,1);
+  await page.waitForFunction(()=>document.querySelector('.deck-groups-library').getAttribute('aria-busy')==='false');
+  await page.getByRole('button',{name:'Kéo để di chuyển Từ vựng N3',exact:true}).focus();await page.keyboard.press('ArrowLeft');
+  await page.waitForFunction(()=>document.querySelector('.deck-folder').id==='group-g1');assert.equal(widgetOrderCount,2);assert.equal(moveCount,3);
+  await page.getByRole('button',{name:'Xong',exact:true}).click();
+  await page.reload();
+  await page.getByRole('button',{name:'Sắp xếp',exact:true}).waitFor();
+  assert.equal(await page.locator('#group-g1').getAttribute('data-widget-size'),'medium');
+  assert.equal(await page.locator('#group-g1').evaluate(el=>el.style.getPropertyValue('--op')),'35');
+  assert.equal(await page.getByRole('button',{name:/Kéo để di chuyển/}).count(),0);
+  await page.waitForFunction(()=>{const a=document.querySelector('#group-g1').getBoundingClientRect(),b=document.querySelector('#group-g2').getBoundingClientRect();return Math.abs(a.y-b.y)<2&&a.right+10<=b.left;});
+  await page.screenshot({path:'artifacts/deck-groups/widgets-colored.png',fullPage:true});
+  await page.getByRole('button',{name:/Từ vựng N3.*2 bộ/}).click();
+  await page.getByRole('heading',{name:'Bài 1 · Khởi đầu'}).waitFor();
+  await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
+  await page.getByRole('button',{name:'Tùy chỉnh widget Từ vựng N3',exact:true}).click();
+  await custom.getByRole('button',{name:/Lớn/}).click();
+  await custom.getByRole('button',{name:'Xong',exact:true}).click();
   // Resize is live, persistent, cancellable and keyboard accessible.
   const sizeKey = 'user:fixture:deck-group-sizes-v1';
   const resize = page.getByRole('button',{name:'Đổi kích thước nhóm Từ vựng N3',exact:true});
@@ -131,7 +204,7 @@ try {
   assert.ok(Math.abs((await folder().first().boundingBox()).width-before.width)<2);
   await resize.focus();await page.keyboard.press('ArrowRight');
   assert.equal((await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,sizeKey)).width,saved.width+10);
-  await page.reload();await page.getByRole('button',{name:/Từ vựng N3.*2 bộ/}).click();
+  await page.reload();await page.locator('#group-g1').waitFor();if(await page.locator('#group-g1 .deck-folder-toggle').getAttribute('aria-expanded')==='false')await page.locator('#group-g1 .deck-folder-toggle').click();
   await page.getByRole('heading',{name:'Bài 1 · Khởi đầu'}).waitFor();
   assert.ok(Math.abs((await folder().first().boundingBox()).width-(saved.width+10))<2);
   // Resizing does not clip portaled menus; Escape restores trigger focus.
@@ -143,11 +216,36 @@ try {
   await page.getByLabel('Thao tác nhóm Từ vựng N3').click();
   await page.getByRole('menuitem',{name:'Đặt lại kích thước'}).click();
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,sizeKey),undefined);
+  // Reset appearance restores responsive presets. Capture the board in both themes.
+  await page.getByLabel('Thao tác nhóm Từ vựng N3').click();await page.getByRole('menuitem',{name:'Tùy chỉnh widget',exact:true}).click();
+  await custom.getByRole('button',{name:'Đặt lại',exact:true}).click();await custom.getByRole('button',{name:'Xong',exact:true}).click();
+  await page.getByRole('button',{name:'Xong',exact:true}).click();
   await mkdir('artifacts/deck-groups',{recursive:true});
-  await page.screenshot({path:'artifacts/deck-groups/desktop.png',fullPage:true});
-  await page.setViewportSize({width:390,height:844});await page.emulateMedia({reducedMotion:'reduce'});
+  await page.waitForFunction(()=>{const a=document.querySelector('#group-g1').getBoundingClientRect(),b=document.querySelector('#group-g2').getBoundingClientRect();return Math.abs(a.y-b.y)<2&&a.right+10<=b.left;});
+  await page.screenshot({path:'artifacts/deck-groups/widgets-desktop.png',fullPage:true});
+  await page.emulateMedia({colorScheme:'dark'});
+  await page.screenshot({path:'artifacts/deck-groups/widgets-dark.png',fullPage:true});
+  await page.setViewportSize({width:360,height:844});await page.emulateMedia({reducedMotion:'reduce'});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
-  await page.screenshot({path:'artifacts/deck-groups/mobile.png',fullPage:true});
+  await page.screenshot({path:'artifacts/deck-groups/widgets-mobile.png',fullPage:true});
+  // The widget handle itself supports touch, independently of deck membership dragging.
+  if(await page.locator('#group-g1 .deck-folder-toggle').getAttribute('aria-expanded')==='true')await page.locator('#group-g1 .deck-folder-toggle').click();
+  await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
+  const widgetTouch = await page.context().newCDPSession(page);
+  const widgetGrip = await page.getByRole('button',{name:'Kéo để di chuyển Từ vựng N3',exact:true}).boundingBox();
+  const widgetDestination = await page.locator('#group-g2').boundingBox();
+  await widgetTouch.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:widgetGrip.x+12,y:widgetGrip.y+12}]});
+  await widgetTouch.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:widgetDestination.x+widgetDestination.width-25,y:Math.min(810,widgetDestination.y+widgetDestination.height/2)}]});
+  await page.waitForFunction(()=>document.querySelector('#group-g2').classList.contains('is-widget-target'));
+  await widgetTouch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+  await page.waitForFunction(()=>document.querySelector('.deck-folder').id==='group-g2');assert.equal(widgetOrderCount,3);
+  await page.waitForFunction(()=>document.querySelector('.deck-groups-library').getAttribute('aria-busy')==='false');
+  await page.getByRole('button',{name:'Kéo để di chuyển Từ vựng N3',exact:true}).focus();await page.keyboard.press('ArrowUp');
+  await page.waitForFunction(()=>document.querySelector('.deck-folder').id==='group-g1');
+  await page.waitForFunction(()=>document.querySelector('.deck-groups-library').getAttribute('aria-busy')==='false');
+  await page.getByRole('button',{name:'Xong',exact:true}).click();
+  await page.getByRole('button',{name:/Từ vựng N3.*2 bộ/}).click();
+  await page.getByRole('heading',{name:'Bài 1 · Khởi đầu',exact:true}).waitFor();
   await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
   const touchHandle = await page.getByRole('heading',{name:'Bài 1 · Khởi đầu',exact:true}).boundingBox();
   const cdp = await page.context().newCDPSession(page);
@@ -159,7 +257,8 @@ try {
   await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
   await page.getByRole('button',{name:/Luyện thi.*1 bộ/}).waitFor();
   assert.equal(decks[0].groupId,'g2');
-  await page.getByRole('button',{name:/Luyện thi.*1 bộ/}).click();
+  if(await page.locator('#group-g2 .deck-folder-toggle').getAttribute('aria-expanded')==='false')await page.locator('#group-g2 .deck-folder-toggle').click();
+  await page.getByRole('heading',{name:'Bài 1 · Khởi đầu',exact:true}).waitFor();
   await moveByMenu('Bài 1 · Khởi đầu','g1');
   await page.getByRole('button',{name:/Từ vựng N3.*2 bộ/}).waitFor();
   await page.getByLabel('Thao tác nhóm Từ vựng N3').click();await page.getByRole('menuitem',{name:'Giải tán nhóm',exact:true}).click();
@@ -167,5 +266,49 @@ try {
   await page.waitForFunction(()=>document.querySelectorAll('.deck-root-zone h3').length===2);
   assert.equal(decks.every(d=>d.groupId===null),true);
   assert.deepEqual(errors,[]);
-  console.log('PASS: resize/persistence/cancel/keyboard, portal menus, groups CRUD, both study actions, move, rollback, hover-open drag, Escape, dissolve, mobile touch drag and reduced motion');
+  // Visual matrix with real group summaries: three sizes, light/dark and a 360px sheet.
+  groups=[{id:'g1',name:'Từ vựng N3',version:0,position:0},{id:'g2',name:'FPT',version:0,position:1},{id:'g3',name:'English',version:0,position:2},{id:'g4',name:'Từ vựng N2 · DMR',version:0,position:3}];
+  decks=[
+    {id:'d1',name:'Bài 1 · Khởi đầu',groupId:'g1',version:0,cardCount:30,dueCount:5,position:0},
+    {id:'d2',name:'Bài 2 · Cuộc sống',groupId:'g1',version:0,cardCount:24,dueCount:3,position:1},
+    {id:'d3',name:'Bài 1',groupId:'g2',version:0,cardCount:1951,dueCount:0,position:0},
+    {id:'d4',name:'Daily words',groupId:'g3',version:0,cardCount:137,dueCount:0,position:0},
+    {id:'d5',name:'Từ vựng N2',groupId:'g4',version:0,cardCount:2101,dueCount:0,position:0},
+  ];
+  await page.evaluate(({widgetKey,sizeKey})=>{
+    localStorage.setItem(widgetKey,JSON.stringify({g1:{size:'large',color:'#9a86e0',opacity:30,blur:24},g2:{size:'medium',color:'#5b8def',opacity:30,blur:24},g3:{size:'small',color:'#5fa88a',opacity:30,blur:24},g4:{size:'medium',color:'#d9a24b',opacity:30,blur:24}}));
+    localStorage.removeItem(sizeKey);
+  },{widgetKey,sizeKey});
+  await page.setViewportSize({width:1280,height:1000});await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});
+  await page.reload();await page.getByRole('heading',{name:'Bài 2 · Cuộc sống'}).waitFor();
+  await page.getByRole('button',{name:'Đổi chế độ',exact:true}).evaluate(el=>el.style.display='none');
+  assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 6');
+  assert.equal(await page.locator('#group-g2').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 3');
+  assert.equal(await page.locator('#group-g3').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 2');
+  await page.locator('#group-g1').getByRole('img',{name:'8 thẻ cần ôn'}).waitFor();
+  assert.equal(await page.locator('#group-g3 .widget-review-ring').count(),0);
+  await page.screenshot({path:'artifacts/deck-groups/glass-dark.png',fullPage:true});
+  await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
+  await page.getByRole('button',{name:'Tùy chỉnh widget FPT',exact:true}).click();
+  await custom.waitFor();await page.screenshot({path:'artifacts/deck-groups/glass-desktop-panel.png',fullPage:true});
+  await page.keyboard.press('Escape');assert.equal(await custom.count(),0);
+  assert.equal(await page.getByRole('button',{name:'Tùy chỉnh widget FPT',exact:true}).evaluate(el=>el===document.activeElement),true);
+  await page.getByRole('button',{name:'Xong',exact:true}).click();
+  await page.emulateMedia({colorScheme:'light'});
+  assert.equal(await page.locator('.deck-groups-library').evaluate(el=>getComputedStyle(el).getPropertyValue('--bg').trim()),'#eceeeb');
+  await page.screenshot({path:'artifacts/deck-groups/glass-light.png',fullPage:true});
+  await page.setViewportSize({width:360,height:844});await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  assert.equal(await page.locator('#group-g3').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 3');
+  assert.equal(await page.locator('#group-g2').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 6');
+  await page.screenshot({path:'artifacts/deck-groups/glass-mobile.png',fullPage:true});
+  await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
+  await page.getByRole('button',{name:'Tùy chỉnh widget English',exact:true}).click();
+  await custom.waitFor();const sheetBox=await custom.boundingBox();
+  assert.ok(sheetBox.height<=844*.62+1);assert.ok(sheetBox.y+sheetBox.height<=844);
+  assert.equal(await custom.evaluate(el=>getComputedStyle(el).animationName),'none');
+  await page.screenshot({path:'artifacts/deck-groups/glass-mobile-panel.png',fullPage:true});
+  await custom.getByRole('button',{name:'Đóng bảng tùy chỉnh',exact:true}).click();
+  assert.equal(await custom.count(),0);assert.deepEqual(errors,[]);
+  console.log('PASS: widget lock/side-by-side/color/transparency/blur/persistence, pointer and keyboard reorder/cancel, resize, groups CRUD, study actions, deck move/rollback, mobile touch drag and reduced motion');
 } finally { await browser?.close(); await server.close(); }

@@ -4,9 +4,9 @@ import { Ellipsis, EllipsisVertical } from 'lucide-react';
 
 export type DeckAction = { id: string; label: string; destructive?: boolean; disabled?: boolean; onSelect: () => void };
 
-type Props = { label?: string; actions: DeckAction[]; horizontal?: boolean; triggerContent?: ReactNode; disabled?: boolean };
+type Props = { label?: string; actions: DeckAction[]; horizontal?: boolean; triggerContent?: ReactNode; disabled?: boolean; menuClassName?: string };
 
-export function OverflowMenu({ label = 'Mở menu', actions, horizontal, triggerContent, disabled }: Props) {
+export function OverflowMenu({ label = 'Mở menu', actions, horizontal, triggerContent, disabled, menuClassName = '' }: Props) {
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const trigger = useRef<HTMLButtonElement>(null);
@@ -44,7 +44,7 @@ export function OverflowMenu({ label = 'Mở menu', actions, horizontal, trigger
       onKeyDown={event => { if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); setOpen(true); } }}
       onClick={() => setOpen(value => !value)}>{triggerContent ?? (horizontal ? <Ellipsis size={20}/> : <EllipsisVertical size={18}/>)}</button>
     {open && createPortal(<div ref={menu} id={id} role="menu" aria-label={label}
-      className="fixed z-[1100] min-w-52 max-w-[calc(100vw-16px)] max-h-[calc(100dvh-16px)] overflow-auto rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-1.5 shadow-xl"
+      className={`fixed z-[1100] min-w-52 max-w-[calc(100vw-16px)] max-h-[calc(100dvh-16px)] overflow-auto rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-1.5 shadow-xl ${menuClassName}`}
       style={position} onKeyDown={event => {
         const items = [...menu.current!.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')];
         const index = items.indexOf(document.activeElement as HTMLButtonElement);
