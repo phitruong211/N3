@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useApp, useLearningStorage } from "@/hooks/useApp";
+import { useReviewTiming } from '@/hooks/useReviewTiming';
+import { useAuth } from '@/hooks/useAuth';
+import { reviewBuiltInCard } from '@/lib/learningSync';
 import {
   useActiveElapsedMinutes,
 } from "@/hooks/useActiveElapsedMinutes";
@@ -66,6 +69,7 @@ export function StudySession({
   onComplete?: () => void;
 }) {
   const { settings, srsCards, updateSRSCard, learningSync } = useApp();
+  const { user } = useAuth();
   const { recordStudyActivity, recordFreeStudyActivity, getJSON, setJSON } = useLearningStorage();
   const templateKey = `study_template_${cards[0]?.source === "BUILT_IN" ? deckName : cards[0]?.deckId || deckName}`;
   const [template, setTemplate] = useState(() => cards[0]?.source === "BUILT_IN"
@@ -100,6 +104,7 @@ export function StudySession({
   const personalNote = useStudyNote(current);
   const currentCardKey = current ? `${current.type}:${current.id}` : null;
   const flipped = currentCardKey !== null && revealedCardKey === currentCardKey;
+  const readReviewTiming = useReviewTiming(currentCardKey, flipped, customizing || personalNote.open || busy || done);
   const elapsed = useActiveElapsedMinutes(
     current ? `${current.type}:${current.id}` : null,
   );
@@ -131,6 +136,7 @@ export function StudySession({
     : undefined;
   const intervals = state ? getNextIntervals(state, settings) : null;
   const clientReviewIds = useRef(new Map<string, string>());
+  const pendingRating = useRef<Rating | null>(null);
   const recordView = useCallback(() => {
     if (
       !current ||
@@ -213,6 +219,10 @@ export function StudySession({
   }
   async function rate(rating: Rating) {
     if (lock.current || !current || !state || !flipped) return;
+    // An uncertain network outcome must retry the original rating with the same key.
+    rating = pendingRating.current ?? rating;
+    pendingRating.current = rating;
+    const timing = readReviewTiming();
     lock.current = true;
     setBusy(true);
     setError("");
@@ -220,14 +230,27 @@ export function StudySession({
       const minutes = elapsed();
       let saved: SRSCard;
       if (current.source === "BUILT_IN") {
-        saved = processReview(state, rating, new Date(), settings);
-        updateSRSCard(saved);
-        await Promise.resolve();
-        await learningSync.flush().catch(() => {});
+        if (user) {
+          const operationId = clientReviewIds.current.get(current.id) ?? crypto.randomUUID();
+          clientReviewIds.current.set(current.id, operationId);
+          await learningSync.beforeTransfer();
+          try {
+            const result = await reviewBuiltInCard(state, rating, operationId, timing);
+            learningSync.apply(result.state);
+            saved = result.card;
+            clientReviewIds.current.delete(current.id);
+          } finally { learningSync.afterTransfer(); }
+        } else {
+          saved = processReview(state, rating, new Date(), settings);
+          const guestLogs = getJSON<unknown[]>('guest_review_logs', []);
+          setJSON('guest_review_logs', [...guestLogs, { cardId: current.id, deckType: type, rating,
+            ...timing, reviewedAt: new Date().toISOString(), schedulerVersion: 'fsrs-6/ts-fsrs-5.4.2' }]);
+          updateSRSCard(saved);
+        }
       } else {
         const operationId = clientReviewIds.current.get(current.id) ?? crypto.randomUUID();
         clientReviewIds.current.set(current.id, operationId);
-        saved = await reviewCard(current.id, rating, operationId, Math.round(minutes * 60000));
+        saved = await reviewCard(current.id, rating, operationId, Math.round(minutes * 60000), timing, state.reps);
         clientReviewIds.current.delete(current.id);
       }
       recordStudyActivity(
@@ -243,6 +266,7 @@ export function StudySession({
         minutes: s.minutes + minutes,
       }));
       const nextQueue = applyReviewedProgress(reviewQueue, current.id, legacyToFsrsProgress(saved), new Date());
+      pendingRating.current = null;
       setReviewQueue(nextQueue);
       setRevealedCardKey(null);
       if (!nextQueue.ready.length && !nextQueue.futureLearning.length) setDone(true);
@@ -507,7 +531,8 @@ export function StudySession({
             (["again", "hard", "good", "easy"] as Rating[]).map((rating, i) => (
               <button
                 key={rating}
-                disabled={busy}
+                disabled={busy || (pendingRating.current !== null && pendingRating.current !== rating)}
+                title={["Không nhớ hoặc trả lời sai", "Nhớ đúng nhưng khó khăn", "Nhớ đúng bình thường", "Nhớ đúng và dễ dàng"][i]}
                 className="study-button"
                 onClick={() => void rate(rating)}
               >

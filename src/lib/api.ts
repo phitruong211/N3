@@ -183,9 +183,10 @@ export const removeCard = (id: string) => apiRequest<void>(`/cards/${id}`, { met
 export const reorderCards = (deckId: string, cardIds: string[]) => apiRequest<ApiCard[]>(`/decks/${deckId}/cards/reorder`, { method: 'PUT', body: JSON.stringify({ cardIds }) });
 export const moveCards = (cardIds: string[], targetDeckId: string, targetPosition?: number) => apiRequest<ApiCard[]>('/cards/move', { method: 'POST', body: JSON.stringify({ cardIds, targetDeckId, targetPosition }) });
 export const getDeckProgress = (deckId: string) => apiRequest<ApiQueueCard[]>(`/anki/decks/${deckId}/cards`);
-export async function reviewCard(cardId: string, rating: Rating, clientReviewId: string, responseTimeMs?: number): Promise<SRSCard> {
+export async function reviewCard(cardId: string, rating: Rating, clientReviewId: string, responseTimeMs?: number,
+  timing?: import('./reviewTiming').ReviewTimingData, expectedRepetitions?: number): Promise<SRSCard> {
   const result = await apiRequest<{ cardId: string; progress: ApiProgress }>(`/anki/cards/${cardId}/reviews`, {
-    method: 'POST', body: JSON.stringify({ clientReviewId, rating: rating.toUpperCase(), responseTimeMs }),
+    method: 'POST', body: JSON.stringify({ clientReviewId, rating: rating.toUpperCase(), responseTimeMs, ...timing, expectedRepetitions }),
   });
   return progressToSrs(cardId, result.progress);
 }

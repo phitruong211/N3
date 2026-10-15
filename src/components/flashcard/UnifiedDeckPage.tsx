@@ -40,9 +40,9 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
   }
 
   function launchScheduled(deck: BuiltInDeckDefinition) {
-    const cards = scheduleFor(deck).cards;
-    if (!cards.length) return;
-    setSession({ id: deck.id, name: deck.name, cards, template: defaultDeckTemplate(), initialIndex: 0, mode: 'anki' });
+    const scheduled = scheduleFor(deck);
+    if (!scheduled.cards.length) return;
+    setSession({ id: deck.id, name: deck.name, cards: scheduled.sessionCards, template: defaultDeckTemplate(), initialIndex: 0, mode: 'anki' });
   }
 
   function freeAction(deck: BuiltInDeckDefinition) {

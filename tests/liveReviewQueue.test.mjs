@@ -24,3 +24,39 @@ test('daily allowance limits new cards and due cards stay ahead', () => {
   assert.equal(queue.ready.length, 21);
   assert.equal(queue.ready[0], '24');
 });
+
+test('a due learning card appears after the current card while new cards remain', () => {
+  const cards = [{id:'current'}, {id:'new'}, {id:'again'}];
+  const queue = createReviewQueue({cards, keyFor:c=>c.id, now,
+    progressByKey:new Map([['again', progress]])});
+  assert.deepEqual(queue.ready, ['current', 'new']);
+  // Passing the deadline must not replace the card being read.
+  const ratedAt = new Date('2026-10-10T00:01:05.000Z');
+  assert.equal(nextReadyCard(queue).key, 'current');
+  const saved = {...progress, state:'review', dueAt:'2026-10-12T00:00:00.000Z'};
+  const next = applyReviewedProgress(queue, 'current', saved, ratedAt);
+  assert.deepEqual(next.ready, ['again', 'new']);
+  assert.equal(nextReadyCard(next).key, 'again');
+  assert.deepEqual(queue.ready, ['current', 'new']);
+});
+
+test('future review cards are reconsidered at their deadline and are not shown early', () => {
+  const cards = [{id:'current'}, {id:'review'}, {id:'new'}];
+  const queue = createReviewQueue({cards, keyFor:c=>c.id, now,
+    progressByKey:new Map([['review', {...progress, state:'review'}]])});
+  const saved = {...progress, dueAt:'2026-10-10T00:10:00.000Z'};
+  const before = applyReviewedProgress(queue, 'current', saved, new Date('2026-10-10T00:00:59.999Z'));
+  assert.deepEqual(before.ready, ['new']);
+  const at = applyReviewedProgress(queue, 'current', saved, new Date('2026-10-10T00:01:00.000Z'));
+  assert.deepEqual(at.ready, ['review', 'new']);
+  assert.deepEqual(promoteDueCards(at, new Date('2026-10-10T00:01:01.000Z')).ready, at.ready);
+});
+
+test('multiple due cards retain priority and prevent premature completion after last ready card', () => {
+  const queue = createReviewQueue({cards:['current','review','learning','relearning'].map(id=>({id})), keyFor:c=>c.id, now,
+    progressByKey:new Map(['review','learning','relearning'].map(state=>[state,{...progress,state}]))});
+  const next = applyReviewedProgress(queue, 'current', {...progress, state:'review', dueAt:'2026-10-12T00:00:00Z'},
+    new Date('2026-10-10T00:02:00Z'));
+  assert.deepEqual(next.ready, ['relearning','learning','review']);
+  assert.equal(next.futureLearning.length, 0);
+});

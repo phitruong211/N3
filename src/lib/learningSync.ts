@@ -3,6 +3,10 @@ import type { Bookmark, SRSCard, StudyDay } from '@/types';
 
 export interface LearningData { bookmarks: Bookmark[]; srsCards: SRSCard[]; studyDays: StudyDay[] }
 export interface LearningSnapshot extends LearningData { revision: number }
+export const reviewBuiltInCard = (card: SRSCard, rating: string, clientReviewId: string,
+  timing?: import('./reviewTiming').ReviewTimingData) => apiRequest<{ state: LearningSnapshot; card: SRSCard }>(
+    '/users/me/learning/reviews', { method: 'POST', body: JSON.stringify({ cardId: card.cardId, deckType: card.deckType,
+      review: { clientReviewId, rating: rating.toUpperCase(), expectedRepetitions: card.reps, ...timing } }) });
 export interface MigrationReport { state: LearningSnapshot; bookmarksCreated: number; srsCreated: number; srsSkipped: number; activitiesMerged: number }
 export const getLearningState = (signal?: AbortSignal) => apiRequest<LearningSnapshot>('/users/me/learning', { signal });
 export const putLearningState = (state: LearningSnapshot, signal?: AbortSignal) => apiRequest<LearningSnapshot>('/users/me/learning', { method: 'PUT', body: JSON.stringify(state), signal });

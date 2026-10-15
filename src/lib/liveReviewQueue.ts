@@ -79,11 +79,18 @@ export function applyReviewedProgress<T>(queue: ReviewQueue<T>, key: string, pro
   else if ((progress.state === 'learning' || progress.state === 'relearning') && due < next.nextDayStart.getTime()) next.futureLearning.push(key);
   next.ready = sorted(next, next.ready);
   next.futureLearning = sorted(next, next.futureLearning);
-  return next;
+  // Recheck deadlines at the card boundary. A learning card may have become due
+  // while the learner was reading the current card or waiting for its save.
+  return promoteDueCards(next, now);
 }
 
 export function promoteDueCards<T>(queue: ReviewQueue<T>, now: Date): ReviewQueue<T> {
-  const due = queue.futureLearning.filter(key => Date.parse(queue.progressByKey.get(key)?.dueAt ?? '') <= now.getTime());
+  const ready = new Set(queue.ready);
+  const due = [...queue.cardsByKey.keys()].filter(key => {
+    const progress = queue.progressByKey.get(key);
+    return !ready.has(key) && progress && progress.state !== 'new'
+      && Date.parse(progress.dueAt) <= now.getTime();
+  });
   if (!due.length) return queue;
   return {
     ...queue,

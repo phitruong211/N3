@@ -31,6 +31,7 @@ test('scheduled deck queue prioritizes due cards and applies the automatic daily
     remainingTodayCount: 3,
   });
   assert.deepEqual(result.cards.map(card => card.id), ['learning', 'review', 'new-1']);
+  assert.deepEqual(result.sessionCards.map(card => card.id), ['learning', 'review', 'new-1', 'future-learning']);
 });
 
 test('scheduled deck queue stops introducing new cards after the daily allowance is used', () => {
