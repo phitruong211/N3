@@ -5,7 +5,7 @@
 - Lưới 6 cột, khoảng cách 16 px. Nhỏ chiếm 2 cột (3 trên vùng hẹp/điện thoại), Vừa chiếm 3 cột (6 trên điện thoại), Lớn chiếm 6 cột.
 - Nhỏ: biểu tượng, tên, số bộ/thẻ và nút mở nhóm. Vừa thêm vòng tiến độ và số thẻ cần ôn. Lớn tải danh sách bộ con và trình bày thành các hàng tên/số thẻ gọn, nhiều cột khi đủ rộng.
 - Tông tối/sáng theo hệ điều hành, tôn trọng lựa chọn light/dark rõ ràng của ứng dụng. Nền có hai vệt sáng mờ; widget dùng một lớp kính có blur/saturation, viền mảnh và mép sáng phía trên.
-- Sáu tông gợi ý: Sương, Xanh khói, Xanh sage, Cát ấm, Hồng tro, Lavender. Có bảng chọn màu tùy ý và hiển thị mã HEX; màu đã lưu được giữ nguyên. Mặc định Sương, độ đậm nền 30%, blur 24 px. Khoảng chỉnh 5–70% và 0–40 px. Widget thật cập nhật ngay; không có thẻ xem trước riêng.
+- Sáu tông gợi ý: Sương, Xanh trời, Bạc hà, Mơ vàng, Hồng đào, Lavender. Có bảng chọn màu tùy ý và hiển thị mã HEX; màu đã lưu được giữ nguyên. Mặc định Sương, độ đậm nền 30%, blur 24 px. Khoảng chỉnh 5–70% và 0–40 px. Widget thật cập nhật ngay; không có thẻ xem trước riêng.
 
 ## Sắp xếp và tùy chỉnh
 
@@ -29,3 +29,5 @@ Mở nhóm vẫn dùng dữ liệu/phân trang cũ. Các hàng bộ con gọi c�
 ## Kiểm tra
 
 `tests/deckWidgets.test.mjs` kiểm tra dữ liệu lưu không hợp lệ, màu cũ, giới hạn, độ tương phản và thứ tự bất biến. `tests/deckGroups.browser.mjs` kiểm tra ba kích thước, sáu màu gợi ý và bảng chọn màu tùy ý, bảng không modal/không phủ lưới, focus/Esc, reload, kéo/resize/cancel/bàn phím/cảm ứng, luồng nhóm cũ và 360 px ở sáng/tối. Có thể đặt `PLAYWRIGHT_CHANNEL=msedge` để dùng Edge cài sẵn. Ảnh kiểm tra nằm tại `artifacts/deck-groups/glass-*.png`.
+
+Vệt sáng được giới hạn trong vùng bộ thẻ, không phủ sidebar. Bề mặt kính có lớp phản sáng chéo và viền sáng mảnh; nền tối được nâng lên màu than xanh #151b1e. Màu đã lưu vẫn giữ nguyên; chọn màu gợi ý để áp dụng bảng màu mới.

@@ -4,11 +4,11 @@ export interface DeckWidgetStyle { size: WidgetSize; color: string; opacity: num
 export const DEFAULT_WIDGET_STYLE: DeckWidgetStyle = { size: 'small', color: '#8b93a1', opacity: 30, blur: 24 };
 export const WIDGET_COLORS = [
   { value: '#8b93a1', label: 'Sương' },
-  { value: '#7c9cba', label: 'Xanh khói' },
-  { value: '#83a995', label: 'Xanh sage' },
-  { value: '#c5ad88', label: 'Cát ấm' },
-  { value: '#bc9298', label: 'Hồng tro' },
-  { value: '#a398bd', label: 'Lavender' },
+  { value: '#65a8ed', label: 'Xanh trời' },
+  { value: '#59c5a2', label: 'Bạc hà' },
+  { value: '#e8b768', label: 'Mơ vàng' },
+  { value: '#e58fa6', label: 'Hồng đào' },
+  { value: '#aa94e8', label: 'Lavender' },
 ];
 
 
@@ -39,8 +39,8 @@ function contrast(a: Rgb, b: Rgb) { const first = luminance(a), second = luminan
 
 /** Glass at the upper opacity bound can need dark ink even in a dark theme. */
 export function widgetInk(style: DeckWidgetStyle, light: boolean) {
-  const surfaces = (light ? ['#eceeeb', '#c7e1d5', '#dbd6ec'] : ['#0d100f', '#1f3930', '#2f2a42', '#14432c', '#322046']).map(rgb);
-  const backgrounds = surfaces.flatMap(surface => { const glass = mix(rgb(style.color), surface, style.opacity / 100); return [glass, mix(rgb('#ffffff'), glass, .06), mix(rgb('#000000'), glass, .06)]; });
+  const surfaces = (light ? ['#eceeeb', '#c7e1d5', '#dbd6ec'] : ['#0d100f', '#151b1e', '#1f3930', '#2f2a42', '#14432c', '#322046']).map(rgb);
+  const backgrounds = surfaces.flatMap(surface => { const glass = mix(rgb(style.color), surface, style.opacity / 100); return [glass, mix(rgb('#ffffff'), glass, .18), mix(rgb('#000000'), glass, .06)]; });
   const minimum = (hex: string) => Math.min(...backgrounds.map(background => contrast(rgb(hex), background)));
   const preferred = light ? '#171a18' : '#eef1ef', inverse = light ? '#eef1ef' : '#0d100f';
   let ink = minimum(preferred) >= minimum(inverse) ? preferred : inverse;

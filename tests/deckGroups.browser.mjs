@@ -136,7 +136,7 @@ try {
   await custom.getByRole('slider',{name:'Độ mờ phía sau',exact:true}).focus();await page.keyboard.press('Home');
   for(let step=0;step<24;step++)await page.keyboard.press('ArrowRight');
   const widgetKey = 'user:fixture:deck-group-widgets-v1';
-  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,widgetKey),{size:'medium',color:'#a398bd',opacity:35,blur:24});
+  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,widgetKey),{size:'medium',color:'#aa94e8',opacity:35,blur:24});
   assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).opacity),'1');
   assert.equal(await custom.locator('.widget-color-options button').count(),6);
   assert.equal(await custom.locator('.widget-style-preview').count(),0);
@@ -276,7 +276,7 @@ try {
     {id:'d5',name:'Từ vựng N2',groupId:'g4',version:0,cardCount:2101,dueCount:0,position:0},
   ];
   await page.evaluate(({widgetKey,sizeKey})=>{
-    localStorage.setItem(widgetKey,JSON.stringify({g1:{size:'large',color:'#9a86e0',opacity:30,blur:24},g2:{size:'medium',color:'#5b8def',opacity:30,blur:24},g3:{size:'small',color:'#5fa88a',opacity:30,blur:24},g4:{size:'medium',color:'#d9a24b',opacity:30,blur:24}}));
+    localStorage.setItem(widgetKey,JSON.stringify({g1:{size:'large',color:'#aa94e8',opacity:30,blur:24},g2:{size:'medium',color:'#65a8ed',opacity:30,blur:24},g3:{size:'small',color:'#59c5a2',opacity:30,blur:24},g4:{size:'medium',color:'#e8b768',opacity:30,blur:24}}));
     localStorage.removeItem(sizeKey);
   },{widgetKey,sizeKey});
   await page.setViewportSize({width:1280,height:1000});await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});

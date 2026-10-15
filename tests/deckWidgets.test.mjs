@@ -18,9 +18,9 @@ test('glass ink stays at AA text contrast across every tone, opacity and theme s
   const luminance = color => color.map(channel=>{const value=channel/255;return value<=.04045?value/12.92:((value+.055)/1.055)**2.4;}).reduce((sum,value,index)=>sum+value*[.2126,.7152,.0722][index],0);
   for(const light of [false,true])for(const tone of WIDGET_COLORS)for(let opacity=5;opacity<=70;opacity++) {
     const colors=widgetInk({...DEFAULT_WIDGET_STYLE,color:tone.value,opacity},light);
-    for(const base of light?['#eceeeb','#c7e1d5','#dbd6ec']:['#0d100f','#1f3930','#2f2a42','#14432c','#322046']) {
+    for(const base of light?['#eceeeb','#c7e1d5','#dbd6ec']:['#0d100f','#151b1e','#1f3930','#2f2a42','#14432c','#322046']) {
       const glass=mix(rgb(tone.value),rgb(base),opacity/100);
-      for(const background of [glass,mix([255,255,255],glass,.06),mix([0,0,0],glass,.06)])for(const text of [colors.ink,colors.ink2]) {
+      for(const background of [glass,mix([255,255,255],glass,.18),mix([0,0,0],glass,.06)])for(const text of [colors.ink,colors.ink2]) {
         const a=luminance(rgb(text)),b=luminance(colors.halo ? rgb(colors.halo) : background);
         assert.ok((Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5,`${tone.label} ${opacity}% ${light?'light':'dark'} ${text}`);
       }
