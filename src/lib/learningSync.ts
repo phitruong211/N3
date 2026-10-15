@@ -19,3 +19,13 @@ export async function migrationKey(accountId: string, sourceId: string, data: Le
   const digest = await crypto.subtle.digest('SHA-256', bytes);
   return `${sourceId.slice(0, 20)}:${Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')}`;
 }
+
+export async function reviewBuiltInBatch(items: import('./reviewOutbox').QueuedReview[]) {
+  return apiRequest<{ state: LearningSnapshot; cards: SRSCard[] }>('/users/me/learning/reviews/batch', {
+    method: 'POST', body: JSON.stringify({ reviews: items.map(item => ({
+      cardId: item.card.cardId, deckType: item.card.deckType,
+      review: { clientReviewId: item.id, rating: item.rating.toUpperCase(),
+        expectedRepetitions: item.card.reps, responseTimeMs: item.responseTimeMs, ...item.timing },
+    })) }),
+  });
+}

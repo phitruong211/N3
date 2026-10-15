@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useApp, useLearningStorage } from "@/hooks/useApp";
+import { projectedReview } from '@/lib/reviewOutbox';
 import { useReviewTiming } from '@/hooks/useReviewTiming';
 import { useAuth } from '@/hooks/useAuth';
-import { reviewBuiltInCard } from '@/lib/learningSync';
 import {
   useActiveElapsedMinutes,
 } from "@/hooks/useActiveElapsedMinutes";
 import { createSRSCard, getNextIntervals, processReview } from "@/lib/srs";
 import { legacyToFsrsProgress, progressToSrsCard } from "@/lib/fsrsProgress";
 import { applyReviewedProgress, createReviewQueue, nearestFutureDue, nextReadyCard, promoteDueCards } from "@/lib/liveReviewQueue";
-import { progressToSrs, reviewCard, type ApiProgress } from "@/lib/api";
+import { progressToSrs, type ApiProgress } from "@/lib/api";
 import { defaultDeckTemplate, normalizeDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
@@ -68,7 +68,7 @@ export function StudySession({
   onPositionChange?: (cardId: string) => void;
   onComplete?: () => void;
 }) {
-  const { settings, srsCards, updateSRSCard, learningSync } = useApp();
+  const { settings, srsCards, updateSRSCard, learningSync, reviewOutbox } = useApp();
   const { user } = useAuth();
   const { recordStudyActivity, recordFreeStudyActivity, getJSON, setJSON } = useLearningStorage();
   const templateKey = `study_template_${cards[0]?.source === "BUILT_IN" ? deckName : cards[0]?.deckId || deckName}`;
@@ -83,7 +83,8 @@ export function StudySession({
       const stored = card.source === 'BUILT_IN'
         ? srsCards.find(item => item.cardId === card.id && item.deckType === card.type.toLowerCase())
         : initialProgress[card.id] ? progressToSrs(card.id, initialProgress[card.id]!) : null;
-      progressByKey.set(card.id, stored ? legacyToFsrsProgress(stored) : null);
+      const projected = reviewOutbox.project(card.source === 'BUILT_IN' ? 'BUILT_IN' : 'PERSONAL', { ...(stored ?? createSRSCard(card.id, 'vocabulary')), deckType: card.type === 'KANJI' ? 'kanji' : card.type === 'GRAMMAR' ? 'grammar' : 'vocabulary' });
+      progressByKey.set(card.id, legacyToFsrsProgress(projected));
     }
     return createReviewQueue({ cards, keyFor: card => card.id, progressByKey, now: new Date(), dailyNewLimit: settings.srsDailyNewLimit });
   });
@@ -135,8 +136,6 @@ export function StudySession({
       : createSRSCard(current.id, type)
     : undefined;
   const intervals = state ? getNextIntervals(state, settings) : null;
-  const clientReviewIds = useRef(new Map<string, string>());
-  const pendingRating = useRef<Rating | null>(null);
   const recordView = useCallback(() => {
     if (
       !current ||
@@ -219,39 +218,24 @@ export function StudySession({
   }
   async function rate(rating: Rating) {
     if (lock.current || !current || !state || !flipped) return;
-    // An uncertain network outcome must retry the original rating with the same key.
-    rating = pendingRating.current ?? rating;
-    pendingRating.current = rating;
     const timing = readReviewTiming();
     lock.current = true;
     setBusy(true);
     setError("");
     try {
       const minutes = elapsed();
-      let saved: SRSCard;
-      if (current.source === "BUILT_IN") {
-        if (user) {
-          const operationId = clientReviewIds.current.get(current.id) ?? crypto.randomUUID();
-          clientReviewIds.current.set(current.id, operationId);
-          await learningSync.beforeTransfer();
-          try {
-            const result = await reviewBuiltInCard(state, rating, operationId, timing);
-            learningSync.apply(result.state);
-            saved = result.card;
-            clientReviewIds.current.delete(current.id);
-          } finally { learningSync.afterTransfer(); }
-        } else {
-          saved = processReview(state, rating, new Date(), settings);
-          const guestLogs = getJSON<unknown[]>('guest_review_logs', []);
-          setJSON('guest_review_logs', [...guestLogs, { cardId: current.id, deckType: type, rating,
-            ...timing, reviewedAt: new Date().toISOString(), schedulerVersion: 'fsrs-6/ts-fsrs-5.4.2' }]);
-          updateSRSCard(saved);
-        }
+      const saved = processReview(state, rating, new Date(), settings);
+      if (user) {
+        await reviewOutbox.enqueue({ id: crypto.randomUUID(),
+          source: current.source === 'BUILT_IN' ? 'BUILT_IN' : 'PERSONAL',
+          card: state, rating, optimistic: saved, timing,
+          responseTimeMs: Math.round(minutes * 60000),
+        });
       } else {
-        const operationId = clientReviewIds.current.get(current.id) ?? crypto.randomUUID();
-        clientReviewIds.current.set(current.id, operationId);
-        saved = await reviewCard(current.id, rating, operationId, Math.round(minutes * 60000), timing, state.reps);
-        clientReviewIds.current.delete(current.id);
+        const guestLogs = getJSON<unknown[]>('guest_review_logs', []);
+        setJSON('guest_review_logs', [...guestLogs, { cardId: current.id, deckType: type, rating,
+          ...timing, reviewedAt: new Date().toISOString(), schedulerVersion: 'fsrs-6/ts-fsrs-5.4.2' }]);
+        updateSRSCard(saved);
       }
       recordStudyActivity(
         1,
@@ -266,7 +250,6 @@ export function StudySession({
         minutes: s.minutes + minutes,
       }));
       const nextQueue = applyReviewedProgress(reviewQueue, current.id, legacyToFsrsProgress(saved), new Date());
-      pendingRating.current = null;
       setReviewQueue(nextQueue);
       setRevealedCardKey(null);
       if (!nextQueue.ready.length && !nextQueue.futureLearning.length) setDone(true);
@@ -281,6 +264,27 @@ export function StudySession({
       setBusy(false);
     }
   }
+  const outboxData = reviewOutbox.data;
+  useEffect(() => {
+    if (mode !== 'anki') return;
+    setReviewQueue(queue => {
+      let next = queue;
+      for (const card of cards) {
+        const old = next.progressByKey.get(card.id);
+        if (!old || !next.answeredToday.has(card.id)) continue;
+        const type = card.type === 'KANJI' ? 'kanji' : card.type === 'GRAMMAR' ? 'grammar' : 'vocabulary';
+        const projected = projectedReview(outboxData, card.source === 'BUILT_IN' ? 'BUILT_IN' : 'PERSONAL', progressToSrsCard(card.id, type, old));
+        if (projected.reps === old.repetitions && JSON.stringify(legacyToFsrsProgress(projected)) !== JSON.stringify(old)) {
+          const currentKey = next.ready[0];
+          // Do not replace the progress of a card whose question is already visible.
+          if (currentKey === card.id) continue;
+          next = applyReviewedProgress(next, card.id, legacyToFsrsProgress(projected), new Date());
+          if (currentKey && next.ready.includes(currentKey)) next = { ...next, ready: [currentKey, ...next.ready.filter(key => key !== currentKey)] };
+        }
+      }
+      return next;
+    });
+  }, [outboxData, cards, mode]);
   useEffect(() => {
     if (mode !== 'anki' || done || reviewQueue.ready.length || !reviewQueue.futureLearning.length) return;
     const promote = () => {
@@ -531,7 +535,7 @@ export function StudySession({
             (["again", "hard", "good", "easy"] as Rating[]).map((rating, i) => (
               <button
                 key={rating}
-                disabled={busy || (pendingRating.current !== null && pendingRating.current !== rating)}
+                disabled={busy}
                 title={["Không nhớ hoặc trả lời sai", "Nhớ đúng nhưng khó khăn", "Nhớ đúng bình thường", "Nhớ đúng và dễ dàng"][i]}
                 className="study-button"
                 onClick={() => void rate(rating)}

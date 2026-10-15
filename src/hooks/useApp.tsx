@@ -5,13 +5,14 @@
 // Minimizes prop drilling (cognitive load for developers)
 // ============================================================
 
-import React, { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback, useMemo, type ReactNode } from 'react';
 import type { VocabItem, KanjiItem, GrammarItem, PageId, AppSettings, SRSCard, Bookmark, NavigationTarget } from '@/types';
 import { loadVocabulary, loadKanji, loadGrammar } from '@/lib/data';
 import { loadN5Decks } from '@/lib/n5Decks';
 import type { BuiltInDeckDefinition } from '@/lib/deckCatalog';
 import type { LearningStorage } from '@/lib/storage';
 import { useAuth } from '@/hooks/useAuth';
+import { useReviewOutbox } from './useReviewOutbox';
 import { useLearningSync } from './useLearningSync';
 import { useSettingsSync } from './useSettingsSync';
 import { useCardNotes } from './useCardNotes';
@@ -21,6 +22,7 @@ import { pageForLocation, pathForPage } from '@/lib/navigation';
 interface AppState {
   storage: LearningStorage;
   learningSync: ReturnType<typeof useLearningSync>;
+  reviewOutbox: ReturnType<typeof useReviewOutbox>;
   cardNotes: ReturnType<typeof useCardNotes>;
   // <Data>                                 </Data>
   vocabulary: VocabItem[];
@@ -92,6 +94,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [sidebarCollapsed, setSidebarCollapsedState] = useState(storage.getSidebarCollapsed);
 
   const learningSync = useLearningSync(storage, Boolean(user), state => { _setBookmarks(state.bookmarks); _setSRSCards(state.srsCards); });
+  const reviewOutbox = useReviewOutbox(storage, Boolean(user), learningSync);
   const cardNotes = useCardNotes(storage, Boolean(user));
 
   // Load data on mount
@@ -218,11 +221,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
     upsertSRSCard(card);
   }, [upsertSRSCard]);
 
+  const visibleCards = useMemo(() => {
+    const cards = new Map(srsCards.map(card => [`${card.deckType}:${card.cardId}`, card]));
+    const candidates = [...Object.entries(reviewOutbox.data.confirmed).filter(([key]) => key.startsWith('BUILT_IN:')).map(([, card]) => card),
+      ...reviewOutbox.data.items.filter(item => item.source === 'BUILT_IN').map(item => item.optimistic)];
+    for (const card of candidates) {
+      const key = `${card.deckType}:${card.cardId}`;
+      if ((cards.get(key)?.reps ?? -1) <= card.reps) cards.set(key, card);
+    }
+    return [...cards.values()];
+  }, [srsCards, reviewOutbox.data]);
   return (
     <AppContext.Provider
       value={{
         storage,
         learningSync,
+        reviewOutbox,
         cardNotes,
         vocabulary,
         kanji,
@@ -242,7 +256,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         bookmarks,
         toggleBookmark,
         isBookmarked,
-        srsCards,
+        srsCards: visibleCards,
         setSRSCards,
         updateSRSCard,
         searchOpen,
@@ -252,6 +266,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
+      {reviewOutbox.pending > 0 && <div role="status" className="fixed right-3 top-20 z-[70] max-w-[calc(100vw-1.5rem)] rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-xs shadow-lg">
+        {reviewOutbox.error ? `Chưa đồng bộ ${reviewOutbox.pending} lượt ôn: ${reviewOutbox.error}` : `Đang đồng bộ ${reviewOutbox.pending} lượt ôn…`}
+        {reviewOutbox.error && <button className="ml-3 underline" onClick={reviewOutbox.retry}>Thử lại</button>}
+      </div>}
     </AppContext.Provider>
   );
 }
