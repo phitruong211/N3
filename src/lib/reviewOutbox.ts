@@ -17,6 +17,7 @@ export type ReviewOutboxData = {
   items: QueuedReview[]; confirmed: Record<string, SRSCard>;
   undo?: { item: QueuedReview; local: boolean; result?: SRSCard };
   lastUndo?: { id: string; card: SRSCard };
+  rejectedUndo?: { item: QueuedReview; message: string };
   reverted?: Record<string, string>;
 };
 export const reviewKey = (source: string, card: SRSCard) => `${source}:${card.deckType}:${card.cardId}`;
@@ -29,6 +30,7 @@ export function createReviewOutbox(options: {
   lock: <T>(name: string, work: () => Promise<T>) => Promise<T>;
   send: (items: QueuedReview[]) => Promise<SRSCard[]>;
   undo?: (item: QueuedReview) => Promise<SRSCard>;
+  isUnsupportedUndo?: (reason: unknown) => boolean;
   applyUndo?: (item: QueuedReview, restored: SRSCard) => Promise<SRSCard | void> | SRSCard | void;
   changed: () => void;
   active: () => boolean;
@@ -45,9 +47,11 @@ export function createReviewOutbox(options: {
     enqueue: (item: QueuedReview) => mutate(data => {
       if (data.undo) throw new Error('Đang hoàn tác lượt ôn. Vui lòng đợi.');
       if (!data.items.some(value => value.id === item.id)) data.items.push(item);
+      delete data.rejectedUndo;
     }),
     requestUndo: (item: QueuedReview) => mutate(data => {
       if (data.lastUndo?.id === item.id) return;
+      if (data.rejectedUndo?.item.id === item.id) throw new Error(data.rejectedUndo.message);
       if (data.undo) {
         if (data.undo.item.id !== item.id) throw new Error('Đang hoàn tác một lượt khác.');
         return;
@@ -68,7 +72,19 @@ export function createReviewOutbox(options: {
             let restored = pending.result;
             if (!restored) {
               if (!pending.local && !options.undo) throw new Error('Chưa hỗ trợ hoàn tác trên máy chủ.');
-              restored = pending.local ? pending.item.card : await options.undo!(pending.item);
+              try {
+                restored = pending.local ? pending.item.card : await options.undo!(pending.item);
+              } catch (reason) {
+                // Only a definitive unsupported-history response can release the
+                // gate. Network failures and uncertain outcomes remain durable.
+                if (!options.isUnsupportedUndo?.(reason)) throw reason;
+                await mutate(data => {
+                  if (data.undo?.item.id !== pending.item.id) return;
+                  data.rejectedUndo = { item: pending.item, message: 'Lượt ôn cũ không hỗ trợ hoàn tác. Tiến độ đã lưu được giữ nguyên; bạn có thể tiếp tục ôn.' };
+                  delete data.undo;
+                });
+                continue;
+              }
               const result = restored;
               await mutate(data => { if (data.undo?.item.id === pending.item.id) data.undo.result = result; });
             }

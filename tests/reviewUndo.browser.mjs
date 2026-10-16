@@ -23,6 +23,7 @@ try {
     let state = { revision: 0, bookmarks: [], studyDays: [], srsCards: [] };
     const receipts = new Map();
     let undoFailure = 0;
+    let undoFailureMessage = 'Undo temporarily unavailable';
     let failOnce = false;
     const undoIds = [];
     let requests = 0;
@@ -46,7 +47,7 @@ try {
         if (undoFailure) {
           const status = undoFailure;
           if (failOnce) undoFailure = 0;
-          return route.fulfill({ status, json: { message: 'Undo temporarily unavailable' } });
+          return route.fulfill({ status, json: { message: undoFailureMessage } });
         }
         const reviewed = receipts.get(id);
         if (!reviewed) return route.fulfill({status:404,json:{message:'missing receipt'}});
@@ -153,6 +154,29 @@ try {
     assert.equal(await page.getByRole('button',{name:/4 · Dễ/}).isEnabled(),true);
     await page.waitForFunction(()=>!JSON.parse(localStorage.getItem('user:queue-test:review_outbox_v1'))?.undo);
     console.log(`${source}/${type}: failed undo auto-recovers, survives reload, and does not block free flashcards`);
+    await page.getByRole('button',{name:/4 · Dễ/}).click();
+    await page.getByText('Question 2',{exact:true}).waitFor();
+    await page.waitForFunction(()=>JSON.parse(localStorage.getItem('user:queue-test:review_outbox_v1'))?.items.length===0);
+    // Reproduce a pending undo left by the old deployment, without a receipt.
+    await page.evaluate(() => {
+      const key='user:queue-test:review_outbox_v1';
+      const data=JSON.parse(localStorage.getItem(key));
+      const prior=data.lastUndo;
+      data.undo={local:false,item:{id:'legacy-review',source:'PERSONAL',card:prior.card,optimistic:prior.card,rating:'easy',timing:{},responseTimeMs:0}};
+      localStorage.setItem(key,JSON.stringify(data));
+    });
+    undoFailure = 409;
+    undoFailureMessage = 'Lượt ôn cũ không hỗ trợ hoàn tác';
+    await page.reload();
+    await page.getByText(/Tiến độ đã lưu được giữ nguyên/).waitFor();
+    assert.equal(await page.getByRole('button',{name:'Kết thúc phiên',exact:true}).isEnabled(),true);
+    await page.getByRole('button',{name:'Hiện đáp án',exact:true}).click();
+    assert.equal(await page.getByRole('button',{name:/4 · Dễ/}).isEnabled(),true);
+    const recovered=await page.evaluate(()=>JSON.parse(localStorage.getItem('user:queue-test:review_outbox_v1')));
+    assert.equal(recovered.undo,undefined);
+    assert.equal(recovered.rejectedUndo.item.id,'legacy-review');
+    assert.equal(recovered.lastUndo.id === 'legacy-review',false,'must not claim a successful rollback');
+    console.log(`${source}/${type}: unsupported legacy undo releases session without rolling back progress`);
     assert.deepEqual(errors,[]);
     console.log(`${source}/${type}: server undo waits for acknowledgement, restores answer and stats, permits re-rating`);
     await context.close();

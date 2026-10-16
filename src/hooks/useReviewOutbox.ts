@@ -19,6 +19,8 @@ export function useReviewOutbox(storage: LearningStorage, enabled: boolean, sync
       ? navigator.locks.request(`${storage.scope}:review:${name}`, work)
       : work(),
     active: () => active.current,
+    isUnsupportedUndo: reason => reason instanceof ApiError && reason.status === 409
+      && reason.message === 'Lượt ôn cũ không hỗ trợ hoàn tác',
     changed: () => { setData(storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox())); },
     send: async items => {
       if (items[0].source === 'BUILT_IN') {
@@ -106,7 +108,9 @@ export function useReviewOutbox(storage: LearningStorage, enabled: boolean, sync
       // reporting and reconnect/backoff recovery as a queued review.
       wake.current();
       await engine.drain();
-      const result = storage.getJSON<ReviewOutboxData>(REVIEW_OUTBOX_KEY, emptyOutbox()).lastUndo;
+      const latest = storage.getJSON<ReviewOutboxData>(REVIEW_OUTBOX_KEY, emptyOutbox());
+      if (latest.rejectedUndo?.item.id === item.id) throw new Error(latest.rejectedUndo.message);
+      const result = latest.lastUndo;
       if (result?.id !== item.id) throw new Error('Chưa hoàn tất hoàn tác. Vui lòng thử lại.');
       return result.card;
     },

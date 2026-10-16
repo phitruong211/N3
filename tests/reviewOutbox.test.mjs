@@ -118,3 +118,25 @@ test('lost undo response retries after reload and local effect failure reuses pe
   await resumed.engine.requestUndo(review);await resumed.engine.drain();
   assert.equal(requests, 1);
 });
+
+test('unsupported legacy undo is retained as rejected without changing progress or activity, and unblocks reviews', async () => {
+  const review = item('legacy');
+  const confirmed = { 'BUILT_IN:vocabulary:c1': review.optimistic };
+  const f = fixture(async items => items.map(value => value.optimistic), {
+    ...emptyOutbox(), confirmed, undo: { item: review, local: false },
+  });
+  f.options.undo = async () => { throw new Error('unsupported'); };
+  f.options.isUnsupportedUndo = error => error.message === 'unsupported';
+  f.options.applyUndo = () => assert.fail('must not reverse local activity or progress');
+  await f.engine.drain();
+  assert.equal(f.read().undo, undefined);
+  assert.equal(f.read().rejectedUndo.item.id, 'legacy');
+  assert.deepEqual(f.read().confirmed, confirmed);
+  assert.equal(f.read().lastUndo, undefined);
+  assert.equal(f.read().reverted, undefined);
+  await assert.rejects(f.engine.requestUndo(review), /Lượt ôn cũ/);
+  await f.engine.enqueue(item('next', 'BUILT_IN', 1));
+  await f.engine.drain();
+  assert.equal(f.read().rejectedUndo, undefined);
+  assert.equal(f.read().confirmed['BUILT_IN:vocabulary:c1'].reps, 2);
+});

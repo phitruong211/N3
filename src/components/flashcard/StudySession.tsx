@@ -337,6 +337,7 @@ export function StudySession({
     onClick={() => void undoLastReview()}
   ><Undo2 size={18}/></button> : null;
   const undoStatus = mode !== 'anki' ? null
+    : reviewOutbox.data.rejectedUndo ? <p role="status" className="study-undo-status">{reviewOutbox.data.rejectedUndo.message}</p>
     : undoing ? <p role="status" className="study-undo-status">Đang hoàn tác…</p>
     : undoPending && reviewOutbox.error ? <p role="alert" className="study-undo-status">{reviewOutbox.error} <button onClick={reviewOutbox.retry}>Thử lại</button></p>
     : undoPending ? <p role="status" className="study-undo-status">Đang chờ hoàn tất hoàn tác.</p>
@@ -344,6 +345,12 @@ export function StudySession({
   const outboxData = reviewOutbox.data;
   useEffect(() => {
     if (mode !== 'anki') return;
+    if (outboxData.rejectedUndo) {
+      recoveringUndo.current = undefined;
+      if (receipt?.item.id === outboxData.rejectedUndo.item.id) setReceipt(null);
+      setUndoError('');
+      return;
+    }
     if (outboxData.undo) recoveringUndo.current = outboxData.undo.item;
     const completed = outboxData.lastUndo;
     const previous = receipt?.item.id === completed?.id ? receipt : null;
@@ -370,7 +377,7 @@ export function StudySession({
     }
     setUndoError('');
     setError('');
-  }, [outboxData.undo, outboxData.lastUndo, receipt, cards, mode]);
+  }, [outboxData.undo, outboxData.lastUndo, outboxData.rejectedUndo, receipt, cards, mode]);
   useEffect(() => {
     if (mode !== 'anki') return;
     setReviewQueue(queue => {
