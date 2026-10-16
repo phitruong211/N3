@@ -9,7 +9,6 @@ import { builtInDeckResumeKey, resolveResumeIndex } from '@/lib/studyResume';
 import { StudySession } from './StudySession';
 import { ImportedDecks } from './ImportedDecks';
 import { DeckCard } from './DeckCard';
-import { DeckGrid } from './DeckGrid';
 import { StudySetupSheet } from './StudySetupSheet';
 
 export type DeckPageMode = 'free' | 'scheduled';
@@ -56,12 +55,14 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     const badge = savedDeck ? { label: 'Đã lưu', tone: 'neutral' as const } : deck.kind === 'vocabulary' ? { label: 'Từ vựng', tone: 'vocabulary' as const } : deck.kind === 'kanji' ? { label: 'Kanji', tone: 'kanji' as const } : { label: 'Ngữ pháp', tone: 'grammar' as const };
     if (mode === 'free') {
       const hasLessons = lessonOptions(deck.cards).length > 0;
-      return <DeckCard key={deck.id} summary={summary} badge={badge} hideProgress
+      return <DeckCard key={deck.id} summary={summary} badge={badge} hideProgress compact={!savedDeck}
         primaryLabel={deck.cards.length ? hasLessons ? 'Chọn bài →' : 'Bắt đầu học →' : 'Chưa có thẻ'}
         primaryDisabled={!deck.cards.length} onPrimary={() => freeAction(deck)}/>;
     }
     const scheduled = scheduleFor(deck);
-    return <DeckCard key={deck.id} summary={summary} badge={badge} metrics={scheduleMetrics(scheduled.summary)}
+    const due = scheduled.summary.remainingTodayCount;
+    return <DeckCard key={deck.id} summary={summary} badge={badge} compact={!savedDeck} metrics={savedDeck ? scheduleMetrics(scheduled.summary) : undefined}
+      meta={<><strong className="font-normal">{summary.totalCards}</strong> thẻ · {due > 0 ? <span className="text-[var(--color-accent)]">{due} cần ôn</span> : 'đã xong hôm nay'}</>}
       primaryLabel={scheduled.cards.length ? 'Ôn ngay →' : 'Đã hoàn thành hôm nay'}
       primaryDisabled={!scheduled.cards.length} onPrimary={() => launchScheduled(deck)}/>;
   }
@@ -72,22 +73,22 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     onExit={() => setSession(null)}/>;
 
   return <div className="study-page" data-reduced-motion={settings.reducedMotion || undefined}>
-    <header className="max-w-2xl">
-      <p className="study-eyebrow">{mode === 'free' ? 'HỌC THEO Ý BẠN' : 'LỊCH ÔN HÔM NAY'}</p>
-      <h1 className="mt-1 text-3xl font-semibold">{mode === 'free' ? 'Bộ thẻ' : 'Ôn ngắt quãng'}</h1>
-      <p className="study-copy mt-3">{mode === 'free'
-        ? 'Chọn bộ và bài muốn học. Phiên học tự do không thay đổi lịch ôn.'
-        : `Hệ thống tự chọn thẻ đang học, thẻ đến hạn và tối đa ${settings.srsDailyNewLimit.toLocaleString('vi-VN')} thẻ mới mỗi ngày.`}</p>
+    <header>
+      <h1 className="text-3xl font-semibold tracking-[-.035em]">{mode === 'free' ? 'Bộ thẻ' : 'Ôn ngắt quãng'}</h1>
     </header>
 
     <ImportedDecks mode={mode} leadingDeck={saved.cards.length ? card(saved, true) : undefined}/>
 
-    <section aria-labelledby="built-in-decks"><div className="mb-4 flex flex-wrap items-end justify-between gap-2"><div><p className="study-eyebrow">THƯ VIỆN</p><h2 id="built-in-decks" className="mt-1 text-xl font-semibold">Bộ có sẵn</h2></div><p className="text-xs text-[var(--color-text-tertiary)]">Nội dung chuẩn · chỉ đọc</p></div>
-      <div className="space-y-7">{builtInLevels.map(level => {
+    <section aria-labelledby="built-in-decks" className="space-y-6">
+      <h2 id="built-in-decks" className="sr-only">Bộ có sẵn</h2>
+      {builtInLevels.map(level => {
         const levelDecks = decks.filter(deck => deck.level === level);
         if (!levelDecks.length) return null;
-        return <section key={level} aria-labelledby={`deck-level-${level}`}><div className="mb-3 flex items-center gap-3"><h3 id={`deck-level-${level}`} className="text-sm font-semibold text-[var(--color-text-secondary)]">Trình độ {level}</h3><span className="h-px flex-1 bg-[var(--color-border)]"/></div><DeckGrid>{levelDecks.map(deck => card(deck))}</DeckGrid></section>;
-      })}</div>
+        return <section key={level} aria-labelledby={`deck-level-${level}`}>
+          <h3 id={`deck-level-${level}`} className="today-group-title">Trình độ {level}</h3>
+          <div className="deck-list">{levelDecks.map(deck => card(deck))}</div>
+        </section>;
+      })}
     </section>
 
     <StudySetupSheet open={Boolean(setupDeck)} deckName={setupDeck?.name ?? ''} lessons={setupDeck ? lessonOptions(setupDeck.cards) : []} onClose={() => setSetupDeck(null)} onStart={lessonKey => setupDeck && launchFree(setupDeck, lessonKey)}/>

@@ -286,3 +286,6 @@
 .deck-groups-library[data-reduced-motion=true] .widget-water-drop,
 .deck-groups-library[data-reduced-motion=true] .widget-water-drop::after { animation:none!important; }
 .deck-groups-library[data-reduced-motion=true] .widget-water-drop::after { display:none; }
+
+/* Section title in the same quiet voice as the level headings above the built-in decks. */
+.deck-personal-header h2, .deck-personal-library .deck-personal-header h2 { margin: 0 .25rem; font-size: .8rem; line-height: 1.4; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; color: var(--color-text-tertiary); }

@@ -531,6 +531,8 @@ export function ImportedDecks({
         }}
       />
     );
+  // A guest has no personal decks to review; the built-in decks below are the whole page.
+  if (!user && mode !== "free") return null;
   return (
     <section className="deck-personal-library space-y-5" aria-label="Bộ thẻ của bạn" data-reduced-motion={settings.reducedMotion || undefined}>
       <div className="deck-personal-header">
@@ -1080,11 +1082,6 @@ export function ImportedDecks({
               }}/> }
           </div>
 
-          {!user && (
-            <p className="study-copy">
-              {mode === "free" ? "Bạn có thể bắt đầu tạo bộ; hệ thống sẽ yêu cầu đăng nhập khi lưu." : "Đăng nhập để xem lịch ôn của các bộ thẻ cá nhân."}
-            </p>
-          )}
           {user && loading && !active && <AppLoading message="Đang tải bộ thẻ…"/>}
           {user && (
             <Pagination
