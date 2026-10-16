@@ -60,6 +60,7 @@ export function useReviewOutbox(storage: LearningStorage, enabled: boolean, sync
     const run = () => {
       if (stopped) return;
       clearTimeout(timer);
+      setError('');
       void engine.drain().then(() => {
         if (stopped) return;
         failures = 0;
@@ -101,6 +102,9 @@ export function useReviewOutbox(storage: LearningStorage, enabled: boolean, sync
     undo: async (item: QueuedReview) => {
       if (!active.current) throw new Error('Chưa sẵn sàng đồng bộ. Vui lòng thử lại.');
       await engine.requestUndo(item);
+      // Use the background runner too so a failed undo gets the same error
+      // reporting and reconnect/backoff recovery as a queued review.
+      wake.current();
       await engine.drain();
       const result = storage.getJSON<ReviewOutboxData>(REVIEW_OUTBOX_KEY, emptyOutbox()).lastUndo;
       if (result?.id !== item.id) throw new Error('Chưa hoàn tất hoàn tác. Vui lòng thử lại.');

@@ -278,8 +278,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
-      {reviewOutbox.pending > 0 && <div role="status" className="fixed right-3 top-20 z-[70] max-w-[calc(100vw-1.5rem)] rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-xs shadow-lg">
-        {reviewOutbox.error ? `Chưa đồng bộ ${reviewOutbox.pending} lượt ôn: ${reviewOutbox.error}` : `Đang đồng bộ ${reviewOutbox.pending} lượt ôn…`}
+      {(reviewOutbox.pending > 0 || reviewOutbox.undoPending) && <div role="status" className="fixed right-3 top-20 z-[70] max-w-[calc(100vw-1.5rem)] rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-xs shadow-lg">
+        {reviewOutbox.undoPending
+          ? reviewOutbox.error ? `Chưa hoàn tác được lượt ôn: ${reviewOutbox.error}` : 'Đang hoàn tác lượt ôn…'
+          : reviewOutbox.error ? `Chưa đồng bộ ${reviewOutbox.pending} lượt ôn: ${reviewOutbox.error}` : `Đang đồng bộ ${reviewOutbox.pending} lượt ôn…`}
         {reviewOutbox.error && <button className="ml-3 underline" onClick={reviewOutbox.retry}>Thử lại</button>}
       </div>}
     </AppContext.Provider>

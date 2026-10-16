@@ -22,6 +22,9 @@ try {
     });
     let state = { revision: 0, bookmarks: [], studyDays: [], srsCards: [] };
     const receipts = new Map();
+    let undoFailure = 0;
+    let failOnce = false;
+    const undoIds = [];
     let requests = 0;
     let loseFirst = false;
     let completedRequests = 0;
@@ -39,6 +42,12 @@ try {
       }
       if (path.endsWith('/undo')) {
         const id = path.split('/').at(-2);
+        undoIds.push(id);
+        if (undoFailure) {
+          const status = undoFailure;
+          if (failOnce) undoFailure = 0;
+          return route.fulfill({ status, json: { message: 'Undo temporarily unavailable' } });
+        }
         const reviewed = receipts.get(id);
         if (!reviewed) return route.fulfill({status:404,json:{message:'missing receipt'}});
         const restored = {...reviewed,state:'new',reps:0,lastReviewedAt:null,firstReviewedAt:null,lastRating:null};
@@ -72,7 +81,7 @@ try {
       }
       return reply({});
     });
-    await context.route('**/__review-harness', route => route.fulfill({ contentType: 'text/html', body: `<script type="module">import RefreshRuntime from '/@react-refresh';RefreshRuntime.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>type=>type;window.__vite_plugin_react_preamble_installed__=true;</script><script type="module" src="/@vite/client"></script><div id="root"></div><script type="module" src="/__review-harness.tsx"></script>` }));
+    await context.route('**/__review-harness*', route => route.fulfill({ contentType: 'text/html', body: `<script type="module">import RefreshRuntime from '/@react-refresh';RefreshRuntime.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>type=>type;window.__vite_plugin_react_preamble_installed__=true;</script><script type="module" src="/@vite/client"></script><div id="root"></div><script type="module" src="/__review-harness.tsx"></script>` }));
     await context.route('**/__review-harness.tsx', route => route.fulfill({ contentType: 'application/javascript', body: `
       import React from '${dep('react')}';
       import ReactDOM from '${dep('react-dom_client')}';
@@ -82,7 +91,7 @@ try {
       import {AppProvider} from '${appUrl}';
       import {StudySession} from '/src/components/flashcard/StudySession.tsx';
       const cards=[1,2].map(i=>({id:'card-'+i,deckId:'test',front:'Question '+i,back:'Answer '+i,type:'${type}',tags:[],source:'${source}',position:i}));
-      function Harness(){const {user,sessionKey}=useAuth();return user?React.createElement(AppProvider,{key:sessionKey},React.createElement(StudySession,{cards,deckName:'Queue test',mode:'anki',onExit:()=>{}})):null;}
+      function Harness(){const {user,sessionKey}=useAuth();return user?React.createElement(AppProvider,{key:sessionKey},React.createElement(StudySession,{cards,deckName:'Queue test',mode:new URLSearchParams(location.search).get('mode') || 'anki',onExit:()=>{}})):null;}
       createRoot(document.getElementById('root')).render(React.createElement(BrowserRouter,null,React.createElement(AuthProvider,null,React.createElement(Harness))));
     ` }));
     await page.goto(base + '/__review-harness');
@@ -107,6 +116,43 @@ try {
     await page.getByText('Question 2',{exact:true}).waitFor();
     await page.waitForFunction(()=>JSON.parse(localStorage.getItem('user:queue-test:review_outbox_v1'))?.items.length===0);
     assert.equal(receipts.size,2,'re-rating uses new immutable UUID');
+    // A failed direct undo must enter the background retry loop and restore
+    // the same session when that retry succeeds, without another user click.
+    undoFailure = 503; failOnce = true;
+    await page.keyboard.press('Backspace');
+    await page.getByRole('alert').filter({hasText:'Undo temporarily unavailable'}).waitFor();
+    await page.getByText('Answer 1',{exact:true}).waitFor();
+    assert.equal(undoIds.at(-1), undoIds.at(-2), 'retry retains the original review UUID');
+    assert.equal(await page.getByRole('button',{name:/4 · Dễ/}).isEnabled(),true);
+    assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'0');
+
+    // Persist a failed undo, leave the session, then recover without an
+    // in-memory receipt. Free flashcards must stay usable in the meantime.
+    await page.getByRole('button',{name:/4 · Dễ/}).click();
+    await page.getByText('Question 2',{exact:true}).waitFor();
+    await page.waitForFunction(()=>JSON.parse(localStorage.getItem('user:queue-test:review_outbox_v1'))?.items.length===0);
+    undoFailure = 409; failOnce = false;
+    await page.keyboard.press('Backspace');
+    await page.getByRole('alert').filter({hasText:'Undo temporarily unavailable'}).waitFor();
+    const pendingId = undoIds.at(-1);
+    await page.goto(base + '/__review-harness?mode=flashcards');
+    await page.getByRole('button',{name:'Hiện đáp án',exact:true}).click();
+    await page.getByText('Answer 1',{exact:true}).waitFor();
+    await page.getByRole('button',{name:'Thẻ tiếp',exact:true}).click();
+    await page.getByText('Question 2',{exact:true}).waitFor();
+    assert.equal(await page.getByRole('button',{name:'Kết thúc phiên',exact:true}).isEnabled(),true);
+    assert.equal(await page.getByText('Đang chờ hoàn tất hoàn tác.',{exact:true}).count(),0);
+    await page.goto(base + '/__review-harness');
+    const undoAlert = page.getByRole('alert').filter({hasText:'Undo temporarily unavailable'});
+    await undoAlert.waitFor();
+    assert.equal(await page.getByRole('button',{name:'Quay lại lượt vừa trả lời (Backspace)',exact:true}).isEnabled(),false);
+    undoFailure = 0;
+    await undoAlert.getByRole('button',{name:'Thử lại',exact:true}).click();
+    await page.getByText('Answer 1',{exact:true}).waitFor();
+    assert.equal(undoIds.at(-1), pendingId);
+    assert.equal(await page.getByRole('button',{name:/4 · Dễ/}).isEnabled(),true);
+    await page.waitForFunction(()=>!JSON.parse(localStorage.getItem('user:queue-test:review_outbox_v1'))?.undo);
+    console.log(`${source}/${type}: failed undo auto-recovers, survives reload, and does not block free flashcards`);
     assert.deepEqual(errors,[]);
     console.log(`${source}/${type}: server undo waits for acknowledgement, restores answer and stats, permits re-rating`);
     await context.close();
