@@ -1,6 +1,13 @@
 import { useEffect, useId, useRef, type CSSProperties, type RefObject } from 'react';
 import { X } from 'lucide-react';
-import { WIDGET_COLORS, type DeckWidgetStyle, type WidgetSize } from '@/lib/deckWidgets';
+import { MAX_WIDGET_BLUR, MAX_WIDGET_OPACITY, MIN_WIDGET_BLUR, WIDGET_COLORS, widgetSpan, type DeckWidgetStyle, type WidgetSize } from '@/lib/deckWidgets';
+
+const SIZE_OPTIONS: [WidgetSize, string][] = [['small', 'Nhỏ'], ['medium', 'Vừa'], ['large', 'Lớn'], ['xlarge', 'Rất lớn']];
+/** Tiny grid glyph showing the tier's footprint (4-column reference grid). */
+function SizeGlyph({ size }: { size: WidgetSize }) {
+  const { cols, rows } = widgetSpan(size, 4);
+  return <span className="widget-size-glyph" aria-hidden="true"><i style={{ width: `${cols * 6 + (cols - 1)}px`, height: `${rows * 6 + (rows - 1)}px` }}/></span>;
+}
 
 /** Non-modal: the selected widget is the live preview and the board stays interactive. */
 export function DeckWidgetCustomize({ name, value, anchor, onChange, onReset, onClose }: {
@@ -32,8 +39,8 @@ export function DeckWidgetCustomize({ name, value, anchor, onChange, onReset, on
       <button type="button" data-panel-close className="widget-icon-button" aria-label="Đóng bảng tùy chỉnh" onClick={onClose}><X size={18}/></button></header>
     <div className="widget-panel-body">
       <fieldset className="widget-control"><legend>Kích thước</legend><div className="widget-size-options">
-        {([['small', 'Nhỏ'], ['medium', 'Vừa'], ['large', 'Lớn']] as [WidgetSize, string][]).map(([size, label]) =>
-          <button key={size} type="button" aria-pressed={value.size === size} onClick={() => onChange({ size })}>{label}</button>)}
+        {SIZE_OPTIONS.map(([size, label]) =>
+          <button key={size} type="button" aria-pressed={value.size === size} onClick={() => onChange({ size })}><SizeGlyph size={size}/>{label}</button>)}
       </div></fieldset>
       <fieldset className="widget-control"><legend>Tông màu</legend><div className="widget-color-options">
         {WIDGET_COLORS.map(color => <button key={color.value} type="button" title={color.label} aria-label={color.label} aria-pressed={value.color === color.value}
@@ -43,8 +50,8 @@ export function DeckWidgetCustomize({ name, value, anchor, onChange, onReset, on
           <input type="color" aria-label="Chọn màu widget từ bảng màu" value={value.color} onChange={event => onChange({ color: event.target.value })}/>
         </label>
       </fieldset>
-      <label className="widget-control widget-slider"><span>Độ trong suốt của thẻ <span>{100 - value.opacity}%</span></span><input aria-label="Độ trong suốt của thẻ" type="range" min={30} max={95} step={1} value={100 - value.opacity} onChange={event => onChange({ opacity: 100 - Number(event.target.value) })}/></label>
-
+      <label className="widget-control widget-slider"><span>Độ đậm màu <span>{value.opacity}%</span></span><input aria-label="Độ đậm màu" type="range" min={0} max={MAX_WIDGET_OPACITY} step={1} value={value.opacity} onChange={event => onChange({ opacity: Number(event.target.value) })}/></label>
+      <label className="widget-control widget-slider"><span>Độ mờ kính <span>{value.blur}px</span></span><input aria-label="Độ mờ kính" type="range" min={MIN_WIDGET_BLUR} max={MAX_WIDGET_BLUR} step={1} value={Math.max(MIN_WIDGET_BLUR, value.blur)} onChange={event => onChange({ blur: Number(event.target.value) })}/></label>
     </div>
     <footer className="widget-panel-footer"><button type="button" className="widget-pill" onClick={onReset}>Đặt lại</button><button type="button" className="widget-pill widget-pill-primary" onClick={onClose}>Xong</button></footer>
   </aside>;

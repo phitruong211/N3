@@ -262,3 +262,17 @@
   .study-free-index { width: 38px; }
   .study-free-position { font-size: .75rem; }
 }
+
+/* Simplified chrome: fewer boxes and colors, and a toolbar that fits a phone. */
+.study-session-rating { border-color: var(--color-border); border-top-width: 1px; background: var(--color-surface); }
+.study-session-rating:hover { background: var(--color-surface-hover); border-color: var(--color-border-strong); transform: none; }
+.study-session-rating-title kbd { border: 0; background: transparent; }
+.study-session .study-session-reveal { box-shadow: none; }
+@media(max-width:640px) {
+  .study-session-end > span { display: none; }
+  .study-session-end { width: 44px; padding: 0; }
+  .study-session-tools .study-clock { display: none; }
+  .study-session-tool[aria-label$="màn hình"] { display: none; }
+  .study-session-rating-title kbd { display: none; }
+  .study-session-card-hint, .study-session-face-label { display: none; }
+}

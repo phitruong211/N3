@@ -39,12 +39,12 @@ export function MainLayout({ children }: { children: ReactNode }) {
   return <div className="flex min-h-screen bg-[var(--color-bg)]">
     <Sidebar/>
     <main className="min-h-screen min-w-0 flex-1 overflow-x-clip" id="main-content" role="main">
-      <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-3 border-b border-[var(--color-border)] bg-[var(--color-surface)] px-4 lg:hidden">
-        <button onClick={() => setCurrentPage('dashboard')} aria-label="Về Hôm nay"><img src="/so-nhat-mark.svg" alt="" className="h-10 w-10 object-contain"/></button>
+      <header className="sticky top-0 z-30 flex h-11 items-center justify-between gap-3 border-b border-[var(--color-border)]/70 bg-[color-mix(in_srgb,var(--color-surface)_85%,transparent)] px-4 backdrop-blur-xl lg:hidden">
+        <button onClick={() => setCurrentPage('dashboard')} aria-label="Về Hôm nay"><img src="/so-nhat-mark.svg" alt="" className="h-8 w-8 object-contain"/></button>
         <span className="truncate text-sm font-semibold">{pageTitles[currentPage]}</span>
-        <button onClick={() => setSearchOpen(true)} className="study-button !min-h-10 !w-10 !border-0 !p-0" aria-label="Tìm kiếm"><Search size={19}/></button>
+        <button onClick={() => setSearchOpen(true)} className="study-button !min-h-10 !w-10 !border-0 !bg-transparent !p-0" aria-label="Tìm kiếm"><Search size={19}/></button>
       </header>
-      <div className="mx-auto w-full max-w-full px-4 py-5 pb-28 sm:px-6 lg:px-10 lg:py-8 lg:pb-10 xl:px-12">{children}</div>
+      <div className="mx-auto w-full max-w-full px-4 py-5 pb-24 sm:px-6 lg:px-10 lg:py-8 lg:pb-10 xl:px-12">{children}</div>
     </main>
     <BottomNav/>
     <SearchModal/>

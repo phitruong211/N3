@@ -1,5 +1,6 @@
 import './deckCard.css';
-import type { DragEventHandler } from 'react';
+import type { DragEventHandler, ReactNode } from 'react';
+import { ChevronRight } from 'lucide-react';
 import type { DeckSummary } from '@/lib/cards';
 import { ContentBadge } from '@/components/ui/StudyUI';
 import { OverflowMenu, type DeckAction } from '@/components/ui/OverflowMenu';
@@ -13,14 +14,24 @@ export type DeckCardProps = {
   onPrimary: () => void;
   metrics?: Array<{ label: string; value: number; tone?: string }>;
   hideProgress?: boolean;
+  /** One quiet row (title, one line of detail, chevron) instead of a tile; the whole row starts the deck. */
+  compact?: boolean;
+  meta?: ReactNode;
   actions?: DeckAction[];
   draggable?: boolean;
   onDragStart?: DragEventHandler;
   onDrop?: DragEventHandler;
 };
 
-export function DeckCard({ summary, badge, description, primaryLabel, primaryDisabled, onPrimary, metrics, hideProgress, actions, draggable, onDragStart, onDrop }: DeckCardProps) {
+export function DeckCard({ summary, badge, description, primaryLabel, primaryDisabled, onPrimary, metrics, hideProgress, compact, meta, actions, draggable, onDragStart, onDrop }: DeckCardProps) {
   const muted = summary.totalCards === 0;
+  if (compact) return <article className="deck-row" data-disabled={primaryDisabled || undefined}>
+    <div className="deck-row-text">
+      <h3 className="deck-row-title">{summary.name}</h3>
+      <p className="deck-row-meta">{meta ?? <><strong className="font-normal">{summary.totalCards}</strong> thẻ</>}</p>
+    </div>
+    <button className="deck-row-action" onClick={onPrimary} disabled={primaryDisabled} aria-label={primaryLabel}><ChevronRight size={18} aria-hidden="true"/></button>
+  </article>;
   return <article className="study-panel deck-hover-card deck-library-card" draggable={draggable} onDragStart={onDragStart} onDragOver={event => draggable && event.preventDefault()} onDrop={onDrop}>
     <div className="flex items-start justify-between gap-3">
       <ContentBadge tone={badge.tone === 'neutral' ? undefined : badge.tone}>{badge.label}</ContentBadge>
