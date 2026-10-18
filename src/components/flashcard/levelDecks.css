@@ -1,0 +1,41 @@
+/* Built-in decks by level: one tablist, one grouped list. Colour only says which kind a row is (icon, bar) and what to do (due pill). */
+.level-section { display: grid; gap: 14px; font-family: 'Be Vietnam Pro', sans-serif; }
+.level-title { margin: 0 .25rem; color: var(--color-text); font-size: 1.2rem; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; }
+
+.level-tabs { display: grid; grid-template-columns: repeat(var(--tabs, 4), minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 16px; background: var(--color-surface-alt); }
+.level-tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; min-height: 54px; padding: 7px 4px; border-radius: 12px; color: var(--color-text-secondary); cursor: pointer; transition: background .18s ease, color .18s ease, box-shadow .18s ease; }
+.level-tab strong { color: inherit; font-size: 1.05rem; font-weight: 650; letter-spacing: -.01em; line-height: 1.25; }
+.level-tab span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .75rem; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.level-tab:not([aria-selected="true"]):hover { color: var(--color-text); background: color-mix(in srgb, var(--color-surface) 55%, transparent); }
+.level-tab[aria-selected="true"] { background: var(--color-surface); color: var(--color-text); box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 3px 10px rgba(0, 0, 0, .05); }
+.level-tab:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+@keyframes level-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.level-panel { animation: level-in .18s cubic-bezier(.2, .8, .2, 1) both; }
+.level-list { margin: 0; padding: 0; overflow: hidden; border-radius: 20px; background: var(--color-surface); list-style: none; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 55%, transparent); }
+.level-list > li { position: relative; }
+.level-list > li + li::before { position: absolute; top: 0; right: 0; left: 70px; height: 1px; background: var(--color-border); opacity: .7; content: ''; }
+
+.level-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px; width: 100%; min-height: 80px; padding: 14px 16px; text-align: left; color: var(--color-text); cursor: pointer; transition: background .12s ease; }
+.level-row:hover:not(:disabled) { background: var(--color-surface-hover); }
+.level-row:active:not(:disabled) { background: var(--color-surface-alt); }
+.level-row:disabled { cursor: default; }
+.level-row:disabled .level-row-icon, .level-row:disabled .level-row-main { opacity: .6; }
+.level-row:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+.level-row-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: color-mix(in srgb, var(--tone) 13%, var(--color-surface)); color: var(--tone); }
+.level-row-main { display: grid; gap: 1px; min-width: 0; }
+.level-row-name { font-size: 1.02rem; font-weight: 600; line-height: 1.35; }
+.level-row-detail { color: var(--color-text-secondary); font-size: .85rem; font-variant-numeric: tabular-nums; line-height: 1.4; }
+.level-row-bar { display: block; width: min(100%, 320px); height: 4px; margin-top: 7px; overflow: hidden; border-radius: 4px; background: color-mix(in srgb, var(--tone) 14%, transparent); }
+.level-row-bar i { display: block; height: 100%; border-radius: inherit; background: var(--tone); transition: width .5s cubic-bezier(.2, .8, .2, 1); }
+.level-row-side { display: flex; align-items: center; gap: 8px; color: var(--color-text-tertiary); }
+.level-row-due { padding: 4px 11px; border-radius: 999px; background: color-mix(in srgb, var(--color-accent) 13%, var(--color-surface)); color: var(--color-accent-text); font-size: .82rem; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.level-row-note { display: inline-flex; align-items: center; gap: 5px; color: var(--color-text-secondary); font-size: .82rem; white-space: nowrap; }
+.level-row-chevron { transition: transform .16s cubic-bezier(.2, .8, .2, 1); }
+.level-row:hover:not(:disabled) .level-row-chevron { color: var(--color-text-secondary); transform: translateX(2px); }
+
+@media (max-width: 420px) {
+  .level-row { gap: 12px; padding: 14px; }
+  .level-row-icon { width: 38px; height: 38px; border-radius: 12px; }
+  .level-list > li + li::before { left: 64px; }
+}

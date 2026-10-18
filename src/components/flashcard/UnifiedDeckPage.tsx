@@ -1,14 +1,15 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useApp, useLearningStorage } from '@/hooks/useApp';
 import type { CardView } from '@/lib/cards';
 import { defaultDeckTemplate, type DeckTemplateConfig } from '@/lib/ankiImport';
-import { buildBuiltInDecks, buildSavedDeck, builtInLevels, deckSummary, type BuiltInDeckDefinition } from '@/lib/deckCatalog';
+import { buildBuiltInDecks, buildSavedDeck, deckSummary, type BuiltInDeckDefinition } from '@/lib/deckCatalog';
 import { buildFreeStudyQueue, lessonOptions } from '@/lib/studySetup';
 import { buildScheduledDeckQueue, type DeckScheduleSummary } from '@/lib/deckSchedule';
 import { builtInDeckResumeKey, resolveResumeIndex } from '@/lib/studyResume';
 import { StudySession } from './StudySession';
 import { ImportedDecks } from './ImportedDecks';
 import { DeckCard } from './DeckCard';
+import { LevelDecks, type LevelRow } from './LevelDecks';
 import { StudySetupSheet } from './StudySetupSheet';
 
 export type DeckPageMode = 'free' | 'scheduled';
@@ -23,11 +24,16 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
   const saved = useMemo(() => buildSavedDeck(decks, bookmarks), [decks, bookmarks]);
   const progressById = useMemo(() => new Map(srsCards.map(card => [`${card.deckType.toUpperCase()}:${card.cardId}`, card])), [srsCards]);
 
+  const progressFor = useCallback((card: CardView) => {
+    const progress = progressById.get(`${card.type}:${card.id}`);
+    return progress ? { state: progress.state, dueDate: progress.dueDate, firstReviewedAt: progress.firstReviewedAt, lastReviewedAt: progress.lastReviewedAt, repetitions: progress.reps, lastRating: progress.lastRating } : null;
+  }, [progressById]);
+  // One pass per deck per change, shared by every level row, instead of once per card per render.
+  const schedules = useMemo(() => new Map(decks.map(deck => [deck.id, buildScheduledDeckQueue(deck.cards, progressFor, { dailyNewLimit: settings.srsDailyNewLimit })])), [decks, progressFor, settings.srsDailyNewLimit]);
+  const lessonDecks = useMemo(() => new Set(decks.filter(deck => lessonOptions(deck.cards).length > 0).map(deck => deck.id)), [decks]);
+
   function scheduleFor(deck: BuiltInDeckDefinition) {
-    return buildScheduledDeckQueue(deck.cards, card => {
-      const progress = progressById.get(`${card.type}:${card.id}`);
-      return progress ? { state: progress.state, dueDate: progress.dueDate, firstReviewedAt: progress.firstReviewedAt, lastReviewedAt: progress.lastReviewedAt, repetitions: progress.reps, lastRating: progress.lastRating } : null;
-    }, { dailyNewLimit: settings.srsDailyNewLimit });
+    return schedules.get(deck.id) ?? buildScheduledDeckQueue(deck.cards, progressFor, { dailyNewLimit: settings.srsDailyNewLimit });
   }
 
   function launchFree(deck: BuiltInDeckDefinition, lessonKey: string | null) {
@@ -50,22 +56,31 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     else launchFree(deck, null);
   }
 
-  function card(deck: BuiltInDeckDefinition, savedDeck = false) {
-    const summary = deckSummary({ ...deck, source: savedDeck ? 'SAVED' : 'BUILT_IN' }, progressById);
-    const badge = savedDeck ? { label: 'Đã lưu', tone: 'neutral' as const } : deck.kind === 'vocabulary' ? { label: 'Từ vựng', tone: 'vocabulary' as const } : deck.kind === 'kanji' ? { label: 'Kanji', tone: 'kanji' as const } : { label: 'Ngữ pháp', tone: 'grammar' as const };
+  function savedCard(deck: BuiltInDeckDefinition) {
+    const summary = deckSummary({ ...deck, source: 'SAVED' }, progressById);
+    const badge = { label: 'Đã lưu', tone: 'neutral' as const };
     if (mode === 'free') {
       const hasLessons = lessonOptions(deck.cards).length > 0;
-      return <DeckCard key={deck.id} summary={summary} badge={badge} hideProgress compact={!savedDeck}
+      return <DeckCard key={deck.id} summary={summary} badge={badge} hideProgress
         primaryLabel={deck.cards.length ? hasLessons ? 'Chọn bài →' : 'Bắt đầu học →' : 'Chưa có thẻ'}
         primaryDisabled={!deck.cards.length} onPrimary={() => freeAction(deck)}/>;
     }
     const scheduled = scheduleFor(deck);
-    const due = scheduled.summary.remainingTodayCount;
-    return <DeckCard key={deck.id} summary={summary} badge={badge} compact={!savedDeck} metrics={savedDeck ? scheduleMetrics(scheduled.summary) : undefined}
-      meta={<><strong className="font-normal">{summary.totalCards}</strong> thẻ · {due > 0 ? <span className="text-[var(--color-accent)]">{due} cần ôn</span> : 'đã xong hôm nay'}</>}
+    return <DeckCard key={deck.id} summary={summary} badge={badge} metrics={scheduleMetrics(scheduled.summary)}
       primaryLabel={scheduled.cards.length ? 'Ôn ngay →' : 'Đã hoàn thành hôm nay'}
       primaryDisabled={!scheduled.cards.length} onPrimary={() => launchScheduled(deck)}/>;
   }
+
+  const levelRows: LevelRow[] = decks.map(deck => {
+    const schedule = scheduleFor(deck);
+    return {
+      id: deck.id, level: deck.level, kind: deck.kind, totalCards: deck.cards.length,
+      learnedCount: schedule.summary.learnedCount, dueCount: schedule.summary.remainingTodayCount,
+      startable: mode === 'free' ? deck.cards.length > 0 : schedule.cards.length > 0,
+      actionLabel: lessonDecks.has(deck.id) ? 'Chọn bài' : 'Bắt đầu',
+      onOpen: () => mode === 'free' ? freeAction(deck) : launchScheduled(deck),
+    };
+  });
 
   if (session) return <StudySession cards={session.cards} deckName={session.name} template={session.template} mode={session.mode} initialIndex={session.initialIndex}
     onPositionChange={session.mode === 'flashcards' ? cardId => setJSON(builtInDeckResumeKey(session.id), cardId) : undefined}
@@ -77,19 +92,9 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
       <h1 className="text-3xl font-semibold tracking-[-.035em]">{mode === 'free' ? 'Bộ thẻ' : 'Ôn ngắt quãng'}</h1>
     </header>
 
-    <ImportedDecks mode={mode} leadingDeck={saved.cards.length ? card(saved, true) : undefined}/>
+    <ImportedDecks mode={mode} leadingDeck={saved.cards.length ? savedCard(saved) : undefined}/>
 
-    <section aria-labelledby="built-in-decks" className="space-y-6">
-      <h2 id="built-in-decks" className="sr-only">Bộ có sẵn</h2>
-      {builtInLevels.map(level => {
-        const levelDecks = decks.filter(deck => deck.level === level);
-        if (!levelDecks.length) return null;
-        return <section key={level} aria-labelledby={`deck-level-${level}`}>
-          <h3 id={`deck-level-${level}`} className="today-group-title">Trình độ {level}</h3>
-          <div className="deck-list">{levelDecks.map(deck => card(deck))}</div>
-        </section>;
-      })}
-    </section>
+    <LevelDecks mode={mode} rows={levelRows} storage={{ getJSON, setJSON }}/>
 
     <StudySetupSheet open={Boolean(setupDeck)} deckName={setupDeck?.name ?? ''} lessons={setupDeck ? lessonOptions(setupDeck.cards) : []} onClose={() => setSetupDeck(null)} onStart={lessonKey => setupDeck && launchFree(setupDeck, lessonKey)}/>
   </div>;

@@ -1,21 +1,29 @@
 /* Liquid glass for deck-group widgets. Colour tokens (--glass-*) live per theme in index.css; the contrast model in
    lib/deckWidgets.ts (GLASS_FILL, ambient strength) must stay in step with --glass-fill and the glows below. */
 
-/* Ambient layer: soft glows behind the grid so the glass has something to refract. It never reaches past the board's
-   left/right edges (that would add a horizontal scrollbar). It is a sibling of the widgets,
-   never an ancestor, and no ancestor between them may use opacity, filter or mask (that would end the backdrop). */
+/* Ambient layer: quiet, neutral light behind the grid so the glass has something to refract. It is exactly the grid's
+   box and fades to nothing before its edges, so no colour ever shows outside the widgets. A group's own tone never feeds it
+   (the contrast model in lib/deckWidgets.ts, AMBIENT_GLOWS, mirrors these strengths). It is a sibling of the widgets, never an
+   ancestor, and no ancestor between them may use opacity, filter or mask (that would end the backdrop). */
 .widget-ambient {
-  position:absolute; inset:-40px 0; z-index:-1; overflow:hidden; pointer-events:none;
-  -webkit-mask-image:linear-gradient(to right,transparent,#000 24px,#000 calc(100% - 24px),transparent),linear-gradient(to bottom,transparent,#000 40px,#000 calc(100% - 40px),transparent);
-  mask-image:linear-gradient(to right,transparent,#000 24px,#000 calc(100% - 24px),transparent),linear-gradient(to bottom,transparent,#000 40px,#000 calc(100% - 40px),transparent);
+  position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 56px,#000 calc(100% - 56px),transparent),linear-gradient(to bottom,transparent,#000 56px,#000 calc(100% - 56px),transparent);
+  mask-image:linear-gradient(to right,transparent,#000 56px,#000 calc(100% - 56px),transparent),linear-gradient(to bottom,transparent,#000 56px,#000 calc(100% - 56px),transparent);
   -webkit-mask-composite:source-in; mask-composite:intersect;
 }
+/* Light: a neutral sheet of light fading downward plus one faint cool pool in the corner, so empty grid cells look clean and
+   glass still has a lighter-to-darker backdrop. Dark: two soft glows that drift (below); the dark page hides their edges. */
 .widget-ambient::before {
-  content:""; position:absolute; inset:-20%; will-change:transform;
+  content:""; position:absolute; inset:0;
   background:
-    radial-gradient(ellipse 38% 42% at 18% 24%,color-mix(in srgb,var(--amb-1,#8fb4e8) 55%,transparent),transparent 70%),
-    radial-gradient(ellipse 34% 40% at 82% 30%,color-mix(in srgb,var(--amb-2,#8fb4e8) 50%,transparent),transparent 70%),
-    radial-gradient(ellipse 42% 38% at 55% 86%,color-mix(in srgb,var(--amb-3,#8fb4e8) 50%,transparent),transparent 70%);
+    radial-gradient(ellipse 60% 55% at 12% 0%,color-mix(in srgb,#9db7d9 10%,transparent),transparent 75%),
+    linear-gradient(180deg,rgba(255,255,255,.55),transparent 85%);
+}
+.dark .widget-ambient::before {
+  inset:-20%; will-change:transform;
+  background:
+    radial-gradient(ellipse 40% 44% at 20% 28%,color-mix(in srgb,#9db7d9 18%,transparent),transparent 72%),
+    radial-gradient(ellipse 36% 40% at 82% 70%,color-mix(in srgb,#d8b99a 14%,transparent),transparent 72%);
 }
 /* One compositor-driven layer drifts in the dark theme, only while the board is on screen (data-visible). */
 @keyframes widget-ambient-drift { from { transform:translate3d(-4%,3%,0) rotate(0deg); } to { transform:translate3d(4%,-3%,0) rotate(10deg); } }
@@ -26,7 +34,8 @@
 
 /* The pane: pointer sheen, then colour tint, then grain, then the neutral fill, all over a blurred and saturated backdrop. */
 .deck-folder {
-  --tint-layer:color-mix(in srgb,var(--tint) calc(var(--op) * 1%),transparent);
+  --tint-strength:.55; /* mirrors TINT_STRENGTH: the saved strength is drawn at about half, so tone is identity, not wash */
+  --tint-layer:color-mix(in srgb,var(--tint) calc(var(--op) * var(--tint-strength) * 1%),transparent);
   --glass-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
   background:
     radial-gradient(130% 95% at var(--mx,20%) var(--my,0%),var(--glass-sheen),transparent 58%),

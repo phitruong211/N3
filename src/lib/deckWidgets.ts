@@ -2,7 +2,7 @@ export const DECK_WIDGETS_KEY = 'deck-group-widgets-v1';
 export type WidgetSize = 'small' | 'medium' | 'large' | 'xlarge';
 export const WIDGET_SIZES: WidgetSize[] = ['small', 'medium', 'large', 'xlarge'];
 export interface DeckWidgetStyle { size: WidgetSize; color: string; opacity: number; blur: number }
-/** "Trong" is the neutral tone: the glass takes its colour from the ambient layer behind it. */
+/** "Trong" is the neutral tone: no hue of its own, so only the quiet glow behind the glass shows through. */
 export const CLEAR_TINT = '#e9edf2';
 export const DEFAULT_WIDGET_STYLE: DeckWidgetStyle = { size: 'small', color: CLEAR_TINT, opacity: 14, blur: 24 };
 export const WIDGET_COLORS = [
@@ -64,15 +64,6 @@ export function sizeFromPixels(width: number, height: number, cell: number, gap:
   return snapWidgetSize((width + gap) / (cell + gap), (height + gap) / (cell + gap), columns);
 }
 
-/** Colour behind clear glass when a group's own tone is neutral. */
-export const AMBIENT_FALLBACK = '#8fb4e8';
-/** Up to three ambient glows, taken from the first groups' tones so the glass has something to refract. */
-export function ambientColors(styles: DeckWidgetStyle[]): string[] {
-  const picked = styles.slice(0, 3).map(style => style.color === CLEAR_TINT ? AMBIENT_FALLBACK : style.color);
-  while (picked.length && picked.length < 3) picked.push(picked[picked.length % Math.max(1, styles.length)] ?? AMBIENT_FALLBACK);
-  return picked.length ? picked : [AMBIENT_FALLBACK];
-}
-
 type Rgb = [number, number, number];
 const rgb = (hex: string): Rgb => [1, 3, 5].map(index => parseInt(hex.slice(index, index + 2), 16)) as Rgb;
 const mix = (front: Rgb, back: Rgb, alpha: number): Rgb => front.map((channel, index) => channel * alpha + back[index] * (1 - alpha)) as Rgb;
@@ -84,24 +75,29 @@ function contrast(a: Rgb, b: Rgb) { const first = luminance(a), second = luminan
 
 /** Mirrors --glass-fill in index.css; keep the two in step. */
 export const GLASS_FILL = { light: { color: '#ffffff', alpha: .34 }, dark: { color: '#181c24', alpha: .34 } };
-/** Worst-case strength of an ambient glow behind the glass (peak of its radial gradient). */
-const AMBIENT_ALPHA = .55;
+/** A group's tint is identity, not atmosphere: the saved strength is drawn at this fraction (--tint-strength in widgetGlass.css). */
+export const TINT_STRENGTH = .55;
+/** Quiet light behind the grid per theme (peak strength; mirrors .widget-ambient in widgetGlass.css). It never carries a group's colour. */
+export const AMBIENT_GLOWS = {
+  light: [{ color: '#ffffff', alpha: .55 }, { color: '#9db7d9', alpha: .10 }],
+  dark: [{ color: '#9db7d9', alpha: .18 }, { color: '#d8b99a', alpha: .14 }],
+};
 const BASES = { light: ['#eef0ec', '#f5f0e3'], dark: ['#0d100f', '#151b1e'] };
 
-/** Every colour the glass can plausibly sit on: page base, with and without each ambient glow, under fill and tint. */
-export function glassBackgrounds(style: DeckWidgetStyle, light: boolean, ambient: string[] = [AMBIENT_FALLBACK]): Rgb[] {
+/** Every colour the glass can plausibly sit on: page base, with and without each glow, under fill and tint. */
+export function glassBackgrounds(style: DeckWidgetStyle, light: boolean): Rgb[] {
   const bases = (light ? BASES.light : BASES.dark).map(rgb);
-  const behind = bases.flatMap(base => [base, ...ambient.map(glow => mix(rgb(glow), base, AMBIENT_ALPHA))]);
+  const behind = bases.flatMap(base => [base, ...AMBIENT_GLOWS[light ? 'light' : 'dark'].map(glow => mix(rgb(glow.color), base, glow.alpha))]);
   const fill = light ? GLASS_FILL.light : GLASS_FILL.dark;
   return behind.flatMap(surface => {
-    const glass = mix(rgb(style.color), mix(rgb(fill.color), surface, fill.alpha), style.opacity / 100);
+    const glass = mix(rgb(style.color), mix(rgb(fill.color), surface, fill.alpha), style.opacity / 100 * TINT_STRENGTH);
     return [glass, mix(rgb('#ffffff'), glass, .18), mix(rgb('#000000'), glass, .06)];
   });
 }
 
 /** Glass at the upper opacity bound can need dark ink even in a dark theme. */
-export function widgetInk(style: DeckWidgetStyle, light: boolean, ambient?: string[]) {
-  const backgrounds = glassBackgrounds(style, light, ambient);
+export function widgetInk(style: DeckWidgetStyle, light: boolean) {
+  const backgrounds = glassBackgrounds(style, light);
   const minimum = (hex: string) => Math.min(...backgrounds.map(background => contrast(rgb(hex), background)));
   const preferred = light ? '#171a18' : '#eef1ef', inverse = light ? '#eef1ef' : '#0d100f';
   let ink = minimum(preferred) >= minimum(inverse) ? preferred : inverse;

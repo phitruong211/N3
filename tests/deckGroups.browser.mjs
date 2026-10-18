@@ -266,6 +266,7 @@ try {
   const media = await page.context().newCDPSession(page);
   await media.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-transparency',value:'reduce'}]});
   if(await page.evaluate(()=>matchMedia('(prefers-reduced-transparency: reduce)').matches))assert.equal(await glassFilter(),'none');
+  await media.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-transparency',value:'no-preference'}]}); // The override outlives later emulateMedia calls.
   await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});
   await page.evaluate(()=>{document.documentElement.className='high-contrast';});
   assert.equal(await glassFilter(),'none');
@@ -334,6 +335,14 @@ try {
   assert.equal(await span('g2','gridColumnStart'),'span 2');assert.equal(await span('g2','gridRowStart'),'auto'); // Medium 2x1.
   assert.equal(await span('g3','gridColumnStart'),'auto'); // Small 1x1.
   await page.locator('#group-g1').locator('.widget-due-number',{hasText:'8'}).waitFor();
+  // Quiet colour: the glow never leaves the grid box, a tone is drawn at part strength, saturation is moderate,
+  // and "done" is one small muted line with no redundant "open" button (the whole widget is the target).
+  assert.deepEqual(await page.evaluate(()=>{const a=document.querySelector('.widget-ambient').getBoundingClientRect(),b=document.querySelector('.deck-folder-board').getBoundingClientRect();return [a.left-b.left,a.top-b.top,b.right-a.right,b.bottom-a.bottom].map(Math.round);}),[0,0,0,0]);
+  assert.equal(await page.locator('#group-g2').evaluate(el=>getComputedStyle(el).getPropertyValue('--tint-strength').trim()),'.55');
+  assert.match(await page.locator('#group-g2').evaluate(el=>getComputedStyle(el).backdropFilter),/saturate\(1\.(25|3)\)/);
+  assert.equal(await page.locator('#group-g2 .widget-done').evaluate(el=>getComputedStyle(el).fontSize),'13px');
+  assert.equal(await page.locator('#group-g2').getByRole('button',{name:'Mở nhóm'}).count(),0);
+  assert.equal(await page.locator('#group-g2 .widget-chevron').count(),1);
   assert.equal(await page.locator('#group-g3 .widget-due').count(),0);
   await page.screenshot({path:'artifacts/deck-groups/glass-dark.png',fullPage:true});
   await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();

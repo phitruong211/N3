@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizeWidgetStyle, readWidgetStyles, moveWidget, DEFAULT_WIDGET_STYLE, WIDGET_COLORS, widgetInk, glassBackgrounds, widgetSpan, snapWidgetSize, sizeFromPixels, ambientColors, AMBIENT_FALLBACK, CLEAR_TINT } from '../src/lib/deckWidgets.ts';
+import { normalizeWidgetStyle, readWidgetStyles, moveWidget, DEFAULT_WIDGET_STYLE, WIDGET_COLORS, widgetInk, glassBackgrounds, widgetSpan, snapWidgetSize, sizeFromPixels, TINT_STRENGTH, AMBIENT_GLOWS, CLEAR_TINT } from '../src/lib/deckWidgets.ts';
 
 test('widget preferences validate stored values, keeping opacity off text and respecting bounds', () => {
   assert.deepEqual(normalizeWidgetStyle(null), DEFAULT_WIDGET_STYLE);
@@ -47,21 +47,30 @@ test('legacy pixel sizes migrate to the closest tier', () => {
   assert.equal(sizeFromPixels(300, 300, 0, gap, 6), DEFAULT_WIDGET_STYLE.size);
 });
 
-test('ambient glows follow the first three tones and neutralise the clear tone', () => {
-  const styles = tones => tones.map(color => ({ ...DEFAULT_WIDGET_STYLE, color }));
-  assert.deepEqual(ambientColors(styles([])), [AMBIENT_FALLBACK]);
-  assert.deepEqual(ambientColors(styles([CLEAR_TINT])), [AMBIENT_FALLBACK, AMBIENT_FALLBACK, AMBIENT_FALLBACK]);
-  assert.deepEqual(ambientColors(styles(['#0a84ff', '#34c759', '#ff375f', '#af52de'])), ['#0a84ff', '#34c759', '#ff375f']);
+test('a group tint is drawn at a fraction of its saved strength and ambient glows stay neutral', () => {
+  assert.ok(TINT_STRENGTH > 0 && TINT_STRENGTH < 1);
+  const channels = hex => [1,3,5].map(index=>parseInt(hex.slice(index,index+2),16));
+  for (const glow of Object.values(AMBIENT_GLOWS).flat()) {
+    const [r,g,b] = channels(glow.color);
+    assert.ok(Math.max(r,g,b)-Math.min(r,g,b) < 80, glow.color+' is a quiet, low-chroma glow');
+    // Coloured glows stay faint; only plain white light may be stronger.
+    assert.ok(glow.alpha <= (glow.color === '#ffffff' ? .6 : .2), glow.color+' strength stays low');
+  }
+  // The tone is blended at opacity * TINT_STRENGTH over fill-on-page, never at the raw saved strength.
+  const mix = (front,back,alpha) => front.map((value,index)=>value*alpha+back[index]*(1-alpha));
+  const style = {...DEFAULT_WIDGET_STYLE,color:'#34c759',opacity:70};
+  const expected = mix(channels('#34c759'),mix(channels('#ffffff'),channels('#eef0ec'),.34),.7*TINT_STRENGTH);
+  assert.deepEqual(glassBackgrounds(style,true)[0].map(Math.round),expected.map(Math.round));
+  assert.notDeepEqual(glassBackgrounds(style,true)[0].map(Math.round),mix(channels('#34c759'),mix(channels('#ffffff'),channels('#eef0ec'),.34),.7).map(Math.round));
 });
 
-test('glass ink stays at AA text contrast across every tone, opacity, theme and ambient glow', () => {
+test('glass ink stays at AA text contrast across every tone, opacity and theme', () => {
   const rgb = hex => [1,3,5].map(index=>parseInt(hex.slice(index,index+2),16));
   const luminance = color => color.map(channel=>{const value=channel/255;return value<=.04045?value/12.92:((value+.055)/1.055)**2.4;}).reduce((sum,value,index)=>sum+value*[.2126,.7152,.0722][index],0);
-  const ambients = [undefined, WIDGET_COLORS.map(c => c.value).slice(1, 4), ['#ffcc00', '#00c7be', '#ff9f0a']];
-  for(const light of [false,true])for(const tone of WIDGET_COLORS)for(const ambient of ambients)for(let opacity=0;opacity<=70;opacity+=2) {
+  for(const light of [false,true])for(const tone of WIDGET_COLORS)for(let opacity=0;opacity<=70;opacity+=2) {
     const style={...DEFAULT_WIDGET_STYLE,color:tone.value,opacity};
-    const colors=widgetInk(style,light,ambient);
-    for(const background of glassBackgrounds(style,light,ambient))for(const text of [colors.ink,colors.ink2]) {
+    const colors=widgetInk(style,light);
+    for(const background of glassBackgrounds(style,light))for(const text of [colors.ink,colors.ink2]) {
       const a=luminance(rgb(text)),b=luminance(colors.halo ? rgb(colors.halo) : background);
       assert.ok((Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5,`${tone.label} ${opacity}% ${light?'light':'dark'} ${text}`);
     }
