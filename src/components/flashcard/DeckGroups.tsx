@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type PointerEvent as ReactPointerEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ChevronDown, Folder, FolderOpen, Plus, MoveDiagonal2, X, Grip, SlidersHorizontal } from 'lucide-react';
+import { Check, ChevronDown, ChevronRight, Folder, FolderOpen, Plus, MoveDiagonal2, X, Grip, SlidersHorizontal } from 'lucide-react';
 import {
   listDeckGroups, listDeckPage, createDeckGroup, renameDeckGroup, dissolveDeckGroup,
   moveDeckToGroup, orderDeckGroups, type DeckGroup, type PersonalDeck, type Page,
@@ -12,7 +12,7 @@ import { OverflowMenu, type DeckAction } from '@/components/ui/OverflowMenu';
 import type { LearningStorage } from '@/lib/storage';
 import { readGridMetrics, useWidgetSnapResize } from './useWidgetSnapResize';
 import { useDeckWidgetStyles } from '@/hooks/useDeckWidgetStyles';
-import { ambientColors, moveWidget, normalizeWidgetStyle, widgetInk, type WidgetSize } from '@/lib/deckWidgets';
+import { moveWidget, normalizeWidgetStyle, widgetInk, type WidgetSize } from '@/lib/deckWidgets';
 import { DeckWidgetCustomize } from './DeckWidgetCustomize';
 
 type Props = {
@@ -365,8 +365,6 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
     ...createActions,
     { id: 'create-group', label: 'Tạo nhóm', disabled: busy || saving || groupLoading, onSelect: () => { setError(''); setEditor({ name: '' }); } },
   ]}/>;
-  const ambient = ambientColors(groups.map(group => normalizeWidgetStyle(widgets.styles[group.id])));
-  const amb = [0, 1, 2].map(i => ambient[i] ?? ambient[0]);
   const summary = `${groups.length} nhóm · ${groups.reduce((total, group) => total + group.dueCount, 0).toLocaleString('vi-VN')} thẻ cần ôn hôm nay`;
   const arrangeButton = groups.length > 0 && <button type="button" className="widget-pill" aria-pressed={editingLayout} disabled={saving || busy || Boolean(widgetDrag) || Boolean(resize.resizing)}
     onClick={() => { setEditingLayout(value => !value); setCustomizingWidget(null); }}>{editingLayout ? 'Xong' : 'Sắp xếp'}</button>;
@@ -378,12 +376,12 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
     {error && <p role="alert" className="text-sm text-[var(--color-error)]">{error} <button className="underline" onClick={() => { setError(''); setRevision(v => v + 1); onChange(); }}>Thử lại</button></p>}
     <p className="sr-only" role="status">{saving ? 'Đang lưu…' : notice}</p>
     <div ref={workspace} className={`deck-widget-workspace ${customizingWidget ? 'has-customizer' : ''}`}>
-    <div ref={board} className="deck-folder-board" style={{ '--amb-1': amb[0], '--amb-2': amb[1], '--amb-3': amb[2] } as CSSProperties}>
+    <div ref={board} className="deck-folder-board">
     <div className="widget-ambient" aria-hidden="true"/>
     <div ref={grid} className={`deck-folder-grid ${editingLayout ? 'is-editing-layout' : ''}`} onPointerMove={followPointer}>{groups.map((group, index) => {
       const style = normalizeWidgetStyle(widgets.styles[group.id]);
       const size: WidgetSize = resize.preview?.id === group.id ? resize.preview.size : style.size;
-      const ink = widgetInk(style, lightTheme, ambient);
+      const ink = widgetInk(style, lightTheme);
       const due = Math.max(0, group.dueCount || 0);
       const isOpen = opened.has(group.id);
       const groupPage = pages[group.id];
@@ -424,10 +422,12 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
       {(size !== 'small' || isOpen) && <div className="widget-side">
         {size !== 'small' && <div className="widget-due" data-done={due === 0 || undefined}>
           {due > 0 ? <><span className="widget-due-number">{due.toLocaleString('vi-VN')}</span><span className="widget-due-label">thẻ cần ôn hôm nay</span></>
-            : <span className="widget-due-number">✓ Đã xong hôm nay</span>}
+            : <span className="widget-done"><Check size={14} aria-hidden="true"/>Xong hôm nay</span>}
         </div>}
-        <div className="widget-primary-action"><button type="button" className={`widget-pill widget-open-button ${reviewable ? 'is-primary' : ''}`} disabled={busy || saving}
-          onClick={() => reviewable ? onReviewGroup!(group) : toggle(group.id)}>{reviewable ? `Ôn ${due} thẻ →` : isOpen ? 'Thu gọn' : 'Mở nhóm'}</button></div>
+        {reviewable || isOpen
+          ? <div className="widget-primary-action"><button type="button" className={`widget-pill widget-open-button ${reviewable ? 'is-primary' : ''}`} disabled={busy || saving}
+            onClick={() => reviewable ? onReviewGroup!(group) : toggle(group.id)}>{reviewable ? `Ôn ${due} thẻ →` : 'Thu gọn'}</button></div>
+          : <ChevronRight className="widget-chevron" size={18} aria-hidden="true"/>}
       </div>}
       {previewing && <div className="widget-preview">
         {loading.has(group.id) && !groupPage && <p role="status" className="study-copy">Đang tải bộ thẻ…</p>}

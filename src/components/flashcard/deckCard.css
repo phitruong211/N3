@@ -7,17 +7,3 @@
 .deck-library-card .deck-library-action:hover { opacity: .85; }
 .deck-library-card .deck-library-action:disabled { opacity: .4; cursor: not-allowed; }
 @media(max-width:640px) { .deck-library-card { padding: 20px; min-height: 220px; } }
-
-/* Built-in decks: one quiet row per deck inside a grouped list; the whole row is the tap target. */
-.deck-list { display: grid; overflow: hidden; border-radius: 14px; background: var(--color-surface); }
-.deck-row { position: relative; display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 10px 16px; font-family: 'Be Vietnam Pro', sans-serif; transition: background .12s ease; }
-.deck-row + .deck-row::before { position: absolute; top: 0; right: 0; left: 16px; height: 1px; background: var(--color-border); opacity: .7; content: ''; }
-.deck-row:hover:not([data-disabled]) { background: var(--color-surface-hover); }
-.deck-row:active:not([data-disabled]) { background: var(--color-surface-alt); }
-.deck-row-text { min-width: 0; flex: 1; }
-.deck-row-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text); font-size: 1rem; font-weight: 500; line-height: 1.35; }
-.deck-row-meta { margin-top: 1px; color: var(--color-text-tertiary); font-size: .85rem; }
-.deck-row-action { display: grid; flex: none; place-items: center; width: 28px; height: 28px; color: var(--color-text-tertiary); cursor: pointer; }
-.deck-row-action::after { position: absolute; inset: 0; content: ''; }
-.deck-row-action:disabled { cursor: default; opacity: .35; }
-.deck-row[data-disabled] .deck-row-title { color: var(--color-text-secondary); }

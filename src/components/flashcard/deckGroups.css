@@ -78,11 +78,16 @@
 .widget-group-menu { position:relative; z-index:1; flex-shrink:0; }
 .deck-folder .widget-group-menu .study-button { color:var(--widget-ink,var(--ink)); background:transparent; border-color:transparent; }
 .widget-side { position:relative; z-index:1; display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-shrink:0; }
+/* Empty areas of the side row pass clicks to the widget; only its real controls capture them. */
+.widget-side { pointer-events:none; }
+.widget-side .widget-open-button { pointer-events:auto; }
 .widget-primary-action { display:flex; align-items:center; gap:12px; flex-shrink:0; }
 .widget-due { display:flex; flex-direction:column; gap:2px; flex-shrink:0; }
 .widget-due-number { font-size:var(--due-size); line-height:1; font-weight:600; letter-spacing:-.03em; font-variant-numeric:tabular-nums; color:var(--widget-ink,var(--ink)); }
 .widget-due-label { font-size:12px; color:var(--widget-ink2,var(--ink2)); }
-.widget-due[data-done="true"] .widget-due-number { font-size:18px; line-height:1.4; letter-spacing:0; }
+.widget-done { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:500; line-height:1.4; color:var(--widget-ink2,var(--ink2)); text-shadow:var(--widget-text-shadow,none); }
+.widget-chevron { flex-shrink:0; align-self:flex-end; color:var(--widget-ink2,var(--ink2)); opacity:.75; pointer-events:none; }
+.deck-folder:hover .widget-chevron { opacity:1; transform:translateX(2px); transition:transform 160ms cubic-bezier(.2,.8,.2,1),opacity 160ms; }
 .widget-open-button:active { transform:scale(.97); transition:transform 100ms; }
 
 /* Large and extra large list their decks; extra large splits into a summary column and a two-column list when wide. */
