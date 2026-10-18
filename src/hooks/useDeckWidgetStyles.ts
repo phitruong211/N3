@@ -1,6 +1,10 @@
 import { useCallback, useRef, useState } from 'react';
 import type { LearningStorage } from '@/lib/storage';
-import { DECK_WIDGETS_KEY, normalizeWidgetStyle, readWidgetStyles, type DeckWidgetStyle } from '@/lib/deckWidgets';
+import { DECK_WIDGETS_KEY, normalizeWidgetStyle, readWidgetStyles, sizeFromPixels, type DeckWidgetStyle } from '@/lib/deckWidgets';
+
+/** Pixel sizes saved before widgets snapped to fixed tiers. */
+const LEGACY_SIZES_KEY = 'deck-group-sizes-v1';
+type LegacySizes = Record<string, { width?: number; height?: number }>;
 
 export function useDeckWidgetStyles(storage?: Pick<LearningStorage, 'getJSON' | 'setJSON'>) {
   const [styles, setStyles] = useState(() => { try { return readWidgetStyles(storage?.getJSON(DECK_WIDGETS_KEY, {})); } catch { return {}; } });
@@ -17,5 +21,16 @@ export function useDeckWidgetStyles(storage?: Pick<LearningStorage, 'getJSON' | 
     const next = Object.fromEntries(Object.entries(current.current).filter(([id]) => ids.has(id)));
     if (Object.keys(next).length !== Object.keys(current.current).length) persist(next);
   }, [persist]);
-  return { styles, update, reset, prune };
+  /** One-time: turn legacy pixel sizes into the nearest tier, then empty the old key. */
+  const migrateLegacySizes = useCallback((metrics: { cell: number; gap: number; columns: number }) => {
+    let legacy: LegacySizes | undefined;
+    try { legacy = storage?.getJSON<LegacySizes>(LEGACY_SIZES_KEY, {}); } catch { return; }
+    const entries = Object.entries(legacy ?? {}).filter(([, size]) => size && Number.isFinite(size.width) && Number.isFinite(size.height));
+    if (!entries.length) return;
+    const next = { ...current.current };
+    for (const [id, size] of entries) next[id] = normalizeWidgetStyle({ ...normalizeWidgetStyle(next[id]), size: sizeFromPixels(size.width!, size.height!, metrics.cell, metrics.gap, metrics.columns) });
+    persist(next);
+    try { storage?.setJSON(LEGACY_SIZES_KEY, {}); } catch { /* A stale key only re-runs this harmless conversion. */ }
+  }, [storage, persist]);
+  return { styles, update, reset, prune, migrateLegacySizes };
 }

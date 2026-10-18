@@ -4,9 +4,9 @@ import { Ellipsis, EllipsisVertical } from 'lucide-react';
 
 export type DeckAction = { id: string; label: string; destructive?: boolean; disabled?: boolean; onSelect: () => void };
 
-type Props = { label?: string; actions: DeckAction[]; horizontal?: boolean; triggerContent?: ReactNode; disabled?: boolean; menuClassName?: string };
+type Props = { label?: string; actions: DeckAction[]; horizontal?: boolean; triggerContent?: ReactNode; disabled?: boolean; menuClassName?: string; compact?: boolean };
 
-export function OverflowMenu({ label = 'Mở menu', actions, horizontal, triggerContent, disabled, menuClassName = '' }: Props) {
+export function OverflowMenu({ label = 'Mở menu', actions, horizontal, triggerContent, disabled, menuClassName = '', compact }: Props) {
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const trigger = useRef<HTMLButtonElement>(null);
@@ -39,7 +39,7 @@ export function OverflowMenu({ label = 'Mở menu', actions, horizontal, trigger
     return () => { document.removeEventListener('pointerdown', outside); window.removeEventListener('keydown', escape); };
   }, [open]);
   return <>
-    <button ref={trigger} type="button" disabled={disabled} className={`study-button ${triggerContent ? 'study-button-primary' : '!min-h-11 !w-11 !p-0'}`}
+    <button ref={trigger} type="button" disabled={disabled} className={`study-button ${triggerContent ? 'study-button-primary' : compact ? '!min-h-9 !w-9 !p-0' : '!min-h-11 !w-11 !p-0'}`}
       aria-label={label} aria-haspopup="menu" aria-controls={open ? id : undefined} aria-expanded={open}
       onKeyDown={event => { if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); setOpen(true); } }}
       onClick={() => setOpen(value => !value)}>{triggerContent ?? (horizontal ? <Ellipsis size={20}/> : <EllipsisVertical size={18}/>)}</button>

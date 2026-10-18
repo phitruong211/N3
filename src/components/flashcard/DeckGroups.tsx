@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type PointerEvent as ReactPointerEvent } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type PointerEvent as ReactPointerEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronDown, Folder, FolderOpen, Plus, MoveDiagonal2, X, Grip, SlidersHorizontal } from 'lucide-react';
@@ -7,11 +7,12 @@ import {
   moveDeckToGroup, orderDeckGroups, type DeckGroup, type PersonalDeck, type Page,
 } from '@/lib/deckApi';
 import './deckGroups.css';
+import './widgetGlass.css';
 import { OverflowMenu, type DeckAction } from '@/components/ui/OverflowMenu';
 import type { LearningStorage } from '@/lib/storage';
-import { useDeckGroupSizes } from './useDeckGroupSizes';
+import { readGridMetrics, useWidgetSnapResize } from './useWidgetSnapResize';
 import { useDeckWidgetStyles } from '@/hooks/useDeckWidgetStyles';
-import { moveWidget, normalizeWidgetStyle, widgetInk } from '@/lib/deckWidgets';
+import { ambientColors, moveWidget, normalizeWidgetStyle, widgetInk, type WidgetSize } from '@/lib/deckWidgets';
 import { DeckWidgetCustomize } from './DeckWidgetCustomize';
 
 type Props = {
@@ -27,25 +28,28 @@ type Drag = { deck: PersonalDeck; x: number; y: number };
 function usesLightTheme() { return !document.documentElement.classList.contains('dark'); }
 
 export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = false, onChange, renderDeck, deckActions, createActions = [], toolbarTarget, storage, onShareGroup, requestedGroup, onGroupOpened, onReviewGroup, summaryTarget }: Props) {
-  const sizing = useDeckGroupSizes(storage);
   const widgets = useDeckWidgetStyles(storage);
   const pruneWidgets = widgets.prune;
+  const migrateWidgetSizes = widgets.migrateLegacySizes;
+  const widgetStyles = widgets.styles;
   const [editingLayout, setEditingLayout] = useState(false);
   const [customizingWidget, setCustomizingWidget] = useState<DeckGroup | null>(null);
   const [widgetDrag, setWidgetDrag] = useState<string | null>(null);
   const [widgetTarget, setWidgetTarget] = useState<string | null>(null);
   const cleanupWidgetDrag = useRef<() => void>(() => {});
   const workspace = useRef<HTMLDivElement>(null);
+  const board = useRef<HTMLDivElement>(null);
   const grid = useRef<HTMLDivElement>(null);
-  const [gridWidth, setGridWidth] = useState(0);
+  const lightFrame = useRef(0);
+  const migrated = useRef(false);
   const [lightTheme, setLightTheme] = useState(usesLightTheme);
   const stylesRef = useRef(widgets.styles); stylesRef.current = widgets.styles;
-  const pruneSizes = sizing.prune;
+  const resize = useWidgetSnapResize(grid, applySize);
   const suppressClick = useRef(false);
   const [moving, setMoving] = useState<PersonalDeck | null>(null);
   const [moveTarget, setMoveTarget] = useState('');
   const systemReducedMotion = useReducedMotion();
-  const layoutTransition = { layout: { duration: reducedMotion || systemReducedMotion ? 0 : 0.18 } };
+  const layoutTransition = reducedMotion || systemReducedMotion ? { layout: { duration: 0 } } : { layout: { type: 'spring' as const, stiffness: 500, damping: 40 } };
   const [groups, setGroups] = useState<DeckGroup[]>([]);
   const [opened, setOpened] = useState<Set<string>>(new Set());
   const [pages, setPages] = useState<Record<string, Page<PersonalDeck>>>({});
@@ -71,14 +75,31 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
   const returnFocus = useRef<HTMLElement | null>(null);
   const dialogOpen = editor !== null || removing !== null || moving !== null;
 
-  useEffect(() => { alive.current = true; return () => { alive.current = false; cleanupDrag.current(); cleanupWidgetDrag.current(); }; }, []);
-  useLayoutEffect(() => {
-    const element = grid.current;
-    if (!element) return;
-    const measure = () => setGridWidth(element.clientWidth);
-    measure(); const observer = new ResizeObserver(measure); observer.observe(element);
-    return () => observer.disconnect();
+  useEffect(() => { alive.current = true; return () => { alive.current = false; cleanupDrag.current(); cleanupWidgetDrag.current(); cancelAnimationFrame(lightFrame.current); }; }, []);
+  // The ambient layer only drifts while the board is on screen and the tab is visible.
+  useEffect(() => {
+    const root = board.current;
+    if (!root || typeof IntersectionObserver === 'undefined') return;
+    let onScreen = false;
+    const sync = () => root.setAttribute('data-visible', String(onScreen && !document.hidden));
+    const observer = new IntersectionObserver(entries => { for (const entry of entries) onScreen = entry.isIntersecting; sync(); });
+    observer.observe(root); document.addEventListener('visibilitychange', sync);
+    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', sync); };
   }, []);
+  // Pixel sizes from before fixed tiers become the nearest tier once the real grid is measured.
+  useEffect(() => {
+    if (migrated.current || !groups.length) return;
+    const metrics = readGridMetrics(grid.current);
+    if (!metrics) return;
+    migrated.current = true; migrateWidgetSizes(metrics);
+  }, [groups.length, migrateWidgetSizes]);
+  // Large and extra-large widgets list their decks, so they need a page even when collapsed.
+  useEffect(() => {
+    for (const group of groups) {
+      const size = normalizeWidgetStyle(widgetStyles[group.id]).size;
+      if ((size === 'large' || size === 'xlarge') && !pagesRef.current[group.id] && !requests.current.has(group.id)) void loadGroup(group.id);
+    }
+  }, [groups, widgetStyles]);
   useEffect(() => {
     const changed = () => setLightTheme(usesLightTheme());
     const observer = new MutationObserver(changed); observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
@@ -93,16 +114,15 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
     listDeckGroups().then(async result => {
       if (!valid) return;
       setGroups(result);
-      pruneSizes(new Set(result.map(group => group.id)));
       pruneWidgets(new Set(result.map(group => group.id)));
       const ids = new Set(result.map(g => g.id));
-      const largeIds = result.filter(group => normalizeWidgetStyle(stylesRef.current[group.id]).size === 'large').map(group => group.id);
-      setOpened(current => new Set([...current, ...largeIds].filter(id => ids.has(id))));
+      const largeIds = result.filter(group => ['large', 'xlarge'].includes(normalizeWidgetStyle(stylesRef.current[group.id]).size)).map(group => group.id);
+      setOpened(current => new Set([...current].filter(id => ids.has(id))));
       setPages(current => Object.fromEntries(Object.entries(current).filter(([id]) => ids.has(id))));
       await Promise.all([...new Set([...openRef.current, ...largeIds])].filter(id => ids.has(id)).map(id => loadGroup(id, pagesRef.current[id]?.number ?? 0, generation)));
     }).catch(e => { if (valid) setError(e.message); }).finally(() => { if (valid) setGroupLoading(false); });
     return () => { valid = false; };
-  }, [reload, revision, pruneSizes, pruneWidgets]);
+  }, [reload, revision, pruneWidgets]);
 
   useEffect(() => {
     if (dialogOpen) {
@@ -171,8 +191,25 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
     [ids[index], ids[to]] = [ids[to], ids[index]];
     void mutate(() => orderDeckGroups(ids), 'Đã lưu thứ tự nhóm.');
   }
+  function applySize(id: string, size: WidgetSize) {
+    widgets.update(id, { size });
+    setOpened(current => { if (!current.has(id)) return current; const next = new Set(current); next.delete(id); return next; });
+  }
+  /** Specular highlight follows a mouse pointer across the widget under it (never on touch). */
+  function followPointer(event: ReactPointerEvent<HTMLDivElement>) {
+    if (event.pointerType !== 'mouse' || reducedMotion || systemReducedMotion) return;
+    const folder = (event.target as HTMLElement).closest<HTMLElement>('.deck-folder');
+    if (!folder) return;
+    const { clientX, clientY } = event;
+    cancelAnimationFrame(lightFrame.current);
+    lightFrame.current = requestAnimationFrame(() => {
+      const box = folder.getBoundingClientRect();
+      folder.style.setProperty('--mx', `${Math.round((clientX - box.left) / box.width * 100)}%`);
+      folder.style.setProperty('--my', `${Math.round((clientY - box.top) / box.height * 100)}%`);
+    });
+  }
   function beginWidgetDrag(event: ReactPointerEvent<HTMLButtonElement>, group: DeckGroup) {
-    if (!editingLayout || saving || busy || groupLoading || sizing.resizing || event.button !== 0) return;
+    if (!editingLayout || saving || busy || groupLoading || resize.resizing || event.button !== 0) return;
     event.preventDefault(); event.stopPropagation(); cleanupWidgetDrag.current();
     const handle = event.currentTarget, pointerId = event.pointerId;
     const originalCursor = document.body.style.cursor, originalSelect = document.body.style.userSelect;
@@ -225,7 +262,7 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
   }
   function beginDrag(event: ReactPointerEvent<HTMLDivElement>, deck: PersonalDeck) {
     suppressClick.current = false;
-    if (editingLayout || busy || saving || groupLoading || sizing.resizing || event.button !== 0 || (event.target as HTMLElement).closest('button,a,input,select,textarea,summary,[role=menu],[contenteditable=true]')) return;
+    if (editingLayout || busy || saving || groupLoading || resize.resizing || event.button !== 0 || (event.target as HTMLElement).closest('button,a,input,select,textarea,summary,[role=menu],[contenteditable=true]')) return;
     cleanupDrag.current();
     const button = event.currentTarget;
     const pointerId = event.pointerId;
@@ -310,7 +347,7 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
   function entry(deck: PersonalDeck, compact = false) {
     const groupId = deck.groupId ?? null;
     const actions = deckActions?.(deck) ?? [];
-    const menu = <OverflowMenu menuClassName="deck-widget-menu" horizontal label={`Thao tác với bộ ${deck.name}`} actions={[
+    const menu = <OverflowMenu menuClassName="deck-widget-menu" horizontal compact label={`Thao tác với bộ ${deck.name}`} actions={[
       ...actions.slice(0, 1),
       { id: 'move-group', label: 'Chuyển đến nhóm…', disabled: busy || saving || groupLoading, onSelect: () => { setMoving(deck); setMoveTarget(groupId ?? ''); setError(''); } },
       ...actions.slice(1),
@@ -328,77 +365,96 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
     ...createActions,
     { id: 'create-group', label: 'Tạo nhóm', disabled: busy || saving || groupLoading, onSelect: () => { setError(''); setEditor({ name: '' }); } },
   ]}/>;
+  const ambient = ambientColors(groups.map(group => normalizeWidgetStyle(widgets.styles[group.id])));
+  const amb = [0, 1, 2].map(i => ambient[i] ?? ambient[0]);
   const summary = `${groups.length} nhóm · ${groups.reduce((total, group) => total + group.dueCount, 0).toLocaleString('vi-VN')} thẻ cần ôn hôm nay`;
-  const arrangeButton = groups.length > 0 && <button type="button" className="widget-pill" aria-pressed={editingLayout} disabled={saving || busy || Boolean(widgetDrag) || Boolean(sizing.resizing)}
+  const arrangeButton = groups.length > 0 && <button type="button" className="widget-pill" aria-pressed={editingLayout} disabled={saving || busy || Boolean(widgetDrag) || Boolean(resize.resizing)}
     onClick={() => { setEditingLayout(value => !value); setCustomizingWidget(null); }}>{editingLayout ? 'Xong' : 'Sắp xếp'}</button>;
   const toolbar = <div className="widget-toolbar-actions">{arrangeButton}{createMenu}</div>;
 
-  return <div className={`deck-groups-library sm:col-span-2 xl:col-span-3 ${drag ? "is-drag-active" : ""} ${sizing.resizing ? "is-resizing" : ""}`} data-study-mode={mode} data-reduced-motion={reducedMotion || systemReducedMotion || undefined} aria-busy={saving}>
+  return <div className={`deck-groups-library sm:col-span-2 xl:col-span-3 ${drag ? "is-drag-active" : ""} ${resize.resizing ? "is-resizing" : ""}`} data-study-mode={mode} data-reduced-motion={reducedMotion || systemReducedMotion || undefined} aria-busy={saving}>
     {toolbarTarget ? createPortal(toolbar, toolbarTarget) : toolbarTarget === undefined ? <div className="deck-library-toolbar"><p className="widget-library-summary">{summary}</p>{toolbar}</div> : null}
     {summaryTarget && createPortal(summary, summaryTarget)}
     {error && <p role="alert" className="text-sm text-[var(--color-error)]">{error} <button className="underline" onClick={() => { setError(''); setRevision(v => v + 1); onChange(); }}>Thử lại</button></p>}
     <p className="sr-only" role="status">{saving ? 'Đang lưu…' : notice}</p>
     <div ref={workspace} className={`deck-widget-workspace ${customizingWidget ? 'has-customizer' : ''}`}>
-    <div ref={grid} className={`deck-folder-grid ${editingLayout ? 'is-editing-layout' : ''}`}>{groups.map((group, index) => {
+    <div ref={board} className="deck-folder-board" style={{ '--amb-1': amb[0], '--amb-2': amb[1], '--amb-3': amb[2] } as CSSProperties}>
+    <div className="widget-ambient" aria-hidden="true"/>
+    <div ref={grid} className={`deck-folder-grid ${editingLayout ? 'is-editing-layout' : ''}`} onPointerMove={followPointer}>{groups.map((group, index) => {
       const style = normalizeWidgetStyle(widgets.styles[group.id]);
-      const ink = widgetInk(style, lightTheme);
-      const customSize = sizing.sizes[group.id];
-      const customSpan = customSize && gridWidth > 0 ? Math.max(gridWidth <= 600 ? 3 : 2, Math.min(6, Math.ceil((customSize.width + 16) / ((gridWidth + 16) / 6)))) : undefined;
+      const size: WidgetSize = resize.preview?.id === group.id ? resize.preview.size : style.size;
+      const ink = widgetInk(style, lightTheme, ambient);
       const due = Math.max(0, group.dueCount || 0);
-      const groupMenu = <OverflowMenu menuClassName="deck-widget-menu" horizontal label={`Thao tác nhóm ${group.name}`} actions={[
+      const isOpen = opened.has(group.id);
+      const groupPage = pages[group.id];
+      const previewRows = size === 'xlarge' ? 12 : 8; // CSS shows only the rows that fit
+      const previewing = !isOpen && (size === 'large' || size === 'xlarge');
+      const reviewable = due > 0 && size !== 'small' && Boolean(onReviewGroup);
+      const groupMenu = <OverflowMenu menuClassName="deck-widget-menu" horizontal compact label={`Thao tác nhóm ${group.name}`} actions={[
         { id: 'rename', label: 'Đổi tên', disabled: saving || busy || groupLoading, onSelect: () => { setError(''); setEditor({ group, name: group.name }); } },
         ...(onShareGroup ? [{ id: 'share', label: 'Chia sẻ nhóm', disabled: saving || busy || groupLoading, onSelect: () => onShareGroup(group) }] : []),
         { id: 'up', label: 'Đưa lên', disabled: !editingLayout || saving || busy || groupLoading || index === 0, onSelect: () => shiftGroup(group, -1) },
         { id: 'down', label: 'Đưa xuống', disabled: !editingLayout || saving || busy || groupLoading || index === groups.length - 1, onSelect: () => shiftGroup(group, 1) },
         { id: 'customize-widget', label: 'Tùy chỉnh widget', onSelect: () => { setCustomizingWidget(group); } },
-        { id: 'reset', label: 'Đặt lại kích thước', disabled: !sizing.sizes[group.id], onSelect: () => sizing.reset(group.id) },
         { id: 'dissolve', label: 'Giải tán nhóm', destructive: true, disabled: saving || busy || groupLoading, onSelect: () => { setError(''); setRemoving(group); } },
       ]}/>;
       return <motion.section layout="position" transition={layoutTransition} key={group.id} id={`group-${group.id}`}
-      style={{ width: customSize?.width, height: customSize?.height, maxHeight: customSize ? 'none' : undefined, gridColumn: customSpan ? `span ${customSpan}` : undefined,
+      style={{
         '--tint': style.color, '--op': style.opacity, '--blur': `${style.blur}px`,
         '--widget-ink': ink.ink, '--widget-ink2': ink.ink2,
         '--widget-text-shadow': ink.halo ? `0 0 1px ${ink.halo}, 0 0 2px ${ink.halo}` : 'none',
-        '--review-percent': `${Math.min(100, group.cardCount > 0 ? due / group.cardCount * 100 : 0)}%`,
-      } as CSSProperties} data-widget-size={style.size} data-widget-id={group.id}
-      className={`deck-folder ${customizingWidget?.id === group.id ? 'is-selected' : ''} ${editingLayout ? 'is-layout-editing' : ''} ${widgetDrag === group.id ? 'is-widget-moving' : ''} ${widgetTarget === group.id ? 'is-widget-target' : ''} ${sizing.resizing === group.id ? 'is-resizing' : ''} ${opened.has(group.id) ? 'is-open' : ''} ${targetKey === `group:${group.id}` ? 'is-target' : ''}`}
+      } as CSSProperties} data-widget-size={size} data-widget-id={group.id}
+      className={`deck-folder ${customizingWidget?.id === group.id ? 'is-selected' : ''} ${editingLayout ? 'is-layout-editing' : ''} ${widgetDrag === group.id ? 'is-widget-moving' : ''} ${widgetTarget === group.id ? 'is-widget-target' : ''} ${resize.resizing === group.id ? 'is-resizing' : ''} ${isOpen ? 'is-open' : ''} ${targetKey === `group:${group.id}` ? 'is-target' : ''}`}
       data-deck-drop={!editingLayout ? `group:${group.id}` : undefined} data-group-id={group.id}>
-      <div className="widget-water" aria-hidden="true">{[0, 1, 2, 3, 4].map(drop => <span className="widget-water-drop" key={drop}/>)}</div>
       {editingLayout && <div className="widget-edit-controls">
-        <button className="widget-move-handle widget-icon-button" aria-label={`Kéo để di chuyển ${group.name}`} title="Kéo để đổi chỗ · Phím mũi tên để sắp xếp" disabled={saving || busy || Boolean(sizing.resizing)} onPointerDown={event => beginWidgetDrag(event, group)}
+        <button className="widget-move-handle widget-icon-button" aria-label={`Kéo để di chuyển ${group.name}`} title="Kéo để đổi chỗ · Phím mũi tên để sắp xếp" disabled={saving || busy || Boolean(resize.resizing)} onPointerDown={event => beginWidgetDrag(event, group)}
           onKeyDown={event => { if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].includes(event.key)) { event.preventDefault(); shiftGroup(group, ['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1); } }}><Grip size={18}/></button>
         <button className="widget-customize-trigger widget-icon-button" aria-label={`Tùy chỉnh widget ${group.name}`} onClick={() => setCustomizingWidget(group)}><SlidersHorizontal size={16}/></button>
       </div>}
       <div className="widget-content">
       <div className="deck-folder-header">
-        <button className="deck-folder-toggle" aria-expanded={opened.has(group.id)} aria-controls={`folder-${group.id}`} onClick={() => toggle(group.id)}>
-          <span className="deck-folder-icon">{opened.has(group.id) ? <FolderOpen size={22}/> : <Folder size={22}/>}</span>
-          <span className="widget-title"><strong>{group.name}</strong><span>{group.deckCount} bộ · {group.cardCount.toLocaleString('vi-VN')} thẻ</span></span>
+        <button className="deck-folder-toggle" aria-expanded={isOpen} aria-controls={`folder-${group.id}`} onClick={() => toggle(group.id)}>
+          <span className="deck-folder-icon">{isOpen ? <FolderOpen size={22}/> : <Folder size={22}/>}
+            {size === 'small' && !isOpen && due > 0 && <span className="widget-due-badge" aria-hidden="true">{due > 99 ? '99+' : due}</span>}</span>
+          <span className="widget-title"><strong>{group.name}</strong><span>{group.deckCount} bộ · {group.cardCount.toLocaleString('vi-VN')} thẻ</span>
+            {size === 'small' && due > 0 && <span className="sr-only">{due.toLocaleString('vi-VN')} thẻ cần ôn hôm nay</span>}</span>
         </button>
-        {style.size !== 'small' && <div className="widget-review-meter"><div className="widget-review-ring" role="img" aria-label={`${due} thẻ cần ôn`}><span>{due}</span></div><small>thẻ cần ôn</small></div>}
+        <div className="widget-group-menu">{groupMenu}</div>
       </div>
-      {style.size !== 'large' && <div className="widget-group-menu">{groupMenu}</div>}
-      {(!opened.has(group.id) || style.size !== 'small') && <div className="widget-primary-action"><button type="button" className="widget-pill widget-open-button" disabled={busy || saving}
-        onClick={() => due > 0 && style.size !== 'small' && onReviewGroup ? onReviewGroup(group) : toggle(group.id)}>{style.size !== 'small' && due > 0 ? `Ôn ${due} thẻ` : opened.has(group.id) ? 'Thu gọn' : 'Mở nhóm'}</button>{style.size === 'large' && <div className="widget-inline-group-menu">{groupMenu}</div>}</div>}
+      {(size !== 'small' || isOpen) && <div className="widget-side">
+        {size !== 'small' && <div className="widget-due" data-done={due === 0 || undefined}>
+          {due > 0 ? <><span className="widget-due-number">{due.toLocaleString('vi-VN')}</span><span className="widget-due-label">thẻ cần ôn hôm nay</span></>
+            : <span className="widget-due-number">✓ Đã xong hôm nay</span>}
+        </div>}
+        <div className="widget-primary-action"><button type="button" className={`widget-pill widget-open-button ${reviewable ? 'is-primary' : ''}`} disabled={busy || saving}
+          onClick={() => reviewable ? onReviewGroup!(group) : toggle(group.id)}>{reviewable ? `Ôn ${due} thẻ →` : isOpen ? 'Thu gọn' : 'Mở nhóm'}</button></div>
+      </div>}
+      {previewing && <div className="widget-preview">
+        {loading.has(group.id) && !groupPage && <p role="status" className="study-copy">Đang tải bộ thẻ…</p>}
+        <div className="widget-preview-list">{groupPage?.content.slice(0, previewRows).map(deck => entry(deck, true))}</div>
+        {groupPage && groupPage.totalElements === 0 && <p className="deck-empty-folder">Kéo bộ thẻ vào đây hoặc chọn “Chuyển đến nhóm” trong menu bộ thẻ.</p>}
+        {groupPage && groupPage.totalElements > 1 && <button type="button" className="widget-more" onClick={() => expand(group.id)}>Xem tất cả {groupPage.totalElements.toLocaleString('vi-VN')} bộ</button>}
+      </div>}
       {targetKey === `group:${group.id}` && <p className="deck-drop-hint">Thả để chuyển vào nhóm</p>}
-      {opened.has(group.id) && <div id={`folder-${group.id}`} className="deck-folder-content">
+      {isOpen && <div id={`folder-${group.id}`} className="deck-folder-content">
         {loading.has(group.id) && <p role="status" className="study-copy">Đang tải bộ thẻ…</p>}
-        <div className="deck-responsive-grid">{pages[group.id]?.content.map(deck => entry(deck, true))}</div>
+        <div className="deck-responsive-grid">{groupPage?.content.map(deck => entry(deck, true))}</div>
         {endZone(group.id)}
-        {!loading.has(group.id) && pages[group.id]?.totalElements === 0 && <p className="deck-empty-folder">Kéo bộ thẻ vào đây hoặc chọn “Chuyển đến nhóm” trong menu bộ thẻ.</p>}
-        {(pages[group.id]?.totalPages ?? 0) > 1 && <div className="mt-4 flex items-center justify-center gap-3">
-          <button className="study-button" disabled={loading.has(group.id) || pages[group.id].number === 0} onClick={() => void loadGroup(group.id, pages[group.id].number - 1)}>Trước</button>
-          <span className="study-copy">{pages[group.id].number + 1} / {pages[group.id].totalPages}</span>
-          <button className="study-button" disabled={loading.has(group.id) || pages[group.id].number + 1 >= pages[group.id].totalPages} onClick={() => void loadGroup(group.id, pages[group.id].number + 1)}>Sau</button>
+        {!loading.has(group.id) && groupPage?.totalElements === 0 && <p className="deck-empty-folder">Kéo bộ thẻ vào đây hoặc chọn “Chuyển đến nhóm” trong menu bộ thẻ.</p>}
+        {(groupPage?.totalPages ?? 0) > 1 && <div className="mt-4 flex items-center justify-center gap-3">
+          <button className="study-button" disabled={loading.has(group.id) || groupPage!.number === 0} onClick={() => void loadGroup(group.id, groupPage!.number - 1)}>Trước</button>
+          <span className="study-copy">{groupPage!.number + 1} / {groupPage!.totalPages}</span>
+          <button className="study-button" disabled={loading.has(group.id) || groupPage!.number + 1 >= groupPage!.totalPages} onClick={() => void loadGroup(group.id, groupPage!.number + 1)}>Sau</button>
         </div>}
       </div>}
       </div>
-      {editingLayout && <button type="button" className="deck-resize-handle" aria-label={`Đổi kích thước nhóm ${group.name}`} title="Kéo để đổi kích thước · Phím mũi tên để điều chỉnh"
-        disabled={Boolean(drag) || Boolean(widgetDrag) || saving || busy} onPointerDown={e => sizing.begin(e, group.id)} onKeyDown={e => sizing.keyboard(e, group.id)}><MoveDiagonal2 size={19}/></button>}
+      {editingLayout && <button type="button" className="deck-resize-handle" aria-label={`Đổi kích thước nhóm ${group.name}`} title="Kéo để đổi cỡ (Nhỏ · Vừa · Lớn · Rất lớn) · Phím mũi tên để đổi từng bậc"
+        disabled={Boolean(drag) || Boolean(widgetDrag) || saving || busy} onPointerDown={e => resize.begin(e, group.id, style.size)} onKeyDown={e => resize.keyboard(e, group.id, style.size)}><MoveDiagonal2 size={19}/></button>}
     </motion.section>; })}</div>
+    </div>
     {customizingWidget && <DeckWidgetCustomize name={customizingWidget.name} anchor={workspace} value={normalizeWidgetStyle(widgets.styles[customizingWidget.id])}
-      onChange={patch => { if (patch.size) { sizing.reset(customizingWidget.id); if (patch.size === 'large') expand(customizingWidget.id); else setOpened(current => { const next = new Set(current); next.delete(customizingWidget.id); return next; }); } widgets.update(customizingWidget.id, patch); }}
-      onReset={() => { sizing.reset(customizingWidget.id); widgets.reset(customizingWidget.id); setOpened(current => { const next = new Set(current); next.delete(customizingWidget.id); return next; }); }} onClose={() => setCustomizingWidget(null)}/>}
+      onChange={patch => { if (patch.size) applySize(customizingWidget.id, patch.size); else widgets.update(customizingWidget.id, patch); }}
+      onReset={() => { widgets.reset(customizingWidget.id); setOpened(current => { const next = new Set(current); next.delete(customizingWidget.id); return next; }); }} onClose={() => setCustomizingWidget(null)}/>}
     </div>
     <section className={`deck-root-zone ${!rootDecks.length && !drag ? "hidden" : ""} ${targetKey === 'root' ? 'is-target' : ''}`} data-deck-drop="root" data-group-id="">
       {(groups.length > 0 || drag) && <div className="deck-root-heading"><span>Ngoài nhóm</span>{drag && <span>Thả vào đây để đưa ra ngoài</span>}</div>}

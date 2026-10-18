@@ -1,31 +1,76 @@
 export const DECK_WIDGETS_KEY = 'deck-group-widgets-v1';
-export type WidgetSize = 'small' | 'medium' | 'large';
+export type WidgetSize = 'small' | 'medium' | 'large' | 'xlarge';
+export const WIDGET_SIZES: WidgetSize[] = ['small', 'medium', 'large', 'xlarge'];
 export interface DeckWidgetStyle { size: WidgetSize; color: string; opacity: number; blur: number }
-export const DEFAULT_WIDGET_STYLE: DeckWidgetStyle = { size: 'small', color: '#b5cee8', opacity: 30, blur: 24 };
+/** "Trong" is the neutral tone: the glass takes its colour from the ambient layer behind it. */
+export const CLEAR_TINT = '#e9edf2';
+export const DEFAULT_WIDGET_STYLE: DeckWidgetStyle = { size: 'small', color: CLEAR_TINT, opacity: 14, blur: 24 };
 export const WIDGET_COLORS = [
-  { value: '#b5cee8', label: 'Sương' },
-  { value: '#56b8ff', label: 'Xanh trời' },
-  { value: '#4edbb3', label: 'Bạc hà' },
-  { value: '#ffd080', label: 'Mơ vàng' },
-  { value: '#ff9cba', label: 'Hồng đào' },
-  { value: '#b4a0ff', label: 'Lavender' },
+  { value: CLEAR_TINT, label: 'Trong' },
+  { value: '#0a84ff', label: 'Xanh trời' },
+  { value: '#00c7be', label: 'Bạc hà' },
+  { value: '#34c759', label: 'Xanh lá' },
+  { value: '#ffcc00', label: 'Vàng' },
+  { value: '#ff9f0a', label: 'Cam' },
+  { value: '#ff375f', label: 'Hồng' },
+  { value: '#af52de', label: 'Tím' },
 ];
-
+export const MAX_WIDGET_OPACITY = 70;
+export const MIN_WIDGET_BLUR = 8;
+export const MAX_WIDGET_BLUR = 40;
 
 export function normalizeWidgetStyle(value: unknown): DeckWidgetStyle {
   const raw = value && typeof value === 'object' ? value as Partial<DeckWidgetStyle> : {};
   const color = typeof raw.color === 'string' ? raw.color.toLowerCase() : '';
+  const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
   return {
-    size: ['small', 'medium', 'large'].includes(raw.size ?? '') ? raw.size! : 'small',
+    size: WIDGET_SIZES.includes(raw.size as WidgetSize) ? raw.size! : DEFAULT_WIDGET_STYLE.size,
     color: /^#[0-9a-f]{6}$/.test(color) ? color : DEFAULT_WIDGET_STYLE.color,
-    opacity: typeof raw.opacity === 'number' && Number.isFinite(raw.opacity) ? Math.max(5, Math.min(70, raw.opacity)) : 30,
-    blur: typeof raw.blur === 'number' && Number.isFinite(raw.blur) ? Math.max(0, Math.min(40, raw.blur)) : 24,
+    opacity: finite(raw.opacity) ? Math.max(0, Math.min(MAX_WIDGET_OPACITY, raw.opacity)) : DEFAULT_WIDGET_STYLE.opacity,
+    blur: finite(raw.blur) ? Math.max(0, Math.min(MAX_WIDGET_BLUR, raw.blur)) : DEFAULT_WIDGET_STYLE.blur,
   };
 }
 
 export function readWidgetStyles(value: unknown): Record<string, DeckWidgetStyle> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
   return Object.fromEntries(Object.entries(value).map(([id, style]) => [id, normalizeWidgetStyle(style)]));
+}
+
+/** Grid footprint in cells. Extra-large is 4×2, or 2×3 on the two-column phone grid. */
+export function widgetSpan(size: WidgetSize, columns: number): { cols: number; rows: number } {
+  const wide = Math.max(1, Math.floor(columns));
+  switch (size) {
+    case 'small': return { cols: 1, rows: 1 };
+    case 'medium': return { cols: Math.min(2, wide), rows: 1 };
+    case 'large': return { cols: Math.min(2, wide), rows: 2 };
+    default: return wide >= 4 ? { cols: 4, rows: 2 } : { cols: Math.min(2, wide), rows: 3 };
+  }
+}
+
+/** Nearest preset to a fractional cell footprint; ties go to the smaller preset. */
+export function snapWidgetSize(cols: number, rows: number, columns: number): WidgetSize {
+  let best: WidgetSize = 'small', bestDistance = Infinity;
+  for (const size of WIDGET_SIZES) {
+    const span = widgetSpan(size, columns);
+    const distance = Math.hypot(span.cols - cols, span.rows - rows);
+    if (distance < bestDistance - 1e-9) { best = size; bestDistance = distance; }
+  }
+  return best;
+}
+
+/** Convert a legacy pixel size to the preset that fills the closest block of cells. */
+export function sizeFromPixels(width: number, height: number, cell: number, gap: number, columns: number): WidgetSize {
+  if (!(cell > 0) || !Number.isFinite(width) || !Number.isFinite(height)) return DEFAULT_WIDGET_STYLE.size;
+  return snapWidgetSize((width + gap) / (cell + gap), (height + gap) / (cell + gap), columns);
+}
+
+/** Colour behind clear glass when a group's own tone is neutral. */
+export const AMBIENT_FALLBACK = '#8fb4e8';
+/** Up to three ambient glows, taken from the first groups' tones so the glass has something to refract. */
+export function ambientColors(styles: DeckWidgetStyle[]): string[] {
+  const picked = styles.slice(0, 3).map(style => style.color === CLEAR_TINT ? AMBIENT_FALLBACK : style.color);
+  while (picked.length && picked.length < 3) picked.push(picked[picked.length % Math.max(1, styles.length)] ?? AMBIENT_FALLBACK);
+  return picked.length ? picked : [AMBIENT_FALLBACK];
 }
 
 type Rgb = [number, number, number];
@@ -37,10 +82,26 @@ function luminance(color: Rgb) {
 }
 function contrast(a: Rgb, b: Rgb) { const first = luminance(a), second = luminance(b); return (Math.max(first, second) + .05) / (Math.min(first, second) + .05); }
 
+/** Mirrors --glass-fill in index.css; keep the two in step. */
+export const GLASS_FILL = { light: { color: '#ffffff', alpha: .34 }, dark: { color: '#181c24', alpha: .34 } };
+/** Worst-case strength of an ambient glow behind the glass (peak of its radial gradient). */
+const AMBIENT_ALPHA = .55;
+const BASES = { light: ['#eef0ec', '#f5f0e3'], dark: ['#0d100f', '#151b1e'] };
+
+/** Every colour the glass can plausibly sit on: page base, with and without each ambient glow, under fill and tint. */
+export function glassBackgrounds(style: DeckWidgetStyle, light: boolean, ambient: string[] = [AMBIENT_FALLBACK]): Rgb[] {
+  const bases = (light ? BASES.light : BASES.dark).map(rgb);
+  const behind = bases.flatMap(base => [base, ...ambient.map(glow => mix(rgb(glow), base, AMBIENT_ALPHA))]);
+  const fill = light ? GLASS_FILL.light : GLASS_FILL.dark;
+  return behind.flatMap(surface => {
+    const glass = mix(rgb(style.color), mix(rgb(fill.color), surface, fill.alpha), style.opacity / 100);
+    return [glass, mix(rgb('#ffffff'), glass, .18), mix(rgb('#000000'), glass, .06)];
+  });
+}
+
 /** Glass at the upper opacity bound can need dark ink even in a dark theme. */
-export function widgetInk(style: DeckWidgetStyle, light: boolean) {
-  const surfaces = (light ? ['#eceeeb', '#c7e1d5', '#dbd6ec'] : ['#0d100f', '#151b1e', '#1f3930', '#2f2a42', '#14432c', '#322046']).map(rgb);
-  const backgrounds = surfaces.flatMap(surface => { const glass = mix(rgb(style.color), surface, style.opacity / 100); return [glass, mix(rgb('#ffffff'), glass, .18), mix(rgb('#000000'), glass, .06)]; });
+export function widgetInk(style: DeckWidgetStyle, light: boolean, ambient?: string[]) {
+  const backgrounds = glassBackgrounds(style, light, ambient);
   const minimum = (hex: string) => Math.min(...backgrounds.map(background => contrast(rgb(hex), background)));
   const preferred = light ? '#171a18' : '#eef1ef', inverse = light ? '#eef1ef' : '#0d100f';
   let ink = minimum(preferred) >= minimum(inverse) ? preferred : inverse;

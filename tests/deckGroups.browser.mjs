@@ -122,33 +122,47 @@ try {
   assert.equal(await page.getByRole('button',{name:/Kéo để di chuyển/}).count(),0);
   assert.equal(await page.getByRole('button',{name:/Đổi kích thước nhóm/}).count(),0);
   await page.waitForFunction(()=>{const a=document.querySelector('#group-g1').getBoundingClientRect(),b=document.querySelector('#group-g2').getBoundingClientRect();return Math.abs(a.y-b.y)<2&&a.right+10<=b.left;});
+  await page.mouse.move(2,2); // Hover lifts a widget by 2px; measure with the pointer away.
+  // Layout springs finish before measuring: g2 must hold still for ten frames.
+  await page.waitForFunction(()=>new Promise(done=>{const g=document.querySelector('#group-g2');let last=g.getBoundingClientRect(),still=0;
+    const tick=()=>{const now=g.getBoundingClientRect();still=Math.abs(now.x-last.x)<.1&&Math.abs(now.y-last.y)<.1?still+1:0;last=now;if(still>=10)done(true);else requestAnimationFrame(tick);};requestAnimationFrame(tick);}));
   const firstWidget = await page.locator('#group-g1').boundingBox();
   const secondWidget = await page.locator('#group-g2').boundingBox();
   assert.ok(Math.abs(firstWidget.y-secondWidget.y)<2);
   assert.ok(secondWidget.x>firstWidget.x+firstWidget.width);
   await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
+  assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).animationName),'widget-jiggle'); // Arrange mode wiggles like iOS.
+  await page.emulateMedia({reducedMotion:'reduce'});
+  assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).animationName),'none'); // Reduced motion keeps widgets still (and clickable).
   const gridBeforeCustomize=await page.locator('.deck-folder-grid').boundingBox();
   await page.getByRole('button',{name:'Tùy chỉnh widget Từ vựng N3',exact:true}).click();
   const custom = page.getByRole('complementary',{name:'Giao diện thẻ',exact:true});
   await custom.getByRole('button',{name:/Vừa/}).click();
-  await custom.getByRole('button',{name:'Lavender',exact:true}).click();
-  await custom.getByRole('slider',{name:'Độ trong suốt của thẻ',exact:true}).focus();await page.keyboard.press('Home');
+  await custom.getByRole('button',{name:'Tím',exact:true}).click();
+  await custom.getByRole('slider',{name:'Độ đậm màu',exact:true}).focus();await page.keyboard.press('Home');
   for(let step=0;step<35;step++)await page.keyboard.press('ArrowRight');
   const widgetKey = 'user:fixture:deck-group-widgets-v1';
-  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,widgetKey),{size:'medium',color:'#b4a0ff',opacity:35,blur:24});
+  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,widgetKey),{size:'medium',color:'#af52de',opacity:35,blur:24});
   assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).opacity),'1');
-  assert.equal(await custom.locator('.widget-color-options button').count(),6);
+  assert.equal(await custom.locator('.widget-color-options button').count(),8);
+  assert.equal(await custom.locator('.widget-size-options button').count(),4);
+  // Blur is real: the slider drives the widget's backdrop filter and is saved.
+  await custom.getByRole('slider',{name:'Độ mờ kính',exact:true}).focus();await page.keyboard.press('Home');
+  assert.equal(await page.locator('#group-g1').evaluate(el=>el.style.getPropertyValue('--blur')),'8px');
+  assert.match(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).backdropFilter),/blur\(8px\)/);
+  await page.keyboard.press('End');
+  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1.blur,widgetKey),40);
   assert.equal(await custom.locator('.widget-style-preview').count(),0);
   await custom.getByLabel('Chọn màu widget từ bảng màu').fill('#608c9b');
   assert.equal(await page.locator('#group-g1').evaluate(el=>el.style.getPropertyValue('--tint')),'#608c9b');
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1.color,widgetKey),'#608c9b');
   assert.equal(await page.locator('dialog[open]').count(),0);
   assert.equal(await page.locator('#group-g1 .widget-content').evaluate(el=>getComputedStyle(el).opacity),'1');
-  assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).borderStyle),'solid');
+  assert.match(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).backdropFilter),/blur\(.*saturate\(/);
   assert.equal(await custom.evaluate(el=>getComputedStyle(el).position),'fixed');
   const panelBox=await custom.boundingBox(),gridBox=await page.locator('.deck-folder-grid').boundingBox();
   assert.equal(Math.round(panelBox.width),300);assert.equal(Math.round(gridBox.width),Math.round(gridBeforeCustomize.width));
-  for(const name of ['Độ trong suốt của thẻ']) {
+  for(const name of ['Độ đậm màu','Độ mờ kính']) {
     const slider=custom.getByRole('slider',{name,exact:true});await slider.focus();
     assert.equal(await slider.evaluate(el=>getComputedStyle(el).outlineWidth),'2px');
     assert.equal(await slider.evaluate(el=>getComputedStyle(el).outlineOffset),'2px');
@@ -186,36 +200,48 @@ try {
   await page.getByRole('button',{name:'Tùy chỉnh widget Từ vựng N3',exact:true}).click();
   await custom.getByRole('button',{name:/Lớn/}).click();
   await custom.getByRole('button',{name:'Xong',exact:true}).click();
-  // Resize is live, persistent, cancellable and keyboard accessible.
-  const sizeKey = 'user:fixture:deck-group-sizes-v1';
+  const sizeKey = 'user:fixture:deck-group-sizes-v1'; // Legacy pixel sizes.
+  // Resize snaps between fixed tiers: the widget is the live preview, Esc cancels, arrows step one tier.
   const resize = page.getByRole('button',{name:'Đổi kích thước nhóm Từ vựng N3',exact:true});
-  let before = await folder().first().boundingBox();
+  const metrics = await page.locator('.deck-folder-grid').evaluate(el=>{const css=getComputedStyle(el);return {cell:parseFloat(css.gridTemplateColumns.split(' ')[0]),gap:parseFloat(css.columnGap)};});
+  const step = metrics.cell+metrics.gap, near=(a,b)=>Math.abs(a-b)<2;
+  const sizeOf = () => page.locator('#group-g1').getAttribute('data-widget-size');
+  const storedSize = () => page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1.size,widgetKey);
+  assert.equal(await sizeOf(),'large');
+  let box = await folder().first().boundingBox();
+  assert.ok(near(box.width,metrics.cell*2+metrics.gap)&&near(box.height,box.width)); // Large is a 2x2 block of square cells.
   let grip = await resize.boundingBox();
   await page.mouse.move(grip.x+grip.width/2,grip.y+grip.height/2);await page.mouse.down();
-  await page.mouse.move(grip.x+grip.width/2-500,grip.y+grip.height/2+100,{steps:8});
+  await page.mouse.move(grip.x+grip.width/2-step,grip.y+grip.height/2-step,{steps:8});
+  assert.equal(await sizeOf(),'small'); assert.equal(await storedSize(),'large'); // Live preview; nothing saved until release.
   assert.equal(await page.locator('.deck-drag-preview').count(),0);
   await page.mouse.up();
-  const saved = await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,sizeKey);
-  assert.ok(saved.width < before.width-450); assert.ok(saved.height >= before.height+90);
-  before = await folder().first().boundingBox();grip = await resize.boundingBox();
-  await page.mouse.move(grip.x+20,grip.y+20);await page.mouse.down();await page.mouse.move(grip.x-80,grip.y+70);
+  assert.equal(await sizeOf(),'small'); assert.equal(await storedSize(),'small');
+  box = await folder().first().boundingBox();assert.ok(near(box.width,metrics.cell)&&near(box.height,metrics.cell));
+  grip = await resize.boundingBox();
+  await page.mouse.move(grip.x+grip.width/2,grip.y+grip.height/2);await page.mouse.down();
+  await page.mouse.move(grip.x+grip.width/2+step*3,grip.y+grip.height/2+step,{steps:8});
+  assert.equal(await sizeOf(),'xlarge');
   await page.keyboard.press('Escape');await page.mouse.up();
-  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,sizeKey),saved);
-  assert.ok(Math.abs((await folder().first().boundingBox()).width-before.width)<2);
+  assert.equal(await sizeOf(),'small'); assert.equal(await storedSize(),'small'); // Escape restores the saved tier.
   await resize.focus();await page.keyboard.press('ArrowRight');
-  assert.equal((await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,sizeKey)).width,saved.width+10);
-  await page.reload();await page.locator('#group-g1').waitFor();if(await page.locator('#group-g1 .deck-folder-toggle').getAttribute('aria-expanded')==='false')await page.locator('#group-g1 .deck-folder-toggle').click();
+  assert.equal(await sizeOf(),'medium'); assert.equal(await storedSize(),'medium');
+  await page.keyboard.press('ArrowRight');await page.keyboard.press('ArrowLeft');await page.keyboard.press('ArrowRight');
+  assert.equal(await sizeOf(),'large');
+  await page.reload();await page.locator('#group-g1').waitFor();assert.equal(await sizeOf(),'large');
+  // Pixel sizes saved before tiers existed convert to the nearest tier, once.
+  await page.evaluate(()=>localStorage.setItem('user:fixture:deck-group-sizes-v1',JSON.stringify({})));
+  await page.evaluate(({key,size})=>{const all=JSON.parse(localStorage.getItem(key));all.g1.size='small';localStorage.setItem(key,JSON.stringify(all));localStorage.setItem('user:fixture:deck-group-sizes-v1',JSON.stringify({g1:{width:size,height:size}}));},{key:widgetKey,size:Math.round(step*2-metrics.gap)});
+  await page.reload();
+  await page.waitForFunction(()=>document.querySelector('#group-g1')?.dataset.widgetSize==='large');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('user:fixture:deck-group-sizes-v1')),'{}');
   await page.getByRole('heading',{name:'Bài 1 · Khởi đầu'}).waitFor();
-  assert.ok(Math.abs((await folder().first().boundingBox()).width-(saved.width+10))<2);
   // Resizing does not clip portaled menus; Escape restores trigger focus.
   const menuTrigger=page.getByRole('button',{name:'Thao tác với bộ Bài 1 · Khởi đầu',exact:true});
   await menuTrigger.click();await page.getByRole('menuitem',{name:'Chuyển đến nhóm…'}).waitFor();
   assert.equal(await page.getByRole('menu').evaluate(el=>el.parentElement===document.body),true);
   await page.keyboard.press('Escape');assert.equal(await menuTrigger.evaluate(el=>el===document.activeElement),true);
-  // Keep the mobile touch fixture compact after testing stored dimensions.
-  await page.getByLabel('Thao tác nhóm Từ vựng N3').click();
-  await page.getByRole('menuitem',{name:'Đặt lại kích thước'}).click();
-  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).g1,sizeKey),undefined);
+  assert.equal(await page.getByRole('menuitem',{name:'Đặt lại kích thước'}).count(),0); // Pixel sizes no longer exist to reset.
   // Reset appearance restores responsive presets. Capture the board in both themes.
   await page.getByLabel('Thao tác nhóm Từ vựng N3').click();await page.getByRole('menuitem',{name:'Tùy chỉnh widget',exact:true}).click();
   await custom.getByRole('button',{name:'Đặt lại',exact:true}).click();await custom.getByRole('button',{name:'Xong',exact:true}).click();
@@ -223,15 +249,28 @@ try {
   await mkdir('artifacts/deck-groups',{recursive:true});
   await page.waitForFunction(()=>{const a=document.querySelector('#group-g1').getBoundingClientRect(),b=document.querySelector('#group-g2').getBoundingClientRect();return Math.abs(a.y-b.y)<2&&a.right+10<=b.left;});
   await page.screenshot({path:'artifacts/deck-groups/widgets-desktop.png',fullPage:true});
-  await page.emulateMedia({colorScheme:'dark'});
+  await page.emulateMedia({colorScheme:'dark',reducedMotion:'no-preference'});
+  await page.reload();await page.locator('.deck-folder').first().waitFor(); // The motion library reads the preference at mount.
   await page.evaluate(()=>document.documentElement.classList.add('dark'));
-  const lavaPosition = () => page.locator('#group-g1').evaluate(el=>getComputedStyle(el,'::before').backgroundPosition);
-  const lavaBefore = await lavaPosition();
-  await page.waitForTimeout(300);
-  assert.notEqual(await lavaPosition(),lavaBefore);
+  const lightTransform = () => page.locator('.widget-ambient').evaluate(el=>getComputedStyle(el,'::before').transform);
+  await page.waitForFunction(()=>document.querySelector('.deck-folder-board').getAttribute('data-visible')==='true');
+  const lightBefore = await lightTransform();
+  await page.waitForTimeout(500);
+  assert.notEqual(await lightTransform(),lightBefore); // One ambient layer drifts with transform only while the board is on screen.
+  const glassFilter = () => page.locator('#group-g1').evaluate(el=>getComputedStyle(el).backdropFilter);
+  assert.match(await glassFilter(),/blur\(/); // Real backdrop blur.
   await page.screenshot({path:'artifacts/deck-groups/widgets-dark.png',fullPage:true});
   await page.emulateMedia({reducedMotion:'reduce'});
-  assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
+  assert.equal(await page.locator('.widget-ambient').evaluate(el=>getComputedStyle(el,'::before').animationName),'none');
+  // Fallbacks: OS Reduce Transparency (where the browser exposes it) and the high-contrast theme give opaque panes.
+  const media = await page.context().newCDPSession(page);
+  await media.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-transparency',value:'reduce'}]});
+  if(await page.evaluate(()=>matchMedia('(prefers-reduced-transparency: reduce)').matches))assert.equal(await glassFilter(),'none');
+  await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});
+  await page.evaluate(()=>{document.documentElement.className='high-contrast';});
+  assert.equal(await glassFilter(),'none');
+  assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).borderTopWidth),'2px');
+  await page.evaluate(()=>{document.documentElement.className='dark';});
   await page.evaluate(()=>document.documentElement.classList.remove('dark'));
   await page.setViewportSize({width:360,height:844});await page.emulateMedia({reducedMotion:'reduce'});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
@@ -290,11 +329,12 @@ try {
   await page.setViewportSize({width:1280,height:1000});await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});
   await page.reload();await page.getByRole('heading',{name:'Bài 2 · Cuộc sống'}).waitFor();
   await page.getByRole('button',{name:'Đổi chế độ',exact:true}).evaluate(el=>el.style.display='none');
-  assert.equal(await page.locator('#group-g1').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 6');
-  assert.equal(await page.locator('#group-g2').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 3');
-  assert.equal(await page.locator('#group-g3').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 2');
-  await page.locator('#group-g1').getByRole('img',{name:'8 thẻ cần ôn'}).waitFor();
-  assert.equal(await page.locator('#group-g3 .widget-review-ring').count(),0);
+  const span = (id,axis) => page.locator('#group-'+id).evaluate((el,axis)=>getComputedStyle(el)[axis],axis);
+  assert.equal(await span('g1','gridColumnStart'),'span 2');assert.equal(await span('g1','gridRowStart'),'span 2'); // Large 2x2.
+  assert.equal(await span('g2','gridColumnStart'),'span 2');assert.equal(await span('g2','gridRowStart'),'auto'); // Medium 2x1.
+  assert.equal(await span('g3','gridColumnStart'),'auto'); // Small 1x1.
+  await page.locator('#group-g1').locator('.widget-due-number',{hasText:'8'}).waitFor();
+  assert.equal(await page.locator('#group-g3 .widget-due').count(),0);
   await page.screenshot({path:'artifacts/deck-groups/glass-dark.png',fullPage:true});
   await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
   await page.getByRole('button',{name:'Tùy chỉnh widget FPT',exact:true}).click();
@@ -307,8 +347,8 @@ try {
   await page.screenshot({path:'artifacts/deck-groups/glass-light.png',fullPage:true});
   await page.setViewportSize({width:360,height:844});await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
-  assert.equal(await page.locator('#group-g3').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 3');
-  assert.equal(await page.locator('#group-g2').evaluate(el=>getComputedStyle(el).gridColumnStart),'span 6');
+  assert.equal(await span('g3','gridColumnStart'),'auto');
+  assert.equal(await span('g2','gridColumnStart'),'span 2'); // Two-column phone grid: medium is full width.
   await page.screenshot({path:'artifacts/deck-groups/glass-mobile.png',fullPage:true});
   await page.getByRole('button',{name:'Sắp xếp',exact:true}).click();
   await page.getByRole('button',{name:'Tùy chỉnh widget English',exact:true}).click();
@@ -329,5 +369,5 @@ try {
     assert.equal(palette[2],palette[3],theme+' text');
     assert.equal(palette[4],palette[5],theme+' panel');
   }
-  console.log('PASS: widget lock/side-by-side/color/transparency/blur/persistence, pointer and keyboard reorder/cancel, resize, groups CRUD, study actions, deck move/rollback, mobile touch drag and reduced motion');
+  console.log('PASS: widget lock/side-by-side/color/transparency/blur/persistence, pointer and keyboard reorder/cancel, snap-to-tier resize and legacy pixel migration, glass/ambient/fallbacks, groups CRUD, study actions, deck move/rollback, mobile touch drag and reduced motion');
 } finally { await browser?.close(); await server.close(); }
