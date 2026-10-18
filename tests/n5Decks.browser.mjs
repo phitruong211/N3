@@ -44,6 +44,14 @@ try {
   const progress = await page.evaluate(() => Object.keys(localStorage).filter(key => key.startsWith('guest:srs_cards_'))
     .flatMap(key => JSON.parse(localStorage.getItem(key))));
   assert.equal(progress.filter(card => /^(vocab|kanji|grammar)N5-/.test(card.cardId)).length, 3);
+  // Each kind is a hanko seal: its Han character in the shared serif face, and that face has really loaded.
+  await page.goto(`${baseURL}/decks`);
+  await levelReady('N5');
+  assert.deepEqual(await page.locator('.level-seal').allInnerTexts(), ['語', '漢', '文']);
+  assert.match(await page.locator('.level-seal').first().evaluate(el => getComputedStyle(el).fontFamily), /Noto Serif JP/);
+  await page.evaluate(() => document.fonts.load('700 20px "Noto Serif JP Local"', '語漢文'));
+  assert.equal(await page.evaluate(() => document.fonts.check('700 20px "Noto Serif JP Local"', '語漢文')), true);
+  assert.equal(await page.locator('.level-seal').first().getAttribute('aria-hidden'), 'true');
   // One level at a time: switching shows that level's decks, the choice is remembered, and the tablist is keyboard-operable.
   await page.goto(`${baseURL}/decks`);
   await levelReady('N5');
@@ -62,7 +70,7 @@ try {
   await page.keyboard.press('Home');
   assert.equal(await tab('N5').getAttribute('aria-selected'), 'true');
   assert.deepEqual(errors, []);
-  console.log('PASS: all three shared N5 decks open in free and scheduled modes; review progress survives reload; free study leaves scheduling unchanged; level tabs switch, remember and work by keyboard.');
+  console.log('PASS: all three shared N5 decks open in free and scheduled modes; review progress survives reload; free study leaves scheduling unchanged; level tabs switch, remember and work by keyboard; each kind shows its hanko seal.');
 } finally {
   await browser.close();
 }
