@@ -1,7 +1,7 @@
 import { useId, useMemo, useState, type KeyboardEvent } from 'react';
-import { BookOpen, Check, ChevronRight, Languages, ScrollText } from 'lucide-react';
+import { Check, ChevronRight } from 'lucide-react';
 import { builtInLevels, type DeckKind, type DeckLevel } from '@/lib/deckCatalog';
-import { initialLevel, learnedPercent, levelTabLabel, nextTabIndex, summarizeLevel } from '@/lib/levelDecks';
+import { initialLevel, KIND_GLYPH, KIND_TILT, learnedPercent, levelTabLabel, nextTabIndex, summarizeLevel } from '@/lib/levelDecks';
 import type { LearningStorage } from '@/lib/storage';
 import './levelDecks.css';
 
@@ -15,11 +15,11 @@ export type LevelRow = {
   onOpen: () => void;
 };
 
-/** Same icons and hues as the Today library, so a kind looks the same everywhere. */
+/** Each kind is a hanko-style seal: its Han character (shared with the Today library) in its own hue. */
 const KINDS = {
-  vocabulary: { label: 'Từ vựng', Icon: BookOpen, tone: 'var(--color-accent)' },
-  kanji: { label: 'Kanji', Icon: Languages, tone: 'var(--color-kanji)' },
-  grammar: { label: 'Ngữ pháp', Icon: ScrollText, tone: 'var(--color-grammar)' },
+  vocabulary: { label: 'Từ vựng', tone: 'var(--color-accent)' },
+  kanji: { label: 'Kanji', tone: 'var(--color-kanji)' },
+  grammar: { label: 'Ngữ pháp', tone: 'var(--color-grammar)' },
 } as const;
 const LEVEL_KEY = 'deck-level-v1';
 const count = (value: number) => value.toLocaleString('vi-VN');
@@ -66,7 +66,7 @@ export function LevelDecks({ mode, rows, storage }: { mode: 'free' | 'scheduled'
         return <li key={row.id}>
           <button type="button" className="level-row" style={{ '--tone': kind.tone } as React.CSSProperties} disabled={!row.startable} onClick={row.onOpen}
             aria-label={`${kind.label} ${row.level}, ${count(row.totalCards)} thẻ, ${count(row.learnedCount)} đã học${waiting ? `, ${count(row.dueCount)} cần ôn` : ''}`}>
-            <span className="level-row-icon" aria-hidden="true"><kind.Icon size={20}/></span>
+            <span className="level-seal" style={{ '--tilt': KIND_TILT[row.kind] } as React.CSSProperties} aria-hidden="true">{KIND_GLYPH[row.kind]}</span>
             <span className="level-row-main">
               <span className="level-row-name">{kind.label}</span>
               <span className="level-row-detail">{row.totalCards ? `${count(row.learnedCount)}/${count(row.totalCards)} đã học` : 'Chưa có thẻ'}</span>

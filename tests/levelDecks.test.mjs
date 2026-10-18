@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { learnedPercent, summarizeLevel, levelTabLabel, initialLevel, nextTabIndex } from '../src/lib/levelDecks.ts';
+import { learnedPercent, summarizeLevel, levelTabLabel, initialLevel, nextTabIndex, KIND_GLYPH, KIND_TILT } from '../src/lib/levelDecks.ts';
 
 test('progress never rounds an unfinished deck to 100% or a started one to 0%', () => {
   assert.equal(learnedPercent(0, 600), 0);
@@ -44,4 +44,11 @@ test('tab keys wrap and jump like a native tablist', () => {
   assert.equal(nextTabIndex('End', 1, 4), 3);
   assert.equal(nextTabIndex('Enter', 1, 4), null);
   assert.equal(nextTabIndex('ArrowRight', 0, 0), null);
+});
+
+test('each deck kind has its own seal: the Today library glyph and a distinct tilt', () => {
+  assert.deepEqual(KIND_GLYPH, { vocabulary: '語', kanji: '漢', grammar: '文' });
+  const tilts = Object.values(KIND_TILT);
+  assert.equal(new Set(tilts).size, tilts.length);
+  assert.ok(tilts.every(degrees => degrees !== 0 && Math.abs(degrees) <= 6), 'off-true but never crooked');
 });

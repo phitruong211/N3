@@ -1,5 +1,10 @@
 import type { DeckKind, DeckLevel } from './deckCatalog.ts';
 
+/** The Han characters the Today library already uses, so a kind reads the same everywhere (語 words, 漢 kanji, 文 sentences). */
+export const KIND_GLYPH: Record<DeckKind, string> = { vocabulary: '語', kanji: '漢', grammar: '文' };
+/** Degrees. Each seal sits slightly off-true, like a stamp pressed by hand, and no two lean the same way. */
+export const KIND_TILT: Record<DeckKind, number> = { vocabulary: -4, kanji: 3, grammar: -2 };
+
 export interface LevelDeckStat { level: DeckLevel; kind: DeckKind; totalCards: number; learnedCount: number; dueCount: number }
 export interface LevelSummary { totalCards: number; learnedCount: number; dueCount: number; percent: number }
 
