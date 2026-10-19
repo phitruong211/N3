@@ -9,6 +9,7 @@
     "lint": "oxlint",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "preview": "vite preview",
+    "brand": "node --experimental-strip-types scripts/render-brand.mjs",
     "test:guest": "node tests/guestFlow.browser.mjs",
     "test:companion": "node tests/catCompanion.browser.mjs",
     "test:study-ui": "node tests/studySessionUI.browser.mjs",

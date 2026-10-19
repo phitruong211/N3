@@ -1,6 +1,7 @@
 import { LogIn, LogOut, PanelLeftClose, PanelLeftOpen, Search, Settings } from 'lucide-react';
 import { useApp } from '@/hooks/useApp';
 import { useAuth } from '@/hooks/useAuth';
+import { BrandMark } from '@/components/ui/BrandMark';
 import { isNavigationItemActive, PRIMARY_NAV_ITEMS, SECONDARY_NAV_ITEMS, type NavigationItem } from './navigationItems';
 
 export function Sidebar() {
@@ -20,7 +21,7 @@ export function Sidebar() {
     <aside className={`sticky top-0 hidden h-screen shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] transition-[width] duration-200 lg:flex ${sidebarCollapsed ? 'w-[4.75rem]' : 'w-60'}`} aria-label="Điều hướng chính">
       <div className={`flex items-center gap-2 px-3 py-4 ${sidebarCollapsed ? 'flex-col' : 'justify-between'}`}>
         <button onClick={() => setCurrentPage('dashboard')} className="flex min-w-0 items-center gap-2.5 text-left" aria-label="Về trang Hôm nay">
-          <img src="/so-nhat-mark.svg" alt="" className="h-11 w-11 shrink-0 object-contain"/>
+          <BrandMark size={44} className="shrink-0"/>
           {!sidebarCollapsed && <span className="whitespace-nowrap text-lg font-bold tracking-wide">SỔ NHẬT</span>}
         </button>
         <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} className="study-button !min-h-9 !w-9 !p-0" aria-label={sidebarCollapsed ? 'Mở rộng menu' : 'Thu gọn menu'}>
