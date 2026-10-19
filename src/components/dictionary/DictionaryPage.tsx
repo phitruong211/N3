@@ -15,6 +15,8 @@ import {
 import "./dictionary.css";
 import { clearCardDraft, cardDraftOwner } from "@/lib/dictionary/draft";
 import { ApiError } from "@/lib/api";
+import { BrandMark } from "@/components/ui/BrandMark";
+import { applyPageMeta } from "@/lib/seo";
 
 const AddDialog = lazy(() =>
   import("./AddDictionaryCardDialog").then((m) => ({
@@ -59,6 +61,8 @@ function Attribution() {
   );
 }
 export function DictionaryPage({ embedded = false }: { embedded?: boolean }) {
+  // The standalone page has no MainLayout, so it sets its own tab title and canonical link.
+  useEffect(() => { if (!embedded) applyPageMeta("dictionary"); }, [embedded]);
   const location = useLocation();
   const navigate = useNavigate();
   const params = new URLSearchParams(location.search);
@@ -272,7 +276,7 @@ export function DictionaryPage({ embedded = false }: { embedded?: boolean }) {
         {!embedded && (
           <header className="dictionary-header">
             <Link to="/today" className="dictionary-brand">
-              <img src="/so-nhat-mark.svg" alt="" />
+              <BrandMark size={32} variant="small" />
               SỔ NHẬT
             </Link>
             <nav aria-label="Điều hướng từ điển">

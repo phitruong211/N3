@@ -4,6 +4,8 @@ import { Sidebar } from './Sidebar';
 import { BottomNav } from './BottomNav';
 import { SearchModal } from '@/components/search/SearchModal';
 import { useApp } from '@/hooks/useApp';
+import { BrandMark } from '@/components/ui/BrandMark';
+import { applyPageMeta, PAGE_TITLES } from '@/lib/seo';
 import type { PageId } from '@/types';
 
 export function MainLayout({ children }: { children: ReactNode }) {
@@ -29,19 +31,14 @@ export function MainLayout({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('keydown', handler);
   }, [setCurrentPage]);
 
-  const pageTitles: Record<PageId, string> = {
-    dictionary: 'Từ điển',
-    dashboard: 'Hôm nay', vocabulary: 'Thư viện', grammar: 'Thư viện', kanji: 'Thư viện', listening: 'Thư viện',
-    flashcards: 'Bộ thẻ', anki: 'Ôn ngắt quãng', srs: 'Ôn ngắt quãng', quiz: 'Trắc nghiệm', progress: 'Tiến độ',
-    search: 'Tìm kiếm', bookmarks: 'Đã lưu', settings: 'Cài đặt',
-  };
+  useEffect(() => { applyPageMeta(currentPage); }, [currentPage]);
 
   return <div className="flex min-h-screen bg-[var(--color-bg)]">
     <Sidebar/>
     <main className="min-h-screen min-w-0 flex-1 overflow-x-clip" id="main-content" role="main">
       <header className="sticky top-0 z-30 flex h-11 items-center justify-between gap-3 border-b border-[var(--color-border)]/70 bg-[color-mix(in_srgb,var(--color-surface)_85%,transparent)] px-4 backdrop-blur-xl lg:hidden">
-        <button onClick={() => setCurrentPage('dashboard')} aria-label="Về Hôm nay"><img src="/so-nhat-mark.svg" alt="" className="h-8 w-8 object-contain"/></button>
-        <span className="truncate text-sm font-semibold">{pageTitles[currentPage]}</span>
+        <button onClick={() => setCurrentPage('dashboard')} aria-label="Về Hôm nay"><BrandMark size={32} variant="small"/></button>
+        <span className="truncate text-sm font-semibold">{PAGE_TITLES[currentPage]}</span>
         <button onClick={() => setSearchOpen(true)} className="study-button !min-h-10 !w-10 !border-0 !bg-transparent !p-0" aria-label="Tìm kiếm"><Search size={19}/></button>
       </header>
       <div className="mx-auto w-full max-w-full px-4 py-5 pb-24 sm:px-6 lg:px-10 lg:py-8 lg:pb-10 xl:px-12">{children}</div>

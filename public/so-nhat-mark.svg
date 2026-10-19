@@ -1,9 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
-  <title id="title">SỔ NHẬT</title>
-  <circle cx="32" cy="14" r="7" fill="#b7523e"/>
-  <path d="M7.5 19.5c8.6-1.8 16.2.1 24.5 6.1v29.1c-7.7-5.2-15.6-7.1-24.5-5.2z" fill="#fffefa" stroke="#233c35" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M56.5 19.5c-8.6-1.8-16.2.1-24.5 6.1v29.1c7.7-5.2 15.6-7.1 24.5-5.2z" fill="#fffefa" stroke="#233c35" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M32 25.6v29.1" stroke="#233c35" stroke-width="3" stroke-linecap="round"/>
-  <text x="19.5" y="39.5" fill="#233c35" font-family="'Noto Serif JP','Hiragino Mincho ProN',serif" font-size="15" font-weight="700" text-anchor="middle">あ</text>
-  <path d="M39 31.5h10M39 37h10M39 42.5h7" stroke="#233c35" stroke-width="2.5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SỔ NHẬT">
+  <title>SỔ NHẬT</title>
+  <style>.i{stroke:#233C35}.p{fill:#FAF4E7}.s{fill:#B3433A}@media (prefers-color-scheme:dark){.i{stroke:#EDE6D4}.p{fill:#262B27}.s{fill:#E27D6F}}</style>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path class="i" d="M55.4 18.5A27 27 0 1 1 46.3 9.1" stroke-width="3.2"/>
+    <circle class="s" cx="32" cy="31" r="9"/>
+    <path class="i p" d="M32 38C26 34.2 18 33.2 11 35V47.5C18 45.8 26 47 32 51.5Z" stroke-width="2.6"/>
+    <path class="i p" d="M32 38C38 34.2 46 33.2 53 35V47.5C46 45.8 38 47 32 51.5Z" stroke-width="2.6"/>
+    <path class="i" d="M39 40h9M39 43.5h7" stroke-width="1.6" opacity=".55"/>
+    <path class="s" d="M30 51.5h4v5l-2-1.6-2 1.6z" stroke="none"/>
+  </g>
 </svg>

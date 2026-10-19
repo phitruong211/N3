@@ -2,11 +2,12 @@ import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Check, Download } from 'lucide-react';
 import type { useSharedSave } from './useSharedSave';
+import { BrandMark } from '@/components/ui/BrandMark';
 import './sharing.css';
 
 export function SharedPageLayout({ children }: { children: ReactNode }) {
   return <main className="shared-page"><div className="shared-page-inner">
-    <header className="shared-brand"><Link to="/today"><img src="/so-nhat-mark.svg" alt=""/>SỔ NHẬT</Link><span>Cùng nhau học mỗi ngày</span></header>
+    <header className="shared-brand"><Link to="/today"><BrandMark size={30} variant="small"/>SỔ NHẬT</Link><span>Cùng nhau học mỗi ngày</span></header>
     {children}
   </div></main>;
 }

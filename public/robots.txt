@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /settings
+Disallow: /progress
+Disallow: /review
+Disallow: /saved
+
+Sitemap: https://n3-green.vercel.app/sitemap.xml

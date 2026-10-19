@@ -5,6 +5,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { hasLegacyLearningData } from '@/lib/storage';
 import type { PageId } from '@/types';
 import {
+  ArrowRight,
   BookOpen,
   Check,
   Clock3,
@@ -17,6 +18,8 @@ import {
 } from 'lucide-react';
 import { ACTIVE_CAT } from './catConfig';
 import { detectCompanionCapabilities, shouldEnableCompanion, watchReducedMotion } from './companionPolicy';
+import { daypart, japaneseDate, weekStamps, wordOfDay } from './todayData';
+import './dashboard.css';
 
 const CatCompanion = lazy(() => import('./CatCompanion'));
 
@@ -24,9 +27,13 @@ export function Dashboard() {
   const { getStudyDays, calculateStreak } = useLearningStorage();
   const { vocabulary, grammar, kanji, srsCards, setCurrentPage, settings, loading } = useApp();
   const { draft, user } = useAuth();
-  const todayKey = formatDate(new Date());
+  const now = new Date();
+  const todayKey = formatDate(now);
   const studyDays = useMemo(() => getStudyDays(), [getStudyDays]);
   const today = studyDays.find(day => day.date === todayKey);
+  const day = useMemo(() => new Date(`${todayKey}T00:00:00`), [todayKey]);
+  const week = useMemo(() => weekStamps(studyDays, day), [studyDays, day]);
+  const word = useMemo(() => loading ? null : wordOfDay(vocabulary, day), [loading, vocabulary, day]);
   const legacyDataPresent = useMemo(() => hasLegacyLearningData(), []);
   const streak = calculateStreak().current;
   const due = useMemo(() => getDueCards(srsCards).length, [srsCards]);
@@ -34,9 +41,8 @@ export function Dashboard() {
   const goalProgress = settings.dailyGoal > 0 ? Math.min(100, Math.round(reviewed / settings.dailyGoal * 100)) : 0;
   const goalComplete = settings.dailyGoal > 0 && reviewed >= settings.dailyGoal;
   const displayName = user?.displayName?.trim().split(/\s+/)[0];
-  const hour = new Date().getHours();
-  const greeting = hour < 11 ? 'Chào buổi sáng' : hour < 14 ? 'Chào buổi trưa' : hour < 18 ? 'Chào buổi chiều' : 'Chào buổi tối';
-  const dateLabel = new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date());
+  const { part, greeting } = daypart(now.getHours());
+  const dateLabel = new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: 'numeric', month: 'long' }).format(now);
 
   const library = [
     { page: 'vocabulary' as PageId, title: 'Từ vựng', count: loading ? '' : `${vocabulary.length.toLocaleString('vi-VN')} từ`, mark: '語', icon: BookOpen, tone: 'var(--color-accent)' },
@@ -45,45 +51,23 @@ export function Dashboard() {
     { page: 'listening' as PageId, title: 'Luyện nghe', count: 'Theo cấp độ', mark: '聴', icon: Headphones, tone: 'var(--color-success)' },
   ];
 
-  return <div className="study-page dashboard-page">
-    <header className="dashboard-heading flex items-end justify-between gap-5 border-b border-[var(--color-border)] pb-5">
-      <div>
+  return <div className="study-page dashboard-page" data-daypart={part}>
+    <section className="dash-hero" aria-labelledby="today-focus-title">
+      <span className="dash-orb" aria-hidden="true"/>
+      <p className="dash-vdate" lang="ja" aria-hidden="true">{japaneseDate(now)}</p>
+      <div className="dash-hero-main">
         <p className="study-eyebrow capitalize">{dateLabel}</p>
         <h1 className="mt-1 text-2xl font-semibold tracking-[-.035em] sm:text-3xl">{greeting}{displayName ? `, ${displayName}` : ''}.</h1>
-      </div>
-
-    </header>
-
-    <section className="dashboard-focus overflow-hidden rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-surface)]" aria-labelledby="today-focus-title">
-      <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(280px,.55fr)]">
-        <div className="dashboard-study-space relative overflow-hidden p-6 sm:p-9 lg:p-11">
-          <span className="absolute left-0 top-10 h-20 w-1 bg-[var(--color-error)]" aria-hidden="true"/>
-          <span className="study-eyebrow flex items-center gap-2"><i className="h-2 w-2 rounded-full bg-[var(--color-error)]"/>Hôm nay</span>
-          <div className="mt-5 flex items-end gap-4">
-            <strong className="font-serif text-[clamp(5rem,11vw,8.5rem)] font-normal leading-[.75] tracking-[-.08em] text-[var(--color-text)]">{due}</strong>
-            <h2 id="today-focus-title" className="max-w-48 pb-1 text-xl font-semibold leading-tight tracking-[-.03em] sm:pb-2 sm:text-2xl">thẻ đến hạn</h2>
-          </div>
-          <button onClick={() => setCurrentPage(due > 0 ? 'srs' : 'flashcards')} className="study-button study-button-primary dashboard-primary-cta mt-8 min-w-40 !rounded-full">
-            {due > 0 ? <RotateCcw size={18}/> : <Layers size={18}/>} {due > 0 ? 'Ôn ngay' : 'Học tự do'}
-          </button>
-          <StudyCompanion due={due} goalComplete={goalComplete}/>
-          <span className="pointer-events-none absolute -bottom-14 right-5 select-none font-serif text-[11rem] leading-none text-[var(--color-text)] opacity-[.035]" aria-hidden="true">学</span>
+        <div className="dash-due">
+          <strong>{due}</strong>
+          <h2 id="today-focus-title">thẻ đến hạn</h2>
+          <span className="dash-hanko" lang="ja" aria-hidden="true">今日</span>
         </div>
-
-        <div className="dashboard-progress relative flex min-h-80 flex-col justify-between overflow-hidden bg-[var(--color-accent)] p-6 text-[var(--color-text-inverse)] sm:p-8">
-          <span className="absolute -right-6 -top-12 font-serif text-[10rem] leading-none opacity-10" aria-hidden="true">今</span>
-          <div className="relative flex items-start justify-between gap-4">
-            <div><p className="text-[.7rem] font-bold uppercase tracking-[.14em] opacity-65">Mục tiêu</p><p className="mt-2 text-3xl font-semibold tracking-[-.04em]">{reviewed}<span className="ml-1 text-base font-medium opacity-65">/ {settings.dailyGoal}</span></p></div>
-            <GoalDial value={goalProgress}/>
-          </div>
-          <TodayPostcard due={due} complete={goalComplete}/>
-          <div className="relative grid grid-cols-2 gap-3 border-t border-current/20 pt-5">
-            <MiniMetric icon={Flame} value={`${streak} ngày`} label="Liên tiếp"/>
-            <MiniMetric icon={Clock3} value={`${Math.round(today?.timeSpent ?? 0)} phút`} label="Hôm nay"/>
-          </div>
-          <button onClick={() => setCurrentPage('progress')} className="relative mt-5 flex w-fit items-center gap-1.5 text-xs font-semibold opacity-75 transition-opacity hover:opacity-100">Xem tiến độ</button>
-        </div>
+        <button onClick={() => setCurrentPage(due > 0 ? 'srs' : 'flashcards')} className="study-button study-button-primary dash-cta !rounded-full">
+          {due > 0 ? <RotateCcw size={18}/> : <Layers size={18}/>} {due > 0 ? 'Ôn ngay' : 'Học tự do'}
+        </button>
       </div>
+      <StudyCompanion due={due} goalComplete={goalComplete}/>
     </section>
 
     {draft && <section className="flex flex-col gap-3 rounded-2xl border border-[var(--color-accent)]/25 bg-[var(--color-accent-subtle)] p-4 sm:flex-row sm:items-center sm:justify-between" aria-label="Bộ thẻ đang tạo dở">
@@ -91,29 +75,70 @@ export function Dashboard() {
       <button className="study-button shrink-0" onClick={() => setCurrentPage('flashcards')}>Tiếp tục</button>
     </section>}
 
+    <div className="dash-row">
+      <section className="dash-panel" aria-label="Mục tiêu hôm nay">
+        <p className="dash-panel-title">Mục tiêu</p>
+        <div className="dash-goal">
+          <EnsoDial value={goalProgress} complete={goalComplete}/>
+          <div>
+            <p className="dash-count">{reviewed}<span>/ {settings.dailyGoal}</span></p>
+            <p className="mt-1 text-xs text-[var(--color-text-secondary)]">thẻ đã ôn hôm nay</p>
+          </div>
+        </div>
+        <TodayPostcard due={due} complete={goalComplete}/>
+      </section>
+
+      <section className="dash-panel" aria-label="Tuần này">
+        <p className="dash-panel-title">Tuần này</p>
+        <ul className="dash-week">
+          {week.map((day, index) => <li key={day.date} className={`dash-day ${day.studied ? 'is-studied' : ''} ${day.isToday ? 'is-today' : ''}`} style={{ '--i': index } as CSSProperties}
+            aria-label={`${day.label}${day.isToday ? ', hôm nay' : ''}: ${day.studied ? 'đã học' : 'chưa học'}`}>
+            <span className="dash-stamp" lang="ja" aria-hidden="true">{day.studied ? '学' : ''}</span>
+            <span aria-hidden="true">{day.label}</span>
+          </li>)}
+        </ul>
+        <div className="dash-metrics">
+          <MiniMetric icon={Flame} value={`${streak} ngày`} label="Liên tiếp"/>
+          <MiniMetric icon={Clock3} value={`${Math.round(today?.timeSpent ?? 0)} phút`} label="Hôm nay"/>
+        </div>
+        <button onClick={() => setCurrentPage('progress')} className="dash-link">Xem tiến độ <ArrowRight size={14}/></button>
+      </section>
+    </div>
+
+    {word && <button className="dash-word" onClick={() => setCurrentPage('vocabulary')}>
+      <span className="dash-word-kanji" lang="ja">{word.tu}</span>
+      <span className="min-w-0">
+        <span className="dash-panel-title block">Từ của hôm nay</span>
+        <span className="dash-word-reading mt-1 block" lang="ja">{word.phien_am}{word.han_viet ? ` · ${word.han_viet}` : ''}</span>
+        <span className="dash-word-meaning block">{word.nghia[0] ?? ''}</span>
+      </span>
+      <ArrowRight size={18} aria-hidden="true"/>
+    </button>}
+
     <section aria-labelledby="library-title">
-      <div className="mb-4 flex items-end justify-between gap-4">
+      <div className="flex items-end justify-between gap-4">
         <div><p className="study-eyebrow">Khám phá</p><h2 id="library-title" className="mt-1 text-xl font-semibold tracking-[-.025em]">Hôm nay học gì?</h2></div>
-        <button className="flex items-center gap-1 text-sm font-semibold text-[var(--color-accent)] hover:underline" onClick={() => setCurrentPage('flashcards')}><Layers size={16}/> Học theo bộ</button>
+        <button className="flex items-center gap-1 text-sm font-semibold text-[var(--color-accent-text)] hover:underline" onClick={() => setCurrentPage('flashcards')}><Layers size={16}/> Học theo bộ</button>
       </div>
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {library.map(({ page, title, count, mark, icon: Icon, tone }, index) => <button key={page} onClick={() => setCurrentPage(page)} className="dashboard-library-card group relative min-h-44 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 text-left" style={{ '--dashboard-card-tone': tone, '--dashboard-card-delay': `${.14 + index * .055}s` } as CSSProperties}>
-          <span className="dashboard-card-mark absolute -bottom-7 right-2 select-none font-serif text-[7rem] leading-none opacity-[.08]" style={{ color: tone }} aria-hidden="true">{mark}</span>
-          <span className="dashboard-card-icon grid h-10 w-10 place-items-center rounded-full border border-[var(--color-border)] bg-[var(--color-bg)]" style={{ color: tone }}><Icon size={20}/></span>
-          <h3 className="relative mt-7 text-lg font-semibold">{title}</h3>
+      <div className="dash-ema-grid">
+        {library.map(({ page, title, count, mark, icon: Icon, tone }, index) => <button key={page} onClick={() => setCurrentPage(page)} className="dashboard-library-card" style={{ '--dashboard-card-tone': tone, '--dashboard-card-delay': `${.14 + index * .055}s` } as CSSProperties}>
+          <span className="dash-ema-clip" aria-hidden="true"><span className="dashboard-card-mark" lang="ja" style={{ color: tone }}>{mark}</span></span>
+          <span className="dashboard-card-icon" style={{ color: tone }}><Icon size={20}/></span>
+          <h3 className="relative mt-5 text-lg font-semibold">{title}</h3>
           <p className="relative mt-1 text-sm font-medium text-[var(--color-text-secondary)]">{count}</p>
         </button>)}
       </div>
     </section>
 
-    <button onClick={() => setCurrentPage('flashcards')} className="dashboard-free-link group flex items-center gap-4 rounded-2xl border border-[var(--color-border)] px-5 py-4 text-left transition-colors hover:border-[var(--color-border-strong)] sm:px-6">
-      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent)]"><Layers size={20}/></span>
+    <button onClick={() => setCurrentPage('flashcards')} className="dashboard-free-link">
+      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]"><Layers size={20}/></span>
       <span className="flex-1 font-semibold">Mở bộ thẻ và học theo bài</span>
+      <ArrowRight size={18} className="text-[var(--color-text-secondary)]" aria-hidden="true"/>
     </button>
 
     {legacyDataPresent && <section className="flex flex-col gap-2 border-t border-[var(--color-border)] pt-5 text-sm sm:flex-row sm:items-center sm:justify-between" role="note">
       <p className="text-[var(--color-text-secondary)]"><strong className="text-[var(--color-text)]">Dữ liệu cũ vẫn an toàn.</strong></p>
-      <button className="font-semibold text-[var(--color-accent)] hover:underline" onClick={() => setCurrentPage('settings')}>Kiểm tra →</button>
+      <button className="font-semibold text-[var(--color-accent-text)] hover:underline" onClick={() => setCurrentPage('settings')}>Kiểm tra →</button>
     </section>}
   </div>;
 }
@@ -121,19 +146,19 @@ export function Dashboard() {
 function TodayPostcard({ due, complete }: { due: number; complete: boolean }) {
   const title = complete ? 'Hôm nay đã xong' : due > 0 ? 'Một lượt ôn ngắn' : 'Sẵn sàng học mới';
   const caption = complete ? 'Mục tiêu đã hoàn thành' : due > 0 ? `${due} thẻ đang chờ bạn` : 'Chọn một bộ thẻ để bắt đầu';
-  return <div className={`dashboard-postcard relative my-6 flex min-h-28 items-center gap-4 rounded-2xl p-4 ${complete ? 'is-complete' : ''}`} role="status">
-    <div className="dashboard-card-stack relative h-20 w-20 shrink-0" aria-hidden="true">
+  return <div className={`dashboard-postcard ${complete ? 'is-complete' : ''}`} role="status">
+    <div className="dashboard-card-stack" aria-hidden="true">
       <span className="dashboard-study-card dashboard-study-card-back"/>
       <span className="dashboard-study-card dashboard-study-card-middle"/>
       <span className="dashboard-study-card dashboard-study-card-front">
-        <span className="dashboard-postcard-mark font-serif">{complete ? '完' : '学'}</span>
+        <span className="dashboard-postcard-mark" lang="ja">{complete ? '完' : '学'}</span>
         {complete && <span className="dashboard-complete-check"><Check size={12} strokeWidth={3}/></span>}
       </span>
     </div>
-    <div className="relative min-w-0">
-      <p className="text-[.65rem] font-bold uppercase tracking-[.14em] opacity-55">Bưu thiếp hôm nay</p>
+    <div className="min-w-0">
+      <p className="dash-postcard-label">Bưu thiếp hôm nay</p>
       <p className="mt-1 text-sm font-semibold leading-snug">{title}</p>
-      <p className="mt-0.5 text-xs opacity-65">{caption}</p>
+      <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">{caption}</p>
     </div>
   </div>;
 }
@@ -155,7 +180,7 @@ function StudyCompanion({ due, goalComplete }: { due: number; goalComplete: bool
       <span className="dashboard-companion-hint">{ready ? 'Chạm nhẹ để chào Kuro' : 'Bạn đồng hành mỗi ngày'}</span>
     </div>
     <div className={`dashboard-header-companion ${ready ? 'is-ready' : ''}`}>
-    <span className="dashboard-header-seal font-serif" aria-hidden="true">猫</span>
+    <span className="dashboard-header-seal" lang="ja" aria-hidden="true">猫</span>
     {enabled && <Suspense fallback={null}>
       <CatCompanion config={ACTIVE_CAT} due={due} goalComplete={goalComplete} onReady={() => setReady(true)} onUnavailable={() => setReady(false)}/>
     </Suspense>}
@@ -163,15 +188,17 @@ function StudyCompanion({ due, goalComplete }: { due: number; goalComplete: bool
   </aside>;
 }
 
-function GoalDial({ value }: { value: number }) {
-  const radius = 24;
-  const circumference = 2 * Math.PI * radius;
-  return <div className="relative grid h-16 w-16 shrink-0 place-items-center" aria-label={`Đã hoàn thành ${value}% mục tiêu`}>
-    <svg className="absolute inset-0 -rotate-90" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r={radius} fill="none" stroke="currentColor" strokeOpacity=".22" strokeWidth="5"/><circle cx="32" cy="32" r={radius} fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={circumference * (1 - value / 100)}/></svg>
-    <strong className="text-xs">{value}%</strong>
+/** An ink circle that stays open like a brushed ensō, drawn to the goal percentage. */
+function EnsoDial({ value, complete }: { value: number; complete: boolean }) {
+  return <div className={`dash-enso ${complete ? 'is-complete' : ''}`} role="img" aria-label={`Đã hoàn thành ${value}% mục tiêu`}>
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <circle className="track" cx="50" cy="50" r="42" pathLength="100" strokeDasharray="94 100"/>
+      <circle className="ink" cx="50" cy="50" r="42" pathLength="100" style={{ strokeDasharray: `${(value * .94).toFixed(1)} 100`, opacity: value > 0 ? 1 : 0 }}/>
+    </svg>
+    <strong aria-hidden="true">{value}%</strong>
   </div>;
 }
 
 function MiniMetric({ icon: Icon, value, label }: { icon: typeof Flame; value: string; label: string }) {
-  return <div><Icon size={17} className="mb-2 opacity-65"/><strong className="block text-sm">{value}</strong><span className="mt-0.5 block text-[.7rem] opacity-60">{label}</span></div>;
+  return <div><Icon size={17}/><strong>{value}</strong><span>{label}</span></div>;
 }
