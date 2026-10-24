@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Check, Download } from 'lucide-react';
+import { ArrowUpRight, Check, Download } from '@/components/ui/icons';
 import type { useSharedSave } from './useSharedSave';
 import { BrandMark } from '@/components/ui/BrandMark';
 import './sharing.css';

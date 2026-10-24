@@ -1,6 +1,6 @@
 import { useLearningStorage } from '@/hooks/useApp';
 import { useRef, useState } from 'react';
-import { Check, Headphones, RotateCcw, Volume2 } from 'lucide-react';
+import { Check, RotateCcw, Volume2 } from '@/components/ui/icons';
 import { examItems, type ExamLevel } from './examData';
 
 type Scores = Record<string, number>;
@@ -68,7 +68,7 @@ export function JlptListeningPractice() {
     </section>
 
     <section className="study-panel space-y-5" aria-label={`Bài nghe ${item.title}`}>
-      <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="study-eyebrow">{item.level} · {item.category} · {item.questions.length} câu hỏi</p><h3 className="text-xl font-semibold">{item.title}</h3></div><span className="study-pill inline-flex items-center gap-1"><Headphones size={14} /> Luyện thi</span></div>
+      <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="study-eyebrow">{item.level} · {item.category} · {item.questions.length} câu hỏi</p><h3 className="text-xl font-semibold">{item.title}</h3></div><span className="study-pill inline-flex items-center gap-1">Luyện thi</span></div>
       <div className="rounded-xl bg-[var(--color-surface-alt)] p-4 space-y-3">
         <p className="text-sm font-semibold flex items-center gap-2"><Volume2 size={17} /> Nghe đoạn hội thoại / thông báo</p>
         <audio key={item.id} ref={audioRef} src={`${import.meta.env.BASE_URL}audio/jlpt/${item.id}.m4a`} controls preload="metadata" className="w-full" aria-label={`Audio bài ${item.title}`} onError={() => setAudioFailed(true)} />

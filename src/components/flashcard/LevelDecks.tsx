@@ -1,5 +1,5 @@
 import { useId, useMemo, useState, type KeyboardEvent } from 'react';
-import { Check, ChevronRight } from 'lucide-react';
+import { Check, ChevronRight } from '@/components/ui/icons';
 import { builtInLevels, type DeckKind, type DeckLevel } from '@/lib/deckCatalog';
 import { initialLevel, KIND_GLYPH, KIND_TILT, learnedPercent, levelTabLabel, nextTabIndex, summarizeLevel } from '@/lib/levelDecks';
 import type { LearningStorage } from '@/lib/storage';
@@ -65,10 +65,10 @@ export function LevelDecks({ mode, rows, storage }: { mode: 'free' | 'scheduled'
         const waiting = scheduled && row.startable && row.dueCount > 0;
         return <li key={row.id}>
           <button type="button" className="level-row" style={{ '--tone': kind.tone } as React.CSSProperties} disabled={!row.startable} onClick={row.onOpen}
-            aria-label={`${kind.label} ${row.level}, ${count(row.totalCards)} thẻ, ${count(row.learnedCount)} đã học${waiting ? `, ${count(row.dueCount)} cần ôn` : ''}`}>
+>
             <span className="level-seal" style={{ '--tilt': KIND_TILT[row.kind] } as React.CSSProperties} aria-hidden="true">{KIND_GLYPH[row.kind]}</span>
             <span className="level-row-main">
-              <span className="level-row-name">{kind.label}</span>
+              <span className="level-row-name">{kind.label}<span className="sr-only"> {row.level}, {count(row.totalCards)} thẻ,</span></span>
               <span className="level-row-detail">{row.totalCards ? `${count(row.learnedCount)}/${count(row.totalCards)} đã học` : 'Chưa có thẻ'}</span>
               <span className="level-row-bar" aria-hidden="true"><i style={{ width: `${percent}%` }}/></span>
             </span>

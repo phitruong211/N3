@@ -13,7 +13,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useApp } from '@/hooks/useApp';
 import { generateVocabQuiz, generateKanjiQuiz } from '@/lib/quiz';
 import type { QuizQuestion, QuizType } from '@/types';
-import { CheckCircle, XCircle, RotateCcw, Target } from 'lucide-react';
+import { CheckCircle, XCircle, RotateCcw } from '@/components/ui/icons';
+import { Seal } from '@/components/ui/Seal';
 import { PageHeading } from '@/components/ui/StudyUI';
 
 export function QuizPage() {
@@ -49,7 +50,7 @@ export function QuizPage() {
 
   return (
     <div className="study-page">
-      <PageHeading eyebrow="LUYỆN TẬP" title="Trắc nghiệm" subtitle="Chọn đáp án để tự kiểm tra điều đã nhớ" />
+      <PageHeading title="Trắc nghiệm" />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
         <QuizTypeCard
@@ -169,24 +170,9 @@ function QuizSession({
     const accuracy = Math.round((correctCount / questions.length) * 100);
     return (
       <div className="fixed inset-0 z-50 bg-[var(--color-bg)] flex flex-col items-center justify-center p-6 text-center space-y-8 select-none">
-        <div
-          className={`w-20 h-20 rounded-3xl flex items-center justify-center shadow-sm ${
-            accuracy >= 70
-              ? 'bg-[var(--color-success-subtle)] border border-[var(--color-success)]/20'
-              : 'bg-[var(--color-warning-subtle)] border border-[var(--color-warning)]/20'
-          }`}
-        >
-          <Target
-            size={40}
-            className={
-              accuracy >= 70
-                ? 'text-[var(--color-success)]'
-                : 'text-[var(--color-warning)]'
-            }
-          />
-        </div>
+        <Seal glyph={accuracy >= 70 ? '合' : '再'} tone={accuracy >= 70 ? 'var(--color-success)' : 'var(--color-warning)'} className="!w-20 !h-20 [--seal:80px]" />
         <div className="space-y-1">
-          <h2 className="text-3xl font-semibold text-[var(--color-text)] tracking-tight">
+          <h2 className="study-title">
             Đã hoàn thành
           </h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
@@ -358,7 +344,7 @@ function QuizSession({
                   ? 'Câu tiếp theo'
                   : 'Xem kết quả'}
               </span>
-              <kbd className="text-[10px] bg-white/20 px-2 py-0.5 rounded font-mono">
+              <kbd className="text-[11px] bg-white/20 px-2 py-0.5 rounded font-mono">
                 Space / Enter
               </kbd>
             </button>

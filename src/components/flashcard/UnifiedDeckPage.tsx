@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
+import { PageHeading } from '@/components/ui/StudyUI';
 import { useApp, useLearningStorage } from '@/hooks/useApp';
 import type { CardView } from '@/lib/cards';
 import { defaultDeckTemplate, type DeckTemplateConfig } from '@/lib/ankiImport';
@@ -88,9 +89,7 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     onExit={() => setSession(null)}/>;
 
   return <div className="study-page" data-reduced-motion={settings.reducedMotion || undefined}>
-    <header>
-      <h1 className="text-3xl font-semibold tracking-[-.035em]">{mode === 'free' ? 'Bộ thẻ' : 'Ôn ngắt quãng'}</h1>
-    </header>
+    <PageHeading title={mode === 'free' ? 'Bộ thẻ' : 'Ôn ngắt quãng'} subtitle={mode === 'free' ? 'Học tự do, không ảnh hưởng lịch ôn.' : undefined}/>
 
     <ImportedDecks mode={mode} leadingDeck={saved.cards.length ? savedCard(saved) : undefined}/>
 

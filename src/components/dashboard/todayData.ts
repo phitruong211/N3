@@ -11,7 +11,7 @@ export function daypart(hour: number): { part: Daypart; greeting: string } {
   return { part, greeting };
 }
 
-const WEEK_LABELS = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+const WEEK_LABELS = ['月', '火', '水', '木', '金', '土', '日'];
 
 /** Monday to Sunday of the week that contains `today`, marking days with at least one review. */
 export function weekStamps(studyDays: { date: string; cardsReviewed: number }[], today: Date): WeekStamp[] {
@@ -31,10 +31,12 @@ export function wordOfDay<T>(items: readonly T[], date: Date): T | null {
   return items[(Math.imul(seed, 2654435761) >>> 0) % items.length];
 }
 
-const DIGITS = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
-const kanjiNumber = (n: number) => n < 10 ? DIGITS[n] : `${n >= 20 ? DIGITS[Math.floor(n / 10)] : ''}十${DIGITS[n % 10]}`;
-
-/** For example 十月二十日 · 火曜日. */
-export function japaneseDate(date: Date): string {
-  return `${kanjiNumber(date.getMonth() + 1)}月${kanjiNumber(date.getDate())}日 · ${'日月火水木金土'[date.getDay()]}曜日`;
+/** What the Today page needs from the library, prebuilt by scripts/build-today-summary.mjs so it skips the 2.6 MB download. */
+export interface TodaySummary { counts: { vocabulary: number; kanji: number; grammar: number }; words: [string, string, string, string][] }
+export interface TodayWord { tu: string; phien_am: string; han_viet: string | null; nghia: string[] }
+let summaryRequest: Promise<TodaySummary> | null = null;
+export function loadTodaySummary(): Promise<TodaySummary> {
+  summaryRequest ??= fetch('/data/today.json').then(response => { if (!response.ok) throw new Error('today.json'); return response.json(); }).catch(error => { summaryRequest = null; throw error; });
+  return summaryRequest;
 }
+export const todayWord = ([tu, phien_am, han_viet, meaning]: TodaySummary['words'][number]): TodayWord => ({ tu, phien_am, han_viet: han_viet || null, nghia: meaning ? [meaning] : [] });

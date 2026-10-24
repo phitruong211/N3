@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Bookmark, BookmarkCheck, Search, X } from 'lucide-react';
+import { Bookmark, BookmarkCheck, Search, X } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
 import type { GrammarItem } from '@/types';
 import { StudySession } from '@/components/flashcard/StudySession';
@@ -34,13 +34,13 @@ export function GrammarPage() {
   if (flashcardMode && filtered.length) return <StudySession cards={filtered.map((item, index) => grammarCard(item, `library-grammar-${level}`, index))} deckName={`Ngữ pháp · ${level === 'all' ? 'Tất cả' : level}`} mode="flashcards" onExit={() => setFlashcardMode(false)} />;
 
   return <div className="study-page">
-    <PageHeading eyebrow="THƯ VIỆN" title="Ngữ pháp" subtitle={filtered.length + ' / ' + grammar.length + ' mẫu · Hiểu cách dùng qua ví dụ'}
+    <PageHeading title="Ngữ pháp" subtitle={filtered.length + ' / ' + grammar.length + ' mẫu'}
       action={<button className="study-button study-button-primary" disabled={!filtered.length} onClick={() => setFlashcardMode(true)}>Học bằng thẻ →</button>} />
     <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
       <label className="study-input flex min-w-0 flex-1 items-center gap-2">
         <Search size={18} aria-hidden="true" className="shrink-0" />
         <span className="sr-only">Tìm mẫu ngữ pháp</span>
-        <input className="min-w-0 flex-1 bg-transparent outline-none" value={query} onChange={e => setQuery(e.target.value)} placeholder="Tìm mẫu, nghĩa hoặc cách dùng" />
+        <input className="min-h-11 min-w-0 flex-1 bg-transparent outline-none" value={query} onChange={e => setQuery(e.target.value)} placeholder="Tìm mẫu, nghĩa hoặc cách dùng" />
         {query && <button aria-label="Xóa tìm kiếm" onClick={() => setQuery('')}><X size={18}/></button>}
       </label>
       <div className="flex flex-wrap gap-2">
@@ -70,7 +70,7 @@ function GrammarDetail({ item, bookmarked, onBookmark }: { item: GrammarItem; bo
         <h2 className="font-jp-serif mt-4 break-words text-3xl font-semibold leading-snug text-[var(--color-text)] sm:text-4xl">{item.pattern}</h2>
         {item.reading && <p className="font-jp mt-2 break-words text-sm text-[var(--color-text-secondary)]">{item.reading}</p>}
       </div>
-      <button className="study-button shrink-0" aria-label={bookmarked ? 'Bỏ lưu ngữ pháp' : 'Lưu ngữ pháp'} onClick={onBookmark}>{bookmarked ? <BookmarkCheck size={19}/> : <Bookmark size={19}/>}</button>
+      <button className="study-button shrink-0" aria-label={bookmarked ? 'Bỏ lưu ngữ pháp' : 'Lưu ngữ pháp'} onClick={onBookmark}>{bookmarked ? <BookmarkCheck size={19} className="stamp-pop"/> : <Bookmark size={19}/>}</button>
     </div>
     <p className="mt-5 break-words text-lg font-semibold text-[var(--color-text)]">{item.meaning}</p>
     {item.cong_thuc && <div className="mt-5 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-alt)] p-4">
@@ -89,7 +89,7 @@ function GrammarDetail({ item, bookmarked, onBookmark }: { item: GrammarItem; bo
 function DetailSection({ title, children, open = false }: { title: string; children: ReactNode; open?: boolean }) {
   const [expanded, setExpanded] = useState(open);
   return <details className="mt-5 border-t border-[var(--color-border)] pt-4" open={expanded} onToggle={event => setExpanded(event.currentTarget.open)}>
-    <summary className="cursor-pointer text-sm font-semibold text-[var(--color-text)]">{title}</summary>
+    <summary className="hit cursor-pointer text-sm font-semibold text-[var(--color-text)]">{title}</summary>
     <div className="mt-3">{children}</div>
   </details>;
 }

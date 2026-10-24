@@ -3,6 +3,7 @@ import { useApp, useLearningStorage } from "@/hooks/useApp";
 import { projectedReview, type QueuedReview } from '@/lib/reviewOutbox';
 import { useReviewTiming } from '@/hooks/useReviewTiming';
 import { useAuth } from '@/hooks/useAuth';
+import { Sunrise } from '@/components/ui/ink';
 import {
   useActiveElapsedMinutes,
 } from "@/hooks/useActiveElapsedMinutes";
@@ -15,13 +16,19 @@ import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
 import { CardFace, DeckCustomizeDialog } from "./CardPresentation";
 import { useStudyNote, NoteButton, PersonalNoteView, PersonalNoteEditor } from './PersonalCardNote';
-import { Maximize2, Minimize2, Shuffle, X, Settings2, Undo2, ArrowLeft, ArrowRight } from "lucide-react";
+import { Maximize2, Minimize2, Shuffle, X, Settings2, Undo2, HelpCircle } from '@/components/ui/icons';
+import "@fontsource/zen-maru-gothic/japanese-500.css";
 import "./studySession.css";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 import { StudyClock, useStudySeconds } from "./StudyClock";
 
 const SWIPE_THRESHOLD = 50;
+
+// Keys stay with the open help; browsers without :popover-open never show it.
+function helpIsOpen() {
+  try { return document.querySelector('#study-help:popover-open') !== null; } catch { return false; }
+}
 
 function fisherYates<T>(items: readonly T[]): T[] {
   const shuffled = [...items];
@@ -81,10 +88,6 @@ export function StudySession({
     if (cards[0]?.source !== 'BUILT_IN') return initialTemplate;
     const stored = getJSON<DeckTemplateConfig | null>(templateKey, null);
     if (stored) return normalizeDeckTemplate(stored);
-    // New Kanji sessions start with legible strokes; saved size/font choices remain authoritative.
-    if (cards[0]?.type === 'KANJI' && initialTemplate.front.style.fontSize === defaultDeckTemplate().front.style.fontSize && initialTemplate.front.style.fontFamily === 'default') {
-      return { ...initialTemplate, front: { ...initialTemplate.front, style: { ...initialTemplate.front.style, fontSize: 64, fontFamily: 'notoSerifJp' as const } } };
-    }
     return initialTemplate;
   });
   const [customizing, setCustomizing] = useState(false);
@@ -118,6 +121,7 @@ export function StudySession({
   const blocked = busy || undoPending;
   const viewed = useRef(new Set<string>());
   const lock = useRef(false);
+  const dragged = useRef(false);
   const [slideDirection, setSlideDirection] = useState(1);
   const scheduled = mode === 'anki' ? nextReadyCard(reviewQueue) : null;
   const current = mode === 'anki' ? scheduled?.card : sessionCards[index];
@@ -144,6 +148,7 @@ export function StudySession({
     : undefined;
   const sessionRef = useRef<HTMLElement>(null);
   const [fullscreen, setFullscreen] = useState(false);
+  const [chromeIdle, setChromeIdle] = useState(false);
   const type =
     current?.type === "KANJI"
       ? "kanji"
@@ -431,6 +436,17 @@ export function StudySession({
     document.addEventListener("fullscreenchange", syncFullscreen);
     return () => document.removeEventListener("fullscreenchange", syncFullscreen);
   }, []);
+  // Quiet reading: after a pause the chrome dims (windowed) or hides (fullscreen), and returns on pointer, touch or Tab.
+  useEffect(() => {
+    let timer = 0;
+    const wake = () => { setChromeIdle(false); window.clearTimeout(timer); timer = window.setTimeout(() => setChromeIdle(true), fullscreen ? 2500 : 4000); };
+    const wakeOnTab = (event: KeyboardEvent) => { if (event.key === 'Tab') wake(); };
+    wake();
+    const pointer = ['pointermove', 'pointerdown', 'touchstart'] as const;
+    pointer.forEach(name => window.addEventListener(name, wake, { passive: true }));
+    window.addEventListener('keydown', wakeOnTab);
+    return () => { window.clearTimeout(timer); pointer.forEach(name => window.removeEventListener(name, wake)); window.removeEventListener('keydown', wakeOnTab); };
+  }, [fullscreen]);
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (busy || undoing || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -438,7 +454,7 @@ export function StudySession({
         (e.target as HTMLElement).closest(
           'input,textarea,select,[contenteditable="true"]',
         ) ||
-        customizing || personalNote.open || document.querySelector('dialog[open],[role="dialog"]')
+        customizing || personalNote.open || helpIsOpen() || document.querySelector('dialog[open],[role="dialog"]')
       )
         return;
       if (e.key === 'Backspace' && mode === 'anki' && receipt) {
@@ -500,9 +516,10 @@ export function StudySession({
   if (done || !current)
     return (
       <div className="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-5 bg-[var(--color-bg)] p-6 text-center">
+        <Sunrise size={190}/>
         <StudyClock seconds={studySeconds}/>
         {undoButton}{undoStatus}
-        <h2 className="text-2xl font-semibold">Đã hoàn thành</h2>
+        <h2 className="study-title">Đã hoàn thành</h2>
         <p>{mode === 'flashcards' ? `Đã xem ${stats.count}/${sessionCards.length} thẻ · ${(studySeconds / 60).toFixed(1)} phút` : `${reviewQueue.answeredToday.size} thẻ · ${stats.count} lượt trả lời · ${stats.count ? Math.round((stats.correct / stats.count) * 100) : 0}% chính xác · ${(studySeconds / 60).toFixed(1)} phút`}</p>
         <button className="study-button study-button-primary" onClick={finish}>
           Về danh sách bộ thẻ
@@ -517,12 +534,15 @@ export function StudySession({
   const fields = flipped && template.back.showFront && !sideFields.includes("front") ? ["front" as const, ...sideFields] : sideFields;
   const activeSide = flipped ? "back" : "front";
   const activeStyle = template[activeSide].style;
+  // With no buttons under the card, a tap does what Space does: reveal, then move on.
+  const tapCard = () => mode === "flashcards" && flipped ? next() : setRevealedCardKey(currentCardKey);
   return (
     <section
       ref={sessionRef}
       className="study-session fixed inset-0 z-50 flex min-h-0 flex-col bg-[var(--color-bg)] select-none"
       data-reduced-motion={reduceMotion || undefined}
       data-fullscreen={fullscreen || undefined}
+      data-chrome={chromeIdle && !customizing && !personalNote.open ? (fullscreen ? 'hidden' : 'dim') : undefined}
       aria-label="Phiên học thẻ"
     >
       <header className="study-session-header">
@@ -540,6 +560,7 @@ export function StudySession({
             <StudyClock seconds={studySeconds}/>
             {undoButton}
             <NoteButton note={personalNote} compact/>
+            <button className="study-session-tool" popoverTarget="study-help" title="Cách dùng và phím tắt" aria-label="Cách dùng và phím tắt"><HelpCircle size={18}/></button>
             <button className="study-session-tool" disabled={blocked} title="Tùy chỉnh thẻ" aria-label="Tùy chỉnh thẻ" onClick={() => { setError(""); setCustomizing(true); }}><Settings2 size={18}/></button>
             {mode === 'flashcards' && <button className="study-session-tool" title="Xáo trộn thẻ" aria-label="Xáo trộn" aria-pressed={shuffled} onClick={toggleShuffle}><Shuffle size={18}/></button>}
             <button className="study-session-tool" onClick={() => void toggleFullscreen()} title={fullscreen ? 'Thu nhỏ màn hình' : 'Toàn màn hình'} aria-label={fullscreen ? 'Thu nhỏ màn hình' : 'Toàn màn hình'}>
@@ -569,12 +590,16 @@ export function StudySession({
             dragElastic={0.22}
             dragMomentum={false}
             whileDrag={reduceMotion ? undefined : { scale: 0.985 }}
+            onPointerDown={() => { dragged.current = false; }}
+            onDragStart={() => { dragged.current = true; }}
             onDragEnd={(_, info) => {
               if (info.offset.x <= -SWIPE_THRESHOLD) moveCard("next");
               else if (info.offset.x >= SWIPE_THRESHOLD) moveCard("previous");
             }}
             className={`study-session-card ${flipped && (current.type === "GRAMMAR" || current.extraData?.examples || current.extraData?.kanjiVocabulary || personalNote.entry?.text) ? "study-session-card-rich" : ""}`}
             data-card-theme={activeStyle.theme}
+            data-kind={current.type.toLowerCase()}
+            data-side={activeSide}
             role="button"
             tabIndex={0}
             aria-disabled={blocked}
@@ -585,17 +610,20 @@ export function StudySession({
                 event.stopPropagation();
                 if (!blocked && !event.repeat) {
                   if (mode === "anki" && flipped && event.key === " ") void rate("good");
-                  else setRevealedCardKey(value => mode === "anki" || value !== currentCardKey ? currentCardKey : null);
+                  else tapCard();
                 }
               }
             }}
-            aria-label={flipped ? "Đã hiện đáp án" : "Hiện đáp án"}
+            aria-label={!flipped ? "Hiện đáp án" : mode === "flashcards" ? "Sang thẻ tiếp" : "Đã hiện đáp án"}
             onClick={event => {
-              if (blocked || (event.target as HTMLElement).closest('button,a,input,textarea,select')) return;
-              setRevealedCardKey(value => mode === "anki" || value !== currentCardKey ? currentCardKey : null);
+              // A swipe ends with a click on the same card; it must not advance a second time.
+              if (dragged.current || blocked || (event.target as HTMLElement).closest('button,a,input,textarea,select')) return;
+              tapCard();
             }}
           >
-
+            <p className="study-session-face-label" aria-hidden="true">
+              {{ VOCABULARY: "Từ vựng", KANJI: "Kanji", GRAMMAR: "Ngữ pháp" }[current.type] ?? current.type} · {flipped ? "Đáp án" : "Câu hỏi"}
+            </p>
             <motion.div key={`${currentCardKey}:${activeSide}`} className="study-session-face"
               initial={reduceMotion ? false : { opacity: 0.35, rotateY: -8, y: 3 }}
               animate={{ opacity: 1, rotateY: 0, y: 0 }}
@@ -610,7 +638,6 @@ export function StudySession({
             />
             {flipped && <PersonalNoteView note={personalNote}/>}
             </motion.div>
-
           </motion.div>
         </AnimatePresence>
       </div>
@@ -648,8 +675,26 @@ export function StudySession({
           finally { setSavingTemplate(false); }
         }}
       />}
+      <div id="study-help" popover="auto" className="study-help">
+        <p className="study-help-title">Cách dùng</p>
+        <dl>
+          {(mode === "flashcards" ? [
+            ["Chạm thẻ · Space", "Lật thẻ, rồi sang thẻ tiếp"],
+            ["→ · vuốt trái", "Thẻ tiếp"],
+            ["← · vuốt phải", "Thẻ trước"],
+            ["Ô số dưới thẻ", "Nhảy tới thẻ bất kỳ"],
+          ] : [
+            ["Chạm thẻ · Space", "Hiện đáp án"],
+            ["1 · 2 · 3 · 4", "Quên · Khó · Tốt · Dễ"],
+            ["Space (sau khi lật)", "Tốt"],
+            ["Backspace", "Hoàn tác lượt vừa trả lời"],
+          ]).concat([["N", "Ghi chú riêng"], ["Esc", "Kết thúc phiên"]]).map(([key, action]) => (
+            <div key={key}><dt><kbd>{key}</kbd></dt><dd>{action}</dd></div>
+          ))}
+        </dl>
+      </div>
       <PersonalNoteEditor note={personalNote} card={current}/>
-      <div className={`study-session-actions ${mode === "flashcards" ? "study-free-controls" : ""} ${mode === "anki" && !flipped ? "study-session-actions-hidden" : ""} ${mode === "anki" && flipped ? "study-session-ratings" : ""}`} aria-label={mode === "anki" && flipped ? "Đánh giá mức độ ghi nhớ" : "Điều khiển thẻ"}>
+      <div className={`study-session-actions ${mode === "flashcards" ? "study-free-controls" : ""} ${mode === "anki" && flipped ? "study-session-ratings" : ""}`} aria-label={mode === "anki" && flipped ? "Đánh giá mức độ ghi nhớ" : "Điều khiển thẻ"}>
         {mode === "anki" ? (
           flipped ? (
             (["again", "hard", "good", "easy"] as Rating[]).map((rating, i) => (
@@ -669,15 +714,6 @@ export function StudySession({
           ) : null
         ) : (
           <>
-            <button
-              className="study-button study-free-previous"
-              aria-label="Thẻ trước"
-              title="Thẻ trước (←)"
-              disabled={!index}
-              onClick={previous}
-            >
-              <ArrowLeft size={18}/><span>Thẻ trước</span>
-            </button>
             <label className="study-free-position">
               <span className="sr-only">Đến thẻ</span>
               <input
@@ -702,14 +738,6 @@ export function StudySession({
               />
               <span className="study-free-total">/ {sessionCards.length}</span>
             </label>
-            {flipped && <button
-              className="study-button study-button-primary study-session-free-next shrink-0 whitespace-nowrap"
-              onClick={next}
-            >
-              {index + 1 === sessionCards.length ? "Hoàn thành" : "Thẻ tiếp"}
-              <span className="study-free-shortcut" aria-hidden="true">Space</span>
-              {flipped && <ArrowRight size={17} aria-hidden="true"/>}
-            </button>}
           </>
         )}
       </div>

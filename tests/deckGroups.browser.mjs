@@ -352,7 +352,7 @@ try {
   assert.equal(await page.getByRole('button',{name:'Tùy chỉnh widget FPT',exact:true}).evaluate(el=>el===document.activeElement),true);
   await page.getByRole('button',{name:'Xong',exact:true}).click();
   await page.emulateMedia({colorScheme:'light'});
-  assert.equal(await page.locator('.deck-groups-library').evaluate(el=>getComputedStyle(el).getPropertyValue('--bg').trim()),'#F7F6F2');
+  assert.equal(await page.locator('.deck-groups-library').evaluate(el=>getComputedStyle(el).getPropertyValue('--bg').trim()),'#F4F0E8');
   await page.screenshot({path:'artifacts/deck-groups/glass-light.png',fullPage:true});
   await page.setViewportSize({width:360,height:844});await page.emulateMedia({colorScheme:'dark',reducedMotion:'reduce'});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);

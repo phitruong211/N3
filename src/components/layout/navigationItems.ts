@@ -1,20 +1,20 @@
 import type { PageId } from '@/types';
-import { Bookmark, BookOpen, ChartNoAxesCombined, CircleHelp, Layers, LayoutGrid, RotateCcw, Settings } from 'lucide-react';
+import { NavDecks, NavDictionary, NavLibrary, NavProgress, NavQuiz, NavReview, NavSaved, NavSettings, NavToday, type Icon } from '@/components/ui/icons';
 
-export type NavigationItem = { page: PageId; label: string; icon: typeof BookOpen; shortcut?: string };
+export type NavigationItem = { page: PageId; label: string; icon: Icon; shortcut?: string };
 
 export const PRIMARY_NAV_ITEMS: NavigationItem[] = [
-  { page: 'dashboard', label: 'Hôm nay', icon: LayoutGrid, shortcut: 'G D' },
-  { page: 'vocabulary', label: 'Thư viện', icon: BookOpen, shortcut: 'G V' },
-  { page: 'flashcards', label: 'Bộ thẻ', icon: Layers, shortcut: 'G F' },
-  { page: 'srs', label: 'Ôn ngắt quãng', icon: RotateCcw, shortcut: 'G S' },
-  { page: 'quiz', label: 'Trắc nghiệm', icon: CircleHelp, shortcut: 'G Q' },
+  { page: 'dashboard', label: 'Hôm nay', icon: NavToday, shortcut: 'G D' },
+  { page: 'vocabulary', label: 'Thư viện', icon: NavLibrary, shortcut: 'G V' },
+  { page: 'flashcards', label: 'Bộ thẻ', icon: NavDecks, shortcut: 'G F' },
+  { page: 'srs', label: 'Ôn ngắt quãng', icon: NavReview, shortcut: 'G S' },
+  { page: 'quiz', label: 'Trắc nghiệm', icon: NavQuiz, shortcut: 'G Q' },
 ];
 
 export const SECONDARY_NAV_ITEMS: NavigationItem[] = [
-  { page: 'dictionary', label: 'Từ điển', icon: BookOpen },
-  { page: 'progress', label: 'Tiến độ', icon: ChartNoAxesCombined, shortcut: 'G P' },
-  { page: 'bookmarks', label: 'Đã lưu', icon: Bookmark, shortcut: 'G B' },
+  { page: 'dictionary', label: 'Từ điển', icon: NavDictionary },
+  { page: 'progress', label: 'Tiến độ', icon: NavProgress, shortcut: 'G P' },
+  { page: 'bookmarks', label: 'Đã lưu', icon: NavSaved, shortcut: 'G B' },
 ];
 
 export const MOBILE_NAV_ITEMS: NavigationItem[] = PRIMARY_NAV_ITEMS
@@ -23,7 +23,7 @@ export const MOBILE_NAV_ITEMS: NavigationItem[] = PRIMARY_NAV_ITEMS
 export const MORE_NAV_ITEMS: NavigationItem[] = [
   PRIMARY_NAV_ITEMS.find(item => item.page === 'quiz')!,
   ...SECONDARY_NAV_ITEMS,
-  { page: 'settings', label: 'Cài đặt', icon: Settings },
+  { page: 'settings', label: 'Cài đặt', icon: NavSettings },
 ];
 
 export function isNavigationItemActive(item: NavigationItem, currentPage: PageId): boolean {

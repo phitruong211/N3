@@ -1,0 +1,42 @@
+/* Progress: figures set like a ledger, a week-by-week ink calendar, no boxed cards. */
+.progress-figures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-block: 1px solid var(--color-border-strong); }
+.progress-figure { padding: 1.5rem 0; border-bottom: 1px solid var(--color-border); }
+.progress-figure:nth-last-child(-n+2) { border-bottom: 0; }
+.progress-figure:nth-child(odd) { padding-right: 1.5rem; border-right: 1px solid var(--color-border); }
+.progress-figure:nth-child(even) { padding-left: 1.5rem; }
+.progress-figure strong { display: block; font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 400; line-height: 1; letter-spacing: -.03em; font-variant-numeric: lining-nums; }
+.progress-figure strong small { margin-left: .35rem; font-family: 'Be Vietnam Pro', sans-serif; font-size: .85rem; font-weight: 500; letter-spacing: 0; color: var(--color-text-tertiary); }
+.progress-figure span { display: block; margin-top: .6rem; }
+.progress-section { display: grid; gap: 1.25rem; }
+.progress-section > h2 { font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 1.8rem); font-weight: 400; letter-spacing: -.02em; padding-bottom: .9rem; border-bottom: 1px solid var(--color-border-strong); }
+.progress-bars { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.progress-bar-row { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) 3rem; align-items: center; gap: 1rem; font-size: .85rem; color: var(--color-text-secondary); }
+.progress-bar-row i { display: block; height: 3px; background: var(--color-surface-alt); }
+.progress-bar-row i b { display: block; height: 100%; background: var(--bar); transition: width var(--dur-slow) var(--ease-out); }
+.progress-bar-row output { text-align: right; font-variant-numeric: tabular-nums; color: var(--color-text-tertiary); }
+.progress-foot { display: flex; justify-content: space-between; gap: 1rem; font-size: .78rem; color: var(--color-text-tertiary); }
+
+.ink-calendar { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .75rem; align-items: start; }
+.ink-calendar-days { display: grid; grid-template-rows: repeat(7, 1fr); gap: 4px; font-size: .68rem; letter-spacing: .06em; color: var(--color-text-tertiary); }
+.ink-calendar-days span { display: flex; align-items: center; min-height: 100%; }
+.ink-calendar-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 1fr); grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 4px; }
+.ink-cell { aspect-ratio: 1; min-width: 0; border-radius: 3px; background: color-mix(in srgb, var(--color-accent) calc(var(--level) * 24%), var(--color-surface-alt)); }
+.ink-cell[data-future] { background: transparent; border: 1px dashed var(--color-border); }
+.ink-cell[data-today] { outline: 1.5px solid var(--color-gold); outline-offset: 1px; }
+.ink-legend { display: flex; align-items: center; gap: .5rem; margin-top: .9rem; font-size: .72rem; color: var(--color-text-tertiary); }
+.ink-legend .ink-cell { width: 12px; height: 12px; aspect-ratio: auto; }
+
+.weak-list { margin: 0; padding: 0; list-style: none; }
+.weak-list li { display: grid; grid-template-columns: 6rem minmax(0, 1fr) auto; align-items: center; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--color-border); }
+.weak-list li > span:first-child { font-size: 1.15rem; }
+.weak-list li > span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .85rem; color: var(--color-text-secondary); }
+.weak-list li > span:last-child { font-variant-numeric: tabular-nums; font-size: .85rem; font-weight: 600; }
+
+@media (min-width: 900px) {
+  .progress-figures { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .progress-figure { border-bottom: 0; padding: 1.75rem 1.5rem; border-right: 1px solid var(--color-border); }
+  .progress-figure:first-child { padding-left: 0; }
+  .progress-figure:last-child { border-right: 0; }
+  .progress-figure:nth-child(odd), .progress-figure:nth-child(even) { padding-inline: 1.5rem; }
+  .progress-figure:first-child { padding-left: 0; }
+}

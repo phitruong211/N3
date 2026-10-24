@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowRight, BookOpen, Search, Plus, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Search, Plus, X } from '@/components/ui/icons';
 import { useAuth } from "@/hooks/useAuth";
 import { AppLoading } from "@/components/ui/AppLoading";
 import {
@@ -271,7 +271,7 @@ export function DictionaryPage({ embedded = false }: { embedded?: boolean }) {
   const resultsCurrent =
     data?.query === query && !loading && !error && input === query;
   return (
-    <div className={`dictionary-page${embedded ? " dictionary-embedded" : ""}`}>
+    <div className={`dictionary-page${embedded ? " dictionary-embedded" : ""}`} role={embedded ? undefined : "main"} id={embedded ? undefined : "main-content"}>
       <div className="dictionary-wrap">
         {!embedded && (
           <header className="dictionary-header">
@@ -296,14 +296,7 @@ export function DictionaryPage({ embedded = false }: { embedded?: boolean }) {
           </header>
         )}
         <section className="dictionary-hero">
-          <div>
-            <p className="dictionary-eyebrow">MỖI TỪ MỚI, MỘT BƯỚC TIẾN</p>
-            <h1>
-              Từ điển <span lang="ja">辞書</span>
-            </h1>
-            <p>Tra nghĩa, chọn bộ thẻ, ghi nhớ theo nhịp của bạn.</p>
-          </div>
-          <BookOpen className="dictionary-hero-icon" aria-hidden="true" />
+          <h1>Từ điển</h1>
         </section>
         {sources ? (
           <section className="study-panel space-y-4">
@@ -402,7 +395,7 @@ export function DictionaryPage({ embedded = false }: { embedded?: boolean }) {
               </button>
             </form>
             <div className="dictionary-search-note">
-              <span>Nhật → Anh · Không cần đăng nhập để tra</span>
+              <span>Nhật → Anh</span>
               <span>
                 {sourceInfo?.ready
                   ? `${sourceInfo.entryCount.toLocaleString("vi-VN")} mục từ`
@@ -465,11 +458,7 @@ export function DictionaryPage({ embedded = false }: { embedded?: boolean }) {
                 )}
                 {!query && !loading && (
                   <div className="dictionary-empty">
-                    <span className="dictionary-empty-kanji" lang="ja">
-                      言葉
-                    </span>
                     <h2>Gặp một từ mới?</h2>
-                    <p>Tra cách đọc và nghĩa, rồi thêm vào bộ thẻ của bạn.</p>
                     <div className="flex flex-wrap justify-center gap-2 mt-5">
                       {["食べる", "勉強", "neko", "ありがとう"].map((q) => (
                         <button

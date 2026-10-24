@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Check, Plus, Search } from "lucide-react";
+import { Check, Plus, Search } from '@/components/ui/icons';
 import { useAuth } from "@/hooks/useAuth";
 import { apiRequest, ApiError } from "@/lib/api";
 import { AppDialog } from "@/components/ui/AppDialog";

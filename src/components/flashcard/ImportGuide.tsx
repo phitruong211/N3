@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, Copy, Download, FileQuestion } from 'lucide-react';
+import { Check, Copy, Download } from '@/components/ui/icons';
 import { IMPORT_EXAMPLE } from '@/lib/ankiImport';
 
 const sampleCard = IMPORT_EXAMPLE[0];
@@ -64,7 +64,7 @@ function PromptSection({ title, text }: { title: string; text: string }) {
 
 export function ImportGuide({ onDownload }: { onDownload: (format: 'json' | 'csv' | 'txt') => void }) {
   return <details className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
-    <summary className="flex cursor-pointer list-none items-center gap-2 font-semibold text-[var(--color-accent)]"><FileQuestion size={18} /> Hướng dẫn import: 2 prompt và JSON mẫu</summary>
+    <summary className="flex cursor-pointer list-none items-center gap-2 font-semibold text-[var(--color-accent)]">Hướng dẫn import: 2 prompt và JSON mẫu</summary>
     <div className="mt-4 space-y-6 text-sm leading-relaxed">
       <PromptSection title="1. Prompt HTML/CSS" text={formattingPrompt} />
       <PromptSection title="2. Prompt cấu trúc file" text={structurePrompt} />

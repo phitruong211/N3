@@ -5,8 +5,8 @@
 // Each page maps to one navigation item, one mental model
 // ============================================================
 
-import React, { Suspense, lazy } from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect, type ReactNode } from 'react';
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { AppProvider, useApp } from '@/hooks/useApp';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { AuthProvider, useAuth } from '@/hooks/useAuth';
@@ -33,22 +33,28 @@ const ProgressPage = lazy(() => import('@/components/progress/ProgressPage').the
 const BookmarksPage = lazy(() => import('@/components/bookmarks/BookmarksPage').then((module) => ({ default: module.BookmarksPage })));
 const SettingsPage = lazy(() => import('@/components/settings/SettingsPage').then((module) => ({ default: module.SettingsPage })));
 
-function AppContent() {
-  const { loading, loadError, retryLoad, learningSync } = useApp();
-  const location = useLocation();
-  const isDictionary = location.pathname === "/dictionary" || location.pathname.startsWith("/dictionary/");
-
-  if (!isDictionary && (loading || !learningSync.initialized)) {
-    return <AppLoading fullScreen message="Đang chuẩn bị nội dung học…"/>;
-  }
-
-  if (!isDictionary && loadError) {
+/** Library pages wait here; the data downloads the first time one is opened. */
+function LibraryGate({ children }: { children: ReactNode }) {
+  const { loading, loadError, retryLoad, ensureLibrary } = useApp();
+  useEffect(ensureLibrary, [ensureLibrary]);
+  if (loadError) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4 p-6 bg-[var(--color-bg)] text-[var(--color-text)]" role="alert">
+      <div className="flex flex-col items-center justify-center gap-4 p-6 text-[var(--color-text)]" role="alert">
         <p>Không thể tải nội dung học.</p>
         <button onClick={retryLoad} className="study-button study-button-primary">Thử lại</button>
       </div>
     );
+  }
+  return loading ? <AppLoading message="Đang mở thư viện…"/> : <>{children}</>;
+}
+
+function AppContent() {
+  const { learningSync } = useApp();
+  const location = useLocation();
+  const isDictionary = location.pathname === "/dictionary" || location.pathname.startsWith("/dictionary/");
+
+  if (!isDictionary && !learningSync.initialized) {
+    return <AppLoading fullScreen message="Đang chuẩn bị nội dung học…"/>;
   }
 
   return (
@@ -61,16 +67,16 @@ function AppContent() {
           <Route path="/dictionary/*" element={<DictionaryPage embedded />} />
           <Route path="/library" element={<LibraryLayout />}>
             <Route index element={<Navigate to="vocabulary" replace />} />
-            <Route path="vocabulary" element={<VocabularyPage />} />
-            <Route path="grammar" element={<GrammarPage />} />
-            <Route path="kanji" element={<KanjiPage />} />
+            <Route path="vocabulary" element={<LibraryGate><VocabularyPage /></LibraryGate>} />
+            <Route path="grammar" element={<LibraryGate><GrammarPage /></LibraryGate>} />
+            <Route path="kanji" element={<LibraryGate><KanjiPage /></LibraryGate>} />
             <Route path="listening" element={<ListeningPage />} />
           </Route>
-          <Route path="/decks" element={<FlashcardPage />} />
-          <Route path="/review" element={<AnkiPage />} />
-          <Route path="/quiz" element={<QuizPage />} />
-          <Route path="/progress" element={<ProgressPage />} />
-          <Route path="/saved" element={<BookmarksPage />} />
+          <Route path="/decks" element={<LibraryGate><FlashcardPage /></LibraryGate>} />
+          <Route path="/review" element={<LibraryGate><AnkiPage /></LibraryGate>} />
+          <Route path="/quiz" element={<LibraryGate><QuizPage /></LibraryGate>} />
+          <Route path="/progress" element={<LibraryGate><ProgressPage /></LibraryGate>} />
+          <Route path="/saved" element={<LibraryGate><BookmarksPage /></LibraryGate>} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
@@ -92,12 +98,20 @@ export default function App() {
 
 function AuthGate() {
   const location = useLocation();
-  const { user, mode, loading, restoreError, retryRestore, sessionKey } = useAuth();
+  const navigate = useNavigate();
+  const { user, mode, loading, restoreError, retryRestore, sessionKey, enterGuest } = useAuth();
+  // Landing "Học thử" sends ?guest=1 so a new visitor skips the login screen.
+  const wantsGuest = new URLSearchParams(location.search).get('guest') === '1';
+  useEffect(() => {
+    if (!wantsGuest || loading) return;
+    if (mode === 'unauthenticated') enterGuest();
+    navigate({ pathname: location.pathname, search: '' }, { replace: true });
+  }, [wantsGuest, loading, mode, enterGuest, navigate, location.pathname]);
   if (!user && (location.pathname === '/dictionary' || location.pathname.startsWith('/dictionary/'))) return <><Suspense fallback={<AppLoading fullScreen message="Đang mở từ điển…"/>}><DictionaryPage/></Suspense><AuthDialog/></>;
   if (/^\/shared\/groups\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/shared/groups/:token" element={<SharedGroupPage />}/></Routes><AuthDialog /></>;
   if (/^\/shared\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/shared/:token" element={<SharedDeckPage />}/></Routes><AuthDialog /></>;
   if (loading) return <AppLoading fullScreen message="Đang mở không gian học của bạn…"/>;
   if (!user && restoreError && hasSession()) return <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-6 bg-[var(--color-bg)]"><p className="study-copy max-w-md text-center" role="alert">{restoreError}</p><button className="study-button study-button-primary" onClick={retryRestore}>Thử kết nối lại</button></div>;
-  if (mode === 'unauthenticated') return <AuthPage />;
+  if (mode === 'unauthenticated') return wantsGuest ? <AppLoading fullScreen message="Đang mở không gian học…"/> : <AuthPage />;
   return <><AppProvider key={sessionKey}><AppContent /></AppProvider><AuthDialog /></>;
 }

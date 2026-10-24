@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Copy, Share2, Link2, Link2Off } from 'lucide-react';
+import { Copy, Share2, Link2, Link2Off } from '@/components/ui/icons';
 import { AppDialog } from '@/components/ui/AppDialog';
 import { enableShare, revokeShare, shareStatus, shareUrl, groupShareStatus, enableGroupShare, revokeGroupShare, groupShareUrl, type GroupShareLink } from '@/lib/deckSharing';
 import './sharing.css';

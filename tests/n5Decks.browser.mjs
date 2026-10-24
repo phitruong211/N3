@@ -47,11 +47,11 @@ try {
   // Each kind is a hanko seal: its Han character in the shared serif face, and that face has really loaded.
   await page.goto(`${baseURL}/decks`);
   await levelReady('N5');
-  assert.deepEqual(await page.locator('.level-seal').allInnerTexts(), ['語', '漢', '文']);
-  assert.match(await page.locator('.level-seal').first().evaluate(el => getComputedStyle(el).fontFamily), /Noto Serif JP/);
+  assert.deepEqual(await page.locator('.level-row .level-seal').allInnerTexts(), ['語', '漢', '文']);
+  assert.match(await page.locator('.level-row .level-seal').first().evaluate(el => getComputedStyle(el).fontFamily), /SN Serif JP/);
   await page.evaluate(() => document.fonts.load('700 20px "Noto Serif JP Local"', '語漢文'));
   assert.equal(await page.evaluate(() => document.fonts.check('700 20px "Noto Serif JP Local"', '語漢文')), true);
-  assert.equal(await page.locator('.level-seal').first().getAttribute('aria-hidden'), 'true');
+  assert.equal(await page.locator('.level-row .level-seal').first().getAttribute('aria-hidden'), 'true');
   // One level at a time: switching shows that level's decks, the choice is remembered, and the tablist is keyboard-operable.
   await page.goto(`${baseURL}/decks`);
   await levelReady('N5');

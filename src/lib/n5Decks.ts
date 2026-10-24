@@ -30,7 +30,15 @@ export function n5StudyCard(item: StudyCardData, deckId: string, position: numbe
 
 let cached: BuiltInDeckDefinition[] | null = null;
 
-export async function loadN5Decks(): Promise<BuiltInDeckDefinition[]> {
+let pending: Promise<BuiltInDeckDefinition[]> | null = null;
+
+// Shares one in-flight request between concurrent callers; a failure is not cached.
+export function loadN5Decks(): Promise<BuiltInDeckDefinition[]> {
+  pending ??= loadN5DecksOnce().catch(error => { pending = null; throw error; });
+  return pending;
+}
+
+async function loadN5DecksOnce(): Promise<BuiltInDeckDefinition[]> {
   if (cached) return cached;
   const definitions = [
     { id: 'vocabN5', name: 'Từ vựng N5', kind: 'vocabulary' },

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, type CSSProperties } from "react";
-import { ArrowDown, ArrowUp, Bold, Copy, Eye, EyeOff, GripVertical, Italic, Minus, Plus, X } from "lucide-react";
+import { ArrowDown, ArrowUp, Bold, Copy, Eye, EyeOff, GripVertical, Italic, Minus, Plus, X } from '@/components/ui/icons';
 import { CARD_FONT_PRESETS, defaultDeckTemplate, importFaceBlocks, kindLabels, parseCardExamples, type ImportFaceBlock } from "@/lib/ankiImport";
 import { parseStoredFurigana } from "@/lib/furigana";
 import { FuriganaText } from "./FuriganaText";
@@ -51,16 +51,24 @@ function FontSizeInput({ value, label, onCommit }: { value: number; label: strin
     }} />;
 }
 const fontFamilies: Record<DeckTemplateConfig['front']['style']['fontFamily'], string> = {
-  default: "'Be Vietnam Pro', 'Noto Serif JP Local', serif",
-  notoSansJp: "'Noto Sans JP Local', sans-serif",
-  notoSerifJp: "'Noto Serif JP Local', serif",
+  default: "'Be Vietnam Pro', 'SN Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif",
+  notoSansJp: "'SN Sans JP', 'Noto Sans JP Local', sans-serif",
+  notoSerifJp: "'SN Serif JP', 'Noto Serif JP Local', serif",
   delaGothicOne: "'Dela Gothic One Local', sans-serif",
   system: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
 };
 
-function cardTextStyle(style: DeckTemplateConfig['front']['style']): CSSProperties {
+// Short text (a single word or kanji) is enlarged when autoFit is on; capped by viewport width so it never overflows.
+export function autoFitScale(text: string): number {
+  const length = Array.from(text.replace(/\s+/g, "")).length;
+  return length <= 3 ? 2.4 : length <= 8 ? 1.6 : 1;
+}
+
+function cardTextStyle(style: DeckTemplateConfig['front']['style'], text = "", secondary = false): CSSProperties {
+  const scale = style.autoFit && !secondary ? autoFitScale(text) : 1;
+  const size = secondary ? Math.max(14, Math.round(style.fontSize * 0.55)) : style.fontSize * scale;
   return {
-    fontSize: `${style.fontSize}px`,
+    fontSize: scale > 1 ? `min(${size}px, 18vw)` : `${size}px`,
     fontWeight: style.bold ? 700 : 400,
     fontStyle: style.italic ? "italic" : "normal",
     fontFamily: fontFamilies[style.fontFamily],
@@ -100,7 +108,7 @@ function Examples({ value, showReading }: { value: unknown; showReading: boolean
   if (!examples.length) return null;
   return <div className="space-y-3 border-t border-current/10 pt-4 text-left">
     <p className="text-xs font-semibold opacity-60">Ví dụ · bấm mắt để xem nghĩa</p>
-    {examples.map((example, index) => <div key={index} className="rounded-xl bg-black/5 p-4">
+    {examples.map((example, index) => <div key={index} className="rounded-sm border-l-2 border-[color-mix(in_srgb,currentColor_24%,transparent)] bg-[color-mix(in_srgb,currentColor_4%,transparent)] px-4 py-3">
       <div lang="ja" className="font-jp whitespace-pre-wrap break-words text-base leading-relaxed sm:text-lg">{index + 1}. <FuriganaText text={example.japanese} show={showReading} /></div>
       {showReading && example.reading && <p lang="ja" className="card-reading font-jp mt-1 text-sm text-[var(--color-accent)]">{example.reading}</p>}
       <ExampleMeaning meaning={example.meaning} label={`ví dụ ${index + 1}`} />
@@ -211,6 +219,7 @@ export function CardFace({
 }) {
   const grammarAnswer = card.kind === "grammar" && fields.includes("back");
   const style = template[side].style;
+  const firstTextIndex = fields.findIndex(field => field === "front" || field === "back");
   return (
     <div
       className={`w-full space-y-4 ${grammarAnswer ? "mx-auto max-w-3xl text-left" : style.alignment === "left" ? "text-left" : "text-center"} ${compact ? "!text-base" : ""}`}
@@ -236,9 +245,10 @@ export function CardFace({
         return (
           <div
             key={`${field}-${index}`}
+            data-field={field}
             className={
               field === "notes"
-                ? "whitespace-pre-wrap break-words rounded-xl bg-black/5 p-4 text-base"
+                ? "whitespace-pre-wrap break-words rounded-sm border-l-2 border-[color-mix(in_srgb,currentColor_24%,transparent)] bg-[color-mix(in_srgb,currentColor_4%,transparent)] px-4 py-3 text-base"
                 : field === "reading"
                   ? "card-reading font-jp text-lg text-[var(--color-accent)]"
                   : field === "hanViet"
@@ -247,7 +257,7 @@ export function CardFace({
                     ? "text-xs font-bold uppercase tracking-wide opacity-70"
                 : "font-jp whitespace-pre-wrap break-words"
             }
-            style={isCardText ? cardTextStyle(style) : undefined}
+            style={isCardText ? cardTextStyle(style, value, index !== firstTextIndex) : undefined}
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
             {kanjiVocabulary.length ? <KanjiVocabulary value={kanjiVocabulary} showReading={showExampleReadings} /> : field === "hanViet" ? `Hán Việt: ${value}` : importedBlocks.length ? (
@@ -556,6 +566,10 @@ export function DeckCustomizeDialog({
                     <Plus size={17} />
                   </button>
                 </span>
+              </label>
+              <label className="flex items-center justify-between gap-3 sm:col-span-2">
+                <span>Tự phóng chữ ngắn<span className="block text-xs font-normal text-[var(--color-text-tertiary)]">Từ hoặc kanji ngắn được phóng to hơn cỡ đã chọn.</span></span>
+                <input type="checkbox" checked={Boolean(activeStyle.autoFit)} aria-label={`Tự phóng chữ ngắn ${previewBack ? "mặt sau" : "mặt trước"}`} onChange={(event) => updateActiveStyle({ autoFit: event.target.checked })}/>
               </label>
               <div className="sm:col-span-2">
                 <span className="mb-1 block">Kiểu chữ</span>

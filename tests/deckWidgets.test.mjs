@@ -59,9 +59,9 @@ test('a group tint is drawn at a fraction of its saved strength and ambient glow
   // The tone is blended at opacity * TINT_STRENGTH over fill-on-page, never at the raw saved strength.
   const mix = (front,back,alpha) => front.map((value,index)=>value*alpha+back[index]*(1-alpha));
   const style = {...DEFAULT_WIDGET_STYLE,color:'#34c759',opacity:70};
-  const expected = mix(channels('#34c759'),mix(channels('#ffffff'),channels('#eef0ec'),.34),.7*TINT_STRENGTH);
+  const expected = mix(channels('#34c759'),mix(channels('#faf7f1'),channels('#f4f0e8'),.42),.7*TINT_STRENGTH);
   assert.deepEqual(glassBackgrounds(style,true)[0].map(Math.round),expected.map(Math.round));
-  assert.notDeepEqual(glassBackgrounds(style,true)[0].map(Math.round),mix(channels('#34c759'),mix(channels('#ffffff'),channels('#eef0ec'),.34),.7).map(Math.round));
+  assert.notDeepEqual(glassBackgrounds(style,true)[0].map(Math.round),mix(channels('#34c759'),mix(channels('#faf7f1'),channels('#f4f0e8'),.42),.7).map(Math.round));
 });
 
 test('glass ink stays at AA text contrast across every tone, opacity and theme', () => {

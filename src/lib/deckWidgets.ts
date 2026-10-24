@@ -74,7 +74,7 @@ function luminance(color: Rgb) {
 function contrast(a: Rgb, b: Rgb) { const first = luminance(a), second = luminance(b); return (Math.max(first, second) + .05) / (Math.min(first, second) + .05); }
 
 /** Mirrors --glass-fill in index.css; keep the two in step. */
-export const GLASS_FILL = { light: { color: '#ffffff', alpha: .34 }, dark: { color: '#181c24', alpha: .34 } };
+export const GLASS_FILL = { light: { color: '#faf7f1', alpha: .42 }, dark: { color: '#121a38', alpha: .42 } };
 /** A group's tint is identity, not atmosphere: the saved strength is drawn at this fraction (--tint-strength in widgetGlass.css). */
 export const TINT_STRENGTH = .55;
 /** Quiet light behind the grid per theme (peak strength; mirrors .widget-ambient in widgetGlass.css). It never carries a group's colour. */
@@ -82,7 +82,7 @@ export const AMBIENT_GLOWS = {
   light: [{ color: '#ffffff', alpha: .55 }, { color: '#9db7d9', alpha: .10 }],
   dark: [{ color: '#9db7d9', alpha: .18 }, { color: '#d8b99a', alpha: .14 }],
 };
-const BASES = { light: ['#eef0ec', '#f5f0e3'], dark: ['#0d100f', '#151b1e'] };
+const BASES = { light: ['#f4f0e8', '#efe5cf'], dark: ['#0a0f1e', '#0f1630'] };
 
 /** Every colour the glass can plausibly sit on: page base, with and without each glow, under fill and tint. */
 export function glassBackgrounds(style: DeckWidgetStyle, light: boolean): Rgb[] {

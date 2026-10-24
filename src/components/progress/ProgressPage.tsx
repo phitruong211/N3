@@ -1,17 +1,18 @@
 // ============================================================
-// Progress Page — Statistics & Heatmap
-// ============================================================
-// Principles:
-// - Goal Gradient Effect: Visual progress towards mastery
-// - Habit Formation: Heatmap shows consistency
-// - Recognition over Recall: Visual charts, not raw numbers
+// Progress — figures, review states and a week-by-week ink calendar
 // ============================================================
 
-import React, { useMemo } from 'react';
-import { useApp } from '@/hooks/useApp';
+import { useMemo } from 'react';
+import { useApp, useLearningStorage } from '@/hooks/useApp';
 import { getStateDistribution, formatDate } from '@/lib/srs';
-import { useLearningStorage } from '@/hooks/useApp';
-import { Flame, Target, TrendingUp, Calendar, BarChart3 } from 'lucide-react';
+import { EmptyState, PageHeading } from '@/components/ui/StudyUI';
+import type { SRSCard } from '@/types';
+import './progress.css';
+
+const WEEKDAYS = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+const WEEKS = 12;
+const count = (value: number) => value.toLocaleString('vi-VN');
+const accuracyOf = (card: SRSCard) => card.reps === 0 ? 0 : Math.max(0, card.reps - card.lapses) / card.reps;
 
 export function ProgressPage() {
   const { calculateStreak, getStudyDays } = useLearningStorage();
@@ -19,246 +20,113 @@ export function ProgressPage() {
   const distribution = useMemo(() => getStateDistribution(srsCards), [srsCards]);
   const streak = calculateStreak();
   const studyDays = getStudyDays();
+  const library = vocabulary.length + kanji.length + grammar.length;
 
   const totalAccuracy = useMemo(() => {
-    if (srsCards.length === 0) return 0;
-    const total = srsCards.reduce((sum, c) => sum + c.reps, 0);
-    const correct = srsCards.reduce((sum, c) => sum + Math.max(0, c.reps - c.lapses), 0);
+    const total = srsCards.reduce((sum, card) => sum + card.reps, 0);
+    const correct = srsCards.reduce((sum, card) => sum + Math.max(0, card.reps - card.lapses), 0);
     return total > 0 ? Math.round((correct / total) * 100) : 0;
   }, [srsCards]);
 
-  return (
-    <div className="study-page">
-      <div>
-        <h1 className="text-2xl font-semibold text-[var(--color-text)]">
-          Tiến độ
-        </h1>
-        <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-          Nhìn lại nhịp học và những mục cần luyện thêm
-        </p>
-      </div>
-
-      {/* Stats overview */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard
-          icon={<Flame size={18} className="text-[var(--color-warning)]" />}
-          label="Học liên tiếp"
-          value={`${streak.current}`}
-          unit="ngày"
-        />
-        <StatCard
-          icon={<Target size={18} className="text-[var(--color-accent)]" />}
-          label="Độ chính xác"
-          value={`${totalAccuracy}`}
-          unit="%"
-        />
-        <StatCard
-          icon={<TrendingUp size={18} className="text-[var(--color-success)]" />}
-          label="Thẻ trong SRS"
-          value={`${srsCards.length}`}
-          unit="thẻ"
-        />
-        <StatCard
-          icon={<Calendar size={18} className="text-[var(--color-new)]" />}
-          label="Ngày đã học"
-          value={`${studyDays.length}`}
-          unit="ngày"
-        />
-      </div>
-
-      {/* Mastery distribution */}
-      <div className="p-6 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
-        <h2 className="text-sm font-semibold text-[var(--color-text)] mb-4 flex items-center gap-2">
-          <BarChart3 size={16} />
-          Trạng thái ôn tập
-        </h2>
-
-        <div className="space-y-3">
-          <ProgressBar label="Mới" count={distribution.new} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-new)" />
-          <ProgressBar label="Đang học" count={distribution.learning} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-learning)" />
-          <ProgressBar label="Đang ôn" count={distribution.review} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-review)" />
-          <ProgressBar label="Học lại" count={distribution.relearning} total={vocabulary.length + kanji.length + grammar.length} color="var(--color-forgotten)" />
-        </div>
-
-        <div className="mt-4 pt-4 border-t border-[var(--color-border)] flex items-center justify-between text-xs text-[var(--color-text-tertiary)]">
-          <span>Chưa bắt đầu: {Math.max(0, (vocabulary.length + kanji.length + grammar.length) - srsCards.length)}</span>
-          <span>Tổng mục: {vocabulary.length + kanji.length + grammar.length}</span>
-        </div>
-      </div>
-
-      {/* Study heatmap */}
-      <div className="p-6 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
-        <h2 className="text-sm font-semibold text-[var(--color-text)] mb-4">
-          Ngày học
-        </h2>
-        <Heatmap studyDays={studyDays} />
-      </div>
-
-      {/* Weak items */}
-      <WeakItems srsCards={srsCards} vocabulary={vocabulary} />
-    </div>
-  );
-}
-
-function StatCard({
-  icon,
-  label,
-  value,
-  unit,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  unit: string;
-}) {
-  return (
-    <div className="p-4 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
-      <div className="flex items-center gap-2 mb-3">{icon}
-        <span className="text-xs font-medium text-[var(--color-text-secondary)]">{label}</span>
-      </div>
-      <div className="flex items-baseline gap-1">
-        <span className="text-2xl font-semibold text-[var(--color-text)]">{value}</span>
-        <span className="text-xs text-[var(--color-text-tertiary)]">{unit}</span>
-      </div>
-    </div>
-  );
-}
-
-function ProgressBar({
-  label,
-  count,
-  total,
-  color,
-}: {
-  label: string;
-  count: number;
-  total: number;
-  color: string;
-}) {
-  const pct = total > 0 ? (count / total) * 100 : 0;
-  return (
-    <div className="flex items-center gap-3">
-      <span className="text-xs font-medium text-[var(--color-text-secondary)] w-20">{label}</span>
-      <div className="flex-1 h-2.5 rounded-full bg-[var(--color-surface-alt)]">
-        <div
-          className="h-full rounded-full transition-all duration-300"
-          style={{ width: `${pct}%`, backgroundColor: color }}
-        />
-      </div>
-      <span className="text-xs text-[var(--color-text-tertiary)] w-8 text-right">{count}</span>
-    </div>
-  );
-}
-
-// GitHub-style heatmap
-function Heatmap({ studyDays }: { studyDays: { date: string; cardsReviewed: number }[] }) {
-  const cells = useMemo(() => {
-    const today = new Date();
-    const result: { date: string; level: number }[] = [];
-    const dayMap = new Map(studyDays.map((d) => [d.date, d.cardsReviewed]));
-
-    // Last 12 weeks (84 days)
-    for (let i = 83; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      const dateStr = formatDate(date);
-      const count = dayMap.get(dateStr) || 0;
-      let level = 0;
-      if (count > 0) level = 1;
-      if (count >= 10) level = 2;
-      if (count >= 20) level = 3;
-      if (count >= 40) level = 4;
-      result.push({ date: dateStr, level });
-    }
-    return result;
-  }, [studyDays]);
-
-  const levelColors = [
-    'bg-[var(--color-surface-alt)]',
-    'bg-[var(--color-success)]/20',
-    'bg-[var(--color-success)]/40',
-    'bg-[var(--color-success)]/70',
-    'bg-[var(--color-success)]',
+  const states: [string, number, string][] = [
+    ['Mới', distribution.new, 'var(--color-new)'], ['Đang học', distribution.learning, 'var(--color-learning)'],
+    ['Đang ôn', distribution.review, 'var(--color-review)'], ['Học lại', distribution.relearning, 'var(--color-forgotten)'],
   ];
 
   return (
-    <div>
-      <div className="grid grid-cols-[repeat(12,1fr)] gap-1">
-        {cells.map((cell) => (
-          <div
-            key={cell.date}
-            className={`aspect-square rounded-sm ${levelColors[cell.level]}`}
-            title={`${cell.date}: ${cell.level > 0 ? 'studied' : 'no activity'}`}
-          />
-        ))}
-      </div>
-      <div className="flex items-center gap-2 mt-3 text-xs text-[var(--color-text-tertiary)]">
-        <span>Ít</span>
-        {levelColors.map((c, i) => (
-          <div key={i} className={`w-3 h-3 rounded-sm ${c}`} />
-        ))}
-        <span>Nhiều</span>
-      </div>
+    <div className="study-page">
+      <PageHeading title="Tiến độ"/>
+
+      <section className="progress-figures rise-group" aria-label="Tổng quan">
+        <Figure value={String(streak.current)} unit="ngày" label="Học liên tiếp"/>
+        <Figure value={String(totalAccuracy)} unit="%" label="Độ chính xác"/>
+        <Figure value={count(srsCards.length)} unit="thẻ" label="Thẻ trong lịch ôn"/>
+        <Figure value={count(studyDays.length)} unit="ngày" label="Ngày đã học"/>
+      </section>
+
+      <section className="progress-section" aria-labelledby="states-title">
+        <h2 id="states-title">Trạng thái ôn tập</h2>
+        <ul className="progress-bars">
+          {states.map(([label, value, color]) => {
+            const percent = library > 0 ? value / library * 100 : 0;
+            return <li key={label} className="progress-bar-row" style={{ '--bar': color } as React.CSSProperties}>
+              <span>{label}</span>
+              <i role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={library} aria-valuenow={value}><b style={{ width: `${percent}%` }}/></i>
+              <output>{count(value)}</output>
+            </li>;
+          })}
+        </ul>
+        <p className="progress-foot"><span>Chưa bắt đầu: {count(Math.max(0, library - srsCards.length))}</span><span>Tổng mục: {count(library)}</span></p>
+      </section>
+
+      <section className="progress-section" aria-labelledby="calendar-title">
+        <h2 id="calendar-title">Lịch học {WEEKS} tuần</h2>
+        {studyDays.some(day => day.cardsReviewed > 0)
+          ? <InkCalendar studyDays={studyDays}/>
+          : <EmptyState art="bamboo" title="Chưa có nhịp học nào" detail="Học vài thẻ hôm nay, lịch học sẽ hiện ở đây, mỗi ô một ngày."/>}
+      </section>
+
+      <WeakItems srsCards={srsCards} vocabulary={vocabulary}/>
     </div>
   );
 }
 
-import type { SRSCard } from '@/types';
+function Figure({ value, unit, label }: { value: string; unit: string; label: string }) {
+  return <div className="progress-figure"><strong>{value}<small>{unit}</small></strong><span className="study-eyebrow">{label}</span></div>;
+}
 
-function WeakItems({
-  srsCards,
-  vocabulary,
-}: {
-  srsCards: SRSCard[];
-  vocabulary: { id: string; kanji: string; hiragana: string; meaning: string }[];
-}) {
-  const weak = useMemo(() => {
-    return srsCards
-      .filter((c) => c.reps >= 2 && (c.reps === 0 ? 0 : Math.max(0, c.reps - c.lapses) / c.reps) < 0.6)
-      .sort((a, b) => {
-        const aAcc = a.reps === 0 ? 0 : Math.max(0, a.reps - a.lapses) / a.reps;
-        const bAcc = b.reps === 0 ? 0 : Math.max(0, b.reps - b.lapses) / b.reps;
-        return aAcc - bAcc;
-      })
-      .slice(0, 10)
-      .map((c) => {
-        const vocab = vocabulary.find((v) => v.id === c.cardId);
-        return {
-          ...c,
-          kanji: vocab?.kanji || c.cardId,
-          meaning: vocab?.meaning || '',
-          accuracy: Math.round((c.reps === 0 ? 0 : Math.max(0, c.reps - c.lapses) / c.reps) * 100),
-        };
-      });
-  }, [srsCards, vocabulary]);
+/** Twelve weeks, one column per week (Monday to Sunday): the shape of the habit, not just a count. */
+function InkCalendar({ studyDays }: { studyDays: { date: string; cardsReviewed: number }[] }) {
+  const { cells, studied, longest } = useMemo(() => {
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const monday = new Date(today); monday.setDate(today.getDate() - ((today.getDay() + 6) % 7) - (WEEKS - 1) * 7);
+    const counts = new Map(studyDays.map(day => [day.date, day.cardsReviewed]));
+    const label = new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: 'numeric', month: 'numeric' });
+    let run = 0, best = 0, active = 0;
+    const result = Array.from({ length: WEEKS * 7 }, (_, index) => {
+      const date = new Date(monday); date.setDate(monday.getDate() + index);
+      const key = formatDate(date), future = date > today, reviewed = future ? 0 : counts.get(key) ?? 0;
+      if (reviewed > 0) { active++; run++; best = Math.max(best, run); } else if (!future) run = 0;
+      const level = reviewed >= 40 ? 4 : reviewed >= 20 ? 3 : reviewed >= 10 ? 2 : reviewed > 0 ? 1 : 0;
+      return { key, future, today: date.getTime() === today.getTime(), level, reviewed, text: `${label.format(date)}: ${reviewed} thẻ` };
+    });
+    return { cells: result, studied: active, longest: best };
+  }, [studyDays]);
 
-  if (weak.length === 0) return null;
-
-  return (
-    <div className="p-6 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
-      <h2 className="text-sm font-semibold text-[var(--color-text)] mb-4">
-        Từ cần luyện thêm
-      </h2>
-      <div className="space-y-2">
-        {weak.map((item) => (
-          <div
-            key={item.cardId}
-            className="flex items-center gap-4 px-3 py-2 rounded-lg bg-[var(--color-surface-alt)]"
-          >
-            <span className="font-jp text-sm font-medium text-[var(--color-text)] w-24">
-              {item.kanji}
-            </span>
-            <span className="text-xs text-[var(--color-text-secondary)] flex-1 truncate">
-              {item.meaning}
-            </span>
-            <span className={`text-xs font-medium ${
-              item.accuracy < 40 ? 'text-[var(--color-error)]' : 'text-[var(--color-warning)]'
-            }`}>
-              {item.accuracy}%
-            </span>
-          </div>
-        ))}
+  return <div>
+    <div className="ink-calendar" role="img" aria-label={`${WEEKS} tuần gần đây: ${studied} ngày có học, chuỗi dài nhất ${longest} ngày`}>
+      <div className="ink-calendar-days" aria-hidden="true">{WEEKDAYS.map(day => <span key={day}>{day}</span>)}</div>
+      <div className="ink-calendar-grid" aria-hidden="true">
+        {cells.map(cell => <div key={cell.key} className="ink-cell" title={cell.future ? undefined : cell.text}
+          style={{ '--level': cell.level } as React.CSSProperties} data-future={cell.future || undefined} data-today={cell.today || undefined}/>)}
       </div>
     </div>
-  );
+    <div className="ink-legend" aria-hidden="true">
+      <span>Ít</span>{[0, 1, 2, 3, 4].map(level => <i key={level} className="ink-cell" style={{ '--level': level } as React.CSSProperties}/>)}<span>Nhiều</span>
+    </div>
+    <ul className="sr-only">{cells.filter(cell => cell.reviewed > 0).map(cell => <li key={cell.key}>{cell.text}</li>)}</ul>
+  </div>;
+}
+
+function WeakItems({ srsCards, vocabulary }: { srsCards: SRSCard[]; vocabulary: { id: string; kanji: string; hiragana: string; meaning: string }[] }) {
+  const weak = useMemo(() => srsCards
+    .filter(card => card.reps >= 2 && accuracyOf(card) < 0.6)
+    .sort((a, b) => accuracyOf(a) - accuracyOf(b))
+    .slice(0, 10)
+    .map(card => {
+      const vocab = vocabulary.find(item => item.id === card.cardId);
+      return { cardId: card.cardId, kanji: vocab?.kanji || card.cardId, meaning: vocab?.meaning || '', accuracy: Math.round(accuracyOf(card) * 100) };
+    }), [srsCards, vocabulary]);
+
+  if (weak.length === 0) return null;
+  return <section className="progress-section" aria-labelledby="weak-title">
+    <h2 id="weak-title">Từ cần luyện thêm</h2>
+    <ul className="weak-list">
+      {weak.map(item => <li key={item.cardId}>
+        <span className="font-jp" lang="ja">{item.kanji}</span>
+        <span>{item.meaning}</span>
+        <span style={{ color: item.accuracy < 40 ? 'var(--color-error)' : 'var(--color-warning)' }}>{item.accuracy}%</span>
+      </li>)}
+    </ul>
+  </section>;
 }

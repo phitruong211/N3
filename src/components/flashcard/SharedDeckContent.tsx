@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
-import { ArrowLeft, ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown } from '@/components/ui/icons';
 import type { SharedDeckPreview } from '@/lib/deckSharing';
 import { FuriganaText } from './FuriganaText';
 

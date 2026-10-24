@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ArrowRight, BookmarkCheck, Trash2 } from 'lucide-react';
+import { ArrowRight, BookmarkCheck, Trash2 } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
 import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
 import type { Bookmark } from '@/types';
@@ -15,8 +15,8 @@ export function BookmarksPage() {
       detail: item ? ('meaning' in item ? item.meaning : item.hanViet) : '' };
   }), [bookmarks, vocabulary, grammar, kanji]);
   return <div className="study-page">
-    <PageHeading eyebrow="CÁ NHÂN" title="Đã lưu" subtitle={bookmarks.length + ' mục để học lại'} />
-    {!items.length ? <EmptyState title="Chưa lưu mục nào" detail="Chạm biểu tượng dấu trang khi học từ vựng, ngữ pháp hoặc kanji." action={<button className="study-button study-button-primary" onClick={() => setCurrentPage('vocabulary')}>Khám phá từ vựng →</button>} /> :
+    <PageHeading title="Đã lưu" subtitle={bookmarks.length + ' mục để học lại'} />
+    {!items.length ? <EmptyState art="crane" title="Chưa lưu mục nào" detail="Chạm biểu tượng dấu trang khi học từ vựng, ngữ pháp hoặc kanji." action={<button className="study-button study-button-primary" onClick={() => setCurrentPage('vocabulary')}>Khám phá từ vựng →</button>} /> :
       <div className="study-panel divide-y divide-[var(--color-border)] !p-0">
         {items.map(item => <div key={item.itemType + item.itemId} className="flex min-w-0 items-center gap-2 p-3 sm:gap-4 sm:p-4">
           <BookmarkCheck size={18} className="hidden shrink-0 text-[var(--color-accent)] sm:block"/>

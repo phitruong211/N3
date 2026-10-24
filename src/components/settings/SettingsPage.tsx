@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
 import { useLearningStorage } from '@/hooks/useApp';
 import type { ThemeMode } from '@/types';
@@ -7,9 +7,12 @@ import { PageHeading } from '@/components/ui/StudyUI';
 import { useAuth } from '@/hooks/useAuth';
 import { AccountLearningStatus } from '@/components/auth/AccountLearningStatus';
 
-const themes: { id: ThemeMode; label: string }[] = [
-  { id: 'light', label: 'Sáng' }, { id: 'dark', label: 'Tối' },
-  { id: 'reading', label: 'Đọc sách' }, { id: 'high-contrast', label: 'Tương phản cao' },
+// Swatch colours are fixed so each card previews its own theme whichever one is active.
+const themes: { id: ThemeMode; label: string; bg: string; surface: string; text: string; accent: string }[] = [
+  { id: 'light', label: 'Sáng', bg: '#F4F0E8', surface: '#FAF7F1', text: '#1B1A17', accent: '#2C4A3E' },
+  { id: 'dark', label: 'Tối', bg: '#0A0F1E', surface: '#0F1630', text: '#ECE6D8', accent: '#D9C08C' },
+  { id: 'reading', label: 'Đọc sách', bg: '#EFE5CF', surface: '#F6EEDC', text: '#3A2F22', accent: '#8A4426' },
+  { id: 'high-contrast', label: 'Tương phản cao', bg: '#FFFFFF', surface: '#FFFFFF', text: '#000000', accent: '#003EA8' },
 ];
 const sizes = [{ id: 'small', label: 'Nhỏ' }, { id: 'medium', label: 'Vừa' }, { id: 'large', label: 'Lớn' }] as const;
 const dailyNewCardPresets = [0, 10, 20, 50, 100] as const;
@@ -46,7 +49,7 @@ export function SettingsPage() {
     if (resetAllData()) window.location.reload();
   };
   return <div className="study-page">
-    <PageHeading eyebrow="CÁ NHÂN" title="Cài đặt" subtitle="Chỉnh cách đọc và học phù hợp với bạn" />
+    <PageHeading title="Cài đặt" />
     {user && <div role="status" className="study-copy">{settingsSync.pending ? "Đang đồng bộ cài đặt…" : settingsSync.error ? <><span role="alert">{settingsSync.error} Cài đặt vẫn được giữ trên thiết bị.</span> <button className="study-button" onClick={()=>void settingsSync.retry()}>Thử lưu lại</button></> : "Cài đặt đã đồng bộ"}</div>}
     <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)]">
       <div className="space-y-6">
@@ -58,10 +61,21 @@ export function SettingsPage() {
         </section>
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Giao diện</h2>
-          <p className="study-copy mt-1">Chọn màu nền và độ tương phản.</p>
-          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">{themes.map(theme => <button key={theme.id} aria-pressed={settings.theme === theme.id}
-            className={'study-button min-h-11 ' + (settings.theme === theme.id ? 'study-button-primary' : '')}
-            onClick={() => updateSettings({ theme: theme.id })}>{theme.label}</button>)}</div>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">{themes.map(theme => {
+            const active = settings.theme === theme.id;
+            return <button key={theme.id} aria-pressed={active} onClick={() => updateSettings({ theme: theme.id })}
+              className={'group rounded-lg border p-2 text-left transition-[border-color,box-shadow,transform] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 ' + (active ? 'border-[var(--color-gold)] shadow-[0_0_0_1px_var(--color-gold)]' : 'border-[var(--color-border)] hover:border-[var(--color-border-strong)]')}>
+              <span aria-hidden="true" className="relative block aspect-[16/10] overflow-hidden rounded-md border" style={{ background: theme.bg, borderColor: theme.text + '22' }}>
+                <span className="absolute inset-x-2 top-2 h-1.5 w-1/3 rounded-full" style={{ background: theme.text }}/>
+                <span className="absolute inset-x-2 top-5 h-1 w-1/2 rounded-full opacity-50" style={{ background: theme.text }}/>
+                <span className="absolute inset-x-2 bottom-2 flex h-[38%] items-end justify-between rounded-sm p-1.5" style={{ background: theme.surface, border: `1px solid ${theme.text}1f` }}>
+                  <span className="h-1.5 w-1/3 rounded-full" style={{ background: theme.accent }}/>
+                  <span className="size-2 rounded-full" style={{ background: theme.accent }}/>
+                </span>
+              </span>
+              <span className="mt-2 block text-sm font-semibold text-[var(--color-text)]">{theme.label}</span>
+            </button>;
+          })}</div>
           <SettingToggle label="Giảm chuyển động" detail="Giảm hiệu ứng chuyển cảnh và lật thẻ" checked={settings.reducedMotion} onChange={value => updateSettings({ reducedMotion: value })}/>
         </section>
         <section className="study-panel">
@@ -110,8 +124,8 @@ export function SettingsPage() {
                 key={value}
                 type="button"
                 aria-pressed={settings.srsDailyNewLimit === value}
-                className={'min-h-9 rounded-lg border px-3 text-sm font-semibold transition-colors focus-ring ' + (settings.srsDailyNewLimit === value
-                  ? 'border-[var(--color-accent)] bg-[var(--color-accent)] text-white'
+                className={'min-h-11 min-w-11 rounded-lg border px-3 text-sm font-semibold transition-colors focus-ring ' + (settings.srsDailyNewLimit === value
+                  ? 'border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-text-inverse)]'
                   : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]')}
                 onClick={() => changeDailyNewLimit(value)}
               >{value === 0 ? 'Chỉ ôn' : value}</button>)}
@@ -142,7 +156,7 @@ export function SettingsPage() {
           <button className="study-button mt-4" onClick={() => { setSrsError(''); updateSettings({ srsDailyNewLimit: 20, srsAgainMinutes: 1, srsGoodMinutes: 10, srsDesiredRetention: 0.9 }); }}>Khôi phục mặc định</button>
         </section>
         <details className="study-panel">
-          <summary className="flex cursor-pointer list-none items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><span className="text-base font-semibold">Vùng nguy hiểm</span></summary>
+          <summary className="hit flex cursor-pointer list-none items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><span className="text-base font-semibold">Vùng nguy hiểm</span></summary>
           <h2 className="mt-4 text-base font-semibold">Xóa dữ liệu trên thiết bị</h2>
           <p className="study-copy mt-2">Xóa lịch ôn, hoạt động học, mục đã lưu, dữ liệu nghe và cài đặt trên thiết bị của phiên hiện tại. Tiến độ đã đồng bộ sẽ được tải lại từ tài khoản. Không xóa dữ liệu của tài khoản khác, dữ liệu Guest khi đang đăng nhập hoặc bộ thẻ trên máy chủ.</p>
           <button className="study-button mt-4 border-[var(--color-error)] text-[var(--color-error)]" onClick={handleReset}>
@@ -173,7 +187,7 @@ function SettingToggle({ label, detail, checked, onChange }: { label: string; de
   return <div className="flex items-center justify-between gap-4 border-t border-[var(--color-border)] py-4">
     <div><p className="text-sm font-semibold text-[var(--color-text)]">{label}</p><p className="study-copy mt-1">{detail}</p></div>
     <button role="switch" aria-checked={checked} aria-label={label} onClick={() => onChange(!checked)}
-      className={'relative h-7 w-12 shrink-0 rounded-full transition-colors focus-ring ' + (checked ? 'bg-[var(--color-accent)]' : 'bg-[var(--color-border-strong)]')}>
+      className={'hit relative h-7 w-12 shrink-0 rounded-full transition-colors focus-ring ' + (checked ? 'bg-[var(--color-accent)]' : 'bg-[var(--color-border-strong)]')}>
       <span className={'absolute left-1 top-1 h-5 w-5 rounded-full bg-white transition-transform ' + (checked ? 'translate-x-5' : '')}/>
     </button>
   </div>;

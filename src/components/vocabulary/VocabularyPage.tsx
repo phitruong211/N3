@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Bookmark, BookmarkCheck, Search, Volume2, X } from 'lucide-react';
+import { Bookmark, BookmarkCheck, Search, Volume2, X } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
 import type { VocabItem } from '@/types';
 import { speakJapanese } from '@/components/flashcard/FlashcardPage';
@@ -64,13 +64,13 @@ export function VocabularyPage() {
   if (focusMode && current) return <StudySession cards={filtered.map((item, index) => vocabularyCard(item, `library-vocab-${level}`, index))} deckName={`Từ vựng · ${level === 'all' ? 'Tất cả' : level}`} initialIndex={focusIndex} mode="flashcards" onExit={() => setFocusMode(false)} />;
 
   return <div className="study-page">
-    <PageHeading eyebrow="THƯ VIỆN" title="Từ vựng" subtitle={filtered.length + ' / ' + vocabulary.length + ' từ · Đọc, nghe và nhớ nghĩa'}
+    <PageHeading title="Từ vựng" subtitle={filtered.length + ' / ' + vocabulary.length + ' từ'}
       action={<button className="study-button study-button-primary" disabled={!current} onClick={() => setFocusMode(true)}>Học bằng thẻ →</button>} />
     <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
       <label className="study-input flex min-w-0 flex-1 items-center gap-2">
         <Search size={18} aria-hidden="true" className="shrink-0" />
         <span className="sr-only">Tìm từ vựng</span>
-        <input ref={searchRef} className="min-w-0 flex-1 bg-transparent outline-none" value={query} onChange={e => changeFilter(() => setQuery(e.target.value))} placeholder="Tìm chữ, cách đọc hoặc nghĩa" />
+        <input ref={searchRef} className="min-h-11 min-w-0 flex-1 bg-transparent outline-none" value={query} onChange={e => changeFilter(() => setQuery(e.target.value))} placeholder="Tìm chữ, cách đọc hoặc nghĩa" />
         {query && <button aria-label="Xóa tìm kiếm" onClick={() => changeFilter(() => setQuery(''))}><X size={18}/></button>}
       </label>
       <div className="flex flex-wrap gap-2">
@@ -104,7 +104,7 @@ function VocabDetail({ item, bookmarked, onBookmark, onStudy }: { item: VocabIte
       </div>
       <div className="flex shrink-0 gap-2">
         <button className="study-button" aria-label="Nghe phát âm" onClick={() => speakJapanese(item.tu)}><Volume2 size={19}/></button>
-        <button className="study-button" aria-label={bookmarked ? 'Bỏ lưu từ' : 'Lưu từ'} onClick={onBookmark}>{bookmarked ? <BookmarkCheck size={19}/> : <Bookmark size={19}/>}</button>
+        <button className="study-button" aria-label={bookmarked ? 'Bỏ lưu từ' : 'Lưu từ'} onClick={onBookmark}>{bookmarked ? <BookmarkCheck size={19} className="stamp-pop"/> : <Bookmark size={19}/>}</button>
       </div>
     </div>
     <div className="mt-5 border-t border-[var(--color-border)] pt-5">
@@ -127,5 +127,5 @@ function VocabDetail({ item, bookmarked, onBookmark, onStudy }: { item: VocabIte
 }
 
 function DetailSection({ title, children }: { title: string; children: ReactNode }) {
-  return <details className="mt-5 border-t border-[var(--color-border)] pt-4"><summary className="cursor-pointer text-sm font-semibold text-[var(--color-text)]">{title}</summary><div className="mt-3">{children}</div></details>;
+  return <details className="mt-5 border-t border-[var(--color-border)] pt-4"><summary className="hit cursor-pointer text-sm font-semibold text-[var(--color-text)]">{title}</summary><div className="mt-3">{children}</div></details>;
 }

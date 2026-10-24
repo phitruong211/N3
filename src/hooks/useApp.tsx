@@ -29,9 +29,11 @@ interface AppState {
   kanji: KanjiItem[];
   grammar: GrammarItem[];
   n5Decks: BuiltInDeckDefinition[];
+  /** True until the library JSON has arrived. Nothing is fetched until a page calls ensureLibrary(). */
   loading: boolean;
   loadError: string | null;
   retryLoad: () => void;
+  ensureLibrary: () => void;
 
   // Navigation
   currentPage: PageId;
@@ -76,6 +78,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
+  const [libraryWanted, setLibraryWanted] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const currentPage = pageForLocation(location.pathname, location.search) ?? 'dashboard';
@@ -97,8 +100,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const reviewOutbox = useReviewOutbox(storage, Boolean(user), learningSync);
   const cardNotes = useCardNotes(storage, Boolean(user));
 
-  // Load data on mount
+  // The ~2.6 MB library loads on first use (library pages, decks, quiz, search), not on every visit.
   useEffect(() => {
+    if (!libraryWanted) return;
     let active = true;
     setLoading(true);
     setLoadError(null);
@@ -118,7 +122,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setLoading(false);
       });
     return () => { active = false; };
-  }, [loadAttempt]);
+  }, [loadAttempt, libraryWanted]);
 
   useEffect(() => {
     rememberPage(currentPage);
@@ -126,6 +130,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [currentPage, location.pathname, location.search, rememberPage, setLastPage]);
 
   const retryLoad = useCallback(() => setLoadAttempt((attempt) => attempt + 1), []);
+  const ensureLibrary = useCallback(() => setLibraryWanted(true), []);
 
   // Apply theme on settings change
   useEffect(() => {
@@ -257,6 +262,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         loading,
         loadError,
         retryLoad,
+        ensureLibrary,
         currentPage,
         setCurrentPage,
         navigationTarget,

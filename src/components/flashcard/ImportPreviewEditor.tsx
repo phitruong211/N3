@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AlertTriangle, ArrowDown, ArrowUp, CheckCircle2, Pencil, SlidersHorizontal } from "lucide-react";
+import { AlertTriangle, ArrowDown, ArrowUp, CheckCircle2, Pencil, SlidersHorizontal } from '@/components/ui/icons';
 import {
   assignImportSourceField,
   defaultDeckTemplate,

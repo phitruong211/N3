@@ -1,15 +1,14 @@
 import type { ReactNode } from 'react';
+import { INK, type InkName } from './ink';
 
-export function PageHeading({ eyebrow, title, subtitle, action }: {
-  eyebrow?: string;
+export function PageHeading({ title, subtitle, action }: {
   title: string;
   subtitle?: string;
   action?: ReactNode;
 }) {
   return (
-    <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-b border-[var(--color-border)] pb-5">
-      <div className="min-w-0 space-y-1">
-        {eyebrow && <p className="study-eyebrow">{eyebrow}</p>}
+    <header className="relative flex flex-col gap-4 border-b border-[var(--color-border-strong)] pb-6 after:absolute after:-bottom-px after:left-0 after:h-0.5 after:w-14 after:bg-[var(--color-gold)] sm:flex-row sm:items-end sm:justify-between">
+      <div className="min-w-0 space-y-2">
         <h1 className="study-title">{title}</h1>
         {subtitle && <p className="study-subtitle">{subtitle}</p>}
       </div>
@@ -18,13 +17,16 @@ export function PageHeading({ eyebrow, title, subtitle, action }: {
   );
 }
 
-export function EmptyState({ title, detail, action }: {
+export function EmptyState({ title, detail, action, art = 'inkstone' }: {
   title: string;
   detail?: string;
   action?: ReactNode;
+  art?: InkName | null;
 }) {
+  const Art = art ? INK[art] : null;
   return (
     <div className="study-empty" role="status">
+      {Art && <div className="mx-auto mb-4 w-fit"><Art size={132}/></div>}
       <p className="font-semibold text-[var(--color-text)]">{title}</p>
       {detail && <p className="mt-1 text-sm">{detail}</p>}
       {action && <div className="mt-4">{action}</div>}

@@ -6,7 +6,7 @@
 .shared-brand>span { color:var(--color-text-tertiary); font-size:12px; }
 .shared-hero { display:flex; justify-content:space-between; align-items:flex-start; gap:32px; padding-bottom:32px; border-bottom:1px solid var(--color-border); margin-bottom:28px; }
 .shared-hero-copy { min-width:0; flex:1; }
-.shared-hero h1 { font-size:clamp(26px,4vw,38px); font-weight:600; line-height:1.25; letter-spacing:-.025em; overflow-wrap:anywhere; margin:10px 0; }
+.shared-hero h1 { font-family:var(--font-display); font-size:clamp(2rem,4.5vw,3rem); font-weight:400; letter-spacing:-.025em; line-height:1.1; }
 .shared-meta { color:var(--color-text-secondary); font-size:14px; line-height:1.7; overflow-wrap:anywhere; }
 .shared-description { color:var(--color-text-secondary); font-size:14px; line-height:1.8; margin-top:16px; }
 .shared-description>p { white-space:pre-wrap; overflow-wrap:anywhere; }

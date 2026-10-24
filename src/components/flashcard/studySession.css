@@ -14,25 +14,24 @@
 .study-session-count strong span { color: var(--color-text-secondary); font-weight: 400; }
 .study-session-answers { font-size: .72rem; }
 .study-session-progress { height: 3px; max-width: 900px; margin: 16px auto 0; overflow: hidden; border-radius: 2px; background: var(--color-surface-alt); }
-.study-session-progress > div { height: 100%; background: var(--color-accent); transition: width .2s ease; }
+.study-session-progress > div { height: 100%; background: var(--color-gold); transition: width var(--dur-slow) var(--ease-out); }
 .study-session-remaining { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding-top: 10px; color: var(--color-text-secondary); font-size: .72rem; }
 .study-session-remaining > span { display: inline-flex; align-items: center; gap: 6px; }
 .study-session-remaining i { display: inline-block; width: 5px; height: 5px; border-radius: 50%; }
 .study-dot-new { background: var(--color-accent); }
-.study-dot-due { background: #9b7029; }
+.study-dot-due { background: var(--color-warning); }
 .study-dot-wait { background: var(--color-text-secondary); }
 .study-session-workspace { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: 18px; width: 100%; max-width: 948px; min-height: 0; margin-inline: auto; padding: 22px 24px max(20px,env(safe-area-inset-bottom)); }
 .study-session-stage { display: flex; position: relative; flex: 1; justify-content: center; min-height: 0; max-height: 560px; }
-.study-session-card { --card-reading: #315c48; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; min-width: 0; height: 100%; overflow-y: auto; padding: 60px clamp(24px,5vw,60px); border: 1px solid var(--color-border); border-radius: 20px; background: var(--color-surface); color: var(--color-text); cursor: pointer; touch-action: pan-y; perspective: 1000px; }
-.dark .study-session-card, .study-session-card[data-card-theme="dark"] { --card-reading: #b6dfce; }
-.study-session-card[data-card-theme="dark"] { background: #0f172a; color: #f8fafc; border-color: #334155; }
+.study-session-card { --card-reading: var(--color-accent-text); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; min-width: 0; height: 100%; overflow-y: auto; padding: 60px clamp(24px,5vw,60px); border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); color: var(--color-text); cursor: pointer; touch-action: pan-y; perspective: 1000px; }
+.study-session-card[data-card-theme="dark"] { --card-reading: #E4CE9E; }
+.study-session-card[data-card-theme="dark"] { background: #0F1630; color: #ECE6D8; border-color: #26305A; }
 .study-session-card[data-card-theme="blue"] { --card-reading: #274d79; background: #eff6ff; color: #0f172a; }
 .study-session-card-rich { justify-content: flex-start; }
 .study-session-face { width: 100%; flex-shrink: 0; transform-origin: center; }
 .study-session-face-label { position: absolute; top: 20px; left: 24px; font-size: .62rem; font-weight: 600; letter-spacing: .12em; opacity: .65; pointer-events: none; }
-.study-session-card-hint { position: absolute; bottom: 18px; left: 12px; right: 12px; text-align: center; font-size: .7rem; opacity: .7; pointer-events: none; }
-.study-session-card .furigana-text rt { color: var(--card-reading); font-family: 'Noto Sans JP Local', sans-serif; font-size: max(.5em,14px); font-weight: 600; line-height: 1.3; }
-.study-session-card .card-reading { color: var(--card-reading); font-family: 'Noto Sans JP Local', sans-serif; font-size: max(.5em,16px); font-weight: 500; }
+.study-session-card .furigana-text rt { color: var(--card-reading); font-family: var(--font-jp-sans); font-size: max(.5em,14px); font-weight: 600; line-height: 1.3; }
+.study-session-card .card-reading { color: var(--card-reading); font-family: var(--font-jp-sans); font-size: max(.5em,16px); font-weight: 500; }
 .study-session-card [lang="ja"] > p, .study-session-card p[lang="ja"] { color: var(--card-reading); }
 .study-session-card .font-jp:has(> .furigana-text ruby) { line-height: 1.8; }
 .study-session-actions { display: flex; flex-wrap: wrap; flex-shrink: 0; align-items: center; justify-content: center; gap: 12px; min-height: 76px; }
@@ -40,13 +39,13 @@
 .study-session-keyhint { display: inline-flex; align-items: center; gap: 6px; font-size: .7rem; font-weight: 400; }
 .study-session-keyhint kbd, kbd.study-session-keyhint { border: 1px solid currentColor; border-radius: 5px; padding: 2px 6px; font-size: .7rem; opacity: .85; }
 .study-session-ratings { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
-.study-session-rating { --rating-color: var(--color-text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; min-height: 76px; min-width: 0; border: 1px solid var(--color-border); border-top: 3px solid var(--rating-color); border-radius: 12px; background: var(--color-surface); color: var(--color-text); cursor: pointer; transition: background .15s,border-color .15s,transform .15s; }
+.study-session-rating { --rating-color: var(--color-text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; min-height: 76px; min-width: 0; border: 1px solid var(--color-border); border-top: 3px solid var(--rating-color); border-radius: 12px; background: var(--color-surface); color: var(--color-text); cursor: pointer; transition: background var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft), transform var(--dur-base) var(--ease-out); }
 .study-session-rating:hover { background: var(--color-surface-hover); transform: translateY(-2px); border-color: var(--rating-color); }
 .study-session-rating:disabled { opacity: .45; cursor: not-allowed; }
-.study-session-rating-again { --rating-color: #a64d42; }
-.study-session-rating-hard { --rating-color: #946617; }
+.study-session-rating-again { --rating-color: var(--color-error); }
+.study-session-rating-hard { --rating-color: var(--color-warning); }
 .study-session-rating-good { --rating-color: var(--color-accent); }
-.study-session-rating-easy { --rating-color: #5373a2; }
+.study-session-rating-easy { --rating-color: var(--color-success); }
 .study-session-rating-title { display: inline-flex; align-items: center; gap: 9px; font-size: .95rem; font-weight: 600; }
 .study-session-rating-title kbd { color: var(--color-text-secondary); font-size: .7rem; font-weight: 400; }
 .study-session-interval { color: var(--color-text-secondary); font-size: .75rem; }
@@ -63,7 +62,6 @@
   .study-session-workspace { gap: 14px; padding: 14px 12px max(14px,env(safe-area-inset-bottom)); }
   .study-session-card { padding: 48px 22px; border-radius: 16px; }
   .study-session-face-label { top: 16px; left: 20px; font-size: .58rem; }
-  .study-session-card-hint { font-size: .62rem; bottom: 14px; }
   .study-session-actions { gap: 8px; min-height: 68px; }
   .study-session-ratings { gap: 8px; }
   .study-session-rating { min-height: 68px; gap: 5px; border-radius: 10px; }
@@ -79,7 +77,6 @@
   .study-session-remaining { padding-top: 4px; }
   .study-session-workspace { padding-block: 10px; gap: 10px; }
   .study-session-card { padding-block: 38px; }
-  .study-session-card-hint { display: none; }
   .study-session-actions, .study-session-rating { min-height: 58px; }
 }
 .study-session[data-reduced-motion="true"] *, .study-session[data-reduced-motion="true"] *::before, .study-session[data-reduced-motion="true"] *::after { animation-duration: 0s !important; transition-duration: 0s !important; }
@@ -102,18 +99,14 @@
 .study-clock-digits { font-family: 'Arial Narrow', 'Helvetica Neue', sans-serif; font-stretch: condensed; font-size: 36px; font-weight: 800; letter-spacing: -.07em; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .study-clock-label { margin-top: 5px; font-size: 6px; letter-spacing: .15em; font-weight: 700; }
 .study-session-stage { max-height: 440px; }
-.study-session-card { border-radius: 24px; box-shadow: 0 8px 30px #00000004; }
+.study-session-card { border-radius: 14px; box-shadow: var(--shadow-md); transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out); }
 .study-session-face-label { top: 22px; left: 28px; letter-spacing: .1em; }
 .study-session .study-session-reveal { width: 100%; min-height: 60px; justify-content: space-between; padding-inline: 24px; background: var(--color-text); color: var(--color-surface); border-color: transparent; border-radius: 16px; }
 .study-session-ratings { gap: 10px; }
-.study-session-rating { min-height: 76px; border: 1px solid color-mix(in srgb,var(--rating-color) 25%,var(--color-border)); border-radius: 16px; background: color-mix(in srgb,var(--rating-color) 7%,var(--color-surface)); }
+.study-session-rating { min-height: 76px; border: 1px solid color-mix(in srgb,var(--rating-color) 25%,var(--color-border)); border-radius: 10px; background: color-mix(in srgb,var(--rating-color) 6%,var(--color-surface)); }
 .study-session-rating-title { color: var(--rating-color); }
 .study-session-rating-title kbd { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 6px; background: var(--color-surface); border: 1px solid var(--color-border); }
-.study-session-rating-good { --rating-color: #32705a; }
-.dark .study-session-rating-again { --rating-color: #eea59b; }
-.dark .study-session-rating-hard { --rating-color: #ddbd75; }
-.dark .study-session-rating-good { --rating-color: #95ccb5; }
-.dark .study-session-rating-easy { --rating-color: #a5c3ee; }
+.study-session-rating-good { --rating-color: var(--color-accent); }
 .study-session button:focus-visible, .study-session-card:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
 .study-session[data-fullscreen="true"] .study-session-workspace { max-width: 948px; }
 .study-session[data-fullscreen="true"] .study-session-stage { max-height: 520px; }
@@ -194,7 +187,7 @@
 .study-session[data-fullscreen="true"] .study-session-stage {
   max-height: none;
 }
-.study-session-card { border-radius: 18px; box-shadow: none; }
+.study-session-card { border-radius: 12px; box-shadow: none; }
 .study-session-face { max-width: 800px; margin-inline: auto; }
 @media(max-width:640px) {
   .study-session-header,
@@ -274,5 +267,146 @@
   .study-session-tools .study-clock { display: none; }
   .study-session-tool[aria-label$="màn hình"] { display: none; }
   .study-session-rating-title kbd { display: none; }
-  .study-session-card-hint, .study-session-face-label { display: none; }
+  .study-session-face-label { display: none; }
 }
+
+/* Editorial study desk. Last in the file on purpose: it settles the earlier layers into one calm look. */
+.study-session-deck { font-family: var(--font-display); font-size: 1.1rem; font-weight: 500; letter-spacing: -.01em; }
+.study-session-count { font-size: .75rem; color: var(--color-text-tertiary); }
+.study-session-count strong { font-family: var(--font-display); font-size: 1.1rem; font-weight: 500; }
+.study-session-end { font-size: .8rem; letter-spacing: .02em; }
+.study-session-tool, .study-session-end { border-radius: 8px; }
+.study-session-tool { transition: color var(--dur-fast), background var(--dur-fast), transform var(--dur-fast) var(--ease-out); }
+.study-session-tool:active { transform: scale(.92); }
+.study-session-tools .study-clock { width: auto; min-width: 64px; height: 44px; border-radius: 8px; }
+.study-session-tools .study-clock-ticks { display: none; }
+.study-session-tools .study-clock-digits { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; letter-spacing: 0; font-stretch: normal; color: var(--color-text-secondary); }
+
+/* Progress: one gold hairline that fills as you go. */
+.study-session-progress { height: 2px; opacity: 1; border-radius: 0; background: var(--color-border); }
+.study-session-progress > div { background: var(--color-gold); box-shadow: 0 0 10px color-mix(in srgb, var(--color-gold) 55%, transparent); transition: width var(--dur-slow) var(--ease-out); }
+.study-dot-new { background: var(--color-gold); }
+
+/* The card is a printed card: hairline frame inside, soft lift outside. */
+.study-session-card { border-radius: 10px; box-shadow: var(--shadow-md); outline: 1px solid color-mix(in srgb, currentColor 14%, transparent); outline-offset: -10px; }
+.study-session-card:focus-visible { outline: 1px solid var(--color-gold); outline-offset: -10px; box-shadow: var(--shadow-md), 0 0 0 2px color-mix(in srgb, var(--color-gold) 22%, transparent); }
+.study-session-face-label { color: var(--color-gold); opacity: 1; font-weight: 600; letter-spacing: .22em; }
+
+/* Reveal and ratings. */
+.study-session .study-session-reveal { border-radius: 8px; font-weight: 500; letter-spacing: .02em; transition: background var(--dur-fast), transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+.study-session .study-session-reveal:hover { box-shadow: var(--shadow-md); }
+.study-session .study-session-reveal:active { transform: scale(.985); }
+.study-session-ratings { gap: 12px; }
+.study-session-rating { min-height: 84px; border-radius: 8px; border: 1px solid var(--color-border); border-top: 2px solid var(--rating-color); background: var(--color-surface); gap: 6px; }
+.study-session-rating:hover { transform: translateY(-3px); border-color: var(--color-border-strong); border-top-color: var(--rating-color); background: color-mix(in srgb, var(--rating-color) 7%, var(--color-surface)); box-shadow: var(--shadow-md); }
+.study-session-rating:active { transform: scale(.975); }
+.study-session-rating-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; letter-spacing: -.01em; }
+.study-session-rating-title kbd { width: 20px; height: 20px; border-radius: 4px; background: transparent; font-family: 'Be Vietnam Pro', sans-serif; font-size: .68rem; color: var(--color-text-tertiary); }
+.study-session-interval { font-size: .8rem; letter-spacing: .02em; color: var(--color-text-tertiary); }
+@media (max-width: 640px) {
+  .study-session-rating { min-height: 70px; }
+  .study-session-rating-title { font-size: 1rem; }
+  .study-session-ratings { gap: 8px; }
+}
+
+/* Fullscreen zen: after a pause the chrome fades out and only the card remains. Opacity only, so nothing shifts.
+   Space, Enter and 1-4 keep working; pointer, touch or Tab brings the controls back. Touch screens keep the answer
+   buttons visible because a tap on the card cannot both reveal controls and answer. */
+.study-session-header, .study-session-remaining, .study-session-actions { transition: opacity var(--dur-slow) var(--ease-soft); }
+.study-session[data-chrome="hidden"] { cursor: none; }
+.study-session[data-chrome="hidden"] .study-session-header,
+.study-session[data-chrome="hidden"] .study-session-remaining,
+.study-session[data-chrome="hidden"] .study-session-header:has(:focus-visible) { opacity: 1; pointer-events: auto; }
+/* Windowed: the same pause only dims the chrome, so nothing disappears and answers stay in reach. */
+.study-session[data-chrome="dim"] .study-session-header,
+.study-session[data-chrome="dim"] .study-session-remaining,
+.study-session[data-chrome="dim"] .study-session-header:has(:focus-visible) { opacity: 1; }
+/* Fullscreen: the header floats over reserved space, so the card sits dead centre whether or not the controls show. */
+.study-session[data-fullscreen="true"] .study-session-header { position: absolute; z-index: 2; top: 0; left: 0; right: 0; margin-inline: auto; }
+.study-session[data-fullscreen="true"] .study-session-workspace { padding-top: 136px; padding-bottom: max(136px, env(safe-area-inset-bottom)); }
+@media (max-width: 640px) { .study-session[data-fullscreen="true"] .study-session-workspace { padding: 112px 12px max(112px, env(safe-area-inset-bottom)); } }
+@media (hover: hover) and (pointer: fine) {
+  .study-session[data-chrome="hidden"] .study-session-actions { opacity: 0; pointer-events: none; }
+  .study-session[data-chrome="hidden"] .study-session-actions:has(:focus-visible) { opacity: 1; pointer-events: auto; }
+}
+
+/* Focused study card.
+   Colour carries meaning, so each role gets one hue and keeps it on every card: the Japanese word is ink,
+   pronunciation green, Hán Việt vermilion, Vietnamese meaning indigo. The card edge shows the card kind.
+   Furigana, a reading line and the extra gap for ruby only exist when the card actually has a reading. */
+.study-session-card {
+  --kind: var(--color-accent);
+  --role-reading: #0F6E6E;
+  --role-hanviet: var(--color-seal);
+  --role-meaning: #26366B;
+  --card-reading: var(--role-reading);
+  padding: 56px clamp(24px,5vw,56px) 40px;
+  box-shadow: inset 0 3px 0 var(--kind), var(--shadow-md);
+  outline-color: color-mix(in srgb, var(--kind) 14%, transparent);
+  text-wrap: balance;
+}
+.dark .study-session-card,
+.study-session-card[data-card-theme="dark"] { --role-reading: #74D3C6; --role-hanviet: #EB8C7E; --role-meaning: #9DBBFF; }
+.study-session-card[data-card-theme="blue"] { --role-reading: #0F6E6E; --role-hanviet: #A33B2D; --role-meaning: #26366B; --card-reading: var(--role-reading); }
+.study-session-card[data-kind="kanji"] { --kind: var(--color-kanji); }
+.study-session-card[data-kind="grammar"] { --kind: var(--color-grammar); }
+
+.study-session-face-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  top: 22px; left: 28px; color: var(--kind); font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase;
+}
+.study-session-face-label::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--kind); }
+@media (max-width: 640px) {
+  .study-session-card { padding: 52px 20px 28px; }
+  .study-session-face-label { display: inline-flex; top: 18px; left: 20px; font-size: .68rem; }
+}
+
+/* Pronunciation in teal and a rounded kana face, so it never reads as part of the Mincho word underneath. */
+.study-session-card .furigana-text rt,
+.study-session-card [data-field="reading"],
+.study-session-card .card-reading { color: var(--role-reading); font-family: 'Zen Maru Gothic', var(--font-jp-sans); font-weight: 500; letter-spacing: .04em; }
+.study-session-card [data-field="hanViet"] { color: var(--role-hanviet); font-size: 1.05rem; font-weight: 600; letter-spacing: .01em; }
+.study-session-card[data-side="back"]:not([data-kind="grammar"]) [data-field="back"] { color: var(--role-meaning); }
+.study-session-card [data-field="notes"] { color: var(--color-text-secondary); }
+.study-session-card[data-card-theme="dark"] [data-field="notes"] { color: #B3B0A8; }
+
+
+/* Under the card: only the page number in free study; in review, a reserved row the ratings fill, so the card never jumps. */
+.study-session-actions { min-height: 84px; }
+.study-session .study-free-controls { display: flex; justify-content: center; min-height: 44px; }
+@media (max-width: 640px) { .study-session-actions { min-height: 70px; } }
+
+/* Fullscreen: header, card and page number share one centred column of the same width; the card sits in the middle
+   of the space under the header. The header stays in flow and only fades, so the card never moves. */
+.study-session[data-fullscreen="true"] .study-session-header { position: static; max-width: 1040px; padding: 28px 32px 0; }
+.study-session[data-fullscreen="true"] .study-session-workspace { justify-content: center; max-width: 1040px; padding: 28px 32px max(36px, env(safe-area-inset-bottom)); }
+.study-session[data-fullscreen="true"] .study-session-stage { flex: 0 1 640px; }
+@media (max-width: 640px) {
+  .study-session[data-fullscreen="true"] .study-session-header { padding: 8px 12px 0; }
+  .study-session[data-fullscreen="true"] .study-session-workspace { padding: 12px 12px max(16px, env(safe-area-inset-bottom)); }
+}
+
+/* Ratings: colour = outcome, red forgot, amber hard, blue good, green easy. The interval is the second thing the eye reads. */
+.study-session-rating-again { --rating-color: var(--color-error); }
+.study-session-rating-hard { --rating-color: var(--color-warning); }
+.study-session-rating-good { --rating-color: var(--rate-good); }
+.study-session-rating-easy { --rating-color: var(--color-success); }
+.study-session { --rate-good: #2F5D8A; }
+.dark .study-session { --rate-good: #8FB8FF; }
+.study-session-rating {
+  border: 1px solid color-mix(in srgb, var(--rating-color) 38%, var(--color-border)); border-top-width: 1px;
+  background: color-mix(in srgb, var(--rating-color) 9%, var(--color-surface));
+}
+.study-session-rating:hover { background: color-mix(in srgb, var(--rating-color) 16%, var(--color-surface)); border-color: var(--rating-color); border-top-color: var(--rating-color); transform: translateY(-2px); }
+.study-session-rating-title { font-size: 1.15rem; font-weight: 600; color: var(--rating-color); }
+.study-session-rating-title kbd { color: color-mix(in srgb, var(--rating-color) 70%, var(--color-text-secondary)); font-size: .72rem; }
+.study-session-interval { font-size: .85rem; font-weight: 500; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+
+/* Help: usage and shortcuts live behind the ? button instead of on the card. */
+.study-help { width: min(360px, calc(100vw - 32px)); margin: auto; padding: 20px 22px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-md); font-family: 'Be Vietnam Pro', sans-serif; }
+.study-help::backdrop { background: color-mix(in srgb, var(--color-bg) 55%, transparent); }
+.study-help-title { margin-bottom: 12px; font-family: var(--font-display); font-size: 1.15rem; }
+.study-help dl { display: grid; grid-template-columns: max-content 1fr; align-items: baseline; gap: 10px 16px; }
+.study-help dl > div { display: contents; }
+.study-help kbd { padding: 2px 7px; border: 1px solid var(--color-border-strong); border-radius: 5px; font-family: inherit; font-size: .75rem; white-space: nowrap; }
+.study-help dd { color: var(--color-text-secondary); font-size: .85rem; }

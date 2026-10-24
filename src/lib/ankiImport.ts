@@ -13,6 +13,8 @@ export interface CardSideStyle {
   italic: boolean;
   fontFamily: CardFontFamily;
   alignment: 'left' | 'center';
+  /** Enlarges very short text (single words, kanji) beyond fontSize. Absent in older templates, so they render unchanged. */
+  autoFit?: boolean;
 }
 export interface DeckTemplateConfig {
   version: 4;
@@ -50,7 +52,7 @@ export const IMPORT_EXAMPLE = [
 ] as const;
 export const defaultDeckTemplate = (): DeckTemplateConfig => ({
   version: 4,
-  front: { fields: ['front', 'reading'], showDeckName: true, style: { theme: 'paper', fontScale: 'large', fontSize: CARD_FONT_PRESETS.large, bold: false, italic: false, fontFamily: 'default', alignment: 'center' } },
+  front: { fields: ['front', 'reading'], showDeckName: true, style: { theme: 'paper', fontScale: 'large', fontSize: CARD_FONT_PRESETS.large, bold: false, italic: false, fontFamily: 'default', alignment: 'center', autoFit: true } },
   back: { fields: ['back', 'reading', 'hanViet', 'notes'], showFront: false, showExamples: true, style: { theme: 'paper', fontScale: 'large', fontSize: CARD_FONT_PRESETS.large, bold: false, italic: false, fontFamily: 'default', alignment: 'center' } },
 });
 
@@ -83,6 +85,7 @@ export function normalizeDeckTemplate(value: unknown): DeckTemplateConfig {
       italic: source.italic === true,
       fontFamily: fontFamilies.includes(source.fontFamily as CardFontFamily) ? source.fontFamily as CardFontFamily : defaults.fontFamily,
       alignment: source.alignment === 'left' ? 'left' : 'center',
+      ...(typeof source.autoFit === 'boolean' ? { autoFit: source.autoFit } : {}),
     };
   };
   return {

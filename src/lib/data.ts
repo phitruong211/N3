@@ -112,9 +112,20 @@ function normalizeVerbInfo(raw: RawVocabN3['dong_tu']): VerbInfo | null {
   return null;
 }
 
+// Shares one in-flight request between concurrent callers (StrictMode, retries); a failure is not cached.
+function once<T>(load: () => Promise<T>): () => Promise<T> {
+  let pending: Promise<T> | null = null;
+  return () => {
+    pending ??= load().catch(error => { pending = null; throw error; });
+    return pending;
+  };
+}
+
 let _vocabCache: VocabItem[] | null = null;
 
-export async function loadVocabulary(): Promise<VocabItem[]> {
+export const loadVocabulary = once(loadVocabularyOnce);
+
+async function loadVocabularyOnce(): Promise<VocabItem[]> {
   if (_vocabCache) return _vocabCache;
 
   const [rawN3, rawN4] = await Promise.all([
@@ -275,7 +286,9 @@ function relatedWordsFromNote(note = ''): RawKanjiVocab[] {
   return words;
 }
 
-export async function loadKanji(): Promise<KanjiItem[]> {
+export const loadKanji = once(loadKanjiOnce);
+
+async function loadKanjiOnce(): Promise<KanjiItem[]> {
   if (_kanjiCache) return _kanjiCache;
 
   const [raw, rawN4, n2Response] = await Promise.all([
@@ -351,7 +364,9 @@ export async function loadKanji(): Promise<KanjiItem[]> {
 
 let _grammarCache: GrammarItem[] | null = null;
 
-export async function loadGrammar(): Promise<GrammarItem[]> {
+export const loadGrammar = once(loadGrammarOnce);
+
+async function loadGrammarOnce(): Promise<GrammarItem[]> {
   if (_grammarCache) return _grammarCache;
 
   const [rawN2, rawN3, rawN4] = await Promise.all([

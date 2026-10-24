@@ -1,3 +1,4 @@
+import { displayDeckName } from '@/lib/deckDisplay';
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DeckShareDialog } from './DeckShareDialog';
@@ -59,7 +60,7 @@ import {
   ChevronDown,
   Upload,
   X,
-} from "lucide-react";
+} from '@/components/ui/icons';
 const blankCard = (): ImportedCard => ({
   id: crypto.randomUUID(),
   front: "",
@@ -1036,7 +1037,8 @@ export function ImportedDecks({
                 const needed = readyCount(deck);
                 if (compact) return <article className="widget-deck-row">
                   <h3><button type="button" aria-label={`${mode === 'free' ? 'Bắt đầu học' : 'Ôn ngay'} ${deck.name}`} disabled={busy || (mode === 'free' ? !deck.cardCount : !needed)}
-                    onClick={() => void (mode === 'free' ? openFreeStudy(deck) : startScheduledStudy(deck))}>{deck.name}</button></h3>
+                    onClick={() => void (mode === 'free' ? openFreeStudy(deck) : startScheduledStudy(deck))}>{displayDeckName(deck.name)}</button></h3>
+                  {mode !== 'free' && needed > 0 && <span className="widget-deck-chip">{needed.toLocaleString('vi-VN')} cần ôn</span>}
                   <span>{deck.cardCount.toLocaleString('vi-VN')} thẻ</span>{menu}
                 </article>;
                 return (

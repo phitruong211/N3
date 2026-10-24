@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, type CSSProperties, type RefObject } from 'react';
-import { X } from 'lucide-react';
+import { X } from '@/components/ui/icons';
 import { MAX_WIDGET_BLUR, MAX_WIDGET_OPACITY, MIN_WIDGET_BLUR, WIDGET_COLORS, widgetSpan, type DeckWidgetStyle, type WidgetSize } from '@/lib/deckWidgets';
 
 const SIZE_OPTIONS: [WidgetSize, string][] = [['small', 'Nhỏ'], ['medium', 'Vừa'], ['large', 'Lớn'], ['xlarge', 'Rất lớn']];

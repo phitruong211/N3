@@ -47,37 +47,20 @@
   gap: 24px;
   padding: 48px 0 30px;
 }
-.dictionary-eyebrow,
 .dictionary-caption {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   color: var(--color-text-tertiary);
 }
+/* Same voice as PageHeading: display serif, light weight. */
 .dictionary-hero h1 {
-  font-size: clamp(30px, 4vw, 46px);
-  font-weight: 650;
-  letter-spacing: -0.045em;
-  margin: 10px 0;
-}
-.dictionary-hero h1 span {
-  font-family: serif;
-  margin-left: 15px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 400;
-  color: var(--color-accent);
-}
-.dictionary-hero p:last-child {
-  color: var(--color-text-secondary);
-  font-size: 14px;
-  line-height: 1.7;
-}
-.dictionary-hero-icon {
-  width: 68px;
-  height: 68px;
-  stroke-width: 1;
-  color: var(--color-accent);
-  opacity: 0.4;
-  margin-right: 30px;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  margin: 10px 0;
 }
 .dictionary-search {
   display: flex;
@@ -104,7 +87,8 @@
   border: 0;
   outline: 0;
   font-size: 17px;
-  padding: 8px 0;
+  padding: 12px 0;
+  min-height: 44px;
 }
 .dictionary-search > button:not(.study-button) {
   padding: 8px;
@@ -151,7 +135,7 @@
   gap: 12px;
 }
 .dictionary-word-link h2 {
-  font-family: "Noto Serif JP Local", serif;
+  font-family: var(--font-jp-serif);
   font-size: 28px;
   line-height: 1.4;
   overflow-wrap: anywhere;
@@ -166,7 +150,7 @@
   margin-top: 4px;
 }
 .dictionary-common {
-  font-size: 10px;
+  font-size: 11px;
   white-space: nowrap;
   padding: 4px 8px;
   border-radius: 6px;
@@ -186,7 +170,7 @@
   gap: 10px;
 }
 .dictionary-result-bottom > span {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--color-text-tertiary);
 }
 .dictionary-result-bottom .study-button {
@@ -196,12 +180,6 @@
 .dictionary-empty {
   text-align: center;
   padding: 48px 20px 60px;
-}
-.dictionary-empty-kanji {
-  font-size: 65px;
-  font-family: serif;
-  color: var(--color-accent);
-  opacity: 0.22;
 }
 .dictionary-empty h2 {
   font-size: 20px;
@@ -239,7 +217,7 @@
   color: var(--color-text-secondary);
 }
 .dictionary-detail-word {
-  font-family: "Noto Serif JP Local", serif;
+  font-family: var(--font-jp-serif);
   font-size: 40px;
   margin: 10px 0;
   overflow-wrap: anywhere;
@@ -273,7 +251,7 @@
   height: 23px;
 }
 .dictionary-pos {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--color-text-tertiary);
   margin-bottom: 4px;
 }
@@ -286,7 +264,7 @@
   padding-top: 20px;
   border-top: 1px solid var(--color-border);
   color: var(--color-text-tertiary);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 2;
 }
 .dictionary-attribution a {
@@ -342,7 +320,7 @@
   color: var(--color-accent);
 }
 .dictionary-deck-option small {
-  font-size: 10px;
+  font-size: 11px;
 }
 .dictionary-selected {
   display: flex;
@@ -373,7 +351,7 @@
 }
 .dictionary-preview small {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--color-text-tertiary);
   margin-bottom: 8px;
 }
@@ -396,11 +374,6 @@
   .dictionary-hero {
     padding: 32px 0 24px;
   }
-  .dictionary-hero-icon {
-    width: 44px;
-    height: 44px;
-    margin: 0;
-  }
   .dictionary-search {
     gap: 8px;
     padding: 9px 10px 9px 12px;
@@ -416,7 +389,7 @@
     font-size: 12px;
   }
   .dictionary-search-note {
-    font-size: 10px;
+    font-size: 11px;
   }
   .dictionary-content:has(.dictionary-detail) {
     grid-template-columns: minmax(0, 1fr);
@@ -436,9 +409,6 @@
   }
   .dictionary-result-bottom .study-button {
     margin-left: auto;
-  }
-  .dictionary-hero p:last-child {
-    font-size: 12px;
   }
   .dictionary-dialog {
     max-height: 90dvh;

@@ -1,4 +1,4 @@
-import { LogIn, LogOut, PanelLeftClose, PanelLeftOpen, Search, Settings } from 'lucide-react';
+import { NavSettings, LogIn, LogOut, PanelLeftClose, PanelLeftOpen, Search } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
 import { useAuth } from '@/hooks/useAuth';
 import { BrandMark } from '@/components/ui/BrandMark';
@@ -9,27 +9,26 @@ export function Sidebar() {
   const { user, signOut, setPrompt } = useAuth();
 
   const renderItem = (item: NavigationItem) => {
-    const Icon = item.icon;
     const active = isNavigationItemActive(item, currentPage);
     return <button key={item.page} onClick={() => setCurrentPage(item.page)} title={sidebarCollapsed ? item.label : undefined} aria-current={active ? 'page' : undefined}
-      className={`flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-xl px-3 text-left text-sm font-medium transition-colors ${active ? 'bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]' : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text)]'} ${sidebarCollapsed ? 'justify-center' : ''}`}>
-      <Icon size={19} strokeWidth={active ? 2.2 : 1.8}/><span className={sidebarCollapsed ? 'sr-only' : ''}>{item.label}</span>
+      className={`relative flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-md px-3 text-left text-sm transition-[color,background,padding] duration-[var(--dur-base)] ease-[var(--ease-out)] ${active ? 'bg-[color-mix(in_srgb,var(--color-gold)_10%,transparent)] font-semibold text-[var(--color-text)] shadow-[inset_2px_0_0_var(--color-gold)]' : 'font-medium text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text)]'} ${sidebarCollapsed ? 'justify-center' : ''}`}>
+      <item.icon size={22} strokeWidth={1.6} className="shrink-0"/><span className={sidebarCollapsed ? 'sr-only' : ''}>{item.label}</span>
     </button>;
   };
 
   return (
     <aside className={`sticky top-0 hidden h-screen shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] transition-[width] duration-200 lg:flex ${sidebarCollapsed ? 'w-[4.75rem]' : 'w-60'}`} aria-label="Điều hướng chính">
       <div className={`flex items-center gap-2 px-3 py-4 ${sidebarCollapsed ? 'flex-col' : 'justify-between'}`}>
-        <button onClick={() => setCurrentPage('dashboard')} className="flex min-w-0 items-center gap-2.5 text-left" aria-label="Về trang Hôm nay">
+        <button onClick={() => setCurrentPage('dashboard')} className="flex min-w-0 items-center gap-2.5 text-left" aria-label="SỔ NHẬT, về trang Hôm nay">
           <BrandMark size={44} className="shrink-0"/>
-          {!sidebarCollapsed && <span className="whitespace-nowrap text-lg font-bold tracking-wide">SỔ NHẬT</span>}
+          {!sidebarCollapsed && <span className="whitespace-nowrap font-[family-name:var(--font-display)] text-lg font-medium tracking-[.14em]">SỔ NHẬT</span>}
         </button>
-        <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} className="study-button !min-h-9 !w-9 !p-0" aria-label={sidebarCollapsed ? 'Mở rộng menu' : 'Thu gọn menu'}>
+        <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)} className="study-button !min-h-11 !w-11 shrink-0 !p-0" aria-label={sidebarCollapsed ? 'Mở rộng menu' : 'Thu gọn menu'}>
           {sidebarCollapsed ? <PanelLeftOpen size={17}/> : <PanelLeftClose size={17}/>} 
         </button>
       </div>
 
-      <button onClick={() => setSearchOpen(true)} className={`study-button mx-3 !min-h-10 ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} aria-label="Tìm kiếm">
+      <button onClick={() => setSearchOpen(true)} className={`study-button mx-3 !min-h-10 ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} aria-label={sidebarCollapsed ? 'Tìm kiếm' : undefined}>
         <Search size={17}/>{!sidebarCollapsed && <><span className="flex-1 text-left">Tìm kiếm</span><kbd className="kbd-shortcut">⌘ K</kbd></>}
       </button>
 
@@ -40,7 +39,7 @@ export function Sidebar() {
       </nav>
 
       <div className="space-y-1 border-t border-[var(--color-border)] p-3">
-        {renderItem({ page: 'settings', label: 'Cài đặt', icon: Settings })}
+        {renderItem({ page: 'settings', label: 'Cài đặt', icon: NavSettings })}
         {!sidebarCollapsed && <p className="truncate px-3 pt-2 text-xs text-[var(--color-text-tertiary)]" title={user?.email}>{user?.displayName || 'Khách · lưu trên thiết bị'}</p>}
         <button className={`study-button w-full ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} title={user ? 'Đăng xuất' : 'Đăng nhập'} onClick={() => user ? void signOut() : setPrompt('login')}>
           {user ? <LogOut size={17}/> : <LogIn size={17}/>}<span className={sidebarCollapsed ? 'sr-only' : undefined}>{user ? 'Đăng xuất' : 'Đăng nhập'}</span>

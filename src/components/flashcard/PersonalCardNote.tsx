@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
-import { NotebookPen, X, Check, LockKeyhole, Download, ChevronDown } from 'lucide-react';
+import { NotebookPen, X, Check, LockKeyhole, Download, ChevronDown } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
 import { cardNoteKey, exportCardWithNote, CARD_NOTE_LIMIT, type CardNotesStore, type NoteEntry } from '@/lib/cardNotes';
 import type { CardView } from '@/lib/cards';

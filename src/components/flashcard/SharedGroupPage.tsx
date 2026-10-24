@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight, X } from '@/components/ui/icons';
 import { ApiError } from '@/lib/api';
 import { sharedGroupPreview, sharedGroupDeckPreview, type SharedGroupPreview, type SharedDeckPreview } from '@/lib/deckSharing';
 import { SharedDeckContent } from './SharedDeckContent';

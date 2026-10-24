@@ -58,10 +58,28 @@ try {
   await page.waitForTimeout(1200);
   assert.equal(await page.locator('.study-clock-digits').textContent(), beforeHidden);
   await page.evaluate(() => { delete document.hidden; document.dispatchEvent(new Event('visibilitychange')); });
+  // Windowed: controls dim after a pause and come back on pointer movement.
+  await page.waitForTimeout(4600);
+  assert.equal(await page.locator('.study-session').getAttribute('data-chrome'),'dim');
+  assert.ok(Number(await page.locator('.study-session-header').evaluate(el=>getComputedStyle(el).opacity))<.5);
+  await page.mouse.move(600,400);await page.waitForTimeout(700);
+  assert.equal(await page.locator('.study-session').getAttribute('data-chrome'),null);
   await page.getByRole('button', { name: 'Toàn màn hình', exact: true }).click();
   await page.waitForFunction(() => Boolean(document.fullscreenElement));
   await page.locator('.study-session[data-fullscreen="true"]').waitFor();
   await page.screenshot({path:'artifacts/study-session-ui/fullscreen-question.png'});
+  // Zen: controls fade after a pause and return on pointer movement.
+  await page.waitForTimeout(3300);
+  assert.equal(await page.locator('.study-session').getAttribute('data-chrome'),'hidden');
+  assert.equal(await page.locator('.study-session-header').evaluate(el=>getComputedStyle(el).opacity),'0');
+  await page.screenshot({path:'artifacts/study-session-ui/fullscreen-zen.png'});
+  // The card stays put when the controls return, and sits centred while they are hidden.
+  const zenBox=await card().boundingBox();
+  assert.ok(Math.abs(zenBox.y-(900-zenBox.y-zenBox.height))<=2,'zen card is vertically centred');
+  await page.mouse.move(700,300);await page.waitForTimeout(800);
+  assert.equal(await page.locator('.study-session').getAttribute('data-chrome'),null);
+  assert.equal(await page.locator('.study-session-header').evaluate(el=>getComputedStyle(el).opacity),'1');
+  assert.equal(Math.round((await card().boundingBox()).y),Math.round(zenBox.y),'card does not move when controls return');
   await page.getByRole('button', { name: 'Thu nhỏ màn hình', exact: true }).click();
   await page.waitForFunction(() => !document.fullscreenElement);
   assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuemax'),'3');
@@ -90,7 +108,7 @@ try {
   assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'1');
 
   await card().focus();await page.keyboard.press('Space');await page.getByRole('button',{name:/3 · Tốt/}).waitFor();
-  assert.ok(await page.locator('.study-session-face').evaluate(el=>getComputedStyle(el.firstElementChild.querySelector('[style*="font-family"]')).fontFamily.includes('Noto Sans JP')));
+  assert.ok(await page.locator('.study-session-face').evaluate(el=>getComputedStyle(el.firstElementChild.querySelector('[style*="font-family"]')).fontFamily.match(/Noto Sans JP|SN Sans JP/)));
   await page.keyboard.press('3');await page.locator('.study-session-card ruby').filter({hasText:'先生'}).first().waitFor();
   assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'2');
   // Two separate Space presses reveal then rate Good; holding Space cannot rate twice.

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type PointerEvent as ReactPointerEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Check, ChevronDown, ChevronRight, Folder, FolderOpen, Plus, MoveDiagonal2, X, Grip, SlidersHorizontal } from 'lucide-react';
+import { Check, ChevronDown, ChevronRight, Folder, FolderOpen, Plus, MoveDiagonal2, X, Grip, SlidersHorizontal } from '@/components/ui/icons';
 import {
   listDeckGroups, listDeckPage, createDeckGroup, renameDeckGroup, dissolveDeckGroup,
   moveDeckToGroup, orderDeckGroups, type DeckGroup, type PersonalDeck, type Page,
@@ -9,6 +9,7 @@ import {
 import './deckGroups.css';
 import './widgetGlass.css';
 import { OverflowMenu, type DeckAction } from '@/components/ui/OverflowMenu';
+import { EmptyState } from '@/components/ui/StudyUI';
 import type { LearningStorage } from '@/lib/storage';
 import { readGridMetrics, useWidgetSnapResize } from './useWidgetSnapResize';
 import { useDeckWidgetStyles } from '@/hooks/useDeckWidgetStyles';
@@ -461,7 +462,7 @@ export function DeckGroups({ rootDecks, reload, mode, busy, reducedMotion = fals
       <div className="deck-responsive-grid">{rootDecks.map(deck => entry(deck))}</div>
       {endZone(null)}
     </section>
-    {!busy && !groupLoading && !groups.length && !rootDecks.length && !error && <p className="study-copy">Chưa có bộ cá nhân. Chọn “Tạo mới” để bắt đầu.</p>}
+    {!busy && !groupLoading && !groups.length && !rootDecks.length && !error && <EmptyState art="notebook" title="Chưa có bộ cá nhân" detail="Chọn “Tạo mới” để bắt đầu." />}
     <dialog ref={dialog} className="deck-group-dialog" onCancel={e => { if (saving) e.preventDefault(); else { setEditor(null); setRemoving(null); setMoving(null); } }} aria-labelledby="deck-group-dialog-title">
       <form onSubmit={e => { e.preventDefault(); if (moving) { void mutate(() => moveDeckToGroup(moving, moveTarget || null), 'Đã chuyển bộ thẻ.'); return; } if (editor?.name.trim()) void mutate(() => editor.group ? renameDeckGroup(groups.find(g => g.id === editor.group!.id) ?? editor.group, editor.name.trim()) : createDeckGroup(editor.name.trim()), 'Đã lưu nhóm.'); }}>
         <div className="flex items-center justify-between gap-4"><h3 id="deck-group-dialog-title" className="text-xl font-semibold">{moving ? 'Chuyển bộ thẻ' : removing ? 'Giải tán nhóm?' : editor?.group ? 'Đổi tên nhóm' : 'Tạo nhóm'}</h3><button type="button" aria-label="Đóng" disabled={saving} onClick={() => { setEditor(null); setRemoving(null); setMoving(null); }}><X size={20}/></button></div>

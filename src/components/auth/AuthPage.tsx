@@ -1,5 +1,7 @@
 import { useState, type FormEvent } from 'react';
-import { ArrowRight, Eye, EyeOff, LoaderCircle, BookOpen, LogIn, UserPlus } from 'lucide-react';
+import { ArrowRight, Eye, EyeOff, LoaderCircle, LogIn } from '@/components/ui/icons';
+import { BrandMark } from '@/components/ui/BrandMark';
+import { Seal } from '@/components/ui/Seal';
 import { useAuth } from '@/hooks/useAuth';
 import './auth.css';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -31,17 +33,17 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
 
   return <main className={compact ? "auth-page auth-page-compact" : "auth-page"}>
     {!compact && <section className="auth-story" aria-label="Học tiếng Nhật mỗi ngày">
-      <div className="auth-brand"><img src="/so-nhat-mark.svg" alt=""/><div>SỔ NHẬT<small>HỌC TIẾNG NHẬT MỖI NGÀY</small></div></div>
-      <div className="auth-editorial"><p className="auth-eyebrow">MỘT CHÚT MỖI NGÀY</p><h1>Những bước nhỏ.<br/><em>Một hành trình lớn.</em></h1><p className="auth-description">Từ những từ vựng đầu tiên đến một thế giới mới.<br/>Tiếp tục hành trình tiếng Nhật theo nhịp của bạn.</p>
-        <div className="auth-art"><div className="auth-orbit" aria-hidden="true"/><div className="auth-card"><div className="auth-card-label"><span>TỪ VỰNG HÔM NAY</span><span>01 / 一</span></div><p className="auth-kanji" lang="ja">一歩</p><p className="auth-reading" lang="ja">いっぽ <span>· ippo</span></p><div className="auth-card-footer">Một bước chân.<ArrowRight size={20} aria-hidden="true"/></div><span className="auth-stamp" lang="ja" aria-hidden="true">日々</span></div><span className="auth-caption" lang="ja" aria-hidden="true">千里の道も一歩から</span></div>
-      </div>
-      <div className="auth-story-footer"><span>Học chậm mà chắc. Nhớ lâu hơn.</span><span lang="ja">一日一歩。</span></div>
+      <img className="auth-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/20181110_Fushimi_Inari_Torii_12.jpg/1280px-20181110_Fushimi_Inari_Torii_12.jpg" alt="" referrerPolicy="no-referrer" decoding="async"/>
+      <div className="auth-brand"><BrandMark size={46}/><div>SỔ NHẬT<small>HỌC TIẾNG NHẬT MỖI NGÀY</small></div></div>
+      <div className="auth-editorial"><p className="auth-eyebrow">MỘT CHÚT MỖI NGÀY</p><h1>Những bước nhỏ.<br/><em>Một hành trình lớn.</em></h1><p className="auth-description">Từ những từ vựng đầu tiên đến một thế giới mới.<br/>Tiếp tục hành trình tiếng Nhật theo nhịp của bạn.</p></div>
+      <p className="auth-bigkanji" lang="ja" aria-hidden="true">歩</p>
+      <div className="auth-story-footer"><span>Fushimi Inari, Kyōto — ảnh Balon Greyjoy, CC0</span><span lang="ja">一日一歩。</span></div>
     </section>}
     <section className="auth-form-side" aria-label="Tài khoản">
     <div className="auth-welcome">KHÔNG GIAN HỌC TẬP CỦA BẠN <span>✳</span></div>
     <div className="auth-form-wrap">
       <div className="auth-heading"><p className="auth-eyebrow">{mode === 'login' ? 'RẤT VUI ĐƯỢC GẶP LẠI BẠN' : 'MỘT KHỞI ĐẦU MỚI'}</p><h2>{mode === 'login' ? 'Chào bạn trở lại.' : 'Bắt đầu hành trình.'}</h2><span className="auth-rule"/><p>{mode === 'login' ? 'Bộ thẻ và lịch ôn đang chờ. Cùng học tiếp nhé.' : 'Tạo không gian học tiếng Nhật của riêng bạn.'}</p></div>
-      <div className="auth-tabs"><button disabled={busy} aria-pressed={mode === 'login'} onClick={() => { setMode('login'); setError(''); setShowPassword(false); }}><LogIn size={16}/>Đăng nhập</button><button disabled={busy} aria-pressed={mode === 'register'} onClick={() => { setMode('register'); setError(''); setShowPassword(false); }}><UserPlus size={16}/>Đăng ký</button></div>
+      <div className="auth-tabs"><button disabled={busy} aria-pressed={mode === 'login'} onClick={() => { setMode('login'); setError(''); setShowPassword(false); }}><LogIn size={16}/>Đăng nhập</button><button disabled={busy} aria-pressed={mode === 'register'} onClick={() => { setMode('register'); setError(''); setShowPassword(false); }}>Đăng ký</button></div>
       <form className="auth-form" onSubmit={submit} aria-busy={busy}>
         <fieldset disabled={busy} className="space-y-5">
         {mode === 'register' && <label className="block text-sm font-semibold">Tên hiển thị<input className="study-input mt-1" required maxLength={100} value={displayName} onChange={e => setDisplayName(e.target.value)}/></label>}
@@ -55,7 +57,7 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
         if (compact) setPrompt(null);
         else { enterGuest(); navigate('/today', { replace: true }); }
       }}>{compact ? 'Tiếp tục học thử' : 'Học thử'}</button>
-      <div className="auth-benefits"><BookOpen size={17} aria-hidden="true"/><span>Bộ thẻ cá nhân</span><span aria-hidden="true">·</span><span>Ôn tập theo nhịp của bạn</span></div>
+      <div className="auth-benefits"><Seal glyph="札" size="xs"/><span>Bộ thẻ cá nhân</span><span aria-hidden="true">·</span><span>Ôn tập theo nhịp của bạn</span></div>
     </div>
     <footer className="auth-bottom"><span>SỔ NHẬT</span><span>Bước nhỏ, hành trình lớn.</span></footer>
     </section>

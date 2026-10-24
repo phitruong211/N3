@@ -1,0 +1,47 @@
+/* Shared by the first HTML paint and React loading states. No font or JS dependency. */
+body { margin: 0; }
+.nhat-loading {
+  --loading-ink: var(--color-text, #233c35);
+  --loading-muted: var(--color-text-secondary, #606760);
+  --loading-paper: var(--color-bg, #f7f6f2);
+  --loading-rust: #b7523e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  box-sizing: border-box;
+  padding: 32px 20px;
+  color: var(--loading-ink);
+  text-align: center;
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+}
+.nhat-loading-screen { min-height: 100vh; min-height: 100dvh; background: var(--loading-paper); }
+.nhat-loading-inline { min-height: 260px; }
+.nhat-loading-art { position: relative; isolation: isolate; width: 152px; height: 152px; flex: 0 0 auto; }
+.nhat-loading-brand { margin: 12px 0 0; font-size: 21px; font-weight: 700; letter-spacing: .12em; }
+.nhat-loading-brand > span { display: block; margin-top: 10px; color: var(--loading-muted); font-size: 9px; font-weight: 500; letter-spacing: .2em; }
+.nhat-loading-message { margin: 24px 0 0; color: var(--loading-muted); font-size: 13px; line-height: 1.7; }
+.nhat-loading-inline .nhat-loading-message { margin-top: 12px; }
+.nhat-loading-track { display: block; position: relative; width: 64px; height: 2px; margin-top: 17px; overflow: hidden; border-radius: 2px; background: #b7523e1a; }
+.nhat-loading-track > span { display: block; position: absolute; width: 24px; height: 100%; border-radius: inherit; background: var(--loading-rust); animation: nhat-track 1.8s ease-in-out infinite; }
+@keyframes nhat-track { 0% { transform: translateX(-24px); } 100% { transform: translateX(64px); } }
+@media (prefers-reduced-motion: reduce) {
+  .nhat-loading *, .nhat-loading *::before, .nhat-loading *::after { animation: none !important; }
+  .nhat-loading-page { display: none; }
+  .nhat-loading-track > span { left: 20px; }
+}
+.reduced-motion .nhat-loading *, .reduced-motion .nhat-loading *::before, .reduced-motion .nhat-loading *::after { animation: none !important; }
+.reduced-motion .nhat-loading-page { display: none; }
+.reduced-motion .nhat-loading-track > span { left: 20px; }
+
+/* Editorial pass: one quiet mark, a hairline that travels. */
+.nhat-loading { --loading-rust: var(--color-gold, #9A7B3C); font-family: 'Be Vietnam Pro', system-ui, sans-serif; }
+.nhat-loading-art { width: 96px; height: 96px; }
+.nhat-loading-brand { font-family: 'Newsreader', 'SN Serif JP', 'Hiragino Mincho ProN', serif; font-size: 24px; font-weight: 400; letter-spacing: .28em; }
+.nhat-loading-track { background: color-mix(in srgb, var(--color-text, #1B1A17) 12%, transparent); }
+
+/* The loader is one ensō that draws itself. */
+.nhat-loading-art { width: 128px; height: 96px; }
+.nhat-loading-art .ink { color: var(--color-text-secondary, #55514A); }
+.nhat-loading-art .ink .draw { animation: ink-draw 1.6s ease-in-out infinite alternate; }

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { daypart, weekStamps, wordOfDay, japaneseDate } from '../src/components/dashboard/todayData.ts';
+import { daypart, weekStamps, wordOfDay } from '../src/components/dashboard/todayData.ts';
 
 test('greeting keeps its original cut-offs and the sky follows the hour', () => {
   const cases = [[0, 'Chào buổi sáng', 'night'], [4, 'Chào buổi sáng', 'night'], [5, 'Chào buổi sáng', 'dawn'], [10, 'Chào buổi sáng', 'dawn'],
@@ -21,7 +21,7 @@ test('a Sunday still belongs to the week that began on the previous Monday', () 
   const week = weekStamps([], new Date(2026, 9, 25));
   assert.equal(week[0].date, '2026-10-19');
   assert.equal(week[6].isToday, true);
-  assert.equal(week[6].label, 'CN');
+  assert.equal(week[6].label, '日');
 });
 
 test('week crosses month and year borders', () => {
@@ -36,12 +36,4 @@ test('word of the day is stable within a day and empty-safe', () => {
   assert.equal(wordOfDay(words, new Date(2026, 9, 20, 1)), wordOfDay(words, new Date(2026, 9, 20, 23)));
   const picks = new Set(Array.from({ length: 14 }, (_, i) => wordOfDay(words, new Date(2026, 9, 1 + i))));
   assert.ok(picks.size >= 10, 'neighbouring days should rarely repeat');
-});
-
-test('Japanese date uses kanji numerals', () => {
-  assert.equal(japaneseDate(new Date(2026, 9, 20)), '十月二十日 · 火曜日');
-  assert.equal(japaneseDate(new Date(2026, 0, 1)), '一月一日 · 木曜日');
-  assert.equal(japaneseDate(new Date(2026, 11, 31)), '十二月三十一日 · 木曜日');
-  assert.equal(japaneseDate(new Date(2026, 4, 10)), '五月十日 · 日曜日');
-  assert.equal(japaneseDate(new Date(2026, 4, 15)), '五月十五日 · 金曜日');
 });

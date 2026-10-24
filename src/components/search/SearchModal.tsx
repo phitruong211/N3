@@ -10,22 +10,26 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useApp } from '@/hooks/useApp';
-import { Search, X, BookOpen, Languages, GraduationCap, ArrowRight } from 'lucide-react';
+import { Search, X, ArrowRight } from '@/components/ui/icons';
+import { Seal } from '@/components/ui/Seal';
 import Fuse from 'fuse.js';
 import type { SearchResult } from '@/types';
 import { useNavigate } from 'react-router-dom';
 
 export function SearchModal() {
   const navigate = useNavigate();
-  const { searchOpen, setSearchOpen, vocabulary, kanji, grammar, selectSearchResult } = useApp();
+  const { searchOpen, setSearchOpen, vocabulary, kanji, grammar, selectSearchResult, loading, ensureLibrary } = useApp();
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  // Build search index
+  useEffect(() => { if (searchOpen) ensureLibrary(); }, [searchOpen, ensureLibrary]);
+
+  // Build the index only while searching, once the library has arrived.
   const fuse = useMemo(() => {
+    if (!searchOpen || loading) return null;
     const items: SearchResult[] = [
       ...vocabulary.map((v) => ({
         id: v.id,
@@ -55,11 +59,11 @@ export function SearchModal() {
       threshold: 0.4,
       includeScore: true,
     });
-  }, [vocabulary, kanji, grammar]);
+  }, [searchOpen, loading, vocabulary, kanji, grammar]);
 
   const results = useMemo(() => {
     if (!query.trim()) return [];
-    return fuse.search(query).slice(0, 20).map((r) => r.item);
+    return (fuse?.search(query) ?? []).slice(0, 20).map((r) => r.item);
   }, [query, fuse]);
 
   // Focus input when modal opens
@@ -121,9 +125,9 @@ export function SearchModal() {
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'vocabulary': return <BookOpen size={14} />;
-      case 'kanji': return <Languages size={14} />;
-      case 'grammar': return <GraduationCap size={14} />;
+      case 'vocabulary': return <Seal glyph="語" size="xs" />;
+      case 'kanji': return <Seal glyph="漢" size="xs" />;
+      case 'grammar': return <Seal glyph="文" size="xs" />;
       default: return null;
     }
   };
@@ -182,9 +186,10 @@ export function SearchModal() {
           </div>
 
           {/* Results */}
-          <button className="w-full flex items-center gap-3 text-left px-4 py-3 text-sm border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]" onClick={() => { setSearchOpen(false); navigate(`/dictionary${query.trim() ? `?q=${encodeURIComponent(query)}` : ''}`); }}><BookOpen size={17}/>Tra {query.trim() ? `“${query}” ` : ''}trong từ điển<ArrowRight size={16}/></button>
+          <button className="w-full flex items-center gap-3 text-left px-4 py-3 text-sm border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]" onClick={() => { setSearchOpen(false); navigate(`/dictionary${query.trim() ? `?q=${encodeURIComponent(query)}` : ''}`); }}><Seal glyph="辞" size="xs"/>Tra {query.trim() ? `“${query}” ` : ''}trong từ điển<ArrowRight size={16}/></button>
           <div className="max-h-[65vh] overflow-y-auto" role="listbox" aria-label="Kết quả tìm kiếm">
-            {query.trim() && results.length === 0 && (
+            {query.trim() && loading && <div className="px-4 py-8 text-center text-sm text-[var(--color-text-tertiary)]">Đang tải dữ liệu…</div>}
+            {query.trim() && !loading && results.length === 0 && (
               <div className="px-4 py-8 text-center text-sm text-[var(--color-text-tertiary)]">
                 Không tìm thấy kết quả cho “{query}”
               </div>
@@ -206,7 +211,7 @@ export function SearchModal() {
                 role="option"
                 aria-selected={i === selectedIndex}
               >
-                <span className="flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wider text-[var(--color-text-tertiary)] bg-[var(--color-surface-alt)] px-2 py-0.5 rounded shrink-0">
+                <span className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-[var(--color-text-tertiary)] bg-[var(--color-surface-alt)] px-2 py-0.5 rounded shrink-0">
                   {getTypeIcon(result.type)}
                   {getTypeLabel(result.type)}
                 </span>
