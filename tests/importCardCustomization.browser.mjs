@@ -2,21 +2,7 @@ import assert from "node:assert/strict";
 import { createServer } from "vite";
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || "playwright");
 
-const server = await createServer({
-  server: { host: "127.0.0.1", port: 0, open: false },
-  plugins: [{
-    name: "import-card-customization-fixture",
-    enforce: "pre",
-    load(id) {
-      if (!id.replaceAll("\\", "/").endsWith("/src/hooks/useApp.tsx")) return;
-      return `
-        const settings={showFuriganaFront:true,showFuriganaBack:true,autoPlayAudio:false,ankiSessionMinutes:0,reducedMotion:true,srsAgainMinutes:1,srsGoodMinutes:10,srsDesiredRetention:0.9};
-        export const useApp=()=>({settings,srsCards:[],updateSRSCard:()=>{},learningSync:{flush:async()=>{}}});
-        export const useLearningStorage=()=>({recordStudyActivity:()=>{},getJSON:(key,fallback)=>fallback,setJSON:()=>{}});
-      `;
-    },
-  }],
-});
+const server = await createServer({ server: { host: "127.0.0.1", port: 0, open: false } });
 const card = {
   id: "import-1", deckId: "fixture", front: "勉強", back: "日本語を勉強する",
   reading: "べんきょう", backReading: "にほんごをべんきょうする", note: "",
@@ -45,15 +31,26 @@ server.middlewares.use(async (request, response, next) => {
     return;
   }
   if (!request.url?.startsWith("/__import-card-test__")) return next();
+  const withConfig = new URL(request.url, "http://fixture").searchParams.has("config");
+  const customType = { id: "plus", name: "Từ vựng + cấp độ", kind: "VOCABULARY", fields: [
+    { key: "front", label: "Mặt trước", type: "ruby", required: true }, { key: "frontReading", label: "Cách đọc mặt trước", type: "kana", for: "front" },
+    { key: "back", label: "Mặt sau", type: "ruby", required: true }, { key: "backReading", label: "Cách đọc mặt sau", type: "kana", for: "back" },
+    { key: "level", label: "Cấp độ", type: "text" },
+  ], front: { show: ["front", "frontReading"] }, back: { show: ["back", "backReading", "level"] } };
   const html = await server.transformIndexHtml(request.url, `<html><body><div id="root"></div><script type="module">
-    import React from 'react'; import {createRoot} from 'react-dom/client';
+    import React from 'react'; import {createRoot} from 'react-dom/client'; import {BrowserRouter} from 'react-router-dom';
+    import {AuthProvider} from '/src/hooks/useAuth.tsx'; import {AppProvider} from '/src/hooks/useApp.tsx';
     import {StudySession} from '/src/components/flashcard/StudySession.tsx'; import '/src/index.css';
+    localStorage.clear(); sessionStorage.setItem('guest:session','1');
+    localStorage.setItem('guest:n3_settings',JSON.stringify({autoPlayAudio:false,reducedMotion:true}));
+    const withConfig=${withConfig};
     const card=${JSON.stringify(card)};
-    createRoot(document.getElementById('root')).render(React.createElement(StudySession,{
-      cards:[card],deckName:'Import fixture',mode:'flashcards',onExit:()=>{},
-      onTemplateChange:async value=>{window.savedTemplate=value;},
-      onCardChange:async value=>{window.savedCard=value;return {...card,...value,note:value.notes,type:value.kind.toUpperCase()};}
-    }));
+    if (withConfig) Object.assign(card,{noteType:'plus',front:'勉強',reading:'べんきょう',back:'Học',backReading:'',fields:{front:'勉強[べんきょう]',back:'Học',level:'N3'},extraData:{frontFuriganaSegments:JSON.stringify([{text:'勉強',reading:'べんきょう'}])}});
+    const props={cards:[card],deckName:'Import fixture',mode:'flashcards',onExit:()=>{},
+      onCardChange:async value=>{window.savedCard=value;return {...card,...value,note:value.notes,type:value.kind.toUpperCase()};}};
+    if (withConfig) Object.assign(props,{config:{version:5,noteTypes:[${JSON.stringify(customType)}]},onConfigChange:async value=>{window.savedConfig=value;}});
+    else props.onTemplateChange=async value=>{window.savedTemplate=value;};
+    createRoot(document.getElementById('root')).render(React.createElement(BrowserRouter,null,React.createElement(AuthProvider,null,React.createElement(AppProvider,null,React.createElement(StudySession,props)))));
   </script></body></html>`);
   response.setHeader("Content-Type", "text/html"); response.end(html);
 });
@@ -91,7 +88,7 @@ try {
   await dialog.locator("label").filter({ hasText: "Cách đọc mặt trước" }).locator("textarea").fill("学校[がっこう]");
   await dialog.locator("label").filter({ hasText: "Cách đọc mặt sau" }).locator("textarea").fill("");
   await dialog.getByLabel("Cách đọc", { exact: true }).uncheck();
-  await dialog.locator("label").filter({ hasText: "Font chữ" }).locator("select").selectOption("notoSansJp");
+  await dialog.getByRole("group", { name: /^Kiểu mặt/ }).getByLabel("Font chữ").selectOption("notoSansJp");
   await dialog.getByRole("button", { name: "Áp dụng kiểu này cho cả hai mặt", exact: true }).click();
   await dialog.getByRole("button", { name: "Lưu tùy chỉnh", exact: true }).click();
   await dialog.waitFor({ state: "detached" });
@@ -105,6 +102,25 @@ try {
   assert.equal(await page.locator("ruby rt").count(), 0);
   await page.locator('div[role="button"][aria-label="Hiện đáp án"]').click();
   assert.deepEqual(await page.locator("ruby rt").allTextContents(), ["にほん", "い"]);
+  // A deck with its own note type: the custom field renders with its label, is editable, and the layout is saved into the config.
+  await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/__import-card-test__?config`);
+  await page.locator('div[role="button"][aria-label="Hiện đáp án"]').click();
+  const answer = page.locator(".study-session-face");
+  assert.match(await answer.innerText(), /CẤP ĐỘ/i);
+  assert.match(await answer.innerText(), /N3/);
+  await page.getByRole("button", { name: "Tùy chỉnh thẻ", exact: true }).click();
+  const typed = page.getByRole("dialog", { name: "Tùy chỉnh bộ thẻ" });
+  await typed.locator("label").filter({ hasText: "Cấp độ" }).locator("textarea").fill("N2");
+  await typed.getByRole("tab", { name: "Mặt sau" }).click();
+  await typed.getByRole("checkbox", { name: "Cấp độ" }).uncheck();
+  await typed.getByRole("button", { name: "Lưu tùy chỉnh", exact: true }).click();
+  await typed.waitFor({ state: "detached" });
+  const savedTyped = await page.evaluate(() => ({ card: window.savedCard, config: window.savedConfig }));
+  assert.equal(savedTyped.card.noteType, "plus");
+  assert.equal(savedTyped.card.fields.level, "N2");
+  assert.equal(savedTyped.card.fields.front, "勉強[べんきょう]");
+  assert.deepEqual(savedTyped.config.noteTypes[0].back.show, ["back", "backReading"]);
+  assert.doesNotMatch(await page.locator(".study-session-face").innerText(), /CẤP ĐỘ/i);
   assert.deepEqual(errors, []);
   console.log("PASS: imported current-card editing, two-sided furigana and synchronized font styles.");
 } finally {

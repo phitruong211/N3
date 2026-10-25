@@ -134,6 +134,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     draft, setDraft, resumePage, rememberPage, guestNotice, dismissGuestNotice: () => setGuestNotice(false), sessionKey,
   }}>{children}</AuthContext.Provider>;
 }
+/** For components that also render outside an account, such as previews in tests. */
+export function useOptionalAuth(): AuthState | null {
+  return useContext(AuthContext) ?? null;
+}
 export function useAuth(): AuthState {
   const context = useContext(AuthContext);
   if (!context) throw new Error('useAuth must be used within AuthProvider');

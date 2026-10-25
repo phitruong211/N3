@@ -1,5 +1,7 @@
 # Chia sẻ bộ thẻ và nhóm
 
+> Mã ngắn, QR, hạn dùng, thư viện công khai, báo cáo và gỡ bộ: xem mục "Giai đoạn 4" trong [deck-format-v1.md](deck-format-v1.md). Liên kết tạo bằng token như mô tả dưới đây vẫn là cơ chế gốc; mã ngắn là một lối vào khác dẫn tới đúng liên kết đó.
+
 Chia sẻ hỗ trợ **deck import**, riêng lẻ hoặc cả nhóm. Trong menu ⋯ của deck chọn **Chia sẻ bộ thẻ**; trong menu nhóm chọn **Chia sẻ nhóm**. Hộp thoại cho biết số bộ import/số thẻ và số bộ tạo thủ công không được chia sẻ. Nhóm chưa có bộ import sẽ không tạo được link.
 
 Mở hộp thoại chỉ đọc trạng thái. Bấm **Tạo liên kết** để bật, **Sao chép** để gửi; thiết bị hỗ trợ có **Gửi liên kết** mở bảng chia sẻ hệ điều hành. **Tùy chọn chia sẻ** chứa giải thích chi tiết và **Ngừng chia sẻ** có xác nhận. Bật lại sau thu hồi tạo token mới. Link nhóm và từng deck độc lập; bật nhóm không tự bật link từng deck.
@@ -16,7 +18,7 @@ Mở hộp thoại chỉ đọc trạng thái. Bấm **Tạo liên kết** để
 
 Ai có link đều có thể xem trước và nhận toàn bộ nội dung được chia sẻ. Public API không trả email, tiến độ, ghi chú, metadata tệp hoặc token riêng của deck; có no-store/noindex. Chỉ tên hiển thị chủ bộ/nhóm được trả về.
 
-Khi lưu, sao chép nội dung, ghi chú, tags, dữ liệu bổ sung, giao diện và attribution từ điển. Bản nhận có ID mới, PRIVATE, không mang tiến độ/lịch ôn/đường dẫn tệp nguồn. Link phản ánh nội dung hiện tại; bản đã lưu độc lập và không tự cập nhật.
+Khi lưu, sao chép nội dung, loại thẻ và giá trị từng trường (`note_type`, `field_values`), ghi chú, tags, dữ liệu bổ sung, giao diện và attribution từ điển. Bản nhận có ID mới, PRIVATE, không mang tiến độ/lịch ôn/đường dẫn tệp nguồn. Link phản ánh nội dung hiện tại; bản đã lưu độc lập và không tự cập nhật.
 
 Nhận nhóm là một transaction: tạo nhóm riêng và các deck IMPORT theo thứ tự nguồn, bỏ MANUAL. Không di chuyển hoặc ghi đè bản deck người nhận đã có từ link riêng. Nhấn lại/retry trả về bản nhóm đang có, không tự phục hồi deck người nhận đã xóa/chuyển đi. Nếu giải tán bản nhóm, lần nhận tiếp tạo nhóm và bản deck mới; deck cũ vẫn ở vị trí người nhận đã đặt.
 

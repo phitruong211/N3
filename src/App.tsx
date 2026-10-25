@@ -18,6 +18,9 @@ import { resolveInitialPath } from '@/lib/navigation';
 import { LibraryLayout } from '@/components/library/LibraryLayout';
 import { SharedGroupPage } from '@/components/flashcard/SharedGroupPage';
 import { SharedDeckPage } from '@/components/flashcard/SharedDeckPage';
+import { ShortLinkPage } from '@/components/flashcard/ShortLinkPage';
+import { ExplorePage } from '@/components/flashcard/ExplorePage';
+import { AdminReportsPage } from '@/components/flashcard/AdminReportsPage';
 import { AppLoading } from '@/components/ui/AppLoading';
 
 const Dashboard = lazy(() => import('@/components/dashboard/Dashboard').then((module) => ({ default: module.Dashboard })));
@@ -78,6 +81,7 @@ function AppContent() {
           <Route path="/progress" element={<LibraryGate><ProgressPage /></LibraryGate>} />
           <Route path="/saved" element={<LibraryGate><BookmarksPage /></LibraryGate>} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/admin/reports" element={<AdminReportsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
@@ -108,6 +112,8 @@ function AuthGate() {
     navigate({ pathname: location.pathname, search: '' }, { replace: true });
   }, [wantsGuest, loading, mode, enterGuest, navigate, location.pathname]);
   if (!user && (location.pathname === '/dictionary' || location.pathname.startsWith('/dictionary/'))) return <><Suspense fallback={<AppLoading fullScreen message="Đang mở từ điển…"/>}><DictionaryPage/></Suspense><AuthDialog/></>;
+  if (/^\/s\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/s/:code" element={<ShortLinkPage />}/></Routes><AuthDialog /></>;
+  if (/^\/explore\/?$/.test(location.pathname)) return <><Routes><Route path="/explore" element={<ExplorePage />}/></Routes><AuthDialog /></>;
   if (/^\/shared\/groups\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/shared/groups/:token" element={<SharedGroupPage />}/></Routes><AuthDialog /></>;
   if (/^\/shared\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/shared/:token" element={<SharedDeckPage />}/></Routes><AuthDialog /></>;
   if (loading) return <AppLoading fullScreen message="Đang mở không gian học của bạn…"/>;

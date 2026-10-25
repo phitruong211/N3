@@ -6,7 +6,8 @@ import {
   type ApiProgress,
   type ApiQueueCard,
 } from "./api";
-import type { ImportedCard, DeckTemplateConfig } from "./ankiImport";
+import type { ImportedCard } from "./ankiImport";
+import { builtinNoteTypes, cardFromFields, noteTypeIdForKind, sanitizeStyle, type CardFieldValues, type DeckConfig, type NoteType } from "./deckFormat";
 export interface Page<T> {
   content: T[];
   totalElements: number;
@@ -59,6 +60,7 @@ export function cardRequest(card: ImportedCard, position?: number) {
   const extraData = { ...card.extraData };
   if (card.backReading.trim()) extraData.backReading = card.backReading.trim();
   else delete extraData.backReading;
+  delete extraData.style;
   return {
     front: card.front.trim(),
     back: card.back.trim(),
@@ -70,9 +72,13 @@ export function cardRequest(card: ImportedCard, position?: number) {
     extraData: {
       ...extraData,
       hanViet: card.hanViet.trim(),
+      // The card's own look rides in extraData; the server validates it like every other style.
+      ...(card.style ? { style: card.style } : {}),
       ...(card.sourceRef ? { sourceRef: card.sourceRef } : {}),
       ...(card.sourceSheet ? { sourceSheet: card.sourceSheet } : {}),
     },
+    // Cards with fields are saved by their fields; the server derives the columns above from them.
+    ...(card.fields ? { noteType: card.noteType, fields: card.fields } : {}),
   };
 }
 export function importDeck(body: unknown, key: string) {
@@ -87,7 +93,7 @@ export function creationBody(
   cards: ImportedCard[],
   source: string,
   format: string,
-  template: DeckTemplateConfig,
+  template: object,
   manual = false,
 ) {
   return {
@@ -105,11 +111,12 @@ export function creationBody(
     })),
   };
 }
-export function asImported(card: PersonalCard): ImportedCard {
+export function asImported(card: PersonalCard, config?: DeckConfig): ImportedCard {
   const hanViet = ["hanViet", "han_viet", "hanTu", "han_tu"]
     .map((key) => card.extraData?.[key])
     .find((value) => typeof value === "string");
-  return {
+  const style = sanitizeStyle(card.extraData?.style, "");
+  const legacy: ImportedCard = {
     id: card.id,
     front: card.front,
     back: card.back,
@@ -122,7 +129,15 @@ export function asImported(card: PersonalCard): ImportedCard {
     sourceRef: card.sourceRef,
     sourceSheet: card.sourceSheet,
     extraData: card.extraData as Record<string, string>,
+    ...(style ? { style } : {}),
   };
+  if (!card.fields) return legacy;
+  // Fields are the source of truth: rebuild the shape the renderers use instead of trusting stored projections.
+  const type: NoteType = config?.noteTypes.find((item) => item.id === card.noteType)
+    ?? builtinNoteTypes().find((item) => item.id === (card.noteType || noteTypeIdForKind(legacy.kind)))
+    ?? builtinNoteTypes()[3];
+  const { card: projected } = cardFromFields(type, card.fields as CardFieldValues, { ...legacy, id: card.id });
+  return { ...projected, kind: legacy.kind, noteType: card.noteType || type.id };
 }
 
 export interface DeckGroup { id: string; name: string; position: number; version: number; deckCount: number; cardCount: number; dueCount: number }

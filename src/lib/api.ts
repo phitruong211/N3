@@ -93,7 +93,7 @@ async function refreshAccessToken(identity: string | null): Promise<boolean> {
   try { return await promise; } finally { if (refreshFlight === flight) refreshFlight = null; }
 }
 
-export async function apiRequest<T>(path: string, init: RequestInit = {}, retry = true): Promise<T> {
+async function apiFetch(path: string, init: RequestInit, retry: boolean): Promise<{ response: Response; identity: ReturnType<typeof sessionIdentity> }> {
   const identity = sessionIdentity();
   const publicAuth = ['/auth/login', '/auth/register', '/auth/logout', '/auth/refresh'].includes(path);
   if (!publicAuth && path !== '/auth/me' && (!identity || verifiedSession !== identity)) {
@@ -102,7 +102,8 @@ export async function apiRequest<T>(path: string, init: RequestInit = {}, retry 
   if (path === '/auth/me' && !hasSession()) throw new ApiError(401, 'Chưa có phiên đăng nhập.');
   const headers = new Headers(init.headers);
   headers.delete('Authorization');
-  if (init.body && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
+  // A FormData body needs the browser to set its own multipart boundary.
+  if (init.body && !(init.body instanceof FormData) && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
   const token = localStorage.getItem(ACCESS_TOKEN_KEY);
   if (token && !publicAuth) headers.set('Authorization', `Bearer ${token}`);
   const timeout = AbortSignal.timeout(90_000);
@@ -117,15 +118,28 @@ export async function apiRequest<T>(path: string, init: RequestInit = {}, retry 
   init.signal?.throwIfAborted();
   assertSession(identity);
   if (response.status === 401 && retry && (path === '/auth/me' || !path.startsWith('/auth/'))) {
-    if (await refreshAccessToken(identity)) return apiRequest<T>(path, init, false);
+    if (await refreshAccessToken(identity)) return apiFetch(path, init, false);
   }
   if (response.status === 401 && !publicAuth && !retry) { clearSession(); notifySessionExpired(); }
   if (!response.ok) { const error = await parseError(response); assertSession(identity); throw error; }
+  return { response, identity };
+}
+
+export async function apiRequest<T>(path: string, init: RequestInit = {}, retry = true): Promise<T> {
+  const { response, identity } = await apiFetch(path, init, retry);
   if (response.status === 204) return undefined as T;
   const body = await response.json() as T;
   init.signal?.throwIfAborted();
   assertSession(identity);
   return body;
+}
+
+/** Raw bytes of an authenticated resource, such as an uploaded font. */
+export async function apiBytes(path: string, signal?: AbortSignal): Promise<ArrayBuffer> {
+  const { response, identity } = await apiFetch(path, { signal }, true);
+  const bytes = await response.arrayBuffer();
+  assertSession(identity);
+  return bytes;
 }
 
 export async function login(email: string, password: string, signal?: AbortSignal): Promise<ApiUser> {
@@ -166,9 +180,9 @@ export async function patchRemoteSettings(updates: Partial<AppSettings>): Promis
 
 export type ApiCardKind = 'VOCABULARY' | 'KANJI' | 'GRAMMAR' | 'GENERAL';
 export interface ApiDeckSummary { id: string; name: string; description: string | null; sourceType: string; sourceName: string | null; importFormat: string | null; visibility: string; cardCount: number; position: number; templateConfig: Record<string, unknown>; createdAt: string; updatedAt: string }
-export interface ApiCard { id: string; deckId: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; position: number; externalId: string | null; extraData: Record<string, unknown>; createdAt: string; updatedAt: string }
+export interface ApiCard { id: string; deckId: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; position: number; externalId: string | null; extraData: Record<string, unknown>; createdAt: string; updatedAt: string; noteType?: string | null; fields?: Record<string, unknown> | null }
 export interface ApiDeck { deck: ApiDeckSummary; cards: ApiCard[] }
-export interface ApiQueueCard { cardId: string; deckId: string; deckName: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; extraData: Record<string, unknown>; progress: ApiProgress | null }
+export interface ApiQueueCard { cardId: string; deckId: string; deckName: string; front: string; back: string; reading: string | null; notes: string | null; kind: ApiCardKind; extraData: Record<string, unknown>; progress: ApiProgress | null; noteType?: string | null; fields?: Record<string, unknown> | null }
 export interface ApiProgress { state: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'; easeFactor: number; intervalMinutes?: number; intervalDays?: number; dueAt: string; repetitions: number; lapses: number; lastReviewedAt: string | null; algorithm?: 'fsrs-6'; stability?: number; difficulty?: number; elapsedDays?: number; scheduledDays?: number; learningSteps?: number; firstReviewedAt?: string | null; lastRating?: 'AGAIN' | 'HARD' | 'GOOD' | 'EASY' | null }
 
 export const listDecks = () => apiRequest<ApiDeckSummary[]>('/decks');

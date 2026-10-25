@@ -1,8 +1,8 @@
 import { createElement, Fragment, useMemo, type CSSProperties, type ReactNode } from 'react';
-import { safeCardStyle } from '@/lib/cardFormatting';
+import { CARD_MARKUP_TAGS, safeCardStyle } from '@/lib/cardFormatting';
 import './richCardContent.css';
 
-const allowed = new Set('p div span br b strong i em u s small mark h1 h2 h3 h4 h5 h6 ul ol li blockquote pre code ruby rt rp'.split(' '));
+const allowed = new Set<string>(CARD_MARKUP_TAGS.filter(tag => tag !== 'font'));
 const discard = new Set('script style iframe object embed svg math form input button textarea select link meta base img audio video source'.split(' '));
 
 // Build React elements rather than injecting HTML. No URLs, event handlers or global CSS survive.

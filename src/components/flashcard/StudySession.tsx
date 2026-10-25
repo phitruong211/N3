@@ -12,6 +12,8 @@ import { legacyToFsrsProgress, progressToSrsCard } from "@/lib/fsrsProgress";
 import { applyReviewedProgress, createReviewQueue, nearestFutureDue, nextReadyCard, promoteDueCards, reviewSessionSummary } from "@/lib/liveReviewQueue";
 import { progressToSrs, type ApiProgress } from "@/lib/api";
 import { defaultDeckTemplate, normalizeDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
+import { applyResolvedTemplate, mergeSideStyle, noteTypeIdForKind, noteTypeOf, resolveTemplate, type DeckConfig } from "@/lib/deckFormat";
+import { surfaceStyle } from "@/lib/cardSurface";
 import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
 import { CardFace, DeckCustomizeDialog } from "./CardPresentation";
@@ -58,9 +60,11 @@ export function StudySession({
   deckName,
   mode,
   template: initialTemplate = defaultDeckTemplate(),
+  config: initialConfig,
   initialProgress = {},
   onExit,
   onTemplateChange,
+  onConfigChange,
   onCardChange,
   initialIndex = 0,
   onPositionChange,
@@ -70,9 +74,12 @@ export function StudySession({
   deckName: string;
   mode: "flashcards" | "anki";
   template?: DeckTemplateConfig;
+  /** Decks with note types resolve a template per card; without it `template` applies to every card. */
+  config?: DeckConfig;
   initialProgress?: Record<string, ApiProgress | null>;
   onExit: () => void;
   onTemplateChange?: (template: DeckTemplateConfig) => Promise<void> | void;
+  onConfigChange?: (config: DeckConfig) => Promise<void> | void;
   onCardChange?: (card: ReturnType<typeof presentationCard>) => Promise<CardView>;
   initialIndex?: number;
   onPositionChange?: (cardId: string) => void;
@@ -84,7 +91,8 @@ export function StudySession({
   const reduceMotion = settings.reducedMotion || Boolean(prefersReducedMotion);
   const { recordStudyActivity, recordFreeStudyActivity, undoReviewActivity, getJSON, setJSON } = useLearningStorage();
   const templateKey = `study_template_${cards[0]?.source === "BUILT_IN" ? deckName : cards[0]?.deckId || deckName}`;
-  const [template, setTemplate] = useState(() => {
+  const [config, setConfig] = useState(initialConfig);
+  const [baseTemplate, setTemplate] = useState(() => {
     if (cards[0]?.source !== 'BUILT_IN') return initialTemplate;
     const stored = getJSON<DeckTemplateConfig | null>(templateKey, null);
     if (stored) return normalizeDeckTemplate(stored);
@@ -526,6 +534,8 @@ export function StudySession({
         </button>
       </div>
     );
+  const cardTypeId = config ? noteTypeOf(config, current.noteType ?? noteTypeIdForKind(current.type)).id : "";
+  const template = config ? resolveTemplate(config, cardTypeId) : baseTemplate;
   const sideFields = (
     flipped
       ? template.back.fields
@@ -533,7 +543,7 @@ export function StudySession({
   ).filter((field) => (flipped ? settings.showFuriganaBack : settings.showFuriganaFront) || field !== "reading");
   const fields = flipped && template.back.showFront && !sideFields.includes("front") ? ["front" as const, ...sideFields] : sideFields;
   const activeSide = flipped ? "back" : "front";
-  const activeStyle = template[activeSide].style;
+  const activeStyle = mergeSideStyle(template[activeSide].style, current.style);
   // With no buttons under the card, a tap does what Space does: reveal, then move on.
   const tapCard = () => mode === "flashcards" && flipped ? next() : setRevealedCardKey(currentCardKey);
   return (
@@ -598,6 +608,8 @@ export function StudySession({
             }}
             className={`study-session-card ${flipped && (current.type === "GRAMMAR" || current.extraData?.examples || current.extraData?.kanjiVocabulary || personalNote.entry?.text) ? "study-session-card-rich" : ""}`}
             data-card-theme={activeStyle.theme}
+            data-custom-fg={activeStyle.colors?.fg ? "" : undefined}
+            style={surfaceStyle(activeStyle)}
             data-kind={current.type.toLowerCase()}
             data-side={activeSide}
             role="button"
@@ -652,6 +664,7 @@ export function StudySession({
         busy={savingTemplate}
         error={error}
         editableCard={current.source === "IMPORT" && onCardChange ? presentationCard(current) : undefined}
+        noteTypes={config?.noteTypes}
         onCancel={() => setCustomizing(false)}
         onSave={async (next, changedCard) => {
           setSavingTemplate(true);
@@ -665,7 +678,11 @@ export function StudySession({
               }));
             }
             if (JSON.stringify(next) !== JSON.stringify(template)) {
-              if (onTemplateChange) await onTemplateChange(next);
+              if (config && onConfigChange) {
+                const nextConfig = applyResolvedTemplate(config, cardTypeId, next);
+                await onConfigChange(nextConfig);
+                setConfig(nextConfig);
+              } else if (onTemplateChange) await onTemplateChange(next);
               else setJSON(templateKey, next);
             }
             setTemplate(next);

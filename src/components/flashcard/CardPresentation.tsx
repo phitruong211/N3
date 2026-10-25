@@ -2,6 +2,13 @@ import { useState, useRef, useEffect, type CSSProperties } from "react";
 import { ArrowDown, ArrowUp, Bold, Copy, Eye, EyeOff, GripVertical, Italic, Minus, Plus, X } from '@/components/ui/icons';
 import { CARD_FONT_PRESETS, defaultDeckTemplate, importFaceBlocks, kindLabels, parseCardExamples, type ImportFaceBlock } from "@/lib/ankiImport";
 import { parseStoredFurigana } from "@/lib/furigana";
+import { mergeSideStyle } from "@/lib/deckFormat";
+import { fontStack } from "@/lib/fontRegistry";
+import { ensureFont } from "@/lib/fontLoader";
+import { fieldDecoration, fontIdsOf, surfaceStyle } from "@/lib/cardSurface";
+import { FontSelectOptions } from "./FontSelectOptions";
+import { useCustomFonts } from "@/hooks/useCustomFonts";
+import { MIN_CONTRAST, styleContrast } from "@/lib/styleContrast";
 import { FuriganaText } from "./FuriganaText";
 import { hasCardMarkup } from '@/lib/cardFormatting';
 import { CardFields } from "./CardFields";
@@ -12,7 +19,8 @@ import type {
   ImportedCard,
   ImportedDeck,
 } from "@/lib/ankiImport";
-const fieldLabels: Record<CardField, string> = {
+import type { NoteType } from "@/lib/deckFormat";
+const fieldLabels: Record<string, string> = {
   front: "Mặt trước",
   back: "Mặt sau",
   reading: "Cách đọc",
@@ -50,14 +58,6 @@ function FontSizeInput({ value, label, onCommit }: { value: number; label: strin
       }
     }} />;
 }
-const fontFamilies: Record<DeckTemplateConfig['front']['style']['fontFamily'], string> = {
-  default: "'Be Vietnam Pro', 'SN Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif",
-  notoSansJp: "'SN Sans JP', 'Noto Sans JP Local', sans-serif",
-  notoSerifJp: "'SN Serif JP', 'Noto Serif JP Local', serif",
-  delaGothicOne: "'Dela Gothic One Local', sans-serif",
-  system: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-};
-
 // Short text (a single word or kanji) is enlarged when autoFit is on; capped by viewport width so it never overflows.
 export function autoFitScale(text: string): number {
   const length = Array.from(text.replace(/\s+/g, "")).length;
@@ -71,7 +71,7 @@ function cardTextStyle(style: DeckTemplateConfig['front']['style'], text = "", s
     fontSize: scale > 1 ? `min(${size}px, 18vw)` : `${size}px`,
     fontWeight: style.bold ? 700 : 400,
     fontStyle: style.italic ? "italic" : "normal",
-    fontFamily: fontFamilies[style.fontFamily],
+    fontFamily: fontStack(style.fontFamily),
     fontSynthesis: "weight style",
   };
 }
@@ -81,6 +81,10 @@ function fieldValue(
   deckName: string,
   side: 'front' | 'back',
 ): string {
+  if (field.startsWith("field:")) {
+    const value = card.fields?.[field.slice(6)];
+    return typeof value === "string" ? value : "";
+  }
   if (field === "kind") return kindLabels[card.kind];
   if (field === "deckName") return deckName;
   if (field === "reading") return side === "back" ? card.backReading || card.reading : card.reading;
@@ -218,15 +222,21 @@ export function CardFace({
   showExampleReadings?: boolean;
 }) {
   const grammarAnswer = card.kind === "grammar" && fields.includes("back");
-  const style = template[side].style;
+  const style = mergeSideStyle(template[side].style, card.style);
+  const fontKey = fontIdsOf(style, template.fieldStyles, card.style).join(",");
+  useEffect(() => { for (const id of fontKey.split(",")) ensureFont(id); }, [fontKey]);
   const firstTextIndex = fields.findIndex(field => field === "front" || field === "back");
   return (
     <div
       className={`w-full space-y-4 ${grammarAnswer ? "mx-auto max-w-3xl text-left" : style.alignment === "left" ? "text-left" : "text-center"} ${compact ? "!text-base" : ""}`}
+      style={fieldDecoration({ colors: { fg: style.colors?.fg, accent: style.colors?.accent } })}
     >
       {fields.map((field, index) => {
         const value = fieldValue(field, card, deckName, side);
         if (!value) return null;
+        const fieldKey = field === "reading" ? (side === "front" ? "frontReading" : "backReading") : field.startsWith("field:") ? field.slice(6) : field;
+        const fieldSpec = template.fieldStyles?.[fieldKey];
+        const fieldStyle = mergeSideStyle(style, fieldSpec);
         const importedBlocks = field === "front" || field === "back" ? importFaceBlocks(card, field) : [];
         const kanjiVocabulary = field === "notes" && card.kind === "kanji"
           ? parseKanjiVocabulary(card.extraData?.kanjiVocabulary)
@@ -236,7 +246,16 @@ export function CardFace({
           (side === "back" && fields.includes("back") && card.backReading)
         )) return null;
         if (grammarAnswer && field === "back" && !importedBlocks.length && !hasCardMarkup(value)) {
-          return <GrammarBack key={`${field}-${index}`} value={value} reading={card.backReading} storedSegments={card.extraData?.backFuriganaSegments} showReading={fields.includes("reading")} compact={compact} style={style} />;
+          return <GrammarBack key={`${field}-${index}`} value={value} reading={card.backReading} storedSegments={card.extraData?.backFuriganaSegments} showReading={fields.includes("reading")} compact={compact} style={fieldStyle} />;
+        }
+        if (field.startsWith("field:")) {
+          const label = template.fieldLabels?.[field.slice(6)] ?? field.slice(6);
+          return <section key={`${field}-${index}`} data-field={field} className="border-t border-current/10 pt-4 text-left" style={fieldDecoration(fieldSpec)}>
+            <p className="mb-2 text-[0.7rem] font-bold uppercase tracking-wider opacity-55">{label}</p>
+            <div className="font-jp whitespace-pre-wrap break-words leading-relaxed" style={compact ? undefined : cardTextStyle(fieldStyle, value, true)}>
+              <FuriganaText text={value} show={fields.includes("reading")} />
+            </div>
+          </section>;
         }
         const isCardText = field === "front" || field === "back";
         const cardReading = field === "front" ? card.reading : field === "back" ? card.backReading : "";
@@ -257,11 +276,11 @@ export function CardFace({
                     ? "text-xs font-bold uppercase tracking-wide opacity-70"
                 : "font-jp whitespace-pre-wrap break-words"
             }
-            style={isCardText ? cardTextStyle(style, value, index !== firstTextIndex) : undefined}
+            style={isCardText ? { ...cardTextStyle(fieldStyle, value, index !== firstTextIndex), ...fieldDecoration(fieldSpec) } : { ...(fieldSpec?.font?.family ? { fontFamily: fontStack(fieldSpec.font.family) } : {}), ...fieldDecoration(fieldSpec) }}
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
             {kanjiVocabulary.length ? <KanjiVocabulary value={kanjiVocabulary} showReading={showExampleReadings} /> : field === "hanViet" ? `Hán Việt: ${value}` : importedBlocks.length ? (
-              <ImportedFaceBlocks blocks={importedBlocks} reading={cardReading} showReading={showFurigana} compact={compact} style={style} />
+              <ImportedFaceBlocks blocks={importedBlocks} reading={cardReading} showReading={showFurigana} compact={compact} style={fieldStyle} />
             ) : isCardText ? (
               <FuriganaText text={value} reading={cardReading} storedSegments={storedSegments} show={showFurigana} />
             ) : hasCardMarkup(value) ? <FuriganaText text={value} show={false} /> : value}
@@ -278,6 +297,7 @@ export function DeckCustomizeDialog({
   busy,
   error,
   editableCard,
+  noteTypes,
   onCancel,
   onSave,
 }: {
@@ -285,6 +305,7 @@ export function DeckCustomizeDialog({
   busy: boolean;
   error?: string;
   editableCard?: ImportedCard;
+  noteTypes?: NoteType[];
   onCancel: () => void;
   onSave: (template: DeckTemplateConfig, card?: ImportedCard) => void;
 }) {
@@ -313,6 +334,7 @@ export function DeckCustomizeDialog({
     notes: "Ghi chú sẽ xuất hiện ở đây.",
     kind: "vocabulary" as const,
   };
+  const labelOf = (field: CardField) => field.startsWith("field:") ? template.fieldLabels?.[field.slice(6)] ?? field.slice(6) : fieldLabels[field];
   const candidates: CardField[] = [
     "front",
     "back",
@@ -321,6 +343,7 @@ export function DeckCustomizeDialog({
     "notes",
     "kind",
     "deckName",
+    ...Object.keys(template.fieldLabels ?? {}).map((key) => `field:${key}` as CardField),
   ];
   const updateFields = (side: "front" | "back", fields: CardField[]) =>
     setTemplate((previous) => ({
@@ -357,6 +380,9 @@ export function DeckCustomizeDialog({
       front: { ...previous.front, style: { ...previous.front.style, ...changes } },
       back: { ...previous.back, style: { ...previous.back.style, ...changes } },
     }));
+  const customFonts = useCustomFonts();
+  const dialogContrast = styleContrast({ theme: activeStyle.theme, colors: activeStyle.colors });
+  useEffect(() => { ensureFont(activeStyle.fontFamily); }, [activeStyle.fontFamily]);
   const themeClass =
     activeStyle.theme === "dark"
       ? "bg-slate-900 text-white"
@@ -425,7 +451,7 @@ export function DeckCustomizeDialog({
                 <p className="mb-3 text-xs text-[var(--color-text-tertiary)]">
                   Chỉnh trực tiếp thẻ import đang học. Nội dung sẽ được lưu cùng bộ thẻ.
                 </p>
-                <CardFields key={cardDraft.id} card={cardDraft} onChange={setCardDraft} compact showPreview={false} />
+                <CardFields key={cardDraft.id} card={cardDraft} noteTypes={noteTypes} onChange={setCardDraft} compact showPreview={false} />
               </fieldset>
             )}
               <fieldset className="rounded-xl border border-[var(--color-border)] p-4">
@@ -446,7 +472,7 @@ export function DeckCustomizeDialog({
                         checked={template[activeSide].fields.includes(field)}
                         onChange={() => toggleField(activeSide, field)}
                       />
-                      <span>{fieldLabels[field]}</span>
+                      <span>{labelOf(field)}</span>
                     </label>
                   ))}
                 </div>
@@ -462,14 +488,14 @@ export function DeckCustomizeDialog({
                       >
                         <span>
                           <GripVertical className="mr-2 inline" size={15} />
-                          {fieldLabels[field]}
+                          {labelOf(field)}
                         </span>
                         <span className="flex gap-1">
                           <button
                             className="study-button !p-1.5"
                             disabled={index === 0}
                             onClick={() => shiftField(activeSide, index, -1)}
-                            aria-label={`Đưa ${fieldLabels[field]} lên`}
+                            aria-label={`Đưa ${labelOf(field)} lên`}
                           >
                             <ArrowUp size={14} />
                           </button>
@@ -479,7 +505,7 @@ export function DeckCustomizeDialog({
                               index === template[activeSide].fields.length - 1
                             }
                             onClick={() => shiftField(activeSide, index, 1)}
-                            aria-label={`Đưa ${fieldLabels[field]} xuống`}
+                            aria-label={`Đưa ${labelOf(field)} xuống`}
                           >
                             <ArrowDown size={14} />
                           </button>
@@ -514,13 +540,26 @@ export function DeckCustomizeDialog({
                   aria-label="Font chữ"
                   onChange={(event) => updateActiveStyle({ fontFamily: event.target.value as DeckTemplateConfig[typeof activeSide]["style"]["fontFamily"] })}
                 >
-                  <option value="default">Mặc định</option>
-                  <option value="notoSansJp">Gothic · Noto Sans JP</option>
-                  <option value="notoSerifJp">Mincho · Noto Serif JP</option>
-                  <option value="delaGothicOne">Dela Gothic One</option>
-                  <option value="system">Font hệ thống</option>
+                  <FontSelectOptions custom={customFonts.fonts} current={activeStyle.fontFamily} />
                 </select>
               </label>
+              <div className="sm:col-span-2 grid gap-3 sm:grid-cols-3">
+                {([["bg", "Màu nền"], ["fg", "Màu chữ"], ["accent", "Màu nhấn"]] as const).map(([key, text]) => {
+                  const own = activeStyle.colors?.[key];
+                  return <div key={key} className="space-y-1">
+                    <span className="block text-sm">{text} {previewBack ? "mặt sau" : "mặt trước"}</span>
+                    <div className="flex items-center gap-2">
+                      <input type="color" aria-label={`${text} ${previewBack ? "mặt sau" : "mặt trước"}`} className="h-10 w-14 cursor-pointer rounded border border-[var(--color-border)] bg-transparent p-1"
+                        value={own ?? (key === "bg" ? "#faf7f1" : key === "fg" ? "#1f2937" : "#b45309")}
+                        onChange={(event) => updateActiveStyle({ colors: { ...activeStyle.colors, [key]: event.target.value } })} />
+                      <span className="min-w-0 flex-1 truncate text-xs text-[var(--color-text-secondary)]">{own ?? "Theo chủ đề"}</span>
+                      {own && <button type="button" className="study-button !min-h-9 !px-2 !py-1 !text-xs" aria-label={`Bỏ ${text.toLowerCase()} ${previewBack ? "mặt sau" : "mặt trước"}`}
+                        onClick={() => { const { [key]: _drop, ...rest } = activeStyle.colors ?? {}; updateActiveStyle({ colors: Object.keys(rest).length ? rest : undefined }); }}>Bỏ</button>}
+                    </div>
+                  </div>;
+                })}
+              </div>
+              {dialogContrast && !dialogContrast.ok && <p role="status" className="sm:col-span-2 rounded-lg bg-[var(--color-warning-subtle)] px-3 py-2 text-sm text-[var(--color-warning)]">Chữ và nền chỉ đạt tương phản {dialogContrast.ratio.toFixed(1)}:1; khuyến nghị từ {MIN_CONTRAST}:1.</p>}
               <label>
                 Cỡ chữ nhanh
                 <select
@@ -616,6 +655,7 @@ export function DeckCustomizeDialog({
           <div className="lg:sticky lg:top-0 lg:self-start">
             <div
               className={`flex min-h-80 items-center rounded-2xl border border-[var(--color-border)] p-6 shadow-sm ${themeClass}`}
+              style={surfaceStyle(mergeSideStyle(activeStyle, cardDraft?.style ?? example.style))}
             >
               <CardFace
                 card={example}

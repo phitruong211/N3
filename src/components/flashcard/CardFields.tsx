@@ -1,71 +1,54 @@
 import { useMemo, useState } from "react";
-import { kindLabels, type ImportedCard } from "@/lib/ankiImport";
-import {
-  parseStoredFurigana,
-  normalizeReadingInput,
-  resolveFurigana,
-  serializeFurigana,
-  type FuriganaResult,
-} from "@/lib/furigana";
+import type { ImportedCard } from "@/lib/ankiImport";
+import { builtinNoteTypes, cardFromFields, exampleLines, fieldsFromCard, noteTypeIdForKind, parseExampleLines, type CardExample, type CardFieldValues, type NoteField, type NoteType } from "@/lib/deckFormat";
+import { parseFuriganaMarkup } from "@/lib/furigana";
 import { FuriganaText } from "./FuriganaText";
+import { StyleEditor } from "./StyleEditor";
 
-type Side = "front" | "back";
-
-function editableText(card: ImportedCard, side: Side) {
-  const key = side === "front" ? "frontFuriganaSegments" : "backFuriganaSegments";
-  const segments = parseStoredFurigana(card.extraData?.[key]);
-  return segments.length ? serializeFurigana(segments) : card[side];
+function typeOf(card: ImportedCard, noteTypes: NoteType[]): NoteType {
+  return noteTypes.find(type => type.id === card.noteType)
+    ?? noteTypes.find(type => type.id === noteTypeIdForKind(card.kind))
+    ?? noteTypes[0];
 }
 
-function withFurigana(card: ImportedCard, side: Side, result: FuriganaResult, clearImportedLayout = false): ImportedCard {
-  const key = side === "front" ? "frontFuriganaSegments" : "backFuriganaSegments";
-  const extraData = { ...card.extraData };
-  if (!result.warning && result.segments.some((segment) => segment.reading)) {
-    extraData[key] = JSON.stringify(result.segments);
-  } else {
-    delete extraData[key];
-  }
-  if (clearImportedLayout) {
-    delete extraData.importFieldLayout;
-    delete extraData.importFieldValues;
-  }
-  return { ...card, [side]: result.text, extraData };
-}
-
+/** Edits a card through the fields of its note type; the card's front/back/reading/... are re-derived on every change. */
 export function CardFields({
   card,
   onChange,
+  noteTypes: provided,
   compact = false,
   showPreview = true,
 }: {
   card: ImportedCard;
   onChange: (card: ImportedCard) => void;
+  noteTypes?: NoteType[];
   compact?: boolean;
   showPreview?: boolean;
 }) {
-  const [frontInput, setFrontInput] = useState(() => editableText(card, "front"));
-  const [backInput, setBackInput] = useState(() => editableText(card, "back"));
-  const frontResult = useMemo(
-    () => resolveFurigana(frontInput, card.reading),
-    [frontInput, card.reading],
-  );
-  const backResult = useMemo(
-    () => resolveFurigana(backInput, card.backReading),
-    [backInput, card.backReading],
-  );
-  const updateText = (side: Side, value: string) => {
-    if (side === "front") setFrontInput(value);
-    else setBackInput(value);
-    const reading = side === "front" ? card.reading : card.backReading;
-    onChange(withFurigana(card, side, resolveFurigana(value, reading), true));
+  const noteTypes = provided?.length ? provided : builtinNoteTypes();
+  const type = typeOf(card, noteTypes);
+  const [values, setValues] = useState<CardFieldValues>(() => fieldsFromCard(card));
+  const [drafts, setDrafts] = useState<Record<string, string>>(() => {
+    const initial = fieldsFromCard(card);
+    return Object.fromEntries(type.fields.filter(field => field.type === "examples").map(field => [field.key, exampleLines(initial[field.key])]));
+  });
+  const warnings = useMemo(() => Object.fromEntries(type.fields
+    .filter(field => field.type === "ruby" && typeof values[field.key] === "string")
+    .map(field => [field.key, parseFuriganaMarkup(values[field.key] as string).warning])), [type, values]);
+  const emit = (nextType: NoteType, nextValues: CardFieldValues) => onChange(cardFromFields(nextType, nextValues, { ...card, id: card.id }).card);
+  const setField = (key: string, value: string | CardExample[]) => {
+    const next = { ...values };
+    if ((typeof value === "string" && !value.trim()) || (Array.isArray(value) && !value.length)) delete next[key];
+    else next[key] = value;
+    setValues(next);
+    emit(type, next);
   };
-  const updateReading = (side: Side, value: string) => {
-    const readingKey = side === "front" ? "reading" : "backReading";
-    const inputValue = side === "front" ? frontInput : backInput;
-    const normalized = normalizeReadingInput(value);
-    const next = { ...card, [readingKey]: normalized };
-    onChange(withFurigana(next, side, resolveFurigana(inputValue, normalized)));
+  const changeType = (id: string) => {
+    const nextType = noteTypes.find(item => item.id === id);
+    if (nextType) emit(nextType, values);
   };
+  const label = (field: NoteField) => <>{field.label}{field.required && <span aria-hidden="true"> *</span>}</>;
+  const wide = (field: NoteField) => field.key === "front" || field.key === "back";
 
   return (
     <div className="space-y-4">
@@ -75,50 +58,34 @@ export function CardFields({
         <span className="mt-2 block">Có thể nhập HTML để định dạng từng đoạn: <code>{'<b>In đậm</b>'}</code>, <code>{'<br>'}</code> xuống dòng, <code>{'<span style="color:#60a5fa">Chữ màu</span>'}</code>. Xem <a className="underline" href="/data/import-formatting-guide.md" target="_blank" rel="noreferrer">hướng dẫn và mẫu</a>.</span>
       </div>
       <div className={`grid gap-3 ${compact ? "" : "sm:grid-cols-2"}`}>
-        <label>
-          Mặt trước <span aria-hidden="true">*</span>
-          <textarea
-            className="study-input mt-1 min-h-24"
-            required
-            maxLength={20000}
-            value={frontInput}
-            onChange={(event) => updateText("front", event.target.value)}
-          />
-          {frontResult.warning && <span className="mt-1 block text-xs text-[var(--color-warning)]">{frontResult.warning}</span>}
-        </label>
-        <label>
-          Mặt sau <span aria-hidden="true">*</span>
-          <textarea
-            className="study-input mt-1 min-h-24"
-            required
-            maxLength={20000}
-            value={backInput}
-            onChange={(event) => updateText("back", event.target.value)}
-          />
-          {backResult.warning && <span className="mt-1 block text-xs text-[var(--color-warning)]">{backResult.warning}</span>}
-        </label>
-        <label>
-          Cách đọc mặt trước
-          <textarea className="study-input mt-1" maxLength={10000} placeholder="Ví dụ: たちば" value={card.reading} onChange={(event) => updateReading("front", event.target.value)} />
-        </label>
-        <label>
-          Cách đọc mặt sau
-          <textarea className="study-input mt-1" maxLength={10000} placeholder="Chỉ nhập hiragana của mặt sau" value={card.backReading} onChange={(event) => updateReading("back", event.target.value)} />
-        </label>
-        <label>
-          Hán Việt
-          <textarea className="study-input mt-1" maxLength={10000} value={card.hanViet} onChange={(event) => onChange({ ...card, hanViet: event.target.value })} />
-        </label>
-        <label>
-          Ghi chú
-          <textarea className="study-input mt-1" maxLength={20000} value={card.notes} onChange={(event) => onChange({ ...card, notes: event.target.value })} />
-        </label>
-        <label>
-          Loại thẻ
-          <select className="study-input mt-1" value={card.kind} onChange={(event) => onChange({ ...card, kind: event.target.value as ImportedCard["kind"] })}>
-            {Object.entries(kindLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
-          </select>
-        </label>
+        {type.fields.map(field => field.type === "examples" ? (
+          <label key={field.key} className={compact ? "" : "sm:col-span-2"}>
+            {label(field)} <span className="text-xs text-[var(--color-text-secondary)]">(mỗi dòng: câu tiếng Nhật | cách đọc | nghĩa)</span>
+            <textarea className="study-input mt-1 min-h-20" value={drafts[field.key] ?? ""}
+              onChange={event => {
+                setDrafts(previous => ({ ...previous, [field.key]: event.target.value }));
+                setField(field.key, parseExampleLines(event.target.value).examples);
+              }} />
+            {parseExampleLines(drafts[field.key] ?? "").invalid > 0 && <span className="mt-1 block text-xs text-[var(--color-warning)]">{parseExampleLines(drafts[field.key] ?? "").invalid} dòng chưa đúng dạng nên bị bỏ qua.</span>}
+          </label>
+        ) : (
+          <label key={field.key}>
+            {label(field)}
+            <textarea className={`study-input mt-1 ${wide(field) ? "min-h-24" : ""}`} required={field.required} maxLength={field.type === "kana" ? 10000 : 20000}
+              placeholder={field.type === "kana" ? "Chỉ nhập hiragana" : undefined}
+              value={typeof values[field.key] === "string" ? values[field.key] as string : ""}
+              onChange={event => setField(field.key, event.target.value)} />
+            {warnings[field.key] && <span className="mt-1 block text-xs text-[var(--color-warning)]">{warnings[field.key]}</span>}
+          </label>
+        ))}
+        {noteTypes.length > 1 && (
+          <label>
+            Loại thẻ
+            <select className="study-input mt-1" value={type.id} onChange={event => changeType(event.target.value)}>
+              {noteTypes.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
+            </select>
+          </label>
+        )}
         <label>
           Tags (cách nhau bằng dấu phẩy)
           <input
@@ -128,6 +95,11 @@ export function CardFields({
           />
         </label>
       </div>
+      <details className="rounded-xl border border-[var(--color-border)] p-3">
+        <summary className="cursor-pointer font-semibold">Giao diện riêng của thẻ này{card.style ? " · đã tùy chỉnh" : ""}</summary>
+        <p className="mb-3 mt-2 text-xs text-[var(--color-text-secondary)]">Ghi đè giao diện của bộ thẻ chỉ cho thẻ này, ví dụ đổi màu hoặc font để đánh dấu một thẻ đặc biệt.</p>
+        <StyleEditor label="Giao diện thẻ" value={card.style} onChange={style => { const { style: _drop, ...rest } = card; onChange(style ? { ...rest, style } : rest); }} />
+      </details>
       {showPreview && (
         <div className={`grid gap-3 ${compact ? "" : "sm:grid-cols-2"}`}>
           {(["front", "back"] as const).map((side) => (
@@ -135,7 +107,7 @@ export function CardFields({
               <p className="study-eyebrow mb-3">XEM TRƯỚC {side === "front" ? "MẶT TRƯỚC" : "MẶT SAU"}</p>
               <p lang="ja" className="font-jp whitespace-pre-wrap break-words text-xl leading-loose">
                 <FuriganaText
-                  text={side === "front" ? frontResult.text : backResult.text}
+                  text={card[side]}
                   reading={side === "front" ? card.reading : card.backReading}
                   storedSegments={side === "front" ? card.extraData?.frontFuriganaSegments : card.extraData?.backFuriganaSegments}
                 />

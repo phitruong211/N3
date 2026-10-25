@@ -410,3 +410,6 @@
 .study-help dl > div { display: contents; }
 .study-help kbd { padding: 2px 7px; border: 1px solid var(--color-border-strong); border-radius: 5px; font-family: inherit; font-size: .75rem; white-space: nowrap; }
 .study-help dd { color: var(--color-text-secondary); font-size: .85rem; }
+
+/* A custom text color should reach every block, including the muted notes the dark theme normally greys. */
+.study-session-card[data-custom-fg] [data-field="notes"] { color: inherit; opacity: .85; }
