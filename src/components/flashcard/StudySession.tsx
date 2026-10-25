@@ -26,6 +26,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { StudyClock, useStudySeconds } from "./StudyClock";
 
 const SWIPE_THRESHOLD = 50;
+const FLICK_VELOCITY = 500;
 
 // Keys stay with the open help; browsers without :popover-open never show it.
 function helpIsOpen() {
@@ -43,15 +44,15 @@ function fisherYates<T>(items: readonly T[]): T[] {
 
 const cardMotion = {
   enter: (direction: number) => ({
-    x: direction > 0 ? 88 : -88,
+    x: direction > 0 ? 64 : -64,
     opacity: 0,
-    scale: 0.985,
+    scale: 0.96,
   }),
   center: { x: 0, opacity: 1, scale: 1 },
   exit: (direction: number) => ({
-    x: direction > 0 ? -88 : 88,
+    x: direction > 0 ? -64 : 64,
     opacity: 0,
-    scale: 0.985,
+    scale: 0.96,
   }),
 };
 
@@ -594,7 +595,7 @@ export function StudySession({
             initial={mode === "flashcards" ? "enter" : false}
             animate="center"
             exit={mode === "flashcards" ? "exit" : undefined}
-            transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 390, damping: 34, mass: 0.72 }}
+            transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 320, damping: 32, mass: 1 }}
             drag={mode === "flashcards" ? "x" : false}
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.22}
@@ -603,8 +604,8 @@ export function StudySession({
             onPointerDown={() => { dragged.current = false; }}
             onDragStart={() => { dragged.current = true; }}
             onDragEnd={(_, info) => {
-              if (info.offset.x <= -SWIPE_THRESHOLD) moveCard("next");
-              else if (info.offset.x >= SWIPE_THRESHOLD) moveCard("previous");
+              if (info.offset.x <= -SWIPE_THRESHOLD || info.velocity.x < -FLICK_VELOCITY) moveCard("next");
+              else if (info.offset.x >= SWIPE_THRESHOLD || info.velocity.x > FLICK_VELOCITY) moveCard("previous");
             }}
             className={`study-session-card ${flipped && (current.type === "GRAMMAR" || current.extraData?.examples || current.extraData?.kanjiVocabulary || personalNote.entry?.text) ? "study-session-card-rich" : ""}`}
             data-card-theme={activeStyle.theme}
@@ -637,9 +638,9 @@ export function StudySession({
               {{ VOCABULARY: "Từ vựng", KANJI: "Kanji", GRAMMAR: "Ngữ pháp" }[current.type] ?? current.type} · {flipped ? "Đáp án" : "Câu hỏi"}
             </p>
             <motion.div key={`${currentCardKey}:${activeSide}`} className="study-session-face"
-              initial={reduceMotion ? false : { opacity: 0.35, rotateY: -8, y: 3 }}
-              animate={{ opacity: 1, rotateY: 0, y: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.2, ease: 'easeOut' }}>
+              initial={reduceMotion ? false : { opacity: 0, rotateX: -12, y: 8 }}
+              animate={{ opacity: 1, rotateX: 0, y: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.34, ease: [0.16, 1, 0.3, 1] }}>
             <CardFace
               card={presentationCard(current)}
               deckName={deckName}
