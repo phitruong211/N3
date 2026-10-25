@@ -1,5 +1,7 @@
 # Import bộ thẻ
 
+> Định dạng chuẩn, loại thẻ tự định nghĩa, xuất tệp và prompt sinh từ schema: xem [deck-format-v1.md](deck-format-v1.md). Tài liệu này mô tả các tên cột, TXT/CSV/Excel và furigana vẫn được nhận như trước; mọi tệp đều được đưa về định dạng đó. Cột chưa nhận diện được giữ lại thành trường riêng của thẻ. Tệp Markdown (`.md`) và nội dung dán (`mặt trước :: mặt sau :: cách đọc`) cũng được hỗ trợ.
+
 ## Định dạng màu, cỡ chữ và thụt dòng
 
 Các trường nội dung nhận HTML và CSS nội tuyến theo danh sách cho phép, tự hiển thị trong preview và phiên học. Hướng dẫn đầy đủ: [import-formatting-guide.md](../public/data/import-formatting-guide.md). File mẫu: [import-formatting-sample.json](../public/data/import-formatting-sample.json). Trong ứng dụng, liên kết hướng dẫn nằm ở phần chỉnh nội dung thẻ.

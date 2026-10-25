@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { utils, write } from 'xlsx';
-import { IMPORT_EXAMPLE, assignImportSourceField, defaultDeckTemplate, importFaceBlocks, importSourceFields, moveImportSourceField, normalizeDeckTemplate, parseTextImport, parseExcelImport, parseImportFile, remapImportPreview, parseCardExamples } from '../src/lib/ankiImport.ts';
+import { IMPORT_EXAMPLE, assignImportColumn, defaultDeckTemplate, normalizeDeckTemplate, parseTextImport, parseExcelImport, parseImportFile, remapImportPreview, parseCardExamples, setImportTableNoteType } from '../src/lib/ankiImport.ts';
 
 test('structured examples survive JSON import, remapping and API extra data serialization', () => {
   const examples = [{ japanese: '雨が降るたびに、道がぬれます。', reading: 'あめがふるたびに、みちがぬれます。', meaning: 'Mỗi lần trời mưa, đường lại ướt.' }, { japanese: '日本語を勉強します。', meaning: 'Tôi học tiếng Nhật.' }];
@@ -165,32 +165,43 @@ test('Unicode pair duplicates keep first but retain distinct answers', () => {
  assert.equal(p.cards.length, 2); assert.equal(p.duplicates, 1); assert.equal(p.issues[0].row, 3);
  assert.equal(p.cards[0].notes, 'note'); assert.equal(p.cards[0].kind, 'vocabulary'); assert.deepEqual(p.cards[0].tags, ['a','b']);
 });
-test('arbitrary source fields default to one front field and can be reassigned', () => {
+test('columns that match no field become custom fields of a derived note type and nothing is lost', () => {
  let p = parseTextImport('[{"A":"", "B":"猫", "C":"mèo", "Secret":"value"}]', 'custom.json');
  assert.equal(p.cards.length, 0);
  let table = p.tables[0];
- const fields = importSourceFields(table);
- assert.deepEqual(fields.map(field => field.destination), ['front', 'back', 'back', 'back']);
- table = assignImportSourceField(table, fields[0].key, 'ignore');
- table = assignImportSourceField(table, fields[1].key, 'front');
- table = assignImportSourceField(table, fields[3].key, 'ignore');
+ assert.deepEqual(table.columns.map(column => column.target), ['front', 'back', 'col3', 'col4']);
+ const type = p.noteTypes.find(item => item.id === table.noteTypeId);
+ assert.deepEqual(type.fields.slice(-2).map(field => [field.key, field.label]), [['col3', 'C'], ['col4', 'Secret']]);
+ table = assignImportColumn(table, 'col-0', 'ignore');
+ table = assignImportColumn(table, 'col-1', 'front');
+ table = assignImportColumn(table, 'col-2', 'back');
+ table = assignImportColumn(table, 'col-3', 'ignore');
  p = remapImportPreview(p, [table]);
  assert.equal(p.cards[0].front, '猫'); assert.equal(p.cards[0].back, 'mèo'); assert.equal(p.cards[0].notes, '');
- assert.deepEqual(importFaceBlocks(p.cards[0], 'front').map(block => block.value), ['猫']);
- assert.deepEqual(importFaceBlocks(p.cards[0], 'back').map(block => block.value), ['mèo']);
+ assert.deepEqual(p.cards[0].fields, { front: '猫', back: 'mèo' });
 });
 
-test('source fields can compose and reorder one card face while preserving labels', () => {
- let p = parseTextImport('[{"Question":"丘[おか]","Meaning":"Đồi","Sentence":"丘[おか]の上[うえ]"}]', 'free-form.json');
- let table = p.tables[0];
- const fields = importSourceFields(table);
- table = moveImportSourceField(table, fields[2].key, -1);
- p = remapImportPreview(p, [table]);
- assert.equal(p.cards[0].front, '丘');
- assert.equal(p.cards[0].back, '丘の上\n\nĐồi');
- assert.deepEqual(importFaceBlocks(p.cards[0], 'back').map(block => [block.label, block.value]), [['Sentence', '丘[おか]の上[うえ]'], ['Meaning', 'Đồi']]);
- assert.equal(p.cards[0].reading, 'おか');
- assert.equal(p.cards[0].backReading, 'おかのうえ');
+test('assigning a column to a field releases the column that held it', () => {
+ const p = parseTextImport('[{"Question":"丘[おか]","Meaning":"Đồi","Sentence":"丘[おか]の上[うえ]"}]', 'free-form.json');
+ const table = assignImportColumn(p.tables[0], 'col-2', 'back');
+ assert.deepEqual(table.columns.map(column => column.target), ['front', 'ignore', 'back']);
+ const result = remapImportPreview(p, [table]);
+ assert.equal(result.cards[0].back, '丘の上');
+ assert.equal(result.cards[0].backReading, 'おかのうえ');
+ assert.equal(result.cards[0].reading, 'おか');
+});
+
+test('extra source columns stay on the card as labelled custom fields', () => {
+ const p = parseTextImport('[{"Question":"丘","Meaning":"Đồi","Sentence":"丘の上"}]', 'free-form.json');
+ assert.equal(p.cards.length, 1);
+ assert.deepEqual(p.cards[0].fields, { front: '丘', back: 'Đồi', col3: '丘の上' });
+ assert.equal(p.noteTypes.find(item => item.id === p.cards[0].noteType).back.show.at(-1), 'col3');
+});
+
+test('switching a table to another note type releases columns that type does not have', () => {
+ const p = parseTextImport('[{"Question":"猫","Meaning":"mèo","Sentence":"x"}]', 'free-form.json');
+ const table = setImportTableNoteType(p.tables[0], 'general', p.noteTypes);
+ assert.deepEqual(table.columns.map(column => column.target), ['front', 'back', 'ignore']);
 });
 test('length limits, blank rows and manual header handling', () => {
  const p = parseTextImport('front,back\ncat,meaning\n,\n' + 'x'.repeat(20001) + ',back', 'limits.csv');
@@ -237,8 +248,8 @@ test('custom-named JSON example lists preserve multiple examples when assigned a
   ];
   const preview = parseTextImport(JSON.stringify([{ 'Từ': '猫', 'Nghĩa': 'Mèo', 'Minh họa': examples }]), 'custom.json');
   let table = preview.tables[0];
-  const field = importSourceFields(table).find(field => field.label === 'Minh họa');
-  table = assignImportSourceField(table, field.key, 'examples');
+  const field = table.columns.find(field => field.label === 'Minh họa');
+  table = assignImportColumn(table, field.key, 'examples');
   const result = remapImportPreview(preview, [table]);
   assert.equal(result.skipped, 0);
   assert.equal(result.cards.length, 1);

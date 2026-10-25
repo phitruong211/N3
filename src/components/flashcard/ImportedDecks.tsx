@@ -6,15 +6,16 @@ import { AppLoading } from '@/components/ui/AppLoading';
 import { useAuth } from "@/hooks/useAuth";
 import { useApp, useLearningStorage } from "@/hooks/useApp";
 import {
-  defaultDeckTemplate,
   kindLabels,
-  normalizeDeckTemplate,
   parseImportFile,
-  IMPORT_EXAMPLE,
+  parseTextImport,
+  previewConfig,
   type ImportedCard,
   type ImportPreview,
-  type DeckTemplateConfig,
 } from "@/lib/ankiImport";
+import { applyResolvedTemplate, builtinNoteTypes, normalizeConfig, resolveTemplate, type DeckConfig } from "@/lib/deckFormat";
+import { DeckExportDialog } from "./DeckExportDialog";
+import { EnterCodeDialog } from "./EnterCodeDialog";
 import ImportPreviewEditor from "./ImportPreviewEditor";
 import { DeckGroups } from "./DeckGroups";
 import { CardFields } from "./CardFields";
@@ -71,7 +72,10 @@ const blankCard = (): ImportedCard => ({
   notes: "",
   kind: "general",
   tags: [],
+  noteType: "general",
+  fields: { front: "", back: "" },
 });
+const manualConfig = (): DeckConfig => normalizeConfig({ version: 5, noteTypes: builtinNoteTypes() });
 const emptyPage = <T,>(): Page<T> => ({
   content: [],
   number: 0,
@@ -143,7 +147,7 @@ export function ImportedDecks({
   const [session, setSession] = useState<{
     cards: CardView[];
     deck: PersonalDeck;
-    template: DeckTemplateConfig;
+    config: DeckConfig;
     progress: Record<string, ApiProgress | null>;
     mode: "flashcards" | "anki";
     initialIndex: number;
@@ -151,9 +155,11 @@ export function ImportedDecks({
   const [studySetup, setStudySetup] = useState<{
     deck: PersonalDeck;
     cards: CardView[];
-    template: DeckTemplateConfig;
+    config: DeckConfig;
     progress: Record<string, ApiProgress | null>;
   } | null>(null);
+  const [exporting, setExporting] = useState<PersonalDeck | null>(null);
+  const [enteringCode, setEnteringCode] = useState(false);
   const input = useRef<HTMLInputElement>(null);
   const lock = useRef(false);
   const parser = useRef<AbortController | null>(null);
@@ -272,6 +278,7 @@ export function ImportedDecks({
   }
   function closeDraft() {
     setPreview(null);
+    setName("");
     setCreating(false);
     setDraft(null);
     setCreatorError("");
@@ -327,7 +334,7 @@ export function ImportedDecks({
         list,
         manual ? "Tạo thủ công" : preview!.source,
         manual ? "Thủ công" : preview!.format,
-        defaultDeckTemplate(),
+        manual ? manualConfig() : previewConfig(preview!),
         manual,
       );
       const digest = await crypto.subtle.digest(
@@ -383,17 +390,14 @@ export function ImportedDecks({
   async function loadFreeStudyCards(deck: PersonalDeck) {
     const progress: Record<string, ApiProgress | null> = {};
     const loaded = await loadStudyPages(p => cardPage(deck.id, p, "", "", "", 200, false));
+    const config = normalizeConfig(deck.templateConfig);
     const views = loaded.map((c, i) => importedCardView(
-      asImported(c),
+      asImported(c, config),
       deck.id,
       deck.sourceType === "MANUAL" ? "MANUAL" : "IMPORT",
       i,
     ));
-    return {
-      views,
-      progress,
-      template: normalizeDeckTemplate(deck.templateConfig),
-    };
+    return { views, progress, config };
   }
 
   function readyCount(deck: PersonalDeck) {
@@ -404,13 +408,13 @@ export function ImportedDecks({
 
   async function openFreeStudy(deck: PersonalDeck) {
     await operation(async () => {
-      const { views, progress, template } = await loadFreeStudyCards(deck);
+      const { views, progress, config } = await loadFreeStudyCards(deck);
       if (!views.length) {
         setMessage("Bộ này chưa có thẻ để học.");
         return;
       }
-      if (lessonOptions(views).length) setStudySetup({ deck, cards: views, template, progress });
-      else startFreeStudy({ deck, cards: views, template, progress }, null);
+      if (lessonOptions(views).length) setStudySetup({ deck, cards: views, config, progress });
+      else startFreeStudy({ deck, cards: views, config, progress }, null);
     });
   }
 
@@ -424,7 +428,7 @@ export function ImportedDecks({
     setSession({
       cards,
       deck: source.deck,
-      template: source.template,
+      config: source.config,
       progress: source.progress,
       mode: "flashcards",
       initialIndex: resolveResumeIndex(cards, getJSON<string | null>(personalDeckResumeKey(source.deck.id), null)),
@@ -441,29 +445,20 @@ export function ImportedDecks({
     await operation(async () => {
       const queue = await dueQueue(deck.id, Math.min(200, count));
       const progress: Record<string, ApiProgress | null> = {};
+      const config = normalizeConfig(deck.templateConfig);
       const views = queue.map((card, index) => {
         progress[card.cardId] = card.progress;
-        return {
-          id: card.cardId,
-          deckId: deck.id,
-          front: card.front,
-          back: card.back,
-          reading: card.reading || "",
-          backReading: typeof card.extraData?.backReading === "string" ? card.extraData.backReading : "",
-          hanViet: (["hanViet", "han_viet", "hanTu", "han_tu"].map(key => card.extraData?.[key]).find(value => typeof value === "string") as string) || "",
-          note: card.notes || "",
-          extraData: card.extraData as Record<string, string>,
-          type: card.kind,
-          tags: [],
-          source: deck.sourceType === "MANUAL" ? "MANUAL" as const : "IMPORT" as const,
-          position: index,
-        };
+        return importedCardView(asImported({
+          id: card.cardId, deckId: deck.id, front: card.front, back: card.back, reading: card.reading, notes: card.notes,
+          kind: card.kind, position: index, externalId: null, extraData: card.extraData,
+          createdAt: "", updatedAt: "", noteType: card.noteType, fields: card.fields,
+        } as PersonalCard, config), deck.id, deck.sourceType === "MANUAL" ? "MANUAL" : "IMPORT", index);
       });
       if (!views.length) {
         setMessage("Bộ này đã hoàn thành lịch ôn hôm nay.");
         return;
       }
-      setSession({ cards: views, deck, template: normalizeDeckTemplate(deck.templateConfig), progress, mode: "anki", initialIndex: 0 });
+      setSession({ cards: views, deck, config, progress, mode: "anki", initialIndex: 0 });
     });
   }
   async function shiftCard(id: string, delta: number) {
@@ -478,29 +473,17 @@ export function ImportedDecks({
       setReload((v) => v + 1);
     });
   }
-  function download(format: "csv" | "json" | "txt") {
-    const delimiter = format === "csv" ? "," : "\t";
-    const headers = Object.keys(IMPORT_EXAMPLE[0]);
-    const rows = IMPORT_EXAMPLE.map(card => headers.map(key => {
-      const value = card[key as keyof typeof card];
-      if (value == null) return "";
-      if (key === "tags") return (value as readonly string[]).join(";");
-      return typeof value === "object" ? JSON.stringify(value) : String(value);
-    }));
-    const text = format === "json"
-      ? JSON.stringify(IMPORT_EXAMPLE, null, 2)
-      : [headers, ...rows].map(row => row.map(value => `"${value.replaceAll('"', '""')}"`).join(delimiter)).join("\n") + "\n";
-    const url = URL.createObjectURL(
-      new Blob([text], {
-        type: format === "json" ? "application/json" : "text/plain;charset=utf-8",
-      }),
-    );
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `mau-bo-the.${format}`;
-    a.click();
-    URL.revokeObjectURL(url);
+  function usePaste(text: string, format: "json" | "markdown" | "table") {
+    setActive(null);
+    setCreating(true);
+    setCreatorError("");
+    void operation(async () => {
+      const p = parseTextImport(text, format === "json" ? "Bộ thẻ dán.json" : format === "markdown" ? "Bộ thẻ dán.md" : "Bộ thẻ dán.txt");
+      setPreview(p);
+      setName((current) => current.trim() || p.name);
+    });
   }
+  const activeConfig = active ? normalizeConfig(active.templateConfig) : null;
   if (session)
     return (
       <StudySession
@@ -508,19 +491,20 @@ export function ImportedDecks({
         deckName={session.deck.name}
         mode={session.mode}
         initialIndex={session.initialIndex}
-        template={session.template}
+        template={resolveTemplate(session.config)}
+        config={session.config}
         initialProgress={session.progress}
         onPositionChange={session.mode === "flashcards" ? cardId => setJSON(personalDeckResumeKey(session.deck.id), cardId) : undefined}
         onComplete={session.mode === "flashcards" ? () => setJSON(personalDeckResumeKey(session.deck.id), null) : undefined}
-        onTemplateChange={async template => {
-          await updateDeck(session.deck.id, { templateConfig: template });
-          setSession(previous => previous ? { ...previous, template } : previous);
+        onConfigChange={async config => {
+          await updateDeck(session.deck.id, { templateConfig: config });
+          setSession(previous => previous ? { ...previous, config } : previous);
           setReload(value => value + 1);
         }}
         onCardChange={session.deck.sourceType === "IMPORT" ? async changed => {
           const updated = await updateCard(changed.id, cardRequest(changed));
           return importedCardView(
-            asImported(updated as PersonalCard),
+            asImported(updated as PersonalCard, session.config),
             session.deck.id,
             "IMPORT",
             Math.max(0, session.cards.findIndex(card => card.id === changed.id)),
@@ -545,6 +529,8 @@ export function ImportedDecks({
           {!user && mode === 'free' && <OverflowMenu label="Tạo mới" triggerContent={<><Plus size={18}/>Tạo mới<ChevronDown size={15}/></>} actions={[
             { id: 'create', label: 'Tạo bộ thẻ', onSelect: openCreator },
             { id: 'import', label: 'Nhập từ tệp', onSelect: chooseImport },
+            { id: 'code', label: 'Nhập mã chia sẻ', onSelect: () => setEnteringCode(true) },
+            { id: 'explore', label: 'Khám phá thư viện cộng đồng', onSelect: () => navigate('/explore') },
           ]}/>}
         </div>}
       </div>
@@ -553,7 +539,7 @@ export function ImportedDecks({
         type="file"
         className="sr-only"
         aria-label="Chọn file nhập bộ thẻ"
-        accept=".txt,.csv,.tsv,.json,.xlsx,.xls"
+        accept=".txt,.csv,.tsv,.json,.md,.markdown,.xlsx,.xls"
         onChange={(e) => {
           const file = e.target.files?.[0];
           e.target.value = "";
@@ -640,6 +626,7 @@ export function ImportedDecks({
             >
               Tùy chỉnh
             </button>
+            <button className="study-button" disabled={busy} onClick={() => setExporting(active)}>Xuất</button>
             {active.sourceType === 'IMPORT' && <button className="study-button" disabled={busy} onClick={() => setSharing(active)}>Chia sẻ</button>}
             <button
               className="study-button"
@@ -699,7 +686,7 @@ export function ImportedDecks({
                 });
               }}
             >
-              <CardFields key={editing.id} card={editing} onChange={setEditing} />
+              <CardFields key={editing.id} card={editing} noteTypes={activeConfig?.noteTypes} onChange={setEditing} />
               <button
                 className="study-button study-button-primary"
                 disabled={busy || !editing.front.trim() || !editing.back.trim()}
@@ -852,7 +839,7 @@ export function ImportedDecks({
                     disabled={busy}
                     onClick={() => {
                       editExisting.current = true;
-                      setEditing(asImported(c));
+                      setEditing(asImported(c, activeConfig!));
                     }}
                   >
                     Sửa
@@ -1009,10 +996,10 @@ export function ImportedDecks({
                       onClick={chooseImport}
                     >
                       <span className="rounded-full bg-[var(--color-surface-alt)] p-3 text-[var(--color-accent)]"><Upload size={21} /></span>
-                      <span><strong className="block">Nhập từ tệp</strong><span className="study-copy">TXT, CSV, TSV, JSON, XLSX hoặc XLS</span></span>
+                      <span><strong className="block">Nhập từ tệp</strong><span className="study-copy">.sonhat.json, JSON, CSV, TSV, TXT, Markdown, XLSX hoặc XLS</span></span>
                     </button>
                   </div>
-                  <ImportGuide onDownload={download} />
+                  <ImportGuide onUsePaste={usePaste} />
                   </>
                 )}
               </section>
@@ -1026,10 +1013,13 @@ export function ImportedDecks({
               createActions={mode === 'free' ? [
                 { id: 'create', label: 'Tạo bộ thẻ', disabled: busy, onSelect: openCreator },
                 { id: 'import', label: 'Nhập từ tệp', disabled: busy, onSelect: chooseImport },
+                { id: 'code', label: 'Nhập mã chia sẻ', disabled: busy, onSelect: () => setEnteringCode(true) },
+                { id: 'explore', label: 'Khám phá thư viện cộng đồng', disabled: busy, onSelect: () => navigate('/explore') },
               ] : []}
               deckActions={deck => [
                 { id: 'manage', label: 'Quản lý thẻ', disabled: busy, onSelect: () => open(deck) },
                 ...(deck.sourceType === 'IMPORT' ? [{ id: 'share', label: 'Chia sẻ bộ thẻ', disabled: busy, onSelect: () => setSharing(deck) }] : []),
+                { id: 'export', label: 'Xuất bộ thẻ', disabled: busy, onSelect: () => setExporting(deck) },
                 { id: 'customize', label: 'Tùy chỉnh giao diện', disabled: busy, onSelect: () => setCustomizing(deck) },
               ]}
               onChange={() => setReload(value => value + 1)} renderDeck={(deck, menu, compact) => {
@@ -1104,33 +1094,38 @@ export function ImportedDecks({
       />
       {sharingGroup && <DeckShareDialog key={`group:${sharingGroup.id}`} kind="group" deck={sharingGroup} onClose={() => setSharingGroup(null)}/>}
       {sharing && <DeckShareDialog key={sharing.id} deck={sharing} onClose={() => setSharing(null)}/>}
-      {customizing && (
-        <DeckCustomizeDialog
-          deck={{
-            id: customizing.id,
-            name: customizing.name,
-            source: customizing.sourceName || "",
-            format: customizing.importFormat || "",
-            position: customizing.position,
-            createdAt: customizing.createdAt,
-            template: normalizeDeckTemplate(customizing.templateConfig),
-            cards:
-              active?.id === customizing.id
-                ? cards.content.map(asImported)
-                : [],
-          }}
-          busy={busy}
-          onCancel={() => setCustomizing(null)}
-          onSave={(template) =>
-            void operation(async () => {
-              await updateDeck(customizing.id, { templateConfig: template });
-              if (active?.id === customizing.id) await refreshActive();
-              else setReload((value) => value + 1);
-              setCustomizing(null);
-            })
-          }
-        />
-      )}
+      {enteringCode && <EnterCodeDialog onClose={() => setEnteringCode(false)} />}
+      {exporting && <DeckExportDialog key={exporting.id} deck={exporting} onClose={() => setExporting(null)} />}
+      {customizing && (() => {
+        const config = normalizeConfig(customizing.templateConfig);
+        const loaded = active?.id === customizing.id ? cards.content : [];
+        const typeId = (loaded[0]?.noteType && config.noteTypes.some((type) => type.id === loaded[0].noteType) ? loaded[0].noteType : config.noteTypes[0].id) as string;
+        return (
+          <DeckCustomizeDialog
+            deck={{
+              id: customizing.id,
+              name: customizing.name,
+              source: customizing.sourceName || "",
+              format: customizing.importFormat || "",
+              position: customizing.position,
+              createdAt: customizing.createdAt,
+              template: resolveTemplate(config, typeId),
+              cards: loaded.map((card) => asImported(card, config)),
+            }}
+            noteTypes={config.noteTypes}
+            busy={busy}
+            onCancel={() => setCustomizing(null)}
+            onSave={(template) =>
+              void operation(async () => {
+                await updateDeck(customizing.id, { templateConfig: applyResolvedTemplate(config, typeId, template) });
+                if (active?.id === customizing.id) await refreshActive();
+                else setReload((value) => value + 1);
+                setCustomizing(null);
+              })
+            }
+          />
+        );
+      })()}
     </section>
   );
 }

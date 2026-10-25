@@ -6,6 +6,8 @@ import { SharedDeckContent } from './SharedDeckContent';
 import { AppLoading } from '@/components/ui/AppLoading';
 import { SharedPageLayout, SharedSaveAction, SharedError } from './SharedPageLayout';
 import { useSharedSave } from './useSharedSave';
+import { useAuth } from '@/hooks/useAuth';
+import { ReportDialog } from './ReportDialog';
 
 export function SharedDeckPage() {
   const { token = '' } = useParams();
@@ -20,6 +22,8 @@ function DeckPage({ token }: { token: string }) {
   const [previewPage, setPreviewPage] = useState(0);
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const save = useSharedSave(token, 'deck');
+  const { user, requestAuth } = useAuth();
+  const [reporting, setReporting] = useState(false);
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true); setError(''); setUnavailable(false);
@@ -52,7 +56,9 @@ function DeckPage({ token }: { token: string }) {
     </>}
     {(error || (save.unavailable && save.error)) && <SharedError error={error || save.error} unavailable={gone} retry={() => setAttempt(v => v + 1)}/>}
     {save.restoreError && <SharedError error={save.restoreError} retry={save.retryRestore}/>}
+    {reporting && deck && <ReportDialog token={token} deckName={deck.name} onClose={() => setReporting(false)} />}
     <footer className="shared-footer"><p>Lưu để học toàn bộ nội dung. Bản sao và lịch ôn của bạn luôn độc lập.</p>
+      {deck && !gone && <p><button type="button" className="underline" onClick={() => user ? setReporting(true) : requestAuth()}>Báo cáo bộ thẻ này</button> nếu nội dung vi phạm bản quyền hoặc không phù hợp.{!user && ' Cần đăng nhập để gửi báo cáo.'}</p>}
       {deck?.cards.some(card => card.dictionarySource) && <p>Một số thẻ dựa trên JMdict — EDRDG / James William Breen, có thể đã được chỉnh sửa. <a href="https://www.edrdg.org/edrdg/licence.html" className="underline" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <Link to="/dictionary/sources" className="underline">Nguồn từ điển</Link></p>}
     </footer>
   </SharedPageLayout>;

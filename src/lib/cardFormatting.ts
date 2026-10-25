@@ -1,5 +1,24 @@
 // Formatting is opt-in through recognized HTML tags; ordinary comparisons remain text.
-export const hasCardMarkup = (value: string) => /<\/?(?:p|div|span|br|b|strong|i|em|u|s|small|mark|font|h[1-6]|ul|ol|li|blockquote|pre|code|ruby|rt|rp)(?:\s|\/?>)/i.test(value);
+export const CARD_MARKUP_TAGS = ['p', 'div', 'span', 'br', 'b', 'strong', 'i', 'em', 'u', 's', 'small', 'mark', 'font', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'pre', 'code', 'ruby', 'rt', 'rp'] as const;
+export const hasCardMarkup = (value: string) => new RegExp(`<\\/?(?:${CARD_MARKUP_TAGS.join('|')})(?:\\s|\\/?>)`, 'i').test(value);
+
+// What safeCardStyle accepts, as data: the import prompt is generated from this and a test checks every example passes.
+export const CARD_STYLE_DOC = [
+  { property: 'color', values: 'màu #rrggbb, rgb(), hsl() hoặc tên màu cơ bản', example: '#60a5fa' },
+  { property: 'background-color', values: 'như color', example: '#fef3c7' },
+  { property: 'font-size', values: '12–72px, 50–200% hoặc 0.5–2em/rem', example: '24px' },
+  { property: 'font-weight', values: 'normal, bold hoặc 100–900 theo bước 100', example: '700' },
+  { property: 'font-style', values: 'normal, italic hoặc oblique', example: 'italic' },
+  { property: 'text-align', values: 'left, right, center, justify, start, end', example: 'left' },
+  { property: 'text-decoration', values: 'none, underline, line-through', example: 'underline' },
+  { property: 'white-space', values: 'normal, pre-wrap, pre-line', example: 'pre-line' },
+  { property: 'line-height', values: 'số từ 1 đến 2', example: '1.5' },
+  { property: 'padding-left', values: '0–64px (hoặc 0–4em, 0–15%)', example: '16px' },
+  { property: 'text-indent', values: 'như padding-left', example: '16px' },
+  { property: 'margin-left', values: 'như padding-left', example: '16px' },
+  { property: 'margin-top', values: 'như padding-left', example: '8px' },
+  { property: 'margin-bottom', values: 'như padding-left', example: '8px' },
+] as const;
 
 export function safeCardStyle(property: string, value: string): string | undefined {
   const v = value.trim().toLowerCase();

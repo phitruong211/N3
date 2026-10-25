@@ -56,6 +56,7 @@ export function SettingsPage() {
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Tài khoản</h2>
           <p className="study-copy mt-1">{user ? `${user.displayName} · ${user.email}` : 'Bạn đang học thử trên thiết bị này.'}</p>
+          {user?.role === 'ADMIN' && <p className="mt-1"><a className="underline" href="/admin/reports">Quản trị: báo cáo bộ thẻ</a></p>}
           <button className="study-button mt-4" onClick={() => user ? void signOut() : requestAuth()}>{user ? 'Đăng xuất' : 'Đăng nhập / Đăng ký'}</button>
           {user && <div className="mt-5 border-t border-[var(--color-border)] pt-4"><AccountLearningStatus /></div>}
         </section>

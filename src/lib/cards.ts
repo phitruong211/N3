@@ -1,5 +1,6 @@
 import type { VocabItem, KanjiItem, GrammarItem } from "../types";
 import type { ImportedCard } from "./ankiImport";
+import type { CardFieldValues, StyleSpec } from "./deckFormat";
 export type CardSource = "BUILT_IN" | "MANUAL" | "IMPORT";
 export interface CardView {
   noteIdentity?: string;
@@ -17,6 +18,9 @@ export interface CardView {
   sourceRef?: string;
   position: number;
   extraData?: Record<string, string>;
+  noteType?: string;
+  fields?: CardFieldValues;
+  style?: StyleSpec;
 }
 export interface DeckSummary {
   id: string;
@@ -117,6 +121,9 @@ export function importedCardView(
     sourceRef: card.sourceRef,
     extraData: card.extraData,
     position,
+    noteType: card.noteType,
+    fields: card.fields,
+    style: card.style,
   };
 }
 export function presentationCard(card: CardView): ImportedCard {
@@ -132,5 +139,8 @@ export function presentationCard(card: CardView): ImportedCard {
     tags: card.tags,
     sourceRef: card.sourceRef,
     extraData: card.extraData,
+    noteType: card.noteType,
+    fields: card.fields,
+    style: card.style,
   };
 }
