@@ -15,12 +15,20 @@ const themes: { id: ThemeMode; label: string; bg: string; surface: string; text:
   { id: 'high-contrast', label: 'Tương phản cao', bg: '#FFFFFF', surface: '#FFFFFF', text: '#000000', accent: '#003EA8' },
 ];
 const sizes = [{ id: 'small', label: 'Nhỏ' }, { id: 'medium', label: 'Vừa' }, { id: 'large', label: 'Lớn' }] as const;
+type Tab = 'account' | 'appearance' | 'study' | 'srs';
+const TABS: { id: Tab; label: string; detail: string }[] = [
+  { id: 'account', label: 'Tài khoản', detail: 'Đăng nhập, đồng bộ, xóa dữ liệu' },
+  { id: 'appearance', label: 'Giao diện', detail: 'Màu nền, cỡ chữ, hiệu ứng' },
+  { id: 'study', label: 'Học tập', detail: 'Furigana, phát âm, mục tiêu ngày' },
+  { id: 'srs', label: 'Ôn ngắt quãng', detail: 'Thẻ mới mỗi ngày, lịch ôn' },
+];
 const dailyNewCardPresets = [0, 10, 20, 50, 100] as const;
 
 export function SettingsPage() {
   const { resetAllData } = useLearningStorage();
   const { settings, updateSettings, settingsSync } = useApp();
   const { user, signOut, requestAuth } = useAuth();
+  const [tab, setTab] = useState<Tab>('appearance');
   const [confirmReset, setConfirmReset] = useState(false);
   const [srsError, setSrsError] = useState('');
   const dailyNewLimitStatus = !user
@@ -44,6 +52,7 @@ export function SettingsPage() {
     if (next <= settings.srsAgainMinutes) { setSrsError('Thời gian kiểm tra lại phải lớn hơn thời gian học lại.'); return; }
     setSrsError(''); updateSettings({ srsGoodMinutes: next });
   };
+  const hasPreview = tab === 'appearance' || tab === 'study';
   const handleReset = () => {
     if (!confirmReset) { setConfirmReset(true); return; }
     if (resetAllData()) window.location.reload();
@@ -51,8 +60,14 @@ export function SettingsPage() {
   return <div className="study-page">
     <PageHeading title="Cài đặt" />
     {user && <div role="status" className="study-copy">{settingsSync.pending ? "Đang đồng bộ cài đặt…" : settingsSync.error ? <><span role="alert">{settingsSync.error} Cài đặt vẫn được giữ trên thiết bị.</span> <button className="study-button" onClick={()=>void settingsSync.retry()}>Thử lưu lại</button></> : "Cài đặt đã đồng bộ"}</div>}
-    <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)]">
+    <div role="tablist" aria-label="Nhóm cài đặt" className="-mb-2 flex max-w-full gap-6 overflow-x-auto border-b border-[var(--color-border-strong)]">
+      {TABS.map(item => <button key={item.id} role="tab" id={`settings-tab-${item.id}`} aria-selected={tab === item.id} aria-controls="settings-panel" title={item.detail} onClick={() => setTab(item.id)}
+        className={`-mb-px whitespace-nowrap border-b-2 py-3 text-sm font-medium transition-[color,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] ${tab === item.id ? 'border-[var(--color-gold)] text-[var(--color-text)]' : 'border-transparent text-[var(--color-text-tertiary)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]'}`}>{item.label}</button>)}
+    </div>
+    <p className="study-copy">{TABS.find(item => item.id === tab)!.detail}.</p>
+    <div id="settings-panel" role="tabpanel" aria-labelledby={`settings-tab-${tab}`} className={`grid items-start gap-6 ${hasPreview ? 'lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)]' : 'max-w-3xl'}`}>
       <div className="space-y-6">
+        {tab === 'account' && <>
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Tài khoản</h2>
           <p className="study-copy mt-1">{user ? `${user.displayName} · ${user.email}` : 'Bạn đang học thử trên thiết bị này.'}</p>
@@ -60,6 +75,17 @@ export function SettingsPage() {
           <button className="study-button mt-4" onClick={() => user ? void signOut() : requestAuth()}>{user ? 'Đăng xuất' : 'Đăng nhập / Đăng ký'}</button>
           {user && <div className="mt-5 border-t border-[var(--color-border)] pt-4"><AccountLearningStatus /></div>}
         </section>
+        <details className="study-panel">
+          <summary className="hit flex cursor-pointer list-none items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><span className="text-base font-semibold">Vùng nguy hiểm</span></summary>
+          <h2 className="mt-4 text-base font-semibold">Xóa dữ liệu trên thiết bị</h2>
+          <p className="study-copy mt-2">Xóa lịch ôn, hoạt động học, mục đã lưu, dữ liệu nghe và cài đặt trên thiết bị của phiên hiện tại. Tiến độ đã đồng bộ sẽ được tải lại từ tài khoản. Không xóa dữ liệu của tài khoản khác, dữ liệu Guest khi đang đăng nhập hoặc bộ thẻ trên máy chủ.</p>
+          <button className="study-button mt-4 border-[var(--color-error)] text-[var(--color-error)]" onClick={handleReset}>
+            {confirmReset ? 'Xác nhận xóa toàn bộ dữ liệu' : 'Xóa dữ liệu học'}
+          </button>
+          {confirmReset && <button className="study-button ml-2 mt-4" onClick={() => setConfirmReset(false)}>Hủy</button>}
+        </details>
+        </>}
+        {tab === 'appearance' && <>
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Giao diện</h2>
           <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">{themes.map(theme => {
@@ -85,6 +111,8 @@ export function SettingsPage() {
             className={'study-button min-h-11 ' + (settings.fontSize === size.id ? 'study-button-primary' : '')}
             onClick={() => updateSettings({ fontSize: size.id })}>{size.label}</button>)}</div>
         </section>
+        </>}
+        {tab === 'study' && <>
         <section className="study-panel">
           <h2 className="mb-3 text-base font-semibold text-[var(--color-text)]">Khi học</h2>
           <SettingToggle label="Hiện furigana mặt trước" detail="Hiện hiragana trên Kanji trước khi lật thẻ" checked={settings.showFuriganaFront} onChange={value => updateSettings({ showFuriganaFront: value })}/>
@@ -92,6 +120,8 @@ export function SettingsPage() {
           <SettingToggle label="Tự phát âm" detail="Đọc thẻ khi bắt đầu học nếu trình duyệt hỗ trợ" checked={settings.autoPlayAudio} onChange={value=>updateSettings({autoPlayAudio:value})}/>
           <label className="block py-3">Mục tiêu mỗi ngày (thẻ)<input className="study-input" type="number" min={1} max={1000} value={settings.dailyGoal} onChange={e=>updateSettings({dailyGoal:Math.max(1,Math.min(1000,Math.round(Number(e.target.value)||1)))})}/></label>
         </section>
+        </>}
+        {tab === 'srs' && <>
         <section className="study-panel">
           <h2 className="text-base font-semibold text-[var(--color-text)]">Ôn ngắt quãng</h2>
           <p className="study-copy mt-1">Nếu không nhớ đáp án, hãy chọn Quên; Khó chỉ dùng khi bạn vẫn nhớ nhưng phải suy nghĩ nhiều.</p>
@@ -156,17 +186,9 @@ export function SettingsPage() {
           </div>
           <button className="study-button mt-4" onClick={() => { setSrsError(''); updateSettings({ srsDailyNewLimit: 20, srsAgainMinutes: 1, srsGoodMinutes: 10, srsDesiredRetention: 0.9 }); }}>Khôi phục mặc định</button>
         </section>
-        <details className="study-panel">
-          <summary className="hit flex cursor-pointer list-none items-center gap-2 text-[var(--color-error)]"><AlertTriangle size={18}/><span className="text-base font-semibold">Vùng nguy hiểm</span></summary>
-          <h2 className="mt-4 text-base font-semibold">Xóa dữ liệu trên thiết bị</h2>
-          <p className="study-copy mt-2">Xóa lịch ôn, hoạt động học, mục đã lưu, dữ liệu nghe và cài đặt trên thiết bị của phiên hiện tại. Tiến độ đã đồng bộ sẽ được tải lại từ tài khoản. Không xóa dữ liệu của tài khoản khác, dữ liệu Guest khi đang đăng nhập hoặc bộ thẻ trên máy chủ.</p>
-          <button className="study-button mt-4 border-[var(--color-error)] text-[var(--color-error)]" onClick={handleReset}>
-            {confirmReset ? 'Xác nhận xóa toàn bộ dữ liệu' : 'Xóa dữ liệu học'}
-          </button>
-          {confirmReset && <button className="study-button ml-2 mt-4" onClick={() => setConfirmReset(false)}>Hủy</button>}
-        </details>
+        </>}
       </div>
-      <section className="study-panel lg:sticky lg:top-20">
+      {hasPreview && <section className="study-panel lg:sticky lg:top-20">
         <p className="study-eyebrow">XEM TRƯỚC</p>
         <div className="mt-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-6 text-center">
           <p className="study-eyebrow mb-2">Mặt trước</p>
@@ -179,7 +201,7 @@ export function SettingsPage() {
           </div>
         </div>
         <p className="study-copy mt-4">{user ? 'Cài đặt, bộ thẻ, dấu trang và tiến độ ôn được đồng bộ với tài khoản. Lịch sử nghe vẫn lưu trên thiết bị.' : 'Cài đặt và tiến độ học thử chỉ lưu trên thiết bị này, chưa đồng bộ vào tài khoản.'}</p>
-      </section>
+      </section>}
     </div>
   </div>;
 }
