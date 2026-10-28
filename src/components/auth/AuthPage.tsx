@@ -33,8 +33,8 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
 
   return <main className={compact ? "auth-page auth-page-compact" : "auth-page"}>
     {!compact && <section className="auth-story" aria-label="Học tiếng Nhật mỗi ngày">
-      <img className="auth-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/20181110_Fushimi_Inari_Torii_12.jpg/1280px-20181110_Fushimi_Inari_Torii_12.jpg" alt="" referrerPolicy="no-referrer" decoding="async"/>
-      <div className="auth-brand"><BrandMark size={46}/><div>SỔ NHẬT<small>HỌC TIẾNG NHẬT MỖI NGÀY</small></div></div>
+      <img className="auth-photo" src="/landing/photos/1280-20181110_fushimi_inari_torii_12.jpg" alt="" referrerPolicy="no-referrer" decoding="async"/>
+      <a className="auth-brand" href="/welcome.html" aria-label="SỔ NHẬT, về trang giới thiệu"><BrandMark size={46}/><div>SỔ NHẬT<small>HỌC TIẾNG NHẬT MỖI NGÀY</small></div></a>
       <div className="auth-editorial"><p className="auth-eyebrow">MỘT CHÚT MỖI NGÀY</p><h1>Những bước nhỏ.<br/><em>Một hành trình lớn.</em></h1><p className="auth-description">Từ những từ vựng đầu tiên đến một thế giới mới.<br/>Tiếp tục hành trình tiếng Nhật theo nhịp của bạn.</p></div>
       <p className="auth-bigkanji" lang="ja" aria-hidden="true">歩</p>
       <div className="auth-story-footer"><span>Fushimi Inari, Kyōto — ảnh Balon Greyjoy, CC0</span><span lang="ja">一日一歩。</span></div>
