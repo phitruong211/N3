@@ -1,0 +1,47 @@
+{
+  "exams": [
+    {
+      "id": "n3-2024-07",
+      "level": "N3",
+      "title": "JLPT N3 · 7/2024",
+      "pdf": "n3-2024-07/de.pdf",
+      "audio": "n3-2024-07/nghe.mp3",
+      "answerPdf": "n3-2024-07/dap-an.pdf",
+      "scriptPdf": "n3-2024-07/script.pdf",
+      "sections": [
+        {
+          "id": "vocab", "title": "Chữ Hán · Từ vựng", "minutes": 30,
+          "groups": [
+            { "label": "問題1", "answers": [3, 3, 1, 1, 4, 2, 2, 4] },
+            { "label": "問題2", "answers": [3, 4, 1, 3, 1, 2] },
+            { "label": "問題3", "answers": [3, 3, 1, 2, 2, 4, 2, 1, 4, 3, 1] },
+            { "label": "問題4", "answers": [2, 2, 1, 4, 3] },
+            { "label": "問題5", "answers": [4, 3, 4, 2, 1] }
+          ]
+        },
+        {
+          "id": "grammar", "title": "Ngữ pháp · Đọc hiểu", "minutes": 70,
+          "groups": [
+            { "label": "問題1", "answers": [4, 2, 1, 2, 2, 1, 1, 4, 3, 1, 3, 2, 3] },
+            { "label": "問題2", "answers": [4, 4, 3, 4, 1] },
+            { "label": "問題3", "answers": [3, 4, 2, 1] },
+            { "label": "問題4", "answers": [4, 3, 1, 3] },
+            { "label": "問題5", "answers": [1, 2, 4, 2, 2, 2] },
+            { "label": "問題6", "answers": [3, 4, 3, 1] },
+            { "label": "問題7", "answers": [3, 4] }
+          ]
+        },
+        {
+          "id": "listening", "title": "Nghe hiểu", "minutes": 40, "audio": true,
+          "groups": [
+            { "label": "問題1", "answers": [2, 1, 4, 4, 1, 3] },
+            { "label": "問題2", "answers": [4, 3, 4, 2, 1, 2] },
+            { "label": "問題3", "answers": [4, 3, 1] },
+            { "label": "問題4", "answers": [1, 3, 2, 1] },
+            { "label": "問題5", "answers": [1, 2, 2, 3, 3, 1, 3, 3, 2] }
+          ]
+        }
+      ]
+    }
+  ]
+}

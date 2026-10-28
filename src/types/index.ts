@@ -370,6 +370,7 @@ export type PageId =
   | 'srs'
   | 'quiz'
   | 'listening'
+  | 'exam'
   | 'progress'
   | 'search'
   | 'bookmarks'

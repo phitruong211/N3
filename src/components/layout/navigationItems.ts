@@ -27,7 +27,7 @@ export const MORE_NAV_ITEMS: NavigationItem[] = [
 ];
 
 export function isNavigationItemActive(item: NavigationItem, currentPage: PageId): boolean {
-  if (item.page === 'vocabulary') return ['vocabulary', 'grammar', 'kanji', 'listening'].includes(currentPage);
+  if (item.page === 'vocabulary') return ['vocabulary', 'grammar', 'kanji', 'listening', 'exam'].includes(currentPage);
   if (item.page === 'flashcards') return currentPage === 'flashcards';
   if (item.page === 'srs') return currentPage === 'srs' || currentPage === 'anki';
   return item.page === currentPage;

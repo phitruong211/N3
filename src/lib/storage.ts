@@ -474,7 +474,7 @@ export function createLearningStorage(scope: StorageScope) {
   // --- Reset ---
 
   function resetAllData(): boolean {
-    return [...Object.values(KEYS), 'n3_srs_cards', 'nhat-listening-v1', 'nhat-jlpt-listening-scores-v1', 'learning_revision', 'learning_base', 'learning_dirty', 'learning_local_backup', 'learning_conflict_backup', 'settings_pending', 'review_outbox_v1'].map(key => localStorage.removeItem(key)).every(Boolean);
+    return [...Object.values(KEYS), 'n3_srs_cards', 'nhat-listening-v1', 'nhat-jlpt-listening-scores-v1', 'nhat-jlpt-exam-v1', 'learning_revision', 'learning_base', 'learning_dirty', 'learning_local_backup', 'learning_conflict_backup', 'settings_pending', 'review_outbox_v1'].map(key => localStorage.removeItem(key)).every(Boolean);
   }
 
   return { setJSONStrict, scope, subscribeLearning, withoutLearningEvents, getSRSKey, getSRSCards, saveSRSCards, getSRSCard, upsertSRSCard, getOrCreateSRSCard, migrateV1, getBookmarks, saveBookmarks, toggleBookmark, isBookmarked, getSettings, saveSettings, updateSetting, getStudyDays, undoReviewActivity, recordStudyActivity, recordFreeStudyActivity, getLastPage, setLastPage, getSidebarCollapsed, setSidebarCollapsed, getLastVocabIndex, setLastVocabIndex, getLastKanjiIndex, setLastKanjiIndex, getLastGrammarIndex, setLastGrammarIndex, getLastActiveDeck, setLastActiveDeck, calculateStreak, applyTheme, resetAllData, getJSON, setJSON };
@@ -483,6 +483,6 @@ export function createLearningStorage(scope: StorageScope) {
 export type LearningStorage = ReturnType<typeof createLearningStorage>;
 
 export function hasLegacyLearningData(): boolean {
-  try { return [...Object.values(KEYS), "n3_srs_cards", "nhat-listening-v1", "nhat-jlpt-listening-scores-v1"].some(key => globalThis.localStorage.getItem(key) !== null); }
+  try { return [...Object.values(KEYS), "n3_srs_cards", "nhat-listening-v1", "nhat-jlpt-listening-scores-v1", "nhat-jlpt-exam-v1"].some(key => globalThis.localStorage.getItem(key) !== null); }
   catch { return false; }
 }

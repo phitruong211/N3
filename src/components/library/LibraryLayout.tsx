@@ -5,6 +5,7 @@ const tabs = [
   ['/library/grammar', 'Ngữ pháp'],
   ['/library/kanji', 'Kanji'],
   ['/library/listening', 'Luyện nghe'],
+  ['/library/exam', 'Đề thi JLPT'],
 ] as const;
 
 export function LibraryLayout() {

@@ -7,6 +7,7 @@ export const PAGE_PATHS: Record<PageId, string> = {
   grammar: '/library/grammar',
   kanji: '/library/kanji',
   listening: '/library/listening',
+  exam: '/library/exam',
   flashcards: '/decks',
   anki: '/review',
   srs: '/review',

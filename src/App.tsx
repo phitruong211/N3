@@ -34,6 +34,7 @@ const QuizPage = lazy(() => import('@/components/quiz/QuizPage').then((module) =
 const ListeningPage = lazy(() => import('@/components/listening/ListeningPage').then((module) => ({ default: module.ListeningPage })));
 const ProgressPage = lazy(() => import('@/components/progress/ProgressPage').then((module) => ({ default: module.ProgressPage })));
 const BookmarksPage = lazy(() => import('@/components/bookmarks/BookmarksPage').then((module) => ({ default: module.BookmarksPage })));
+const ExamPage = lazy(() => import('@/components/exam/ExamPage').then(module => ({ default: module.ExamPage })));
 const SettingsPage = lazy(() => import('@/components/settings/SettingsPage').then((module) => ({ default: module.SettingsPage })));
 
 /** Library pages wait here; the data downloads the first time one is opened. */
@@ -74,6 +75,7 @@ function AppContent() {
             <Route path="grammar" element={<LibraryGate><GrammarPage /></LibraryGate>} />
             <Route path="kanji" element={<LibraryGate><KanjiPage /></LibraryGate>} />
             <Route path="listening" element={<ListeningPage />} />
+            <Route path="exam" element={<ExamPage />} />
           </Route>
           <Route path="/decks" element={<LibraryGate><FlashcardPage /></LibraryGate>} />
           <Route path="/review" element={<LibraryGate><AnkiPage /></LibraryGate>} />
