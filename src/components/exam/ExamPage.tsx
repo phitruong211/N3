@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { useLearningStorage } from '@/hooks/useApp';
 import { Check, ExternalLink, RotateCcw } from '@/components/ui/icons';
 import { EmptyState, PageHeading } from '@/components/ui/StudyUI';
+import { PdfPages } from './PdfPages';
 
 type Question = { prompt: string; options: string[] };
 /** `questions` (optional) lets an exam without a PDF show its questions as text; it must line up with `answers`. */
@@ -22,13 +23,19 @@ const total = (exam: Exam) => exam.sections.reduce((sum, section) => sum + flat(
 const minutesOf = (exam: Exam) => exam.sections.reduce((sum, section) => sum + section.minutes, 0);
 const clock = (seconds: number) => `${String(Math.floor(Math.max(0, seconds) / 60)).padStart(2, '0')}:${String(Math.max(0, seconds) % 60).padStart(2, '0')}`;
 const asset = (path: string) => `${BASE}exams/${path}`;
+/** Desktop shows the browser's own PDF viewer; below this width (phones, tablets) the pages are drawn in-app instead. */
+const DESKTOP = '(min-width: 1024px)';
+const useDesktop = () => useSyncExternalStore(
+  notify => { const query = matchMedia(DESKTOP); query.addEventListener('change', notify); return () => query.removeEventListener('change', notify); },
+  () => matchMedia(DESKTOP).matches,
+);
 const newDraft = (exam: Exam): Draft => ({ step: 0, startedAt: null, secs: [], answers: Object.fromEntries(exam.sections.map(section => [section.id, flat(section).map(() => 0)])) });
 
 /** Two-step button: the first click arms it, the second one confirms. */
 function ConfirmButton({ label, confirmLabel, onConfirm, primary }: { label: string; confirmLabel: string; onConfirm: () => void; primary?: boolean }) {
   const [armed, setArmed] = useState(false);
   useEffect(() => { if (!armed) return; const id = setTimeout(() => setArmed(false), 4000); return () => clearTimeout(id); }, [armed]);
-  return <button className={`study-button ${primary && !armed ? 'study-button-primary' : ''}`} style={armed ? { borderColor: 'var(--color-error)', color: 'var(--color-error)' } : undefined} onClick={() => armed ? (setArmed(false), onConfirm()) : setArmed(true)}>{armed ? confirmLabel : label}</button>;
+  return <button className={`study-button ${primary && !armed ? 'study-button-primary whitespace-nowrap' : ''}`} style={armed ? { borderColor: 'var(--color-error)', color: 'var(--color-error)' } : undefined} onClick={() => armed ? (setArmed(false), onConfirm()) : setArmed(true)}>{armed ? confirmLabel : label}</button>;
 }
 
 export function ExamPage() {
@@ -99,10 +106,10 @@ function Runner({ exam, draft, setDraft, finish, onReset, onLeave }: { exam: Exa
   const used = draft.startedAt ? Math.max(0, Math.floor((now - draft.startedAt) / 1000)) : 0;
   const remaining = limit - used;
   const sheet = draft.answers[section.id];
-  const [pane, setPane] = useState<'pdf' | 'sheet'>('pdf');
   const [wide, setWide] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const running = draft.startedAt !== null;
+  const desktop = useDesktop();
   const textual = !exam.pdf;
   useEffect(() => {
     const sync = () => setFullscreen(!!document.fullscreenElement);
@@ -128,29 +135,27 @@ function Runner({ exam, draft, setDraft, finish, onReset, onLeave }: { exam: Exa
 
   if (!draft.startedAt) return <div className="study-panel mx-auto max-w-xl space-y-4 text-center">
     <h2 className="text-2xl font-semibold">{exam.title}</h2>
-    <div className="grid gap-2">{exam.sections.map((entry, i) => { const done = typeof draft.secs[i] === 'number'; return <button key={entry.id} disabled={done} className={`study-button !justify-between ${done ? '' : 'study-button-primary'}`} onClick={() => setDraft({ ...draft, step: i, startedAt: Date.now() })}><span className="inline-flex items-center gap-2">{done && <Check size={16} />}{entry.title}</span><span className="tabular-nums">{flat(entry).length} câu · {entry.minutes} phút</span></button>; })}</div>
+    <div className="grid gap-2">{exam.sections.map((entry, i) => { const done = typeof draft.secs[i] === 'number'; return <button key={entry.id} disabled={done} className={`study-button !h-auto !flex-col !items-start !justify-start gap-0.5 !py-2.5 text-left ${done ? '' : 'study-button-primary'}`} onClick={() => setDraft({ ...draft, step: i, startedAt: Date.now() })}><span className="inline-flex items-center gap-2">{done && <Check size={16} />}{entry.title}</span><span className="text-xs font-normal tabular-nums opacity-80">{flat(entry).length} câu · {entry.minutes} phút</span></button>; })}</div>
     <div className="flex flex-wrap justify-center gap-2"><button className="study-button" onClick={onLeave}>Thoát</button><ConfirmButton label="Hủy bài thi" confirmLabel="Bấm lần nữa để xóa bài" onConfirm={onReset} /></div>
   </div>;
 
   const blank = sheet.filter(value => !value).length;
   let counter = 0;
   const choose = (at: number, choice: number) => setDraft({ ...draft, answers: { ...draft.answers, [section.id]: sheet.map((value, i) => i === at ? (value === choice ? 0 : choice) : value) } });
-  const tab = (id: 'pdf' | 'sheet', label: string) => <button className={`study-button !min-h-9 flex-1 ${pane === id ? 'study-button-primary' : ''}`} aria-pressed={pane === id} onClick={() => setPane(id)}>{label}</button>;
-  return createPortal(<div className="fixed inset-0 z-[100] flex flex-col gap-2 bg-[var(--color-bg)] p-2 sm:p-3" role="region" aria-label={`Đang thi ${exam.title}`}>
+  return createPortal(<div className="fixed inset-0 z-[100] flex flex-col gap-2 bg-[var(--color-bg)] p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:p-3" role="region" aria-label={`Đang thi ${exam.title}`}>
     <div className="study-panel flex flex-wrap items-center justify-between gap-x-4 gap-y-2 !px-4 !py-2">
-      <div className="min-w-0"><p className="study-eyebrow">{exam.title}</p><p className="truncate font-semibold">{section.title}</p></div>
-      <p role="timer" aria-label="Thời gian còn lại" className={`font-mono text-3xl tabular-nums ${remaining <= 300 ? 'text-[var(--color-error)]' : ''}`}>{clock(remaining)}</p>
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-sm tabular-nums text-[var(--color-text-secondary)]">{sheet.length - blank}/{sheet.length} câu</span>
-        {!textual && <span className="hidden lg:inline-flex"><button className="study-button !min-h-9" aria-pressed={wide} onClick={() => setWide(!wide)} title="Ẩn phiếu để đề rộng hết cỡ">{wide ? 'Hiện phiếu' : 'Đề rộng'}</button></span>}
+      <div className="min-w-0 flex-1"><p className="study-eyebrow">{exam.title}</p><p className="truncate font-semibold">{section.title}</p></div>
+      <p role="timer" aria-label="Thời gian còn lại" className={`font-mono text-2xl tabular-nums sm:text-3xl ${remaining <= 300 ? 'text-[var(--color-error)]' : ''}`}>{clock(remaining)}</p>
+      <div className="flex w-full items-center gap-2 sm:w-auto">
+        <span className="mr-auto whitespace-nowrap text-sm tabular-nums text-[var(--color-text-secondary)]">{sheet.length - blank}/{sheet.length}<span className="max-sm:hidden"> câu</span></span>
+        {!textual && <button className="study-button !min-h-9 whitespace-nowrap" aria-pressed={wide} onClick={() => setWide(!wide)} title="Ẩn phiếu để đề rộng hết cỡ">{wide ? 'Hiện phiếu' : 'Đề rộng'}</button>}
         {document.documentElement.requestFullscreen && <span className="hidden sm:inline-flex"><button className="study-button !min-h-9" aria-pressed={fullscreen} onClick={toggleFullscreen}>{fullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</button></span>}
         <ConfirmButton primary label="Nộp bài" confirmLabel={blank ? `Còn ${blank} câu trống, nộp luôn?` : 'Bấm lần nữa để nộp'} onConfirm={() => submit()} />
-        <button className="study-button !min-h-9" onClick={onLeave} title="Đồng hồ vẫn chạy khi bạn thoát">Thoát</button>
+        <button className="study-button !min-h-9 whitespace-nowrap" onClick={onLeave} title="Đồng hồ vẫn chạy khi bạn thoát">Thoát</button>
       </div>
     </div>
     {section.audio && exam.audio && <audio src={asset(exam.audio)} controls preload="metadata" className="h-10 w-full" aria-label="Audio phần nghe" />}
-    {!textual && <div className="flex gap-2 lg:hidden">{tab('pdf', 'Đề thi')}{tab('sheet', `Phiếu trả lời (${sheet.length - blank}/${sheet.length})`)}</div>}
-    <div className={`grid min-h-0 flex-1 gap-2 ${wide || textual ? '' : 'lg:grid-cols-[minmax(0,1fr)_21rem]'}`}>
+    <div className={`grid min-h-0 flex-1 gap-2 ${wide || textual ? '' : 'grid-rows-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_21rem] lg:grid-rows-none'}`}>
       {textual ? <div className="study-panel min-h-0 overflow-y-auto !p-4 sm:!p-6 lg:col-span-full"><div className="mx-auto max-w-3xl space-y-8">
         {section.groups.every(group => !group.questions) && <p className="study-copy" role="alert">Phần này chưa có nội dung câu hỏi. Thêm `pdf` hoặc `questions` vào đề (xem docs/exams.md).</p>}
         {section.groups.map(group => <fieldset key={group.label} className="space-y-4"><legend lang="ja" className="study-eyebrow">{group.label}</legend>
@@ -159,13 +164,13 @@ function Runner({ exam, draft, setDraft, finish, onReset, onLeave }: { exam: Exa
           {group.answers.map((_, index) => { const at = counter++; const question = group.questions?.[index]; return question && <div key={at} className="space-y-2"><p lang="ja" className="font-jp text-lg leading-relaxed"><span className="mr-2 tabular-nums text-[var(--color-text-secondary)]">{index + 1}.</span>{question.prompt}</p>
             <div className="grid gap-2 sm:grid-cols-2" role="group" aria-label={`${group.label} câu ${index + 1}`}>{question.options.map((option, i) => <button key={i} lang="ja" aria-pressed={sheet[at] === i + 1} onClick={() => choose(at, i + 1)} className={`study-button !h-auto !min-h-11 !justify-start !whitespace-normal !py-2 text-left font-jp ${sheet[at] === i + 1 ? 'study-button-primary' : ''}`}><span className="mr-2 tabular-nums">{i + 1}</span>{option}</button>)}</div></div>; })}
         </fieldset>)}
-      </div></div> : <><div className={`${pane === 'pdf' ? 'flex' : 'hidden'} min-h-0 flex-col gap-1 lg:flex`}>
-        <iframe title={`Đề thi ${exam.title}`} src={`${asset(exam.pdf)}#toolbar=1&navpanes=0&view=FitH`} className="min-h-0 w-full flex-1 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]" />
+      </div></div> : <><div className="flex min-h-0 flex-col gap-1">
+        {desktop ? <iframe title={`Đề thi ${exam.title}`} src={`${asset(exam.pdf)}#toolbar=1&navpanes=0&view=FitH`} className="min-h-0 w-full flex-1 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]" /> : <PdfPages src={asset(exam.pdf)} />}
         <a className="self-end text-xs text-[var(--color-text-secondary)] underline" href={asset(exam.pdf)} target="_blank" rel="noreferrer">Không xem được đề? Mở PDF ở tab mới</a>
       </div>
-      <div className={`study-panel min-h-0 space-y-4 overflow-y-auto !p-4 ${pane === 'sheet' ? 'block' : 'hidden'} ${wide ? 'lg:hidden' : 'lg:block'}`} aria-label="Phiếu trả lời" hidden={textual}>
+      <div className={`study-panel min-h-0 space-y-4 overflow-y-auto !p-4 ${wide ? 'hidden' : ''}`} aria-label="Phiếu trả lời" hidden={textual}>
         {section.groups.map(group => <fieldset key={group.label} className="space-y-1.5"><legend lang="ja" className="study-eyebrow mb-1">{group.label}</legend>
-          {group.answers.map((_, index) => { const at = counter++; return <div key={at} className="flex items-center justify-between gap-2"><span className="w-7 text-sm tabular-nums text-[var(--color-text-secondary)]">{index + 1}</span><div className="flex gap-1.5" role="group" aria-label={`${group.label} câu ${index + 1}`}>{[1, 2, 3, 4].map(choice => <button key={choice} aria-pressed={sheet[at] === choice} className={`study-button !min-h-9 !w-11 !p-0 ${sheet[at] === choice ? 'study-button-primary' : ''}`} onClick={() => choose(at, choice)}>{choice}</button>)}</div></div>; })}
+          {group.answers.map((_, index) => { const at = counter++; return <div key={at} className="flex items-center gap-2 lg:justify-between"><span className="w-7 text-sm tabular-nums text-[var(--color-text-secondary)]">{index + 1}</span><div className="grid flex-1 grid-cols-4 gap-2 lg:flex lg:flex-none lg:gap-1.5" role="group" aria-label={`${group.label} câu ${index + 1}`}>{[1, 2, 3, 4].map(choice => <button key={choice} aria-pressed={sheet[at] === choice} className={`study-button !min-h-10 !p-0 lg:!min-h-9 lg:!w-11 ${sheet[at] === choice ? 'study-button-primary' : ''}`} onClick={() => choose(at, choice)}>{choice}</button>)}</div></div>; })}
         </fieldset>)}
       </div></>}
     </div>
@@ -181,13 +186,16 @@ const chipTone = (choice: number, key: number, got: number | undefined) => choic
 function Result({ exam, attempt, onBack, onRetry }: { exam: Exam; attempt: Attempt; onBack: () => void; onRetry: () => void }) {
   const correct = attempt.sections.reduce((sum, section) => sum + section.correct, 0);
   const secs = attempt.sections.reduce((sum, section) => sum + section.secs, 0);
+  const desktop = useDesktop();
+  const [paper, setPaper] = useState(false);
   return <div className="space-y-6">
     <PageHeading title={`Kết quả · ${exam.title}`} subtitle={`${new Date(attempt.at).toLocaleString('vi-VN', { dateStyle: 'medium', timeStyle: 'short' })} · đúng ${correct}/${total(exam)} câu · ${Math.round(secs / 60)} phút`} action={<div className="flex gap-2"><button className="study-button" onClick={onBack}>← Danh sách đề</button><button className="study-button study-button-primary" onClick={onRetry}><RotateCcw size={16} /> Làm lại</button></div>} />
-    <div className="grid gap-3 sm:grid-cols-3">{exam.sections.map((section, index) => { const result = attempt.sections[index]; return <div key={section.id} className="study-panel"><p className="study-eyebrow">{section.title}</p><p className="text-3xl font-semibold tabular-nums">{result.correct}<span className="text-lg text-[var(--color-text-secondary)]">/{result.total}</span></p><p className="text-sm text-[var(--color-text-secondary)]">{clock(result.secs)} / {section.minutes}:00 phút</p></div>; })}</div>
+    <div className="grid gap-2 sm:grid-cols-3 sm:gap-3">{exam.sections.map((section, index) => { const result = attempt.sections[index]; return <div key={section.id} className="study-panel max-sm:flex max-sm:items-center max-sm:gap-3 max-sm:!py-3"><p className="study-eyebrow max-sm:flex-1">{section.title}</p><p className="text-2xl font-semibold tabular-nums sm:text-3xl">{result.correct}<span className="text-lg text-[var(--color-text-secondary)]">/{result.total}</span></p><p className="text-xs text-[var(--color-text-secondary)] sm:text-sm">{clock(result.secs)}<span className="max-sm:hidden"> / {section.minutes}:00 phút</span></p></div>; })}</div>
     <p className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-[var(--color-text-secondary)]"><span className="inline-flex items-center gap-1.5"><i className="size-3 rounded bg-[var(--color-success)]" />Bạn chọn đúng</span><span className="inline-flex items-center gap-1.5"><i className="size-3 rounded bg-[var(--color-error)]" />Bạn chọn sai</span><span className="inline-flex items-center gap-1.5"><i className="size-3 rounded border border-[var(--color-success)] bg-[color-mix(in_srgb,var(--color-success)_14%,transparent)]" />Đáp án đúng</span></p>
     <div className={exam.pdf ? 'grid gap-4 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start' : ''}>
-      {exam.pdf && <iframe title={`Đề thi ${exam.title}`} src={`${asset(exam.pdf)}#toolbar=1&navpanes=0&view=FitH`} className="sticky top-2 hidden h-[calc(100vh-1rem)] w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] lg:block" />}
+      {exam.pdf && desktop && <iframe title={`Đề thi ${exam.title}`} src={`${asset(exam.pdf)}#toolbar=1&navpanes=0&view=FitH`} className="sticky top-2 h-[calc(100vh-1rem)] w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]" />}
       <div className="space-y-4">
+        {exam.pdf && !desktop && <div className="sticky top-0 z-10 space-y-2 bg-[var(--color-bg)] pb-2"><button className="study-button w-full" aria-pressed={paper} onClick={() => setPaper(!paper)}>{paper ? 'Ẩn đề' : 'Xem đề'}</button>{paper && <div className="flex h-[45dvh] flex-col"><PdfPages src={asset(exam.pdf)} /></div>}</div>}
     {exam.sections.map(section => { const mine = attempt.answers[section.id] ?? []; let at = 0; const wrong = flat(section).filter((key, i) => mine[i] !== key).length;
       return <section key={section.id} className="study-panel space-y-4"><h3 className="text-lg font-semibold">{section.title} · {wrong ? <span className="text-[var(--color-error)]">sai/trống {wrong} câu</span> : <span className="inline-flex items-center gap-1 text-[var(--color-success)]"><Check size={16} /> đúng hết</span>}</h3>
         <div className={`grid gap-x-10 gap-y-6 sm:grid-cols-2 ${exam.pdf ? 'lg:grid-cols-1' : 'xl:grid-cols-3'}`}>{section.groups.map(group => <fieldset key={group.label} className="space-y-1.5"><legend lang="ja" className="study-eyebrow mb-1">{group.label}</legend>
@@ -197,6 +205,6 @@ function Result({ exam, attempt, onBack, onRetry }: { exam: Exam; attempt: Attem
         </fieldset>)}</div></section>; })}
       </div>
     </div>
-    {(exam.pdf || exam.answerPdf || exam.scriptPdf) && <div className="flex flex-wrap gap-2">{exam.pdf && <a className="study-button lg:hidden" href={asset(exam.pdf)} target="_blank" rel="noreferrer"><ExternalLink size={16} /> Xem đề</a>}{exam.answerPdf && <a className="study-button" href={asset(exam.answerPdf)} target="_blank" rel="noreferrer"><ExternalLink size={16} /> Đáp án chi tiết</a>}{exam.scriptPdf && <a className="study-button" href={asset(exam.scriptPdf)} target="_blank" rel="noreferrer"><ExternalLink size={16} /> Script phần nghe</a>}</div>}
+    {(exam.answerPdf || exam.scriptPdf) && <div className="flex flex-wrap gap-2">{exam.answerPdf && <a className="study-button" href={asset(exam.answerPdf)} target="_blank" rel="noreferrer"><ExternalLink size={16} /> Đáp án chi tiết</a>}{exam.scriptPdf && <a className="study-button" href={asset(exam.scriptPdf)} target="_blank" rel="noreferrer"><ExternalLink size={16} /> Script phần nghe</a>}</div>}
   </div>;
 }
