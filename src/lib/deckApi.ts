@@ -52,6 +52,10 @@ export const cardPage = (
   apiRequest<Page<PersonalCard>>(
     `/decks/${id}/cards?page=${page}&size=${size}&query=${encodeURIComponent(query)}&type=${type}&state=${state}&includeProgress=${includeProgress}`,
   );
+export interface CardSearchHit { cardId: string; deckId: string; deckName: string; front: string; back: string; reading: string | null }
+export interface CardSearchResult { cards: CardSearchHit[]; decks: { id: string; name: string }[] }
+export const searchCards = (query: string, limit = 20, signal?: AbortSignal) =>
+  apiRequest<CardSearchResult>(`/cards/search?query=${encodeURIComponent(query)}&limit=${limit}`, { signal });
 export const deckCardIds = (id: string) =>
   apiRequest<string[]>(`/decks/${id}/card-ids`);
 export const dueQueue = (id: string, limit = 50) =>

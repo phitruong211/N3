@@ -143,6 +143,7 @@ export function ImportedDecks({
   const [sharing, setSharing] = useState<PersonalDeck | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedDeck = searchParams.get('deck');
+  const requestedQuery = searchParams.get('q'); // set by the search palette: opens the deck filtered to the chosen card
   const requestedGroup = searchParams.get('group');
   const [session, setSession] = useState<{
     cards: CardView[];
@@ -169,11 +170,11 @@ export function ImportedDecks({
     let valid = true;
     deckMetadata(requestedDeck).then(deck => {
       if (!valid) return;
-      setActive(deck); setName(deck.name); setPage(0); setCards(emptyPage());
-      setSearchParams(current => { const next = new URLSearchParams(current); next.delete('deck'); return next; }, { replace: true });
+      setActive(deck); setName(deck.name); setPage(0); setCards(emptyPage()); setQuery(requestedQuery ?? '');
+      setSearchParams(current => { const next = new URLSearchParams(current); next.delete('deck'); next.delete('q'); return next; }, { replace: true });
     }).catch(e => { if (valid) setError(e.message); });
     return () => { valid = false; };
-  }, [user, requestedDeck, setSearchParams]);
+  }, [user, requestedDeck, requestedQuery, setSearchParams]);
   useEffect(() => {
     mounted.current = true;
     return () => {
