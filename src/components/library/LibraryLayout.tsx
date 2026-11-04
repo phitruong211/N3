@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 const tabs = [
+  ['/library/kana', 'Bảng chữ cái'],
   ['/library/vocabulary', 'Từ vựng'],
   ['/library/grammar', 'Ngữ pháp'],
   ['/library/kanji', 'Kanji'],

@@ -12,6 +12,7 @@ test('legacy page ids map to canonical routes', () => {
 });
 
 test('library routes retain their content page ids', () => {
+  assert.equal(pageForLocation('/library/kana'), 'kana');
   assert.equal(pageForLocation('/library/vocabulary'), 'vocabulary');
   assert.equal(pageForLocation('/library/grammar'), 'grammar');
   assert.equal(pageForLocation('/library/kanji'), 'kanji');

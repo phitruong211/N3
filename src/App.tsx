@@ -26,6 +26,7 @@ import { AppLoading } from '@/components/ui/AppLoading';
 const Dashboard = lazy(() => import('@/components/dashboard/Dashboard').then((module) => ({ default: module.Dashboard })));
 const DictionaryPage = lazy(() => import('@/components/dictionary/DictionaryPage').then(module => ({ default: module.DictionaryPage })));
 const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage').then((module) => ({ default: module.VocabularyPage })));
+const KanaPage = lazy(() => import('@/components/kana/KanaPage').then((module) => ({ default: module.KanaPage })));
 const KanjiPage = lazy(() => import('@/components/kanji/KanjiPage').then((module) => ({ default: module.KanjiPage })));
 const GrammarPage = lazy(() => import('@/components/grammar/GrammarPage').then((module) => ({ default: module.GrammarPage })));
 const FlashcardPage = lazy(() => import('@/components/flashcard/FlashcardPage').then((module) => ({ default: module.FlashcardPage })));
@@ -71,6 +72,7 @@ function AppContent() {
           <Route path="/dictionary/*" element={<DictionaryPage embedded />} />
           <Route path="/library" element={<LibraryLayout />}>
             <Route index element={<Navigate to="vocabulary" replace />} />
+            <Route path="kana" element={<KanaPage />} />
             <Route path="vocabulary" element={<LibraryGate><VocabularyPage /></LibraryGate>} />
             <Route path="grammar" element={<LibraryGate><GrammarPage /></LibraryGate>} />
             <Route path="kanji" element={<LibraryGate><KanjiPage /></LibraryGate>} />

@@ -9,7 +9,7 @@ const HOME_DESCRIPTION = 'SỔ NHẬT giúp bạn học tiếng Nhật mỗi ng�
 /** Short names for the app header; the longer search titles below are only for the browser tab and crawlers. */
 export const PAGE_TITLES: Record<PageId, string> = {
   dictionary: 'Từ điển',
-  dashboard: 'Hôm nay', vocabulary: 'Thư viện', grammar: 'Thư viện', kanji: 'Thư viện', listening: 'Thư viện', exam: 'Thư viện',
+  dashboard: 'Hôm nay', kana: 'Thư viện', vocabulary: 'Thư viện', grammar: 'Thư viện', kanji: 'Thư viện', listening: 'Thư viện', exam: 'Thư viện',
   flashcards: 'Bộ thẻ', anki: 'Ôn ngắt quãng', srs: 'Ôn ngắt quãng', quiz: 'Trắc nghiệm', progress: 'Tiến độ',
   search: 'Tìm kiếm', bookmarks: 'Đã lưu', settings: 'Cài đặt',
 };
@@ -17,6 +17,7 @@ export const PAGE_TITLES: Record<PageId, string> = {
 const META: Record<PageId, { title: string; description: string }> = {
   dashboard: { title: HOME_TITLE, description: HOME_DESCRIPTION },
   search: { title: HOME_TITLE, description: HOME_DESCRIPTION },
+  kana: { title: `Bảng chữ cái Hiragana, Katakana${SUFFIX}`, description: 'Học bảng chữ cái tiếng Nhật Hiragana và Katakana cho người mới: cách đọc từng hàng cột, mẹo nhớ mặt chữ và thứ tự nét viết.' },
   vocabulary: { title: `Từ vựng tiếng Nhật JLPT N5–N2${SUFFIX}`, description: 'Học từ vựng tiếng Nhật theo cấp độ JLPT N5–N2 với cách đọc, Hán Việt, nghĩa và ví dụ. Lưu từ yêu thích và ôn lại bằng thẻ ghi nhớ.' },
   grammar: { title: `Ngữ pháp tiếng Nhật JLPT N5–N2${SUFFIX}`, description: 'Tra cứu mẫu ngữ pháp tiếng Nhật JLPT N5–N2 với cách dùng, ví dụ và ghi chú dễ hiểu bằng tiếng Việt.' },
   kanji: { title: `Kanji JLPT N5–N2${SUFFIX}`, description: 'Học kanji JLPT N5–N2 theo cấp độ: âm on, âm kun, Hán Việt, nghĩa và từ vựng đi kèm.' },
