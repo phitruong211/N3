@@ -37,7 +37,7 @@ import {
   creationBody,
   deckCardIds,
   deckMetadata,
-  dueQueue,
+  deckQueueCards,
   importDeck,
   listDeckPage,
   type Page,
@@ -438,13 +438,15 @@ export function ImportedDecks({
   }
 
   async function startScheduledStudy(deck: PersonalDeck) {
-    const count = readyCount(deck);
-    if (!count) {
+    // Unseen cards still let the session open: its "study more" button admits them past today's limit.
+    if (!readyCount(deck) && !(deck.newCount ?? 0)) {
       setMessage("Bộ này đã hoàn thành lịch ôn hôm nay.");
       return;
     }
     await operation(async () => {
-      const queue = await dueQueue(deck.id, Math.min(200, count));
+      // The whole deck, so the session can keep admitting new cards past today's limit.
+      // shortcut: one response holds every card; paginate if decks grow past a few thousand.
+      const queue = await deckQueueCards(deck.id);
       const progress: Record<string, ApiProgress | null> = {};
       const config = normalizeConfig(deck.templateConfig);
       const views = queue.map((card, index) => {
@@ -456,7 +458,7 @@ export function ImportedDecks({
         } as PersonalCard, config), deck.id, deck.sourceType === "MANUAL" ? "MANUAL" : "IMPORT", index);
       });
       if (!views.length) {
-        setMessage("Bộ này đã hoàn thành lịch ôn hôm nay.");
+        setMessage("Bộ này chưa có thẻ để học.");
         return;
       }
       setSession({ cards: views, deck, config, progress, mode: "anki", initialIndex: 0 });

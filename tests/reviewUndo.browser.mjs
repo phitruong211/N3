@@ -14,6 +14,7 @@ try {
     const context = await browser.newContext();
     const errors = [];
     const page = await context.newPage();
+    const reviewedCount = async () => (await page.locator('.study-session-count').innerText()).match(/(\d+)\s*đã ôn/)[1];
     page.on('pageerror', error => { errors.push(error.message); console.error(error.message); });
     await context.addInitScript(() => {
       localStorage.setItem('auth:access_token', 'fixture');
@@ -125,7 +126,7 @@ try {
     await page.getByText('Answer 1',{exact:true}).waitFor();
     assert.equal(undoIds.at(-1), undoIds.at(-2), 'retry retains the original review UUID');
     assert.equal(await page.getByRole('button',{name:/4 · Dễ/}).isEnabled(),true);
-    assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'0');
+    assert.equal(await reviewedCount(),'0');
 
     // Persist a failed undo, leave the session, then recover without an
     // in-memory receipt. Free flashcards must stay usable in the meantime.
@@ -139,7 +140,8 @@ try {
     await page.goto(base + '/__review-harness?mode=flashcards');
     await page.getByRole('button',{name:'Hiện đáp án',exact:true}).click();
     await page.getByText('Answer 1',{exact:true}).waitFor();
-    await page.getByRole('button',{name:'Thẻ tiếp',exact:true}).click();
+    // Free study has no next button; the deck advances by arrow key or swipe.
+    await page.keyboard.press('ArrowRight');
     await page.getByText('Question 2',{exact:true}).waitFor();
     assert.equal(await page.getByRole('button',{name:'Kết thúc phiên',exact:true}).isEnabled(),true);
     assert.equal(await page.getByText('Đang chờ hoàn tất hoàn tác.',{exact:true}).count(),0);

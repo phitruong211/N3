@@ -112,3 +112,21 @@ export function reviewSessionSummary<T>(queue: ReviewQueue<T>) {
   return { total, reviewed: queue.answeredToday.size, fresh,
     due: queue.ready.length - fresh, waiting: queue.futureLearning.length };
 }
+
+const heldBackNew = <T>(queue: ReviewQueue<T>) => {
+  const ready = new Set(queue.ready);
+  return [...queue.cardsByKey.keys()].filter(key => {
+    const progress = queue.progressByKey.get(key);
+    return (!progress || progress.state === 'new') && !ready.has(key);
+  });
+};
+
+/** New cards the daily limit is still holding back, i.e. what "study more" can admit. */
+export const remainingNewCount = <T>(queue: ReviewQueue<T>) => heldBackNew(queue).length;
+
+/** Admits more new cards into today's session only; the stored daily limit is untouched. */
+export function admitMoreNew<T>(queue: ReviewQueue<T>, count: number): ReviewQueue<T> {
+  const extra = heldBackNew(queue).slice(0, Math.max(0, count));
+  if (!extra.length) return queue;
+  return { ...queue, ready: sorted(queue, [...queue.ready, ...extra]) };
+}

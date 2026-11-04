@@ -23,6 +23,8 @@ export type DeckScheduleSummary = {
 };
 
 export const DAILY_NEW_CARD_LIMIT = 20;
+/** "No limit" for srsDailyNewLimit: the largest value storage and the server's Integer both accept. */
+export const UNLIMITED_NEW_CARDS = 2_147_483_647;
 
 function sameLocalDay(value: string | null | undefined, now: Date): boolean {
   if (!value) return false;
@@ -37,14 +39,13 @@ export function buildScheduledDeckQueue<T>(
   cards: readonly T[],
   progressFor: (card: T) => DeckScheduleProgress | null | undefined,
   options: { now?: Date; dailyNewLimit?: number } = {},
-): { cards: T[]; sessionCards: T[]; summary: DeckScheduleSummary } {
+): { cards: T[]; summary: DeckScheduleSummary } {
   const nowDate = options.now ?? new Date();
   const now = nowDate.getTime();
   const dailyNewLimit = Math.max(0, options.dailyNewLimit ?? DAILY_NEW_CARD_LIMIT);
   const fresh: T[] = [];
   const learning: Array<{ card: T; due: number }> = [];
   const review: Array<{ card: T; due: number }> = [];
-  const future: T[] = [];
   let studiedTodayCount = 0;
   let learnedCount = 0;
   let newStartedTodayCount = 0;
@@ -64,7 +65,7 @@ export function buildScheduledDeckQueue<T>(
     if (sameLocalDay(progress.firstReviewedAt ?? progress.lastReviewedAt, nowDate)) newStartedTodayCount++;
     const due = Date.parse(progress.dueDate);
     if (!Number.isFinite(due)) continue;
-    if (due > now) { future.push(card); continue; }
+    if (due > now) continue;
     if (progress.state === 'learning' || progress.state === 'relearning') learning.push({ card, due });
     else review.push({ card, due });
   }
@@ -79,9 +80,6 @@ export function buildScheduledDeckQueue<T>(
 
   return {
     cards: cardsForSession,
-    // Retain already-studied cards so the live session can notice new deadlines.
-    // Only the selected new cards are admitted; daily limits remain unchanged.
-    sessionCards: [...cardsForSession, ...future],
     summary: {
       newCount: fresh.length,
       learningCount: learning.length,

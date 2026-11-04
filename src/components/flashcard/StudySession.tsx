@@ -9,7 +9,7 @@ import {
 } from "@/hooks/useActiveElapsedMinutes";
 import { createSRSCard, formatDate, getNextIntervals, processReview } from "@/lib/srs";
 import { legacyToFsrsProgress, progressToSrsCard } from "@/lib/fsrsProgress";
-import { applyReviewedProgress, createReviewQueue, nearestFutureDue, nextReadyCard, promoteDueCards, reviewSessionSummary } from "@/lib/liveReviewQueue";
+import { admitMoreNew, applyReviewedProgress, createReviewQueue, nearestFutureDue, nextReadyCard, promoteDueCards, remainingNewCount, reviewSessionSummary } from "@/lib/liveReviewQueue";
 import { progressToSrs, type ApiProgress } from "@/lib/api";
 import { defaultDeckTemplate, normalizeDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { applyResolvedTemplate, mergeSideStyle, noteTypeIdForKind, noteTypeOf, resolveTemplate, type DeckConfig } from "@/lib/deckFormat";
@@ -104,9 +104,11 @@ export function StudySession({
   const [sessionCards, setSessionCards] = useState(() => [...cards]);
   const [reviewQueue, setReviewQueue] = useState(() => {
     const progressByKey = new Map<string, ReturnType<typeof legacyToFsrsProgress> | null>();
+    // Indexed once: a session now holds the whole deck, so a scan per card would be quadratic.
+    const storedByKey = new Map(srsCards.map(item => [`${item.deckType}:${item.cardId}`, item]));
     for (const card of cards) {
       const stored = card.source === 'BUILT_IN'
-        ? srsCards.find(item => item.cardId === card.id && item.deckType === card.type.toLowerCase())
+        ? storedByKey.get(`${card.type.toLowerCase()}:${card.id}`)
         : initialProgress[card.id] ? progressToSrs(card.id, initialProgress[card.id]!) : null;
       const projected = reviewOutbox.project(card.source === 'BUILT_IN' ? 'BUILT_IN' : 'PERSONAL', { ...(stored ?? createSRSCard(card.id, 'vocabulary')), deckType: card.type === 'KANJI' ? 'kanji' : card.type === 'GRAMMAR' ? 'grammar' : 'vocabulary' });
       progressByKey.set(card.id, legacyToFsrsProgress(projected));
@@ -505,8 +507,13 @@ export function StudySession({
     return () => window.removeEventListener("keydown", key);
   });
   const summary = reviewSessionSummary(reviewQueue);
-  const progressValue = mode === 'anki' ? summary.reviewed : index + 1;
-  const progressTotal = mode === 'anki' ? summary.total : sessionCards.length;
+  const moreNew = mode === 'anki' ? remainingNewCount(reviewQueue) : 0;
+  const studyMore = (count: number) => { setDone(false); setReviewQueue(queue => admitMoreNew(queue, count)); };
+  const studyMoreButtons = moreNew > 0 && <div className="flex flex-wrap items-center justify-center gap-2">
+    <span className="study-copy">Học thêm thẻ mới ({moreNew} thẻ chưa học):</span>
+    {[10, 20].filter(count => count < moreNew).map(count => <button key={count} className="study-button" onClick={() => studyMore(count)}>+{count}</button>)}
+    <button className="study-button" onClick={() => studyMore(moreNew)}>Tất cả ({moreNew})</button>
+  </div>;
   const futureDue = mode === 'anki' ? nearestFutureDue(reviewQueue) : null;
   if (!done && mode === 'anki' && !current && futureDue) {
     const seconds = Math.max(0, Math.ceil((Date.parse(futureDue) - clock) / 1000));
@@ -515,11 +522,12 @@ export function StudySession({
       {undoButton}{undoStatus}
       <p className="study-eyebrow">THẺ QUÊN SẼ QUAY LẠI</p>
       <h2 className="text-3xl font-semibold">Tiếp tục sau {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, '0')}</h2>
-      <p className="study-copy max-w-xl">Bạn đã xem hết các thẻ đang sẵn sàng. Có thể chờ để học lại đúng lịch hoặc kết thúc và quay lại sau.</p>
+      <p className="study-copy max-w-xl">Bạn đã xem hết các thẻ đang sẵn sàng. Có thể chờ để học lại đúng lịch, học thêm thẻ mới, hoặc kết thúc và quay lại sau.</p>
       <div className="flex flex-wrap justify-center gap-3">
         <button className="study-button" onClick={finish}>Kết thúc phiên</button>
         <button className="study-button study-button-primary" onClick={() => setReviewQueue(queue => promoteDueCards(queue, new Date()))}>Kiểm tra lại</button>
       </div>
+      {studyMoreButtons}
     </div>;
   }
   if (done || !current)
@@ -530,6 +538,7 @@ export function StudySession({
         {undoButton}{undoStatus}
         <h2 className="study-title">Đã hoàn thành</h2>
         <p>{mode === 'flashcards' ? `Đã xem ${stats.count}/${sessionCards.length} thẻ · ${(studySeconds / 60).toFixed(1)} phút` : `${reviewQueue.answeredToday.size} thẻ · ${stats.count} lượt trả lời · ${stats.count ? Math.round((stats.correct / stats.count) * 100) : 0}% chính xác · ${(studySeconds / 60).toFixed(1)} phút`}</p>
+        {studyMoreButtons}
         <button className="study-button study-button-primary" onClick={finish}>
           Về danh sách bộ thẻ
         </button>
@@ -563,9 +572,10 @@ export function StudySession({
           </button>
           <div className="study-session-heading">
             <p className="study-session-deck">{deckName}</p>
-            <p className="study-session-count"><strong>{progressValue}<span> / {progressTotal}</span></strong> {mode === 'anki' ? 'thẻ đã ôn' : 'thẻ'}
-
-            </p>
+            {/* A review session has no fixed length, so it counts what is left instead of a total. */}
+            {mode === 'anki'
+              ? <p className="study-session-count"><strong>{summary.fresh}</strong> mới · <strong>{summary.due}</strong> đến hạn · <strong>{summary.reviewed}</strong> đã ôn</p>
+              : <p className="study-session-count"><strong>{index + 1}<span> / {sessionCards.length}</span></strong> thẻ</p>}
           </div>
           <div className="study-session-tools">
             <StudyClock seconds={studySeconds}/>
@@ -579,9 +589,9 @@ export function StudySession({
             </button>
           </div>
         </div>
-        <div className="study-session-progress" role="progressbar" aria-label={mode === 'anki' ? 'Số thẻ đã ôn trong phiên' : 'Vị trí trong bộ thẻ'} aria-valuenow={progressValue} aria-valuemin={0} aria-valuemax={progressTotal} aria-valuetext={`${progressValue} trên ${progressTotal} thẻ`}>
-          <div style={{ width: `${progressTotal ? progressValue / progressTotal * 100 : 0}%` }}/>
-        </div>
+        {mode === 'flashcards' && <div className="study-session-progress" role="progressbar" aria-label="Vị trí trong bộ thẻ" aria-valuenow={index + 1} aria-valuemin={0} aria-valuemax={sessionCards.length} aria-valuetext={`${index + 1} trên ${sessionCards.length} thẻ`}>
+          <div style={{ width: `${sessionCards.length ? (index + 1) / sessionCards.length * 100 : 0}%` }}/>
+        </div>}
 
       </header>
       <div className="study-session-workspace">

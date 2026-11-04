@@ -12,6 +12,7 @@ import type {
   ThemeMode,
 } from '../types';
 import { formatDate } from './srs.ts';
+import { UNLIMITED_NEW_CARDS } from './deckSchedule.ts';
 
 const KEYS = {
   SRS_CARDS_VOCAB_V1: 'srs_cards_vocab_v1',
@@ -246,7 +247,7 @@ export function createLearningStorage(scope: StorageScope) {
         ? Math.min(180, Math.max(0, Math.round(requestedMinutes)))
         : DEFAULT_SETTINGS.ankiSessionMinutes,
       srsDailyNewLimit: Number.isFinite(dailyNewLimit)
-        ? Math.min(2_147_483_647, Math.max(0, Math.round(dailyNewLimit)))
+        ? Math.min(UNLIMITED_NEW_CARDS, Math.max(0, Math.round(dailyNewLimit)))
         : DEFAULT_SETTINGS.srsDailyNewLimit,
       srsAgainMinutes: normalizedAgain,
       srsGoodMinutes: normalizedGood > normalizedAgain ? normalizedGood : Math.min(720, normalizedAgain + 1),

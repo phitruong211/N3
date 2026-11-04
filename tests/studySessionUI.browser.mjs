@@ -41,6 +41,8 @@ try {
   await page.route('https://fonts.googleapis.com/**',route=>route.abort());
   await mkdir('artifacts/study-session-ui',{recursive:true});
   const card=()=>page.locator('.study-session-card');
+  // A review session shows no progress bar: the header counts new, due and reviewed instead.
+  const reviewedCount = async () => (await page.locator('.study-session-count').innerText()).match(/(\d+)\s*đã ôn/)[1];
   const reveal=()=>card();
   for (const query of ['', '?theme=dark','?theme=reading','?card=dark','?card=blue']) {
     await page.goto(base+query);await card().waitFor();await page.evaluate(()=>document.fonts.ready);
@@ -73,19 +75,23 @@ try {
   assert.equal(await page.locator('.study-session').getAttribute('data-chrome'),'hidden');
   assert.equal(await page.locator('.study-session-header').evaluate(el=>getComputedStyle(el).opacity),'0');
   await page.screenshot({path:'artifacts/study-session-ui/fullscreen-zen.png'});
-  // The card stays put when the controls return, and sits centred while they are hidden.
+  // The card stays put when the controls return. In fullscreen the header keeps its place in the
+  // flow, so the card fills the room left under it rather than centring on the viewport.
   const zenBox=await card().boundingBox();
-  assert.ok(Math.abs(zenBox.y-(900-zenBox.y-zenBox.height))<=2,'zen card is vertically centred');
+  const headerBottom=await page.locator('.study-session-header').evaluate(el => el.getBoundingClientRect().bottom);
+  const zenActions=await page.locator('.study-session-actions').boundingBox();
+  assert.ok(zenBox.y>=headerBottom-1,'zen card clears the header instead of sliding under it');
+  assert.ok(zenActions.y+zenActions.height<=900,'zen controls stay on screen');
   await page.mouse.move(700,300);await page.waitForTimeout(800);
   assert.equal(await page.locator('.study-session').getAttribute('data-chrome'),null);
   assert.equal(await page.locator('.study-session-header').evaluate(el=>getComputedStyle(el).opacity),'1');
   assert.equal(Math.round((await card().boundingBox()).y),Math.round(zenBox.y),'card does not move when controls return');
   await page.getByRole('button', { name: 'Thu nhỏ màn hình', exact: true }).click();
   await page.waitForFunction(() => !document.fullscreenElement);
-  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuemax'),'3');
+  assert.equal(await page.getByRole('progressbar').count(),0,'a review session has no fixed length to chart');
+  assert.equal((await page.locator('.study-session-count').innerText()).replace(/\s+/g,' ').trim(),'3 mới · 0 đến hạn · 0 đã ôn');
   const surface = await card().boundingBox();
   assert.ok(surface.width >= 1100 && surface.height >= 650, JSON.stringify(surface));
-  assert.equal(await page.locator('.study-session-reveal').count(),0);
   await page.screenshot({path:'artifacts/study-session-ui/desktop-question.png'});
 
   await page.screenshot({path:'artifacts/study-session-ui/desktop-question.png'});
@@ -105,19 +111,19 @@ try {
   await page.getByRole('button',{name:/2 · Khó/}).focus();
   await page.keyboard.press('1');
   await page.locator('.study-session-card ruby').filter({hasText:'学校'}).first().waitFor();
-  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'1');
+  assert.equal(await reviewedCount(),'1');
 
   await card().focus();await page.keyboard.press('Space');await page.getByRole('button',{name:/3 · Tốt/}).waitFor();
   assert.ok(await page.locator('.study-session-face').evaluate(el=>getComputedStyle(el.firstElementChild.querySelector('[style*="font-family"]')).fontFamily.match(/Noto Sans JP|SN Sans JP/)));
   await page.keyboard.press('3');await page.locator('.study-session-card ruby').filter({hasText:'先生'}).first().waitFor();
-  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'2');
+  assert.equal(await reviewedCount(),'2');
   // Two separate Space presses reveal then rate Good; holding Space cannot rate twice.
   await page.goto(base);await card().waitFor();await card().focus();
   await page.keyboard.press('Space');await page.getByRole('button',{name:/3 · Tốt/}).waitFor();
   await page.keyboard.down('Space');
   await page.locator('.study-session-card ruby').filter({hasText:'学校'}).first().waitFor();
   await page.keyboard.down('Space');await page.keyboard.up('Space');
-  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'1');
+  assert.equal(await reviewedCount(),'1');
   assert.equal(await page.getByRole('button',{name:/3 · Tốt/}).count(),0);
   // Undo restores the previous answer, queue and daily counters, then permits a new rating.
   const day = () => page.evaluate(() => JSON.parse(localStorage.getItem('guest:n3_study_days') || '[]')[0]);
@@ -126,7 +132,7 @@ try {
   await page.keyboard.press('Backspace');
   await page.locator('.study-session-card ruby').filter({hasText:'日本'}).first().waitFor();
   await page.getByRole('button',{name:/3 · Tốt/}).waitFor();
-  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'0');
+  assert.equal(await reviewedCount(),'0');
   assert.equal((await logs()).length,0);
   assert.equal((await day()).cardsReviewed,0);
   assert.equal((await day()).newCardsLearned,0);
@@ -137,7 +143,7 @@ try {
   assert.equal((await logs()).length,1);
   await page.keyboard.press('Backspace');
   await page.getByRole('button',{name:/4 · Dễ/}).waitFor();
-  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'0');
+  assert.equal(await reviewedCount(),'0');
   assert.equal((await logs()).length,0);
   for (let i=0;i<3;i++) {
     if (i) { await card().focus();await page.keyboard.press('Space'); }
@@ -149,7 +155,7 @@ try {
   await page.keyboard.press('Backspace');
   await card().getByText('Giáo viên',{exact:true}).waitFor();
   await page.getByRole('button',{name:/4 · Dễ/}).waitFor();
-  assert.equal(await page.getByRole('progressbar').getAttribute('aria-valuenow'),'2');
+  assert.equal(await reviewedCount(),'2');
   assert.equal((await logs()).length,2);
   await page.getByRole('button',{name:/4 · Dễ/}).click();
   await page.getByRole('heading',{name:'Đã hoàn thành',exact:true}).waitFor();
@@ -169,16 +175,21 @@ try {
   assert.equal(await page.locator('.study-session').getAttribute('data-reduced-motion'),'true');
   await page.keyboard.press('Space');await page.getByRole('button',{name:/4 · Dễ/}).waitFor();
   await page.setViewportSize({width:390,height:844});await page.goto(base+'?mode=flashcards');await card().waitFor();
-  const freeNext=page.locator('.study-session-free-next');assert.equal(await freeNext.count(),0);
-  assert.equal(await page.getByRole('button',{name:'Thẻ trước',exact:true}).isVisible(),true);
-  for (const control of await page.locator('.study-free-controls button').all()) {
-    const box=await control.boundingBox();assert.ok(box.height>=44 && box.x>=0 && box.x+box.width<=390);
+  // Free study moves by swipe and arrow keys; the jump-to-card field is the only on-screen control.
+  const jump=page.getByLabel('Số thứ tự thẻ muốn mở',{exact:true});
+  assert.equal(await jump.isVisible(),true);
+  for (const control of await page.locator('.study-free-controls button, .study-free-index').all()) {
+    // 24px is the WCAG 2.2 AA minimum target size; buttons, when there are any, are held to 44.
+    const box=await control.boundingBox();
+    const floor=await control.evaluate(el => el.tagName === 'BUTTON' ? 44 : 24);
+    assert.ok(box.height>=floor && box.x>=0 && box.x+box.width<=390, JSON.stringify(box));
   }
   await page.screenshot({path:'artifacts/study-session-ui/free-controls-mobile.png'});
 
   await card().focus();await page.keyboard.press('Enter');await page.locator('.study-session-card').getByText(/Nhật Bản/).first().waitFor();
-  assert.equal(await freeNext.isVisible(),true);
-  await freeNext.focus();await page.keyboard.press('Enter');await page.locator('.study-session-card ruby').filter({hasText:'学校'}).first().waitFor();
+  // There is no next button in free study: the deck advances by arrow key or swipe.
+  await page.keyboard.press('ArrowRight');await page.locator('.study-session-card ruby').filter({hasText:'学校'}).first().waitFor();
+  await page.keyboard.press('ArrowLeft');await page.locator('.study-session-card ruby').filter({hasText:'日本'}).first().waitFor();
   await page.getByRole('button',{name:'Kết thúc phiên',exact:true}).click();
   assert.equal(await page.evaluate(()=>window.sessionExited),true);
   await page.setViewportSize({width:1100,height:760});await page.goto(base+'?mode=decks');

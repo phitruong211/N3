@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createReviewQueue, nextReadyCard, applyReviewedProgress, promoteDueCards, reviewSessionSummary } from '../src/lib/liveReviewQueue.ts';
+import { createReviewQueue, nextReadyCard, applyReviewedProgress, promoteDueCards, reviewSessionSummary, remainingNewCount, admitMoreNew } from '../src/lib/liveReviewQueue.ts';
 
 const now = new Date('2026-10-10T00:00:00.000Z');
 const card = { id: 'one' };
@@ -70,4 +70,36 @@ test('session progress counts unique cards and keeps repeated learning separate 
   assert.deepEqual(reviewSessionSummary(queue), {total:2, reviewed:1, fresh:1, due:1, waiting:0});
   queue = applyReviewedProgress(queue, 'one', {...progress,repetitions:2,dueAt:'2026-10-10T00:02:00Z'}, new Date('2026-10-10T00:01:00Z'));
   assert.deepEqual(reviewSessionSummary(queue), {total:2, reviewed:1, fresh:1, due:0, waiting:1});
+});
+
+test('study more admits held-back new cards without touching the daily limit', () => {
+  const cards = Array.from({length:5}, (_,i)=>({id:String(i)}));
+  let queue = createReviewQueue({ cards, keyFor:c=>c.id, now, dailyNewLimit:2 });
+  assert.deepEqual(queue.ready, ['0','1']);
+  assert.equal(remainingNewCount(queue), 3);
+
+  queue = admitMoreNew(queue, 2);
+  assert.deepEqual(queue.ready, ['0','1','2','3']);
+  assert.equal(remainingNewCount(queue), 1);
+
+  // Asking for more than what is left admits the rest and stops there.
+  queue = admitMoreNew(queue, 10);
+  assert.deepEqual(queue.ready, ['0','1','2','3','4']);
+  assert.equal(remainingNewCount(queue), 0);
+  assert.equal(admitMoreNew(queue, 5), queue);
+});
+
+test('study more keeps due cards ahead of the new cards it admits', () => {
+  const due = {...progress, state:'review', dueAt:'2026-10-09T00:00:00.000Z'};
+  const queue = admitMoreNew(createReviewQueue({
+    cards:[{id:'new'}, {id:'later'}, {id:'due'}], keyFor:c=>c.id, now, dailyNewLimit:1,
+    progressByKey:new Map([['due', due]]) }), 1);
+  assert.deepEqual(queue.ready, ['due','new','later']);
+});
+
+test('an answered card is never re-admitted as new', () => {
+  let queue = createReviewQueue({ cards:[{id:'one'},{id:'two'}], keyFor:c=>c.id, now, dailyNewLimit:1 });
+  queue = applyReviewedProgress(queue, 'one', {...progress, state:'review', dueAt:'2026-10-12T00:00:00.000Z'}, now);
+  assert.equal(remainingNewCount(queue), 1);
+  assert.deepEqual(admitMoreNew(queue, 5).ready, ['two']);
 });

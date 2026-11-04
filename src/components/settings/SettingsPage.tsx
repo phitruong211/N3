@@ -6,6 +6,7 @@ import type { ThemeMode } from '@/types';
 import { PageHeading } from '@/components/ui/StudyUI';
 import { useAuth } from '@/hooks/useAuth';
 import { AccountLearningStatus } from '@/components/auth/AccountLearningStatus';
+import { UNLIMITED_NEW_CARDS } from '@/lib/deckSchedule';
 
 // Swatch colours are fixed so each card previews its own theme whichever one is active.
 const themes: { id: ThemeMode; label: string; bg: string; surface: string; text: string; accent: string }[] = [
@@ -22,7 +23,8 @@ const TABS: { id: Tab; label: string; detail: string }[] = [
   { id: 'study', label: 'Học tập', detail: 'Furigana, phát âm, mục tiêu ngày' },
   { id: 'srs', label: 'Ôn ngắt quãng', detail: 'Thẻ mới mỗi ngày, lịch ôn' },
 ];
-const dailyNewCardPresets = [0, 10, 20, 50, 100] as const;
+const dailyNewCardPresets = [0, 10, 20, 50, 100, 200, UNLIMITED_NEW_CARDS] as const;
+const presetLabel = (value: number) => value === 0 ? 'Chỉ ôn' : value === UNLIMITED_NEW_CARDS ? 'Không giới hạn' : String(value);
 
 export function SettingsPage() {
   const { resetAllData } = useLearningStorage();
@@ -38,9 +40,10 @@ export function SettingsPage() {
       : settingsSync.error
         ? 'Chưa đồng bộ'
         : 'Đã lưu';
+  const unlimitedNewCards = settings.srsDailyNewLimit >= UNLIMITED_NEW_CARDS;
   const changeDailyNewLimit = (value: number) => {
     const next = Number.isFinite(value) ? Math.round(value) : 0;
-    updateSettings({ srsDailyNewLimit: Math.min(2_147_483_647, Math.max(0, next)) });
+    updateSettings({ srsDailyNewLimit: Math.min(UNLIMITED_NEW_CARDS, Math.max(0, next)) });
   };
   const changeAgain = (value: number) => {
     const next = Math.min(30, Math.max(1, Math.round(value || 1)));
@@ -143,7 +146,8 @@ export function SettingsPage() {
                 inputMode="numeric"
                 min={0}
                 step={1}
-                value={settings.srsDailyNewLimit}
+                placeholder="Không giới hạn"
+                value={unlimitedNewCards ? '' : settings.srsDailyNewLimit}
                 onChange={event => changeDailyNewLimit(Number(event.target.value))}
               />
               <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-sm font-medium text-[var(--color-text-secondary)]">thẻ / ngày</span>
@@ -159,13 +163,15 @@ export function SettingsPage() {
                   ? 'border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-text-inverse)]'
                   : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]')}
                 onClick={() => changeDailyNewLimit(value)}
-              >{value === 0 ? 'Chỉ ôn' : value}</button>)}
+              >{presetLabel(value)}</button>)}
             </div>
 
             <p id="srs-daily-new-limit-help" className="mt-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
               {settings.srsDailyNewLimit === 0
                 ? 'Hôm nay hệ thống chỉ đưa thẻ đang học và thẻ đến hạn vào phiên ôn.'
-                : `Mỗi ngày hệ thống đưa tối đa ${settings.srsDailyNewLimit.toLocaleString('vi-VN')} thẻ mới vào lịch ôn. Bạn vẫn có thể nhập một số khác.`}
+                : unlimitedNewCards
+                  ? 'Mỗi phiên đưa toàn bộ thẻ chưa học vào lịch ôn. Học càng nhiều thẻ mới hôm nay thì số thẻ đến hạn những ngày sau càng lớn.'
+                  : `Mỗi ngày hệ thống đưa tối đa ${settings.srsDailyNewLimit.toLocaleString('vi-VN')} thẻ mới vào lịch ôn. Bạn vẫn có thể nhập một số khác, hoặc bấm “Học thêm” ngay trong phiên khi muốn học quá mức này một hôm nào đó.`}
             </p>
           </div>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">

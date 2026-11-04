@@ -47,8 +47,11 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
 
   function launchScheduled(deck: BuiltInDeckDefinition) {
     const scheduled = scheduleFor(deck);
-    if (!scheduled.cards.length) return;
-    setSession({ id: deck.id, name: deck.name, cards: scheduled.sessionCards, template: defaultDeckTemplate(), initialIndex: 0, mode: 'anki' });
+    // Unseen cards still let the session open: its "study more" button admits them past today's limit.
+    if (!scheduled.cards.length && !scheduled.summary.newCount) return;
+    // The whole deck, so the session holds the cards that button needs. It applies the daily
+    // limit itself through createReviewQueue, so admitting them here would only limit twice.
+    setSession({ id: deck.id, name: deck.name, cards: deck.cards, template: defaultDeckTemplate(), initialIndex: 0, mode: 'anki' });
   }
 
   function freeAction(deck: BuiltInDeckDefinition) {

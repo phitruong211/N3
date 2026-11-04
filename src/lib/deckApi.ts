@@ -58,8 +58,9 @@ export const searchCards = (query: string, limit = 20, signal?: AbortSignal) =>
   apiRequest<CardSearchResult>(`/cards/search?query=${encodeURIComponent(query)}&limit=${limit}`, { signal });
 export const deckCardIds = (id: string) =>
   apiRequest<string[]>(`/decks/${id}/card-ids`);
-export const dueQueue = (id: string, limit = 50) =>
-  apiRequest<ApiQueueCard[]>(`/anki/due?deckId=${id}&limit=${limit}`);
+/** Whole deck with progress in one request; the session schedules it client-side. */
+export const deckQueueCards = (id: string) =>
+  apiRequest<ApiQueueCard[]>(`/anki/decks/${id}/cards`);
 export function cardRequest(card: ImportedCard, position?: number) {
   const extraData = { ...card.extraData };
   if (card.backReading.trim()) extraData.backReading = card.backReading.trim();
