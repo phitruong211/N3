@@ -16,12 +16,12 @@ type Focus = { kind: 'row' | 'col'; i: number } | null;
 /** Every filled slot in reading order; drives the "previous / next character" buttons. */
 const ORDER: Cell[] = KANA_ROWS.flatMap((r, ri) => r.hira.flatMap((k, c) => (k ? [[ri, c] as Cell] : [])));
 
-function speak(text: string) {
+function speak(text: string, rate = 0.6) {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = 'ja-JP';
-  utterance.rate = 0.8;
+  utterance.rate = rate;
   window.speechSynthesis.speak(utterance);
 }
 
@@ -91,7 +91,7 @@ function KanaDetail({ ch, row, col, script, position, replay, onStep, onReplay, 
         <span className="text-xs text-[var(--color-text-secondary)]">Ví dụ:</span>
         <span className="font-jp-serif text-2xl text-[var(--color-text)]">{info.ex[0]}</span>
         <span className="text-sm text-[var(--color-text-secondary)]">{info.ex[1]} = {info.ex[2]}</span>
-        <button className="ml-auto text-sm font-semibold text-[var(--color-accent)]" onClick={() => speak(info.ex![0])}>Nghe từ</button>
+        <button className="ml-auto text-sm font-semibold text-[var(--color-accent)]" onClick={() => speak(info.ex![0], 0.7)}>Nghe từ</button>
       </div>}
       <button className="study-button mt-3" onClick={onSwitch}>
         Xem chữ {script === 'hira' ? 'Katakana' : 'Hiragana'} cùng âm: <span className="font-jp-serif text-xl">{counterpart(ch)}</span>
@@ -132,8 +132,8 @@ export function KanaPage() {
   const row = KANA_ROWS[sel[0]];
   const ch = row[script][sel[1]];
   const position = ORDER.findIndex(([r, c]) => r === sel[0] && c === sel[1]);
-  const focusRow = (r: number) => { setFocus({ kind: 'row', i: r }); speak(KANA_ROWS[r][script].filter(Boolean).join('、')); };
-  const focusCol = (c: number) => { setFocus({ kind: 'col', i: c }); speak(KANA_ROWS.map(r => r[script][c]).filter(Boolean).join('、')); };
+  const focusRow = (r: number) => { setFocus({ kind: 'row', i: r }); speak(KANA_ROWS[r][script].filter(Boolean).join('。'), 0.5); };
+  const focusCol = (c: number) => { setFocus({ kind: 'col', i: c }); speak(KANA_ROWS.map(r => r[script][c]).filter(Boolean).join('。'), 0.5); };
   const pick = (r: number, c: number) => { setSel([r, c]); setFocus(null); if (!wide) setOpen(true); };
   const step = (delta: number) => setSel(ORDER[(position + delta + ORDER.length) % ORDER.length]);
   const showDemo = () => { setSel([1, 0]); setFocus(null); chartRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' }); };
