@@ -4,7 +4,6 @@ import {
   type ApiDeck,
   type ApiDeckSummary,
   type ApiProgress,
-  type ApiQueueCard,
 } from "./api";
 import type { ImportedCard } from "./ankiImport";
 import { builtinNoteTypes, cardFromFields, noteTypeIdForKind, sanitizeStyle, type CardFieldValues, type DeckConfig, type NoteType } from "./deckFormat";
@@ -58,9 +57,6 @@ export const searchCards = (query: string, limit = 20, signal?: AbortSignal) =>
   apiRequest<CardSearchResult>(`/cards/search?query=${encodeURIComponent(query)}&limit=${limit}`, { signal });
 export const deckCardIds = (id: string) =>
   apiRequest<string[]>(`/decks/${id}/card-ids`);
-/** Whole deck with progress in one request; the session schedules it client-side. */
-export const deckQueueCards = (id: string) =>
-  apiRequest<ApiQueueCard[]>(`/anki/decks/${id}/cards`);
 export function cardRequest(card: ImportedCard, position?: number) {
   const extraData = { ...card.extraData };
   if (card.backReading.trim()) extraData.backReading = card.backReading.trim();

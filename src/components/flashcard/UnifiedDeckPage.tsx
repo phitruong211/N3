@@ -71,8 +71,8 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     }
     const scheduled = scheduleFor(deck);
     return <DeckCard key={deck.id} summary={summary} badge={badge} metrics={scheduleMetrics(scheduled.summary)}
-      primaryLabel={scheduled.cards.length ? 'Ôn ngay →' : 'Đã hoàn thành hôm nay'}
-      primaryDisabled={!scheduled.cards.length} onPrimary={() => launchScheduled(deck)}/>;
+      primaryLabel={scheduled.cards.length ? 'Ôn ngay →' : scheduled.summary.newCount ? 'Học thêm →' : 'Đã hoàn thành hôm nay'}
+      primaryDisabled={!scheduled.cards.length && !scheduled.summary.newCount} onPrimary={() => launchScheduled(deck)}/>;
   }
 
   const levelRows: LevelRow[] = decks.map(deck => {
@@ -80,7 +80,8 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     return {
       id: deck.id, level: deck.level, kind: deck.kind, totalCards: deck.cards.length,
       learnedCount: schedule.summary.learnedCount, dueCount: schedule.summary.remainingTodayCount,
-      startable: mode === 'free' ? deck.cards.length > 0 : schedule.cards.length > 0,
+      // Past today's limit the deck stays open while unseen cards remain, so "Học thêm" is reachable.
+      startable: mode === 'free' ? deck.cards.length > 0 : schedule.cards.length > 0 || schedule.summary.newCount > 0,
       actionLabel: lessonDecks.has(deck.id) ? 'Chọn bài' : 'Bắt đầu',
       onOpen: () => mode === 'free' ? freeAction(deck) : launchScheduled(deck),
     };

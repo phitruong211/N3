@@ -14,6 +14,7 @@
     "test:audit": "node tests/audit.browser.mjs",
     "test:guest": "node tests/guestFlow.browser.mjs",
     "test:study-ui": "node tests/studySessionUI.browser.mjs",
+    "test:daily-limit": "node tests/dailyLimit.browser.mjs",
     "test:review-outbox": "node tests/reviewOutbox.browser.mjs",
     "test:integration": "node tests/srsIntegration.browser.mjs",
     "test:scale": "node tests/srsScale.api.mjs",

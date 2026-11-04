@@ -75,7 +75,7 @@ export function LevelDecks({ mode, rows, storage }: { mode: 'free' | 'scheduled'
             <span className="level-row-side">
               {waiting ? <span className="level-row-due">{count(row.dueCount)} cần ôn</span>
                 : !row.startable ? <span className="level-row-note">{row.totalCards ? <><Check size={14} aria-hidden="true"/>Xong hôm nay</> : 'Sắp có'}</span>
-                : !scheduled ? <span className="level-row-note">{row.actionLabel}</span> : null}
+                : <span className="level-row-note">{scheduled ? 'Học thêm' : row.actionLabel}</span>}
               {row.startable && <ChevronRight size={18} className="level-row-chevron" aria-hidden="true"/>}
             </span>
           </button>

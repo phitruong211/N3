@@ -9,7 +9,7 @@ import {
 } from "@/hooks/useActiveElapsedMinutes";
 import { createSRSCard, formatDate, getNextIntervals, processReview } from "@/lib/srs";
 import { legacyToFsrsProgress, progressToSrsCard } from "@/lib/fsrsProgress";
-import { admitMoreNew, applyReviewedProgress, createReviewQueue, nearestFutureDue, nextReadyCard, promoteDueCards, remainingNewCount, reviewSessionSummary } from "@/lib/liveReviewQueue";
+import { admitMoreNew, applyReviewedProgress, createReviewQueue, introducedTodayKeys, nearestFutureDue, nextReadyCard, promoteDueCards, remainingNewCount, reviewSessionSummary } from "@/lib/liveReviewQueue";
 import { progressToSrs, type ApiProgress } from "@/lib/api";
 import { defaultDeckTemplate, normalizeDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { applyResolvedTemplate, mergeSideStyle, noteTypeIdForKind, noteTypeOf, resolveTemplate, type DeckConfig } from "@/lib/deckFormat";
@@ -113,7 +113,8 @@ export function StudySession({
       const projected = reviewOutbox.project(card.source === 'BUILT_IN' ? 'BUILT_IN' : 'PERSONAL', { ...(stored ?? createSRSCard(card.id, 'vocabulary')), deckType: card.type === 'KANJI' ? 'kanji' : card.type === 'GRAMMAR' ? 'grammar' : 'vocabulary' });
       progressByKey.set(card.id, legacyToFsrsProgress(projected));
     }
-    return createReviewQueue({ cards, keyFor: card => card.id, progressByKey, now: new Date(), dailyNewLimit: settings.srsDailyNewLimit });
+    const now = new Date();
+    return createReviewQueue({ cards, keyFor: card => card.id, progressByKey, now, dailyNewLimit: settings.srsDailyNewLimit, introducedToday: introducedTodayKeys(progressByKey, now) });
   });
   const [shuffled, setShuffled] = useState(false);
   const [index, setIndex] = useState(() => Math.max(0, Math.min(cards.length - 1, initialIndex)));

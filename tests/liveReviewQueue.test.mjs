@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createReviewQueue, nextReadyCard, applyReviewedProgress, promoteDueCards, reviewSessionSummary, remainingNewCount, admitMoreNew } from '../src/lib/liveReviewQueue.ts';
+import { createReviewQueue, nextReadyCard, applyReviewedProgress, promoteDueCards, reviewSessionSummary, remainingNewCount, admitMoreNew, introducedTodayKeys } from '../src/lib/liveReviewQueue.ts';
 
 const now = new Date('2026-10-10T00:00:00.000Z');
 const card = { id: 'one' };
@@ -102,4 +102,33 @@ test('an answered card is never re-admitted as new', () => {
   queue = applyReviewedProgress(queue, 'one', {...progress, state:'review', dueAt:'2026-10-12T00:00:00.000Z'}, now);
   assert.equal(remainingNewCount(queue), 1);
   assert.deepEqual(admitMoreNew(queue, 5).ready, ['two']);
+});
+
+test('cards first reviewed today use up the daily new-card limit of the next session', () => {
+  const noon = new Date(2026, 10, 4, 12);
+  const at = (day, hour = 9) => new Date(2026, 10, day, hour).toISOString();
+  const progressByKey = new Map([
+    ['today', {...progress, state:'review', firstReviewedAt: at(4), lastReviewedAt: at(4)}],
+    ['yesterday', {...progress, state:'review', firstReviewedAt: at(3), lastReviewedAt: at(4)}],
+    ['fresh', null],
+    ['reset', {...progress, state:'new', firstReviewedAt: at(4), lastReviewedAt: at(4)}],
+  ]);
+  // Only "today" started today: "yesterday" merely came back for review, "reset" is new again.
+  assert.deepEqual(introducedTodayKeys(progressByKey, noon), ['today']);
+
+  const cards = ['today', 'a', 'b', 'c'].map(id => ({id}));
+  const reopened = createReviewQueue({ cards, keyFor:c=>c.id, now:noon, dailyNewLimit:2,
+    progressByKey: new Map([['today', progressByKey.get('today')]]),
+    introducedToday: introducedTodayKeys(progressByKey, noon).filter(key => key === 'today') });
+  // 2 allowed, 1 already started today: one new card is left, not two.
+  assert.deepEqual(reopened.ready.filter(key => key !== 'today'), ['a']);
+  assert.equal(remainingNewCount(reopened), 2);
+});
+
+test('with the limit already used, no new card is queued but study more can still admit them', () => {
+  const cards = ['x', 'y', 'z'].map(id => ({id}));
+  const queue = createReviewQueue({ cards, keyFor:c=>c.id, now, dailyNewLimit:1, introducedToday:['x']});
+  assert.deepEqual(queue.ready, []);
+  assert.equal(remainingNewCount(queue), 3);
+  assert.deepEqual(admitMoreNew(queue, 2).ready, ['x', 'y']);
 });

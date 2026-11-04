@@ -130,3 +130,21 @@ export function admitMoreNew<T>(queue: ReviewQueue<T>, count: number): ReviewQue
   if (!extra.length) return queue;
   return { ...queue, ready: sorted(queue, [...queue.ready, ...extra]) };
 }
+
+const sameLocalDay = (value: string, now: Date) => {
+  const date = new Date(value);
+  return date.getFullYear() === now.getFullYear() && date.getMonth() === now.getMonth() && date.getDate() === now.getDate();
+};
+
+/**
+ * Cards whose first review fell today (local time). They already used a slot of the daily
+ * new-card limit, so a session opened later must not hand out the whole allowance again.
+ */
+export function introducedTodayKeys(progressByKey: ReadonlyMap<string, FsrsProgress | null>, now: Date): string[] {
+  const keys: string[] = [];
+  for (const [key, progress] of progressByKey) {
+    const first = progress && progress.state !== 'new' ? progress.firstReviewedAt ?? progress.lastReviewedAt : null;
+    if (first && sameLocalDay(first, now)) keys.push(key);
+  }
+  return keys;
+}

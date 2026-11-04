@@ -28,6 +28,7 @@ import {
   removeDeck,
   reorderCards,
   moveCards,
+  getDeckProgress,
   type ApiProgress,
 } from "@/lib/api";
 import {
@@ -37,7 +38,6 @@ import {
   creationBody,
   deckCardIds,
   deckMetadata,
-  deckQueueCards,
   importDeck,
   listDeckPage,
   type Page,
@@ -437,16 +437,18 @@ export function ImportedDecks({
     setStudySetup(null);
   }
 
+  // Unseen cards still let the session open: its "study more" button admits them past today's limit.
+  const canReview = (deck: PersonalDeck) => readyCount(deck) > 0 || (deck.newCount ?? 0) > 0;
+
   async function startScheduledStudy(deck: PersonalDeck) {
-    // Unseen cards still let the session open: its "study more" button admits them past today's limit.
-    if (!readyCount(deck) && !(deck.newCount ?? 0)) {
+    if (!canReview(deck)) {
       setMessage("Bộ này đã hoàn thành lịch ôn hôm nay.");
       return;
     }
     await operation(async () => {
       // The whole deck, so the session can keep admitting new cards past today's limit.
       // shortcut: one response holds every card; paginate if decks grow past a few thousand.
-      const queue = await deckQueueCards(deck.id);
+      const queue = await getDeckProgress(deck.id);
       const progress: Record<string, ApiProgress | null> = {};
       const config = normalizeConfig(deck.templateConfig);
       const views = queue.map((card, index) => {
@@ -1028,8 +1030,9 @@ export function ImportedDecks({
               onChange={() => setReload(value => value + 1)} renderDeck={(deck, menu, compact) => {
                 const badge = personalDeckBadge(deck);
                 const needed = readyCount(deck);
+                const canStudy = canReview(deck);
                 if (compact) return <article className="widget-deck-row">
-                  <h3><button type="button" aria-label={`${mode === 'free' ? 'Bắt đầu học' : 'Ôn ngay'} ${deck.name}`} disabled={busy || (mode === 'free' ? !deck.cardCount : !needed)}
+                  <h3><button type="button" aria-label={`${mode === 'free' ? 'Bắt đầu học' : 'Ôn ngay'} ${deck.name}`} disabled={busy || (mode === 'free' ? !deck.cardCount : !canStudy)}
                     onClick={() => void (mode === 'free' ? openFreeStudy(deck) : startScheduledStudy(deck))}>{displayDeckName(deck.name)}</button></h3>
                   {mode !== 'free' && needed > 0 && <span className="widget-deck-chip">{needed.toLocaleString('vi-VN')} cần ôn</span>}
                   <span>{deck.cardCount.toLocaleString('vi-VN')} thẻ</span>{menu}
@@ -1063,13 +1066,13 @@ export function ImportedDecks({
                     <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
                       <button
                         type="button"
-                        className={`deck-study-action text-left text-sm font-semibold ${(mode === "free" ? deck.cardCount > 0 : needed > 0) ? "text-[var(--color-accent)] hover:underline" : "cursor-default text-[var(--color-text-tertiary)]"}`}
-                        disabled={busy || (mode === "free" ? !deck.cardCount : !needed)}
+                        className={`deck-study-action text-left text-sm font-semibold ${(mode === "free" ? deck.cardCount > 0 : canStudy) ? "text-[var(--color-accent)] hover:underline" : "cursor-default text-[var(--color-text-tertiary)]"}`}
+                        disabled={busy || (mode === "free" ? !deck.cardCount : !canStudy)}
                         onClick={() => void (mode === "free" ? openFreeStudy(deck) : startScheduledStudy(deck))}
                       >
                         {mode === "free"
                           ? deck.cardCount ? "Bắt đầu học →" : "Chưa có thẻ"
-                          : needed ? "Ôn ngay →" : "Đã hoàn thành hôm nay"}
+                          : needed ? "Ôn ngay →" : canStudy ? "Học thêm →" : "Đã hoàn thành hôm nay"}
                       </button>
                     </div>
                   </article>

@@ -37,7 +37,7 @@
 .study-session-keyhint { display: inline-flex; align-items: center; gap: 6px; font-size: .7rem; font-weight: 400; }
 .study-session-keyhint kbd, kbd.study-session-keyhint { border: 1px solid currentColor; border-radius: 5px; padding: 2px 6px; font-size: .7rem; opacity: .85; }
 .study-session-ratings { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
-.study-session-rating { --rating-color: var(--color-text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; min-height: 76px; min-width: 0; border: 1px solid var(--color-border); border-top: 3px solid var(--rating-color); border-radius: 12px; background: var(--color-surface); color: var(--color-text); cursor: pointer; transition: background var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft), transform var(--dur-base) var(--ease-out); }
+.study-session-rating { --rating-color: var(--color-text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; min-height: 76px; min-width: 0; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); color: var(--color-text); cursor: pointer; transition: background var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft), transform var(--dur-base) var(--ease-out); }
 .study-session-rating:hover { background: var(--color-surface-hover); transform: translateY(-2px); border-color: var(--rating-color); }
 .study-session-rating:disabled { opacity: .45; cursor: not-allowed; }
 .study-session-rating-again { --rating-color: var(--color-error); }
@@ -260,7 +260,7 @@
 
 /* Reveal and ratings. */
 .study-session-ratings { gap: 12px; }
-.study-session-rating { min-height: 84px; border-radius: 8px; border: 1px solid var(--color-border); border-top: 2px solid var(--rating-color); background: var(--color-surface); gap: 6px; }
+.study-session-rating { min-height: 84px; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-surface); gap: 6px; }
 .study-session-rating:hover { transform: translateY(-3px); border-color: var(--color-border-strong); border-top-color: var(--rating-color); background: color-mix(in srgb, var(--rating-color) 7%, var(--color-surface)); box-shadow: var(--shadow-md); }
 .study-session-rating:active { transform: scale(.975); }
 .study-session-rating-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; letter-spacing: -.01em; }
