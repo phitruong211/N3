@@ -4,9 +4,11 @@ import { Ellipsis, EllipsisVertical } from '@/components/ui/icons';
 
 export type DeckAction = { id: string; label: string; destructive?: boolean; disabled?: boolean; onSelect: () => void };
 
-type Props = { label?: string; actions: DeckAction[]; horizontal?: boolean; triggerContent?: ReactNode; disabled?: boolean; menuClassName?: string; compact?: boolean };
+type Props = { label?: string; actions: DeckAction[]; horizontal?: boolean; triggerContent?: ReactNode; disabled?: boolean; menuClassName?: string; compact?: boolean;
+  /** Replaces the default button styling, e.g. for a round avatar trigger. */
+  triggerClassName?: string; header?: ReactNode };
 
-export function OverflowMenu({ label = 'Mở menu', actions, horizontal, triggerContent, disabled, menuClassName = '', compact }: Props) {
+export function OverflowMenu({ label = 'Mở menu', actions, horizontal, triggerContent, disabled, menuClassName = '', compact, triggerClassName, header }: Props) {
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const trigger = useRef<HTMLButtonElement>(null);
@@ -39,7 +41,7 @@ export function OverflowMenu({ label = 'Mở menu', actions, horizontal, trigger
     return () => { document.removeEventListener('pointerdown', outside); window.removeEventListener('keydown', escape); };
   }, [open]);
   return <>
-    <button ref={trigger} type="button" disabled={disabled} className={`study-button ${triggerContent ? 'study-button-primary' : compact ? '!min-h-9 !w-9 !p-0' : '!min-h-11 !w-11 !p-0'}`}
+    <button ref={trigger} type="button" disabled={disabled} className={triggerClassName ?? `study-button ${triggerContent ? 'study-button-primary' : compact ? '!min-h-9 !w-9 !p-0' : '!min-h-11 !w-11 !p-0'}`}
       aria-label={label} aria-haspopup="menu" aria-controls={open ? id : undefined} aria-expanded={open}
       onKeyDown={event => { if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); setOpen(true); } }}
       onClick={() => setOpen(value => !value)}>{triggerContent ?? (horizontal ? <Ellipsis size={20}/> : <EllipsisVertical size={18}/>)}</button>
@@ -54,6 +56,7 @@ export function OverflowMenu({ label = 'Mở menu', actions, horizontal, trigger
           items[next]?.focus();
         } else if (event.key === 'Tab') { close(true); }
       }}>
+      {header}
       {actions.map(action => <button key={action.id} type="button" role="menuitem" disabled={action.disabled}
         className={`flex min-h-11 w-full items-center rounded-lg px-3 text-left text-sm hover:bg-[var(--color-surface-hover)] focus-visible:bg-[var(--color-surface-hover)] disabled:opacity-40 ${action.destructive ? 'mt-1 border-t border-[var(--color-border)] text-[var(--color-error)]' : ''}`}
         onClick={() => { close(true); action.onSelect(); }}>{action.label}</button>)}

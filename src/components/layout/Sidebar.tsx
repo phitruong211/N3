@@ -28,13 +28,7 @@ export function Sidebar() {
         </button>
       </div>
 
-      <button onClick={() => setCurrentPage('settings')} title={sidebarCollapsed ? (user ? `${user.displayName} · ${user.email}` : 'Khách · lưu trên thiết bị') : user?.email} aria-label={user ? `Tài khoản ${user.displayName}, mở cài đặt` : 'Khách, mở cài đặt'}
-        className={`mx-3 mb-3 flex min-h-12 items-center gap-3 rounded-lg border border-[var(--color-border)] px-2.5 text-left transition-colors hover:bg-[var(--color-surface-hover)] ${sidebarCollapsed ? 'justify-center !px-0' : ''}`}>
-        <span aria-hidden="true" className="grid size-8 shrink-0 place-items-center rounded-full bg-[var(--color-accent)] text-sm font-semibold text-[var(--color-text-inverse)]">{(user?.displayName || 'K').trim().charAt(0).toUpperCase()}</span>
-        {!sidebarCollapsed && <span className="min-w-0"><span className="block truncate text-sm font-semibold text-[var(--color-text)]">{user?.displayName || 'Khách'}</span><span className="block truncate text-xs text-[var(--color-text-tertiary)]">{user ? 'Đã đăng nhập' : 'Học thử · lưu trên thiết bị'}</span></span>}
-      </button>
-
-      <button onClick={() => setSearchOpen(true)} className={`study-button mx-3 !min-h-10 ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} aria-label={sidebarCollapsed ? 'Tìm kiếm' : undefined}>
+      <button onClick={() => setSearchOpen(true)} className={`study-button mx-3 mt-1 !min-h-10 ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} aria-label={sidebarCollapsed ? 'Tìm kiếm' : undefined}>
         <Search size={17}/>{!sidebarCollapsed && <><span className="flex-1 text-left">Tìm kiếm</span><kbd className="kbd-shortcut">⌘ K</kbd></>}
       </button>
 
