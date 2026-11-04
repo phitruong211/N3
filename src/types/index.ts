@@ -361,6 +361,7 @@ export interface AppSettings {
 
 export type PageId =
   | 'dictionary'
+  | 'library'
   | 'kana'
   | 'dashboard'
   | 'vocabulary'

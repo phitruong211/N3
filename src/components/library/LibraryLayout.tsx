@@ -11,6 +11,8 @@ const tabs = [
 
 export function LibraryLayout() {
   const { pathname } = useLocation();
+  // The overview already lists every section in learning order; a tab row beside it would say the same thing twice.
+  if (pathname === '/library') return <Outlet/>;
   return <div className="space-y-8">
     <div className="border-b border-[var(--color-border-strong)]">
       <nav aria-label="Nội dung thư viện" className="-mb-px flex max-w-full gap-6 overflow-x-auto">

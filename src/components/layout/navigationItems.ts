@@ -5,7 +5,7 @@ export type NavigationItem = { page: PageId; label: string; icon: Icon; shortcut
 
 export const PRIMARY_NAV_ITEMS: NavigationItem[] = [
   { page: 'dashboard', label: 'Hôm nay', icon: NavToday, shortcut: 'G D' },
-  { page: 'vocabulary', label: 'Thư viện', icon: NavLibrary, shortcut: 'G V' },
+  { page: 'library', label: 'Thư viện', icon: NavLibrary, shortcut: 'G V' },
   { page: 'flashcards', label: 'Bộ thẻ', icon: NavDecks, shortcut: 'G F' },
   { page: 'srs', label: 'Ôn ngắt quãng', icon: NavReview, shortcut: 'G S' },
   { page: 'quiz', label: 'Trắc nghiệm', icon: NavQuiz, shortcut: 'G Q' },
@@ -27,7 +27,7 @@ export const MORE_NAV_ITEMS: NavigationItem[] = [
 ];
 
 export function isNavigationItemActive(item: NavigationItem, currentPage: PageId): boolean {
-  if (item.page === 'vocabulary') return ['vocabulary', 'kana', 'grammar', 'kanji', 'listening', 'exam'].includes(currentPage);
+  if (item.page === 'library') return ['library', 'vocabulary', 'kana', 'grammar', 'kanji', 'listening', 'exam'].includes(currentPage);
   if (item.page === 'flashcards') return currentPage === 'flashcards';
   if (item.page === 'srs') return currentPage === 'srs' || currentPage === 'anki';
   return item.page === currentPage;
