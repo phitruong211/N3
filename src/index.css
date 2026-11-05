@@ -368,3 +368,7 @@ button, input, select, textarea { font: inherit; }
 .kana-stroke { stroke-dasharray: 1 2; stroke-dashoffset: 1.01; animation: kana-draw .7s ease-out both; }
 @media (prefers-reduced-motion: reduce) { .kana-stroke { animation: none; stroke-dashoffset: 0; } }
 .reduced-motion .kana-stroke { animation: none; stroke-dashoffset: 0; }
+
+/* Library path: the ink thread between stages draws itself downward once, stage by stage. */
+@keyframes library-thread { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.library-thread { transform-origin: top; animation: library-thread var(--dur-slow) var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 110ms + 180ms); }
