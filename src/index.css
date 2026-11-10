@@ -372,3 +372,30 @@ button, input, select, textarea { font: inherit; }
 /* Library path: the ink thread between stages draws itself downward once, stage by stage. */
 @keyframes library-thread { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 .library-thread { transform-origin: top; animation: library-thread var(--dur-slow) var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 110ms + 180ms); }
+
+/* Kana games. The sky is ruled paper with faint rain; the ground is an ink wash. */
+.rain-sky { background-image: repeating-linear-gradient(100deg, transparent 0 38px, color-mix(in srgb, var(--color-border) 55%, transparent) 38px 39px), linear-gradient(var(--color-surface), var(--color-surface-alt)); }
+.rain-ground { background: linear-gradient(transparent, color-mix(in srgb, var(--color-text) 10%, transparent)); border-top: 2px solid color-mix(in srgb, var(--color-text) 35%, transparent); }
+@keyframes kana-burst { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(1.7); } }
+.kana-burst { animation: kana-burst .55s var(--ease-out) both; }
+@keyframes kana-miss { 0% { opacity: 0; transform: translateY(8px); } 15%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-6px); } }
+.kana-miss { animation: kana-miss 1.6s var(--ease-out) both; }
+/* The torii path: two dashed lane lines and stepping stones that scroll by --scroll (set per frame). */
+.torii-path {
+  --dash: color-mix(in srgb, var(--color-text) 26%, transparent);
+  --tuft: color-mix(in srgb, var(--color-success) 22%, transparent);
+  background-color: color-mix(in srgb, var(--color-gold) 9%, var(--color-surface));
+  background-image:
+    repeating-linear-gradient(180deg, var(--dash) 0 18px, transparent 18px 40px),
+    repeating-linear-gradient(180deg, var(--dash) 0 18px, transparent 18px 40px),
+    radial-gradient(circle at 30% 40%, var(--tuft) 0 2px, transparent 2.5px),
+    radial-gradient(circle at 75% 80%, var(--tuft) 0 1.5px, transparent 2px);
+  background-size: 2px 40px, 2px 40px, 56px 56px, 37px 37px;
+  background-repeat: repeat-y, repeat-y, repeat, repeat;
+  background-position: calc(33.33% + 0px) var(--scroll, 0), calc(66.66% + 0px) var(--scroll, 0), 0 var(--scroll, 0), 0 calc(var(--scroll, 0) * 1.5);
+}
+@keyframes torii-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes torii-leg { 0%, 100% { transform: rotate(14deg); } 50% { transform: rotate(-14deg); } }
+.torii-runner { animation: torii-bob .32s ease-in-out infinite; }
+.torii-leg-a, .torii-leg-b { transform-box: fill-box; transform-origin: top center; animation: torii-leg .32s ease-in-out infinite; }
+.torii-leg-b { animation-direction: reverse; }

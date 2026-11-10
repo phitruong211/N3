@@ -41,13 +41,18 @@ function shuffled(items: string[]) {
   return out;
 }
 
-/** One practice question: a character still being learned, plus three readings it is not. */
-export function buildQuestion(pool: string[], progress: KanaProgress, avoid?: string): Question {
+/** A character still being learned; once every one is learned, any character. `avoid` keeps the last one from repeating. */
+export function pickKana(pool: readonly string[], progress: KanaProgress, avoid?: string, rand = Math.random): string {
   const left = pool.filter(kana => !isLearned(progress, kana) && kana !== avoid);
   // A character you just missed is worth asking twice as often as one you have never answered.
   const weighted = left.flatMap(kana => (progress[kana] ?? 0) === 0 ? [kana, kana] : [kana]);
   const bucket = weighted.length ? weighted : pool.filter(kana => kana !== avoid);
-  const ch = bucket[Math.floor(Math.random() * bucket.length)];
+  return bucket[Math.floor(rand() * bucket.length)];
+}
+
+/** One practice question: a character still being learned, plus three readings it is not. */
+export function buildQuestion(pool: string[], progress: KanaProgress, avoid?: string): Question {
+  const ch = pickKana(pool, progress, avoid);
   const romaji = ROMAJI[ch];
   const others = shuffled([...new Set(pool.map(kana => ROMAJI[kana]))].filter(reading => reading !== romaji));
   return { ch, romaji, choices: shuffled([romaji, ...others.slice(0, 3)]) };
