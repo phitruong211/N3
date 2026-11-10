@@ -7,6 +7,8 @@ import { isNavigationItemActive, PRIMARY_NAV_ITEMS, SECONDARY_NAV_ITEMS, type Na
 export function Sidebar() {
   const { currentPage, setCurrentPage, setSearchOpen, sidebarCollapsed, setSidebarCollapsed } = useApp();
   const { user, signOut, setPrompt } = useAuth();
+  const name = user?.displayName || 'Khách';
+  const avatar = <span aria-hidden="true" className="grid size-8 shrink-0 place-items-center rounded-full bg-[var(--color-accent)] text-sm font-semibold text-[var(--color-text-inverse)]">{name.trim().charAt(0).toUpperCase()}</span>;
 
   const renderItem = (item: NavigationItem) => {
     const active = isNavigationItemActive(item, currentPage);
@@ -40,9 +42,17 @@ export function Sidebar() {
 
       <div className="space-y-1 border-t border-[var(--color-border)] p-3">
         {renderItem({ page: 'settings', label: 'Cài đặt', icon: NavSettings })}
-        <button className={`study-button w-full ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} title={user ? 'Đăng xuất' : 'Đăng nhập'} onClick={() => user ? void signOut() : setPrompt('login')}>
-          {user ? <LogOut size={17}/> : <LogIn size={17}/>}<span className={sidebarCollapsed ? 'sr-only' : undefined}>{user ? 'Đăng xuất' : 'Đăng nhập'}</span>
-        </button>
+        {user
+          ? <div className={`flex items-center gap-2.5 px-1 pt-2 ${sidebarCollapsed ? 'justify-center' : ''}`}>
+            {!sidebarCollapsed && <>{avatar}<span className="min-w-0 flex-1">
+              <span className="block truncate text-sm font-semibold text-[var(--color-text)]">{name}</span>
+              <span className="block truncate text-xs text-[var(--color-text-tertiary)]">{user.email}</span>
+            </span></>}
+            <button className="study-button !min-h-9 !w-9 shrink-0 !p-0" title="Đăng xuất" aria-label="Đăng xuất" onClick={() => void signOut()}><LogOut size={16}/></button>
+          </div>
+          : <button className={`study-button w-full ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} title="Đăng nhập" onClick={() => setPrompt('login')}>
+            <LogIn size={17}/><span className={sidebarCollapsed ? 'sr-only' : undefined}>Đăng nhập</span>
+          </button>}
       </div>
     </aside>
   );
