@@ -2,14 +2,14 @@ import { OverflowMenu } from '@/components/ui/OverflowMenu';
 import { useApp } from '@/hooks/useApp';
 import { useAuth } from '@/hooks/useAuth';
 
-/** Round avatar that opens a small account menu; replaces the old name box in the sidebar. */
+/** Mobile header only: on desktop the sidebar footer shows the account. */
 export function AccountMenu() {
   const { setCurrentPage } = useApp();
   const { user, signOut, setPrompt } = useAuth();
   const name = user?.displayName || 'Khách';
   return <OverflowMenu
     label={user ? `Tài khoản ${name}` : 'Tài khoản khách'}
-    triggerClassName="grid size-9 shrink-0 lg:size-10 cursor-pointer place-items-center rounded-full bg-[var(--color-accent)] text-base font-semibold text-[var(--color-text-inverse)] shadow-md ring-2 ring-[var(--color-surface)] transition-transform hover:scale-105 active:scale-95"
+    triggerClassName="grid size-8 shrink-0 cursor-pointer place-items-center rounded-full bg-[var(--color-accent)] text-sm font-semibold text-[var(--color-text-inverse)] focus-ring"
     triggerContent={name.trim().charAt(0).toUpperCase()}
     header={<div className="mb-1 border-b border-[var(--color-border)] px-3 pb-2.5 pt-2">
       <p className="truncate text-sm font-semibold text-[var(--color-text)]">{name}</p>

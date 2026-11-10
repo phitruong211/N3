@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { RotateCcw, Volume2 } from '@/components/ui/icons';
 import { AppDialog } from '@/components/ui/AppDialog';
 import { PageHeading } from '@/components/ui/StudyUI';
 import { useLearningStorage } from '@/hooks/useApp';
-import { HIRA_INFO, KANA_COLUMNS, KANA_ROWS, KATA_INFO, counterpart, type KanaRow, type KanaScript } from './kanaData';
+import { KANA_COLUMNS, KANA_ROWS, type KanaRow, type KanaScript } from './kanaData';
 import { KANA_STROKES } from './kanaStrokes';
 import { KANA_POOL, KANA_PROGRESS_KEY, buildQuestion, countLearned, isLearned, type KanaProgress } from './kanaProgress';
 
@@ -24,7 +24,8 @@ function japaneseVoice() {
   return window.speechSynthesis.getVoices().filter(v => v.lang.replace('_', '-').toLowerCase().startsWith('ja')).sort((a, b) => voiceScore(b) - voiceScore(a))[0];
 }
 
-function speak(text: string, rate = 0.6) {
+// A lone kana is one short mora: speak it slowly, and twice (see sayKana) so a beginner can catch it.
+function speak(text: string, rate = 0.45) {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
@@ -33,6 +34,8 @@ function speak(text: string, rate = 0.6) {
   utterance.rate = rate;
   window.speechSynthesis.speak(utterance);
 }
+
+const sayKana = (ch: string) => speak(`${ch}。${ch}`);
 
 const startOf = (d: string): [number, number] => {
   const m = d.match(/^M\s*(-?[\d.]+)[,\s]+(-?[\d.]+)/);
@@ -55,26 +58,11 @@ function StrokeStep({ paths, n }: { paths: string[]; n: number }) {
   </figure>;
 }
 
-function Step({ n, title, children }: { n: number; title: string; children: ReactNode }) {
-  return <section className="mt-6 border-t border-[var(--color-border)] pt-5">
-    <h3 className="mb-3 flex items-center gap-2 text-base font-semibold text-[var(--color-text)]">
-      <span aria-hidden="true" className="grid size-6 shrink-0 place-items-center rounded-full bg-[var(--color-accent)] text-xs text-[var(--color-text-inverse)]">{n}</span>
-      {title}
-    </h3>
-    {children}
-  </section>;
-}
-
-function KanaDetail({ ch, row, col, script, position, replay, onStep, onReplay, onSwitch }: {
+function KanaDetail({ ch, row, col, script, position, replay, onStep, onReplay }: {
   ch: string; row: KanaRow; col: number; script: KanaScript; position: number;
-  replay: number; onStep: (delta: number) => void; onReplay: () => void; onSwitch: () => void;
+  replay: number; onStep: (delta: number) => void; onReplay: () => void;
 }) {
-  const romaji = row.romaji[col];
-  const info = (script === 'hira' ? HIRA_INFO : KATA_INFO)[ch];
   const paths = KANA_STROKES[ch] ?? [];
-  const formula = row.id === 'nn' ? 'Đứng một mình, không ghép với nguyên âm'
-    : row.id === 'a' ? `Hàng A (chỉ nguyên âm) → “${romaji}”`
-    : `Hàng ${row.id.toUpperCase()} + cột ${KANA_COLUMNS[col].id.toUpperCase()} = “${romaji}”`;
   return <>
     <div className="flex items-center justify-between gap-2">
       <button className="study-button !min-h-10 !px-3" onClick={() => onStep(-1)}>‹ Chữ trước</button>
@@ -83,29 +71,17 @@ function KanaDetail({ ch, row, col, script, position, replay, onStep, onReplay, 
     </div>
     <div className="mt-5">
       <p className="study-eyebrow">{SCRIPTS[script].name.toUpperCase()} · {row.label.toUpperCase()}</p>
-      <p className="font-jp-serif mt-2 text-8xl leading-none text-[var(--color-text)]">{ch}</p>
+      <div className="mt-2 flex items-end gap-5">
+        <p className="font-jp-serif text-8xl leading-none text-[var(--color-text)]">{ch}</p>
+        <div>
+          <p className="text-2xl font-semibold text-[var(--color-text)]">“{row.romaji[col]}”</p>
+          <button className="study-button mt-2 !min-h-10" onClick={() => sayKana(ch)}><Volume2 size={18} /> Nghe</button>
+        </div>
+      </div>
     </div>
 
-    <Step n={1} title="Nghe và đọc">
-      <p className="text-2xl font-semibold text-[var(--color-text)]">“{romaji}”</p>
-      <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{formula} · gần như “{row.vi[col]}” trong tiếng Việt</p>
-      <button className="study-button mt-3" onClick={() => speak(ch)}><Volume2 size={18} /> Nghe phát âm</button>
-      {info.note && <p className="mt-3 rounded-lg border border-[var(--color-gold)] px-3 py-2 text-sm text-[var(--color-text)]">{info.note}</p>}
-    </Step>
-
-    <Step n={2} title="Nhớ mặt chữ">
-      <p className="text-[var(--color-text)]">{info.hint}</p>
-      {info.ex && <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-lg bg-[var(--color-surface-alt)] px-3 py-2">
-        <span className="font-jp-serif text-2xl text-[var(--color-text)]">{info.ex[0]}</span>
-        <span className="text-sm text-[var(--color-text-secondary)]">{info.ex[1]} = {info.ex[2]}</span>
-        <button className="ml-auto text-sm font-semibold text-[var(--color-accent-text)]" onClick={() => speak(info.ex![0], 0.7)}>Nghe</button>
-      </div>}
-      <button className="study-button mt-3" onClick={onSwitch}>
-        {script === 'hira' ? 'Katakana' : 'Hiragana'} cùng âm: <span className="font-jp-serif text-xl">{counterpart(ch)}</span>
-      </button>
-    </Step>
-
-    <Step n={3} title={`Tập viết · ${paths.length} nét`}>
+    <section className="mt-6 border-t border-[var(--color-border)] pt-5">
+      <h3 className="mb-3 text-base font-semibold text-[var(--color-text)]">Tập viết · {paths.length} nét</h3>
       <svg key={ch + replay} viewBox="0 0 109 109" role="img" aria-label={`Thứ tự ${paths.length} nét của chữ ${ch}`}
         className="mx-auto block w-56 max-w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]" fill="none" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M54.5 2v105M2 54.5h105" strokeWidth="1" strokeDasharray="3 4" style={{ stroke: GHOST }} />
@@ -115,7 +91,7 @@ function KanaDetail({ ch, row, col, script, position, replay, onStep, onReplay, 
       <button className="study-button mx-auto mt-3 !min-h-10" onClick={onReplay}><RotateCcw size={16} /> Xem lại</button>
       <p className="study-copy mt-3">Viết từ trái sang phải, trên xuống dưới. <b>Chấm màu</b> là nơi đặt bút.</p>
       <div className="mt-3 flex flex-wrap gap-3">{paths.map((_, n) => <StrokeStep key={n} paths={paths} n={n} />)}</div>
-    </Step>
+    </section>
   </>;
 }
 
@@ -226,15 +202,15 @@ export function KanaPage() {
   const row = KANA_ROWS[sel[0]];
   const ch = row[script][sel[1]];
   const position = ORDER.findIndex(([r, c]) => r === sel[0] && c === sel[1]);
-  const focusRow = (r: number) => { setFocus({ kind: 'row', i: r }); speak(KANA_ROWS[r][script].filter(Boolean).join('。'), 0.5); };
-  const focusCol = (c: number) => { setFocus({ kind: 'col', i: c }); speak(KANA_ROWS.map(r => r[script][c]).filter(Boolean).join('。'), 0.5); };
+  const focusRow = (r: number) => { setFocus({ kind: 'row', i: r }); speak(KANA_ROWS[r][script].filter(Boolean).join('。')); };
+  const focusCol = (c: number) => { setFocus({ kind: 'col', i: c }); speak(KANA_ROWS.map(r => r[script][c]).filter(Boolean).join('。')); };
   const pick = (r: number, c: number) => { setSel([r, c]); setFocus(null); if (!wide) setOpen(true); };
   const step = (delta: number) => setSel(ORDER[(position + delta + ORDER.length) % ORDER.length]);
   const headBtn = 'flex flex-col items-center justify-center rounded-lg px-1 py-1.5 text-center transition-colors focus-ring hover:bg-[var(--color-surface-hover)]';
   const speakerIcon = <Volume2 size={13} aria-hidden="true" className="text-[var(--color-text-tertiary)]" />;
 
   const detail = <KanaDetail ch={ch} row={row} col={sel[1]} script={script} position={position} replay={replay}
-    onStep={step} onReplay={() => setReplay(n => n + 1)} onSwitch={() => setScript(script === 'hira' ? 'kata' : 'hira')} />;
+    onStep={step} onReplay={() => setReplay(n => n + 1)} />;
 
   const scriptSwitch = <div className="flex w-full gap-2 sm:w-auto" role="group" aria-label="Chọn bộ chữ">
     {(Object.keys(SCRIPTS) as KanaScript[]).map(key => {
@@ -280,13 +256,7 @@ export function KanaPage() {
       ? <Drill key={script} script={script} progress={progress} learned={learned} onRecord={record} onReset={resetScript} />
       : <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,1fr)]">
         <div className="space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-            <p className="study-copy !m-0 min-w-[14rem] flex-1" aria-live="polite">
-              {focus
-                ? focus.kind === 'row' ? <><b className="text-[var(--color-text)]">{KANA_ROWS[focus.i].label}:</b> {KANA_ROWS[focus.i].tip}</>
-                  : <><b className="text-[var(--color-text)]">Cột {KANA_COLUMNS[focus.i].id.toUpperCase()}:</b> mọi chữ kết thúc bằng âm “{KANA_COLUMNS[focus.i].id}” ({KANA_COLUMNS[focus.i].hint}).</>
-                : <>Hàng (trái) + cột (trên) = âm đọc. Bấm tên hàng hoặc cột để nghe cả loạt.</>}
-            </p>
+          <div className="flex justify-end">
             <button role="switch" aria-checked={hideRomaji} onClick={() => setHideRomaji(!hideRomaji)} className="flex shrink-0 items-center gap-2 rounded-lg text-sm text-[var(--color-text)] focus-ring">
               <span aria-hidden="true" className={'relative h-5 w-9 shrink-0 rounded-full transition-colors ' + (hideRomaji ? 'bg-[var(--color-accent)]' : 'bg-[var(--color-border-strong)]')}>
                 <span className={'absolute top-0.5 size-4 rounded-full bg-white transition-all ' + (hideRomaji ? 'left-[18px]' : 'left-0.5')} />
@@ -300,7 +270,6 @@ export function KanaPage() {
             {KANA_COLUMNS.map((col, c) => <button key={col.id} onClick={() => focusCol(c)} aria-label={`Cột ${col.id.toUpperCase()}, nghe cả cột`}
               className={headBtn + (sel[1] === c ? ' bg-[var(--color-surface-alt)]' : '')}>
               <span className={'text-lg font-semibold uppercase ' + (sel[1] === c ? 'text-[var(--color-accent)]' : 'text-[var(--color-text)]')}>{col.id} {speakerIcon}</span>
-              <span className="hidden text-[11px] leading-tight text-[var(--color-text-tertiary)] sm:block">{col.hint}</span>
             </button>)}
             {KANA_ROWS.map((r, ri) => {
               const [kind, letter] = r.label.split(' ');

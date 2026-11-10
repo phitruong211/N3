@@ -41,16 +41,16 @@ export function MainLayout({ children }: { children: ReactNode }) {
   return <div className="flex min-h-screen bg-[var(--color-bg)]">
     <Sidebar/>
     <main className="min-h-screen min-w-0 flex-1 overflow-x-clip" id="main-content" role="main" tabIndex={-1}>
-      <header className="pointer-events-none sticky top-0 z-30 flex h-11 items-center justify-between gap-3 border-b border-[var(--color-border)]/70 bg-[color-mix(in_srgb,var(--color-surface)_85%,transparent)] px-4 backdrop-blur-xl lg:h-14 lg:justify-end lg:border-0 lg:bg-transparent lg:px-10 lg:backdrop-blur-none xl:px-14">
-        <button className="hit pointer-events-auto lg:hidden" onClick={() => setCurrentPage('dashboard')} aria-label="Về Hôm nay"><BrandMark size={32} variant="small"/></button>
-        <span className="truncate text-sm font-semibold lg:hidden">{PAGE_TITLES[currentPage]}</span>
-        <div className="pointer-events-auto flex items-center gap-1">
-          <span className="lg:hidden"><button onClick={() => setSearchOpen(true)} className="study-button !min-h-11 !w-11 !border-0 !bg-transparent !p-0" aria-label="Tìm kiếm"><Search size={19}/></button></span>
+      <header className="sticky top-0 z-30 flex h-11 items-center justify-between gap-3 border-b border-[var(--color-border)]/70 bg-[color-mix(in_srgb,var(--color-surface)_85%,transparent)] px-4 backdrop-blur-xl lg:hidden">
+        <button className="hit" onClick={() => setCurrentPage('dashboard')} aria-label="Về Hôm nay"><BrandMark size={32} variant="small"/></button>
+        <span className="truncate text-sm font-semibold">{PAGE_TITLES[currentPage]}</span>
+        <div className="flex items-center gap-1">
+          <button onClick={() => setSearchOpen(true)} className="study-button !min-h-11 !w-11 !border-0 !bg-transparent !p-0" aria-label="Tìm kiếm"><Search size={19}/></button>
           <AccountMenu/>
         </div>
       </header>
       <a className="skip-link" href="#main-content">Bỏ qua đến nội dung</a>
-      <div className="mx-auto w-full max-w-full px-4 py-5 pb-24 sm:px-6 lg:px-10 lg:pb-12 lg:pt-2 xl:px-14"><div key={section} className="page-enter">{children}</div></div>
+      <div className="mx-auto w-full max-w-full px-4 py-5 pb-24 sm:px-6 lg:px-10 lg:pb-12 lg:pt-8 xl:px-14"><div key={section} className="page-enter">{children}</div></div>
     </main>
     <BottomNav/>
     {searchMounted && <Suspense fallback={null}><SearchModal/></Suspense>}
