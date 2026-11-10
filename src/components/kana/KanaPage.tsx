@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RotateCcw, Volume2 } from '@/components/ui/icons';
 import { AppDialog } from '@/components/ui/AppDialog';
 import { PageHeading } from '@/components/ui/StudyUI';
 import { useLearningStorage } from '@/hooks/useApp';
 import { KANA_COLUMNS, KANA_ROWS, type KanaRow, type KanaScript } from './kanaData';
 import { KANA_STROKES } from './kanaStrokes';
-import { KANA_POOL, KANA_PROGRESS_KEY, buildQuestion, countLearned, isLearned, type KanaProgress } from './kanaProgress';
+import { KANA_POOL, KANA_PROGRESS_KEY, countLearned, isLearned, type KanaProgress } from './kanaProgress';
+import { sayKana, speak } from './kanaSpeech';
+import { GameHub } from './games/GameHub';
 
 const SCRIPTS: Record<KanaScript, { name: string; jp: string; sample: string; role: string }> = {
   hira: { name: 'Hiragana', jp: 'ひらがな', sample: 'あ', role: 'chữ gốc Nhật · học trước' },
@@ -17,25 +19,6 @@ type Focus = { kind: 'row' | 'col'; i: number } | null;
 
 /** Every filled slot in reading order; drives the "previous / next character" buttons. */
 const ORDER: Cell[] = KANA_ROWS.flatMap((r, ri) => r.hira.flatMap((k, c) => (k ? [[ri, c] as Cell] : [])));
-
-// The browser's default ja-JP voice is often the weakest one installed: prefer natural/enhanced voices, then well-known good ones.
-const voiceScore = (v: SpeechSynthesisVoice) => (/premium|enhanced|natural|neural/i.test(v.name) ? 2 : 0) + (/kyoko|o-ren|google|nanami|haruka/i.test(v.name) ? 1 : 0);
-function japaneseVoice() {
-  return window.speechSynthesis.getVoices().filter(v => v.lang.replace('_', '-').toLowerCase().startsWith('ja')).sort((a, b) => voiceScore(b) - voiceScore(a))[0];
-}
-
-// A lone kana is one short mora: speak it slowly, and twice (see sayKana) so a beginner can catch it.
-function speak(text: string, rate = 0.45) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'ja-JP';
-  utterance.voice = japaneseVoice() ?? null; // voices load lazily; null falls back to the browser default
-  utterance.rate = rate;
-  window.speechSynthesis.speak(utterance);
-}
-
-const sayKana = (ch: string) => speak(`${ch}。${ch}`);
 
 const startOf = (d: string): [number, number] => {
   const m = d.match(/^M\s*(-?[\d.]+)[,\s]+(-?[\d.]+)/);
@@ -93,78 +76,6 @@ function KanaDetail({ ch, row, col, script, position, replay, onStep, onReplay }
       <div className="mt-3 flex flex-wrap gap-3">{paths.map((_, n) => <StrokeStep key={n} paths={paths} n={n} />)}</div>
     </section>
   </>;
-}
-
-function Drill({ script, progress, learned, onRecord, onReset }: {
-  script: KanaScript; progress: KanaProgress; learned: number;
-  onRecord: (ch: string, correct: boolean) => void; onReset: () => void;
-}) {
-  const pool = KANA_POOL[script];
-  const [question, setQuestion] = useState(() => buildQuestion(pool, progress));
-  const [picked, setPicked] = useState<string | null>(null);
-  const timer = useRef(0);
-  const latest = useRef(progress);
-  latest.current = progress;
-
-  useEffect(() => () => window.clearTimeout(timer.current), []);
-
-  const advance = () => {
-    window.clearTimeout(timer.current);
-    setPicked(null);
-    setQuestion(buildQuestion(pool, latest.current, question.ch));
-  };
-
-  const answer = (choice: string) => {
-    if (picked) return;
-    setPicked(choice);
-    onRecord(question.ch, choice === question.romaji);
-    speak(question.ch);
-    if (choice === question.romaji) timer.current = window.setTimeout(advance, 750);
-  };
-
-  // No dependency list: every render re-binds the handler, so it never answers a stale question.
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.isComposing) return;
-      if (picked) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); advance(); } return; }
-      const i = Number(e.key) - 1;
-      if (Number.isInteger(i) && i >= 0 && i < question.choices.length) answer(question.choices[i]);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  });
-
-  if (learned === pool.length) return <section className="study-panel mx-auto w-full max-w-md text-center">
-    <p className="font-jp-serif text-6xl leading-none text-[var(--color-seal)]">済</p>
-    <p className="mt-4 text-[var(--color-text)]">Thuộc cả {pool.length} chữ {SCRIPTS[script].name}.</p>
-    <button className="study-button mx-auto mt-5" onClick={onReset}><RotateCcw size={16} /> Luyện lại từ đầu</button>
-  </section>;
-
-  const right = picked === question.romaji;
-  return <section className="mx-auto w-full max-w-md" aria-label="Luyện tập">
-    <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-5 text-center sm:py-7">
-      <p className="font-jp-serif text-[3.5rem] leading-none text-[var(--color-text)] sm:text-[4.5rem]">{question.ch}</p>
-      <p className="mt-2 h-6 text-base text-[var(--color-text-secondary)] sm:h-7 sm:text-lg">{picked ? question.romaji : ''}</p>
-    </div>
-
-    <div className="mt-4 grid grid-cols-2 gap-3">
-      {question.choices.map(choice => {
-        const tone = !picked ? 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]'
-          : choice === question.romaji ? 'border-[var(--color-success)] bg-[var(--color-success-subtle)] text-[var(--color-text)]'
-          : choice === picked ? 'border-[var(--color-error)] bg-[var(--color-error-subtle)] text-[var(--color-text)]'
-          : 'border-[var(--color-border)] bg-[var(--color-surface)] opacity-45';
-        return <button key={choice} onClick={() => answer(choice)} disabled={Boolean(picked)}
-          className={'min-h-14 rounded-xl border text-lg text-[var(--color-text)] transition-colors focus-ring disabled:cursor-default ' + tone}>
-          {choice}
-        </button>;
-      })}
-    </div>
-
-    <p role="status" className="sr-only">{picked ? (right ? 'Đúng' : `Sai, đáp án là ${question.romaji}`) : ''}</p>
-    <div className="mt-4 min-h-12">
-      {picked && !right && <button className="study-button study-button-primary w-full" onClick={advance}>Tiếp tục</button>}
-    </div>
-  </section>;
 }
 
 export function KanaPage() {
@@ -234,7 +145,7 @@ export function KanaPage() {
 
     <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
       <div className="flex gap-6" role="group" aria-label="Chế độ">
-        {([['chart', 'Bảng'], ['drill', 'Luyện tập']] as const).map(([key, label]) =>
+        {([['chart', 'Bảng'], ['drill', 'Trò chơi']] as const).map(([key, label]) =>
           <button key={key} aria-pressed={mode === key} onClick={() => setMode(key)}
             className={'relative cursor-pointer py-1 text-[0.9375rem] transition-colors after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:transition-colors ' + (mode === key ? 'font-semibold text-[var(--color-text)] after:bg-[var(--color-gold)]' : 'text-[var(--color-text-tertiary)] after:bg-transparent hover:text-[var(--color-text)]')}>
             {label}
@@ -253,7 +164,7 @@ export function KanaPage() {
     </div>
 
     {mode === 'drill'
-      ? <Drill key={script} script={script} progress={progress} learned={learned} onRecord={record} onReset={resetScript} />
+      ? <GameHub key={script} script={script} progress={progress} storage={storage} onRecord={record} onReset={resetScript} />
       : <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,1fr)]">
         <div className="space-y-3">
           <div className="flex justify-end">

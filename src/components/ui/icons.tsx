@@ -41,6 +41,10 @@ export const BookmarkCheck = ink('BookmarkCheck', <><path d="M7 4.5h10v15.2l-5-3
 export const Volume2 = ink('Volume2', <><path d="M4.5 9.5h3.2L12 6v12l-4.3-3.5H4.5z"/><path d="M15.5 9.2c1.4 1.6 1.4 4 0 5.6"/><path d="M18 6.8c2.8 3 2.8 7.4 0 10.4"/></>);
 
 export const Undo2 = ink('Undo2', <><path d="M9 14 4.5 9.5 9 5"/><path d="M4.5 9.5H15a4.5 4.5 0 0 1 0 9h-3"/></>);
+export const Music = ink('Music', <><path d="M9 17.5V6.5l10-2v11"/><circle cx="6.8" cy="17.5" r="2.3"/><circle cx="16.8" cy="15.5" r="2.3"/></>);
+export const MusicOff = ink('MusicOff', <><path d="M9 17.5V6.5l10-2v11"/><circle cx="6.8" cy="17.5" r="2.3"/><circle cx="16.8" cy="15.5" r="2.3"/><path d="M4 4l16 16"/></>);
+export const Pause = ink('Pause', <><path d="M9 6.5v11"/><path d="M15 6.5v11"/></>);
+export const Play = ink('Play', <path d="M8 6.2v11.6L17.5 12z"/>);
 export const RotateCcw = ink('RotateCcw', <><path d="M5 12a7 7 0 1 0 2.2-5.1"/><path d="M5 5.5v4h4"/></>);
 export const RefreshCw = RotateCcw;
 export const Maximize2 = ink('Maximize2', <><path d="M14.5 4.5h5v5"/><path d="m19.5 4.5-6 6"/><path d="M9.5 19.5h-5v-5"/><path d="m4.5 19.5 6-6"/></>);
