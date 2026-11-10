@@ -121,11 +121,16 @@ def main():
     if not success:
         raise SystemExit("No feeds could be refreshed; keeping existing catalogue")
     episodes = sorted(preserved.values(), key=lambda entry: entry["publishedAt"], reverse=True)
-    result = {
-        "updatedAt": datetime.now(timezone.utc).isoformat(),
+    content = {
         "sources": [{key: value for key, value in source.items() if key != "feed"} for source in SOURCES],
         "episodes": episodes,
     }
+    # Leave the file untouched when nothing but the timestamp would change, so the
+    # scheduled workflow has nothing to commit and no deployment is triggered.
+    if previous.get("updatedAt") and all(previous.get(key) == value for key, value in json.loads(json.dumps(content)).items()):
+        print(f"Catalogue unchanged ({len(episodes)} episodes); keeping existing file")
+        return
+    result = {"updatedAt": datetime.now(timezone.utc).isoformat(), **content}
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(result, ensure_ascii=False, separators=(",", ":")) + "\n")
     print(f"Saved {len(episodes)} episodes")
