@@ -48,7 +48,7 @@
   padding: 48px 0 30px;
 }
 .dictionary-caption {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.2em;
   color: var(--color-text-tertiary);
@@ -98,7 +98,7 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--color-text-tertiary);
   margin: 12px 4px 28px;
 }
@@ -150,7 +150,7 @@
   margin-top: 4px;
 }
 .dictionary-common {
-  font-size: 11px;
+  font-size: 12px;
   white-space: nowrap;
   padding: 4px 8px;
   border-radius: 6px;
@@ -170,7 +170,7 @@
   gap: 10px;
 }
 .dictionary-result-bottom > span {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--color-text-tertiary);
 }
 .dictionary-result-bottom .study-button {
@@ -246,12 +246,12 @@
   flex-shrink: 0;
   border-radius: 6px;
   background: var(--color-bg);
-  font-size: 11px;
+  font-size: 12px;
   padding: 0 7px;
   height: 23px;
 }
 .dictionary-pos {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--color-text-tertiary);
   margin-bottom: 4px;
 }
@@ -264,7 +264,7 @@
   padding-top: 20px;
   border-top: 1px solid var(--color-border);
   color: var(--color-text-tertiary);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 2;
 }
 .dictionary-attribution a {
@@ -320,7 +320,7 @@
   color: var(--color-accent);
 }
 .dictionary-deck-option small {
-  font-size: 11px;
+  font-size: 12px;
 }
 .dictionary-selected {
   display: flex;
@@ -351,7 +351,7 @@
 }
 .dictionary-preview small {
   display: block;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--color-text-tertiary);
   margin-bottom: 8px;
 }
@@ -389,7 +389,7 @@
     font-size: 12px;
   }
   .dictionary-search-note {
-    font-size: 11px;
+    font-size: 12px;
   }
   .dictionary-content:has(.dictionary-detail) {
     grid-template-columns: minmax(0, 1fr);

@@ -40,6 +40,7 @@ export function OverflowMenu({ label = 'Mở menu', actions, horizontal, trigger
     window.addEventListener('keydown', escape);
     return () => { document.removeEventListener('pointerdown', outside); window.removeEventListener('keydown', escape); };
   }, [open]);
+  // In fullscreen only the fullscreen element is drawn, so a menu portalled to <body> would open invisibly.
   return <>
     <button ref={trigger} type="button" disabled={disabled} className={triggerClassName ?? `study-button ${triggerContent ? 'study-button-primary' : compact ? '!min-h-9 !w-9 !p-0' : '!min-h-11 !w-11 !p-0'}`}
       aria-label={label} aria-haspopup="menu" aria-controls={open ? id : undefined} aria-expanded={open}
@@ -60,6 +61,6 @@ export function OverflowMenu({ label = 'Mở menu', actions, horizontal, trigger
       {actions.map(action => <button key={action.id} type="button" role="menuitem" disabled={action.disabled}
         className={`flex min-h-11 w-full items-center rounded-lg px-3 text-left text-sm hover:bg-[var(--color-surface-hover)] focus-visible:bg-[var(--color-surface-hover)] disabled:opacity-40 ${action.destructive ? 'mt-1 border-t border-[var(--color-border)] text-[var(--color-error)]' : ''}`}
         onClick={() => { close(true); action.onSelect(); }}>{action.label}</button>)}
-    </div>, document.body)}
+    </div>, document.fullscreenElement ?? document.body)}
   </>;
 }

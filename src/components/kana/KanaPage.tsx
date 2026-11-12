@@ -131,7 +131,7 @@ export function KanaPage() {
         <span className="font-jp-serif text-2xl leading-none text-[var(--color-text)]">{s.sample}</span>
         <span className="min-w-0">
           <span className="block text-sm font-semibold text-[var(--color-text)]">{s.name}</span>
-          <span className="block text-[11px] leading-tight text-[var(--color-text-tertiary)]">{s.role}</span>
+          <span className="block text-xs leading-tight text-[var(--color-text-tertiary)]">{s.role}</span>
         </span>
       </button>;
     })}
@@ -187,7 +187,7 @@ export function KanaPage() {
               return <div key={r.id} className="contents" role="row">
                 <button onClick={() => focusRow(ri)} aria-label={`${r.label}, nghe cả hàng`}
                   className={headBtn + (sel[0] === ri ? ' bg-[var(--color-surface-alt)]' : '')}>
-                  <span className="text-[10px] uppercase tracking-wide text-[var(--color-text-tertiary)]">{kind}</span>
+                  <span className="text-[11px] uppercase tracking-wide text-[var(--color-text-tertiary)] sm:text-xs">{kind}</span>
                   <span className={'text-lg font-semibold ' + (sel[0] === ri ? 'text-[var(--color-accent)]' : 'text-[var(--color-text)]')}>{letter}</span>
                   {speakerIcon}
                 </button>

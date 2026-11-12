@@ -53,9 +53,9 @@ export function KanjiPage() {
         <div className="grid max-h-[320px] grid-cols-4 gap-2 overflow-y-auto sm:grid-cols-6 lg:max-h-none lg:overflow-visible xl:grid-cols-7">
           {filtered.map(item => <button key={item.id} onClick={() => { setSelected(item); showDetail(); }} aria-pressed={current.id === item.id}
             className={'relative flex aspect-square min-w-0 flex-col items-center justify-center rounded-xl border p-1 transition-colors focus-ring ' + (current.id === item.id ? 'border-[var(--color-kanji)] bg-[var(--color-surface-alt)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]')}>
-            <span className="absolute left-1 top-1 text-[11px] font-semibold text-[var(--color-text-tertiary)]">{item.level}</span>
+            <span className="absolute left-1 top-1 text-xs font-semibold text-[var(--color-text-tertiary)]">{item.level}</span>
             <span className="font-jp-serif text-3xl leading-none text-[var(--color-text)] sm:text-4xl">{item.kanji}</span>
-            <span className="mt-1 max-w-full truncate text-[11px] text-[var(--color-text-secondary)] sm:text-xs">{item.hanViet}</span>
+            <span className="mt-1 max-w-full truncate text-xs text-[var(--color-text-secondary)]">{item.hanViet}</span>
             {isBookmarked(item.id) && <BookmarkCheck size={12} className="absolute right-1 top-1 text-[var(--color-kanji)]" aria-label="Đã lưu" />}
           </button>)}
         </div>

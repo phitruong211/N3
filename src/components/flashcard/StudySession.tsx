@@ -18,7 +18,8 @@ import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
 import { CardFace, DeckCustomizeDialog } from "./CardPresentation";
 import { useStudyNote, NoteButton, PersonalNoteView, PersonalNoteEditor } from './PersonalCardNote';
-import { Maximize2, Minimize2, Shuffle, X, Settings2, Undo2, HelpCircle, NavDecks } from '@/components/ui/icons';
+import { X, Undo2, HelpCircle, NavDecks } from '@/components/ui/icons';
+import { OverflowMenu } from '@/components/ui/OverflowMenu';
 import { StudyCardList } from "./StudyCardList";
 import type { ImportedCard } from "@/lib/ankiImport";
 import "@fontsource/zen-maru-gothic/japanese-500.css";
@@ -478,7 +479,7 @@ export function StudySession({
         (e.target as HTMLElement).closest(
           'input,textarea,select,[contenteditable="true"]',
         ) ||
-        customizing || personalNote.open || helpIsOpen() || document.querySelector('dialog[open],[role="dialog"]')
+        customizing || personalNote.open || helpIsOpen() || document.querySelector('dialog[open],[role="dialog"],[role="menu"]')
       )
         return;
       if (e.key === 'Backspace' && mode === 'anki' && receipt) {
@@ -598,12 +599,13 @@ export function StudySession({
             {undoButton}
             <NoteButton note={personalNote} compact/>
             <button className="study-session-tool" popoverTarget="study-help" title="Cách dùng và phím tắt" aria-label="Cách dùng và phím tắt"><HelpCircle size={18}/></button>
-            {canEditDeck && <button className="study-session-tool" title="Danh sách thẻ · thêm và sửa (L)" aria-label="Danh sách thẻ" aria-pressed={listOpen} onClick={() => setListOpen(open => !open)}><NavDecks size={18}/></button>}
-            <button className="study-session-tool" disabled={blocked} title="Giao diện thẻ" aria-label="Giao diện thẻ" onClick={() => { setError(""); setCustomizing(true); }}><Settings2 size={18}/></button>
-            {mode === 'flashcards' && <button className="study-session-tool" title="Xáo trộn thẻ" aria-label="Xáo trộn" aria-pressed={shuffled} onClick={toggleShuffle}><Shuffle size={18}/></button>}
-            <button className="study-session-tool" onClick={() => void toggleFullscreen()} title={fullscreen ? 'Thu nhỏ màn hình' : 'Toàn màn hình'} aria-label={fullscreen ? 'Thu nhỏ màn hình' : 'Toàn màn hình'}>
-              {fullscreen ? <Minimize2 size={18}/> : <Maximize2 size={18}/>}
-            </button>
+            {canEditDeck && <button className="study-session-tool" title="Danh sách thẻ · thêm và sửa (L)" aria-label="Danh sách thẻ" aria-pressed={listOpen} onClick={() => setListOpen(open => !open)}><NavDecks size={18}/><span className="study-session-tool-label">Danh sách</span></button>}
+            {/* Settings-like actions used once a session at most live behind one menu, so the bar keeps only what is used card by card. */}
+            <OverflowMenu label="Thêm tùy chọn" horizontal triggerClassName="study-session-tool" actions={[
+              { id: 'style', label: 'Giao diện thẻ', disabled: blocked, onSelect: () => { setError(""); setCustomizing(true); } },
+              ...(mode === 'flashcards' ? [{ id: 'shuffle', label: shuffled ? 'Bỏ xáo trộn' : 'Xáo trộn thẻ', onSelect: toggleShuffle }] : []),
+              { id: 'fullscreen', label: fullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình', onSelect: () => void toggleFullscreen() },
+            ]}/>
           </div>
         </div>
         {mode === 'flashcards' && <div className="study-session-progress" role="progressbar" aria-label="Vị trí trong bộ thẻ" aria-valuenow={index + 1} aria-valuemin={0} aria-valuemax={sessionCards.length} aria-valuetext={`${index + 1} trên ${sessionCards.length} thẻ`}>

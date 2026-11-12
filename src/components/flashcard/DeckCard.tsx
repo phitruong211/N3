@@ -39,7 +39,7 @@ export function DeckCard({ summary, badge, description, primaryLabel, primaryDis
 export function DeckProgressGrid({ metrics }: { metrics: Array<{ label: string; value: number; tone?: string }> }) {
   return <dl className="deck-library-metrics">
     {metrics.map(metric => <div key={metric.label} className="flex items-baseline justify-between gap-2">
-      <dt className="text-[.68rem] font-medium text-[var(--color-text-tertiary)]">{metric.label}</dt>
+      <dt className="text-xs font-medium text-[var(--color-text-tertiary)]">{metric.label}</dt>
       <dd className="text-sm font-semibold tabular-nums" style={metric.tone ? { color: metric.tone } : undefined}>{metric.value}</dd>
     </div>)}
   </dl>;

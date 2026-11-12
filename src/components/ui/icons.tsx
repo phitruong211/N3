@@ -82,7 +82,8 @@ export const PanelLeftClose = ink('PanelLeftClose', <><rect x="3.5" y="4.5" widt
 export const PanelLeftOpen = ink('PanelLeftOpen', <><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M9.5 4.5v15"/><path d="m13.8 9.6 2.4 2.4-2.4 2.4"/></>);
 export const Pencil = ink('Pencil', <><path d="m5 19 .8-3.8L16.4 4.6a1.8 1.8 0 0 1 2.5 0l.5.5a1.8 1.8 0 0 1 0 2.5L8.8 18.2z"/><path d="m14.5 6.5 3 3"/></>);
 export const PenLine = Pencil;
-export const NotebookPen = Pencil;
+// A note sheet with a folded corner: personal notes must not look like the pencil that edits a card.
+export const NotebookPen = ink('NotebookPen', <><path d="M5.5 4.5h13v9.5l-5 5h-8z"/><path d="M18.5 14h-5v5"/><path d="M8.5 9h7"/><path d="M8.5 12.5h4"/></>);
 export const SlidersHorizontal = ink('SlidersHorizontal', <><path d="M4 7h7"/><path d="M17 7h3"/><path d="M4 17h3"/><path d="M13 17h7"/><circle cx="14" cy="7" r="2.2"/><circle cx="10" cy="17" r="2.2"/></>);
 export const Settings2 = SlidersHorizontal;
 export const LogIn = ink('LogIn', <><path d="M14 5.5h3.5a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H14"/><path d="M4 12h10"/><path d="m10 8 4 4-4 4"/></>);
@@ -96,4 +97,5 @@ export const Shuffle = ink('Shuffle', <><path d="M4.5 7.5h3.2c4 0 4.3 9 8.3 9h4.
 export const Bold = ink('Bold', <><path d="M7 5h6a3.5 3.5 0 0 1 0 7H7z"/><path d="M7 12h7a3.5 3.5 0 0 1 0 7H7z"/></>);
 export const Italic = ink('Italic', <><path d="M10 5h8"/><path d="M6 19h8"/><path d="m15 5-6 14"/></>);
 /** An open ensō that turns: the one animated mark in the set. */
-export const LoaderCircle = ink('LoaderCircle', <path className="ink-spin" d="M12 4.5a7.5 7.5 0 1 0 7.5 7.5"/>);
+// The page loader in miniature: rings spreading from a drop, so a busy button speaks the same language as a loading page.
+export const LoaderCircle = ink('LoaderCircle', <><circle className="ink-ripple" cx="12" cy="12" r="8"/><circle className="ink-ripple" cx="12" cy="12" r="8" style={{ animationDelay: '-.6s' }}/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></>);

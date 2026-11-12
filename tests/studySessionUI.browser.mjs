@@ -66,7 +66,7 @@ try {
   assert.ok(Number(await page.locator('.study-session-header').evaluate(el=>getComputedStyle(el).opacity))<.5);
   await page.mouse.move(600,400);await page.waitForTimeout(700);
   assert.equal(await page.locator('.study-session').getAttribute('data-chrome'),null);
-  await page.getByRole('button', { name: 'Toàn màn hình', exact: true }).click();
+  await page.getByRole('button', { name: 'Thêm tùy chọn' }).click(); await page.getByRole('menuitem', { name: 'Toàn màn hình' }).click();
   await page.waitForFunction(() => Boolean(document.fullscreenElement));
   await page.locator('.study-session[data-fullscreen="true"]').waitFor();
   await page.screenshot({path:'artifacts/study-session-ui/fullscreen-question.png'});
@@ -86,7 +86,7 @@ try {
   assert.equal(await page.locator('.study-session').getAttribute('data-chrome'),null);
   assert.equal(await page.locator('.study-session-header').evaluate(el=>getComputedStyle(el).opacity),'1');
   assert.equal(Math.round((await card().boundingBox()).y),Math.round(zenBox.y),'card does not move when controls return');
-  await page.getByRole('button', { name: 'Thu nhỏ màn hình', exact: true }).click();
+  await page.getByRole('button', { name: 'Thêm tùy chọn' }).click(); await page.getByRole('menuitem', { name: 'Thoát toàn màn hình' }).click();
   await page.waitForFunction(() => !document.fullscreenElement);
   assert.equal(await page.getByRole('progressbar').count(),0,'a review session has no fixed length to chart');
   assert.equal((await page.locator('.study-session-count').innerText()).replace(/\s+/g,' ').trim(),'3 mới · 0 đến hạn · 0 đã ôn');
@@ -101,7 +101,7 @@ try {
   assert.equal(await page.getByRole('button',{name:/3 · Tốt/}).count(),1,'example buttons do not flip the card');
   await page.screenshot({path:'artifacts/study-session-ui/desktop-answer.png'});
   // Native keyboard activation must reveal once, without also rating or skipping.
-  await page.getByRole('button',{name:'Giao diện thẻ',exact:true}).click();
+  await page.getByRole('button', { name: 'Thêm tùy chọn' }).click(); await page.getByRole('menuitem', { name: 'Giao diện thẻ' }).click();
   await page.getByRole('dialog').waitFor();
   const font=page.getByLabel('Font chữ',{exact:true});
   await font.selectOption('notoSansJp');

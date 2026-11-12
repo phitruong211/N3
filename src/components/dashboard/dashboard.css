@@ -27,7 +27,7 @@
 
 /* Goal and week: two columns divided by a hairline, not boxed. */
 .dash-row { display: grid; gap: 2.5rem; }
-.dash-label { color: var(--color-text-tertiary); font-size: .7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.dash-label { color: var(--color-text-tertiary); font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
 .dash-goal { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.25rem; }
 .dash-enso { position: relative; display: grid; width: 7rem; height: 7rem; flex: 0 0 auto; place-items: center; color: var(--color-text); }
 .dash-enso.is-complete { color: var(--color-success); }
@@ -41,7 +41,7 @@
 .dash-sub { margin-top: .4rem; font-size: .8rem; color: var(--color-text-secondary); }
 
 .dash-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .4rem; margin-top: 1.25rem; padding: 0; list-style: none; }
-.dash-day { display: flex; flex-direction: column; align-items: center; font-size: .7rem; font-weight: 500; letter-spacing: .06em; color: var(--color-text-tertiary); }
+.dash-day { display: flex; flex-direction: column; align-items: center; font-size: .75rem; font-weight: 500; letter-spacing: .06em; color: var(--color-text-tertiary); }
 .dash-stamp { display: grid; place-items: center; width: 100%; max-width: 2.8rem; aspect-ratio: 1; border: 1px solid var(--color-border-strong); border-radius: 50%; font-family: var(--font-jp-serif); font-size: 1.15rem; color: var(--color-text-tertiary); }
 .dash-day.is-today .dash-stamp { color: var(--color-text); }
 .dash-day.is-today .dash-stamp { border-color: var(--color-gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold) 22%, transparent); }
@@ -49,7 +49,7 @@
 .dash-metrics { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.5rem 2.5rem; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border); }
 .dash-metric svg { margin-bottom: .4rem; color: var(--color-text-tertiary); }
 .dash-metric strong { display: block; font-size: 1rem; font-weight: 600; }
-.dash-metric span { display: block; margin-top: .1rem; font-size: .72rem; color: var(--color-text-secondary); }
+.dash-metric span { display: block; margin-top: .1rem; font-size: .78rem; color: var(--color-text-secondary); }
 .dash-link { display: inline-flex; align-items: center; gap: .4rem; font-size: .82rem; font-weight: 600; color: var(--color-accent-text); background: none; border: 0; padding: 0; cursor: pointer; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size var(--dur-base) var(--ease-out); }
 .dash-link:hover { background-size: 100% 1px; }
 .dash-metrics .dash-link { margin-left: auto; }
