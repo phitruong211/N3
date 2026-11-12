@@ -60,7 +60,9 @@ def make_slices(freq, chrome, rest, fixed):
     # Every other kanji (data and exam text) goes into slices ordered by how often the data uses it.
     pool = {c for c in set(freq) | rest if is_kanji(ord(c)) and ord(c) not in core}
     ordered = sorted(pool, key=lambda c: (-freq[c], c))
-    slices = [sorted(core)] + [sorted(ord(c) for c in ordered[i:i + SLICE]) for i in range(0, len(ordered), SLICE)]
+    # ASCII gets its own last slice: only text set in the JP font first (card faces) uses it, so kana-only pages skip ~37 KB.
+    ascii = core & set(range(0x20, 0x7F))
+    slices = [sorted(core - ascii)] + [sorted(ord(c) for c in ordered[i:i + SLICE]) for i in range(0, len(ordered), SLICE)] + [sorted(ascii)]
     seen = set()
     for index, group in enumerate(slices):  # every code point lives in exactly one slice
         assert not (seen & set(group)), f'slice {index} overlaps an earlier one'
