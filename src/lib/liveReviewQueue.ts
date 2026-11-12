@@ -148,3 +148,14 @@ export function introducedTodayKeys(progressByKey: ReadonlyMap<string, FsrsProgr
   }
   return keys;
 }
+
+/** A card added mid-session joins today's queue as a new card, so it can be learned straight away. */
+export function addSessionCard<T>(queue: ReviewQueue<T>, key: string, card: T): ReviewQueue<T> {
+  const next: ReviewQueue<T> = {
+    ...queue,
+    cardsByKey: new Map(queue.cardsByKey).set(key, card),
+    progressByKey: new Map(queue.progressByKey).set(key, null),
+    sourceOrder: new Map(queue.sourceOrder).set(key, queue.sourceOrder.size),
+  };
+  return { ...next, ready: sorted(next, [...queue.ready, key]) };
+}

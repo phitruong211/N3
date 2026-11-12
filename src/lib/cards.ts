@@ -144,3 +144,19 @@ export function presentationCard(card: CardView): ImportedCard {
     style: card.style,
   };
 }
+
+/** An empty card to fill in; `like` copies its card kind and note type, so a card added beside it gets the same fields. */
+export const blankCard = (like?: ImportedCard): ImportedCard => ({
+  id: crypto.randomUUID(),
+  front: "",
+  back: "",
+  reading: "",
+  backReading: "",
+  hanViet: "",
+  notes: "",
+  kind: "general",
+  tags: [],
+  noteType: "general",
+  fields: { front: "", back: "" },
+  ...(like && { kind: like.kind, noteType: like.noteType, fields: {} }),
+});

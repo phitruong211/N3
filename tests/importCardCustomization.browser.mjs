@@ -80,7 +80,7 @@ try {
     return names.every((name) => document.fonts.check(`20px '${name}'`));
   }), true);
   assert.equal(await page.locator("ruby rt").first().innerText(), "べんきょう");
-  await page.getByRole("button", { name: "Tùy chỉnh thẻ", exact: true }).click();
+  await page.getByRole("button", { name: "Giao diện thẻ", exact: true }).click();
   const dialog = page.getByRole("dialog", { name: "Tùy chỉnh bộ thẻ" });
   await dialog.getByText("Nội dung thẻ hiện tại", { exact: true }).waitFor();
   await dialog.getByLabel(/Mặt trước/).first().fill("学校[がっこう]");
@@ -108,7 +108,7 @@ try {
   const answer = page.locator(".study-session-face");
   assert.match(await answer.innerText(), /CẤP ĐỘ/i);
   assert.match(await answer.innerText(), /N3/);
-  await page.getByRole("button", { name: "Tùy chỉnh thẻ", exact: true }).click();
+  await page.getByRole("button", { name: "Giao diện thẻ", exact: true }).click();
   const typed = page.getByRole("dialog", { name: "Tùy chỉnh bộ thẻ" });
   await typed.locator("label").filter({ hasText: "Cấp độ" }).locator("textarea").fill("N2");
   await typed.getByRole("tab", { name: "Mặt sau" }).click();

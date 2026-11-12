@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createReviewQueue, nextReadyCard, applyReviewedProgress, promoteDueCards, reviewSessionSummary, remainingNewCount, admitMoreNew, introducedTodayKeys } from '../src/lib/liveReviewQueue.ts';
+import { createReviewQueue, nextReadyCard, applyReviewedProgress, promoteDueCards, reviewSessionSummary, remainingNewCount, admitMoreNew, introducedTodayKeys, addSessionCard } from '../src/lib/liveReviewQueue.ts';
 
 const now = new Date('2026-10-10T00:00:00.000Z');
 const card = { id: 'one' };
@@ -131,4 +131,13 @@ test('with the limit already used, no new card is queued but study more can stil
   assert.deepEqual(queue.ready, []);
   assert.equal(remainingNewCount(queue), 3);
   assert.deepEqual(admitMoreNew(queue, 2).ready, ['x', 'y']);
+});
+
+test('a card added mid-session is ready now, behind cards already due', () => {
+  let queue = createReviewQueue({ cards:[card], keyFor:c=>c.id, now });
+  queue = addSessionCard(queue, 'added', { id: 'added' });
+  assert.deepEqual(queue.ready, ['one', 'added']);
+  assert.equal(queue.cardsByKey.get('added').id, 'added');
+  queue = applyReviewedProgress(queue, 'one', progress, now);
+  assert.equal(nextReadyCard(queue).key, 'added');
 });

@@ -101,7 +101,7 @@ try {
   assert.equal(await page.getByRole('button',{name:/3 · Tốt/}).count(),1,'example buttons do not flip the card');
   await page.screenshot({path:'artifacts/study-session-ui/desktop-answer.png'});
   // Native keyboard activation must reveal once, without also rating or skipping.
-  await page.getByRole('button',{name:'Tùy chỉnh thẻ',exact:true}).click();
+  await page.getByRole('button',{name:'Giao diện thẻ',exact:true}).click();
   await page.getByRole('dialog').waitFor();
   const font=page.getByLabel('Font chữ',{exact:true});
   await font.selectOption('notoSansJp');

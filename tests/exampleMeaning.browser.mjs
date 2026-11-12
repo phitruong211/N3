@@ -78,7 +78,7 @@ try {
   await page.locator('div[role="button"][aria-label="Hiện đáp án"]').click();
   await show().waitFor();
   assert.equal(await translation.count(), 0);
-  await page.getByRole('button', { name: 'Tùy chỉnh thẻ', exact: true }).click();
+  await page.getByRole('button', { name: 'Giao diện thẻ', exact: true }).click();
   await page.getByRole('dialog', { name: 'Tùy chỉnh bộ thẻ' }).waitFor();
   await page.getByRole('dialog', { name: 'Tùy chỉnh bộ thẻ' }).getByLabel('Cách đọc', { exact: true }).uncheck();
   await page.getByRole('button', { name: 'Lưu tùy chỉnh', exact: true }).click();
@@ -86,14 +86,14 @@ try {
   assert.deepEqual(await page.evaluate(() => window.savedTemplate.front.fields), ['front']);
   assert.equal(await page.getByRole('button', { name: 'Đã hiện đáp án', exact: true }).count(), 1);
   await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/__example-test__?builtin=1`);
-  await page.getByRole('button', { name: 'Tùy chỉnh thẻ', exact: true }).click();
+  await page.getByRole('button', { name: 'Giao diện thẻ', exact: true }).click();
   await page.getByRole('tab', { name: 'Mặt sau', exact: true }).click();
   await page.getByLabel(/Cỡ chữ nhanh mặt sau/).selectOption('small');
   await page.getByLabel('Hiện ví dụ', { exact: true }).uncheck();
   await page.getByRole('button', { name: 'Lưu tùy chỉnh', exact: true }).click();
   await page.getByRole('dialog', { name: 'Tùy chỉnh bộ thẻ' }).waitFor({ state: 'detached' });
   await page.reload();
-  await page.getByRole('button', { name: 'Tùy chỉnh thẻ', exact: true }).click();
+  await page.getByRole('button', { name: 'Giao diện thẻ', exact: true }).click();
   await page.getByRole('tab', { name: 'Mặt sau', exact: true }).click();
   assert.equal(await page.getByLabel(/Cỡ chữ nhanh mặt sau/).inputValue(), 'small');
   assert.equal(await page.getByLabel('Hiện ví dụ', { exact: true }).isChecked(), false);

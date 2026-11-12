@@ -9,7 +9,7 @@ import {
 } from "@/hooks/useActiveElapsedMinutes";
 import { createSRSCard, formatDate, getNextIntervals, processReview } from "@/lib/srs";
 import { legacyToFsrsProgress, progressToSrsCard } from "@/lib/fsrsProgress";
-import { admitMoreNew, applyReviewedProgress, createReviewQueue, introducedTodayKeys, nearestFutureDue, nextReadyCard, promoteDueCards, remainingNewCount, reviewSessionSummary } from "@/lib/liveReviewQueue";
+import { addSessionCard, admitMoreNew, applyReviewedProgress, createReviewQueue, introducedTodayKeys, nearestFutureDue, nextReadyCard, promoteDueCards, remainingNewCount, reviewSessionSummary } from "@/lib/liveReviewQueue";
 import { progressToSrs, type ApiProgress } from "@/lib/api";
 import { defaultDeckTemplate, normalizeDeckTemplate, type DeckTemplateConfig } from "@/lib/ankiImport";
 import { applyResolvedTemplate, mergeSideStyle, noteTypeIdForKind, noteTypeOf, resolveTemplate, type DeckConfig } from "@/lib/deckFormat";
@@ -18,7 +18,9 @@ import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
 import { CardFace, DeckCustomizeDialog } from "./CardPresentation";
 import { useStudyNote, NoteButton, PersonalNoteView, PersonalNoteEditor } from './PersonalCardNote';
-import { Maximize2, Minimize2, Shuffle, X, Settings2, Undo2, HelpCircle } from '@/components/ui/icons';
+import { Maximize2, Minimize2, Shuffle, X, Settings2, Undo2, HelpCircle, NavDecks } from '@/components/ui/icons';
+import { StudyCardList } from "./StudyCardList";
+import type { ImportedCard } from "@/lib/ankiImport";
 import "@fontsource/zen-maru-gothic/japanese-500.css";
 import "./studySession.css";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -67,6 +69,7 @@ export function StudySession({
   onTemplateChange,
   onConfigChange,
   onCardChange,
+  onCardAdd,
   initialIndex = 0,
   onPositionChange,
   onComplete,
@@ -82,6 +85,8 @@ export function StudySession({
   onTemplateChange?: (template: DeckTemplateConfig) => Promise<void> | void;
   onConfigChange?: (config: DeckConfig) => Promise<void> | void;
   onCardChange?: (card: ReturnType<typeof presentationCard>) => Promise<CardView>;
+  /** Stores a card added from the in-session list and returns it as it should be studied. */
+  onCardAdd?: (card: ImportedCard) => Promise<CardView>;
   initialIndex?: number;
   onPositionChange?: (cardId: string) => void;
   onComplete?: () => void;
@@ -100,6 +105,7 @@ export function StudySession({
     return initialTemplate;
   });
   const [customizing, setCustomizing] = useState(false);
+  const [listOpen, setListOpen] = useState(false);
   const [savingTemplate, setSavingTemplate] = useState(false);
   const [sessionCards, setSessionCards] = useState(() => [...cards]);
   const [reviewQueue, setReviewQueue] = useState(() => {
@@ -135,6 +141,12 @@ export function StudySession({
   const lock = useRef(false);
   const dragged = useRef(false);
   const [slideDirection, setSlideDirection] = useState(1);
+  const canEditDeck = Boolean(onCardChange && onCardAdd);
+  /** An edited card replaces its old copy everywhere the session keeps one. */
+  const putCard = (updated: CardView) => {
+    setSessionCards(previous => previous.map(card => card.id === updated.id ? updated : card));
+    setReviewQueue(previous => ({ ...previous, cardsByKey: new Map(previous.cardsByKey).set(updated.id, updated) }));
+  };
   const scheduled = mode === 'anki' ? nextReadyCard(reviewQueue) : null;
   const current = mode === 'anki' ? scheduled?.card : sessionCards[index];
   const personalNote = useStudyNote(current);
@@ -480,6 +492,8 @@ export function StudySession({
       if (e.key === "Escape") {
         e.preventDefault();
         finish();
+      } else if (e.key.toLowerCase() === 'l' && canEditDeck) {
+        e.preventDefault(); setListOpen(open => !open);
       } else if (e.key.toLowerCase() === 'n' && !e.ctrlKey && !e.metaKey && !e.altKey && personalNote.key) {
         e.preventDefault(); personalNote.setOpen(true);
       } else if (mode === "flashcards" && e.key === "ArrowRight") {
@@ -563,6 +577,7 @@ export function StudySession({
       className="study-session fixed inset-0 z-50 flex min-h-0 flex-col bg-[var(--color-bg)] select-none"
       data-reduced-motion={reduceMotion || undefined}
       data-fullscreen={fullscreen || undefined}
+      data-list-open={listOpen || undefined}
       data-chrome={chromeIdle && !customizing && !personalNote.open ? (fullscreen ? 'hidden' : 'dim') : undefined}
       aria-label="Phiên học thẻ"
     >
@@ -583,7 +598,8 @@ export function StudySession({
             {undoButton}
             <NoteButton note={personalNote} compact/>
             <button className="study-session-tool" popoverTarget="study-help" title="Cách dùng và phím tắt" aria-label="Cách dùng và phím tắt"><HelpCircle size={18}/></button>
-            <button className="study-session-tool" disabled={blocked} title="Tùy chỉnh thẻ" aria-label="Tùy chỉnh thẻ" onClick={() => { setError(""); setCustomizing(true); }}><Settings2 size={18}/></button>
+            {canEditDeck && <button className="study-session-tool" title="Danh sách thẻ · thêm và sửa (L)" aria-label="Danh sách thẻ" aria-pressed={listOpen} onClick={() => setListOpen(open => !open)}><NavDecks size={18}/></button>}
+            <button className="study-session-tool" disabled={blocked} title="Giao diện thẻ" aria-label="Giao diện thẻ" onClick={() => { setError(""); setCustomizing(true); }}><Settings2 size={18}/></button>
             {mode === 'flashcards' && <button className="study-session-tool" title="Xáo trộn thẻ" aria-label="Xáo trộn" aria-pressed={shuffled} onClick={toggleShuffle}><Shuffle size={18}/></button>}
             <button className="study-session-tool" onClick={() => void toggleFullscreen()} title={fullscreen ? 'Thu nhỏ màn hình' : 'Toàn màn hình'} aria-label={fullscreen ? 'Thu nhỏ màn hình' : 'Toàn màn hình'}>
               {fullscreen ? <Minimize2 size={18}/> : <Maximize2 size={18}/>}
@@ -675,19 +691,14 @@ export function StudySession({
         deck={{ id: cards[0]?.deckId || "study", name: deckName, source: "Phiên học", format: "", createdAt: "", position: 0, template, cards: [presentationCard(current)] }}
         busy={savingTemplate}
         error={error}
-        editableCard={current.source === "IMPORT" && onCardChange ? presentationCard(current) : undefined}
+        editableCard={current.source !== "BUILT_IN" && onCardChange ? presentationCard(current) : undefined}
         noteTypes={config?.noteTypes}
         onCancel={() => setCustomizing(false)}
         onSave={async (next, changedCard) => {
           setSavingTemplate(true);
           try {
             if (changedCard && onCardChange && JSON.stringify(changedCard) !== JSON.stringify(presentationCard(current))) {
-              const updated = await onCardChange(changedCard);
-              setSessionCards((previous) => previous.map((card) => card.id === updated.id ? updated : card));
-              setReviewQueue(previous => ({
-                ...previous,
-                cardsByKey: new Map(previous.cardsByKey).set(updated.id, updated),
-              }));
+              putCard(await onCardChange(changedCard));
             }
             if (JSON.stringify(next) !== JSON.stringify(template)) {
               if (config && onConfigChange) {
@@ -717,12 +728,20 @@ export function StudySession({
             ["1 · 2 · 3 · 4", "Quên · Khó · Tốt · Dễ"],
             ["Space (sau khi lật)", "Tốt"],
             ["Backspace", "Hoàn tác lượt vừa trả lời"],
-          ]).concat([["N", "Ghi chú riêng"], ["Esc", "Kết thúc phiên"]]).map(([key, action]) => (
+          ]).concat(canEditDeck ? [["L", "Danh sách thẻ: thêm, sửa"]] : []).concat([["N", "Ghi chú riêng"], ["Esc", "Kết thúc phiên"]]).map(([key, action]) => (
             <div key={key}><dt><kbd>{key}</kbd></dt><dd>{action}</dd></div>
           ))}
         </dl>
       </div>
       <PersonalNoteEditor note={personalNote} card={current}/>
+      {listOpen && <StudyCardList cards={sessionCards} currentId={current.id} noteTypes={config?.noteTypes} onClose={() => setListOpen(false)}
+        onSave={async (card, added) => {
+          if (added) {
+            const view = await onCardAdd!(card);
+            setSessionCards(previous => [...previous, view]);
+            setReviewQueue(previous => addSessionCard(previous, view.id, view));
+          } else putCard(await onCardChange!(card));
+        }}/>}
       <div className={`study-session-actions ${mode === "flashcards" ? "study-free-controls" : ""} ${mode === "anki" && flipped ? "study-session-ratings" : ""}`} aria-label={mode === "anki" && flipped ? "Đánh giá mức độ ghi nhớ" : "Điều khiển thẻ"}>
         {mode === "anki" ? (
           flipped ? (

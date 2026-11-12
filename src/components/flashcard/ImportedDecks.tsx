@@ -45,7 +45,7 @@ import {
   type PersonalDeck,
   type DeckGroup,
 } from "@/lib/deckApi";
-import { importedCardView, type CardView } from "@/lib/cards";
+import { blankCard, importedCardView, type CardView } from "@/lib/cards";
 import { StudySession } from "./StudySession";
 import { StudySetupSheet } from "./StudySetupSheet";
 import { loadStudyPages } from "@/lib/loadStudyPages";
@@ -62,19 +62,6 @@ import {
   Upload,
   X,
 } from '@/components/ui/icons';
-const blankCard = (): ImportedCard => ({
-  id: crypto.randomUUID(),
-  front: "",
-  back: "",
-  reading: "",
-  backReading: "",
-  hanViet: "",
-  notes: "",
-  kind: "general",
-  tags: [],
-  noteType: "general",
-  fields: { front: "", back: "" },
-});
 const manualConfig = (): DeckConfig => normalizeConfig({ version: 5, noteTypes: builtinNoteTypes() });
 const emptyPage = <T,>(): Page<T> => ({
   content: [],
@@ -506,15 +493,20 @@ export function ImportedDecks({
           setSession(previous => previous ? { ...previous, config } : previous);
           setReload(value => value + 1);
         }}
-        onCardChange={session.deck.sourceType === "IMPORT" ? async changed => {
+        onCardChange={async changed => {
           const updated = await updateCard(changed.id, cardRequest(changed));
           return importedCardView(
             asImported(updated as PersonalCard, session.config),
             session.deck.id,
-            "IMPORT",
+            session.deck.sourceType === "MANUAL" ? "MANUAL" : "IMPORT",
             Math.max(0, session.cards.findIndex(card => card.id === changed.id)),
           );
-        } : undefined}
+        }}
+        onCardAdd={async card => {
+          const added = await addCard(session.deck.id, cardRequest(card));
+          return importedCardView(asImported(added as PersonalCard, session.config), session.deck.id,
+            session.deck.sourceType === "MANUAL" ? "MANUAL" : "IMPORT", session.cards.length);
+        }}
         onExit={() => {
           setSession(null);
           void refreshActive();
