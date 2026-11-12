@@ -6,17 +6,24 @@ import { speakJapanese } from '@/components/flashcard/FlashcardPage';
 import { StudySession } from '@/components/flashcard/StudySession';
 import { vocabularyCard } from '@/lib/cards';
 import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
+import { DetailPane, LearnDot, LearnFilter } from '@/components/library/LibraryParts';
+import { countStates, learnStates, stateOf, type LearnState } from '@/lib/learnState';
+import { useWide } from '@/hooks/useWide';
 
 export function VocabularyPage() {
-  const { vocabulary, isBookmarked, toggleBookmark, navigationTarget, clearNavigationTarget } = useApp();
-  const [query, setQuery] = useState('');
+  const { vocabulary, isBookmarked, toggleBookmark, navigationTarget, clearNavigationTarget, srsCards } = useApp();
+  const wide = useWide();
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [learn, setLearn] = useState<LearnState | 'all'>('all');
+  const states = useMemo(() => learnStates(srsCards, 'vocabulary'), [srsCards]);
+  // The dictionary links here with ?q=, so a word found there opens already filtered.
+  const [query, setQuery] = useState(() => new URLSearchParams(location.search).get('q') ?? '');
   const [level, setLevel] = useState<'all' | 'N3' | 'N4'>('all');
   const [savedOnly, setSavedOnly] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(80);
   const [focusMode, setFocusMode] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
-  const detailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (navigationTarget?.type !== 'vocabulary') return;
@@ -27,26 +34,27 @@ export function VocabularyPage() {
     setSelectedId(navigationTarget.id);
     setVisibleCount(80);
     clearNavigationTarget();
-    if (window.innerWidth < 1024) requestAnimationFrame(() => detailRef.current?.scrollIntoView({ block: 'start' }));
+    setSheetOpen(true);
   }, [navigationTarget, vocabulary, clearNavigationTarget]);
 
-  const filtered = useMemo(() => vocabulary.filter(item => {
+  const matching = useMemo(() => vocabulary.filter(item => {
     const text = [item.tu, item.phien_am, item.meaning, item.han_viet ?? ''].join(' ').toLowerCase();
     return (level === 'all' || item.level === level) && (!savedOnly || isBookmarked(item.id)) && (!query.trim() || text.includes(query.trim().toLowerCase()));
   }), [vocabulary, level, savedOnly, query, isBookmarked]);
+  const counts = useMemo(() => countStates(matching.map(item => item.id), states), [matching, states]);
+  const filtered = useMemo(() => learn === 'all' ? matching : matching.filter(item => stateOf(states, item.id) === learn), [matching, learn, states]);
   const current = filtered.find(item => item.id === selectedId) ?? filtered[0];
   const focusIndex = current ? filtered.findIndex(item => item.id === current.id) : 0;
   const select = useCallback((id: string) => {
     setSelectedId(id);
     const index = filtered.findIndex(item => item.id === id);
     if (index >= visibleCount) setVisibleCount(index + 1);
-    if (window.innerWidth < 1024) requestAnimationFrame(() => detailRef.current?.scrollIntoView({ block: 'start' }));
   }, [filtered, visibleCount]);
   const changeFilter = (change: () => void) => { change(); setSelectedId(null); setVisibleCount(80); };
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
-      if (focusMode || event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement || event.target instanceof HTMLButtonElement) return;
+      if (focusMode || sheetOpen || event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement || event.target instanceof HTMLButtonElement) return;
       if (event.key === '/' || (event.key.toLowerCase() === 'k' && (event.ctrlKey || event.metaKey))) { event.preventDefault(); searchRef.current?.focus(); }
       if (!current) return;
       if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
@@ -59,12 +67,12 @@ export function VocabularyPage() {
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [focusMode, current, filtered, focusIndex, toggleBookmark, select]);
+  }, [focusMode, sheetOpen, current, filtered, focusIndex, toggleBookmark, select]);
 
   if (focusMode && current) return <StudySession cards={filtered.map((item, index) => vocabularyCard(item, `library-vocab-${level}`, index))} deckName={`Từ vựng · ${level === 'all' ? 'Tất cả' : level}`} initialIndex={focusIndex} mode="flashcards" onExit={() => setFocusMode(false)} />;
 
   return <div className="study-page">
-    <PageHeading title="Từ vựng" subtitle={filtered.length + ' / ' + vocabulary.length + ' từ'}
+    <PageHeading title="Từ vựng" subtitle={filtered.length === vocabulary.length ? `${vocabulary.length} từ` : `${filtered.length} / ${vocabulary.length} từ`}
       action={<button className="study-button study-button-primary" disabled={!current} onClick={() => setFocusMode(true)}>Học bằng thẻ →</button>} />
     <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
       <label className="study-input flex min-w-0 flex-1 items-center gap-2">
@@ -74,23 +82,26 @@ export function VocabularyPage() {
         {query && <button aria-label="Xóa tìm kiếm" onClick={() => changeFilter(() => setQuery(''))}><X size={18}/></button>}
       </label>
       <div className="flex flex-wrap gap-2">
-        {(['all', 'N3', 'N4'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => changeFilter(() => setLevel(value))}>{value === 'all' ? 'Tất cả' : value}</button>)}
+        {(['all', 'N4', 'N3'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => changeFilter(() => setLevel(value))}>{value === 'all' ? 'Tất cả' : value}</button>)}
         <button className={'study-button ' + (savedOnly ? 'study-button-primary' : '')} aria-pressed={savedOnly} onClick={() => changeFilter(() => setSavedOnly(!savedOnly))}>Đã lưu</button>
       </div>
     </div>
-    {!filtered.length ? <EmptyState title="Chưa có từ phù hợp" detail="Thử từ khóa khác hoặc bỏ bộ lọc." action={<button className="study-button" onClick={() => { setQuery(''); setLevel('all'); setSavedOnly(false); }}>Xem tất cả</button>} /> :
+    <LearnFilter value={learn} counts={counts} onChange={next => changeFilter(() => setLearn(next))}/>
+    {!filtered.length ? <EmptyState title="Chưa có từ phù hợp" detail="Thử từ khóa khác hoặc bỏ bộ lọc." action={<button className="study-button" onClick={() => { setQuery(''); setLevel('all'); setSavedOnly(false); setLearn('all'); }}>Xem tất cả</button>} /> :
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <div className="max-h-[40vh] space-y-2 overflow-y-auto lg:max-h-[calc(100vh-230px)]">
-          {filtered.slice(0, visibleCount).map(item => <button key={item.id} onClick={() => select(item.id)} aria-pressed={current.id === item.id}
-            className={'w-full min-w-0 rounded-xl border p-4 text-left transition-colors focus-ring ' + (current.id === item.id ? 'border-[var(--color-accent)] bg-[var(--color-surface-alt)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]')}>
-            <div className="flex items-start justify-between gap-3"><span className="font-jp-serif break-words text-lg font-semibold text-[var(--color-text)]">{item.tu}</span><span className="study-eyebrow shrink-0">{item.level}</span></div>
+        <div className="space-y-2 lg:max-h-[calc(100vh-230px)] lg:overflow-y-auto">
+          {filtered.slice(0, visibleCount).map(item => <button key={item.id} onClick={() => { select(item.id); setSheetOpen(true); }} aria-pressed={wide && current.id === item.id}
+            className={'w-full min-w-0 rounded-xl border p-4 text-left transition-colors focus-ring ' + (wide && current.id === item.id ? 'border-[var(--color-accent)] bg-[var(--color-surface-alt)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]')}>
+            <div className="flex items-start justify-between gap-3"><span className="font-jp-serif break-words text-lg font-semibold text-[var(--color-text)]">{item.tu}</span><span className="flex shrink-0 items-center gap-2"><LearnDot state={stateOf(states, item.id)}/><span className="study-eyebrow">{item.level}</span></span></div>
             <p className="font-jp mt-1 break-words text-sm text-[var(--color-text-secondary)]">{item.phien_am}</p>
             {item.han_viet && <p className="mt-1 break-words text-xs text-[var(--color-text-tertiary)]">Hán Việt: {item.han_viet}</p>}
             <p className="mt-1 line-clamp-2 break-words text-sm text-[var(--color-text-secondary)]">{item.meaning}</p>
           </button>)}
           {visibleCount < filtered.length && <button className="study-button w-full" onClick={() => setVisibleCount(Math.min(filtered.length, visibleCount + 80))}>Xem thêm {Math.min(80, filtered.length - visibleCount)} từ</button>}
         </div>
-        <div ref={detailRef} className="min-w-0 scroll-mt-16 lg:sticky lg:top-20"><VocabDetail item={current} bookmarked={isBookmarked(current.id)} onBookmark={() => toggleBookmark(current.id, 'vocabulary')} onStudy={() => setFocusMode(true)} /></div>
+        <DetailPane wide={wide} open={sheetOpen} title={current.tu} onClose={() => setSheetOpen(false)}>
+          <div className="min-w-0 lg:sticky lg:top-20"><VocabDetail item={current} bookmarked={isBookmarked(current.id)} onBookmark={() => toggleBookmark(current.id, 'vocabulary')} onStudy={() => { setSheetOpen(false); setFocusMode(true); }} /></div>
+        </DetailPane>
       </div>}
   </div>;
 }

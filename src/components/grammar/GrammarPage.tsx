@@ -1,19 +1,26 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Bookmark, BookmarkCheck, Search, X } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
 import type { GrammarItem } from '@/types';
 import { StudySession } from '@/components/flashcard/StudySession';
 import { grammarCard } from '@/lib/cards';
 import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
+import { DetailPane, LearnDot, LearnFilter } from '@/components/library/LibraryParts';
+import { countStates, learnStates, stateOf, type LearnState } from '@/lib/learnState';
+import { useWide } from '@/hooks/useWide';
 
 export function GrammarPage() {
-  const { grammar, isBookmarked, toggleBookmark, navigationTarget, clearNavigationTarget } = useApp();
-  const [query, setQuery] = useState('');
+  const { grammar, isBookmarked, toggleBookmark, navigationTarget, clearNavigationTarget, srsCards } = useApp();
+  const wide = useWide();
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [learn, setLearn] = useState<LearnState | 'all'>('all');
+  const states = useMemo(() => learnStates(srsCards, 'grammar'), [srsCards]);
+  // The dictionary links here with ?q=, so a word found there opens already filtered.
+  const [query, setQuery] = useState(() => new URLSearchParams(location.search).get('q') ?? '');
   const [savedOnly, setSavedOnly] = useState(false);
   const [level, setLevel] = useState<'all' | 'N2' | 'N3' | 'N4'>('all');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [flashcardMode, setFlashcardMode] = useState(false);
-  const detailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (navigationTarget?.type !== 'grammar') return;
@@ -22,19 +29,21 @@ export function GrammarPage() {
     setLevel('all');
     setSelectedId(navigationTarget.id);
     clearNavigationTarget();
-    if (window.innerWidth < 1024) requestAnimationFrame(() => detailRef.current?.scrollIntoView({ block: 'start' }));
+    setSheetOpen(true);
   }, [navigationTarget, grammar, clearNavigationTarget]);
 
-  const filtered = useMemo(() => grammar.filter(item => {
+  const matching = useMemo(() => grammar.filter(item => {
     const text = [item.pattern, item.meaning, item.usage, item.nhom_chuc_nang, item.cong_thuc].join(' ').toLowerCase();
     return (level === 'all' || item.level === level) && (!savedOnly || isBookmarked(item.id)) && (!query.trim() || text.includes(query.trim().toLowerCase()));
   }), [grammar, level, savedOnly, query, isBookmarked]);
+  const counts = useMemo(() => countStates(matching.map(item => item.id), states), [matching, states]);
+  const filtered = useMemo(() => learn === 'all' ? matching : matching.filter(item => stateOf(states, item.id) === learn), [matching, learn, states]);
   const current = filtered.find(item => item.id === selectedId) ?? filtered[0];
 
   if (flashcardMode && filtered.length) return <StudySession cards={filtered.map((item, index) => grammarCard(item, `library-grammar-${level}`, index))} deckName={`Ngữ pháp · ${level === 'all' ? 'Tất cả' : level}`} mode="flashcards" onExit={() => setFlashcardMode(false)} />;
 
   return <div className="study-page">
-    <PageHeading title="Ngữ pháp" subtitle={filtered.length + ' / ' + grammar.length + ' mẫu'}
+    <PageHeading title="Ngữ pháp" subtitle={filtered.length === grammar.length ? `${grammar.length} mẫu` : `${filtered.length} / ${grammar.length} mẫu`}
       action={<button className="study-button study-button-primary" disabled={!filtered.length} onClick={() => setFlashcardMode(true)}>Học bằng thẻ →</button>} />
     <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
       <label className="study-input flex min-w-0 flex-1 items-center gap-2">
@@ -44,20 +53,23 @@ export function GrammarPage() {
         {query && <button aria-label="Xóa tìm kiếm" onClick={() => setQuery('')}><X size={18}/></button>}
       </label>
       <div className="flex flex-wrap gap-2">
-        {(['all', 'N2', 'N3', 'N4'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => setLevel(value)}>{value === 'all' ? 'Tất cả' : value}</button>)}
+        {(['all', 'N4', 'N3', 'N2'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => setLevel(value)}>{value === 'all' ? 'Tất cả' : value}</button>)}
         <button className={'study-button ' + (savedOnly ? 'study-button-primary' : '')} aria-pressed={savedOnly} onClick={() => setSavedOnly(!savedOnly)}>Đã lưu</button>
       </div>
     </div>
-    {!filtered.length ? <EmptyState title="Chưa có mẫu ngữ pháp phù hợp" detail="Thử từ khóa khác hoặc bỏ bộ lọc." action={<button className="study-button" onClick={() => { setQuery(''); setLevel('all'); setSavedOnly(false); }}>Xem tất cả</button>} /> :
+    <LearnFilter value={learn} counts={counts} onChange={setLearn}/>
+    {!filtered.length ? <EmptyState title="Chưa có mẫu ngữ pháp phù hợp" detail="Thử từ khóa khác hoặc bỏ bộ lọc." action={<button className="study-button" onClick={() => { setQuery(''); setLevel('all'); setSavedOnly(false); setLearn('all'); }}>Xem tất cả</button>} /> :
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <div className="max-h-[40vh] space-y-2 overflow-y-auto lg:max-h-[calc(100vh-230px)]">
-          {filtered.map(item => <button key={item.id} onClick={() => { setSelectedId(item.id); if (window.innerWidth < 1024) requestAnimationFrame(() => detailRef.current?.scrollIntoView({ block: 'start' })); }} aria-pressed={current.id === item.id}
-            className={'w-full min-w-0 rounded-xl border p-4 text-left transition-colors focus-ring ' + (current.id === item.id ? 'border-[var(--color-grammar)] bg-[var(--color-surface-alt)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]')}>
-            <div className="flex items-start justify-between gap-3"><span className="font-jp-serif min-w-0 break-words text-lg font-semibold text-[var(--color-text)]">{item.pattern}</span><span className="study-eyebrow shrink-0">{item.level}</span></div>
+        <div className="space-y-2 lg:max-h-[calc(100vh-230px)] lg:overflow-y-auto">
+          {filtered.map(item => <button key={item.id} onClick={() => { setSelectedId(item.id); setSheetOpen(true); }} aria-pressed={wide && current.id === item.id}
+            className={'w-full min-w-0 rounded-xl border p-4 text-left transition-colors focus-ring ' + (wide && current.id === item.id ? 'border-[var(--color-grammar)] bg-[var(--color-surface-alt)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]')}>
+            <div className="flex items-start justify-between gap-3"><span className="font-jp-serif min-w-0 break-words text-lg font-semibold text-[var(--color-text)]">{item.pattern}</span><span className="flex shrink-0 items-center gap-2"><LearnDot state={stateOf(states, item.id)}/><span className="study-eyebrow">{item.level}</span></span></div>
             <p className="mt-1 line-clamp-2 text-sm text-[var(--color-text-secondary)]">{item.meaning}</p>
           </button>)}
         </div>
-        <div ref={detailRef} className="min-w-0 scroll-mt-16 lg:sticky lg:top-20"><GrammarDetail item={current} bookmarked={isBookmarked(current.id)} onBookmark={() => toggleBookmark(current.id, 'grammar')} /></div>
+        <DetailPane wide={wide} open={sheetOpen} title={current.pattern} onClose={() => setSheetOpen(false)}>
+          <div className="min-w-0 lg:sticky lg:top-20"><GrammarDetail item={current} bookmarked={isBookmarked(current.id)} onBookmark={() => toggleBookmark(current.id, 'grammar')} /></div>
+        </DetailPane>
       </div>}
   </div>;
 }
