@@ -40,3 +40,11 @@
   .level-row { gap: 12px; padding: 14px; }
   .level-row .level-seal { --seal: 40px; }
 }
+
+/* Review page: today's decks lead; the full level list folds away under them. */
+.level-today-sum { margin-top: 4px; color: var(--color-text-secondary); font-size: .95rem; }
+.level-today-sum b { color: var(--color-text); font-weight: 600; }
+.level-today-level { margin-left: 4px; color: var(--color-text-tertiary); font-size: .8rem; font-weight: 500; }
+.level-more > summary { display: flex; align-items: center; min-height: 44px; color: var(--color-text-secondary); font-size: .9rem; font-weight: 600; cursor: pointer; }
+.level-more > summary:hover { color: var(--color-text); }
+.level-more[open] > summary { margin-bottom: 8px; }

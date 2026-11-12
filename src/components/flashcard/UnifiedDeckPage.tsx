@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { PageHeading } from '@/components/ui/StudyUI';
 import { useApp, useLearningStorage } from '@/hooks/useApp';
+import { useAuth } from '@/hooks/useAuth';
 import type { CardView } from '@/lib/cards';
 import { defaultDeckTemplate, type DeckTemplateConfig } from '@/lib/ankiImport';
 import { buildBuiltInDecks, buildSavedDeck, deckSummary, type BuiltInDeckDefinition } from '@/lib/deckCatalog';
@@ -10,14 +11,15 @@ import { builtInDeckResumeKey, resolveResumeIndex } from '@/lib/studyResume';
 import { StudySession } from './StudySession';
 import { ImportedDecks } from './ImportedDecks';
 import { DeckCard } from './DeckCard';
-import { LevelDecks, type LevelRow } from './LevelDecks';
+import { LevelDecks, TodayDecks, type LevelRow } from './LevelDecks';
 import { StudySetupSheet } from './StudySetupSheet';
 
 export type DeckPageMode = 'free' | 'scheduled';
 
 export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
-  const { vocabulary, kanji, grammar, n5Decks, bookmarks, srsCards, settings } = useApp();
+  const { vocabulary, kanji, grammar, n5Decks, bookmarks, srsCards, settings, setCurrentPage } = useApp();
   const { getJSON, setJSON } = useLearningStorage();
+  const { user } = useAuth();
   const [setupDeck, setSetupDeck] = useState<BuiltInDeckDefinition | null>(null);
   const [session, setSession] = useState<{ id: string; name: string; cards: CardView[]; template: DeckTemplateConfig; initialIndex: number; mode: 'flashcards' | 'anki' } | null>(null);
 
@@ -79,7 +81,7 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     const schedule = scheduleFor(deck);
     return {
       id: deck.id, level: deck.level, kind: deck.kind, totalCards: deck.cards.length,
-      learnedCount: schedule.summary.learnedCount, dueCount: schedule.summary.remainingTodayCount,
+      learnedCount: schedule.summary.learnedCount, dueCount: schedule.summary.remainingTodayCount, reviewCount: schedule.summary.dueCount,
       // Past today's limit the deck stays open while unseen cards remain, so "Học thêm" is reachable.
       startable: mode === 'free' ? deck.cards.length > 0 : schedule.cards.length > 0 || schedule.summary.newCount > 0,
       actionLabel: lessonDecks.has(deck.id) ? 'Chọn bài' : 'Bắt đầu',
@@ -96,8 +98,18 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     <PageHeading title={mode === 'free' ? 'Bộ thẻ' : 'Ôn ngắt quãng'} subtitle={mode === 'free' ? 'Học tự do, không ảnh hưởng lịch ôn.' : undefined}/>
 
     <ImportedDecks mode={mode} leadingDeck={saved.cards.length ? savedCard(saved) : undefined}/>
+    {/* Guests have no personal-deck section on the review page, but their saved cards still need a way in. */}
+    {!user && mode === 'scheduled' && saved.cards.length > 0 && <div className="max-w-sm">{savedCard(saved)}</div>}
 
-    <LevelDecks mode={mode} rows={levelRows} storage={{ getJSON, setJSON }}/>
+    {mode === 'free' ? <LevelDecks mode={mode} rows={levelRows} storage={{ getJSON, setJSON }}/>
+      // Reviewing is about today, so the page leads with what is due; browsing every deck stays one tap away.
+      : <>
+        <TodayDecks rows={levelRows} onBrowse={() => setCurrentPage('flashcards')}/>
+        <details className="level-more">
+          <summary>Tất cả bộ theo trình độ</summary>
+          <LevelDecks mode={mode} rows={levelRows} storage={{ getJSON, setJSON }}/>
+        </details>
+      </>}
 
     <StudySetupSheet open={Boolean(setupDeck)} deckName={setupDeck?.name ?? ''} lessons={setupDeck ? lessonOptions(setupDeck.cards) : []} onClose={() => setSetupDeck(null)} onStart={lessonKey => setupDeck && launchFree(setupDeck, lessonKey)}/>
   </div>;

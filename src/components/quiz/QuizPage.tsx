@@ -122,6 +122,11 @@ function QuizSession({
   const [answered, setAnswered] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [done, setDone] = useState(false);
+  const [missed, setMissed] = useState<QuizQuestion[]>([]);
+  const { toggleBookmark, isBookmarked, setCurrentPage } = useApp();
+  // Saved items form the "Thẻ đã lưu" deck on the review pages, so a wrong answer comes back on its own schedule.
+  const unsaved = missed.filter(q => !isBookmarked(q.itemId));
+  const saveMissed = () => unsaved.forEach(q => toggleBookmark(q.itemId, q.itemType));
 
   const current = questions[currentIndex];
   const isCorrect = selectedAnswer === current?.correctAnswer;
@@ -133,6 +138,8 @@ function QuizSession({
       setAnswered(true);
       if (answer === current.correctAnswer) {
         setCorrectCount((c) => c + 1);
+      } else {
+        setMissed(list => [...list, current]);
       }
     },
     [answered, current]
@@ -169,7 +176,7 @@ function QuizSession({
   if (done) {
     const accuracy = Math.round((correctCount / questions.length) * 100);
     return (
-      <div className="fixed inset-0 z-50 bg-[var(--color-bg)] flex flex-col items-center justify-center p-6 text-center space-y-8 select-none">
+      <div className="fixed inset-0 z-50 bg-[var(--color-bg)] flex flex-col items-center justify-center-safe overflow-y-auto p-6 text-center space-y-8 select-none">
         <Seal glyph={accuracy >= 70 ? '合' : '再'} tone={accuracy >= 70 ? 'var(--color-success)' : 'var(--color-warning)'} className="!w-20 !h-20 [--seal:80px]" />
         <div className="space-y-1">
           <h2 className="study-title">
@@ -191,6 +198,18 @@ function QuizSession({
             {correctCount} / {questions.length} câu đúng
           </div>
         </div>
+        {missed.length > 0 && <div className="w-full max-w-md space-y-3 text-left">
+          <p className="text-sm font-semibold text-[var(--color-text)]">Câu chưa đúng</p>
+          <ul className="divide-y divide-[var(--color-border)] rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]">
+            {missed.map(q => <li key={q.id} className="flex items-baseline justify-between gap-3 px-4 py-2.5">
+              <span className="font-jp text-lg text-[var(--color-text)]">{q.prompt}</span>
+              <span className="text-right text-sm text-[var(--color-text-secondary)]">{q.correctAnswer}</span>
+            </li>)}
+          </ul>
+          {unsaved.length > 0
+            ? <button className="study-button w-full" onClick={saveMissed}>Lưu {unsaved.length} mục sai vào Thẻ đã lưu để ôn</button>
+            : <button className="study-button w-full" onClick={() => setCurrentPage('srs')}>Đã lưu · Mở Ôn ngắt quãng →</button>}
+        </div>}
         <div className="flex gap-4 pt-4">
           <button
             onClick={onRetry}

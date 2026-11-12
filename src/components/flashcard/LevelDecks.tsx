@@ -8,6 +8,8 @@ import './levelDecks.css';
 export type LevelRow = {
   id: string; level: DeckLevel; kind: DeckKind;
   totalCards: number; learnedCount: number; dueCount: number;
+  /** Of `dueCount`, the cards already learned and due again; the rest are today's new cards. */
+  reviewCount?: number;
   /** False when there is nothing to open (no cards, or nothing left to review today). */
   startable: boolean;
   /** Free-study verb shown on the row. */
@@ -82,5 +84,45 @@ export function LevelDecks({ mode, rows, storage }: { mode: 'free' | 'scheduled'
         </li>;
       })}</ul>
     </div>
+  </section>;
+}
+
+/** The review page's lead: only decks with work today, from every level, most overdue first. */
+export function TodayDecks({ rows, onBrowse }: { rows: LevelRow[]; onBrowse: () => void }) {
+  const uid = useId();
+  // Decks already started, or with reviews due. A newcomer has none: suggest the first deck of each kind instead of all of them.
+  const open = rows.filter(row => row.startable && row.dueCount > 0);
+  const started = open.filter(row => (row.reviewCount ?? 0) > 0 || row.learnedCount > 0);
+  const starter = !started.length;
+  const today = (starter ? open.filter((row, i) => open.findIndex(other => other.kind === row.kind) === i) : started)
+    .sort((a, b) => (b.reviewCount ?? 0) - (a.reviewCount ?? 0) || b.dueCount - a.dueCount);
+  const reviews = today.reduce((n, row) => n + (row.reviewCount ?? 0), 0);
+  const fresh = today.reduce((n, row) => n + row.dueCount - (row.reviewCount ?? 0), 0);
+  return <section aria-labelledby={`${uid}-title`} className="level-section">
+    <div>
+      <h2 id={`${uid}-title`} className="level-title">Hôm nay</h2>
+      <p className="level-today-sum">{!today.length ? 'Đã xong lịch ôn hôm nay.'
+        : starter ? 'Bạn chưa bắt đầu bộ nào. Gợi ý để bắt đầu:'
+        : <><b>{count(reviews)}</b> thẻ cần ôn · <b>{count(fresh)}</b> thẻ mới</>}</p>
+    </div>
+    {today.length ? <ul className="level-list">{today.map(row => {
+      const kind = KINDS[row.kind];
+      const review = row.reviewCount ?? 0;
+      return <li key={row.id}>
+        <button type="button" className="level-row" style={{ '--tone': kind.tone } as React.CSSProperties} onClick={row.onOpen}>
+          <span className="level-seal" style={{ '--tilt': KIND_TILT[row.kind] } as React.CSSProperties} aria-hidden="true">{KIND_GLYPH[row.kind]}</span>
+          <span className="level-row-main">
+            <span className="level-row-name">{kind.label} <span className="level-today-level">{row.level}</span></span>
+            <span className="level-row-detail">{count(row.learnedCount)}/{count(row.totalCards)} đã học</span>
+          </span>
+          <span className="level-row-side">
+            {review > 0 && <span className="level-row-due">{count(review)} cần ôn</span>}
+            {row.dueCount > review && <span className="level-row-note">{count(row.dueCount - review)} mới</span>}
+            <ChevronRight size={18} className="level-row-chevron" aria-hidden="true"/>
+          </span>
+        </button>
+      </li>;
+    })}</ul>
+    : <button type="button" className="study-button w-fit" onClick={onBrowse}>Học tự do ở Bộ thẻ <ChevronRight size={16} aria-hidden="true"/></button>}
   </section>;
 }
