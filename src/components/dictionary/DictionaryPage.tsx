@@ -13,6 +13,7 @@ import {
   type SearchResponse,
 } from "@/lib/dictionary/api";
 import "./dictionary.css";
+import { LocalMatches } from "./LocalMatches";
 import { clearCardDraft, cardDraftOwner } from "@/lib/dictionary/draft";
 import { ApiError } from "@/lib/api";
 import { BrandMark } from "@/components/ui/BrandMark";
@@ -440,6 +441,7 @@ export function DictionaryPage({ embedded = false }: { embedded?: boolean }) {
                     {searchNotice}
                   </p>
                 )}
+                <LocalMatches query={query} />
                 {loading && <AppLoading message="Đang tìm mục từ…" />}
                 {error && (
                   <div className="study-panel space-y-3" role="alert">
