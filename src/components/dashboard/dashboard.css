@@ -11,11 +11,13 @@
 .dashboard-page > :nth-child(5) { animation-delay: 280ms; }
 
 /* Hero. */
-.dash-ridges { height: clamp(28rem, 74svh, 40rem); border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-bg); }
+.dash-ridges { height: clamp(16rem, 40svh, 24rem); border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-bg); }
 .dash-hero { position: relative; height: 100%; padding: 1.5rem 1.25rem 1.25rem; }
 @media (min-width: 768px) { .dash-hero { padding: 2.5rem 2.5rem 2rem; } }
 .dash-motto { margin-top: 1.25rem; font-family: var(--font-jp-serif); font-size: clamp(1.25rem, 2.4vw, 1.75rem); letter-spacing: .12em; color: var(--color-seal); }
 .dash-motto-vi { margin-top: .35rem; font-size: .85rem; color: var(--color-text-secondary); }
+.dash-cta { justify-self: start; min-height: 3rem; margin-top: -1rem; padding-inline: 1.5rem; font-size: 1rem; }
+@media (max-width: 639px) { .dash-cta { justify-self: stretch; } .dash-ridges { height: 15rem; } }
 .dash-greeting { margin-top: .75rem; font-family: var(--font-display); font-size: clamp(2.25rem, 5vw, 3.75rem); font-weight: 400; line-height: 1.05; letter-spacing: -.02em; color: var(--color-text); }
 
 
@@ -78,3 +80,12 @@
 /* High contrast: solid edges, no ornament. */
 .high-contrast .dash-ridges, .high-contrast .dash-tile { border-color: var(--color-text); }
 .high-contrast .dash-day.is-studied .dash-stamp { outline: 2px solid var(--color-text); }
+/* Phones: the three tasks become compact rows (icon · title over hint · count) so all of them fit under the hero. */
+@media (max-width: 639px) {
+  .dash-todo { gap: .6rem; }
+  .dash-tile { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "icon title num" "icon sub num"; align-items: center; column-gap: .9rem; padding: .9rem 1rem; }
+  .dash-tile svg { grid-area: icon; }
+  .dash-tile strong { grid-area: title; margin-top: 0; }
+  .dash-tile small { grid-area: sub; margin-top: 0; }
+  .dash-tile-num { grid-area: num; margin-top: 0; font-size: 2.25rem; }
+}

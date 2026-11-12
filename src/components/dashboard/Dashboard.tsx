@@ -39,9 +39,28 @@ export function Dashboard() {
   const { greeting } = daypart(now.getHours());
   const motto = MOTTOS[Math.floor(now.getTime() / 864e5) % MOTTOS.length];
   const dateLabel = new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: 'numeric', month: 'long' }).format(now);
+  // The one thing to do next, in the order a spaced-repetition day goes: due reviews, then new cards, then a quick check.
+  const next = due > 0 ? { page: 'srs' as const, label: `Ôn ${due} thẻ đến hạn` }
+    : remaining > 0 ? { page: 'flashcards' as const, label: `Học ${remaining} thẻ mới` }
+    : { page: 'quiz' as const, label: 'Làm trắc nghiệm nhanh' };
+  const todo = <section aria-labelledby="todo-title">
+      <p id="todo-title" className="dash-label">Việc hôm nay</p>
+      <div className="dash-todo">
+        {[
+          { page: 'srs' as const, Icon: NavReview, n: due, title: 'Ôn thẻ đến hạn', sub: due > 0 ? 'thẻ đang chờ' : 'Không còn thẻ nào chờ' },
+          { page: 'flashcards' as const, Icon: NavDecks, n: remaining, title: 'Học thêm thẻ mới', sub: remaining > 0 ? 'thẻ để đạt mục tiêu' : 'Đã đạt mục tiêu hôm nay' },
+          { page: 'quiz' as const, Icon: NavQuiz, n: 10, title: 'Làm trắc nghiệm', sub: 'câu hỏi kiểm tra nhanh' },
+        ].map(({ page, Icon, n, title, sub }) => <button key={page} onClick={() => setCurrentPage(page)} className="dash-tile">
+          <Icon size={26} strokeWidth={1.6} aria-hidden="true"/>
+          <span className="dash-tile-num">{n}</span>
+          <strong>{title}</strong>
+          <small>{sub}</small>
+        </button>)}
+      </div>
+    </section>;
 
   return <div className="study-page dashboard-page">
-    <InkRidges className="dash-ridges" horizon={0.5} sunPosition={[0.8, 0.72]} birdsEvery={20}>
+    <InkRidges className="dash-ridges" horizon={0.34} sunPosition={[0.8, 0.72]} birdsEvery={20}>
     <section className="dash-hero" aria-labelledby="today-focus-title">
       <header>
         <p className="study-eyebrow capitalize">{dateLabel}</p>
@@ -52,10 +71,15 @@ export function Dashboard() {
     </section>
     </InkRidges>
 
+    {/* Under the picture, not on it: the art stays clean and the button is the first thing after it. */}
+    <button className="study-button study-button-primary dash-cta" onClick={() => setCurrentPage(next.page)}>{next.label} <ArrowRight size={16}/></button>
+
     {draft && <section className="dash-notice" aria-label="Bộ thẻ đang tạo dở">
       <p>Bộ thẻ đang tạo vẫn được lưu.</p>
       <button className="dash-link hit" onClick={() => setCurrentPage('flashcards')}>Tiếp tục <ArrowRight size={14}/></button>
     </section>}
+
+    {todo}
 
     <div className="dash-row">
       <section className="dash-col" aria-label="Mục tiêu hôm nay">
@@ -85,22 +109,6 @@ export function Dashboard() {
       </section>
     </div>
 
-
-    <section aria-labelledby="todo-title">
-      <p id="todo-title" className="dash-label">Việc hôm nay</p>
-      <div className="dash-todo">
-        {[
-          { page: 'srs' as const, Icon: NavReview, n: due, title: 'Ôn thẻ đến hạn', sub: due > 0 ? 'thẻ đang chờ' : 'Không còn thẻ nào chờ' },
-          { page: 'flashcards' as const, Icon: NavDecks, n: remaining, title: 'Học thêm thẻ mới', sub: remaining > 0 ? 'thẻ để đạt mục tiêu' : 'Đã đạt mục tiêu hôm nay' },
-          { page: 'quiz' as const, Icon: NavQuiz, n: 10, title: 'Làm trắc nghiệm', sub: 'câu hỏi kiểm tra nhanh' },
-        ].map(({ page, Icon, n, title, sub }) => <button key={page} onClick={() => setCurrentPage(page)} className="dash-tile">
-          <Icon size={26} strokeWidth={1.6} aria-hidden="true"/>
-          <span className="dash-tile-num">{n}</span>
-          <strong>{title}</strong>
-          <small>{sub}</small>
-        </button>)}
-      </div>
-    </section>
 
     {legacyDataPresent && <section className="dash-notice" role="note">
       <p><strong>Dữ liệu cũ vẫn an toàn.</strong></p>
