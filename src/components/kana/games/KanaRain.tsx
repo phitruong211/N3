@@ -16,7 +16,7 @@ export function KanaRain(props: GameProps) {
   return <RainRound key={phase.round} {...props} {...phase} />;
 }
 
-function RainRound({ script, progress, storage, onRecord, onExit, phase, setPhase, restart }: GameProps & ReturnType<typeof usePhase>) {
+function RainRound({ script, progress, storage, onRecord, onExit, onDrill, phase, setPhase, restart }: GameProps & ReturnType<typeof usePhase>) {
   const pool = KANA_POOL[script];
   const world = useRef({ drops: [] as Drop[], effects: [] as Effect[], spawnIn: 0.4, hits: 0, score: 0, combo: 0, lives: LIVES, nextId: 1, missed: [] as string[], last: '' });
   const [, render] = useReducer((n: number) => n + 1, 0);
@@ -108,7 +108,7 @@ function RainRound({ script, progress, storage, onRecord, onExit, phase, setPhas
       {phase === 'countdown' && <Countdown onDone={() => { setPhase('play'); input.current?.focus(); }}
         hint={<>Gõ romaji của chữ đang rơi rồi chữ sẽ vỡ. Để chữ chạm đất là mất một mạng.</>} />}
       {phase === 'paused' && <PausedOverlay onResume={() => { setPhase('play'); input.current?.focus(); }} onExit={onExit} />}
-      {phase === 'over' && <GameOver score={w.score} best={best} missed={w.missed} onRetry={restart} onExit={onExit} />}
+      {phase === 'over' && <GameOver score={w.score} best={best} missed={w.missed} onRetry={restart} onExit={onExit} onDrill={onDrill} />}
     </Board>
 
     <div className="mx-auto mt-4 max-w-sm">

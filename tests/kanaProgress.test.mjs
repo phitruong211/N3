@@ -44,3 +44,14 @@ test('once everything is learned it still asks, rather than running dry', () => 
   assert.ok(KANA_POOL.hira.includes(q.ch));
   assert.ok(q.choices.includes(q.romaji));
 });
+
+test('a drill of a few missed characters still offers four readings from the whole script', () => {
+  const focus = ['さ', 'ち'];
+  for (let i = 0; i < 50; i++) {
+    const q = buildQuestion(focus, {}, undefined, KANA_POOL.hira);
+    assert.ok(focus.includes(q.ch));
+    assert.equal(q.choices.length, 4);
+    assert.equal(new Set(q.choices).size, 4);
+    assert.ok(q.choices.includes(q.romaji));
+  }
+});

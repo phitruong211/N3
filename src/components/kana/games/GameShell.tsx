@@ -18,6 +18,8 @@ export type GameProps = {
   storage: Storage;
   onRecord: (ch: string, correct: boolean) => void;
   onExit: () => void;
+  /** Opens a calm drill of just these characters, offered after a game. */
+  onDrill?: (chars: string[]) => void;
 };
 
 /** Calls `step(dt)` every frame while `running`. dt is capped so a background tab does not jump the world forward. */
@@ -155,8 +157,8 @@ export function PausedOverlay({ onResume, onExit }: { onResume: () => void; onEx
 }
 
 /** End screen: score against the record, then the characters that cost a life, each one tappable to hear it again. */
-export function GameOver({ score, best, missed, onRetry, onExit }: {
-  score: number; best: number; missed: string[]; onRetry: () => void; onExit: () => void;
+export function GameOver({ score, best, missed, onRetry, onExit, onDrill }: {
+  score: number; best: number; missed: string[]; onRetry: () => void; onExit: () => void; onDrill?: (chars: string[]) => void;
 }) {
   const record = score > best && score > 0;
   return <Overlay>
@@ -178,6 +180,7 @@ export function GameOver({ score, best, missed, onRetry, onExit }: {
           </button>)}
         </div>
       </div>}
+      {missed.length > 0 && onDrill && <button className="study-button mx-auto mt-4" onClick={() => onDrill(missed)}>Luyện lại {missed.length} chữ này</button>}
       <div className="mt-6 flex justify-center gap-3">
         <button autoFocus className="study-button study-button-primary" onClick={onRetry}><RotateCcw size={16} /> Chơi lại</button>
         <button className="study-button" onClick={onExit}>Chọn game khác</button>

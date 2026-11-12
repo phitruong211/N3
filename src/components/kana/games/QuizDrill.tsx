@@ -5,10 +5,12 @@ import { speak } from '../kanaSpeech';
 import type { GameProps } from './GameShell';
 
 /** The calm mode: one character, four readings, no clock. */
-export function QuizDrill({ script, progress, onRecord, onExit, onReset }: GameProps & { onReset: () => void }) {
-  const pool = KANA_POOL[script];
+export function QuizDrill({ script, progress, onRecord, onExit, onReset, focus }: GameProps & { onReset: () => void; focus?: string[] }) {
+  const all = KANA_POOL[script];
+  // After a game: only the characters just missed, until each is answered right twice in a row.
+  const pool = focus?.length ? focus : all;
   const learned = countLearned(progress, pool);
-  const [question, setQuestion] = useState(() => buildQuestion(pool, progress));
+  const [question, setQuestion] = useState(() => buildQuestion(pool, progress, undefined, all));
   const [picked, setPicked] = useState<string | null>(null);
   const timer = useRef(0);
   const latest = useRef(progress);
@@ -19,7 +21,7 @@ export function QuizDrill({ script, progress, onRecord, onExit, onReset }: GameP
   const advance = () => {
     window.clearTimeout(timer.current);
     setPicked(null);
-    setQuestion(buildQuestion(pool, latest.current, question.ch));
+    setQuestion(buildQuestion(pool, latest.current, pool.length > 1 ? question.ch : undefined, all));
   };
 
   const answer = (choice: string) => {
@@ -44,9 +46,9 @@ export function QuizDrill({ script, progress, onRecord, onExit, onReset }: GameP
 
   if (learned === pool.length) return <section className="study-panel mx-auto w-full max-w-md text-center">
     <p className="font-jp-serif text-6xl leading-none text-[var(--color-seal)]">済</p>
-    <p className="mt-4 text-[var(--color-text)]">Thuộc cả {pool.length} chữ {script === 'hira' ? 'Hiragana' : 'Katakana'}.</p>
+    <p className="mt-4 text-[var(--color-text)]">{focus?.length ? `Đã nhớ lại cả ${pool.length} chữ vừa sai.` : `Thuộc cả ${pool.length} chữ ${script === 'hira' ? 'Hiragana' : 'Katakana'}.`}</p>
     <div className="mt-5 flex justify-center gap-3">
-      <button className="study-button" onClick={onReset}><RotateCcw size={16} /> Luyện lại từ đầu</button>
+      {!focus?.length && <button className="study-button" onClick={onReset}><RotateCcw size={16} /> Luyện lại từ đầu</button>}
       <button className="study-button" onClick={onExit}>Chọn game khác</button>
     </div>
   </section>;

@@ -12,7 +12,7 @@ export function ImpostorHunt(props: GameProps) {
   return <HuntRound key={phase.round} {...props} {...phase} />;
 }
 
-function HuntRound({ script, storage, onRecord, onExit, phase, setPhase, restart }: GameProps & ReturnType<typeof usePhase>) {
+function HuntRound({ script, storage, onRecord, onExit, onDrill, phase, setPhase, restart }: GameProps & ReturnType<typeof usePhase>) {
   const first = useRef(impostorRound(script, 1));
   const world = useRef({ level: 1, round: first.current, left: first.current.seconds, lives: LIVES, score: 0, missed: [] as string[], wrong: new Set<number>(), slipped: false, reveal: null as null | { found: boolean; gain: number; t: number } });
   const [, render] = useReducer((n: number) => n + 1, 0);
@@ -105,7 +105,7 @@ function HuntRound({ script, storage, onRecord, onExit, phase, setPhase, restart
 
       {phase === 'countdown' && <Countdown onDone={() => setPhase('play')} hint={<>Mỗi lưới giấu đúng một chữ khác. Bấm sai bị trừ {WRONG_PENALTY} giây; hết giờ mất một mạng.</>} />}
       {phase === 'paused' && <PausedOverlay onResume={() => setPhase('play')} onExit={onExit} />}
-      {phase === 'over' && <GameOver score={w.score} best={best} missed={w.missed} onRetry={restart} onExit={onExit} />}
+      {phase === 'over' && <GameOver score={w.score} best={best} missed={w.missed} onRetry={restart} onExit={onExit} onDrill={onDrill} />}
     </Board>
   </section>;
 }

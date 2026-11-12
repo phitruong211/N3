@@ -26,7 +26,8 @@
     "test:dictionary:benchmark": "node tests/dictionary.benchmark.mjs",
     "test:sharing:integration": "node tests/deckSharing.integration.browser.mjs",
     "test:review-undo": "node tests/reviewUndo.browser.mjs",
-    "test:study-list": "node tests/studyCardList.browser.mjs"
+    "test:study-list": "node tests/studyCardList.browser.mjs",
+    "test:kana-drill": "node tests/kanaDrill.browser.mjs"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "^5.3.0",

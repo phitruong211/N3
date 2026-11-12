@@ -50,10 +50,13 @@ export function pickKana(pool: readonly string[], progress: KanaProgress, avoid?
   return bucket[Math.floor(rand() * bucket.length)];
 }
 
-/** One practice question: a character still being learned, plus three readings it is not. */
-export function buildQuestion(pool: string[], progress: KanaProgress, avoid?: string): Question {
+/**
+ * One practice question: a character still being learned, plus three readings it is not.
+ * Wrong readings come from `choicesFrom`, so a drill of two characters still offers four real options.
+ */
+export function buildQuestion(pool: string[], progress: KanaProgress, avoid?: string, choicesFrom: readonly string[] = pool): Question {
   const ch = pickKana(pool, progress, avoid);
   const romaji = ROMAJI[ch];
-  const others = shuffled([...new Set(pool.map(kana => ROMAJI[kana]))].filter(reading => reading !== romaji));
+  const others = shuffled([...new Set(choicesFrom.map(kana => ROMAJI[kana]))].filter(reading => reading !== romaji));
   return { ch, romaji, choices: shuffled([romaji, ...others.slice(0, 3)]) };
 }

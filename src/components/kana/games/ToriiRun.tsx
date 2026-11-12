@@ -49,7 +49,7 @@ function Runner() {
   </svg>;
 }
 
-function RunRound({ script, progress, storage, onRecord, onExit, listen, phase, setPhase, restart }: GameProps & { listen: boolean } & ReturnType<typeof usePhase>) {
+function RunRound({ script, progress, storage, onRecord, onExit, onDrill, listen, phase, setPhase, restart }: GameProps & { listen: boolean } & ReturnType<typeof usePhase>) {
   const world = useRef({ rows: [] as Row[], lane: 1, passed: 0, score: 0, combo: 0, lives: LIVES, missed: [] as string[], dist: 0, nextId: 1, last: '', note: null as null | { text: string; t: number } });
   const [, render] = useReducer((n: number) => n + 1, 0);
   const [best] = useState(() => readBest(storage, 'torii', script));
@@ -154,7 +154,7 @@ function RunRound({ script, progress, storage, onRecord, onExit, listen, phase, 
       {phase === 'countdown' && <Countdown onDone={() => setPhase('play')}
         hint={<>{listen ? 'Nghe âm' : 'Nhìn romaji'} rồi chạy qua cổng mang đúng chữ. Dùng ← → (hoặc A D), hay chạm vào làn muốn chạy.</>} />}
       {phase === 'paused' && <PausedOverlay onResume={() => setPhase('play')} onExit={onExit} />}
-      {phase === 'over' && <GameOver score={w.score} best={best} missed={w.missed} onRetry={restart} onExit={onExit} />}
+      {phase === 'over' && <GameOver score={w.score} best={best} missed={w.missed} onRetry={restart} onExit={onExit} onDrill={onDrill} />}
     </Board>
   </section>;
 }

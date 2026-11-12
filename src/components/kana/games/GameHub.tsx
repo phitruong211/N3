@@ -8,7 +8,7 @@ import { QuizDrill } from './QuizDrill';
 import { KanaRain } from './KanaRain';
 import { Torii, ToriiRun } from './ToriiRun';
 
-type Choice = { game: GameId | 'quiz'; listen?: boolean };
+type Choice = { game: GameId | 'quiz'; listen?: boolean; focus?: string[] };
 
 const SAMPLE: Record<KanaScript, { rain: string[]; base: string; odd: string; gate: string }> = {
   hira: { rain: ['か', 'ね', 'す'], base: 'め', odd: 'ぬ', gate: 'さ' },
@@ -35,10 +35,11 @@ export function GameHub({ onReset, ...props }: Omit<GameProps, 'onExit'> & { onR
   const s = SAMPLE[script];
   const exit = () => setChoice(null);
 
-  if (choice?.game === 'quiz') return <QuizDrill {...props} onReset={onReset} onExit={exit} />;
-  if (choice?.game === 'rain') return <KanaRain {...props} onExit={exit} />;
-  if (choice?.game === 'impostor') return <ImpostorHunt {...props} onExit={exit} />;
-  if (choice?.game === 'torii') return <ToriiRun {...props} listen={Boolean(choice.listen)} onExit={exit} />;
+  const drill = (chars: string[]) => setChoice({ game: 'quiz', focus: chars });
+  if (choice?.game === 'quiz') return <QuizDrill key={choice.focus?.join('') ?? 'all'} {...props} focus={choice.focus} onReset={onReset} onExit={exit} />;
+  if (choice?.game === 'rain') return <KanaRain {...props} onExit={exit} onDrill={drill} />;
+  if (choice?.game === 'impostor') return <ImpostorHunt {...props} onExit={exit} onDrill={drill} />;
+  if (choice?.game === 'torii') return <ToriiRun {...props} listen={Boolean(choice.listen)} onExit={exit} onDrill={drill} />;
 
   const play = 'study-button study-button-primary !min-h-10';
   return <div className="rise-group grid gap-4 md:grid-cols-2 xl:grid-cols-4">
