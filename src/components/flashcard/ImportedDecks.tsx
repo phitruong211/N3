@@ -13,7 +13,7 @@ import {
   type ImportedCard,
   type ImportPreview,
 } from "@/lib/ankiImport";
-import { applyResolvedTemplate, builtinNoteTypes, normalizeConfig, resolveTemplate, type DeckConfig } from "@/lib/deckFormat";
+import { builtinNoteTypes, normalizeConfig, resolveTemplate, type DeckConfig } from "@/lib/deckFormat";
 import { DeckExportDialog } from "./DeckExportDialog";
 import { EnterCodeDialog } from "./EnterCodeDialog";
 import ImportPreviewEditor from "./ImportPreviewEditor";
@@ -51,7 +51,7 @@ import { StudySetupSheet } from "./StudySetupSheet";
 import { loadStudyPages } from "@/lib/loadStudyPages";
 import { buildFreeStudyQueue, lessonOptions } from "@/lib/studySetup";
 import { DeckProgressGrid } from "./DeckCard";
-import { DeckCustomizeDialog } from "./CardPresentation";
+import { CardDesigner } from "./CardDesigner";
 import { personalDeckResumeKey, resolveResumeIndex } from "@/lib/studyResume";
 import { OverflowMenu } from "@/components/ui/OverflowMenu";
 import { ContentBadge } from "@/components/ui/StudyUI";
@@ -621,7 +621,7 @@ export function ImportedDecks({
               className="study-button"
               onClick={() => setCustomizing(active)}
             >
-              Tùy chỉnh
+              Thiết kế thẻ
             </button>
             <button className="study-button" disabled={busy} onClick={() => setExporting(active)}>Xuất</button>
             {active.sourceType === 'IMPORT' && <button className="study-button" disabled={busy} onClick={() => setSharing(active)}>Chia sẻ</button>}
@@ -1017,7 +1017,7 @@ export function ImportedDecks({
                 { id: 'manage', label: 'Quản lý thẻ', disabled: busy, onSelect: () => open(deck) },
                 ...(deck.sourceType === 'IMPORT' ? [{ id: 'share', label: 'Chia sẻ bộ thẻ', disabled: busy, onSelect: () => setSharing(deck) }] : []),
                 { id: 'export', label: 'Xuất bộ thẻ', disabled: busy, onSelect: () => setExporting(deck) },
-                { id: 'customize', label: 'Tùy chỉnh giao diện', disabled: busy, onSelect: () => setCustomizing(deck) },
+                { id: 'customize', label: 'Thiết kế thẻ', disabled: busy, onSelect: () => setCustomizing(deck) },
               ]}
               onChange={() => setReload(value => value + 1)} renderDeck={(deck, menu, compact) => {
                 const badge = personalDeckBadge(deck);
@@ -1097,25 +1097,18 @@ export function ImportedDecks({
       {customizing && (() => {
         const config = normalizeConfig(customizing.templateConfig);
         const loaded = active?.id === customizing.id ? cards.content : [];
-        const typeId = (loaded[0]?.noteType && config.noteTypes.some((type) => type.id === loaded[0].noteType) ? loaded[0].noteType : config.noteTypes[0].id) as string;
         return (
-          <DeckCustomizeDialog
-            deck={{
-              id: customizing.id,
-              name: customizing.name,
-              source: customizing.sourceName || "",
-              format: customizing.importFormat || "",
-              position: customizing.position,
-              createdAt: customizing.createdAt,
-              template: resolveTemplate(config, typeId),
-              cards: loaded.map((card) => asImported(card, config)),
-            }}
-            noteTypes={config.noteTypes}
+          <CardDesigner
+            deckName={customizing.name}
+            config={config}
+            cards={loaded.map((card) => asImported(card, config))}
+            canEditCard={loaded.length > 0}
             busy={busy}
             onCancel={() => setCustomizing(null)}
-            onSave={(template) =>
+            onSave={(next, changedCards) =>
               void operation(async () => {
-                await updateDeck(customizing.id, { templateConfig: applyResolvedTemplate(config, typeId, template) });
+                await updateDeck(customizing.id, { templateConfig: next });
+                for (const card of changedCards) await updateCard(card.id, cardRequest(card));
                 if (active?.id === customizing.id) await refreshActive();
                 else setReload((value) => value + 1);
                 setCustomizing(null);

@@ -109,11 +109,13 @@ try {
   assert.match(await answer.innerText(), /CẤP ĐỘ/i);
   assert.match(await answer.innerText(), /N3/);
   await page.getByRole('button', { name: 'Thêm tùy chọn' }).click(); await page.getByRole('menuitem', { name: "Giao diện thẻ" }).click();
-  const typed = page.getByRole("dialog", { name: "Tùy chỉnh bộ thẻ" });
+  // Decks with note types open the card designer: content on "Thẻ này", what each side shows on "Bố cục & trường".
+  const typed = page.locator("dialog.card-designer");
+  await typed.getByRole("tab", { name: "Thẻ này" }).click();
   await typed.locator("label").filter({ hasText: "Cấp độ" }).locator("textarea").fill("N2");
-  await typed.getByRole("tab", { name: "Mặt sau" }).click();
-  await typed.getByRole("checkbox", { name: "Cấp độ" }).uncheck();
-  await typed.getByRole("button", { name: "Lưu tùy chỉnh", exact: true }).click();
+  await typed.getByRole("tab", { name: "Bố cục & trường" }).click();
+  await typed.getByRole("button", { name: "Ẩn Cấp độ ở mặt sau" }).click();
+  await typed.getByRole("button", { name: "Lưu thiết kế", exact: true }).click();
   await typed.waitFor({ state: "detached" });
   const savedTyped = await page.evaluate(() => ({ card: window.savedCard, config: window.savedConfig }));
   assert.equal(savedTyped.card.noteType, "plus");

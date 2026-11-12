@@ -401,3 +401,38 @@
   .study-session-tool:has(.study-session-tool-label) { width: auto; padding-inline: 12px 14px; border-radius: 999px; }
   .study-session-tool-label { display: inline; font-size: .8rem; font-weight: 550; }
 }
+
+/* Card designer: the real card on the left, every tier of its look on the right. */
+.card-designer { position: fixed; inset: 0; z-index: 60; display: flex; flex-direction: column; width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0; background: var(--color-bg); color: var(--color-text); }
+.card-designer:not([open]) { display: none; }
+.card-designer::backdrop { background: rgb(0 0 0 / .45); }
+.card-designer-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 24px; border-bottom: 1px solid var(--color-border); }
+.card-designer-body { display: grid; flex: 1; min-height: 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+.card-designer-stage { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 18px 16px; background: color-mix(in srgb, var(--color-surface-alt) 55%, var(--color-bg)); }
+.card-designer-card { width: min(560px, 100%); height: auto; aspect-ratio: 16 / 10; max-height: 46dvh; padding: 44px 32px; text-align: center; }
+.card-designer-sides, .card-designer-tabs { display: flex; gap: 4px; }
+.card-designer-sides { padding: 3px; border-radius: 999px; background: var(--color-surface-alt); }
+.card-designer-sides button { min-height: 36px; padding: 0 16px; border-radius: 999px; color: var(--color-text-secondary); font-size: .875rem; font-weight: 600; }
+.card-designer-sides button[aria-selected="true"] { background: var(--color-surface); color: var(--color-text); box-shadow: 0 1px 3px rgb(0 0 0 / .08); }
+.card-designer-pager { display: flex; align-items: center; gap: 14px; color: var(--color-text-secondary); font-size: .875rem; }
+.card-designer-panel { display: flex; flex-direction: column; min-height: 0; border-top: 1px solid var(--color-border); background: var(--color-surface); }
+.card-designer-tabs { overflow-x: auto; padding: 0 16px; border-bottom: 1px solid var(--color-border); }
+.card-designer-tabs button { position: relative; flex-shrink: 0; min-height: 48px; padding: 0 12px; color: var(--color-text-secondary); font-size: .9rem; font-weight: 600; white-space: nowrap; }
+.card-designer-tabs button[aria-selected="true"] { color: var(--color-text); }
+.card-designer-tabs button[aria-selected="true"]::after { position: absolute; inset: auto 12px -1px; height: 2px; border-radius: 2px; background: var(--color-gold); content: ''; }
+.card-designer-pane { display: grid; flex: 1; align-content: start; gap: 16px; min-height: 0; overflow-y: auto; padding: 20px; }
+.card-designer-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; padding: 12px 20px max(12px, env(safe-area-inset-bottom)); border-top: 1px solid var(--color-border); }
+.card-designer-presets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.card-designer-preset { display: grid; gap: 4px; padding: 10px; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-bg); text-align: left; transition: border-color var(--dur-fast), box-shadow var(--dur-base); }
+.card-designer-preset:hover { border-color: var(--color-border-strong); }
+.card-designer-preset[aria-pressed="true"] { border-color: var(--color-gold); box-shadow: 0 0 0 1px var(--color-gold); }
+.card-designer-swatch { display: grid; align-content: center; justify-items: center; gap: 2px; aspect-ratio: 16 / 10; margin-bottom: 4px; padding: 0 14px; border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: 10px; }
+.card-designer-swatch[data-theme] { justify-items: stretch; }
+.card-designer-swatch > span { font-size: .75rem; }
+.card-designer-swatch > b { font-size: 1.9rem; font-weight: 400; line-height: 1.1; }
+@media (min-width: 1024px) {
+  .card-designer-body { grid-template-rows: none; grid-template-columns: minmax(0, 1fr) minmax(380px, 460px); }
+  .card-designer-stage { padding: 32px; }
+  .card-designer-card { max-height: 60dvh; }
+  .card-designer-panel { border-top: 0; border-left: 1px solid var(--color-border); }
+}

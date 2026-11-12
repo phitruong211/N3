@@ -27,7 +27,8 @@
     "test:sharing:integration": "node tests/deckSharing.integration.browser.mjs",
     "test:review-undo": "node tests/reviewUndo.browser.mjs",
     "test:study-list": "node tests/studyCardList.browser.mjs",
-    "test:kana-drill": "node tests/kanaDrill.browser.mjs"
+    "test:kana-drill": "node tests/kanaDrill.browser.mjs",
+    "test:card-designer": "node tests/cardDesigner.browser.mjs"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "^5.3.0",

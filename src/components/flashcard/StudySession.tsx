@@ -17,6 +17,7 @@ import { surfaceStyle } from "@/lib/cardSurface";
 import { presentationCard, type CardView } from "@/lib/cards";
 import type { Rating, SRSCard } from "@/types";
 import { CardFace, DeckCustomizeDialog } from "./CardPresentation";
+import { CardDesigner } from "./CardDesigner";
 import { useStudyNote, NoteButton, PersonalNoteView, PersonalNoteEditor } from './PersonalCardNote';
 import { X, Undo2, HelpCircle, NavDecks } from '@/components/ui/icons';
 import { OverflowMenu } from '@/components/ui/OverflowMenu';
@@ -689,7 +690,27 @@ export function StudySession({
           {error}
         </p>
       )}
-      {customizing && <DeckCustomizeDialog
+      {customizing && config && onConfigChange && <CardDesigner
+        deckName={deckName}
+        config={config}
+        cards={sessionCards.map(presentationCard)}
+        startCardId={current.id}
+        canEditCard={current.source !== "BUILT_IN" && Boolean(onCardChange)}
+        busy={savingTemplate}
+        error={error}
+        onCancel={() => setCustomizing(false)}
+        onSave={async (next, changedCards) => {
+          setSavingTemplate(true);
+          try {
+            for (const card of changedCards) putCard(await onCardChange!(card));
+            if (JSON.stringify(next) !== JSON.stringify(config)) { await onConfigChange(next); setConfig(next); }
+            setCustomizing(false);
+            setError("");
+          } catch (reason) { setError(reason instanceof Error ? reason.message : "Không lưu được thiết kế"); }
+          finally { setSavingTemplate(false); }
+        }}
+      />}
+      {customizing && !(config && onConfigChange) && <DeckCustomizeDialog
         deck={{ id: cards[0]?.deckId || "study", name: deckName, source: "Phiên học", format: "", createdAt: "", position: 0, template, cards: [presentationCard(current)] }}
         busy={savingTemplate}
         error={error}
