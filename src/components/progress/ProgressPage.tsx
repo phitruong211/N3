@@ -3,6 +3,10 @@
 // ============================================================
 
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from '@/components/ui/icons';
+import { learnStates, levelProgress, type LevelProgress } from '@/lib/learnState';
+import { KANA_PROGRESS_KEY, KANA_TOTAL, kanaLearned, type KanaProgress } from '@/components/kana/kanaProgress';
 import { useApp, useLearningStorage } from '@/hooks/useApp';
 import { getStateDistribution, formatDate } from '@/lib/srs';
 import { EmptyState, PageHeading } from '@/components/ui/StudyUI';
@@ -15,12 +19,23 @@ const count = (value: number) => value.toLocaleString('vi-VN');
 const accuracyOf = (card: SRSCard) => card.reps === 0 ? 0 : Math.max(0, card.reps - card.lapses) / card.reps;
 
 export function ProgressPage() {
-  const { calculateStreak, getStudyDays } = useLearningStorage();
+  const { calculateStreak, getStudyDays, getJSON } = useLearningStorage();
   const { srsCards, vocabulary, kanji, grammar } = useApp();
   const distribution = useMemo(() => getStateDistribution(srsCards), [srsCards]);
   const streak = calculateStreak();
   const studyDays = getStudyDays();
   const library = vocabulary.length + kanji.length + grammar.length;
+  // Where the learner stands in each part of the library, level by level: the answer to "how far am I?".
+  const areas = useMemo(() => {
+    const kana = kanaLearned(getJSON<KanaProgress>(KANA_PROGRESS_KEY, {}));
+    return [
+      { name: 'Bảng chữ cái', to: '/library/kana', unit: 'chữ', progress: { levels: [], total: KANA_TOTAL, studied: kana } },
+      { name: 'Từ vựng', to: '/library/vocabulary', unit: 'từ', progress: levelProgress(vocabulary, learnStates(srsCards, 'vocabulary')) },
+      { name: 'Ngữ pháp', to: '/library/grammar', unit: 'mẫu', progress: levelProgress(grammar, learnStates(srsCards, 'grammar')) },
+      { name: 'Kanji', to: '/library/kanji', unit: 'chữ', progress: levelProgress(kanji, learnStates(srsCards, 'kanji')) },
+    ];
+  }, [getJSON, vocabulary, grammar, kanji, srsCards]);
+  const started = areas.some(area => area.progress.studied > 0) || studyDays.length > 0;
 
   const totalAccuracy = useMemo(() => {
     const total = srsCards.reduce((sum, card) => sum + card.reps, 0);
@@ -37,11 +52,26 @@ export function ProgressPage() {
     <div className="study-page">
       <PageHeading title="Tiến độ"/>
 
+      {!started && <section className="progress-start">
+        <div>
+          <h2>Bạn chưa bắt đầu chặng nào</h2>
+          <p className="study-copy">Học vài chữ cái đầu tiên, tiến độ của từng phần sẽ hiện ở đây.</p>
+        </div>
+        <Link to="/library/kana" className="study-button study-button-primary">Bắt đầu với Bảng chữ cái <ArrowRight size={16}/></Link>
+      </section>}
+
       <section className="progress-figures rise-group" aria-label="Tổng quan">
         <Figure value={String(streak.current)} unit="ngày" label="Học liên tiếp"/>
         <Figure value={String(totalAccuracy)} unit="%" label="Độ chính xác"/>
         <Figure value={count(srsCards.length)} unit="thẻ" label="Thẻ trong lịch ôn"/>
         <Figure value={count(studyDays.length)} unit="ngày" label="Ngày đã học"/>
+      </section>
+
+      <section className="progress-section" aria-labelledby="areas-title">
+        <h2 id="areas-title">Theo từng phần</h2>
+        <ul className="progress-areas">
+          {areas.map(area => <li key={area.name}><AreaRow {...area}/></li>)}
+        </ul>
       </section>
 
       <section className="progress-section" aria-labelledby="states-title">
@@ -69,6 +99,20 @@ export function ProgressPage() {
       <WeakItems srsCards={srsCards} vocabulary={vocabulary}/>
     </div>
   );
+}
+
+function AreaRow({ name, to, unit, progress }: { name: string; to: string; unit: string; progress: { levels: LevelProgress[]; total: number; studied: number } }) {
+  const percent = progress.total ? progress.studied / progress.total * 100 : 0;
+  return <Link to={to} className="progress-area">
+    <span className="progress-area-head">
+      <span className="font-semibold text-[var(--color-text)]">{name}</span>
+      <span className="tabular-nums"><b>{count(progress.studied)}</b> / {count(progress.total)} {unit}</span>
+    </span>
+    <i role="progressbar" aria-label={`${name}: đã học ${progress.studied} trên ${progress.total}`} aria-valuemin={0} aria-valuemax={progress.total} aria-valuenow={progress.studied}><b style={{ width: `${percent}%` }}/></i>
+    {progress.levels.length > 1 && <span className="progress-area-levels">
+      {progress.levels.map(level => <span key={level.level}>{level.level} <b className="tabular-nums">{count(level.studied)}</b>/{count(level.total)}</span>)}
+    </span>}
+  </Link>;
 }
 
 function Figure({ value, unit, label }: { value: string; unit: string; label: string }) {
