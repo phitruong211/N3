@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AlertTriangle } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
 import { useLearningStorage } from '@/hooks/useApp';
+import { JLPT_LEVELS, startLevel, TARGET_LEVEL_KEY } from '@/lib/targetLevel';
 import type { ThemeMode } from '@/types';
 import { PageHeading } from '@/components/ui/StudyUI';
 import { useAuth } from '@/hooks/useAuth';
@@ -27,7 +28,9 @@ const dailyNewCardPresets = [0, 10, 20, 50, 100, 200, UNLIMITED_NEW_CARDS] as co
 const presetLabel = (value: number) => value === 0 ? 'Chỉ ôn' : value === UNLIMITED_NEW_CARDS ? 'Không giới hạn' : String(value);
 
 export function SettingsPage() {
-  const { resetAllData } = useLearningStorage();
+  const storage = useLearningStorage();
+  const { resetAllData } = storage;
+  const [targetLevel, setTargetLevel] = useState(() => startLevel(storage.getJSON(TARGET_LEVEL_KEY, 'all'), JLPT_LEVELS));
   const { settings, updateSettings, settingsSync } = useApp();
   const { user, signOut, requestAuth } = useAuth();
   const [tab, setTab] = useState<Tab>('appearance');
@@ -117,11 +120,21 @@ export function SettingsPage() {
         </>}
         {tab === 'study' && <>
         <section className="study-panel">
+          <h2 className="text-base font-semibold text-[var(--color-text)]">Cấp độ mục tiêu</h2>
+          <p className="study-copy mt-1">Thư viện và Trắc nghiệm sẽ mở sẵn ở cấp này. Lưu trên thiết bị này.</p>
+          <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Cấp độ mục tiêu">
+            {(['all', ...JLPT_LEVELS] as const).map(value => <button key={value} className={'study-button ' + (targetLevel === value ? 'study-button-primary' : '')} aria-pressed={targetLevel === value}
+              onClick={() => { storage.setJSON(TARGET_LEVEL_KEY, value); setTargetLevel(value); }}>{value === 'all' ? 'Tất cả' : value}</button>)}
+          </div>
+          {targetLevel === 'N1' && <p className="study-copy mt-3">Nội dung N1 đang được bổ sung; hiện mới có Kanji N2–N1.</p>}
+        </section>
+        <section className="study-panel">
           <h2 className="mb-3 text-base font-semibold text-[var(--color-text)]">Khi học</h2>
           <SettingToggle label="Hiện furigana mặt trước" detail="Hiện hiragana trên Kanji trước khi lật thẻ" checked={settings.showFuriganaFront} onChange={value => updateSettings({ showFuriganaFront: value })}/>
           <SettingToggle label="Hiện furigana mặt sau" detail="Hiện hiragana trên Kanji sau khi lật thẻ" checked={settings.showFuriganaBack} onChange={value => updateSettings({ showFuriganaBack: value })}/>
           <SettingToggle label="Tự phát âm" detail="Đọc thẻ khi bắt đầu học nếu trình duyệt hỗ trợ" checked={settings.autoPlayAudio} onChange={value=>updateSettings({autoPlayAudio:value})}/>
           <label className="block py-3">Mục tiêu mỗi ngày (thẻ)<input className="study-input" type="number" min={1} max={1000} value={settings.dailyGoal} onChange={e=>updateSettings({dailyGoal:Math.max(1,Math.min(1000,Math.round(Number(e.target.value)||1)))})}/></label>
+          <p className="study-copy">Tính mọi thẻ bạn học hoặc ôn trong ngày. Số thẻ mới mỗi ngày chỉnh ở tab Ôn ngắt quãng.</p>
         </section>
         </>}
         {tab === 'srs' && <>
@@ -174,6 +187,8 @@ export function SettingsPage() {
                   : `Mỗi ngày hệ thống đưa tối đa ${settings.srsDailyNewLimit.toLocaleString('vi-VN')} thẻ mới vào lịch ôn. Bạn vẫn có thể nhập một số khác, hoặc bấm “Học thêm” ngay trong phiên khi muốn học quá mức này một hôm nào đó.`}
             </p>
           </div>
+          <details className="mt-4" open={Boolean(srsError) || undefined}>
+            <summary className="cursor-pointer text-sm font-semibold text-[var(--color-text-secondary)]">Tùy chỉnh nâng cao</summary>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <label className="text-sm font-semibold">Học lại khi quên
               <span className="study-copy mt-1 block">Số phút trước khi thẻ quay lại</span>
@@ -185,6 +200,7 @@ export function SettingsPage() {
             </label>
           </div>
           {srsError && <p role="alert" className="mt-3 text-sm text-[var(--color-error)]">{srsError}</p>}
+          </details>
           <p className="mt-5 text-sm font-semibold">Mức ghi nhớ mục tiêu</p>
           <div className="mt-2 grid gap-2 sm:grid-cols-3">
             {([{ value: 0.9, label: 'Cân bằng · 90%' }, { value: 0.93, label: 'Ghi nhớ cao · 93%' }, { value: 0.95, label: 'Ôn kỹ · 95%' }] as const).map(option =>

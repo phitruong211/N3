@@ -24,7 +24,6 @@ import { AdminReportsPage } from '@/components/flashcard/AdminReportsPage';
 import { AppLoading } from '@/components/ui/AppLoading';
 
 const Dashboard = lazy(() => import('@/components/dashboard/Dashboard').then((module) => ({ default: module.Dashboard })));
-const DictionaryPage = lazy(() => import('@/components/dictionary/DictionaryPage').then(module => ({ default: module.DictionaryPage })));
 const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage').then((module) => ({ default: module.VocabularyPage })));
 const LibraryHome = lazy(() => import('@/components/library/LibraryHome').then((module) => ({ default: module.LibraryHome })));
 const KanaPage = lazy(() => import('@/components/kana/KanaPage').then((module) => ({ default: module.KanaPage })));
@@ -57,9 +56,8 @@ function LibraryGate({ children }: { children: ReactNode }) {
 function AppContent() {
   const { learningSync } = useApp();
   const location = useLocation();
-  const isDictionary = location.pathname === "/dictionary" || location.pathname.startsWith("/dictionary/");
 
-  if (!isDictionary && !learningSync.initialized) {
+  if (!learningSync.initialized) {
     return <AppLoading fullScreen message="Đang chuẩn bị nội dung học…"/>;
   }
 
@@ -70,7 +68,8 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<RootRedirect />} />
           <Route path="/today" element={<Dashboard />} />
-          <Route path="/dictionary/*" element={<DictionaryPage embedded />} />
+          {/* The dictionary was removed; old links land on the word list. */}
+          <Route path="/dictionary/*" element={<Navigate replace to="/library/vocabulary" />} />
           <Route path="/library" element={<LibraryLayout />}>
             <Route index element={<LibraryHome />} />
             <Route path="kana" element={<KanaPage />} />
@@ -116,7 +115,6 @@ function AuthGate() {
     if (mode === 'unauthenticated') enterGuest();
     navigate({ pathname: location.pathname, search: '' }, { replace: true });
   }, [wantsGuest, loading, mode, enterGuest, navigate, location.pathname]);
-  if (!user && (location.pathname === '/dictionary' || location.pathname.startsWith('/dictionary/'))) return <><Suspense fallback={<AppLoading fullScreen message="Đang mở từ điển…"/>}><DictionaryPage/></Suspense><AuthDialog/></>;
   if (/^\/s\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/s/:code" element={<ShortLinkPage />}/></Routes><AuthDialog /></>;
   if (/^\/explore\/?$/.test(location.pathname)) return <><Routes><Route path="/explore" element={<ExplorePage />}/></Routes><AuthDialog /></>;
   if (/^\/shared\/groups\/[^/]+\/?$/.test(location.pathname)) return <><Routes><Route path="/shared/groups/:token" element={<SharedGroupPage />}/></Routes><AuthDialog /></>;

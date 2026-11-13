@@ -9,6 +9,13 @@ import {
 
 import { mergeReviewSnapshot, sameLearningData } from '@/lib/reviewSnapshot';
 import { REVIEW_OUTBOX_KEY, emptyOutbox } from '@/lib/reviewOutbox';
+import { ApiError } from '@/lib/api';
+
+// The server refused this device's copy (409 or another 4xx): retrying alone cannot fix it.
+// A dropped connection or a 5xx is not a conflict; the local copy just waits for the next retry.
+const isConflict = (e: unknown) => e instanceof ApiError && e.status >= 400 && e.status < 500;
+const syncMessage = (e: unknown) => e instanceof ApiError ? e.message
+  : "Không kết nối được máy chủ. Tiến độ vẫn được giữ trên thiết bị này và sẽ tự đồng bộ khi có mạng.";
 
 const SYNC_DEBOUNCE_MS = 5_000;
 const SYNC_MAX_WAIT_MS = 30_000;
@@ -100,8 +107,8 @@ export function useLearningSync(
       .catch((e) => {
         if (alive.current) {
           setStatus("error");
-          setError(e.message);
-          setConflict(true);
+          setError(syncMessage(e));
+          setConflict(isConflict(e));
         }
         throw e;
       })
@@ -136,15 +143,16 @@ export function useLearningSync(
       } else if (storage.getJSON("learning_dirty", false)) {
         if ((storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).items.length || storage.getJSON(REVIEW_OUTBOX_KEY, emptyOutbox()).undo)) return;
         if (revision.current !== state.revision)
-          throw new Error(
+          throw new ApiError(
+            409,
             "Tiến độ đã thay đổi trên thiết bị khác. Bản chưa gửi vẫn được giữ trên thiết bị này.",
           );
         await flush();
       } else apply(state);
     } catch (e) {
       if (alive.current && version === loadVersion.current) {
-        setError(e instanceof Error ? e.message : "Không thể đồng bộ");
-        setConflict(true);
+        setError(syncMessage(e));
+        setConflict(isConflict(e));
         setStatus("error");
       }
     } finally {

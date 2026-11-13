@@ -1,7 +1,6 @@
 import type { PageId } from '../types/index.ts';
 
 export const PAGE_PATHS: Record<PageId, string> = {
-  dictionary: '/dictionary',
   dashboard: '/today',
   library: '/library',
   kana: '/library/kana',
@@ -25,7 +24,6 @@ export function pathForPage(page: PageId): string {
 }
 
 export function pageForLocation(pathname: string, _search = ''): PageId | null {
-  if (pathname === '/dictionary' || pathname.startsWith('/dictionary/')) return 'dictionary';
   if (pathname === '/decks') return 'flashcards';
   if (pathname === '/review') return 'srs';
   const entry = Object.entries(PAGE_PATHS).find(([, path]) => path.split('?')[0] === pathname);

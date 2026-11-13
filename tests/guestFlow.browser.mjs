@@ -159,6 +159,12 @@ const nav = async (name) => {
     return;
   }
   const target = name === "Thẻ học" ? "Bộ thẻ" : name === "Anki" ? "Ôn ngắt quãng" : name;
+  if (target === "Tiến độ") {
+    // Progress left the menu; the Today page links to it.
+    await page.getByRole("navigation", { name: "Các trang học" }).getByRole("button", { name: "Hôm nay", exact: true }).click();
+    await page.getByRole("button", { name: "Xem tiến độ" }).click();
+    return;
+  }
   if (target === "Cài đặt") {
     await page.getByRole("button", { name: "Cài đặt", exact: true }).click();
     return;

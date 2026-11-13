@@ -106,6 +106,8 @@ export interface VocabItem {
 
 // ─── Kanji ──────────────────────────────────────────────────
 
+export type JlptLevel = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
+
 export interface KanjiVocab {
   word: string;
   reading: string;
@@ -120,7 +122,7 @@ export interface KanjiItem {
   hanViet: string;
   meaning?: string;
   vocabulary: KanjiVocab[];
-  level: 'N2' | 'N3' | 'N4';
+  level: JlptLevel;
   onyomi?: string[];
   kunyomi?: string[];
   lesson?: string;
@@ -265,12 +267,13 @@ export interface SRSCard {
 // ─── Quiz ───────────────────────────────────────────────────
 
 export type QuizType =
-  | 'vocab-meaning'     // Show kanji → pick meaning
-  | 'vocab-reading'     // Show kanji → pick reading
-  | 'kanji-reading'     // Show kanji → pick reading
-  | 'kanji-meaning'     // Show kanji → pick meaning
-  | 'typing'            // Type the answer
-  | 'sentence-completion';
+  | 'vocab-meaning'     // Show word → pick meaning
+  | 'vocab-reading'     // Show word → pick reading
+  | 'vocab-reverse'     // Show meaning → pick word
+  | 'typing'            // Show word → type its reading
+  | 'kanji-meaning'     // Show kanji → pick Hán Việt
+  | 'grammar-meaning'   // Show pattern → pick meaning
+  | 'grammar-sentence'; // Show sentence → pick the pattern it uses
 
 export interface QuizQuestion {
   id: string;
@@ -281,7 +284,7 @@ export interface QuizQuestion {
   options: string[];
   explanation: string;
   itemId: string;
-  itemType: 'vocabulary' | 'kanji';
+  itemType: 'vocabulary' | 'kanji' | 'grammar';
 }
 
 export interface QuizResult {
@@ -360,7 +363,6 @@ export interface AppSettings {
 // ─── Navigation ─────────────────────────────────────────────
 
 export type PageId =
-  | 'dictionary'
   | 'library'
   | 'kana'
   | 'dashboard'

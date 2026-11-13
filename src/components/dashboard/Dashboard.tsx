@@ -3,7 +3,7 @@ import { useApp, useLearningStorage } from '@/hooks/useApp';
 import { formatDate, getDueCards } from '@/lib/srs';
 import { useAuth } from '@/hooks/useAuth';
 import { hasLegacyLearningData } from '@/lib/storage';
-import { ArrowRight, NavDecks, NavQuiz, NavReview } from '@/components/ui/icons';
+import { ArrowRight } from '@/components/ui/icons';
 import InkRidges from '@/components/ui/ink-ridges';
 import { daypart, weekStamps } from './todayData';
 import './dashboard.css';
@@ -39,25 +39,14 @@ export function Dashboard() {
   const { greeting } = daypart(now.getHours());
   const motto = MOTTOS[Math.floor(now.getTime() / 864e5) % MOTTOS.length];
   const dateLabel = new Intl.DateTimeFormat('vi-VN', { weekday: 'long', day: 'numeric', month: 'long' }).format(now);
-  // The one thing to do next, in the order a spaced-repetition day goes: due reviews, then new cards, then a quick check.
-  const next = due > 0 ? { page: 'srs' as const, label: `Ôn ${due} thẻ đến hạn` }
-    : remaining > 0 ? { page: 'flashcards' as const, label: `Học ${remaining} thẻ mới` }
-    : { page: 'quiz' as const, label: 'Làm trắc nghiệm nhanh' };
-  const todo = <section aria-labelledby="todo-title">
-      <p id="todo-title" className="dash-label">Việc hôm nay</p>
-      <div className="dash-todo">
-        {[
-          { page: 'srs' as const, Icon: NavReview, n: due, title: 'Ôn thẻ đến hạn', sub: due > 0 ? 'thẻ đang chờ' : 'Không còn thẻ nào chờ' },
-          { page: 'flashcards' as const, Icon: NavDecks, n: remaining, title: 'Học thêm thẻ mới', sub: remaining > 0 ? 'thẻ để đạt mục tiêu' : 'Đã đạt mục tiêu hôm nay' },
-          { page: 'quiz' as const, Icon: NavQuiz, n: 10, title: 'Làm trắc nghiệm', sub: 'câu hỏi kiểm tra nhanh' },
-        ].map(({ page, Icon, n, title, sub }) => <button key={page} onClick={() => setCurrentPage(page)} className="dash-tile">
-          <Icon size={26} strokeWidth={1.6} aria-hidden="true"/>
-          <span className="dash-tile-num">{n}</span>
-          <strong>{title}</strong>
-          <small>{sub}</small>
-        </button>)}
-      </div>
-    </section>;
+  // What a spaced-repetition day holds, in order: due reviews, the rest of the daily goal (it counts every card studied), a quick check.
+  // The first is the one button; the others are quiet links beside it, so nothing is said twice.
+  const steps = [
+    ...(due > 0 ? [{ page: 'srs' as const, label: `Ôn ${due} thẻ đến hạn` }] : []),
+    ...(remaining > 0 ? [{ page: 'flashcards' as const, label: `Học thêm ${remaining} thẻ` }] : []),
+    { page: 'quiz' as const, label: 'Trắc nghiệm nhanh' },
+  ];
+  const [next, ...later] = steps;
 
   return <div className="study-page dashboard-page">
     <InkRidges className="dash-ridges" horizon={0.34} sunPosition={[0.8, 0.72]} birdsEvery={20}>
@@ -72,43 +61,37 @@ export function Dashboard() {
     </InkRidges>
 
     {/* Under the picture, not on it: the art stays clean and the button is the first thing after it. */}
-    <button className="study-button study-button-primary dash-cta" onClick={() => setCurrentPage(next.page)}>{next.label} <ArrowRight size={16}/></button>
+    <div className="dash-next">
+      <button className="study-button study-button-primary dash-cta" onClick={() => setCurrentPage(next.page)}>{next.label} <ArrowRight size={16}/></button>
+      {later.length > 0 && <p className="dash-then">rồi {later.map((step, index) => <span key={step.page}>{index > 0 && ' · '}
+        <button className="dash-link hit" onClick={() => setCurrentPage(step.page)}>{step.label.toLowerCase()}</button></span>)}</p>}
+    </div>
 
     {draft && <section className="dash-notice" aria-label="Bộ thẻ đang tạo dở">
       <p>Bộ thẻ đang tạo vẫn được lưu.</p>
       <button className="dash-link hit" onClick={() => setCurrentPage('flashcards')}>Tiếp tục <ArrowRight size={14}/></button>
     </section>}
 
-    {todo}
-
-    <div className="dash-row">
-      <section className="dash-col" aria-label="Mục tiêu hôm nay">
-        <p className="dash-label">Mục tiêu</p>
-        <div className="dash-goal">
-          <EnsoDial value={goalProgress} complete={goalComplete}/>
-          <div>
-            <p className="dash-count">{reviewed}<span>/ {settings.dailyGoal}</span></p>
-            <p className="dash-sub">thẻ đã ôn hôm nay</p>
-          </div>
+    {/* One band: today's goal, the week in stamps, the streak. Everything else lives on the progress page. */}
+    <section className="dash-band" aria-label="Mục tiêu và tuần này">
+      <div className="dash-goal">
+        <EnsoDial value={goalProgress} complete={goalComplete}/>
+        <div>
+          <p className="dash-count">{reviewed}<span>/ {settings.dailyGoal}</span></p>
+          <p className="dash-sub">thẻ hôm nay</p>
         </div>
-      </section>
-
-      <section className="dash-col" aria-label="Tuần này">
-        <p className="dash-label">Tuần này</p>
-        <ul className="dash-week">
-          {week.map((d, index) => <li key={d.date} className={`dash-day ${d.studied ? 'is-studied' : ''} ${d.isToday ? 'is-today' : ''}`} style={{ '--i': index } as CSSProperties}
-            aria-label={`${new Date(`${d.date}T00:00:00`).toLocaleDateString('vi-VN', { weekday: 'long' })}${d.isToday ? ', hôm nay' : ''}: ${d.studied ? 'đã học' : 'chưa học'}`}>
-            <span className="dash-stamp" lang="ja" aria-hidden="true">{d.label}</span>
-          </li>)}
-        </ul>
-        <div className="dash-metrics">
-          <MiniMetric value={`${streak} ngày`} label="Liên tiếp"/>
-          <MiniMetric value={`${Math.round(today?.timeSpent ?? 0)} phút`} label="Hôm nay"/>
-          <button onClick={() => setCurrentPage('progress')} className="dash-link hit">Xem tiến độ <ArrowRight size={14}/></button>
-        </div>
-      </section>
-    </div>
-
+      </div>
+      <ul className="dash-week">
+        {week.map((d, index) => <li key={d.date} className={`dash-day ${d.studied ? 'is-studied' : ''} ${d.isToday ? 'is-today' : ''}`} style={{ '--i': index } as CSSProperties}
+          aria-label={`${new Date(`${d.date}T00:00:00`).toLocaleDateString('vi-VN', { weekday: 'long' })}${d.isToday ? ', hôm nay' : ''}: ${d.studied ? 'đã học' : 'chưa học'}`}>
+          <span className="dash-stamp" lang="ja" aria-hidden="true">{d.label}</span>
+        </li>)}
+      </ul>
+      <div className="dash-streak">
+        <p>{streak > 0 ? `Chuỗi ${streak} ngày` : 'Chưa có chuỗi ngày'}</p>
+        <button onClick={() => setCurrentPage('progress')} className="dash-link hit">Xem tiến độ <ArrowRight size={14}/></button>
+      </div>
+    </section>
 
     {legacyDataPresent && <section className="dash-notice" role="note">
       <p><strong>Dữ liệu cũ vẫn an toàn.</strong></p>
@@ -126,8 +109,4 @@ function EnsoDial({ value, complete }: { value: number; complete: boolean }) {
     </svg>
     <strong aria-hidden="true">{value}%</strong>
   </div>;
-}
-
-function MiniMetric({ value, label }: { value: string; label: string }) {
-  return <div className="dash-metric"><strong>{value}</strong><span>{label}</span></div>;
 }

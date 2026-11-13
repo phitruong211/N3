@@ -1,21 +1,22 @@
+import { startLevel, TARGET_LEVEL_KEY } from '@/lib/targetLevel';
 import { useEffect, useMemo, useState } from 'react';
 import { Bookmark, BookmarkCheck, Search, X } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
-import type { KanjiItem } from '@/types';
+import type { JlptLevel, KanjiItem } from '@/types';
 import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
 import { DetailPane, LearnDot, LearnFilter } from '@/components/library/LibraryParts';
 import { countStates, learnStates, stateOf, type LearnState } from '@/lib/learnState';
 import { useWide } from '@/hooks/useWide';
 
 export function KanjiPage() {
-  const { kanji, isBookmarked, toggleBookmark, setCurrentPage, navigationTarget, clearNavigationTarget, srsCards } = useApp();
+  const { kanji, isBookmarked, toggleBookmark, setCurrentPage, navigationTarget, clearNavigationTarget, srsCards, storage } = useApp();
   const wide = useWide();
   const [sheetOpen, setSheetOpen] = useState(false);
   const [learn, setLearn] = useState<LearnState | 'all'>('all');
   const states = useMemo(() => learnStates(srsCards, 'kanji'), [srsCards]);
-  // The dictionary links here with ?q=, so a word found there opens already filtered.
+  // Links can carry ?q= so the page opens already filtered.
   const [query, setQuery] = useState(() => new URLSearchParams(location.search).get('q') ?? '');
-  const [level, setLevel] = useState<'all' | 'N3' | 'N4' | 'N2'>('all');
+  const [level, setLevel] = useState<'all' | JlptLevel>(() => startLevel(storage.getJSON(TARGET_LEVEL_KEY, 'all'), ['N5', 'N4', 'N3', 'N2'] as const));
   const [savedOnly, setSavedOnly] = useState(false);
   const [selected, setSelected] = useState<KanjiItem | null>(null);
 
@@ -50,7 +51,7 @@ export function KanjiPage() {
         {query && <button aria-label="Xóa tìm kiếm" onClick={() => setQuery('')}><X size={18}/></button>}
       </label>
       <div className="flex flex-wrap gap-2">
-        {(['all', 'N4', 'N3', 'N2'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => { setLevel(value); setSelected(null); }}>{value === 'all' ? 'Tất cả' : `${value} · ${kanji.filter(item => item.level === value).length}`}</button>)}
+        {(['all', 'N5', 'N4', 'N3', 'N2'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => { setLevel(value); setSelected(null); }}>{value === 'all' ? 'Tất cả' : `${value} · ${kanji.filter(item => item.level === value).length}`}</button>)}
         <button className={'study-button ' + (savedOnly ? 'study-button-primary' : '')} aria-pressed={savedOnly} onClick={() => setSavedOnly(!savedOnly)}>Đã lưu</button>
       </div>
     </div>

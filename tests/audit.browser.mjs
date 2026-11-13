@@ -5,7 +5,7 @@ import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 import { brotliCompressSync, constants } from 'node:zlib';
 
-const ROUTES = ['/today', '/library/vocabulary', '/library/grammar', '/library/kanji', '/library/listening', '/decks', '/review', '/quiz', '/progress', '/saved', '/settings', '/dictionary', '/no-such-page'];
+const ROUTES = ['/today', '/library/vocabulary', '/library/grammar', '/library/kanji', '/library/listening', '/decks', '/review', '/quiz', '/progress', '/saved', '/settings', '/no-such-page'];
 const THEMES = process.env.AUDIT_THEMES?.split(',') ?? ['light', 'dark', 'reading', 'high-contrast'];
 const SIZES = [['desktop', { width: 1280, height: 800 }], ['mobile', { width: 375, height: 812 }]];
 const strict = process.env.AUDIT_STRICT === '1';

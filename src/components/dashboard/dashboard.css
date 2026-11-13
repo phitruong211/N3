@@ -16,8 +16,10 @@
 @media (min-width: 768px) { .dash-hero { padding: 2.5rem 2.5rem 2rem; } }
 .dash-motto { margin-top: 1.25rem; font-family: var(--font-jp-serif); font-size: clamp(1.25rem, 2.4vw, 1.75rem); letter-spacing: .12em; color: var(--color-seal); }
 .dash-motto-vi { margin-top: .35rem; font-size: .85rem; color: var(--color-text-secondary); }
-.dash-cta { justify-self: start; min-height: 3rem; margin-top: -1rem; padding-inline: 1.5rem; font-size: 1rem; }
-@media (max-width: 639px) { .dash-cta { justify-self: stretch; } .dash-ridges { height: 15rem; } }
+.dash-next { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; margin-top: -1rem; }
+.dash-cta { min-height: 3rem; padding-inline: 1.5rem; font-size: 1rem; }
+.dash-then { font-size: .9rem; color: var(--color-text-secondary); }
+@media (max-width: 639px) { .dash-next { flex-direction: column; align-items: stretch; text-align: center; } .dash-ridges { height: 15rem; } }
 .dash-greeting { margin-top: .75rem; font-family: var(--font-display); font-size: clamp(2.25rem, 5vw, 3.75rem); font-weight: 400; line-height: 1.05; letter-spacing: -.02em; color: var(--color-text); }
 
 
@@ -25,67 +27,35 @@
 .dash-notice strong { color: var(--color-text); }
 
 
-/* Goal and week: two columns divided by a hairline, not boxed. */
-.dash-row { display: grid; gap: 2.5rem; }
+/* Goal, week and streak: one band between hairlines, not boxed. */
+.dash-band { display: grid; align-items: center; gap: 1.5rem 3rem; padding-block: 1.75rem; border-block: 1px solid var(--color-border); }
+@media (min-width: 900px) { .dash-band { grid-template-columns: auto minmax(0, 1fr) auto; } }
+.dash-streak { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; font-size: .9rem; color: var(--color-text-secondary); }
+@media (min-width: 900px) { .dash-streak { flex-direction: column; align-items: flex-end; gap: .35rem; } }
 .dash-label { color: var(--color-text-tertiary); font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
-.dash-goal { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.25rem; }
-.dash-enso { position: relative; display: grid; width: 7rem; height: 7rem; flex: 0 0 auto; place-items: center; color: var(--color-text); }
+.dash-goal { display: flex; align-items: center; gap: 1.25rem; }
+.dash-enso { position: relative; display: grid; width: 5.5rem; height: 5.5rem; flex: 0 0 auto; place-items: center; color: var(--color-text); }
 .dash-enso.is-complete { color: var(--color-success); }
 .dash-enso svg { position: absolute; inset: 0; transform: rotate(-96deg); overflow: visible; }
 .dash-enso circle { fill: none; stroke: currentColor; stroke-linecap: round; }
 .dash-enso .track { stroke-opacity: .12; stroke-width: 2.5; }
 .dash-enso .ink { stroke-width: 4; animation: dash-draw 1.3s 250ms var(--ease-out) backwards; }
-.dash-enso strong { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; }
+.dash-enso strong { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; }
 .dash-count { font-family: var(--font-display); font-size: 2.6rem; font-weight: 400; line-height: 1; letter-spacing: -.03em; }
 .dash-count span { margin-left: .35rem; font-size: 1.05rem; color: var(--color-text-tertiary); letter-spacing: 0; }
 .dash-sub { margin-top: .4rem; font-size: .8rem; color: var(--color-text-secondary); }
 
-.dash-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .4rem; margin-top: 1.25rem; padding: 0; list-style: none; }
+.dash-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .4rem; max-width: 26rem; margin: 0; padding: 0; list-style: none; }
 .dash-day { display: flex; flex-direction: column; align-items: center; font-size: .75rem; font-weight: 500; letter-spacing: .06em; color: var(--color-text-tertiary); }
 .dash-stamp { display: grid; place-items: center; width: 100%; max-width: 2.8rem; aspect-ratio: 1; border: 1px solid var(--color-border-strong); border-radius: 50%; font-family: var(--font-jp-serif); font-size: 1.15rem; color: var(--color-text-tertiary); }
 .dash-day.is-today .dash-stamp { color: var(--color-text); }
 .dash-day.is-today .dash-stamp { border-color: var(--color-gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold) 22%, transparent); }
 .dash-day.is-studied .dash-stamp { border-color: var(--color-seal); background: var(--color-seal); color: var(--color-seal-ink); --stamp-tilt: -5deg; transform: rotate(-5deg); animation: stamp 500ms calc(300ms + var(--i, 0) * 70ms) var(--ease-stamp) both; }
-.dash-metrics { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.5rem 2.5rem; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border); }
-.dash-metric svg { margin-bottom: .4rem; color: var(--color-text-tertiary); }
-.dash-metric strong { display: block; font-size: 1rem; font-weight: 600; }
-.dash-metric span { display: block; margin-top: .1rem; font-size: .78rem; color: var(--color-text-secondary); }
 .dash-link { display: inline-flex; align-items: center; gap: .4rem; font-size: .82rem; font-weight: 600; color: var(--color-accent-text); background: none; border: 0; padding: 0; cursor: pointer; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size var(--dur-base) var(--ease-out); }
 .dash-link:hover { background-size: 100% 1px; }
-.dash-metrics .dash-link { margin-left: auto; }
 
-/* Word of the day. */
-
-/* Library as a table of contents. */
-
-@media (min-width: 1024px) {
-  .dash-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 0; }
-  .dash-row > .dash-col:first-child { padding-right: 3rem; border-right: 1px solid var(--color-border); }
-  .dash-row > .dash-col:last-child { padding-left: 3rem; }
-}
-@media (max-width: 639px) {
-  .dashboard-page { gap: 32px; }
-  .dash-metrics .dash-link { margin-left: 0; }
-}
-
-
-.dash-todo { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1rem; margin-top: 1rem; }
-.dash-tile { display: flex; flex-direction: column; align-items: flex-start; padding: 1.25rem; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); text-align: left; cursor: pointer; color: var(--color-text); transition: transform var(--dur-base) var(--ease-out), border-color var(--dur-fast), box-shadow var(--dur-base); }
-.dash-tile:hover { transform: translateY(-3px); border-color: var(--color-gold); box-shadow: var(--shadow-md); }
-.dash-tile svg { color: var(--color-text-secondary); }
-.dash-tile-num { margin-top: 1.25rem; font-family: var(--font-display); font-size: 3.25rem; font-weight: 300; line-height: 1; letter-spacing: -.04em; font-variant-numeric: lining-nums; }
-.dash-tile strong { margin-top: .6rem; font-size: 1rem; font-weight: 600; }
-.dash-tile small { margin-top: .15rem; font-size: .85rem; color: var(--color-text-secondary); }
+@media (max-width: 639px) { .dashboard-page { gap: 32px; } }
 
 /* High contrast: solid edges, no ornament. */
-.high-contrast .dash-ridges, .high-contrast .dash-tile { border-color: var(--color-text); }
+.high-contrast .dash-ridges, .high-contrast .dash-band { border-color: var(--color-text); }
 .high-contrast .dash-day.is-studied .dash-stamp { outline: 2px solid var(--color-text); }
-/* Phones: the three tasks become compact rows (icon · title over hint · count) so all of them fit under the hero. */
-@media (max-width: 639px) {
-  .dash-todo { gap: .6rem; }
-  .dash-tile { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "icon title num" "icon sub num"; align-items: center; column-gap: .9rem; padding: .9rem 1rem; }
-  .dash-tile svg { grid-area: icon; }
-  .dash-tile strong { grid-area: title; margin-top: 0; }
-  .dash-tile small { grid-area: sub; margin-top: 0; }
-  .dash-tile-num { grid-area: num; margin-top: 0; font-size: 2.25rem; }
-}

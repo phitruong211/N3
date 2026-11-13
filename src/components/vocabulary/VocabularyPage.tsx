@@ -1,3 +1,4 @@
+import { startLevel, TARGET_LEVEL_KEY } from '@/lib/targetLevel';
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Bookmark, BookmarkCheck, Search, Volume2, X } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
@@ -11,14 +12,14 @@ import { countStates, learnStates, stateOf, type LearnState } from '@/lib/learnS
 import { useWide } from '@/hooks/useWide';
 
 export function VocabularyPage() {
-  const { vocabulary, isBookmarked, toggleBookmark, navigationTarget, clearNavigationTarget, srsCards } = useApp();
+  const { vocabulary, isBookmarked, toggleBookmark, navigationTarget, clearNavigationTarget, srsCards, storage } = useApp();
   const wide = useWide();
   const [sheetOpen, setSheetOpen] = useState(false);
   const [learn, setLearn] = useState<LearnState | 'all'>('all');
   const states = useMemo(() => learnStates(srsCards, 'vocabulary'), [srsCards]);
-  // The dictionary links here with ?q=, so a word found there opens already filtered.
+  // Links can carry ?q= so the page opens already filtered.
   const [query, setQuery] = useState(() => new URLSearchParams(location.search).get('q') ?? '');
-  const [level, setLevel] = useState<'all' | 'N3' | 'N4'>('all');
+  const [level, setLevel] = useState<'all' | 'N5' | 'N4' | 'N3'>(() => startLevel(storage.getJSON(TARGET_LEVEL_KEY, 'all'), ['N5', 'N4', 'N3'] as const));
   const [savedOnly, setSavedOnly] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(80);
@@ -82,7 +83,7 @@ export function VocabularyPage() {
         {query && <button aria-label="Xóa tìm kiếm" onClick={() => changeFilter(() => setQuery(''))}><X size={18}/></button>}
       </label>
       <div className="flex flex-wrap gap-2">
-        {(['all', 'N4', 'N3'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => changeFilter(() => setLevel(value))}>{value === 'all' ? 'Tất cả' : value}</button>)}
+        {(['all', 'N5', 'N4', 'N3'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => changeFilter(() => setLevel(value))}>{value === 'all' ? 'Tất cả' : value}</button>)}
         <button className={'study-button ' + (savedOnly ? 'study-button-primary' : '')} aria-pressed={savedOnly} onClick={() => changeFilter(() => setSavedOnly(!savedOnly))}>Đã lưu</button>
       </div>
     </div>

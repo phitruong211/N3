@@ -9,38 +9,59 @@
 //   without streaks, points, or leaderboards
 // ============================================================
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useApp } from '@/hooks/useApp';
-import { generateVocabQuiz, generateKanjiQuiz } from '@/lib/quiz';
-import type { QuizQuestion, QuizType } from '@/types';
+import { generateQuiz, isTypedCorrect, isTypedQuiz, quizPoolSize } from '@/lib/quiz';
+import type { JlptLevel, QuizQuestion, QuizType } from '@/types';
 import { CheckCircle, XCircle, RotateCcw } from '@/components/ui/icons';
 import { Seal } from '@/components/ui/Seal';
 import { PageHeading } from '@/components/ui/StudyUI';
+import { JLPT_LEVELS, startLevel, TARGET_LEVEL_KEY } from '@/lib/targetLevel';
+
+const GROUPS: { title: string; types: { type: QuizType; title: string; description: string }[] }[] = [
+  { title: 'Từ vựng', types: [
+    { type: 'vocab-meaning', title: 'Từ → Nghĩa', description: 'Nhìn từ Nhật, chọn nghĩa tiếng Việt' },
+    { type: 'vocab-reading', title: 'Từ → Cách đọc', description: 'Nhìn từ Nhật, chọn cách đọc' },
+    { type: 'vocab-reverse', title: 'Nghĩa → Từ', description: 'Nhìn nghĩa tiếng Việt, chọn từ Nhật' },
+    { type: 'typing', title: 'Gõ cách đọc', description: 'Tự gõ cách đọc bằng kana hoặc romaji' },
+  ] },
+  { title: 'Kanji', types: [
+    { type: 'kanji-meaning', title: 'Kanji → Hán Việt', description: 'Nhìn chữ, chọn âm Hán Việt' },
+  ] },
+  { title: 'Ngữ pháp', types: [
+    { type: 'grammar-meaning', title: 'Mẫu → Nghĩa', description: 'Nhìn mẫu ngữ pháp, chọn nghĩa' },
+    { type: 'grammar-sentence', title: 'Câu → Mẫu', description: 'Đọc câu ví dụ, chọn mẫu ngữ pháp được dùng' },
+  ] },
+];
 
 export function QuizPage() {
-  const { vocabulary, kanji } = useApp();
+  const { vocabulary, kanji, grammar, storage } = useApp();
   const [sessionActive, setSessionActive] = useState(false);
   const [quizType, setQuizType] = useState<QuizType>('vocab-meaning');
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [level, setLevel] = useState<'all' | JlptLevel>(() => startLevel(storage.getJSON(TARGET_LEVEL_KEY, 'all'), JLPT_LEVELS));
+  const [round, setRound] = useState(0);
+  const pools = useMemo(() => {
+    const at = <T extends { level: string }>(items: T[]) => level === 'all' ? items : items.filter(item => item.level === level);
+    return { vocabulary: at(vocabulary), kanji: at(kanji), grammar: at(grammar) };
+  }, [vocabulary, kanji, grammar, level]);
+  // Only offer levels the library has content for.
+  const levels = useMemo(() => JLPT_LEVELS.filter(value => [...vocabulary, ...kanji, ...grammar].some(item => item.level === value)), [vocabulary, kanji, grammar]);
 
   const startQuiz = useCallback(
     (type: QuizType) => {
       setQuizType(type);
-      let qs: QuizQuestion[];
-      if (type === 'kanji-meaning' || type === 'kanji-reading') {
-        qs = generateKanjiQuiz(kanji, 10, type);
-      } else {
-        qs = generateVocabQuiz(vocabulary, 10, type);
-      }
-      setQuestions(qs);
+      setQuestions(generateQuiz(type, pools, 10));
+      setRound(value => value + 1);
       setSessionActive(true);
     },
-    [vocabulary, kanji]
+    [pools]
   );
 
   if (sessionActive && questions.length > 0) {
     return (
       <QuizSession
+        key={round} // a new round starts from question 1
         questions={questions}
         onFinish={() => setSessionActive(false)}
         onRetry={() => startQuiz(quizType)}
@@ -52,27 +73,20 @@ export function QuizPage() {
     <div className="study-page">
       <PageHeading title="Trắc nghiệm" />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-        <QuizTypeCard
-          title="Từ vựng → Nghĩa"
-          description="Nhìn từ Nhật, chọn nghĩa tiếng Việt"
-          count={vocabulary.length}
-          onClick={() => startQuiz('vocab-meaning')}
-        />
-        <QuizTypeCard
-          title="Từ vựng → Cách đọc"
-          description="Nhìn từ Nhật, chọn cách đọc hiragana"
-          count={vocabulary.length}
-          onClick={() => startQuiz('vocab-reading')}
-        />
-        <QuizTypeCard
-          title="Kanji → Hán Việt"
-          description="Kanji N3/N2 · nhìn chữ, chọn âm Hán Việt"
-          count={kanji.length}
-          onClick={() => startQuiz('kanji-meaning')}
-        />
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Cấp độ">
+        {(['all', ...levels] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => setLevel(value)}>{value === 'all' ? 'Tất cả' : value}</button>)}
       </div>
 
+      {GROUPS.map(group => {
+        // Four options need at least four distinct items; a level without that content hides the type.
+        const cards = group.types.map(item => ({ ...item, count: quizPoolSize(item.type, pools) })).filter(item => item.count >= 4);
+        return cards.length > 0 && <section key={group.title} className="w-full space-y-3" aria-label={group.title}>
+          <h2 className="study-eyebrow">{group.title}</h2>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {cards.map(item => <QuizTypeCard key={item.type} title={item.title} description={item.description} count={item.count} onClick={() => startQuiz(item.type)} />)}
+          </div>
+        </section>;
+      })}
     </div>
   );
 }
@@ -131,9 +145,13 @@ function QuizSession({
   const current = questions[currentIndex];
   const isCorrect = selectedAnswer === current?.correctAnswer;
 
+  const typed = current ? isTypedQuiz(current.type) : false;
+  const [draft, setDraft] = useState('');
   const handleAnswer = useCallback(
-    (answer: string) => {
+    (given: string) => {
       if (answered) return;
+      // A typed reading counts in kana or romaji; store it as the exact answer so the rest reads one value.
+      const answer = isTypedQuiz(current.type) && isTypedCorrect(given, current.correctAnswer) ? current.correctAnswer : given;
       setSelectedAnswer(answer);
       setAnswered(true);
       if (answer === current.correctAnswer) {
@@ -150,6 +168,7 @@ function QuizSession({
       setCurrentIndex((i) => i + 1);
       setSelectedAnswer(null);
       setAnswered(false);
+      setDraft('');
     } else {
       setDone(true);
     }
@@ -161,6 +180,7 @@ function QuizSession({
       if (e.key === 'Escape') { onFinish(); return; }
       if (done) return;
       if (!answered && current) {
+        if (typed) return; // the form owns the keyboard while typing
         const num = parseInt(e.key);
         if (num >= 1 && num <= current.options.length) handleAnswer(current.options[num - 1]);
       } else if (answered && (e.key === ' ' || e.key === 'Enter')) {
@@ -170,7 +190,7 @@ function QuizSession({
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [answered, done, current, handleAnswer, handleNext, onFinish]);
+  }, [answered, done, current, typed, handleAnswer, handleNext, onFinish]);
 
   // Session summary (Peak-End Rule)
   if (done) {
@@ -268,7 +288,7 @@ function QuizSession({
       {/* Question canvas */}
       <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 max-w-2xl mx-auto w-full space-y-8 sm:px-6">
         <div className="text-center space-y-3">
-          <div className="font-jp-serif break-words text-4xl font-semibold text-[var(--color-text)] md:text-6xl">
+          <div className={`font-jp-serif break-words font-semibold text-[var(--color-text)] ${current.prompt.length > 12 ? 'text-2xl md:text-3xl' : 'text-4xl md:text-6xl'}`}>
             {current.prompt}
           </div>
           {current.promptSub && (
@@ -277,6 +297,14 @@ function QuizSession({
             </div>
           )}
         </div>
+
+        {typed && <form className="w-full space-y-3" onSubmit={event => { event.preventDefault(); if (!answered && draft.trim()) handleAnswer(draft); }}>
+          <label className="block text-sm font-semibold text-[var(--color-text)]">Cách đọc
+            <input className="study-input mt-2 font-jp text-lg" value={draft} onChange={event => setDraft(event.target.value)} readOnly={answered}
+              autoFocus autoComplete="off" autoCapitalize="none" spellCheck={false} lang="ja" placeholder="がっこう hoặc gakkou"/>
+          </label>
+          {!answered && <button type="submit" className="study-button study-button-primary w-full" disabled={!draft.trim()}>Kiểm tra</button>}
+        </form>}
 
         {/* Options grid (Hick's Law: exactly 4 choices) */}
         <div className="w-full space-y-3">
@@ -373,7 +401,7 @@ function QuizSession({
 
       {/* Bottom shortcut bar */}
       <div className="px-4 py-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] text-center text-xs text-[var(--color-text-tertiary)]">
-        <span>Nhấn <kbd className="kbd-shortcut">1–4</kbd> để chọn</span>
+        <span>{typed ? <>Gõ rồi nhấn <kbd className="kbd-shortcut">Enter</kbd></> : <>Nhấn <kbd className="kbd-shortcut">1–4</kbd> để chọn</>}</span>
         <span className="mx-2">·</span>
         <span><kbd className="kbd-shortcut">Space</kbd> / <kbd className="kbd-shortcut">Enter</kbd> để tiếp tục</span>
         <span className="mx-2">·</span>

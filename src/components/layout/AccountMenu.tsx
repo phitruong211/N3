@@ -16,6 +16,8 @@ export function AccountMenu() {
       <p className="truncate text-xs text-[var(--color-text-tertiary)]">{user?.email ?? 'Học thử · lưu trên thiết bị'}</p>
     </div>}
     actions={[
+      { id: 'progress', label: 'Tiến độ', onSelect: () => setCurrentPage('progress') },
+      { id: 'saved', label: 'Thẻ đã lưu', onSelect: () => setCurrentPage('bookmarks') },
       { id: 'settings', label: 'Cài đặt', onSelect: () => setCurrentPage('settings') },
       user ? { id: 'out', label: 'Đăng xuất', onSelect: () => void signOut() } : { id: 'in', label: 'Đăng nhập để lưu tiến độ', onSelect: () => setPrompt('login') },
     ]} />;

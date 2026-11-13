@@ -73,9 +73,12 @@ let refreshFlight: { identity: string | null; promise: Promise<boolean> } | null
 async function refreshAccessToken(identity: string | null): Promise<boolean> {
   assertSession(identity);
   if (refreshFlight?.identity === identity) return refreshFlight.promise;
-  const promise = (async () => {
+  const before = localStorage.getItem(REFRESH_TOKEN_KEY);
+  const run = async () => {
     const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
     if (!refreshToken) return false;
+    // Another tab renewed the session while this one waited: use its tokens, the old one is spent.
+    if (refreshToken !== before) return true;
     const response = await fetch(`${API_URL}/auth/refresh`, {
       method: 'POST', signal: AbortSignal.timeout(30_000), headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ refreshToken, deviceName: navigator.userAgent.slice(0, 200) }),
@@ -87,7 +90,9 @@ async function refreshAccessToken(identity: string | null): Promise<boolean> {
     assertSession(identity);
     saveTokens(tokens);
     return true;
-  })();
+  };
+  // One refresh at a time across tabs: the server accepts each refresh token once.
+  const promise = typeof navigator !== 'undefined' && navigator.locks ? navigator.locks.request('auth:refresh', run) : run();
   const flight = { identity, promise };
   refreshFlight = flight;
   try { return await promise; } finally { if (refreshFlight === flight) refreshFlight = null; }

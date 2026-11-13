@@ -16,7 +16,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { searchCards, type CardSearchResult } from '@/lib/deckApi';
 
 type Kind = 'card' | 'vocabulary' | 'kanji' | 'grammar' | 'page';
-interface Hit { kind: Kind | 'dict'; id: string; title: string; reading?: string; han?: string; meaning: string; level?: string; deck?: string; to?: string }
+interface Hit { kind: Kind; id: string; title: string; reading?: string; han?: string; meaning: string; level?: string; deck?: string; to?: string }
 
 const GROUPS: { kind: Kind; label: string; glyph: string; shown: number; tone: string }[] = [
   { kind: 'card', label: 'Thẻ của bạn', glyph: '札', shown: 5, tone: 'var(--color-seal)' },
@@ -33,7 +33,6 @@ const PAGES: { label: string; to: string; keys: string; glyph: string }[] = [
   { label: 'Kanji', to: '/library/kanji', keys: 'thu vien han tu', glyph: '漢' },
   { label: 'Luyện nghe', to: '/library/listening', keys: 'listening nghe', glyph: '聴' },
   { label: 'Đề thi JLPT', to: '/library/exam', keys: 'jlpt thi exam', glyph: '試' },
-  { label: 'Từ điển', to: '/dictionary', keys: 'dictionary tra tu jmdict', glyph: '辞' },
   { label: 'Bộ thẻ', to: '/decks', keys: 'flashcard the deck anki', glyph: '札' },
   { label: 'Ôn ngắt quãng', to: '/review', keys: 'on tap review srs fsrs', glyph: '復' },
   { label: 'Trắc nghiệm', to: '/quiz', keys: 'quiz kiem tra', glyph: '問' },
@@ -123,7 +122,7 @@ export function SearchModal() {
     };
   }, [index, q, mine]);
 
-  // What is on screen, in keyboard order: groups of hits, then the dictionary fallback.
+  // What is on screen, in keyboard order: groups of hits.
   const sections = useMemo(() => {
     const picked = GROUPS.filter(g => tab === 'all' || g.kind === tab)
       .map(g => ({ ...g, hits: found[g.kind].slice(0, tab === 'all' ? g.shown : 30), total: found[g.kind].length }))
@@ -132,10 +131,7 @@ export function SearchModal() {
     const pageFirst = found.page[0] && fold(found.page[0].title).startsWith(fold(q));
     return pageFirst ? [...picked.filter(s => s.kind === 'page'), ...picked.filter(s => s.kind !== 'page')] : picked;
   }, [found, tab]);
-  const flat = useMemo<Hit[]>(() => {
-    const hits = sections.flatMap(s => s.hits);
-    return q ? [...hits, { kind: 'dict', id: 'dict', title: q, meaning: '' }] : [];
-  }, [sections, q]);
+  const flat = useMemo<Hit[]>(() => q ? sections.flatMap(s => s.hits) : [], [sections, q]);
 
   // Focus input when modal opens
   useEffect(() => {
@@ -159,8 +155,7 @@ export function SearchModal() {
     const text = query.trim();
     if (text) saveRecent([text, ...loadRecent().filter(r => r !== text)].slice(0, 6));
     setSearchOpen(false);
-    if (hit.kind === 'dict') navigate(`/dictionary${text ? `?q=${encodeURIComponent(text)}` : ''}`);
-    else if (hit.kind === 'page' || hit.kind === 'card') navigate(hit.to!);
+    if (hit.kind === 'page' || hit.kind === 'card') navigate(hit.to!);
     else selectSearchResult({ id: hit.id, type: hit.kind });
   }, [query, navigate, setSearchOpen, selectSearchResult]);
 
@@ -205,7 +200,7 @@ export function SearchModal() {
 
   const hasQuery = Boolean(q);
   const noHits = hasQuery && !loading && !minePending && sections.length === 0;
-  const total = flat.length - (hasQuery ? 1 : 0);
+  const total = flat.length;
   let row = -1;
   const rowClass = (active: boolean) => `mx-2 grid min-h-12 w-[calc(100%-1rem)] cursor-pointer grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3.5 gap-y-0.5 rounded-xl px-3 py-2 text-left sm:grid-cols-[minmax(0,34%)_minmax(0,1fr)_auto] transition-colors duration-100 ${active ? 'bg-[var(--color-accent-subtle)]' : 'hover:bg-[var(--color-surface-hover)]'}`;
   const count = (n: number) => n >= 30 ? '30+' : String(n);
@@ -314,14 +309,6 @@ export function SearchModal() {
                 <Seal glyph={p.glyph} size="xs" tone="var(--color-text-secondary)" />{p.label}</button>)}</div>
             </div>}
 
-            {/* Always reachable: the fallback for anything the library does not hold */}
-            {hasQuery && !loading && <button id={`search-option-${flat.length - 1}`} role="option" aria-selected={selectedIndex === flat.length - 1}
-              onClick={() => handleSelect(flat[flat.length - 1])} onMouseMove={() => setSelectedIndex(flat.length - 1)}
-              className="sticky bottom-0 z-10 flex min-h-12 w-full cursor-pointer items-center gap-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] px-5 text-left text-[0.9375rem] transition-colors hover:bg-[var(--color-surface-hover)] aria-selected:bg-[var(--color-accent-subtle)]">
-              <Seal glyph="辞" size="xs" tone="var(--color-accent)" />
-              <span className="min-w-0 flex-1 truncate">Tra “{q}” trong từ điển JMdict</span>
-              <ArrowRight size={16} className="shrink-0 text-[var(--color-text-tertiary)]" />
-            </button>}
           </div>
 
           <div className="hidden items-center gap-4 border-t border-[var(--color-border)] bg-[var(--color-surface-alt)] px-5 py-2 text-xs text-[var(--color-text-tertiary)] sm:flex">

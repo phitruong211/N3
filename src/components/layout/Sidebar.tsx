@@ -2,7 +2,7 @@ import { NavSettings, LogIn, LogOut, PanelLeftClose, PanelLeftOpen, Search } fro
 import { useApp } from '@/hooks/useApp';
 import { useAuth } from '@/hooks/useAuth';
 import { BrandMark } from '@/components/ui/BrandMark';
-import { isNavigationItemActive, PRIMARY_NAV_ITEMS, SECONDARY_NAV_ITEMS, type NavigationItem } from './navigationItems';
+import { isNavigationItemActive, PRIMARY_NAV_ITEMS, type NavigationItem } from './navigationItems';
 
 export function Sidebar() {
   const { currentPage, setCurrentPage, setSearchOpen, sidebarCollapsed, setSidebarCollapsed } = useApp();
@@ -36,8 +36,6 @@ export function Sidebar() {
 
       <nav className="flex-1 overflow-y-auto px-3 py-5" aria-label="Các trang học">
         <div className="space-y-1">{PRIMARY_NAV_ITEMS.map(renderItem)}</div>
-        <div className="my-5 border-t border-[var(--color-border)]"/>
-        <div className="space-y-1">{SECONDARY_NAV_ITEMS.map(renderItem)}</div>
       </nav>
 
       <div className="space-y-1 border-t border-[var(--color-border)] p-3">

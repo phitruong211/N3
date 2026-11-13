@@ -1,5 +1,5 @@
 import type { PageId } from '@/types';
-import { NavDecks, NavDictionary, NavLibrary, NavProgress, NavQuiz, NavReview, NavSaved, NavSettings, NavToday, type Icon } from '@/components/ui/icons';
+import { NavDecks, NavLibrary, NavQuiz, NavReview, NavToday, type Icon } from '@/components/ui/icons';
 
 export type NavigationItem = { page: PageId; label: string; icon: Icon; shortcut?: string };
 
@@ -11,20 +11,9 @@ export const PRIMARY_NAV_ITEMS: NavigationItem[] = [
   { page: 'quiz', label: 'Trắc nghiệm', icon: NavQuiz, shortcut: 'G Q' },
 ];
 
-export const SECONDARY_NAV_ITEMS: NavigationItem[] = [
-  { page: 'dictionary', label: 'Từ điển', icon: NavDictionary },
-  { page: 'progress', label: 'Tiến độ', icon: NavProgress, shortcut: 'G P' },
-  { page: 'bookmarks', label: 'Đã lưu', icon: NavSaved, shortcut: 'G B' },
-];
-
-export const MOBILE_NAV_ITEMS: NavigationItem[] = PRIMARY_NAV_ITEMS
-  .filter(item => item.page !== 'quiz')
-  .map(item => item.page === 'srs' ? { ...item, label: 'Ôn tập' } : item);
-export const MORE_NAV_ITEMS: NavigationItem[] = [
-  PRIMARY_NAV_ITEMS.find(item => item.page === 'quiz')!,
-  ...SECONDARY_NAV_ITEMS,
-  { page: 'settings', label: 'Cài đặt', icon: NavSettings },
-];
+// Phones show the same five; short labels keep them on one row.
+const MOBILE_LABELS: Partial<Record<PageId, string>> = { srs: 'Ôn tập', quiz: 'Kiểm tra' };
+export const MOBILE_NAV_ITEMS: NavigationItem[] = PRIMARY_NAV_ITEMS.map(item => ({ ...item, label: MOBILE_LABELS[item.page] ?? item.label }));
 
 export function isNavigationItemActive(item: NavigationItem, currentPage: PageId): boolean {
   if (item.page === 'library') return ['library', 'vocabulary', 'kana', 'grammar', 'kanji', 'listening', 'exam'].includes(currentPage);

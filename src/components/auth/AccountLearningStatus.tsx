@@ -209,7 +209,7 @@ export function AccountLearningStatus() {
             <button className="study-button" onClick={exportBackup}>
               Tải bản sao dữ liệu
             </button>
-            <button
+            {sync.conflict && <button
               className="study-button"
               onClick={() => {
                 if (
@@ -221,7 +221,7 @@ export function AccountLearningStatus() {
               }}
             >
               Dùng bản tài khoản, giữ bản sao cục bộ
-            </button>
+            </button>}
           </div>
         </div>
       )}

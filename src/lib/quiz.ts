@@ -1,118 +1,65 @@
 // ============================================================
 // Quiz Logic Engine
 // ============================================================
-// Principles:
-// - Testing Effect: Frequent low-stakes quizzing improves retention
-// - Adaptive Difficulty: Prioritize weak items
-// - Immediate Feedback: Show explanation after each answer
+// Every quiz type is one row in SPECS: which pool it draws from,
+// what it shows and what the answer is. Wrong options come from
+// the same pool, so they look like plausible answers.
 // ============================================================
 
-import type { VocabItem, KanjiItem, QuizQuestion, QuizType } from '../types';
+import type { VocabItem, KanjiItem, GrammarItem, QuizQuestion, QuizType } from '../types';
+import { fold, romajiToKana } from './searchIndex.ts';
 
-/**
- * Generate quiz questions from vocabulary data.
- * Uses shuffled wrong answers from the same pool for distractors.
- */
-export function generateVocabQuiz(
-  vocab: VocabItem[],
-  count: number = 10,
-  type: QuizType = 'vocab-meaning'
-): QuizQuestion[] {
-  const shuffled = [...vocab].sort(() => Math.random() - 0.5);
-  const selected = shuffled.slice(0, Math.min(count, vocab.length));
+export interface QuizPools { vocabulary: VocabItem[]; kanji: KanjiItem[]; grammar: GrammarItem[] }
 
-  return selected.map((item, i) => {
-    if (type === 'vocab-meaning') {
-      // Show kanji → pick meaning
-      const correctAnswer = item.meaning;
-      const distractors = getDistractors(vocab, item, 'meaning', 3);
-      const options = shuffle([correctAnswer, ...distractors]);
+interface Row { id: string; itemType: QuizQuestion['itemType']; prompt: string; sub?: string; answer: string; explanation: string }
 
-      return {
-        id: `quiz-${i}`,
-        type,
-        prompt: item.kanji,
-        promptSub: item.hiragana,
-        correctAnswer,
-        options,
-        explanation: `${item.kanji} (${item.hiragana}) = ${item.meaning}`,
-        itemId: item.id,
-        itemType: 'vocabulary' as const,
-      };
-    } else {
-      // vocab-reading: Show kanji → pick reading
-      const correctAnswer = item.hiragana;
-      const distractors = getDistractors(vocab, item, 'hiragana', 3);
-      const options = shuffle([correctAnswer, ...distractors]);
+const KANA_ONLY = /^[ぁ-んァ-ヶー]+$/;
 
-      return {
-        id: `quiz-${i}`,
-        type,
-        prompt: item.kanji,
-        promptSub: item.meaning,
-        correctAnswer,
-        options,
-        explanation: `${item.kanji} = ${item.hiragana} (${item.meaning})`,
-        itemId: item.id,
-        itemType: 'vocabulary' as const,
-      };
-    }
-  });
-}
+const vocabRow = (v: VocabItem, prompt: string, sub: string, answer: string): Row =>
+  ({ id: v.id, itemType: 'vocabulary', prompt, sub, answer, explanation: `${v.kanji} (${v.hiragana}) = ${v.meaning}` });
 
-/**
- * Generate quiz questions from kanji data.
- */
-export function generateKanjiQuiz(
-  kanji: KanjiItem[],
-  count: number = 10,
-  type: QuizType = 'kanji-meaning'
-): QuizQuestion[] {
-  const shuffled = [...kanji].sort(() => Math.random() - 0.5);
-  const selected = shuffled.slice(0, Math.min(count, kanji.length));
+const SPECS: Record<QuizType, { typed?: boolean; rows: (pools: QuizPools) => Row[] }> = {
+  'vocab-meaning': { rows: p => p.vocabulary.map(v => vocabRow(v, v.kanji, v.hiragana, v.meaning)) },
+  // A kana-only word would show its own answer.
+  'vocab-reading': { rows: p => p.vocabulary.filter(v => v.kanji !== v.hiragana).map(v => vocabRow(v, v.kanji, v.meaning, v.hiragana)) },
+  'vocab-reverse': { rows: p => p.vocabulary.map(v => vocabRow(v, v.meaning, 'Chọn từ tiếng Nhật', v.kanji)) },
+  'typing': { typed: true, rows: p => p.vocabulary.filter(v => v.kanji !== v.hiragana && KANA_ONLY.test(v.hiragana)).map(v => vocabRow(v, v.kanji, v.meaning, v.hiragana)) },
+  'kanji-meaning': { rows: p => p.kanji.map(k => ({ id: k.id, itemType: 'kanji', prompt: k.kanji, sub: 'Hán Việt', answer: k.hanViet, explanation: `${k.kanji} = ${k.hanViet}` })) },
+  'grammar-meaning': { rows: p => p.grammar.map(g => ({ id: g.id, itemType: 'grammar', prompt: g.pattern, sub: 'Chọn nghĩa', answer: g.meaning, explanation: `${g.pattern} = ${g.meaning}` })) },
+  // Read a sentence, name the pattern it uses.
+  'grammar-sentence': { rows: p => p.grammar.filter(g => g.examples[0]?.japanese).map(g => ({
+    id: g.id, itemType: 'grammar', prompt: g.examples[0].japanese, sub: g.examples[0].meaning, answer: g.pattern,
+    explanation: `${g.pattern} = ${g.meaning}`,
+  })) },
+};
 
-  return selected.map((item, i) => {
-    const correctAnswer = item.hanViet;
-    const distractors = getKanjiDistractors(kanji, item, 3);
-    const options = shuffle([correctAnswer, ...distractors]);
+export const isTypedQuiz = (type: QuizType) => Boolean(SPECS[type].typed);
 
+/** How many items a quiz type can ask about; the picker shows it and hides types with too few. */
+export const quizPoolSize = (type: QuizType, pools: QuizPools) => usable(SPECS[type].rows(pools)).length;
+
+const usable = (rows: Row[]) => rows.filter(row => row.prompt.trim() && row.answer.trim());
+
+export function generateQuiz(type: QuizType, pools: QuizPools, count = 10): QuizQuestion[] {
+  const spec = SPECS[type];
+  const rows = usable(spec.rows(pools));
+  return shuffle(rows).slice(0, count).map((row, i) => {
+    // Distinct wrong answers only: two identical options would make the question unfair.
+    const wrong = spec.typed ? [] : [...new Set(shuffle(rows).map(other => other.answer).filter(answer => answer !== row.answer))].slice(0, 3);
     return {
-      id: `quiz-${i}`,
-      type,
-      prompt: item.kanji,
-      promptSub: `Hán Việt`,
-      correctAnswer,
-      options,
-      explanation: `${item.kanji} = ${item.hanViet}`,
-      itemId: item.id,
-      itemType: 'kanji' as const,
+      id: `quiz-${i}`, type, prompt: row.prompt, promptSub: row.sub, correctAnswer: row.answer,
+      options: spec.typed ? [] : shuffle([row.answer, ...wrong]),
+      explanation: row.explanation, itemId: row.id, itemType: row.itemType,
     };
   });
 }
 
-function getDistractors(
-  vocab: VocabItem[],
-  correct: VocabItem,
-  field: 'meaning' | 'hiragana',
-  count: number
-): string[] {
-  return vocab
-    .filter((v) => v.id !== correct.id && v[field] !== correct[field])
-    .sort(() => Math.random() - 0.5)
-    .slice(0, count)
-    .map((v) => v[field]);
-}
-
-function getKanjiDistractors(
-  kanji: KanjiItem[],
-  correct: KanjiItem,
-  count: number
-): string[] {
-  return kanji
-    .filter((k) => k.id !== correct.id && k.hanViet !== correct.hanViet)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, count)
-    .map((k) => k.hanViet);
+/** A typed reading is right in hiragana, katakana or romaji ("gakkou" = がっこう). */
+export function isTypedCorrect(input: string, correct: string): boolean {
+  const typed = fold(input.trim().replace(/\s+/g, ''));
+  if (!typed) return false;
+  const want = fold(correct);
+  return typed === want || romajiToKana(typed) === want;
 }
 
 function shuffle<T>(arr: T[]): T[] {

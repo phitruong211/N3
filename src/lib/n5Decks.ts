@@ -14,11 +14,16 @@ interface StudyCardData {
   examples?: GrammarExample[];
 }
 
-/** Keep the supplied card schema, including vocabulary cards in the Kanji deck. */
-export function n5StudyCard(item: StudyCardData, deckId: string, position: number): CardView {
+/** One id for an N5 card in its deck and in the library, so progress and bookmarks are shared. */
+export function n5CardId(deckId: string, type: string, front: string, reading?: string): string {
   // Include the deck, kind and reading: related vocabulary can share a Kanji front.
   // Keep Unicode as-is: URI encoding can exceed the API's 200-character ID limit.
-  const id = `${deckId}-${item.type.toLowerCase()}-${JSON.stringify([item.front, item.reading || ''])}`;
+  return `${deckId}-${type.toLowerCase()}-${JSON.stringify([front, reading || ''])}`;
+}
+
+/** Keep the supplied card schema, including vocabulary cards in the Kanji deck. */
+export function n5StudyCard(item: StudyCardData, deckId: string, position: number): CardView {
+  const id = n5CardId(deckId, item.type, item.front, item.reading);
   return {
     id, deckId, front: item.front, back: item.back, reading: item.reading,
     noteIdentity: item.note_id,
