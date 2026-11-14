@@ -22,6 +22,7 @@ import { ShortLinkPage } from '@/components/flashcard/ShortLinkPage';
 import { ExplorePage } from '@/components/flashcard/ExplorePage';
 import { AdminReportsPage } from '@/components/flashcard/AdminReportsPage';
 import { AppLoading } from '@/components/ui/AppLoading';
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
 
 const Dashboard = lazy(() => import('@/components/dashboard/Dashboard').then((module) => ({ default: module.Dashboard })));
 const VocabularyPage = lazy(() => import('@/components/vocabulary/VocabularyPage').then((module) => ({ default: module.VocabularyPage })));
@@ -64,6 +65,7 @@ function AppContent() {
   return (
     <MainLayout>
       <SessionNotices />
+      <ErrorBoundary resetKey={location.pathname}>
       <Suspense fallback={<AppLoading message="Đang mở bài học…"/>}>
         <Routes>
           <Route path="/" element={<RootRedirect />} />
@@ -89,6 +91,7 @@ function AppContent() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
+      </ErrorBoundary>
     </MainLayout>
   );
 }
