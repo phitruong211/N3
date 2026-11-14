@@ -1,7 +1,5 @@
 /* Dashboard "Hôm nay": an editorial front page. Hairlines and type do the work; colour is spent once, on the seal. */
 @keyframes dash-draw { from { stroke-dasharray: 0 100; } }
-@keyframes dash-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes dash-count { from { opacity: 0; transform: translateY(.18em); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
 
 .dashboard-page { gap: 40px; }
 .dashboard-page > * { animation: rise-in var(--dur-slow) var(--ease-out) backwards; }
@@ -32,7 +30,6 @@
 @media (min-width: 900px) { .dash-band { grid-template-columns: auto minmax(0, 1fr) auto; } }
 .dash-streak { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; font-size: .9rem; color: var(--color-text-secondary); }
 @media (min-width: 900px) { .dash-streak { flex-direction: column; align-items: flex-end; gap: .35rem; } }
-.dash-label { color: var(--color-text-tertiary); font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
 .dash-goal { display: flex; align-items: center; gap: 1.25rem; }
 .dash-enso { position: relative; display: grid; width: 5.5rem; height: 5.5rem; flex: 0 0 auto; place-items: center; color: var(--color-text); }
 .dash-enso.is-complete { color: var(--color-success); }

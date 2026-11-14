@@ -47,7 +47,7 @@
 .study-session-rating-title { display: inline-flex; align-items: center; gap: 9px; font-size: .95rem; font-weight: 600; }
 .study-session-rating-title kbd { color: var(--color-text-secondary); font-size: .7rem; font-weight: 400; }
 .study-session-interval { color: var(--color-text-secondary); font-size: .75rem; }
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .study-session-header { padding: 10px 12px 0; }
   .study-session-toolbar { grid-template-columns: 1fr auto; gap: 4px; }
   .study-session-heading { grid-column: 1 / -1; grid-row: 2; padding-top: 4px; }
@@ -266,7 +266,7 @@
 .study-session-rating-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; letter-spacing: -.01em; }
 .study-session-rating-title kbd { width: 20px; height: 20px; border-radius: 4px; background: transparent; font-family: 'Be Vietnam Pro', sans-serif; font-size: .68rem; color: var(--color-text-tertiary); }
 .study-session-interval { font-size: .8rem; letter-spacing: .02em; color: var(--color-text-tertiary); }
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .study-session-rating { min-height: 70px; }
   .study-session-rating-title { font-size: 1rem; }
   .study-session-ratings { gap: 8px; }
@@ -287,7 +287,7 @@
 /* Fullscreen: the header floats over reserved space, so the card sits dead centre whether or not the controls show. */
 .study-session[data-fullscreen="true"] .study-session-header { position: absolute; z-index: 2; top: 0; left: 0; right: 0; margin-inline: auto; }
 .study-session[data-fullscreen="true"] .study-session-workspace { padding-top: 136px; padding-bottom: max(136px, env(safe-area-inset-bottom)); }
-@media (max-width: 640px) { .study-session[data-fullscreen="true"] .study-session-workspace { padding: 112px 12px max(112px, env(safe-area-inset-bottom)); } }
+@media (max-width: 639px) { .study-session[data-fullscreen="true"] .study-session-workspace { padding: 112px 12px max(112px, env(safe-area-inset-bottom)); } }
 @media (hover: hover) and (pointer: fine) {
   .study-session[data-chrome="hidden"] .study-session-actions { opacity: 0; pointer-events: none; }
   .study-session[data-chrome="hidden"] .study-session-actions:has(:focus-visible) { opacity: 1; pointer-events: auto; }
@@ -319,7 +319,7 @@
   top: 22px; left: 28px; color: var(--kind); font-size: .75rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase;
 }
 .study-session-face-label::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--kind); }
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .study-session-card { padding: 52px 20px 28px; }
   .study-session-face-label { display: inline-flex; top: 18px; left: 20px; font-size: .75rem; }
 }
@@ -337,14 +337,14 @@
 /* Under the card: only the page number in free study; in review, a reserved row the ratings fill, so the card never jumps. */
 .study-session-actions { min-height: 84px; }
 .study-session .study-free-controls { display: flex; justify-content: center; min-height: 44px; }
-@media (max-width: 640px) { .study-session-actions { min-height: 70px; } }
+@media (max-width: 639px) { .study-session-actions { min-height: 70px; } }
 
 /* Fullscreen: header, card and page number share one centred column of the same width; the card sits in the middle
    of the space under the header. The header stays in flow and only fades, so the card never moves. */
 .study-session[data-fullscreen="true"] .study-session-header { position: static; max-width: 1040px; padding: 28px 32px 0; }
 .study-session[data-fullscreen="true"] .study-session-workspace { justify-content: center; max-width: 1040px; padding: 28px 32px max(36px, env(safe-area-inset-bottom)); }
 .study-session[data-fullscreen="true"] .study-session-stage { flex: 0 1 640px; }
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .study-session[data-fullscreen="true"] .study-session-header { padding: 8px 12px 0; }
   .study-session[data-fullscreen="true"] .study-session-workspace { padding: 12px 12px max(16px, env(safe-area-inset-bottom)); }
 }

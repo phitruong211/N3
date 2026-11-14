@@ -148,10 +148,10 @@ function Runner({ exam, draft, setDraft, finish, onReset, onLeave }: { exam: Exa
       <p role="timer" aria-label="Thời gian còn lại" className={`font-mono text-2xl tabular-nums sm:text-3xl ${remaining <= 300 ? 'text-[var(--color-error)]' : ''}`}>{clock(remaining)}</p>
       <div className="flex w-full items-center gap-2 sm:w-auto">
         <span className="mr-auto whitespace-nowrap text-sm tabular-nums text-[var(--color-text-secondary)]">{sheet.length - blank}/{sheet.length}<span className="max-sm:hidden"> câu</span></span>
-        {!textual && <button className="study-button !min-h-9 whitespace-nowrap" aria-pressed={wide} onClick={() => setWide(!wide)} title="Ẩn phiếu để đề rộng hết cỡ">{wide ? 'Hiện phiếu' : 'Đề rộng'}</button>}
-        {document.documentElement.requestFullscreen && <span className="hidden sm:inline-flex"><button className="study-button !min-h-9" aria-pressed={fullscreen} onClick={toggleFullscreen}>{fullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</button></span>}
+        {!textual && <button className="study-button hit !min-h-9 whitespace-nowrap" aria-pressed={wide} onClick={() => setWide(!wide)} title="Ẩn phiếu để đề rộng hết cỡ">{wide ? 'Hiện phiếu' : 'Đề rộng'}</button>}
+        {document.documentElement.requestFullscreen && <span className="hidden sm:inline-flex"><button className="study-button hit !min-h-9" aria-pressed={fullscreen} onClick={toggleFullscreen}>{fullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</button></span>}
         <ConfirmButton primary label="Nộp bài" confirmLabel={blank ? `Còn ${blank} câu trống, nộp luôn?` : 'Bấm lần nữa để nộp'} onConfirm={() => submit()} />
-        <button className="study-button !min-h-9 whitespace-nowrap" onClick={onLeave} title="Đồng hồ vẫn chạy khi bạn thoát">Thoát</button>
+        <button className="study-button hit !min-h-9 whitespace-nowrap" onClick={onLeave} title="Đồng hồ vẫn chạy khi bạn thoát">Thoát</button>
       </div>
     </div>
     {section.audio && exam.audio && <audio src={asset(exam.audio)} controls preload="metadata" className="h-10 w-full" aria-label="Audio phần nghe" />}
@@ -170,7 +170,7 @@ function Runner({ exam, draft, setDraft, finish, onReset, onLeave }: { exam: Exa
       </div>
       <div className={`study-panel min-h-0 space-y-4 overflow-y-auto !p-4 ${wide ? 'hidden' : ''}`} aria-label="Phiếu trả lời" hidden={textual}>
         {section.groups.map(group => <fieldset key={group.label} className="space-y-1.5"><legend lang="ja" className="study-eyebrow mb-1">{group.label}</legend>
-          {group.answers.map((_, index) => { const at = counter++; return <div key={at} className="flex items-center gap-2 lg:justify-between"><span className="w-7 text-sm tabular-nums text-[var(--color-text-secondary)]">{index + 1}</span><div className="grid flex-1 grid-cols-4 gap-2 lg:flex lg:flex-none lg:gap-1.5" role="group" aria-label={`${group.label} câu ${index + 1}`}>{[1, 2, 3, 4].map(choice => <button key={choice} aria-pressed={sheet[at] === choice} className={`study-button !min-h-10 !p-0 lg:!min-h-9 lg:!w-11 ${sheet[at] === choice ? 'study-button-primary' : ''}`} onClick={() => choose(at, choice)}>{choice}</button>)}</div></div>; })}
+          {group.answers.map((_, index) => { const at = counter++; return <div key={at} className="flex items-center gap-2 lg:justify-between"><span className="w-7 text-sm tabular-nums text-[var(--color-text-secondary)]">{index + 1}</span><div className="grid flex-1 grid-cols-4 gap-2 lg:flex lg:flex-none lg:gap-1.5" role="group" aria-label={`${group.label} câu ${index + 1}`}>{[1, 2, 3, 4].map(choice => <button key={choice} aria-pressed={sheet[at] === choice} className={`study-button !min-h-10 !p-0 lg:hit !min-h-9 lg:!w-11 ${sheet[at] === choice ? 'study-button-primary' : ''}`} onClick={() => choose(at, choice)}>{choice}</button>)}</div></div>; })}
         </fieldset>)}
       </div></>}
     </div>

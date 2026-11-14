@@ -105,15 +105,11 @@ function QuizTypeCard({
   return (
     <button
       onClick={onClick}
-      className="
-        p-5 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]
-        hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-hover)]
-        transition-colors duration-150 cursor-pointer text-left focus-ring
-      "
+      className="study-panel !p-5 cursor-pointer text-left transition-colors duration-[var(--dur-fast)] hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-hover)]"
     >
-      <div className="text-sm font-medium text-[var(--color-text)] mb-1">{title}</div>
-      <div className="text-xs text-[var(--color-text-secondary)] mb-3">{description}</div>
-      <div className="text-xs text-[var(--color-text-tertiary)]">10 câu · {count} mục</div>
+      <div className="mb-1 text-base font-semibold text-[var(--color-text)]">{title}</div>
+      <div className="mb-3 text-sm text-[var(--color-text-secondary)]">{description}</div>
+      <div className="text-xs text-[var(--color-text-tertiary)]">10 câu · {count.toLocaleString('vi-VN')} mục</div>
     </button>
   );
 }
@@ -240,7 +236,7 @@ function QuizSession({
           </button>
           <button
             onClick={onFinish}
-            className="px-6 py-3 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] transition-colors cursor-pointer focus-ring shadow-xs"
+            className="study-button"
           >
             Về chọn bài
           </button>
@@ -257,7 +253,7 @@ function QuizSession({
       <div className="flex items-center justify-between gap-3 px-4 py-4 sm:px-8 sm:py-6">
         <button
           onClick={onFinish}
-          className="flex items-center gap-2 text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text)] cursor-pointer focus-ring px-3 py-1.5 rounded-lg border border-transparent hover:border-[var(--color-border)] transition-all"
+          className="study-button !border-transparent hover:!border-[var(--color-border)]"
         >
           <span>Thoát</span>
         </button>
@@ -300,7 +296,7 @@ function QuizSession({
 
         {typed && <form className="w-full space-y-3" onSubmit={event => { event.preventDefault(); if (!answered && draft.trim()) handleAnswer(draft); }}>
           <label className="block text-sm font-semibold text-[var(--color-text)]">Cách đọc
-            <input className="study-input mt-2 font-jp text-lg" value={draft} onChange={event => setDraft(event.target.value)} readOnly={answered}
+            <input className="study-input mt-2 select-text font-jp text-lg" value={draft} onChange={event => setDraft(event.target.value)} readOnly={answered}
               autoFocus autoComplete="off" autoCapitalize="none" spellCheck={false} lang="ja" placeholder="がっこう hoặc gakkou"/>
           </label>
           {!answered && <button type="submit" className="study-button study-button-primary w-full" disabled={!draft.trim()}>Kiểm tra</button>}

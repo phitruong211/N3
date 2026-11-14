@@ -41,7 +41,7 @@ function FontSizeInput({ value, label, onCommit }: { value: number; label: strin
   };
   return <input type="text" inputMode="numeric" role="spinbutton"
     aria-valuemin={12} aria-valuemax={72} aria-valuenow={value} aria-label={label}
-    className="card-font-size-input min-w-0 w-full bg-transparent px-2 text-center tabular-nums outline-none"
+    className="card-font-size-input min-w-0 w-full bg-transparent px-2 text-center tabular-nums [outline-offset:-2px]"
     value={draft} onChange={event => setDraft(event.target.value)} onBlur={commit}
     onKeyDown={event => {
       if (event.key === 'Enter') {
@@ -94,7 +94,7 @@ function fieldValue(
 function ExampleMeaning({ meaning, label }: { meaning: string; label: string }) {
   const [visible, setVisible] = useState(false);
   return <div className="mt-2 text-sm font-normal sm:text-base">
-    <button type="button" className="study-button !min-h-8 !px-2 !py-1 !text-xs"
+    <button type="button" className="study-button hit !min-h-8 !px-2 !py-1 !text-xs"
       aria-label={`${visible ? "Ẩn" : "Hiện"} nghĩa ${label}`} aria-expanded={visible}
       onPointerDown={event => event.stopPropagation()}
       onKeyDown={event => event.stopPropagation()}
@@ -553,7 +553,7 @@ export function DeckCustomizeDialog({
                         value={own ?? (key === "bg" ? "#faf7f1" : key === "fg" ? "#1f2937" : "#b45309")}
                         onChange={(event) => updateActiveStyle({ colors: { ...activeStyle.colors, [key]: event.target.value } })} />
                       <span className="min-w-0 flex-1 truncate text-xs text-[var(--color-text-secondary)]">{own ?? "Theo chủ đề"}</span>
-                      {own && <button type="button" className="study-button !min-h-9 !px-2 !py-1 !text-xs" aria-label={`Bỏ ${text.toLowerCase()} ${previewBack ? "mặt sau" : "mặt trước"}`}
+                      {own && <button type="button" className="study-button hit !min-h-9 !px-2 !py-1 !text-xs" aria-label={`Bỏ ${text.toLowerCase()} ${previewBack ? "mặt sau" : "mặt trước"}`}
                         onClick={() => { const { [key]: _drop, ...rest } = activeStyle.colors ?? {}; updateActiveStyle({ colors: Object.keys(rest).length ? rest : undefined }); }}>Bỏ</button>}
                     </div>
                   </div>;

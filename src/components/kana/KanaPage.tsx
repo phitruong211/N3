@@ -147,7 +147,7 @@ export function KanaPage() {
       <div className="flex gap-6" role="group" aria-label="Chế độ">
         {([['chart', 'Bảng'], ['drill', 'Trò chơi']] as const).map(([key, label]) =>
           <button key={key} aria-pressed={mode === key} onClick={() => setMode(key)}
-            className={'relative cursor-pointer py-1 text-[0.9375rem] transition-colors after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:transition-colors ' + (mode === key ? 'font-semibold text-[var(--color-text)] after:bg-[var(--color-gold)]' : 'text-[var(--color-text-tertiary)] after:bg-transparent hover:text-[var(--color-text)]')}>
+            className={'relative cursor-pointer py-2.5 text-[0.9375rem] transition-colors after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:transition-colors ' + (mode === key ? 'font-semibold text-[var(--color-text)] after:bg-[var(--color-gold)]' : 'text-[var(--color-text-tertiary)] after:bg-transparent hover:text-[var(--color-text)]')}>
             {label}
           </button>)}
       </div>
@@ -168,7 +168,7 @@ export function KanaPage() {
       : <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,1fr)]">
         <div className="space-y-3">
           <div className="flex justify-end">
-            <button role="switch" aria-checked={hideRomaji} onClick={() => setHideRomaji(!hideRomaji)} className="flex shrink-0 items-center gap-2 rounded-lg text-sm text-[var(--color-text)] focus-ring">
+            <button role="switch" aria-checked={hideRomaji} onClick={() => setHideRomaji(!hideRomaji)} className="flex min-h-11 shrink-0 items-center gap-2 rounded-lg text-sm text-[var(--color-text)] focus-ring">
               <span aria-hidden="true" className={'relative h-5 w-9 shrink-0 rounded-full transition-colors ' + (hideRomaji ? 'bg-[var(--color-accent)]' : 'bg-[var(--color-border-strong)]')}>
                 <span className={'absolute top-0.5 size-4 rounded-full bg-white transition-all ' + (hideRomaji ? 'left-[18px]' : 'left-0.5')} />
               </span>
@@ -209,7 +209,7 @@ export function KanaPage() {
           <p className="text-xs text-[var(--color-text-tertiary)]">
             <span aria-hidden="true" className="mr-1.5 inline-block size-1.5 rounded-full bg-[var(--color-seal)] align-middle" />
             Chữ đã thuộc. Tiến độ lưu trên máy này.
-            {learned > 0 && <button className="ml-2 underline hover:text-[var(--color-text)]" onClick={resetScript}>Xóa</button>}
+            {learned > 0 && <button className="hit ml-2 underline hover:text-[var(--color-text)]" onClick={resetScript}>Xóa</button>}
           </p>
         </div>
 

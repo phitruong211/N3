@@ -93,9 +93,9 @@ export function StyleEditor({ value, inherited, onChange, scope = "full", label 
               onChange={event => patch({ colors: { [key]: event.target.value } })} />
             <span className="min-w-0 flex-1 truncate text-xs text-[var(--color-text-secondary)]">{own ?? "Kế thừa"}</span>
             {own
-              ? <button type="button" className="study-button !min-h-9 !px-2 !py-1 !text-xs" aria-label={`Bỏ ${text.toLowerCase()}`} onClick={() => patch({ colors: { [key]: null } })}>Bỏ</button>
+              ? <button type="button" className="study-button hit !min-h-9 !px-2 !py-1 !text-xs" aria-label={`Bỏ ${text.toLowerCase()}`} onClick={() => patch({ colors: { [key]: null } })}>Bỏ</button>
               // A color input only reports a change, so choosing the swatch it already shows needs its own button.
-              : <button type="button" className="study-button !min-h-9 !px-2 !py-1 !text-xs" aria-label={`Dùng màu đang hiện cho ${text.toLowerCase()}`} onClick={() => patch({ colors: { [key]: shownColor(key) } })}>Dùng</button>}
+              : <button type="button" className="study-button hit !min-h-9 !px-2 !py-1 !text-xs" aria-label={`Dùng màu đang hiện cho ${text.toLowerCase()}`} onClick={() => patch({ colors: { [key]: shownColor(key) } })}>Dùng</button>}
           </div>
         </div>;
       })}

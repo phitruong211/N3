@@ -73,7 +73,7 @@ export function JlptListeningPractice() {
         <p className="text-sm font-semibold flex items-center gap-2"><Volume2 size={17} /> Nghe đoạn hội thoại / thông báo</p>
         <audio key={item.id} ref={audioRef} src={`${import.meta.env.BASE_URL}audio/jlpt/${item.id}.m4a`} controls preload="metadata" className="w-full" aria-label={`Audio bài ${item.title}`} onError={() => setAudioFailed(true)} />
         {audioFailed && <p role="alert" className="text-sm text-[var(--color-error)]">Không tải được audio. Hãy tải lại trang và thử lần nữa.</p>}
-        <div className="flex flex-wrap items-center gap-2"><span className="text-xs text-[var(--color-text-secondary)]">Tốc độ</span>{[0.8, 1, 1.2].map(rate => <button key={rate} className={`study-button !min-h-8 !px-2 !py-1 !text-xs ${speed === rate ? 'study-button-primary' : ''}`} aria-pressed={speed === rate} onClick={() => { setSpeed(rate); if (audioRef.current) audioRef.current.playbackRate = rate; }}>{rate}×</button>)}</div>
+        <div className="flex flex-wrap items-center gap-2"><span className="text-xs text-[var(--color-text-secondary)]">Tốc độ</span>{[0.8, 1, 1.2].map(rate => <button key={rate} className={`study-button hit !min-h-8 !px-2 !py-1 !text-xs ${speed === rate ? 'study-button-primary' : ''}`} aria-pressed={speed === rate} onClick={() => { setSpeed(rate); if (audioRef.current) audioRef.current.playbackRate = rate; }}>{rate}×</button>)}</div>
       </div>
       <div className="space-y-5">{item.questions.map((question, questionIndex) => <fieldset key={questionIndex} className="space-y-2">
         <legend className="font-semibold mb-2">Câu {questionIndex + 1}. {question.prompt}</legend>

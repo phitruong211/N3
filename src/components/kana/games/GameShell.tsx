@@ -97,17 +97,17 @@ export function Hud({ score, level, lives, phase, onPause, onExit, music, childr
   score: number; level: number; lives?: number; phase: Phase; onPause: () => void; onExit: () => void; music?: { on: boolean; toggle: () => void }; children?: ReactNode;
 }) {
   return <div className="mb-3 flex items-center gap-2 whitespace-nowrap sm:gap-5">
-    <button className="study-button !min-h-9 !px-3 text-sm" onClick={onExit} aria-label="Chọn game khác">‹<span className="hidden sm:inline"> Chọn game</span></button>
+    <button className="study-button hit !min-h-9 !px-3 text-sm" onClick={onExit} aria-label="Chọn game khác">‹<span className="hidden sm:inline"> Chọn game</span></button>
     <div className="ml-auto flex items-center gap-3 text-sm tabular-nums sm:gap-6">
       {children}
       <span><span className="text-[var(--color-text-tertiary)]">Cấp </span><b>{level}</b></span>
       <span aria-live="polite"><span className="text-[var(--color-text-tertiary)]">Điểm </span><b className="text-base">{score}</b></span>
       {lives !== undefined && <Lives left={lives} />}
     </div>
-    {music && <button className="study-button !min-h-9 !w-9 !p-0" onClick={music.toggle} aria-pressed={music.on} aria-label={music.on ? 'Tắt nhạc' : 'Bật nhạc'} title={music.on ? 'Tắt nhạc' : 'Bật nhạc'}>
+    {music && <button className="study-button hit !min-h-9 !w-9 !p-0" onClick={music.toggle} aria-pressed={music.on} aria-label={music.on ? 'Tắt nhạc' : 'Bật nhạc'} title={music.on ? 'Tắt nhạc' : 'Bật nhạc'}>
       {music.on ? <Music size={16} /> : <MusicOff size={16} />}
     </button>}
-    <button className="study-button !min-h-9 !w-9 !p-0" onClick={onPause} disabled={phase !== 'play' && phase !== 'paused'}
+    <button className="study-button hit !min-h-9 !w-9 !p-0" onClick={onPause} disabled={phase !== 'play' && phase !== 'paused'}
       aria-label={phase === 'paused' ? 'Tiếp tục' : 'Tạm dừng'} title="Esc">
       {phase === 'paused' ? <Play size={16} /> : <Pause size={16} />}
     </button>

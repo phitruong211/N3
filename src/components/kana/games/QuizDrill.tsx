@@ -55,7 +55,7 @@ export function QuizDrill({ script, progress, onRecord, onExit, onReset, focus }
 
   const right = picked === question.romaji;
   return <section className="mx-auto w-full max-w-md" aria-label="Trắc nghiệm">
-    <button className="study-button mb-3 !min-h-9 !px-3 text-sm" onClick={onExit}>‹ Chọn game</button>
+    <button className="study-button mb-3 hit !min-h-9 !px-3 text-sm" onClick={onExit}>‹ Chọn game</button>
     <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-5 text-center sm:py-7">
       <p className="font-jp-serif text-[3.5rem] leading-none text-[var(--color-text)] sm:text-[4.5rem]">{question.ch}</p>
       <p className="mt-2 h-6 text-base text-[var(--color-text-secondary)] sm:h-7 sm:text-lg">{picked ? question.romaji : ''}</p>

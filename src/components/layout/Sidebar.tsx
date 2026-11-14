@@ -46,7 +46,7 @@ export function Sidebar() {
               <span className="block truncate text-sm font-semibold text-[var(--color-text)]">{name}</span>
               <span className="block truncate text-xs text-[var(--color-text-tertiary)]">{user.email}</span>
             </span></>}
-            <button className="study-button !min-h-9 !w-9 shrink-0 !p-0" title="Đăng xuất" aria-label="Đăng xuất" onClick={() => void signOut()}><LogOut size={16}/></button>
+            <button className="study-button hit !min-h-9 !w-9 shrink-0 !p-0" title="Đăng xuất" aria-label="Đăng xuất" onClick={() => void signOut()}><LogOut size={16}/></button>
           </div>
           : <button className={`study-button w-full ${sidebarCollapsed ? '!px-0' : '!justify-start'}`} title="Đăng nhập" onClick={() => setPrompt('login')}>
             <LogIn size={17}/><span className={sidebarCollapsed ? 'sr-only' : undefined}>Đăng nhập</span>

@@ -88,9 +88,9 @@ export function CardDesigner({ deckName, config, cards, startCardId, canEditCard
           <div className="study-session-face"><CardFace card={card} deckName={deckName} fields={fields} template={template} side={side}/></div>
         </div>
         {pool.length > 1 && <div className="card-designer-pager">
-          <button className="study-button !min-h-9 !px-3" onClick={() => step(-1)}>‹ Thẻ trước</button>
+          <button className="study-button hit !min-h-9 !px-3" onClick={() => step(-1)}>‹ Thẻ trước</button>
           <span className="tabular-nums">{index + 1} / {pool.length}</span>
-          <button className="study-button !min-h-9 !px-3" onClick={() => step(1)}>Thẻ sau ›</button>
+          <button className="study-button hit !min-h-9 !px-3" onClick={() => step(1)}>Thẻ sau ›</button>
         </div>}
       </section>
 

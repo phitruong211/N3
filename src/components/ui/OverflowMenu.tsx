@@ -42,7 +42,7 @@ export function OverflowMenu({ label = 'Mở menu', actions, horizontal, trigger
   }, [open]);
   // In fullscreen only the fullscreen element is drawn, so a menu portalled to <body> would open invisibly.
   return <>
-    <button ref={trigger} type="button" disabled={disabled} className={triggerClassName ?? `study-button ${triggerContent ? 'study-button-primary' : compact ? '!min-h-9 !w-9 !p-0' : '!min-h-11 !w-11 !p-0'}`}
+    <button ref={trigger} type="button" disabled={disabled} className={triggerClassName ?? `study-button ${triggerContent ? 'study-button-primary' : compact ? 'hit !min-h-9 !w-9 !p-0' : '!min-h-11 !w-11 !p-0'}`}
       aria-label={label} aria-haspopup="menu" aria-controls={open ? id : undefined} aria-expanded={open}
       onKeyDown={event => { if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); setOpen(true); } }}
       onClick={() => setOpen(value => !value)}>{triggerContent ?? (horizontal ? <Ellipsis size={20}/> : <EllipsisVertical size={18}/>)}</button>

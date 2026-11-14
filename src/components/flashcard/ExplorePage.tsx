@@ -42,7 +42,7 @@ export function ExplorePage() {
       </label>
     </form>
     <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Lọc theo cấp độ">
-      {LEVELS.map(item => <button key={item || "all"} type="button" className={`study-button !min-h-9 ${level === item ? "study-button-primary" : ""}`} aria-pressed={level === item} onClick={() => choose(setLevel)(item)}>{item || "Tất cả"}</button>)}
+      {LEVELS.map(item => <button key={item || "all"} type="button" className={`study-button hit !min-h-9 ${level === item ? "study-button-primary" : ""}`} aria-pressed={level === item} onClick={() => choose(setLevel)(item)}>{item || "Tất cả"}</button>)}
     </div>
     {error && <div className="shared-error" role="alert"><p>{error}</p><button type="button" className="study-button" onClick={() => setAttempt(value => value + 1)}>Thử lại</button></div>}
     {loading && !result ? <AppLoading message="Đang tải thư viện…" /> : result && <>
