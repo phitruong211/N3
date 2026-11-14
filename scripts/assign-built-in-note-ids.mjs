@@ -2,7 +2,7 @@
 // Run when adding a dataset; retain note_id when editing or moving an existing row.
 import { readFile, writeFile } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
-const files = ['vocabN3', 'vocabN4', 'kanjiN3_vocab_full', 'kanjiN4', 'kanjiN2', 'grammarN2', 'grammarN3', 'grammarN4', 'vocabN5', 'kanjiN5', 'grammarN5'];
+const files = ['vocabN2', 'vocabN3', 'vocabN4', 'kanjiN3', 'kanjiN4', 'kanjiN2', 'grammarN2', 'grammarN3', 'grammarN4', 'vocabN5', 'kanjiN5', 'grammarN5'];
 const known = new Set();
 for (const name of files) {
   const url = new URL(`../public/data/${name}.json`, import.meta.url);

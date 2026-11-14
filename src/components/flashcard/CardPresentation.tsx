@@ -279,7 +279,7 @@ export function CardFace({
             style={isCardText ? { ...cardTextStyle(fieldStyle, value, index !== firstTextIndex), ...fieldDecoration(fieldSpec) } : { ...(fieldSpec?.font?.family ? { fontFamily: fontStack(fieldSpec.font.family) } : {}), ...fieldDecoration(fieldSpec) }}
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
-            {kanjiVocabulary.length ? <KanjiVocabulary value={kanjiVocabulary} showReading={showExampleReadings} /> : field === "hanViet" ? `Hán Việt: ${value}` : importedBlocks.length ? (
+            {kanjiVocabulary.length ? <><KanjiVocabulary value={kanjiVocabulary} showReading={showExampleReadings} />{card.extraData?.kanjiTips && <p className="mt-3">{card.extraData.kanjiTips}</p>}</> : field === "hanViet" ? `Hán Việt: ${value}` : importedBlocks.length ? (
               <ImportedFaceBlocks blocks={importedBlocks} reading={cardReading} showReading={showFurigana} compact={compact} style={fieldStyle} />
             ) : isCardText ? (
               <FuriganaText text={value} reading={cardReading} storedSegments={storedSegments} show={showFurigana} />

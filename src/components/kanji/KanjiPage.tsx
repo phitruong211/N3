@@ -16,7 +16,7 @@ export function KanjiPage() {
   const states = useMemo(() => learnStates(srsCards, 'kanji'), [srsCards]);
   // Links can carry ?q= so the page opens already filtered.
   const [query, setQuery] = useState(() => new URLSearchParams(location.search).get('q') ?? '');
-  const [level, setLevel] = useState<'all' | JlptLevel>(() => startLevel(storage.getJSON(TARGET_LEVEL_KEY, 'all'), ['N5', 'N4', 'N3', 'N2'] as const));
+  const [level, setLevel] = useState<'all' | JlptLevel>(() => startLevel(storage.getJSON(TARGET_LEVEL_KEY, 'all'), ['N5', 'N4', 'N3', 'N2', 'N1'] as const));
   const [savedOnly, setSavedOnly] = useState(false);
   const [selected, setSelected] = useState<KanjiItem | null>(null);
 
@@ -51,7 +51,7 @@ export function KanjiPage() {
         {query && <button aria-label="Xóa tìm kiếm" onClick={() => setQuery('')}><X size={18}/></button>}
       </label>
       <div className="flex flex-wrap gap-2">
-        {(['all', 'N5', 'N4', 'N3', 'N2'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => { setLevel(value); setSelected(null); }}>{value === 'all' ? 'Tất cả' : `${value} · ${kanji.filter(item => item.level === value).length}`}</button>)}
+        {(['all', 'N5', 'N4', 'N3', 'N2', 'N1'] as const).map(value => <button key={value} className={'study-button ' + (level === value ? 'study-button-primary' : '')} aria-pressed={level === value} onClick={() => { setLevel(value); setSelected(null); }}>{value === 'all' ? 'Tất cả' : `${value} · ${kanji.filter(item => item.level === value).length}`}</button>)}
         <button className={'study-button ' + (savedOnly ? 'study-button-primary' : '')} aria-pressed={savedOnly} onClick={() => setSavedOnly(!savedOnly)}>Đã lưu</button>
       </div>
     </div>

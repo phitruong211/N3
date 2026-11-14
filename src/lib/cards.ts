@@ -46,12 +46,16 @@ export function vocabularyCard(
     hanViet: item.han_viet,
     note: item.ghi_chu || undefined,
     type: "VOCABULARY",
+    extraData: item.examples?.length ? { examples: JSON.stringify(item.examples) } : undefined,
     tags: item.tags || [],
     source: "BUILT_IN",
     sourceRef: item.id,
     position,
   };
 }
+/** A Kanji card shows its most useful words; the library page lists them all. */
+const KANJI_CARD_WORDS = 6;
+
 export function kanjiCard(
   item: KanjiItem,
   deckId: string,
@@ -64,12 +68,16 @@ export function kanjiCard(
     noteIdentity: item.noteId,
     back: [item.hanViet, item.meaning].filter(Boolean).join(" · "),
     reading: [...(item.onyomi || []), ...(item.kunyomi || [])].join("・"),
-    note: item.vocabulary
+    note: item.vocabulary.slice(0, KANJI_CARD_WORDS)
       .map((v) => `${v.word} ${v.reading} — ${v.meaning}`)
       .join("\n"),
     type: "KANJI",
-    extraData: { kanjiVocabulary: JSON.stringify(item.vocabulary) },
-    tags: [item.level],
+    extraData: {
+      kanjiVocabulary: JSON.stringify(item.vocabulary.slice(0, KANJI_CARD_WORDS)),
+      ...(item.note ? { kanjiTips: item.note } : {}),
+      ...(item.examples?.length ? { examples: JSON.stringify(item.examples) } : {}),
+    },
+    tags: item.lesson ? [item.level, item.lesson] : [item.level],
     source: "BUILT_IN",
     sourceRef: item.id,
     position,

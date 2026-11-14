@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { normalizeGrammarCard } from '../src/lib/grammarData.ts';
 import { grammarCard } from '../src/lib/cards.ts';
 
-for (const [level, count] of [['N3', 249], ['N4', 132]]) {
+for (const [level, count] of [['N3', 249], ['N4', 148]]) {
   test(`${level} built-in library and study cards retain all supplied content`, () => {
     const source = JSON.parse(readFileSync(new URL(`../public/data/grammar${level}.json`, import.meta.url), 'utf8'));
     assert.equal(source.length, count);

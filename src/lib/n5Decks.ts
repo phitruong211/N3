@@ -47,7 +47,6 @@ async function loadN5DecksOnce(): Promise<BuiltInDeckDefinition[]> {
   if (cached) return cached;
   const definitions = [
     { id: 'vocabN5', name: 'Từ vựng N5', kind: 'vocabulary' },
-    { id: 'kanjiN5', name: 'Kanji N5', kind: 'kanji' },
     { id: 'grammarN5', name: 'Ngữ pháp N5', kind: 'grammar' },
   ] as const;
   const decks = await Promise.all(definitions.map(async definition => {

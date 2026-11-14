@@ -87,6 +87,9 @@ export interface VocabItem {
   // Related words
   tu_lien_quan: RelatedWord[];
 
+  // Example sentences shown on the card back
+  examples?: GrammarExample[];
+
   // Tags
   tags: string[];
 
@@ -126,6 +129,9 @@ export interface KanjiItem {
   onyomi?: string[];
   kunyomi?: string[];
   lesson?: string;
+  /** Memory tips shown under the related words. */
+  note?: string;
+  examples?: GrammarExample[];
 }
 
 // ─── Grammar (New Rich Schema) ──────────────────────────────

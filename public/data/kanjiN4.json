@@ -9,33 +9,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "89edb035-e136-48d3-9e86-450080a43ecb",
-    "front": "言う",
-    "back": "nói",
-    "reading": "いう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 言（Ngôn）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "0aac8cfd-be7c-46a2-9a4e-19dd33ad8eba",
-    "front": "言葉",
-    "back": "từ; lời nói",
-    "reading": "ことば",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 言（Ngôn）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -48,33 +23,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "345aed91-405a-4eb9-91dc-adfa298ce009",
-    "front": "手紙",
-    "back": "thư",
-    "reading": "てがみ",
-    "han_viet": "Thủ Chỉ",
-    "note": "Từ liên quan của Kanji 手（Thủ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "cadc7a5f-76aa-41bf-b61a-924f08146f4b",
-    "front": "上手",
-    "back": "giỏi; khéo",
-    "reading": "じょうず",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 手（Thủ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -87,33 +37,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "64f0c4be-2c1a-450b-ae4f-8d4b20e63e1f",
-    "front": "自分",
-    "back": "bản thân",
-    "reading": "じぶん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 自（Tự）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "1799ba45-951e-4a9d-9617-5eeabd792098",
-    "front": "自転車",
-    "back": "xe đạp",
-    "reading": "じてんしゃ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 自（Tự）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -126,33 +51,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "bbf8c768-636a-4374-9a6f-617ed8765223",
-    "front": "医者",
-    "back": "bác sĩ",
-    "reading": "いしゃ",
-    "han_viet": "Y Giả",
-    "note": "Từ liên quan của Kanji 者（Giả）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "e420fa34-0ee4-42fb-8925-41428bad0ab8",
-    "front": "作者",
-    "back": "tác giả",
-    "reading": "さくしゃ",
-    "han_viet": "Tác Giả",
-    "note": "Từ liên quan của Kanji 者（Giả）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -165,33 +65,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "9e044626-5e10-4cff-8591-39b2a29dc6f6",
-    "front": "仕事",
-    "back": "công việc",
-    "reading": "しごと",
-    "han_viet": "Sĩ Sự",
-    "note": "Từ liên quan của Kanji 事（Sự）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "48e77db5-b0c4-469a-a063-c542ab7f4228",
-    "front": "食事",
-    "back": "bữa ăn",
-    "reading": "しょくじ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 事（Sự）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -204,33 +79,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e30425b0-628e-452d-b98e-8e5782fd474d",
-    "front": "思う",
-    "back": "nghĩ",
-    "reading": "おもう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 思（Tư）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "20c397ea-23bd-49c0-8cd5-b13c36d76a5a",
-    "front": "思い出",
-    "back": "kỷ niệm",
-    "reading": "おもいで",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 思（Tư）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -243,33 +93,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "dee34b14-4ef8-4f95-8020-82d197dba332",
-    "front": "会う",
-    "back": "gặp",
-    "reading": "あう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 会（Hội）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "ce1a7325-4b22-4d97-8eaa-f8cc3db29702",
-    "front": "会社",
-    "back": "công ty",
-    "reading": "かいしゃ",
-    "han_viet": "Hội Xã",
-    "note": "Từ liên quan của Kanji 会（Hội）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -282,33 +107,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "f8328c4d-f8d1-463a-a73c-3369b7f29307",
-    "front": "家族",
-    "back": "gia đình",
-    "reading": "かぞく",
-    "han_viet": "Gia Tộc",
-    "note": "Từ liên quan của Kanji 家（Gia）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "f389b985-0eee-4107-b29f-b0d38d412866",
-    "front": "家",
-    "back": "nhà",
-    "reading": "いえ",
-    "han_viet": "Gia",
-    "note": "Từ liên quan của Kanji 家（Gia）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -321,33 +121,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "24f458ef-4631-4e8c-add5-37cbffc4de28",
-    "front": "目的",
-    "back": "mục đích",
-    "reading": "もくてき",
-    "han_viet": "Mục Đích",
-    "note": "Từ liên quan của Kanji 的（Đích）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "0fd9aec3-504d-4ec6-9b92-fc9d9b796fb9",
-    "front": "具体的",
-    "back": "cụ thể",
-    "reading": "ぐたいてき",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 的（Đích）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -360,33 +135,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "9906425e-b8d8-413e-bdbd-890ee0a1a2c0",
-    "front": "方",
-    "back": "người; vị",
-    "reading": "かた",
-    "han_viet": "Phương",
-    "note": "Từ liên quan của Kanji 方（Phương）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "10dc7bba-202a-41b2-a41e-89ad722866e6",
-    "front": "夕方",
-    "back": "chiều tối",
-    "reading": "ゆうがた",
-    "han_viet": "Tịch Phương",
-    "note": "Từ liên quan của Kanji 方（Phương）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -399,33 +149,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "380e8b0b-d8fe-4e42-a8a4-fd8263415213",
-    "front": "地図",
-    "back": "bản đồ",
-    "reading": "ちず",
-    "han_viet": "Địa Đồ",
-    "note": "Từ liên quan của Kanji 地（Địa）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "57a1d3f8-a29c-4d44-89ef-101a02b0cdc5",
-    "front": "地下",
-    "back": "dưới lòng đất",
-    "reading": "ちか",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 地（Địa）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -438,20 +163,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "ae36df35-b8dd-4e3e-8689-561bcf8a0c0c",
-    "front": "目",
-    "back": "mắt",
-    "reading": "め",
-    "han_viet": "Mục",
-    "note": "Từ liên quan của Kanji 目（Mục）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -464,33 +177,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "ade830ed-e480-4ad2-a11a-b314bf0a63de",
-    "front": "場所",
-    "back": "địa điểm",
-    "reading": "ばしょ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 場（Trường）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "c08a40a8-c886-4451-9f25-dcc7efd2f68a",
-    "front": "工場",
-    "back": "nhà máy",
-    "reading": "こうじょう",
-    "han_viet": "Công Trường",
-    "note": "Từ liên quan của Kanji 場（Trường）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -503,33 +191,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "94b656b5-d23b-4abd-89f5-3ff71c222c0f",
-    "front": "時代",
-    "back": "thời đại",
-    "reading": "じだい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 代（Đại）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "3bac0a6d-0276-45a0-b452-b67ec65d156d",
-    "front": "代わり",
-    "back": "thay thế",
-    "reading": "かわり",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 代（Đại）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -542,33 +205,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "13acaf8f-25e3-48d9-81b0-e63170ec3b91",
-    "front": "私",
-    "back": "tôi",
-    "reading": "わたし",
-    "han_viet": "Tư",
-    "note": "Từ liên quan của Kanji 私（Tư）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "fa983fff-9b4f-4319-8a6c-f9f365476bda",
-    "front": "私立",
-    "back": "tư lập",
-    "reading": "しりつ",
-    "han_viet": "Tư Lập",
-    "note": "Từ liên quan của Kanji 私（Tư）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -581,33 +219,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "540b3bce-60a4-49e5-94d5-e3cbb4341d1b",
-    "front": "立つ",
-    "back": "đứng",
-    "reading": "たつ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 立（Lập）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "8e3d2e18-190a-458b-b663-3da5493893c4",
-    "front": "立てる",
-    "back": "dựng; làm cho đứng",
-    "reading": "たてる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 立（Lập）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -620,33 +233,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "0eb3f09f-d332-40bd-a8bb-85c1051630a1",
-    "front": "買い物",
-    "back": "mua sắm",
-    "reading": "かいもの",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 物（Vật）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "0f438541-003d-4c24-9a17-3dbc4986cd95",
-    "front": "食べ物",
-    "back": "đồ ăn",
-    "reading": "たべもの",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 物（Vật）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 1"
     ]
   },
   {
@@ -659,33 +247,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "4c920fbe-6622-44d4-958b-0fec08d25513",
-    "front": "田舎",
-    "back": "nông thôn",
-    "reading": "いなか",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 田（Điền）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "5c969159-aa14-4825-bd18-bc429bb34cb1",
-    "front": "田んぼ",
-    "back": "ruộng lúa",
-    "reading": "たんぼ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 田（Điền）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -698,33 +261,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "115e38d4-d404-4d04-80b1-19fb3c2ecd40",
-    "front": "体",
-    "back": "cơ thể",
-    "reading": "からだ",
-    "han_viet": "Thể",
-    "note": "Từ liên quan của Kanji 体（Thể）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "b8df878b-4706-462d-a579-f9f71081f4d4",
-    "front": "体育",
-    "back": "thể dục",
-    "reading": "たいいく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 体（Thể）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -737,33 +275,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "3a296496-6bfb-43c7-8fc8-0f1f11f91f37",
-    "front": "動く",
-    "back": "chuyển động",
-    "reading": "うごく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 動（Động）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "6de364fa-6392-4992-a4c8-576c579918f4",
-    "front": "動物",
-    "back": "động vật",
-    "reading": "どうぶつ",
-    "han_viet": "Động Vật",
-    "note": "Từ liên quan của Kanji 動（Động）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -776,20 +289,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "70a5dfa3-adf9-4b87-9a5d-43d00127a3eb",
-    "front": "社会",
-    "back": "xã hội",
-    "reading": "しゃかい",
-    "han_viet": "Xã Hội",
-    "note": "Từ liên quan của Kanji 社（Xã）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -802,33 +303,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "5881f159-ef4c-4473-90fc-4312eac256e7",
-    "front": "知る",
-    "back": "biết",
-    "reading": "しる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 知（Tri）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "f8d64198-e14a-4256-b7ce-b007fc143020",
-    "front": "知らせる",
-    "back": "báo cho biết",
-    "reading": "しらせる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 知（Tri）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -841,33 +317,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "ee56f196-9574-4963-afa7-13d1db89ebbc",
-    "front": "料理",
-    "back": "món ăn; nấu ăn",
-    "reading": "りょうり",
-    "han_viet": "Liệu Lý",
-    "note": "Từ liên quan của Kanji 理（Lý）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "ae83ea4b-b74a-48da-9118-5a0afaf2c85b",
-    "front": "理由",
-    "back": "lý do",
-    "reading": "りゆう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 理（Lý）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -880,33 +331,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "79fc96cc-4520-4060-ba51-4cc15dbf1691",
-    "front": "同じ",
-    "back": "giống nhau",
-    "reading": "おなじ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 同（Đồng）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "e4e1f5ab-27ee-4820-9639-ba2beb474755",
-    "front": "同時",
-    "back": "đồng thời",
-    "reading": "どうじ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 同（Đồng）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -919,33 +345,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "8a3f4187-ca33-4e35-bca6-a7c29382886e",
-    "front": "心",
-    "back": "tâm; lòng",
-    "reading": "こころ",
-    "han_viet": "Tâm",
-    "note": "Từ liên quan của Kanji 心（Tâm）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "567c11c0-e491-438a-84ff-f27cb81ede7c",
-    "front": "安心",
-    "back": "yên tâm",
-    "reading": "あんしん",
-    "han_viet": "An Tâm",
-    "note": "Từ liên quan của Kanji 心（Tâm）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -958,33 +359,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "9526b744-92a7-4e43-8232-f430bd983981",
-    "front": "出発",
-    "back": "khởi hành",
-    "reading": "しゅっぱつ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 発（Phát）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "14e5cf20-f8b5-4549-9d64-15f0d89bda69",
-    "front": "発音",
-    "back": "phát âm",
-    "reading": "はつおん",
-    "han_viet": "Phát Âm",
-    "note": "Từ liên quan của Kanji 発（Phát）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -997,33 +373,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "82fec4d6-122e-46c5-aef7-0495a81a33fe",
-    "front": "作る",
-    "back": "làm; chế tạo",
-    "reading": "つくる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 作（Tác）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "c7d144a7-6aa3-4e3a-a361-e46241417a2b",
-    "front": "作品",
-    "back": "tác phẩm",
-    "reading": "さくひん",
-    "han_viet": "Tác Phẩm",
-    "note": "Từ liên quan của Kanji 作（Tác）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -1036,33 +387,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "f95ad994-3bfc-42fc-87ad-e3dcf688bbf8",
-    "front": "新しい",
-    "back": "mới",
-    "reading": "あたらしい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 新（Tân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "3de3cad0-1000-4c93-aca2-f21cf66f669e",
-    "front": "新聞",
-    "back": "báo",
-    "reading": "しんぶん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 新（Tân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -1075,33 +401,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "b543869d-09aa-4cee-ae35-e84d897f8586",
-    "front": "世界",
-    "back": "thế giới",
-    "reading": "せかい",
-    "han_viet": "Thế Giới",
-    "note": "Từ liên quan của Kanji 世（Thế）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "42192d21-f7fb-46eb-9b34-eddc21cab924",
-    "front": "世話",
-    "back": "chăm sóc; giúp đỡ",
-    "reading": "せわ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 世（Thế）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -1114,33 +415,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "65e29e3e-4f2b-4242-bf0a-b54cae0de384",
-    "front": "今度",
-    "back": "lần này; lần tới",
-    "reading": "こんど",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 度（Độ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "0c9a81e5-4454-4a58-adeb-9104a82bc4af",
-    "front": "一度",
-    "back": "một lần",
-    "reading": "いちど",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 度（Độ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -1153,33 +429,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "2f525e89-46d3-4681-84d6-2a8b88df2f9c",
-    "front": "明るい",
-    "back": "sáng; vui vẻ",
-    "reading": "あかるい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 明（Minh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "7f4e159a-9538-41bf-abd6-d495ba3109e4",
-    "front": "説明",
-    "back": "giải thích",
-    "reading": "せつめい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 明（Minh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -1192,33 +443,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "670f9482-65ba-4ad6-9088-8c83f863a020",
-    "front": "力",
-    "back": "sức lực",
-    "reading": "ちから",
-    "han_viet": "Lực",
-    "note": "Từ liên quan của Kanji 力（Lực）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "a059501a-eaa5-48db-8746-64d330683905",
-    "front": "努力",
-    "back": "nỗ lực",
-    "reading": "どりょく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 力（Lực）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -1231,33 +457,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "054c3c18-55e6-48a0-ac79-675a5bcdf989",
-    "front": "意味",
-    "back": "ý nghĩa",
-    "reading": "いみ",
-    "han_viet": "Ý Vị",
-    "note": "Từ liên quan của Kanji 意（Ý）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "3d49e3cc-efca-435a-8b5f-d77164e354dd",
-    "front": "注意",
-    "back": "chú ý",
-    "reading": "ちゅうい",
-    "han_viet": "Chú Ý",
-    "note": "Từ liên quan của Kanji 意（Ý）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -1270,33 +471,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "f536e1ae-f9a7-40ce-a5a8-56f0f996b24a",
-    "front": "用事",
-    "back": "việc cần làm",
-    "reading": "ようじ",
-    "han_viet": "Dụng Sự",
-    "note": "Từ liên quan của Kanji 用（Dụng）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "6ccaa7a9-5da1-40c9-a569-c8c05af126d5",
-    "front": "用意",
-    "back": "chuẩn bị",
-    "reading": "ようい",
-    "han_viet": "Dụng Ý",
-    "note": "Từ liên quan của Kanji 用（Dụng）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 2"
     ]
   },
   {
@@ -1309,33 +485,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "24e9084c-a580-4453-8e63-9b762c5cd269",
-    "front": "主人",
-    "back": "chồng; chủ nhà",
-    "reading": "しゅじん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 主（Chủ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "fffcc724-48e1-4f28-97ec-a72a22f4e388",
-    "front": "主に",
-    "back": "chủ yếu",
-    "reading": "おもに",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 主（Chủ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1348,33 +499,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e61d4d95-1205-4c6f-9d1f-29f004febb07",
-    "front": "通る",
-    "back": "đi qua",
-    "reading": "とおる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 通（Thông）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "60f9f41e-98fd-4114-bdca-2255b8a8faae",
-    "front": "通う",
-    "back": "đi lại thường xuyên",
-    "reading": "かよう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 通（Thông）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1387,33 +513,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "45fe4609-8317-43e3-b585-12ac4e0fc738",
-    "front": "文章",
-    "back": "đoạn văn; bài viết",
-    "reading": "ぶんしょう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 文（Văn）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "32a42696-9e9c-4cb2-b8fa-5158735b2845",
-    "front": "文化",
-    "back": "văn hóa",
-    "reading": "ぶんか",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 文（Văn）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1426,33 +527,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "3c64ecd3-a504-417c-94ea-f338cb78e924",
-    "front": "部屋",
-    "back": "phòng",
-    "reading": "へや",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 屋（Ốc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "239c82f7-0ddd-4f96-841c-4c18812d5735",
-    "front": "本屋",
-    "back": "hiệu sách",
-    "reading": "ほんや",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 屋（Ốc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1465,33 +541,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "fc9ede58-dd1d-41ff-b9cd-3e11ab1a8c51",
-    "front": "授業",
-    "back": "giờ học",
-    "reading": "じゅぎょう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 業（Nghiệp）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "55809185-5787-4829-a93b-c5bb71021501",
-    "front": "卒業",
-    "back": "tốt nghiệp",
-    "reading": "そつぎょう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 業（Nghiệp）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1504,33 +555,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "5c5906ee-6879-4f9d-8999-b2c0bf9e7036",
-    "front": "持つ",
-    "back": "cầm; mang; có",
-    "reading": "もつ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 持（Trì）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "be62d4b0-9b5f-4464-bf1e-979dfb97ee2f",
-    "front": "気持ち",
-    "back": "cảm xúc; tâm trạng",
-    "reading": "きもち",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 持（Trì）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1543,33 +569,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "ce60bb87-b3fd-45e6-bbf7-a7dab8021c02",
-    "front": "道",
-    "back": "đường",
-    "reading": "みち",
-    "han_viet": "Đạo",
-    "note": "Từ liên quan của Kanji 道（Đạo）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "4333258b-3ecd-4f57-b990-320c4e092260",
-    "front": "水道",
-    "back": "nước máy",
-    "reading": "すいどう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 道（Đạo）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1582,33 +583,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "6d1e6f4f-689f-48a4-bd9d-8b51552880f4",
-    "front": "身体",
-    "back": "cơ thể",
-    "reading": "しんたい",
-    "han_viet": "Thân Thể",
-    "note": "Từ liên quan của Kanji 身（Thân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "c4fcb3ac-671a-410e-a9a5-561ecdbecc3a",
-    "front": "身近",
-    "back": "gần gũi",
-    "reading": "みぢか",
-    "han_viet": "Thân Cận",
-    "note": "Từ liên quan của Kanji 身（Thân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1621,33 +597,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "aa1450b6-f121-45a0-936c-2764a99e49be",
-    "front": "不便",
-    "back": "bất tiện",
-    "reading": "ふべん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 不（Bất）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "fc427545-948c-4025-8012-1e77eeeec87e",
-    "front": "不安",
-    "back": "bất an",
-    "reading": "ふあん",
-    "han_viet": "Bất An",
-    "note": "Từ liên quan của Kanji 不（Bất）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1660,33 +611,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "6b4d7596-c380-418a-a6e3-15fddaa2fa77",
-    "front": "入口",
-    "back": "lối vào",
-    "reading": "いりぐち",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 口（Khẩu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "47c280b6-47f8-42b3-b890-9bd140ec6bc8",
-    "front": "出口",
-    "back": "lối ra",
-    "reading": "でぐち",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 口（Khẩu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1699,33 +625,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "be27ab39-b782-40f3-9ca3-29e5892e9889",
-    "front": "多い",
-    "back": "nhiều",
-    "reading": "おおい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 多（Đa）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "f50f43d6-67a3-466c-9405-8881deec6aab",
-    "front": "多分",
-    "back": "có lẽ",
-    "reading": "たぶん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 多（Đa）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1738,33 +639,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "a19363d2-2c77-4258-a411-59bc74f46201",
-    "front": "野菜",
-    "back": "rau",
-    "reading": "やさい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 野（Dã）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "fd579310-08c9-4a96-8ff6-c02c19912528",
-    "front": "野球",
-    "back": "bóng chày",
-    "reading": "やきゅう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 野（Dã）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1777,33 +653,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "46f03ef1-ebcc-4fac-8b24-040f56aa9e52",
-    "front": "考える",
-    "back": "suy nghĩ",
-    "reading": "かんがえる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 考（Khảo）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "f7443631-23b4-4cf5-b7ed-1226150cc67b",
-    "front": "考え",
-    "back": "ý nghĩ",
-    "reading": "かんがえ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 考（Khảo）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1816,33 +667,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e4181c82-0d07-494a-984d-d56ad198a937",
-    "front": "開ける",
-    "back": "mở",
-    "reading": "あける",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 開（Khai）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "cbe538bd-9997-4a41-851b-9b973b72c2d7",
-    "front": "開く",
-    "back": "mở; tổ chức",
-    "reading": "ひらく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 開（Khai）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1855,33 +681,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "54a968bb-24a0-439a-a7ae-4b327ed00605",
-    "front": "教える",
-    "back": "dạy",
-    "reading": "おしえる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 教（Giáo）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "0c1e7f53-0c04-4a81-8955-a1e1687e57c6",
-    "front": "教室",
-    "back": "phòng học",
-    "reading": "きょうしつ",
-    "han_viet": "Giáo Thất",
-    "note": "Từ liên quan của Kanji 教（Giáo）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1894,33 +695,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "3db82a0e-6fbe-414c-801c-dfd5492d37da",
-    "front": "近い",
-    "back": "gần",
-    "reading": "ちかい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 近（Cận）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "e474afd4-48c9-45fd-b952-f134a8895106",
-    "front": "最近",
-    "back": "gần đây",
-    "reading": "さいきん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 近（Cận）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1933,33 +709,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "deb0eec7-6ce6-414e-a42c-4d14e57e9704",
-    "front": "以上",
-    "back": "trở lên",
-    "reading": "いじょう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 以（Dĩ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "fd7df7cf-69c1-4ef8-8779-239d5426c1e6",
-    "front": "以下",
-    "back": "trở xuống",
-    "reading": "いか",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 以（Dĩ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 3"
     ]
   },
   {
@@ -1972,33 +723,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "b7897d82-452a-4464-9890-d712d990503d",
-    "front": "問題",
-    "back": "vấn đề",
-    "reading": "もんだい",
-    "han_viet": "Vấn Đề",
-    "note": "Từ liên quan của Kanji 問（Vấn）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "eb41c60c-f0a9-4804-ab79-3c10e74c913e",
-    "front": "質問",
-    "back": "câu hỏi",
-    "reading": "しつもん",
-    "han_viet": "Chất Vấn",
-    "note": "Từ liên quan của Kanji 問（Vấn）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2011,33 +737,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "57aa3825-2669-4c7d-a87c-3a6e46af0a8f",
-    "front": "正しい",
-    "back": "đúng",
-    "reading": "ただしい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 正（Chính）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "336c4de6-e89c-45bf-803b-8154107061b7",
-    "front": "正月",
-    "back": "Tết; năm mới",
-    "reading": "しょうがつ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 正（Chính）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2050,33 +751,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "66dcff2d-69f5-47a4-a4af-633a9122cf09",
-    "front": "写真",
-    "back": "ảnh",
-    "reading": "しゃしん",
-    "han_viet": "Tả Chân",
-    "note": "Từ liên quan của Kanji 真（Chân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "4b464ca2-2e79-40f2-a6c4-23bcee6c7554",
-    "front": "真ん中",
-    "back": "chính giữa",
-    "reading": "まんなか",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 真（Chân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2089,20 +765,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "d0cbd995-dd79-4296-bf91-b666de1cd3f4",
-    "front": "味",
-    "back": "vị; hương vị",
-    "reading": "あじ",
-    "han_viet": "Vị",
-    "note": "Từ liên quan của Kanji 味（Vị）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2115,20 +779,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "73b0ab21-677f-470a-abee-61a2be3e7727",
-    "front": "世界中",
-    "back": "khắp thế giới",
-    "reading": "せかいじゅう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 界（Giới）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2141,33 +793,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "3904e458-1e92-4a5c-a04d-c181ac89ef4c",
-    "front": "無理",
-    "back": "quá sức; không thể",
-    "reading": "むり",
-    "han_viet": "Vô Lý",
-    "note": "Từ liên quan của Kanji 無（Vô）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "bd3795c0-f7d6-4a53-be7b-664ba973b23c",
-    "front": "無料",
-    "back": "miễn phí",
-    "reading": "むりょう",
-    "han_viet": "Vô Liệu",
-    "note": "Từ liên quan của Kanji 無（Vô）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2180,33 +807,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "a4412fa0-bf75-4745-acd4-72862602d36c",
-    "front": "少ない",
-    "back": "ít",
-    "reading": "すくない",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 少（Thiểu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "f2af05ec-40d3-4d6d-b225-310de084b11e",
-    "front": "少し",
-    "back": "một chút",
-    "reading": "すこし",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 少（Thiểu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2219,33 +821,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e24639e5-8fe2-469e-8ef1-f6fb7d9484ff",
-    "front": "海",
-    "back": "biển",
-    "reading": "うみ",
-    "han_viet": "Hải",
-    "note": "Từ liên quan của Kanji 海（Hải）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "4fd9a147-2b01-474e-8ca7-31efd41618cb",
-    "front": "海外",
-    "back": "nước ngoài",
-    "reading": "かいがい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 海（Hải）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2258,33 +835,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "0a683caa-cf08-4eaf-9335-6395d4b4280f",
-    "front": "切る",
-    "back": "cắt",
-    "reading": "きる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 切（Thiết）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "45b45d48-3c2b-4ff4-b472-f16e667da4e4",
-    "front": "大切",
-    "back": "quan trọng",
-    "reading": "たいせつ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 切（Thiết）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2297,33 +849,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "8ca4c0e8-61e0-4ce0-8fa1-59c3ef3228e4",
-    "front": "重い",
-    "back": "nặng",
-    "reading": "おもい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 重（Trọng）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "9ec76c52-a201-4ee7-a595-c3ee550c1189",
-    "front": "体重",
-    "back": "cân nặng",
-    "reading": "たいじゅう",
-    "han_viet": "Thể Trọng",
-    "note": "Từ liên quan của Kanji 重（Trọng）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2336,33 +863,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "deb888de-2f83-4e37-a848-d1c45c3b8a94",
-    "front": "集まる",
-    "back": "tụ tập",
-    "reading": "あつまる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 集（Tập）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "1b72b4fa-8010-4cfd-9443-f82ba873c065",
-    "front": "集める",
-    "back": "thu thập",
-    "reading": "あつめる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 集（Tập）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2375,33 +877,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "b371bc9f-1166-4229-925e-08b1287daa90",
-    "front": "店員",
-    "back": "nhân viên cửa hàng",
-    "reading": "てんいん",
-    "han_viet": "Điếm Viên",
-    "note": "Từ liên quan của Kanji 員（Viên）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "43d8c244-bc11-47d7-a253-a785ae5c7e42",
-    "front": "会社員",
-    "back": "nhân viên công ty",
-    "reading": "かいしゃいん",
-    "han_viet": "Hội Xã Viên",
-    "note": "Từ liên quan của Kanji 員（Viên）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2414,33 +891,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "9da02fbf-61e5-49f5-a5c8-c7af2168914f",
-    "front": "公園",
-    "back": "công viên",
-    "reading": "こうえん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 公（Công）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "f781a532-01d2-4c4e-beda-6cc618c0b274",
-    "front": "公共",
-    "back": "công cộng",
-    "reading": "こうきょう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 公（Công）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2453,33 +905,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "c7448352-8df0-41f4-89a7-4aa9974e4dc4",
-    "front": "映画",
-    "back": "phim",
-    "reading": "えいが",
-    "han_viet": "Ánh Họa",
-    "note": "Từ liên quan của Kanji 画（Họa）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "725b7414-f640-45d8-b7d7-b7020a132302",
-    "front": "計画",
-    "back": "kế hoạch",
-    "reading": "けいかく",
-    "han_viet": "Kế Họa",
-    "note": "Từ liên quan của Kanji 画（Họa）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2492,33 +919,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "04c1c49d-9424-48ef-a7cb-ab43b9b5bc2a",
-    "front": "死ぬ",
-    "back": "chết",
-    "reading": "しぬ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 死（Tử）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "0e86cfce-ddeb-4d06-b08f-1ba4e2194fd4",
-    "front": "死亡",
-    "back": "tử vong",
-    "reading": "しぼう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 死（Tử）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2531,20 +933,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "5e9f840a-4a03-440a-b374-2ba8adae6f8c",
-    "front": "安い",
-    "back": "rẻ",
-    "reading": "やすい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 安（An）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2557,33 +947,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e8a31a7b-51aa-47ae-bca8-18f5f1a4962c",
-    "front": "親",
-    "back": "cha mẹ",
-    "reading": "おや",
-    "han_viet": "Thân",
-    "note": "Từ liên quan của Kanji 親（Thân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "c2361242-eb95-4e33-8415-bb86ff75e5d4",
-    "front": "両親",
-    "back": "cha mẹ",
-    "reading": "りょうしん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 親（Thân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 4"
     ]
   },
   {
@@ -2596,33 +961,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e1c6bdf4-b12f-4a9c-b4a2-cd126c5112d6",
-    "front": "強い",
-    "back": "mạnh",
-    "reading": "つよい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 強（Cường）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "47fd1e8a-cd38-4264-95a3-06efa068fe93",
-    "front": "勉強",
-    "back": "học tập",
-    "reading": "べんきょう",
-    "han_viet": "Miễn Cường",
-    "note": "Từ liên quan của Kanji 強（Cường）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2635,33 +975,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "a052b1d7-b3e3-4799-87d5-56b23d2c412c",
-    "front": "使う",
-    "back": "dùng",
-    "reading": "つかう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 使（Sử）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "3d32361c-2ec2-4396-81ce-427e6c9c4d56",
-    "front": "大使館",
-    "back": "đại sứ quán",
-    "reading": "たいしかん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 使（Sử）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2674,33 +989,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "7102ba7c-eee4-4e7f-8b0c-c83c25e3650f",
-    "front": "朝",
-    "back": "buổi sáng",
-    "reading": "あさ",
-    "han_viet": "Triều",
-    "note": "Từ liên quan của Kanji 朝（Triều）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "00ff25d3-11f4-4b06-8aa4-4d89a1d75d6c",
-    "front": "今朝",
-    "back": "sáng nay",
-    "reading": "けさ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 朝（Triều）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2713,20 +1003,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "f4dd026d-fb7a-4163-9532-75fb4893c9e6",
-    "front": "宿題",
-    "back": "bài tập về nhà",
-    "reading": "しゅくだい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 題（Đề）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2739,20 +1017,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "89069b52-579b-45c1-bd5a-116464dea4ec",
-    "front": "仕方",
-    "back": "cách làm",
-    "reading": "しかた",
-    "han_viet": "Sĩ Phương",
-    "note": "Từ liên quan của Kanji 仕（Sĩ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2765,33 +1031,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "8e3b7f2b-a2a3-4f1f-a571-66c5c74e558b",
-    "front": "東京",
-    "back": "Tokyo",
-    "reading": "とうきょう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 京（Kinh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "34f329a0-9013-4808-9e64-22238fe73a7a",
-    "front": "京都",
-    "back": "Kyoto",
-    "reading": "きょうと",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 京（Kinh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2804,33 +1045,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "eb1005fc-5f85-49ba-b512-6a258a92e7e5",
-    "front": "足",
-    "back": "chân",
-    "reading": "あし",
-    "han_viet": "Túc",
-    "note": "Từ liên quan của Kanji 足（Túc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "d6c62ed2-cbed-438a-964f-12600759ce6e",
-    "front": "足りる",
-    "back": "đủ",
-    "reading": "たりる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 足（Túc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2843,33 +1059,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "dfb91aba-4021-4c59-b893-6d0aee21e00f",
-    "front": "品物",
-    "back": "hàng hóa",
-    "reading": "しなもの",
-    "han_viet": "Phẩm Vật",
-    "note": "Từ liên quan của Kanji 品（Phẩm）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "17dd34a9-00ab-4f4e-8bba-99a42893ac44",
-    "front": "食品",
-    "back": "thực phẩm",
-    "reading": "しょくひん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 品（Phẩm）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2882,33 +1073,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "c36448fc-fdfc-45f7-b253-d0f06dc9d9fc",
-    "front": "着る",
-    "back": "mặc",
-    "reading": "きる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 着（Trứ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "9119197e-fca4-4950-8772-78db0bcc5603",
-    "front": "到着",
-    "back": "đến nơi",
-    "reading": "とうちゃく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 着（Trứ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2921,33 +1087,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "7f17cd57-d91b-445c-aff5-0d9c19f5225b",
-    "front": "別",
-    "back": "khác; riêng",
-    "reading": "べつ",
-    "han_viet": "Biệt",
-    "note": "Từ liên quan của Kanji 別（Biệt）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "44e34719-8509-4b7c-b072-662ff70097d5",
-    "front": "特別",
-    "back": "đặc biệt",
-    "reading": "とくべつ",
-    "han_viet": "Đặc Biệt",
-    "note": "Từ liên quan của Kanji 別（Biệt）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2960,20 +1101,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e04e0060-e538-4958-b042-fe092cd97e42",
-    "front": "音",
-    "back": "âm thanh",
-    "reading": "おと",
-    "han_viet": "Âm",
-    "note": "Từ liên quan của Kanji 音（Âm）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -2986,33 +1115,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "544ca211-2788-4b90-ae1f-2d0425ec2d41",
-    "front": "元気",
-    "back": "khỏe",
-    "reading": "げんき",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 元（Nguyên）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "919adbb3-c0ec-4074-9fab-3dae6b90ea12",
-    "front": "元",
-    "back": "gốc; trước đây",
-    "reading": "もと",
-    "han_viet": "Nguyên",
-    "note": "Từ liên quan của Kanji 元（Nguyên）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -3025,20 +1129,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "f4372fd1-f16c-4358-aef7-cd99d818e509",
-    "front": "特に",
-    "back": "đặc biệt là",
-    "reading": "とくに",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 特（Đặc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -3051,33 +1143,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e018e889-64ca-4e72-b9ff-5e0b88790120",
-    "front": "風",
-    "back": "gió",
-    "reading": "かぜ",
-    "han_viet": "Phong",
-    "note": "Từ liên quan của Kanji 風（Phong）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "d74aab19-26a8-442a-9079-e3de0076b54d",
-    "front": "台風",
-    "back": "bão",
-    "reading": "たいふう",
-    "han_viet": "Đài Phong",
-    "note": "Từ liên quan của Kanji 風（Phong）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -3090,33 +1157,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "5d558ed9-1667-4ce3-ac7d-a58c8c986b89",
-    "front": "夜",
-    "back": "ban đêm",
-    "reading": "よる",
-    "han_viet": "Dạ",
-    "note": "Từ liên quan của Kanji 夜（Dạ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "f111c20f-3708-46c9-a6bd-93a40f86c0b3",
-    "front": "今夜",
-    "back": "tối nay",
-    "reading": "こんや",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 夜（Dạ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -3129,33 +1171,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "ef732b8c-708c-4d68-aa35-de7d9ef27660",
-    "front": "空",
-    "back": "bầu trời",
-    "reading": "そら",
-    "han_viet": "Không",
-    "note": "Từ liên quan của Kanji 空（Không）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "441bdde2-5f4f-4da0-83b6-df978c18cfba",
-    "front": "空港",
-    "back": "sân bay",
-    "reading": "くうこう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 空（Không）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -3168,33 +1185,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "c37b75c4-b0a7-4fda-85a8-efc507e8ab33",
-    "front": "有名",
-    "back": "nổi tiếng",
-    "reading": "ゆうめい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 有（Hữu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "d9d7da81-25da-4c73-af76-1e7584e6a74c",
-    "front": "有る",
-    "back": "có",
-    "reading": "ある",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 有（Hữu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 5"
     ]
   },
   {
@@ -3207,33 +1199,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "209a4168-4d69-42aa-9073-686d2b45c7de",
-    "front": "起きる",
-    "back": "thức dậy",
-    "reading": "おきる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 起（Khởi）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "9530e2d2-5238-4a10-aee4-d87f1ddc1b68",
-    "front": "起こす",
-    "back": "đánh thức; gây ra",
-    "reading": "おこす",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 起（Khởi）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3246,33 +1213,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "8c2c5b5f-8092-403a-bed9-71c6e704921c",
-    "front": "運転",
-    "back": "lái xe",
-    "reading": "うんてん",
-    "han_viet": "Vận Chuyển",
-    "note": "Từ liên quan của Kanji 運（Vận）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "a031fd96-065d-49de-9f2e-95614b1c0e29",
-    "front": "運動",
-    "back": "vận động",
-    "reading": "うんどう",
-    "han_viet": "Vận Động",
-    "note": "Từ liên quan của Kanji 運（Vận）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3285,20 +1227,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "1c878855-eafd-4710-ab2f-e8f497ce91c7",
-    "front": "料金",
-    "back": "phí",
-    "reading": "りょうきん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 料（Liệu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3311,33 +1241,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "7097fe3e-f576-4b4e-bd5a-c5e75cb2e65c",
-    "front": "楽しい",
-    "back": "vui",
-    "reading": "たのしい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 楽（Lạc / Nhạc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "d980b7e8-bdb5-4745-8b9a-18b2d6c90f64",
-    "front": "音楽",
-    "back": "âm nhạc",
-    "reading": "おんがく",
-    "han_viet": "Âm Lạc",
-    "note": "Từ liên quan của Kanji 楽（Lạc / Nhạc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3350,33 +1255,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "f868bd8b-d9fc-4bc4-accd-8b1da2234bcc",
-    "front": "色",
-    "back": "màu sắc",
-    "reading": "いろ",
-    "han_viet": "Sắc",
-    "note": "Từ liên quan của Kanji 色（Sắc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "8c06e49f-20b1-4917-a9f9-670460f833cb",
-    "front": "景色",
-    "back": "phong cảnh",
-    "reading": "けしき",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 色（Sắc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3389,33 +1269,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "0ced9a53-01b4-4270-a752-ee1dc3ba4e05",
-    "front": "帰る",
-    "back": "trở về",
-    "reading": "かえる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 帰（Quy）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "29d2f304-e071-4a6f-bfe8-09f402043d7a",
-    "front": "帰国",
-    "back": "về nước",
-    "reading": "きこく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 帰（Quy）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3428,33 +1283,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "fef43cbe-caac-4b00-b08b-28e44bd5f16c",
-    "front": "歩く",
-    "back": "đi bộ",
-    "reading": "あるく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 歩（Bộ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "bc9d623f-8dd5-406d-927a-4f810b38f682",
-    "front": "散歩",
-    "back": "đi dạo",
-    "reading": "さんぽ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 歩（Bộ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3467,33 +1297,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "d9358b85-442a-46d0-a40e-3b4bc8746491",
-    "front": "悪い",
-    "back": "xấu; tệ",
-    "reading": "わるい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 悪（Ác）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "f38d448d-06ea-4232-a93c-e58cb81cf3b0",
-    "front": "最悪",
-    "back": "tệ nhất",
-    "reading": "さいあく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 悪（Ác）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3506,33 +1311,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "b61b1c9f-db9c-4e8b-9ad6-d0d190d2b4f9",
-    "front": "広い",
-    "back": "rộng",
-    "reading": "ひろい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 広（Quảng）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "c3b76187-0ce2-447f-aeec-c278263637b9",
-    "front": "広場",
-    "back": "quảng trường",
-    "reading": "ひろば",
-    "han_viet": "Quảng Trường",
-    "note": "Từ liên quan của Kanji 広（Quảng）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3545,20 +1325,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "8c31aa17-3232-476f-b8a2-166397452970",
-    "front": "店",
-    "back": "cửa hàng",
-    "reading": "みせ",
-    "han_viet": "Điếm",
-    "note": "Từ liên quan của Kanji 店（Điếm）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3571,33 +1339,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "3d4c8ffa-f598-4d02-831f-a6d2eb4fbad3",
-    "front": "町",
-    "back": "thị trấn; khu phố",
-    "reading": "まち",
-    "han_viet": "Đinh",
-    "note": "Từ liên quan của Kanji 町（Đinh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "b662fe15-64cb-42f0-a690-3a908ee34a66",
-    "front": "町中",
-    "back": "trong phố",
-    "reading": "まちなか",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 町（Đinh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3610,33 +1353,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "37b9936b-71a9-4c93-9e22-95bddf3b5da8",
-    "front": "住む",
-    "back": "sống; cư trú",
-    "reading": "すむ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 住（Trú）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "a5c2f91b-3936-4803-940e-619d2b2e7202",
-    "front": "住所",
-    "back": "địa chỉ",
-    "reading": "じゅうしょ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 住（Trú）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3649,33 +1367,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "f79192a6-a769-42c1-bfbd-7065e853c723",
-    "front": "売る",
-    "back": "bán",
-    "reading": "うる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 売（Mại）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "2ff2fc54-c12d-482e-9216-717cc70a9748",
-    "front": "売店",
-    "back": "quầy hàng",
-    "reading": "ばいてん",
-    "han_viet": "Mại Điếm",
-    "note": "Từ liên quan của Kanji 売（Mại）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3688,33 +1381,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "8610b2e1-743c-4947-8645-a0f06a2bf121",
-    "front": "待つ",
-    "back": "đợi",
-    "reading": "まつ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 待（Đãi）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "4d9d4d77-eafe-4c97-ab7f-18c49a9f9a11",
-    "front": "招待",
-    "back": "mời",
-    "reading": "しょうたい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 待（Đãi）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3727,33 +1395,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "cc9d7c96-3461-4c1a-88d4-dfd51a2f23c9",
-    "front": "古い",
-    "back": "cũ",
-    "reading": "ふるい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 古（Cổ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "8b7fdb53-f68e-49fe-a20e-4cf221298e40",
-    "front": "中古",
-    "back": "đồ cũ",
-    "reading": "ちゅうこ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 古（Cổ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3766,33 +1409,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e099bd1c-42b2-48a7-8eab-c283a9352177",
-    "front": "始める",
-    "back": "bắt đầu",
-    "reading": "はじめる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 始（Thủy）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "6b5b2648-b9d4-426d-bdde-219dbceeaf43",
-    "front": "始まる",
-    "back": "bắt đầu",
-    "reading": "はじまる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 始（Thủy）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3805,33 +1423,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "6af9b764-6f47-438a-87b7-f4a0c166f273",
-    "front": "終わる",
-    "back": "kết thúc",
-    "reading": "おわる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 終（Chung）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "4fd15380-2eaf-4aee-96b5-8e2f96e47592",
-    "front": "終える",
-    "back": "hoàn thành",
-    "reading": "おえる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 終（Chung）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 6"
     ]
   },
   {
@@ -3844,20 +1437,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "f94d3994-21fb-4049-880e-f1901291e05d",
-    "front": "時計",
-    "back": "đồng hồ",
-    "reading": "とけい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 計（Kế）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -3870,33 +1451,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "326c11cc-7778-4ab7-8c0c-9d27af777eef",
-    "front": "病院",
-    "back": "bệnh viện",
-    "reading": "びょういん",
-    "han_viet": "Bệnh Viện",
-    "note": "Từ liên quan của Kanji 院（Viện）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "32cc46fa-ab51-42c5-b148-b9a83aa6de94",
-    "front": "入院",
-    "back": "nhập viện",
-    "reading": "にゅういん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 院（Viện）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -3909,33 +1465,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "0cf0eaa3-afb2-4901-ad38-22f681ef0074",
-    "front": "送る",
-    "back": "gửi; tiễn",
-    "reading": "おくる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 送（Tống）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "8cc73d60-23d0-421c-a66b-932bc47c7ec3",
-    "front": "放送",
-    "back": "phát sóng",
-    "reading": "ほうそう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 送（Tống）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -3948,20 +1479,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "741e1356-506b-4b51-a62b-45b96faba3c9",
-    "front": "水族館",
-    "back": "thủy cung",
-    "reading": "すいぞくかん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 族（Tộc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -3974,20 +1493,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "2573dd66-bd0e-4809-9e27-d31f52d0d874",
-    "front": "映る",
-    "back": "được chiếu; phản chiếu",
-    "reading": "うつる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 映（Ánh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4000,20 +1507,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "0d60270f-0f05-46d0-a66c-4d1a455a83c8",
-    "front": "買う",
-    "back": "mua",
-    "reading": "かう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 買（Mãi）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4026,20 +1521,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "c1ce1810-000d-4095-9030-222306a83fd9",
-    "front": "病気",
-    "back": "bệnh; ốm",
-    "reading": "びょうき",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 病（Bệnh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4052,33 +1535,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "cff1301a-4226-411c-beeb-cbed01c15b6b",
-    "front": "早い",
-    "back": "sớm; nhanh",
-    "reading": "はやい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 早（Tảo）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "2bcc1c62-c502-4811-8826-1be73361ac1c",
-    "front": "早く",
-    "back": "sớm; nhanh chóng",
-    "reading": "はやく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 早（Tảo）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4091,20 +1549,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "b4036943-5f03-4198-8f63-be3a217f507b",
-    "front": "品質",
-    "back": "chất lượng",
-    "reading": "ひんしつ",
-    "han_viet": "Phẩm Chất",
-    "note": "Từ liên quan của Kanji 質（Chất）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4117,20 +1563,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "37221e18-84fe-4f6e-b6e6-963ecc8e733e",
-    "front": "台所",
-    "back": "nhà bếp",
-    "reading": "だいどころ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 台（Đài）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4143,20 +1577,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "7a535605-1190-4b89-8325-9ed58b0c0606",
-    "front": "洋室",
-    "back": "phòng kiểu phương Tây",
-    "reading": "ようしつ",
-    "han_viet": "Dương Thất",
-    "note": "Từ liên quan của Kanji 室（Thất）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4169,33 +1591,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "0bebc242-9606-4378-a13b-4ee37bdc1b8e",
-    "front": "可能",
-    "back": "có thể; khả năng",
-    "reading": "かのう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 可（Khả）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "06bfb7dd-9e56-409e-b370-0345d8cbfcae",
-    "front": "許可",
-    "back": "cho phép",
-    "reading": "きょか",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 可（Khả）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4208,33 +1605,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "065bbc91-187f-4785-9778-07d8cc4fe13f",
-    "front": "建てる",
-    "back": "xây",
-    "reading": "たてる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 建（Kiến）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "ed08e733-c2ef-4d0a-8f0c-64c51c6643ee",
-    "front": "建物",
-    "back": "tòa nhà",
-    "reading": "たてもの",
-    "han_viet": "Kiến Vật",
-    "note": "Từ liên quan của Kanji 建（Kiến）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4247,7 +1619,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4260,20 +1633,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "531e7d46-65da-4ef2-b028-cf3f8a1a913a",
-    "front": "医学",
-    "back": "y học",
-    "reading": "いがく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 医（Y）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4286,33 +1647,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "d6371133-0de0-435e-849e-eb5a57d6c154",
-    "front": "止まる",
-    "back": "dừng lại",
-    "reading": "とまる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 止（Chỉ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "78da66a6-be5f-4965-99d1-8f4a212c14df",
-    "front": "止める",
-    "back": "dừng; ngăn",
-    "reading": "とめる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 止（Chỉ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4325,33 +1661,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "791c5a4d-f0c0-4560-893b-aeb30decc5c8",
-    "front": "漢字",
-    "back": "chữ Hán",
-    "reading": "かんじ",
-    "han_viet": "Hán Tự",
-    "note": "Từ liên quan của Kanji 字（Tự）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "a51e64ff-7e7d-4e1f-b0f2-68629e066323",
-    "front": "文字",
-    "back": "chữ; ký tự",
-    "reading": "もじ",
-    "han_viet": "Văn Tự",
-    "note": "Từ liên quan của Kanji 字（Tự）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 7"
     ]
   },
   {
@@ -4364,20 +1675,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "16fa899f-fc9e-42ea-a16c-f62cd318ef6d",
-    "front": "工事",
-    "back": "công trình; thi công",
-    "reading": "こうじ",
-    "han_viet": "Công Sự",
-    "note": "Từ liên quan của Kanji 工（Công）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4390,33 +1689,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "efeba388-1d3b-4148-ab8b-ef231bdbfdbb",
-    "front": "急ぐ",
-    "back": "vội",
-    "reading": "いそぐ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 急（Cấp）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "ae12618c-b18d-485b-93a5-aee1ba4666fe",
-    "front": "急に",
-    "back": "đột nhiên",
-    "reading": "きゅうに",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 急（Cấp）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4429,20 +1703,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e8832cc3-e96a-410c-aada-6c044d17f7bb",
-    "front": "図書館",
-    "back": "thư viện",
-    "reading": "としょかん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 図（Đồ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4455,33 +1717,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "51f0096b-2738-4b1f-b515-16d38594141a",
-    "front": "黒い",
-    "back": "đen",
-    "reading": "くろい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 黒（Hắc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "0409a287-0f4c-4c25-9713-744f308391c3",
-    "front": "黒",
-    "back": "màu đen",
-    "reading": "くろ",
-    "han_viet": "Hắc",
-    "note": "Từ liên quan của Kanji 黒（Hắc）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4494,33 +1731,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "afa92492-1202-4fc9-9f72-cd0397492128",
-    "front": "花",
-    "back": "hoa",
-    "reading": "はな",
-    "han_viet": "Hoa",
-    "note": "Từ liên quan của Kanji 花（Hoa）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "dfb549c7-edf3-424c-814d-4103c927d2d8",
-    "front": "花見",
-    "back": "ngắm hoa",
-    "reading": "はなみ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 花（Hoa）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4533,33 +1745,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "7675c917-7822-467e-9ca4-7ae5db4167a4",
-    "front": "英語",
-    "back": "tiếng Anh",
-    "reading": "えいご",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 英（Anh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "d348bdb3-bafa-4341-b844-28b9d293600e",
-    "front": "英国",
-    "back": "nước Anh",
-    "reading": "えいこく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 英（Anh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4572,20 +1759,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "308a6776-99a0-41da-9a61-8ce57b3e9cee",
-    "front": "走る",
-    "back": "chạy",
-    "reading": "はしる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 走（Tẩu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4598,33 +1773,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "dab6bcd1-7dfe-4093-90a8-1d120baf5663",
-    "front": "青い",
-    "back": "xanh",
-    "reading": "あおい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 青（Thanh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "fa363477-9675-459f-ba4e-199f34583954",
-    "front": "青",
-    "back": "màu xanh",
-    "reading": "あお",
-    "han_viet": "Thanh",
-    "note": "Từ liên quan của Kanji 青（Thanh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4637,33 +1787,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "00f0f50e-d41e-435b-94d2-b34573c935bc",
-    "front": "答える",
-    "back": "trả lời",
-    "reading": "こたえる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 答（Đáp）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "9b0e7317-2e85-4d4e-a1a3-a6cf063b1d48",
-    "front": "答え",
-    "back": "đáp án",
-    "reading": "こたえ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 答（Đáp）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4676,20 +1801,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "8e533cea-10c7-4847-a871-0d9cdd928c99",
-    "front": "紙",
-    "back": "giấy",
-    "reading": "かみ",
-    "han_viet": "Chỉ",
-    "note": "Từ liên quan của Kanji 紙（Chỉ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4702,33 +1815,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "ddec6edb-bfbb-4976-aafa-344cbeda3ef0",
-    "front": "歌",
-    "back": "bài hát",
-    "reading": "うた",
-    "han_viet": "Ca",
-    "note": "Từ liên quan của Kanji 歌（Ca）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "65f23dcb-fcfc-4f94-bff3-efc40c1e1f18",
-    "front": "歌う",
-    "back": "hát",
-    "reading": "うたう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 歌（Ca）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4741,20 +1829,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "ee2ced0e-1b1b-48ee-8723-72807936819e",
-    "front": "注文",
-    "back": "gọi món; đặt hàng",
-    "reading": "ちゅうもん",
-    "han_viet": "Chú Văn",
-    "note": "Từ liên quan của Kanji 注（Chú）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4767,33 +1843,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "caad09b4-36d9-4ae2-ba03-d6fab01b0dea",
-    "front": "赤い",
-    "back": "đỏ",
-    "reading": "あかい",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 赤（Xích）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "5bbb17a5-4821-444d-845c-5c74e90fda3c",
-    "front": "赤",
-    "back": "màu đỏ",
-    "reading": "あか",
-    "han_viet": "Xích",
-    "note": "Từ liên quan của Kanji 赤（Xích）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4806,20 +1857,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "7cdd61fd-53aa-4ed8-8e6c-2c05a575b6c0",
-    "front": "春",
-    "back": "mùa xuân",
-    "reading": "はる",
-    "han_viet": "Xuân",
-    "note": "Từ liên quan của Kanji 春（Xuân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4832,20 +1871,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "1b049524-213e-4f2a-a303-d4f07383bebf",
-    "front": "映画館",
-    "back": "rạp chiếu phim",
-    "reading": "えいがかん",
-    "han_viet": "Ánh Họa Quán",
-    "note": "Từ liên quan của Kanji 館（Quán）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4858,33 +1885,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "eee9aa78-7e1a-4e46-8eb9-7bd7cc5f382d",
-    "front": "旅行",
-    "back": "du lịch",
-    "reading": "りょこう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 旅（Lữ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "2225d9fd-11a7-4767-b57a-46292e9b7e4f",
-    "front": "旅",
-    "back": "chuyến đi",
-    "reading": "たび",
-    "han_viet": "Lữ",
-    "note": "Từ liên quan của Kanji 旅（Lữ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4897,33 +1899,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "8107d12b-25e5-4bd4-aa5e-037cb104f1dd",
-    "front": "試験",
-    "back": "kỳ thi",
-    "reading": "しけん",
-    "han_viet": "Thí Nghiệm",
-    "note": "Từ liên quan của Kanji 験（Nghiệm）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "360a06f2-7e27-4126-ad11-1ae2cfcf4cd5",
-    "front": "経験",
-    "back": "kinh nghiệm",
-    "reading": "けいけん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 験（Nghiệm）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 8"
     ]
   },
   {
@@ -4936,20 +1913,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "317f58b9-c3be-4468-87f1-fa7588ca3448",
-    "front": "写す",
-    "back": "chép; chụp",
-    "reading": "うつす",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 写（Tả）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -4962,33 +1927,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "6bd836fa-2637-479c-8edb-4df4ecb4dff8",
-    "front": "去年",
-    "back": "năm ngoái",
-    "reading": "きょねん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 去（Khứ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "a087bba4-946a-425b-9a65-4dfcc384c892",
-    "front": "過去",
-    "back": "quá khứ",
-    "reading": "かこ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 去（Khứ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5001,33 +1941,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "43979b24-192c-4dff-8af4-8c7c20b4e16d",
-    "front": "研究",
-    "back": "nghiên cứu",
-    "reading": "けんきゅう",
-    "han_viet": "Nghiên Cứu",
-    "note": "Từ liên quan của Kanji 研（Nghiên）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "ade04b52-5d82-4bd4-a712-e12809ba8df5",
-    "front": "研修",
-    "back": "đào tạo; tu nghiệp",
-    "reading": "けんしゅう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 研（Nghiên）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5040,33 +1955,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "098184f4-78f7-42e9-87e1-b140894483bb",
-    "front": "飲む",
-    "back": "uống",
-    "reading": "のむ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 飲（Ẩm）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "ea8c00d0-200c-4ad0-9ae5-200946e11d02",
-    "front": "飲み物",
-    "back": "đồ uống",
-    "reading": "のみもの",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 飲（Ẩm）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5079,33 +1969,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "98ae1ff2-abbc-4909-874e-457613bece70",
-    "front": "肉",
-    "back": "thịt",
-    "reading": "にく",
-    "han_viet": "Nhục",
-    "note": "Từ liên quan của Kanji 肉（Nhục）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "3bab1e5b-84ac-48b6-8168-b368c40ad592",
-    "front": "牛肉",
-    "back": "thịt bò",
-    "reading": "ぎゅうにく",
-    "han_viet": "Ngưu Nhục",
-    "note": "Từ liên quan của Kanji 肉（Nhục）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5118,33 +1983,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "156304f5-a49c-4195-9dbc-ebdb0d328b1d",
-    "front": "服",
-    "back": "quần áo",
-    "reading": "ふく",
-    "han_viet": "Phục",
-    "note": "Từ liên quan của Kanji 服（Phục）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "eca34869-5e7c-493a-a4d9-7c8f46b7aa4c",
-    "front": "洋服",
-    "back": "quần áo kiểu phương Tây",
-    "reading": "ようふく",
-    "han_viet": "Dương Phục",
-    "note": "Từ liên quan của Kanji 服（Phục）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5157,33 +1997,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "fe858451-0222-4a8c-971a-4edc86a8de88",
-    "front": "銀行",
-    "back": "ngân hàng",
-    "reading": "ぎんこう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 銀（Ngân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "e2a4b493-c5e1-4812-80a8-348e7c0ac0a1",
-    "front": "銀",
-    "back": "bạc",
-    "reading": "ぎん",
-    "han_viet": "Ngân",
-    "note": "Từ liên quan của Kanji 銀（Ngân）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5196,33 +2011,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "873514d8-18bc-4b38-b227-1ae689b861ea",
-    "front": "お茶",
-    "back": "trà",
-    "reading": "おちゃ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 茶（Trà）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "0b3a1b70-0e08-4c8e-81d2-2de65544598f",
-    "front": "茶色",
-    "back": "màu nâu",
-    "reading": "ちゃいろ",
-    "han_viet": "Trà Sắc",
-    "note": "Từ liên quan của Kanji 茶（Trà）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5235,7 +2025,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5248,7 +2039,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5261,33 +2053,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "f756c253-c757-4d73-8072-8187f2865079",
-    "front": "兄",
-    "back": "anh trai",
-    "reading": "あに",
-    "han_viet": "Huynh",
-    "note": "Từ liên quan của Kanji 兄（Huynh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "af3a2c16-58d9-41f9-98ae-9b496b8d46a6",
-    "front": "お兄さん",
-    "back": "anh trai; anh",
-    "reading": "おにいさん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 兄（Huynh）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5300,20 +2067,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "3e9298a3-5f96-45ed-8d2a-0762b8de8a3d",
-    "front": "秋",
-    "back": "mùa thu",
-    "reading": "あき",
-    "han_viet": "Thu",
-    "note": "Từ liên quan của Kanji 秋（Thu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5326,33 +2081,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e1b62705-993f-45a4-833c-4563e1dadc07",
-    "front": "食堂",
-    "back": "nhà ăn; hội quán ăn",
-    "reading": "しょくどう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 堂（Đường）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "b9c83786-4504-4106-a223-1e129193ae95",
-    "front": "講堂",
-    "back": "giảng đường",
-    "reading": "こうどう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 堂（Đường）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5365,33 +2095,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "e0575387-ff9c-4d7b-990d-35ce86a6566a",
-    "front": "一週間",
-    "back": "một tuần",
-    "reading": "いっしゅうかん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 週（Chu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "9822a5ae-9640-4627-add3-a76d59c26cb9",
-    "front": "毎週",
-    "back": "hàng tuần",
-    "reading": "まいしゅう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 週（Chu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5404,33 +2109,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "84e9bde0-70ca-4c79-bfa5-20f2b8e9ef23",
-    "front": "習う",
-    "back": "học",
-    "reading": "ならう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 習（Tập）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "8f5eaf65-6d0d-4036-858a-bd4ab5aa9b55",
-    "front": "練習",
-    "back": "luyện tập",
-    "reading": "れんしゅう",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 習（Tập）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5443,20 +2123,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "9f95441a-f54b-401e-a89a-18ffff12c1ce",
-    "front": "試す",
-    "back": "thử",
-    "reading": "ためす",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 試（Thí）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5469,33 +2137,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "0ac3e5e6-350d-4c39-8418-42384fda9950",
-    "front": "夏",
-    "back": "mùa hè",
-    "reading": "なつ",
-    "han_viet": "Hạ",
-    "note": "Từ liên quan của Kanji 夏（Hạ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "7295dd3e-a054-4da9-a95b-b4fd8c729dcd",
-    "front": "夏休み",
-    "back": "nghỉ hè",
-    "reading": "なつやすみ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 夏（Hạ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 9"
     ]
   },
   {
@@ -5508,20 +2151,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "1e2707de-a56c-4f46-b0c5-de77ebcc9cb4",
-    "front": "弟",
-    "back": "em trai",
-    "reading": "おとうと",
-    "han_viet": "Đệ",
-    "note": "Từ liên quan của Kanji 弟（Đệ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5534,20 +2165,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "ef0766d2-f6f0-4c6d-a989-e57934966545",
-    "front": "鳥",
-    "back": "chim",
-    "reading": "とり",
-    "han_viet": "Điểu",
-    "note": "Từ liên quan của Kanji 鳥（Điểu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5560,20 +2179,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "d37f968f-32a2-49bf-8751-594cb5e1315a",
-    "front": "犬",
-    "back": "chó",
-    "reading": "いぬ",
-    "han_viet": "Khuyển",
-    "note": "Từ liên quan của Kanji 犬（Khuyển）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5586,20 +2193,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "557e12ec-5e9a-4aaf-ac3e-296f0a27e291",
-    "front": "夕食",
-    "back": "bữa tối",
-    "reading": "ゆうしょく",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 夕（Tịch）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5612,33 +2207,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "29444432-d711-4e25-819e-cf7e0c72f6a9",
-    "front": "魚",
-    "back": "cá",
-    "reading": "さかな",
-    "han_viet": "Ngư",
-    "note": "Từ liên quan của Kanji 魚（Ngư）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "60a5a884-cd09-46db-b341-f2c0ca52fa4b",
-    "front": "金魚",
-    "back": "cá vàng",
-    "reading": "きんぎょ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 魚（Ngư）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5651,20 +2221,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "6b210e63-4e28-4b12-980d-53807c002805",
-    "front": "借りる",
-    "back": "mượn",
-    "reading": "かりる",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 借（Tá）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5677,33 +2235,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "61c0f148-b7aa-488d-a7c6-75e51874adbf",
-    "front": "ご飯",
-    "back": "cơm; bữa ăn",
-    "reading": "ごはん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 飯（Phạn）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "9d65d43f-f3c2-4312-8f7d-5a0a8f1d8ef0",
-    "front": "朝ご飯",
-    "back": "bữa sáng",
-    "reading": "あさごはん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 飯（Phạn）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5716,33 +2249,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "aede24b6-03fa-4903-b5b3-2f84b0315600",
-    "front": "駅",
-    "back": "nhà ga",
-    "reading": "えき",
-    "han_viet": "Dịch",
-    "note": "Từ liên quan của Kanji 駅（Dịch）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "72520b0a-429e-45e2-9359-179463988e8a",
-    "front": "駅前",
-    "back": "trước nhà ga",
-    "reading": "えきまえ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 駅（Dịch）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5755,33 +2263,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "08c2474b-3d1a-46b9-a8cf-22b9e445319d",
-    "front": "昼",
-    "back": "buổi trưa",
-    "reading": "ひる",
-    "han_viet": "Trú",
-    "note": "Từ liên quan của Kanji 昼（Trú）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "caccad78-9b79-48f0-97e8-00d14e1d18ed",
-    "front": "昼ご飯",
-    "back": "bữa trưa",
-    "reading": "ひるごはん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 昼（Trú）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5794,33 +2277,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "67de1ab2-0d82-4300-9951-2da137793fd4",
-    "front": "冬",
-    "back": "mùa đông",
-    "reading": "ふゆ",
-    "han_viet": "Đông",
-    "note": "Từ liên quan của Kanji 冬（Đông）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "22a390d3-8a46-4923-b532-f408f0972fc7",
-    "front": "冬休み",
-    "back": "nghỉ đông",
-    "reading": "ふゆやすみ",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 冬（Đông）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5833,33 +2291,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "479f964c-77f2-4685-8296-af9872854f99",
-    "front": "姉",
-    "back": "chị gái",
-    "reading": "あね",
-    "han_viet": "Tỉ",
-    "note": "Từ liên quan của Kanji 姉（Tỉ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "059ead63-a012-4aad-80e5-069bfdf9d9bc",
-    "front": "お姉さん",
-    "back": "chị; chị gái",
-    "reading": "おねえさん",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 姉（Tỉ）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5872,33 +2305,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "c0b50460-3963-4c96-91d7-7d6cc98e207e",
-    "front": "曜日",
-    "back": "thứ trong tuần",
-    "reading": "ようび",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 曜（Diệu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "9b28e29c-b72a-4d6d-b425-7d2379beddde",
-    "front": "月曜日",
-    "back": "thứ Hai",
-    "reading": "げつようび",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 曜（Diệu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5911,20 +2319,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "9325cca6-606c-4128-9956-c7d9c1ec40fe",
-    "front": "漢語",
-    "back": "từ Hán",
-    "reading": "かんご",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 漢（Hán）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5937,20 +2333,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "d7055256-2420-4920-8661-a0e3dcc81858",
-    "front": "牛",
-    "back": "bò",
-    "reading": "うし",
-    "han_viet": "Ngưu",
-    "note": "Từ liên quan của Kanji 牛（Ngưu）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5963,20 +2347,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "b797ea57-5d47-4cca-9597-55fef1884ad2",
-    "front": "妹",
-    "back": "em gái",
-    "reading": "いもうと",
-    "han_viet": "Muội",
-    "note": "Từ liên quan của Kanji 妹（Muội）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -5989,33 +2361,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
-    ]
-  },
-  {
-    "note_id": "97178834-29d9-4861-9950-0d87c469b1ac",
-    "front": "貸す",
-    "back": "cho mượn",
-    "reading": "かす",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 貸（Thải）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
-    ]
-  },
-  {
-    "note_id": "b2be42bf-4e81-448d-abb6-af156b259867",
-    "front": "貸し出す",
-    "back": "cho mượn; cho thuê",
-    "reading": "かしだす",
-    "han_viet": null,
-    "note": "Từ liên quan của Kanji 貸（Thải）",
-    "type": "VOCABULARY",
-    "tags": [
-      "kanji N4",
-      "từ liên quan"
+      "kanji",
+      "Bài 10"
     ]
   },
   {
@@ -6028,7 +2375,8 @@
     "type": "KANJI",
     "tags": [
       "N4",
-      "kanji"
+      "kanji",
+      "Bài 10"
     ]
   }
 ]

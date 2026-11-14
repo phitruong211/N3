@@ -8,7 +8,7 @@
 import type {
   VocabItem, KanjiItem, GrammarItem,
   VerbInfo, AlternateReading, Variant, RelatedWord, VocabMetadata,
-  LegacyVerbVariant,
+  LegacyVerbVariant, GrammarExample,
 } from '../types';
 import { normalizeGrammarCard, type GrammarCardData } from './grammarData.ts';
 import { n5CardId } from './n5Decks.ts';
@@ -60,14 +60,9 @@ interface RawVocabN3 {
   tags?: string[];
   cac_id_trung_lap?: number[];
   metadata?: VocabMetadata;
+  examples?: GrammarExample[];
 }
 
-interface RawVocabN4 {
-  note_id?: string;
-  kanji?: string;
-  phien_am?: string;
-  nghia?: string;
-}
 
 /** Convert old dong_tu.bien_the format into clean VerbInfo */
 function normalizeVerbInfo(raw: RawVocabN3['dong_tu']): VerbInfo | null {
@@ -122,17 +117,17 @@ function once<T>(load: () => Promise<T>): () => Promise<T> {
   };
 }
 
-/** A word that only has the flat fields (N4, N5): fill the rich schema with empty values. */
-function flatVocab(v: { id: string; noteId?: string; numericId: number; index: number; level: 'N4' | 'N5'; tu: string; phien_am: string; han_viet: string | null; nghia: unknown; ghi_chu: string | null }): VocabItem {
-  const nghia = normalizeNghia(v.nghia);
+/** A study-card word (N5, N4, N2): fill the rich schema with empty values. */
+function flatVocab(id: string, item: RawStudyCard, index: number, level: 'N5' | 'N4' | 'N2'): VocabItem {
+  const nghia = normalizeNghia(item.back);
   return {
-    id: v.id, noteId: v.noteId, numericId: v.numericId, bai: null,
-    tu: v.tu, phien_am: v.phien_am, han_viet: v.han_viet, nghia,
-    loai_tu: null, dong_tu: null, cach_doc_khac: [], bien_the: [], ghi_chu: v.ghi_chu, tu_lien_quan: [],
-    tags: [v.level], metadata: { stt_goc: v.index, cac_id_trung_lap: [] },
+    id, noteId: item.note_id, numericId: index + { N5: 20000, N4: 10000, N2: 30000 }[level], bai: null,
+    tu: item.front || '', phien_am: item.reading || '', han_viet: item.han_viet || null, nghia,
+    loai_tu: null, dong_tu: null, cach_doc_khac: [], bien_the: [], ghi_chu: item.note || null, tu_lien_quan: [],
+    examples: item.examples, tags: item.tags?.length ? item.tags : [level], metadata: { stt_goc: index, cac_id_trung_lap: [] },
     // Backward-compatible
-    kanji: v.tu, hiragana: v.phien_am, meaning: nghia.join(', '), type: 'main',
-    relatedWords: '', lesson: '', level: v.level,
+    kanji: item.front || '', hiragana: item.reading || '', meaning: nghia.join(', '), type: 'main',
+    relatedWords: '', lesson: '', level,
   };
 }
 
@@ -143,9 +138,10 @@ export const loadVocabulary = once(loadVocabularyOnce);
 async function loadVocabularyOnce(): Promise<VocabItem[]> {
   if (_vocabCache) return _vocabCache;
 
-  const [rawN3, rawN4, rawN5] = await Promise.all([
+  const [rawN2, rawN3, rawN4, rawN5] = await Promise.all([
+    fetchArray<RawStudyCard>('/data/vocabN2.json'),
     fetchArray<RawVocabN3>('/data/vocabN3.json'),
-    fetchArray<RawVocabN4>('/data/vocabN4.json'),
+    fetchArray<RawStudyCard>('/data/vocabN4.json'),
     fetchArray<RawStudyCard>('/data/vocabN5.json'),
   ]);
 
@@ -181,6 +177,7 @@ async function loadVocabularyOnce(): Promise<VocabItem[]> {
       bien_the: item.bien_the ?? [],
       ghi_chu,
       tu_lien_quan,
+      examples: item.examples,
       tags,
       metadata: item.metadata ?? {
         stt_goc: item.stt_goc ?? null,
@@ -198,24 +195,12 @@ async function loadVocabularyOnce(): Promise<VocabItem[]> {
     };
   });
 
-  // Process N4 vocabulary (legacy flat format)
-  const n4Vocab: VocabItem[] = rawN4.map((item, index) => {
-    const rawPhienAm = item.phien_am || '';
-    const hvMatch = rawPhienAm.match(/^(.*?)\s*\[([^\]]*)\]\s*$/);
-    return flatVocab({
-      id: `vocab-n4-${index}`, noteId: item.note_id, numericId: index + 10000, index, level: 'N4',
-      tu: item.kanji || '', phien_am: hvMatch ? hvMatch[1].trim() : rawPhienAm.trim(),
-      han_viet: hvMatch ? hvMatch[2].trim() : null, nghia: item.nghia, ghi_chu: null,
-    });
-  });
+  // Ids stay index-based for N4/N2 and front-based for N5, so saved progress keeps matching.
+  const n4Vocab = rawN4.map((item, index) => flatVocab(`vocab-n4-${index}`, item, index, 'N4'));
+  const n2Vocab = rawN2.map((item, index) => flatVocab(`vocab-n2-${index}`, item, index, 'N2'));
+  const n5Vocab = rawN5.map((item, index) => flatVocab(n5CardId('vocabN5', 'VOCABULARY', item.front || '', item.reading), item, index, 'N5'));
 
-  // N5 uses the study-card schema; ids match the N5 deck so progress and bookmarks are shared.
-  const n5Vocab: VocabItem[] = rawN5.map((item, index) => flatVocab({
-    id: n5CardId('vocabN5', 'VOCABULARY', item.front || '', item.reading), noteId: item.note_id, numericId: index + 20000, index, level: 'N5',
-    tu: item.front || '', phien_am: item.reading || '', han_viet: item.han_viet || null, nghia: item.back, ghi_chu: item.note || null,
-  }));
-
-  _vocabCache = [...n3Vocab, ...n4Vocab, ...n5Vocab];
+  _vocabCache = [...n3Vocab, ...n4Vocab, ...n5Vocab, ...n2Vocab];
   return _vocabCache;
 }
 
@@ -223,38 +208,29 @@ async function loadVocabularyOnce(): Promise<VocabItem[]> {
 
 interface RawKanjiVocab {
   word?: string;
-  tu?: string;
   reading?: string;
-  phien_am?: string;
   meaning?: string;
-  nghia?: string;
   han_viet?: string;
 }
 
+/** The N3 and N2 Kanji files: one entry per character with its readings and words. */
 interface RawKanji {
   note_id?: string;
   kanji?: string;
-  tu_chinh?: string;
   han_viet?: string;
-  Han_viet?: string;
-  vocabulary?: RawKanjiVocab[];
-  tu_lien_quan?: RawKanjiVocab[];
-}
-
-let _kanjiCache: KanjiItem[] | null = null;
-
-interface RawKanjiN2 {
-  note_id?: string;
-  kanji?: string;
-  han_viet?: string;
+  meaning?: string;
   onyomi?: string[];
   kunyomi?: string[];
   words?: RawKanjiVocab[];
+  note?: string;
+  examples?: GrammarExample[];
+  level?: 'N3' | 'N2' | 'N1';
+  lesson?: string;
+  /** Extraction noise kept only so later index-based ids do not shift. */
+  hidden?: boolean;
 }
 
-interface RawKanjiN2File {
-  data?: RawKanjiN2[];
-}
+let _kanjiCache: KanjiItem[] | null = null;
 
 interface RawStudyCard {
   note_id?: string;
@@ -264,6 +240,8 @@ interface RawStudyCard {
   han_viet?: string | null;
   note?: string;
   type?: string;
+  tags?: string[];
+  examples?: GrammarExample[];
 }
 
 function splitKanjiReading(raw: string, label: 'On' | 'Kun'): string[] {
@@ -288,56 +266,36 @@ export const loadKanji = once(loadKanjiOnce);
 async function loadKanjiOnce(): Promise<KanjiItem[]> {
   if (_kanjiCache) return _kanjiCache;
 
-  const [raw, rawN4, rawN5, n2Response] = await Promise.all([
-    fetchArray<RawKanji>('/data/kanjiN3_vocab_full.json'),
+  const [rawN2, rawN3, rawN4, rawN5] = await Promise.all([
+    fetchArray<RawKanji>('/data/kanjiN2.json'),
+    fetchArray<RawKanji>('/data/kanjiN3.json'),
     fetchArray<RawStudyCard>('/data/kanjiN4.json'),
     fetchArray<RawStudyCard>('/data/kanjiN5.json'),
-    fetch('/data/kanjiN2.json'),
   ]);
-  if (!n2Response.ok) throw new Error(`Could not load /data/kanjiN2.json: ${n2Response.status}`);
-  const n2File: RawKanjiN2File = await n2Response.json();
-  if (!Array.isArray(n2File.data)) throw new Error('Invalid data in /data/kanjiN2.json: expected data array');
 
-  const n3Kanji: KanjiItem[] = raw.map((item, index) => {
-    const kanjiChar = item.tu_chinh || item.kanji || '';
-    const hanVietStr = item.han_viet || item.Han_viet || '';
-    const rawVocab = item.tu_lien_quan || item.vocabulary || [];
-
-    return {
-      id: `kanji-${index}`,
-      noteId: item.note_id,
-      kanji: kanjiChar,
-      hanViet: hanVietStr,
-      level: 'N3',
-      vocabulary: rawVocab
-        .map((v) => ({
-          word: v.tu || v.word || '',
-          reading: v.phien_am || v.reading || '',
-          hanViet: v.han_viet || undefined,
-          meaning: v.nghia || v.meaning || '',
-        }))
-        .filter((v) => v.word.length <= 6 && v.reading.length > 1)
-        .slice(0, 5),
-    };
-  });
-
-  const n2Kanji: KanjiItem[] = n2File.data.map((item, index) => ({
-    id: `kanji-n2-${index}`,
+  // An entry may name its own level: the N2 source book also holds N1 Kanji.
+  const structured = (items: RawKanji[], level: 'N3' | 'N2', idPrefix: string): KanjiItem[] => items.map((item, index) => ({
+    hidden: item.hidden,
+    id: `${idPrefix}${index}`,
     noteId: item.note_id,
     kanji: item.kanji || '',
     hanViet: item.han_viet || '',
-    level: 'N2',
+    meaning: item.meaning || undefined,
+    level: item.level || level,
     onyomi: item.onyomi || [],
     kunyomi: item.kunyomi || [],
-    vocabulary: (item.words || []).map((word) => ({
+    vocabulary: (item.words || []).map(word => ({
       word: word.word || '',
       reading: word.reading || '',
       hanViet: word.han_viet || undefined,
       meaning: word.meaning || '',
-    })).filter((word) => word.word),
-  }));
+    })).filter(word => word.word),
+    note: item.note || undefined,
+    examples: item.examples,
+    lesson: item.lesson,
+  })).filter(item => !item.hidden).map(({ hidden: _, ...item }) => item);
 
-  // The N4 and N5 files also hold related-vocabulary cards; the Kanji library lists the Kanji only.
+  // N5 and N4 keep the study-card schema: the note holds the related words, then memory tips.
   const cardKanji = (cards: RawStudyCard[], level: 'N4' | 'N5', id: (item: RawStudyCard) => string): KanjiItem[] =>
     cards.filter(item => item.type === 'KANJI' && item.front).map(item => ({
       id: id(item),
@@ -353,12 +311,17 @@ async function loadKanjiOnce(): Promise<KanjiItem[]> {
         reading: word.reading || '',
         meaning: word.meaning || '',
       })),
+      note: (item.note || '').split(/\r?\n/).filter(line => line.startsWith('【')).join('\n') || undefined,
+      examples: item.examples,
+      lesson: item.tags?.find(tag => /^bài\s*\d+/i.test(tag)),
     }));
-  const n4Kanji = cardKanji(rawN4, 'N4', item => `kanji-n4-${encodeURIComponent(item.front || '')}`);
-  const n5Kanji = cardKanji(rawN5, 'N5', item => n5CardId('kanjiN5', 'KANJI', item.front || '', item.reading));
-
-  _kanjiCache = [...n3Kanji, ...n4Kanji, ...n2Kanji, ...n5Kanji];
-
+  // Ids match what each level used before, so saved progress keeps matching.
+  _kanjiCache = [
+    ...structured(rawN3, 'N3', 'kanji-'),
+    ...cardKanji(rawN4, 'N4', item => `kanji-n4-${encodeURIComponent(item.front || '')}`),
+    ...structured(rawN2, 'N2', 'kanji-n2-'),
+    ...cardKanji(rawN5, 'N5', item => n5CardId('kanjiN5', 'KANJI', item.front || '', item.reading)),
+  ];
   return _kanjiCache;
 }
 
