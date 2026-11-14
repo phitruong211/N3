@@ -1,7 +1,7 @@
 import { useReducer, useRef, useState } from 'react';
 import { KANA_POOL, ROMAJI, pickKana } from '../kanaProgress';
 import { speak } from '../kanaSpeech';
-import { rainLevel, resolveTyped } from './gameLogic';
+import { rainLevel, resolveTyped, telexKey } from './gameLogic';
 import { Board, Countdown, GameOver, Hud, PausedOverlay, SHAKE, readBest, saveBest, useGameLoop, useGameMusic, usePhase, type GameProps } from './GameShell';
 
 type Drop = { id: number; ch: string; slot: number; y: number };
@@ -59,6 +59,7 @@ function RainRound({ script, progress, storage, onRecord, onExit, onDrill, phase
   const pending = useRef<number | undefined>(undefined);
   const composing = useRef(false);
   const resetting = useRef(false);
+  const imeRewrite = useRef(false);
   const clearInput = () => {
     setTyped('');
     if (!composing.current) return;
@@ -134,10 +135,13 @@ function RainRound({ script, progress, storage, onRecord, onExit, onDrill, phase
       <label className="sr-only" htmlFor="kana-rain-input">Gõ romaji</label>
       <input id="kana-rain-input" ref={input} value={typed} disabled={phase === 'over'}
         // Judge every keystroke, even mid-composition (Vietnamese IME, phone keyboards), so no Enter is needed.
-        onChange={e => submit(e.target.value, false)}
+        onChange={e => { const v = e.target.value; const rewrite = imeRewrite.current; imeRewrite.current = false; submit(rewrite ? telexKey(v) : v, false); }}
         onCompositionStart={() => { composing.current = true; }}
         onCompositionEnd={e => { composing.current = false; submit(e.currentTarget.value, false); }}
-        onKeyDown={e => { if (!e.nativeEvent.isComposing && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); submit(e.currentTarget.value, true); } }}
+        onKeyDown={e => {
+          // A Backspace on an empty box is Unikey/EVKey rewriting the word we already cleared; decode what follows.
+          if (e.key === 'Backspace' && !e.currentTarget.value) imeRewrite.current = true;
+          if (!e.nativeEvent.isComposing && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); submit(e.currentTarget.value, true); } }}
         autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} enterKeyHint="go" placeholder="Gõ romaji…"
         className="h-14 w-full rounded-xl border-2 border-[var(--color-border-strong)] bg-[var(--color-surface)] text-center text-2xl tracking-wider text-[var(--color-text)] outline-none focus:border-[var(--color-accent)]" />
       <p className="mt-2 text-center text-xs text-[var(--color-text-tertiary)]">Gõ đúng là chữ tự vỡ · Chữ gần đất nhất được bắn trước · Esc tạm dừng</p>

@@ -24,6 +24,22 @@ export function resolveTyped<T extends { ch: string }>(input: string, items: rea
   return { hit: null, wrong: force || !longer };
 }
 
+const TONE_KEYS: Record<string, string> = { '́': 's', '̀': 'f', '̉': 'r', '̃': 'x', '̣': 'j' };
+/**
+ * Unikey/EVKey (Telex) remember the word typed before we cleared the box, so the next key arrives as "delete + á"
+ * instead of "s". Read the key back from the mark it added: tone → s/f/r/x/j, â/ê/ô → that vowel, ư/ơ/ă → w, đ → d.
+ */
+export function telexKey(text: string): string {
+  const nfd = text.normalize('NFD');
+  const tone = [...nfd].find(c => TONE_KEYS[c]);
+  if (tone) return TONE_KEYS[tone];
+  const hat = nfd.indexOf('̂');
+  if (hat > 0) return nfd[hat - 1].toLowerCase();
+  if (/[̛̆]/.test(nfd)) return 'w';
+  if (/[đĐ]/.test(text)) return 'd';
+  return text;
+}
+
 /** Kana rain difficulty: every 8 hits is a level; drops fall faster, come sooner and crowd the sky. */
 export function rainLevel(hits: number) {
   const level = 1 + Math.floor(hits / 8);

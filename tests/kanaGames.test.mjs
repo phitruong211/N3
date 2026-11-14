@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { KANA_POOL, ROMAJI } from '../src/components/kana/kanaProgress.ts';
-import { LOOKALIKES, gateRow, impostorRound, rainLevel, resolveTyped, toriiLevel } from '../src/components/kana/games/gameLogic.ts';
+import { LOOKALIKES, gateRow, impostorRound, rainLevel, resolveTyped, telexKey, toriiLevel } from '../src/components/kana/games/gameLogic.ts';
 
 const drops = chars => chars.map(ch => ({ ch }));
 
@@ -81,4 +81,18 @@ test('music stays in the miyako-bushi scale and only gently thickens with the le
   // Background music: the tempo only drifts, from a lofi 76 to at most 94 BPM.
   assert.equal(bpmFor(1), 76);
   assert.ok(bpmFor(50) <= 94 && bpmFor(50) === bpmFor(7));
+});
+
+test('telexKey reads back the key a Vietnamese IME turned into a mark', () => {
+  assert.equal(telexKey('á'), 's');
+  assert.equal(telexKey('à'), 'f');
+  assert.equal(telexKey('ả'), 'r');
+  assert.equal(telexKey('ã'), 'x');
+  assert.equal(telexKey('ạ'), 'j');
+  assert.equal(telexKey('ấ'), 's');
+  assert.equal(telexKey('â'), 'a');
+  assert.equal(telexKey('ô'), 'o');
+  assert.equal(telexKey('ư'), 'w');
+  assert.equal(telexKey('đ'), 'd');
+  assert.equal(telexKey('k'), 'k');
 });
