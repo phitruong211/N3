@@ -1,4 +1,4 @@
-import { apiRequest, ApiError } from './api';
+import { apiRequest, ApiError, timeoutSignal } from './api';
 
 export interface LibraryState { published: boolean; level: string | null; moderation: 'ACTIVE' | 'UNDER_REVIEW' | 'REMOVED'; removedReason: string | null; downloads: number }
 /** `code` is the short code ("K7QM-3XPD"); `expiresAt` is null for links that never expire. */
@@ -37,7 +37,7 @@ export const saveSharedGroup = (token: string) => apiRequest<{ groupId: string; 
 export const groupShareUrl = (token: string) => `${window.location.origin}/shared/groups/${encodeURIComponent(token)}`;
 async function publicRequest<T>(path: string, signal: AbortSignal): Promise<T> {
   const base = (import.meta.env?.VITE_API_URL || '/api/v1').replace(/\/$/, '');
-  const response = await fetch(`${base}${path}`, { signal: AbortSignal.any([signal, AbortSignal.timeout(30_000)]), cache: 'no-store', credentials: 'omit' });
+  const response = await fetch(`${base}${path}`, { signal: timeoutSignal(30_000, signal).signal, cache: 'no-store', credentials: 'omit' });
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
     throw new ApiError(response.status, body.message || 'Không thể mở nội dung chia sẻ. Hãy thử lại.');

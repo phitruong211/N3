@@ -15,7 +15,8 @@ export const readingsOf = (ch: string) => [ROMAJI[ch], ...(ALIASES[ROMAJI[ch]] ?
  * waits for the next letter or Enter (`force`).
  */
 export function resolveTyped<T extends { ch: string }>(input: string, items: readonly T[], force = false): { hit: T | null; wrong: boolean } {
-  const typed = input.trim().toLowerCase();
+  // Vietnamese keyboards (Telex) turn w into ư and add tone marks: read "ưa" as "wa", "á" as "a", "đ" as "d".
+  const typed = input.trim().toLowerCase().replace(/ư/g, 'w').replace(/đ/g, 'd').normalize('NFD').replace(/[̀-ͯ]/g, '');
   if (!typed) return { hit: null, wrong: false };
   const hit = items.find(item => readingsOf(item.ch).includes(typed)) ?? null;
   const longer = items.some(item => item !== hit && readingsOf(item.ch).some(r => r.length > typed.length && r.startsWith(typed)));

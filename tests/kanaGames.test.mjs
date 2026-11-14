@@ -10,6 +10,9 @@ test('typing a reading hits the most urgent matching drop', () => {
   assert.equal(resolveTyped('KA ', drops(['か'])).hit?.ch, 'か');
   assert.equal(resolveTyped('si', drops(['し'])).hit?.ch, 'し');
   assert.equal(resolveTyped('tu', drops(['つ'])).hit?.ch, 'つ');
+  // Telex output from Vietnamese keyboards.
+  assert.equal(resolveTyped('ưa', drops(['わ'])).hit?.ch, 'わ');
+  assert.equal(resolveTyped('ká', drops(['か'])).hit?.ch, 'か');
 });
 
 test('a reading that starts a longer one on screen waits for more letters or Enter', () => {

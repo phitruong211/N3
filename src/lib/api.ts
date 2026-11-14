@@ -69,7 +69,17 @@ async function parseError(response: Response): Promise<ApiError> {
   return new ApiError(response.status, body.message || `Yêu cầu thất bại (${response.status})`, body.fieldErrors, body.code);
 }
 
-let refreshFlight: { identity: string | null; promise: Promise<boolean> } | null = null;
+/** Caller signal + timeout without AbortSignal.any/timeout, which Safari < 17.4 lacks. */
+export function timeoutSignal(ms: number, signal?: AbortSignal | null) {
+  const controller = new AbortController();
+  let timedOut = false;
+  const timer = setTimeout(() => { timedOut = true; controller.abort(new DOMException('Timeout', 'TimeoutError')); }, ms);
+  const forward = () => { clearTimeout(timer); controller.abort(signal?.reason); };
+  if (signal?.aborted) forward(); else signal?.addEventListener('abort', forward, { once: true });
+  return { signal: controller.signal, timedOut: () => timedOut };
+}
+
+let refreshFlight:{ identity: string | null; promise: Promise<boolean> } | null = null;
 async function refreshAccessToken(identity: string | null): Promise<boolean> {
   assertSession(identity);
   if (refreshFlight?.identity === identity) return refreshFlight.promise;
@@ -80,7 +90,7 @@ async function refreshAccessToken(identity: string | null): Promise<boolean> {
     // Another tab renewed the session while this one waited: use its tokens, the old one is spent.
     if (refreshToken !== before) return true;
     const response = await fetch(`${API_URL}/auth/refresh`, {
-      method: 'POST', signal: AbortSignal.timeout(30_000), headers: { 'Content-Type': 'application/json' },
+      method: 'POST', signal: timeoutSignal(30_000).signal, headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ refreshToken, deviceName: navigator.userAgent.slice(0, 200) }),
     });
     assertSession(identity);
@@ -111,13 +121,12 @@ async function apiFetch(path: string, init: RequestInit, retry: boolean): Promis
   if (init.body && !(init.body instanceof FormData) && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
   const token = localStorage.getItem(ACCESS_TOKEN_KEY);
   if (token && !publicAuth) headers.set('Authorization', `Bearer ${token}`);
-  const timeout = AbortSignal.timeout(90_000);
-  const signal = init.signal ? AbortSignal.any([init.signal, timeout]) : timeout;
+  const { signal, timedOut } = timeoutSignal(90_000, init.signal);
   let response: Response;
   try {
     response = await fetch(`${API_URL}${path}`, { ...init, headers, signal });
   } catch {
-    if (timeout.aborted) throw new ApiError(0, 'Máy chủ phản hồi quá lâu. Bản nháp vẫn được giữ; hãy thử lại.');
+    if (timedOut()) throw new ApiError(0, 'Máy chủ phản hồi quá lâu. Bản nháp vẫn được giữ; hãy thử lại.');
     throw new ApiError(0, 'Không thể kết nối máy chủ. Hãy kiểm tra backend đang chạy ở cổng 8080.');
   }
   init.signal?.throwIfAborted();

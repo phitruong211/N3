@@ -56,8 +56,22 @@ function RainRound({ script, progress, storage, onRecord, onExit, onDrill, phase
     render();
   }, phase === 'play');
 
+  const pending = useRef<number | undefined>(undefined);
+  const composing = useRef(false);
+  const resetting = useRef(false);
+  const clearInput = () => {
+    setTyped('');
+    if (!composing.current) return;
+    // An IME keeps its unfinished text unless it loses focus; drop it so the next kana starts clean.
+    resetting.current = true;
+    input.current?.blur();
+    input.current?.focus();
+    resetting.current = false;
+  };
+
   const submit = (value: string, force: boolean) => {
-    if (phase !== 'play') return;
+    window.clearTimeout(pending.current);
+    if (phase !== 'play' || resetting.current) return;
     const urgent = [...w.drops].sort((a, b) => b.y - a.y);
     const { hit, wrong } = resolveTyped(value, urgent, force);
     if (hit) {
@@ -68,12 +82,16 @@ function RainRound({ script, progress, storage, onRecord, onExit, onDrill, phase
       w.score += 10 * level + Math.min(w.combo, 10) * 2;
       onRecord(hit.ch, true);
       speak(hit.ch);
-      setTyped('');
+      clearInput();
     } else if (wrong) {
       w.combo = 0;
       input.current?.animate(SHAKE, 320);
-      setTyped('');
-    } else setTyped(value);
+      clearInput();
+    } else {
+      setTyped(value);
+      // "n" is ん or the start of な…: if no more letters come soon, take it as ん so Enter is never needed.
+      if (resolveTyped(value, urgent, true).hit) pending.current = window.setTimeout(() => submit(value, true), 450);
+    }
   };
 
   return <section aria-label="Mưa chữ">
@@ -82,7 +100,8 @@ function RainRound({ script, progress, storage, onRecord, onExit, onDrill, phase
       {w.combo >= 3 && <span key={w.combo} className="stamp-pop font-semibold text-[var(--color-seal)]">×{w.combo}</span>}
     </Hud>
 
-    <Board className="rain-sky" onPointerDown={() => input.current?.focus()}>
+    {/* preventDefault keeps the browser from moving focus off the input right after we focus it. */}
+    <Board className="rain-sky" onPointerDown={e => { if (phase !== 'play') return; e.preventDefault(); input.current?.focus(); }}>
       {w.drops.map(d => {
         const danger = d.y > 0.62;
         return <div key={d.id} className="absolute -translate-x-1/2" style={{ left: slotX(d.slot), top: `calc(${d.y} * (100% - 5.5rem) - 0.25rem)` }}>
@@ -114,11 +133,14 @@ function RainRound({ script, progress, storage, onRecord, onExit, onDrill, phase
     <div className="mx-auto mt-4 max-w-sm">
       <label className="sr-only" htmlFor="kana-rain-input">Gõ romaji</label>
       <input id="kana-rain-input" ref={input} value={typed} disabled={phase === 'over'}
+        // Judge every keystroke, even mid-composition (Vietnamese IME, phone keyboards), so no Enter is needed.
         onChange={e => submit(e.target.value, false)}
-        onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); submit(typed, true); } }}
+        onCompositionStart={() => { composing.current = true; }}
+        onCompositionEnd={e => { composing.current = false; submit(e.currentTarget.value, false); }}
+        onKeyDown={e => { if (!e.nativeEvent.isComposing && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); submit(e.currentTarget.value, true); } }}
         autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} enterKeyHint="go" placeholder="Gõ romaji…"
         className="h-14 w-full rounded-xl border-2 border-[var(--color-border-strong)] bg-[var(--color-surface)] text-center text-2xl tracking-wider text-[var(--color-text)] outline-none focus:border-[var(--color-accent)]" />
-      <p className="mt-2 text-center text-xs text-[var(--color-text-tertiary)]">Chữ gần đất nhất được bắn trước · Enter để xác nhận · Esc tạm dừng</p>
+      <p className="mt-2 text-center text-xs text-[var(--color-text-tertiary)]">Gõ đúng là chữ tự vỡ · Chữ gần đất nhất được bắn trước · Esc tạm dừng</p>
     </div>
   </section>;
 }

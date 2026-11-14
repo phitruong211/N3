@@ -16,6 +16,8 @@ const woff2Only = (): Plugin => ({
 
 export default defineConfig({
   plugins: [woff2Only(), react(), tailwindcss()],
+  // Lower the syntax so older phones/laptops (Safari 14, Chrome 87) can parse the bundle; APIs are in src/polyfills.ts.
+  build: { target: ['es2020', 'safari14', 'chrome87', 'firefox78', 'edge88'] },
   server: {
     proxy: {
       '/api': {
