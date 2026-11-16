@@ -10,7 +10,7 @@ try {
   const [vocabulary, kanji, grammar] = await Promise.all([loadVocabulary(), loadKanji(), loadGrammar()]);
   const summary = {
     counts: { vocabulary: vocabulary.length, kanji: kanji.length, grammar: grammar.length },
-    words: vocabulary.map(word => [word.tu, word.phien_am, word.han_viet ?? '', word.nghia[0] ?? '']),
+    words: vocabulary.map(word => [word.tu, word.phien_am, word.han_viet ?? '', word.nghia[0] ?? '', word.id]),
   };
   await writeFile(new URL('../public/data/today.json', import.meta.url), JSON.stringify(summary));
   console.log(`today.json: ${summary.words.length} words, counts ${JSON.stringify(summary.counts)}`);

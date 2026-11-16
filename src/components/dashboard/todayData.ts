@@ -32,11 +32,19 @@ export function wordOfDay<T>(items: readonly T[], date: Date): T | null {
 }
 
 /** What the Today page needs from the library, prebuilt by scripts/build-today-summary.mjs so it skips the 2.6 MB download. */
-export interface TodaySummary { counts: { vocabulary: number; kanji: number; grammar: number }; words: [string, string, string, string][] }
-export interface TodayWord { tu: string; phien_am: string; han_viet: string | null; nghia: string[] }
+export interface TodaySummary { counts: { vocabulary: number; kanji: number; grammar: number }; words: [string, string, string, string, string][] }
+export interface TodayWord { id: string; tu: string; phien_am: string; han_viet: string | null; nghia: string[] }
 let summaryRequest: Promise<TodaySummary> | null = null;
 export function loadTodaySummary(): Promise<TodaySummary> {
   summaryRequest ??= fetch('/data/today.json').then(response => { if (!response.ok) throw new Error('today.json'); return response.json(); }).catch(error => { summaryRequest = null; throw error; });
   return summaryRequest;
 }
-export const todayWord = ([tu, phien_am, han_viet, meaning]: TodaySummary['words'][number]): TodayWord => ({ tu, phien_am, han_viet: han_viet || null, nghia: meaning ? [meaning] : [] });
+export const todayWord = ([tu, phien_am, han_viet, meaning, id]: TodaySummary['words'][number]): TodayWord => ({ id, tu, phien_am, han_viet: han_viet || null, nghia: meaning ? [meaning] : [] });
+
+/** How a journal row names its day: today and yesterday by name, older days by weekday and date. */
+export function journalLabel(date: string, today: string): string {
+  const diff = Math.round((Date.parse(today) - Date.parse(date)) / 864e5);
+  if (diff === 0) return 'Hôm nay';
+  if (diff === 1) return 'Hôm qua';
+  return new Intl.DateTimeFormat('vi-VN', { weekday: 'short', day: 'numeric', month: 'numeric' }).format(new Date(`${date}T00:00:00`));
+}

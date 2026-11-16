@@ -67,6 +67,8 @@ function AppContent() {
       <SessionNotices />
       <ErrorBoundary resetKey={location.pathname}>
       <Suspense fallback={<AppLoading message="Đang mở bài học…"/>}>
+        {/* Keyed inside Suspense: the boundary stays mounted, so a lazy page loads behind the current one instead of flashing the loader. */}
+        <div key={location.pathname.split('/')[1]} className="page-enter">
         <Routes>
           <Route path="/" element={<RootRedirect />} />
           <Route path="/today" element={<Dashboard />} />
@@ -90,6 +92,7 @@ function AppContent() {
           <Route path="/admin/reports" element={<AdminReportsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        </div>
       </Suspense>
       </ErrorBoundary>
     </MainLayout>

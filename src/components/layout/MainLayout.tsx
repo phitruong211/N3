@@ -1,5 +1,4 @@
 import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Search } from '@/components/ui/icons';
 import { Sidebar } from './Sidebar';
 import { AccountMenu } from './AccountMenu';
@@ -15,7 +14,6 @@ export function MainLayout({ children }: { children: ReactNode }) {
   const [searchMounted, setSearchMounted] = useState(false);
   useEffect(() => { if (searchOpen) setSearchMounted(true); }, [searchOpen]);
   const lastKeyRef = useRef<{ key: string; time: number }>({ key: '', time: 0 });
-  const section = useLocation().pathname.split('/')[1];
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
@@ -50,7 +48,7 @@ export function MainLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
       <a className="skip-link" href="#main-content">Bỏ qua đến nội dung</a>
-      <div className="mx-auto w-full max-w-full px-4 py-5 pb-24 sm:px-6 lg:px-10 lg:pb-12 lg:pt-8 xl:px-14"><div key={section} className="page-enter">{children}</div></div>
+      <div className="mx-auto w-full max-w-full px-4 py-5 pb-24 sm:px-6 lg:px-10 lg:pb-12 lg:pt-8 xl:px-14">{children}</div>
     </main>
     <BottomNav/>
     {searchMounted && <Suspense fallback={null}><SearchModal/></Suspense>}

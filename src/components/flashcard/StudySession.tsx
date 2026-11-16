@@ -26,6 +26,7 @@ import type { ImportedCard } from "@/lib/ankiImport";
 import "@fontsource/zen-maru-gothic/japanese-500.css";
 import "./studySession.css";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Seal } from "@/components/ui/Seal";
 
 import { StudyClock, useStudySeconds } from "./StudyClock";
 
@@ -549,8 +550,8 @@ export function StudySession({
   }
   if (done || !current)
     return (
-      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-5 bg-[var(--color-bg)] p-6 text-center">
-        <Sunrise size={190}/>
+      <div className="study-done fixed inset-0 z-50 flex flex-col items-center justify-center space-y-5 bg-[var(--color-bg)] p-6 text-center">
+        <div className="study-done-art"><Sunrise size={190}/><Seal glyph="済" className="study-done-seal" tone="var(--color-seal)" tilt={-8}/></div>
         <StudyClock seconds={studySeconds}/>
         {undoButton}{undoStatus}
         <h2 className="study-title">Đã hoàn thành</h2>
@@ -622,9 +623,9 @@ export function StudySession({
             key={`${current.type}:${current.id}`}
             custom={slideDirection}
             variants={cardMotion}
-            initial={mode === "flashcards" ? "enter" : false}
+            initial="enter"
             animate="center"
-            exit={mode === "flashcards" ? "exit" : undefined}
+            exit="exit"
             transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 320, damping: 32, mass: 1 }}
             drag={mode === "flashcards" ? "x" : false}
             dragConstraints={{ left: 0, right: 0 }}

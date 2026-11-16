@@ -1,11 +1,13 @@
-import { useMemo, type CSSProperties } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useApp, useLearningStorage } from '@/hooks/useApp';
 import { formatDate, getDueCards } from '@/lib/srs';
 import { useAuth } from '@/hooks/useAuth';
 import { hasLegacyLearningData } from '@/lib/storage';
 import { ArrowRight } from '@/components/ui/icons';
 import InkRidges from '@/components/ui/ink-ridges';
-import { daypart, weekStamps } from './todayData';
+import { Notebook } from '@/components/ui/ink';
+import { Seal } from '@/components/ui/Seal';
+import { daypart, journalLabel, loadTodaySummary, todayWord, weekStamps, wordOfDay, type TodaySummary } from './todayData';
 import './dashboard.css';
 
 const MOTTOS = [
@@ -20,7 +22,7 @@ const MOTTOS = [
 
 export function Dashboard() {
   const { getStudyDays, calculateStreak } = useLearningStorage();
-  const { srsCards, setCurrentPage, settings } = useApp();
+  const { srsCards, setCurrentPage, selectSearchResult, settings } = useApp();
   const { draft, user } = useAuth();
   const now = new Date();
   const todayKey = formatDate(now);
@@ -29,6 +31,11 @@ export function Dashboard() {
   const day = useMemo(() => new Date(`${todayKey}T00:00:00`), [todayKey]);
   const week = useMemo(() => weekStamps(studyDays, day), [studyDays, day]);
   const legacyDataPresent = useMemo(() => hasLegacyLearningData(), []);
+  // The page: one word to carry through the day, and the last few days as a journal.
+  const [summary, setSummary] = useState<TodaySummary | null>(null);
+  useEffect(() => { let live = true; loadTodaySummary().then(s => { if (live) setSummary(s); }).catch(() => {}); return () => { live = false; }; }, []);
+  const word = useMemo(() => { const pick = summary ? wordOfDay(summary.words, day) : null; return pick ? todayWord(pick) : null; }, [summary, day]);
+  const journal = useMemo(() => studyDays.filter(d => d.cardsReviewed > 0).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5), [studyDays]);
   const streak = calculateStreak().current;
   const due = useMemo(() => getDueCards(srsCards).length, [srsCards]);
   const reviewed = today?.cardsReviewed ?? 0;
@@ -91,6 +98,34 @@ export function Dashboard() {
         <p>{streak > 0 ? `Chuỗi ${streak} ngày` : 'Chưa có chuỗi ngày'}</p>
         <button onClick={() => setCurrentPage('progress')} className="dash-link hit">Xem tiến độ <ArrowRight size={14}/></button>
       </div>
+    </section>
+
+    {/* The notebook spread: a word to keep for the day on the left page, the journal of recent days on the right. */}
+    <section className="dash-spread" aria-label="Trang hôm nay">
+      <article className="dash-word" aria-labelledby="dash-word-title">
+        <p className="study-eyebrow dash-page-title" id="dash-word-title"><Seal glyph="語" size="xs" tone="var(--color-gold)"/>Từ của hôm nay</p>
+        {word ? <>
+          <p className="dash-word-ja" lang="ja">{word.tu}</p>
+          <p className="dash-word-reading" lang="ja">{word.phien_am}</p>
+          {word.han_viet && <p className="dash-word-hanviet">Hán Việt: {word.han_viet}</p>}
+          <p className="dash-word-meaning">{word.nghia[0]}</p>
+          <button className="dash-link hit" onClick={() => selectSearchResult({ type: 'vocabulary', id: word.id })}>Mở trong thư viện <ArrowRight size={14}/></button>
+        </> : <p className="dash-word-ja" aria-hidden="true">　</p>}
+      </article>
+      <section className="dash-journal" aria-labelledby="dash-journal-title">
+        <p className="study-eyebrow dash-page-title" id="dash-journal-title"><Seal glyph="記" size="xs" tone="var(--color-gold)"/>Nhật ký học</p>
+        {journal.length > 0
+          ? <ol className="dash-journal-list">{journal.map((d, index) => <li key={d.date} style={{ '--i': index, '--w': Math.min(1, d.cardsReviewed / Math.max(settings.dailyGoal, 1)) } as CSSProperties}>
+            <span className="dash-journal-date">{journalLabel(d.date, todayKey)}</span>
+            <span className="dash-journal-bar" aria-hidden="true"/>
+            <span className="dash-journal-figure"><strong>{d.cardsReviewed}</strong> thẻ{d.timeSpent >= 1 && ` · ${Math.round(d.timeSpent)} phút`}{d.accuracy > 0 && ` · ${Math.round(d.accuracy * 100)}% đúng`}</span>
+          </li>)}</ol>
+          : <div className="dash-journal-empty">
+            <Notebook size={132}/>
+            <p>Trang đầu tiên của bạn bắt đầu hôm nay.</p>
+            <button className="dash-link hit" onClick={() => setCurrentPage(next.page)}>{next.label} <ArrowRight size={14}/></button>
+          </div>}
+      </section>
     </section>
 
     {legacyDataPresent && <section className="dash-notice" role="note">

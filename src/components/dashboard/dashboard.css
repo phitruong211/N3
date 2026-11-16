@@ -56,3 +56,39 @@
 /* High contrast: solid edges, no ornament. */
 .high-contrast .dash-ridges, .high-contrast .dash-band { border-color: var(--color-text); }
 .high-contrast .dash-day.is-studied .dash-stamp { outline: 2px solid var(--color-text); }
+
+/* The spread: two facing pages of the notebook. The left page is ruled paper carrying one word; the right is the journal. */
+.dash-spread { display: grid; gap: 1.5rem; }
+@media (min-width: 900px) { .dash-spread { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 2rem; } }
+.dash-page-title { display: inline-flex; align-items: center; gap: .6rem; }
+.dash-word { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: .35rem; padding: 1.75rem 2rem 1.9rem; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); box-shadow: var(--shadow-md); overflow: hidden; }
+/* Ruled lines sit under the type, in the paper's own ink at 7%, with a gold margin line like a school notebook. */
+.dash-word::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, transparent 0 35px, color-mix(in srgb, var(--color-text) 7%, transparent) 35px 36px); background-position: 0 14px; }
+.dash-word::after { content: ''; position: absolute; top: 0; bottom: 0; left: 1.35rem; width: 1px; background: color-mix(in srgb, var(--color-seal) 35%, transparent); pointer-events: none; }
+.dash-word > * { position: relative; }
+.dash-word-ja { margin-top: 1rem; font-family: var(--font-jp-serif); font-size: clamp(2.6rem, 5vw, 3.6rem); font-weight: 400; line-height: 1.1; letter-spacing: .02em; color: var(--color-text); text-wrap: balance; }
+.dash-word-reading { font-family: 'Zen Maru Gothic', var(--font-jp-sans); font-size: 1.05rem; letter-spacing: .06em; color: #0F6E6E; }
+.dark .dash-word-reading { color: #74D3C6; }
+.dash-word-hanviet { font-size: .95rem; font-weight: 600; letter-spacing: .01em; color: var(--color-seal); }
+.dash-word-meaning { margin-top: .4rem; font-size: 1.2rem; font-weight: 500; color: #26366B; }
+.dark .dash-word-meaning { color: #9DBBFF; }
+.dash-word .dash-link { margin-top: 1.1rem; }
+
+.dash-journal { display: flex; flex-direction: column; gap: .75rem; padding-top: .25rem; }
+.dash-journal-list { margin: 0; padding: 0; list-style: none; }
+.dash-journal-list li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) auto; align-items: center; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--color-border); animation: rise-in var(--dur-slow) var(--ease-out) backwards; animation-delay: calc(360ms + var(--i, 0) * 70ms); }
+.dash-journal-date { font-size: .9rem; font-weight: 600; color: var(--color-text); text-transform: capitalize; }
+.dash-journal-bar { position: relative; height: 3px; border-radius: 2px; background: color-mix(in srgb, var(--color-text) 8%, transparent); overflow: hidden; }
+.dash-journal-bar::after { content: ''; position: absolute; inset: 0; width: calc(var(--w, 0) * 100%); background: var(--color-gold); border-radius: inherit; transform-origin: left; animation: dash-ink 900ms calc(480ms + var(--i, 0) * 70ms) var(--ease-out) backwards; }
+@keyframes dash-ink { from { transform: scaleX(0); } }
+.dash-journal-figure { font-size: .85rem; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dash-journal-figure strong { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; color: var(--color-text); }
+.dash-journal-empty { display: flex; flex-direction: column; align-items: center; gap: .6rem; padding: 1.25rem 0 .5rem; text-align: center; color: var(--color-text-secondary); font-size: .95rem; }
+.dash-journal-empty .ink { color: var(--color-text-tertiary); }
+@media (max-width: 639px) {
+  .dash-word { padding: 1.4rem 1.4rem 1.5rem; }
+  .dash-journal-list li { grid-template-columns: 5.5rem minmax(0, 1fr); }
+  .dash-journal-figure { grid-column: 1 / -1; }
+}
+.high-contrast .dash-word { box-shadow: none; border-color: var(--color-text); }
+.high-contrast .dash-word::before, .high-contrast .dash-word::after { display: none; }
