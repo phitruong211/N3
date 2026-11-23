@@ -19,7 +19,7 @@ export function Sidebar() {
   };
 
   return (
-    <aside className={`sticky top-0 hidden h-screen shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] transition-[width] duration-200 lg:flex ${sidebarCollapsed ? 'w-[4.75rem]' : 'w-60'}`} aria-label="Điều hướng chính">
+    <aside className={`sticky top-0 hidden h-dvh shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] transition-[width] duration-200 lg:flex ${sidebarCollapsed ? 'w-[4.75rem]' : 'w-60'}`} aria-label="Điều hướng chính">
       <div className={`flex items-center gap-2 px-3 py-4 ${sidebarCollapsed ? 'flex-col' : 'justify-between'}`}>
         <button onClick={() => setCurrentPage('dashboard')} className="flex min-w-0 items-center gap-2.5 text-left" aria-label="SỔ NHẬT, về trang Hôm nay">
           <BrandMark size={44} className="shrink-0"/>

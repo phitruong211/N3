@@ -15,8 +15,8 @@ export function LibraryLayout() {
   if (pathname === '/library') return <Outlet/>;
   return <div className="space-y-8">
     <div className="border-b border-[var(--color-border-strong)]">
-      <nav aria-label="Nội dung thư viện" className="-mb-px flex max-w-full gap-6 overflow-x-auto">
-        {tabs.map(([to, label]) => <NavLink key={to} to={to} className={({ isActive }) => `whitespace-nowrap border-b-2 py-3 text-sm font-medium transition-[color,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] ${isActive ? 'border-[var(--color-gold)] text-[var(--color-text)]' : 'border-transparent text-[var(--color-text-tertiary)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]'}`}>{label}</NavLink>)}
+      <nav aria-label="Nội dung thư viện" className="h-scroll -mb-px flex max-w-full gap-6">
+        {tabs.map(([to, label]) => <NavLink key={to} to={to} className={({ isActive }) => `min-w-11 whitespace-nowrap border-b-2 py-3.5 text-center text-sm font-medium transition-[color,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] ${isActive ? 'border-[var(--color-gold)] text-[var(--color-text)]' : 'border-transparent text-[var(--color-text-tertiary)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]'}`}>{label}</NavLink>)}
       </nav>
     </div>
     <div key={pathname} className="page-turn"><Outlet/></div>

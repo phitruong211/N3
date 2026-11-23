@@ -66,9 +66,9 @@ export function SettingsPage() {
   return <div className="study-page">
     <PageHeading title="Cài đặt" />
     {user && <div role="status" className="study-copy">{settingsSync.pending ? "Đang đồng bộ cài đặt…" : settingsSync.error ? <><span role="alert">{settingsSync.error} Cài đặt vẫn được giữ trên thiết bị.</span> <button className="study-button" onClick={()=>void settingsSync.retry()}>Thử lưu lại</button></> : "Cài đặt đã đồng bộ"}</div>}
-    <div role="tablist" aria-label="Nhóm cài đặt" className="-mb-2 flex max-w-full gap-6 overflow-x-auto border-b border-[var(--color-border-strong)]">
+    <div role="tablist" aria-label="Nhóm cài đặt" className="h-scroll -mb-2 flex max-w-full gap-6 border-b border-[var(--color-border-strong)]">
       {TABS.map(item => <button key={item.id} role="tab" id={`settings-tab-${item.id}`} aria-selected={tab === item.id} aria-controls="settings-panel" title={item.detail} onClick={() => setTab(item.id)}
-        className={`-mb-px whitespace-nowrap border-b-2 py-3 text-sm font-medium transition-[color,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] ${tab === item.id ? 'border-[var(--color-gold)] text-[var(--color-text)]' : 'border-transparent text-[var(--color-text-tertiary)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]'}`}>{item.label}</button>)}
+        className={`-mb-px whitespace-nowrap border-b-2 py-3.5 text-sm font-medium transition-[color,border-color] duration-[var(--dur-base)] ease-[var(--ease-out)] ${tab === item.id ? 'border-[var(--color-gold)] text-[var(--color-text)]' : 'border-transparent text-[var(--color-text-tertiary)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]'}`}>{item.label}</button>)}
     </div>
     <p className="study-copy">{TABS.find(item => item.id === tab)!.detail}.</p>
     <div id="settings-panel" role="tabpanel" aria-labelledby={`settings-tab-${tab}`} className={`grid items-start gap-6 ${hasPreview ? 'lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)]' : 'max-w-3xl'}`}>

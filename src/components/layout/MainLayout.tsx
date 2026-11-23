@@ -36,10 +36,10 @@ export function MainLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => { applyPageMeta(currentPage); }, [currentPage]);
 
-  return <div className="flex min-h-screen bg-[var(--color-bg)]">
+  return <div className="flex min-h-dvh bg-[var(--color-bg)]">
     <Sidebar/>
-    <main className="min-h-screen min-w-0 flex-1 overflow-x-clip" id="main-content" role="main" tabIndex={-1}>
-      <header className="sticky top-0 z-30 flex h-11 items-center justify-between gap-3 border-b border-[var(--color-border)]/70 bg-[color-mix(in_srgb,var(--color-surface)_85%,transparent)] px-4 backdrop-blur-xl lg:hidden">
+    <main className="min-h-dvh min-w-0 flex-1 overflow-x-clip" id="main-content" role="main" tabIndex={-1}>
+      <header className="sticky top-0 z-30 flex min-h-11 items-center justify-between gap-3 border-b border-[var(--color-border)]/70 bg-[color-mix(in_srgb,var(--color-surface)_85%,transparent)] px-safe pt-safe backdrop-blur-xl lg:hidden">
         <button className="hit" onClick={() => setCurrentPage('dashboard')} aria-label="Về Hôm nay"><BrandMark size={32} variant="small"/></button>
         <span className="truncate text-sm font-semibold">{PAGE_TITLES[currentPage]}</span>
         <div className="flex items-center gap-1">
@@ -48,7 +48,7 @@ export function MainLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
       <a className="skip-link" href="#main-content">Bỏ qua đến nội dung</a>
-      <div className="mx-auto w-full max-w-full px-4 py-5 pb-24 sm:px-6 lg:px-10 lg:pb-12 lg:pt-8 xl:px-14">{children}</div>
+      <div className="mx-auto w-full max-w-full px-safe py-5 pb-[calc(5.5rem+env(safe-area-inset-bottom))] sm:px-6 lg:px-10 lg:pb-12 lg:pt-8 xl:px-14">{children}</div>
     </main>
     <BottomNav/>
     {searchMounted && <Suspense fallback={null}><SearchModal/></Suspense>}
