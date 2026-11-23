@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { ArrowDown, ArrowUp, Plus, X } from "@/components/ui/icons";
 import type { FieldType, NoteKind, NoteType } from "@/lib/deckFormat";
 import type { StyleSpec } from "@/lib/deckFormat";
 import { layered } from "@/lib/styleEdit";
 import { StyleEditor } from "./StyleEditor";
-import { addNoteTypeField, faceChoices, isFixedField, moveFaceField, moveNoteTypeField, removeNoteTypeField, renameNoteType, setFaceField, setNoteTypeKind, updateNoteTypeField } from "@/lib/noteTypeEdit";
+import { addNoteTypeField, faceChoices, faceFontSize, syncFaceFontSize, isFixedField, moveFaceField, moveNoteTypeField, removeNoteTypeField, renameNoteType, setFaceField, setNoteTypeKind, updateNoteTypeField } from "@/lib/noteTypeEdit";
 
 const KIND_LABELS: Record<NoteKind, string> = { VOCABULARY: "Từ vựng", KANJI: "Kanji", GRAMMAR: "Ngữ pháp", GENERAL: "Tổng hợp" };
 const TYPE_LABELS: Record<FieldType, string> = { text: "Văn bản", ruby: "Văn bản có furigana", kana: "Cách đọc (kana)", examples: "Ví dụ" };
@@ -67,6 +68,7 @@ export function NoteTypeEditor({ type, deckStyle, onChange }: { type: NoteType; 
           </span>
         </li>)}
       </ul>
+      <FaceSizeSync key={faceFontSize(type, side) ?? "mixed"} type={type} side={side} onChange={onChange} />
       <details>
         <summary className="cursor-pointer text-sm text-[var(--color-accent)]">Giao diện {side === "front" ? "mặt trước" : "mặt sau"}{type[side].style ? " · đã tùy chỉnh" : ""}</summary>
         <div className="mt-2"><StyleEditor label={`Giao diện ${side === "front" ? "mặt trước" : "mặt sau"}`} value={type[side].style} inherited={typeBase} onChange={style => onChange({ ...type, [side]: (({ style: _drop, ...rest }) => style ? { ...rest, style } : rest)(type[side]) })} /></div>
@@ -78,5 +80,31 @@ export function NoteTypeEditor({ type, deckStyle, onChange }: { type: NoteType; 
         </select>
       </label>}
     </section>)}
+  </div>;
+}
+
+/** One size for every field on a side, applied with a button so typing "24" never passes through 12 on the way. */
+function FaceSizeSync({ type, side, onChange }: { type: NoteType; side: "front" | "back"; onChange: (type: NoteType) => void }) {
+  const shared = faceFontSize(type, side);
+  const [draft, setDraft] = useState(String(shared ?? 32));
+  const size = Number(draft);
+  const valid = Number.isInteger(size) && size >= 12 && size <= 72;
+  const where = side === "front" ? "mặt trước" : "mặt sau";
+  return <div className="space-y-2 rounded-lg border border-[var(--color-border)] p-3">
+    <label className="block text-sm font-medium" htmlFor={`face-size-${type.id}-${side}`}>Cùng một cỡ chữ cho mọi chữ {where}</label>
+    <div className="flex flex-wrap items-center gap-2">
+      <input id={`face-size-${type.id}-${side}`} className="study-input !w-24 tabular-nums" type="number" inputMode="numeric" min={12} max={72}
+        value={draft} aria-invalid={!valid} onChange={event => setDraft(event.target.value)}
+        onKeyDown={event => { if (event.key === "Enter" && valid) { event.preventDefault(); onChange(syncFaceFontSize(type, side, size)); } }} />
+      <span className="text-sm text-[var(--color-text-secondary)]">px</span>
+      <button type="button" className="study-button study-button-primary" disabled={!valid || size === shared} aria-label={`${shared ? "Đổi cỡ" : "Đồng bộ cỡ chữ"} ${where}`} onClick={() => onChange(syncFaceFontSize(type, side, size))}>
+        {shared ? "Đổi cỡ" : "Đồng bộ"}
+      </button>
+      {shared !== undefined && <button type="button" className="study-button" aria-label={`Bỏ đồng bộ cỡ chữ ${where}`} onClick={() => onChange(syncFaceFontSize(type, side, null))}>Bỏ đồng bộ</button>}
+    </div>
+    <p className="text-xs text-[var(--color-text-secondary)]">
+      {shared ? `Mọi trường ở ${where} đang cùng cỡ ${shared}px, thẻ nào cũng vậy.` : `Đặt một cỡ (12–72) cho mọi trường ở ${where} và tắt tự phóng to chữ ngắn, để thẻ nào cũng cùng cỡ.`}
+      {" "}Muốn một chữ hay một dòng khác cỡ: dùng nút Nhỏ / Lớn khi sửa thẻ.
+    </p>
   </div>;
 }

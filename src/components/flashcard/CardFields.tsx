@@ -1,9 +1,13 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import type { ImportedCard } from "@/lib/ankiImport";
 import { builtinNoteTypes, cardFromFields, exampleLines, fieldsFromCard, noteTypeIdForKind, parseExampleLines, type CardExample, type CardFieldValues, type NoteField, type NoteType } from "@/lib/deckFormat";
 import { parseFuriganaMarkup } from "@/lib/furigana";
+import { resizeTextRange } from "@/lib/cardFormatting";
 import { FuriganaText } from "./FuriganaText";
 import { StyleEditor } from "./StyleEditor";
+
+// Relative sizes, so the word keeps its proportion when the deck's font size changes later.
+const SIZE_BUTTONS = [[0.75, "Nhỏ", ".75rem"], [1.5, "Lớn", "1rem"], [2, "Rất lớn", "1.125rem"], [null, "Cỡ thường", ".875rem"]] as const;
 
 function typeOf(card: ImportedCard, noteTypes: NoteType[]): NoteType {
   return noteTypes.find(type => type.id === card.noteType)
@@ -47,6 +51,16 @@ export function CardFields({
     const nextType = noteTypes.find(item => item.id === id);
     if (nextType) emit(nextType, values);
   };
+  const areas = useRef<Record<string, HTMLTextAreaElement | null>>({});
+  const [active, setActive] = useState<string>();
+  const resize = (key: string, em: number | null) => {
+    const area = areas.current[key];
+    if (!area) return;
+    const next = resizeTextRange(area.value, area.selectionStart, area.selectionEnd, em);
+    if (next.text === area.value) return;
+    setField(key, next.text);
+    requestAnimationFrame(() => area.setSelectionRange(next.start, next.end));
+  };
   const label = (field: NoteField) => <>{field.label}{field.required && <span aria-hidden="true"> *</span>}</>;
   const wide = (field: NoteField) => field.key === "front" || field.key === "back";
 
@@ -69,14 +83,23 @@ export function CardFields({
             {parseExampleLines(drafts[field.key] ?? "").invalid > 0 && <span className="mt-1 block text-xs text-[var(--color-warning)]">{parseExampleLines(drafts[field.key] ?? "").invalid} dòng chưa đúng dạng nên bị bỏ qua.</span>}
           </label>
         ) : (
-          <label key={field.key}>
-            {label(field)}
-            <textarea className={`study-input mt-1 ${wide(field) ? "min-h-24" : ""}`} required={field.required} maxLength={field.type === "kana" ? 10000 : 20000}
-              placeholder={field.type === "kana" ? "Chỉ nhập hiragana" : undefined}
-              value={typeof values[field.key] === "string" ? values[field.key] as string : ""}
-              onChange={event => setField(field.key, event.target.value)} />
-            {warnings[field.key] && <span className="mt-1 block text-xs text-[var(--color-warning)]">{warnings[field.key]}</span>}
-          </label>
+          <div key={field.key}>
+            <label>
+              {label(field)}
+              <textarea ref={element => { areas.current[field.key] = element; }} onFocus={() => setActive(field.key)}
+                className={`study-input mt-1 ${wide(field) ? "min-h-24" : ""}`} required={field.required} maxLength={field.type === "kana" ? 10000 : 20000}
+                placeholder={field.type === "kana" ? "Chỉ nhập hiragana" : undefined}
+                value={typeof values[field.key] === "string" ? values[field.key] as string : ""}
+                onChange={event => setField(field.key, event.target.value)} />
+              {warnings[field.key] && <span className="mt-1 block text-xs text-[var(--color-warning)]">{warnings[field.key]}</span>}
+            </label>
+            {active === field.key && <div role="group" aria-label={`Cỡ chữ trong ${field.label}`} className="mt-1.5 flex flex-wrap items-center gap-1.5">
+              {SIZE_BUTTONS.map(([em, text, preview]) => <button key={text} type="button" className="study-button hit !min-h-9 !px-3 !py-1" style={{ fontSize: preview }}
+                // Keeps the field focused, so the selection and the phone keyboard survive the tap.
+                onPointerDown={event => event.preventDefault()} onClick={() => resize(field.key, em)}>{text}</button>)}
+              <span className="w-full text-xs text-[var(--color-text-tertiary)]">Bôi đen chữ cần đổi cỡ, hoặc đặt con trỏ vào một dòng để đổi cả dòng.{field.type === "ruby" && <> Có furigana thì ghi kiểu <code>猫[ねこ]</code> để furigana vẫn nằm trên chữ.</>}</span>
+            </div>}
+          </div>
         ))}
         {noteTypes.length > 1 && (
           <label>

@@ -252,7 +252,7 @@ export function CardFace({
           const label = template.fieldLabels?.[field.slice(6)] ?? field.slice(6);
           return <section key={`${field}-${index}`} data-field={field} className="border-t border-current/10 pt-4 text-left" style={fieldDecoration(fieldSpec)}>
             <p className="mb-2 text-[0.7rem] font-bold uppercase tracking-wider opacity-55">{label}</p>
-            <div className="font-jp whitespace-pre-wrap break-words leading-relaxed" style={compact ? undefined : cardTextStyle(fieldStyle, value, true)}>
+            <div className="font-jp whitespace-pre-wrap break-words leading-relaxed" style={compact ? undefined : cardTextStyle(fieldStyle, value, !fieldSpec?.font?.size)}>
               <FuriganaText text={value} show={fields.includes("reading")} />
             </div>
           </section>;
@@ -276,7 +276,7 @@ export function CardFace({
                     ? "text-xs font-bold uppercase tracking-wide opacity-70"
                 : "font-jp whitespace-pre-wrap break-words"
             }
-            style={isCardText ? { ...cardTextStyle(fieldStyle, value, index !== firstTextIndex), ...fieldDecoration(fieldSpec) } : { ...(fieldSpec?.font?.family ? { fontFamily: fontStack(fieldSpec.font.family) } : {}), ...fieldDecoration(fieldSpec) }}
+            style={isCardText ? { ...cardTextStyle(fieldStyle, value, index !== firstTextIndex), ...fieldDecoration(fieldSpec) } : { ...(fieldSpec?.font?.family ? { fontFamily: fontStack(fieldSpec.font.family) } : {}), ...(fieldSpec?.font?.size ? { fontSize: `${fieldSpec.font.size}px` } : {}), ...fieldDecoration(fieldSpec) }}
           >
             <span className="sr-only">{fieldLabels[field]}: </span>
             {kanjiVocabulary.length ? <><KanjiVocabulary value={kanjiVocabulary} showReading={showExampleReadings} />{card.extraData?.kanjiTips && <p className="mt-3">{card.extraData.kanjiTips}</p>}</> : field === "hanViet" ? `Hán Việt: ${value}` : importedBlocks.length ? (

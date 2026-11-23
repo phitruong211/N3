@@ -1,5 +1,6 @@
 // Pure edits of a note type for the editor UI. Every function returns a type that still satisfies the schema.
-import { KEY_PATTERN, LIMITS, PSEUDO_KEYS, type FieldType, type NoteFace, type NoteField, type NoteKind, type NoteType } from './deckFormat.ts';
+import { KEY_PATTERN, LIMITS, PSEUDO_KEYS, type FieldType, type NoteFace, type NoteField, type NoteKind, type NoteType, type StyleSpec } from './deckFormat.ts';
+import { updateStyle } from './styleEdit.ts';
 
 const REQUIRED_KEYS = ['front', 'back'];
 export const isFixedField = (key: string) => REQUIRED_KEYS.includes(key);
@@ -56,6 +57,31 @@ export function moveFaceField(type: NoteType, side: 'front' | 'back', key: strin
   if (index < 0 || target < 0 || target >= show.length) return type;
   [show[index], show[target]] = [show[target], show[index]];
   return { ...type, [side]: { ...type[side], show } };
+}
+
+const withStyle = <T extends { style?: StyleSpec }>(item: T, style: StyleSpec | undefined): T => {
+  const { style: _drop, ...rest } = item;
+  return (style ? { ...rest, style } : rest) as T;
+};
+
+/**
+ * One font size for every field a side shows, and no auto-enlarged short text, so every card's side reads at the same
+ * size. `null` takes the shared size back off. Fields shown on both sides follow it on the other side too.
+ */
+export function syncFaceFontSize(type: NoteType, side: 'front' | 'back', size: number | null): NoteType {
+  const shown = new Set(type[side].show);
+  return {
+    ...type,
+    fields: type.fields.map(field => shown.has(field.key) ? withStyle(field, updateStyle(field.style, { font: { size } })) : field),
+    [side]: withStyle(type[side], updateStyle(type[side].style, { autoFit: size === null ? null : false })),
+  };
+}
+
+/** The size every field on a side shares, if they share one. */
+export function faceFontSize(type: NoteType, side: 'front' | 'back'): number | undefined {
+  const sizes = new Set(type.fields.filter(field => type[side].show.includes(field.key)).map(field => field.style?.font?.size));
+  const [size] = sizes;
+  return sizes.size === 1 ? size : undefined;
 }
 
 export function setNoteTypeKind(type: NoteType, kind: NoteKind): NoteType { return { ...type, kind }; }
