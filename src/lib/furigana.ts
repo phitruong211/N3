@@ -144,3 +144,21 @@ export function parseStoredFurigana(value: unknown): FuriganaSegment[] {
     return [];
   }
 }
+
+/**
+ * Hands out the segments of the whole text piece by piece, in the order formatting splits it into text nodes, so a
+ * word wrapped in a size or colour span keeps its furigana above it. A reading cut by a tag stays on its first piece.
+ */
+export function segmentCursor(segments: FuriganaSegment[]) {
+  let index = 0, offset = 0;
+  return (text: string): FuriganaSegment[] => {
+    const out: FuriganaSegment[] = [];
+    for (let need = text.length; need > 0 && index < segments.length;) {
+      const segment = segments[index], part = segment.text.slice(offset, offset + need);
+      out.push(offset === 0 && segment.reading ? { text: part, reading: segment.reading } : { text: part });
+      need -= part.length; offset += part.length;
+      if (offset >= segment.text.length) { index++; offset = 0; }
+    }
+    return out;
+  };
+}

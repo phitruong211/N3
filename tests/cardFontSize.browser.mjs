@@ -69,8 +69,16 @@ try {
   assert.equal(await front.inputValue(), '<span style="font-size:2em">猫</span>が好き');
   assert.equal(await front.evaluate(el => el === document.activeElement), true);
   assert.equal(await designer.locator('.card-designer-card [data-field="front"] span[style*="font-size"]').evaluate(el => getComputedStyle(el).fontSize), '80px');
+  // The resized word keeps its furigana as ruby above it, aligned from the separate reading field.
+  await designer.getByRole('textbox', { name: /^Cách đọc mặt trước/ }).fill('ねこがすき');
+  const sized = designer.locator('.card-designer-card [data-field="front"] span[style*="font-size"]');
+  assert.deepEqual(await sized.locator('ruby').evaluateAll(rubies => rubies.map(ruby => [ruby.firstChild.textContent, ruby.querySelector('rt').textContent])), [['猫', 'ねこ']]);
+  const [glyph, reading] = await sized.locator('ruby').evaluate(ruby => { const range = document.createRange(); range.selectNodeContents(ruby.firstChild); return [range.getBoundingClientRect(), ruby.querySelector('rt').getBoundingClientRect()].map(box => ({ top: box.top, bottom: box.bottom })); });
+  assert.ok(reading.top < glyph.top && reading.bottom < (glyph.top + glyph.bottom) / 2, `furigana sits above the word: ${JSON.stringify({ glyph, reading })}`);
+  assert.equal(await designer.locator('.card-designer-card [data-field="front"] ruby').count(), 2);
   await page.screenshot({ path: 'artifacts/card-font-size/one-word.png' });
   // Again on the same word replaces the size instead of stacking it; a caret alone resets the whole line.
+  await front.focus();
   await front.evaluate(el => { const at = el.value.indexOf('猫'); el.setSelectionRange(at, at + 1); });
   await designer.getByRole('button', { name: 'Nhỏ', exact: true }).click();
   assert.equal(await front.inputValue(), '<span style="font-size:0.75em">猫</span>が好き');

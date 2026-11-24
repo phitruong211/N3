@@ -39,3 +39,14 @@ test('size buttons wrap a selection or the caret line, replace instead of nestin
   // What the buttons write passes the renderer's own style filter.
   for (const em of ['0.75', '1.5', '2']) assert.equal(safeCardStyle('font-size', `${em}em`), `${em}em`);
 });
+
+test('furigana of the whole text is handed out piece by piece as formatting splits it', async () => {
+  const { segmentCursor } = await import('../src/lib/furigana.ts');
+  const take = segmentCursor([{ text: '猫', reading: 'ねこ' }, { text: 'が' }, { text: '好', reading: 'す' }, { text: 'き' }]);
+  // "<span style=…>猫</span>が好き" renders as two text nodes: 猫 | が好き.
+  assert.deepEqual(take('猫'), [{ text: '猫', reading: 'ねこ' }]);
+  assert.deepEqual(take('が好き'), [{ text: 'が' }, { text: '好', reading: 'す' }, { text: 'き' }]);
+  // A tag cutting through one reading keeps the reading on the first piece only.
+  const split = segmentCursor([{ text: '日本', reading: 'にほん' }, { text: '語' }]);
+  assert.deepEqual([split('日'), split('本語')], [[{ text: '日', reading: 'にほん' }], [{ text: '本' }, { text: '語' }]]);
+});
