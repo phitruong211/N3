@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Bookmark, BookmarkCheck, Search, X } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
 import type { GrammarItem } from '@/types';
-import { StudySession } from '@/components/flashcard/StudySession';
+import { StudySession } from '@/components/flashcard/LazyStudySession';
 import { grammarCard } from '@/lib/cards';
 import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
 import { DetailPane, LearnDot, LearnFilter } from '@/components/library/LibraryParts';
@@ -63,7 +63,7 @@ export function GrammarPage() {
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         <div className="space-y-2 lg:max-h-[calc(100vh-230px)] lg:overflow-y-auto">
           {filtered.map(item => <button key={item.id} onClick={() => { setSelectedId(item.id); setSheetOpen(true); }} aria-pressed={wide && current.id === item.id}
-            className={'w-full min-w-0 rounded-xl border p-4 text-left transition-colors focus-ring ' + (wide && current.id === item.id ? 'border-[var(--color-grammar)] bg-[var(--color-surface-alt)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]')}>
+            className={'list-row-lazy w-full min-w-0 rounded-xl border p-4 text-left transition-colors focus-ring ' + (wide && current.id === item.id ? 'border-[var(--color-grammar)] bg-[var(--color-surface-alt)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]')}>
             <div className="flex items-start justify-between gap-3"><span className="font-jp-serif min-w-0 break-words text-lg font-semibold text-[var(--color-text)]">{item.pattern}</span><span className="flex shrink-0 items-center gap-2"><LearnDot state={stateOf(states, item.id)}/><span className="study-eyebrow">{item.level}</span></span></div>
             <p className="mt-1 line-clamp-2 text-sm text-[var(--color-text-secondary)]">{item.meaning}</p>
           </button>)}

@@ -424,6 +424,11 @@ button, a, summary, [role="button"], [role="tab"], label { touch-action: manipul
 .torii-leg-a, .torii-leg-b { transform-box: fill-box; transform-origin: top center; animation: torii-leg .32s ease-in-out infinite; }
 .torii-leg-b { animation-direction: reverse; }
 
+/* Long library lists (over a thousand kanji, hundreds of patterns): rows off screen skip text shaping, layout and paint
+   until scrolled near, so their fonts are not fetched either. `auto` keeps each row's real size once it has been seen. */
+.list-row-lazy { content-visibility: auto; contain-intrinsic-size: auto 96px; }
+.list-tile-lazy { content-visibility: auto; contain-intrinsic-size: auto 80px; }
+
 /* Library lists: learning state, its filter, and the detail sheet on phones. */
 .learn-dot { display: inline-block; flex-shrink: 0; width: 8px; height: 8px; border: 1.5px solid var(--color-border-strong); border-radius: 50%; }
 .learn-dot[data-state="learning"] { border-color: var(--color-learning); background: var(--color-learning); }

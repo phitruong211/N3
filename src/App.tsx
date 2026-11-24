@@ -7,7 +7,7 @@
 
 import React, { Suspense, lazy, useEffect, type ReactNode } from 'react';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { AppProvider, useApp } from '@/hooks/useApp';
+import { AppProvider, useApp, type LibraryPart } from '@/hooks/useApp';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { AuthProvider, useAuth } from '@/hooks/useAuth';
 import { hasSession } from '@/lib/api';
@@ -39,10 +39,14 @@ const BookmarksPage = lazy(() => import('@/components/bookmarks/BookmarksPage').
 const ExamPage = lazy(() => import('@/components/exam/ExamPage').then(module => ({ default: module.ExamPage })));
 const SettingsPage = lazy(() => import('@/components/settings/SettingsPage').then((module) => ({ default: module.SettingsPage })));
 
-/** Library pages wait here; the data downloads the first time one is opened. */
-function LibraryGate({ children }: { children: ReactNode }) {
-  const { loading, loadError, retryLoad, ensureLibrary } = useApp();
-  useEffect(ensureLibrary, [ensureLibrary]);
+// Constants, so a gate's effect does not re-run on every render.
+const VOCABULARY: readonly LibraryPart[] = ['vocabulary'], KANJI: readonly LibraryPart[] = ['kanji'], GRAMMAR: readonly LibraryPart[] = ['grammar'];
+
+/** Library pages wait here for the parts they read (all by default); the data downloads the first time one is opened. */
+function LibraryGate({ parts, children }: { parts?: readonly LibraryPart[]; children: ReactNode }) {
+  const { loading, libraryReady, loadError, retryLoad, ensureLibrary } = useApp();
+  useEffect(() => ensureLibrary(parts), [ensureLibrary, parts]);
+  const waiting = parts ? !parts.every(part => libraryReady.has(part)) : loading;
   if (loadError) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 p-6 text-[var(--color-text)]" role="alert">
@@ -51,7 +55,7 @@ function LibraryGate({ children }: { children: ReactNode }) {
       </div>
     );
   }
-  return loading ? <AppLoading message="Đang mở thư viện…"/> : <>{children}</>;
+  return waiting ? <AppLoading message="Đang mở thư viện…"/> : <>{children}</>;
 }
 
 function AppContent() {
@@ -77,9 +81,9 @@ function AppContent() {
           <Route path="/library" element={<LibraryLayout />}>
             <Route index element={<LibraryHome />} />
             <Route path="kana" element={<KanaPage />} />
-            <Route path="vocabulary" element={<LibraryGate><VocabularyPage /></LibraryGate>} />
-            <Route path="grammar" element={<LibraryGate><GrammarPage /></LibraryGate>} />
-            <Route path="kanji" element={<LibraryGate><KanjiPage /></LibraryGate>} />
+            <Route path="vocabulary" element={<LibraryGate parts={VOCABULARY}><VocabularyPage /></LibraryGate>} />
+            <Route path="grammar" element={<LibraryGate parts={GRAMMAR}><GrammarPage /></LibraryGate>} />
+            <Route path="kanji" element={<LibraryGate parts={KANJI}><KanjiPage /></LibraryGate>} />
             <Route path="listening" element={<ListeningPage />} />
             <Route path="exam" element={<ExamPage />} />
           </Route>

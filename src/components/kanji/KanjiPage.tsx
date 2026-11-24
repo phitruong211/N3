@@ -60,7 +60,7 @@ export function KanjiPage() {
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,1fr)]">
         <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 xl:grid-cols-7">
           {filtered.map(item => <button key={item.id} onClick={() => { setSelected(item); setSheetOpen(true); }} aria-pressed={wide && current.id === item.id}
-            className={'relative flex aspect-square min-w-0 flex-col items-center justify-center rounded-xl border p-1 transition-colors focus-ring ' + (wide && current.id === item.id ? 'border-[var(--color-kanji)] bg-[var(--color-surface-alt)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]')}>
+            className={'list-tile-lazy relative flex aspect-square min-w-0 flex-col items-center justify-center rounded-xl border p-1 transition-colors focus-ring ' + (wide && current.id === item.id ? 'border-[var(--color-kanji)] bg-[var(--color-surface-alt)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]')}>
             <span className="absolute left-1.5 top-1.5 flex items-center gap-1 text-xs font-semibold text-[var(--color-text-tertiary)]"><LearnDot state={stateOf(states, item.id)}/>{level === 'all' && item.level}</span>
             <span className="font-jp-serif text-3xl leading-none text-[var(--color-text)] sm:text-4xl">{item.kanji}</span>
             <span className="mt-1 max-w-full truncate text-xs text-[var(--color-text-secondary)]">{item.hanViet}</span>
