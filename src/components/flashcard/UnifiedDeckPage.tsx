@@ -8,7 +8,7 @@ import { buildBuiltInDecks, buildSavedDeck, deckSummary, type BuiltInDeckDefinit
 import { buildFreeStudyQueue, lessonOptions } from '@/lib/studySetup';
 import { buildScheduledDeckQueue, type DeckScheduleSummary } from '@/lib/deckSchedule';
 import { builtInDeckResumeKey, resolveResumeIndex } from '@/lib/studyResume';
-import { StudySession } from './StudySession';
+import { StudySession } from './LazyStudySession';
 import { ImportedDecks } from './ImportedDecks';
 import { DeckCard } from './DeckCard';
 import { LevelDecks, TodayDecks, type LevelRow } from './LevelDecks';

@@ -3,8 +3,8 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { Bookmark, BookmarkCheck, Search, Volume2, X } from '@/components/ui/icons';
 import { useApp } from '@/hooks/useApp';
 import type { VocabItem } from '@/types';
-import { speakJapanese } from '@/components/flashcard/FlashcardPage';
-import { StudySession } from '@/components/flashcard/StudySession';
+import { speak } from '@/components/kana/kanaSpeech';
+import { StudySession } from '@/components/flashcard/LazyStudySession';
 import { vocabularyCard } from '@/lib/cards';
 import { ContentBadge, EmptyState, PageHeading } from '@/components/ui/StudyUI';
 import { DetailPane, LearnDot, LearnFilter } from '@/components/library/LibraryParts';
@@ -115,7 +115,7 @@ function VocabDetail({ item, bookmarked, onBookmark, onStudy }: { item: VocabIte
         <p className="font-jp mt-2 break-words text-lg text-[var(--color-accent)]">{item.phien_am}</p>
       </div>
       <div className="flex shrink-0 gap-2">
-        <button className="study-button" aria-label="Nghe phát âm" onClick={() => speakJapanese(item.tu)}><Volume2 size={19}/></button>
+        <button className="study-button" aria-label="Nghe phát âm" onClick={() => speak(item.tu, 0.9)}><Volume2 size={19}/></button>
         <button className="study-button" aria-label={bookmarked ? 'Bỏ lưu từ' : 'Lưu từ'} onClick={onBookmark}>{bookmarked ? <BookmarkCheck size={19} className="stamp-pop"/> : <Bookmark size={19}/>}</button>
       </div>
     </div>

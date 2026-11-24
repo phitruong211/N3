@@ -765,15 +765,25 @@ export default function InkRidges({
     const gl = new RidgesGL(canvas, kick)
     if (!gl.ok) {
       setGlOk(false)
-      root.style.setProperty('--ink-ridges-paint', '1')
       return () => gl.dispose()
     }
     theme()
 
+    let drawnAt = 0
+    let drawnScroll = 0
     function frame(now: number) {
       raf = 0
       const o = opts.current
       const reduced = reducedMq.matches
+      // Once painted, with no birds and no pointer easing, only the slow mist moves: 30 fps looks the same and halves the work.
+      const idleDrift = !reduced && drawnAt && now - paintStart >= o.paintIn && !flight && now < nextFlightAt
+        && Math.abs(ptr.x - ptr.tx) <= 1e-4 && Math.abs(ptr.y - ptr.ty) <= 1e-4 && window.scrollY === drawnScroll
+      if (idleDrift && now - drawnAt < 1000 / 30 - 2) {
+        raf = requestAnimationFrame(frame)
+        return
+      }
+      drawnAt = now
+      drawnScroll = window.scrollY
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 0
       last = now
       const p = reduced || o.paintIn <= 0 ? 1 : clamp01((now - paintStart) / o.paintIn)
@@ -794,7 +804,6 @@ export default function InkRidges({
         flight = { start: now, duration: 9 + Math.random() * 3, dir: Math.random() < 0.5 ? 1 : -1, count: Math.min(8, Math.round(o.birds)), layer: n >= 3 ? 1 : 0, seed: Math.floor(Math.random() * 1000) }
       }
       let flock: { alpha: number; birds: Bird[] } = { alpha: 0, birds: [] }
-      let flightU = 0
       if (flight) {
         const t = (now - flight.start) / 1000
         if (t >= flight.duration || reduced || o.birds <= 0) {
@@ -802,7 +811,6 @@ export default function InkRidges({
           scheduleFlight(now, false)
         } else {
           flock = birdsAt(flight, t, ridgeOpts)
-          flightU = t / flight.duration
         }
       }
       gl.draw({
@@ -831,8 +839,6 @@ export default function InkRidges({
         sunGrow: sunBloom(p),
         drop,
       })
-      root!.style.setProperty('--ink-ridges-paint', String(p))
-      root!.style.setProperty('--ink-ridges-flight', String(flightU))
       const settling = Math.abs(ptr.x - ptr.tx) > 1e-4 || Math.abs(ptr.y - ptr.ty) > 1e-4
       const moving = p < 1 || o.drift > 0 || settling || !!flight
       clearTimeout(flightTimer)

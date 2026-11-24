@@ -19,6 +19,9 @@ import { useCardNotes } from './useCardNotes';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { pageForLocation, pathForPage } from '@/lib/navigation';
 
+export type LibraryPart = 'vocabulary' | 'kanji' | 'grammar' | 'n5Decks';
+const ALL_PARTS: readonly LibraryPart[] = ['vocabulary', 'kanji', 'grammar', 'n5Decks'];
+
 interface AppState {
   storage: LearningStorage;
   learningSync: ReturnType<typeof useLearningSync>;
@@ -29,11 +32,14 @@ interface AppState {
   kanji: KanjiItem[];
   grammar: GrammarItem[];
   n5Decks: BuiltInDeckDefinition[];
-  /** True until the library JSON has arrived. Nothing is fetched until a page calls ensureLibrary(). */
+  /** True until every library part asked for has arrived. Nothing is fetched until a page calls ensureLibrary(). */
   loading: boolean;
+  /** The parts that have arrived, for a page that only waits for its own. */
+  libraryReady: ReadonlySet<LibraryPart>;
   loadError: string | null;
   retryLoad: () => void;
-  ensureLibrary: () => void;
+  /** Starts loading the given parts (all of them when none are named); each one shows up as soon as it arrives. */
+  ensureLibrary: (parts?: readonly LibraryPart[]) => void;
 
   // Navigation
   currentPage: PageId;
@@ -75,10 +81,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [kanji, setKanji] = useState<KanjiItem[]>([]);
   const [grammar, setGrammar] = useState<GrammarItem[]>([]);
   const [n5Decks, setN5Decks] = useState<BuiltInDeckDefinition[]>([]);
-  const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
-  const [libraryWanted, setLibraryWanted] = useState(false);
+  const [wanted, setWanted] = useState<ReadonlySet<LibraryPart>>(() => new Set());
+  const [libraryReady, setLibraryReady] = useState<ReadonlySet<LibraryPart>>(() => new Set());
+  const loading = !wanted.size || [...wanted].some(part => !libraryReady.has(part));
   const location = useLocation();
   const navigate = useNavigate();
   const currentPage = pageForLocation(location.pathname, location.search) ?? 'dashboard';
@@ -100,29 +107,30 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const reviewOutbox = useReviewOutbox(storage, Boolean(user), learningSync);
   const cardNotes = useCardNotes(storage, Boolean(user));
 
-  // The ~2.6 MB library loads on first use (library pages, decks, quiz, search), not on every visit.
+  // The ~2.6 MB library loads on first use, and only the parts a page needs: the vocabulary page waits for words alone.
   useEffect(() => {
-    if (!libraryWanted) return;
+    const missing = [...wanted].filter(part => !libraryReady.has(part));
+    if (!missing.length) return;
     let active = true;
-    setLoading(true);
     setLoadError(null);
-    Promise.all([loadVocabulary(), loadKanji(), loadGrammar(), loadN5Decks()])
-      .then(([v, k, g, n5]) => {
-        if (!active) return;
-        setVocabulary(v);
-        setKanji(k);
-        setGrammar(g);
-        setN5Decks(n5);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (!active) return;
-        console.error('Failed to load data:', err);
-        setLoadError(err instanceof Error ? err.message : 'Không thể tải nội dung học.');
-        setLoading(false);
-      });
+    // Loaders share one request per part, so re-running this while one is in flight does not fetch it again.
+    const load: Record<LibraryPart, () => Promise<unknown>> = {
+      vocabulary: () => loadVocabulary().then(v => { if (active) setVocabulary(v); }),
+      kanji: () => loadKanji().then(k => { if (active) setKanji(k); }),
+      grammar: () => loadGrammar().then(g => { if (active) setGrammar(g); }),
+      n5Decks: () => loadN5Decks().then(n5 => { if (active) setN5Decks(n5); }),
+    };
+    for (const part of missing) {
+      load[part]()
+        .then(() => { if (active) setLibraryReady(ready => new Set(ready).add(part)); })
+        .catch((err) => {
+          if (!active) return;
+          console.error('Failed to load data:', err);
+          setLoadError(err instanceof Error ? err.message : 'Không thể tải nội dung học.');
+        });
+    }
     return () => { active = false; };
-  }, [loadAttempt, libraryWanted]);
+  }, [loadAttempt, wanted, libraryReady]);
 
   useEffect(() => {
     rememberPage(currentPage);
@@ -130,7 +138,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [currentPage, location.pathname, location.search, rememberPage, setLastPage]);
 
   const retryLoad = useCallback(() => setLoadAttempt((attempt) => attempt + 1), []);
-  const ensureLibrary = useCallback(() => setLibraryWanted(true), []);
+  const ensureLibrary = useCallback((parts: readonly LibraryPart[] = ALL_PARTS) =>
+    setWanted(current => parts.every(part => current.has(part)) ? current : new Set([...current, ...parts])), []);
 
   // Apply theme on settings change
   useEffect(() => {
@@ -259,6 +268,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         grammar,
         n5Decks,
         loading,
+        libraryReady,
         loadError,
         retryLoad,
         ensureLibrary,

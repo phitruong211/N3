@@ -1,6 +1,7 @@
 import { displayDeckName } from '@/lib/deckDisplay';
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { onDemand } from '@/components/ui/onDemand';
 import { DeckShareDialog } from './DeckShareDialog';
 import { AppLoading } from '@/components/ui/AppLoading';
 import { useAuth } from "@/hooks/useAuth";
@@ -16,9 +17,7 @@ import {
 import { builtinNoteTypes, normalizeConfig, resolveTemplate, type DeckConfig } from "@/lib/deckFormat";
 import { DeckExportDialog } from "./DeckExportDialog";
 import { EnterCodeDialog } from "./EnterCodeDialog";
-import ImportPreviewEditor from "./ImportPreviewEditor";
 import { DeckGroups } from "./DeckGroups";
-import { CardFields } from "./CardFields";
 import { ImportGuide } from "./ImportGuide";
 import {
   addCard,
@@ -46,12 +45,11 @@ import {
   type DeckGroup,
 } from "@/lib/deckApi";
 import { blankCard, importedCardView, type CardView } from "@/lib/cards";
-import { StudySession } from "./StudySession";
+import { StudySession } from "./LazyStudySession";
 import { StudySetupSheet } from "./StudySetupSheet";
 import { loadStudyPages } from "@/lib/loadStudyPages";
 import { buildFreeStudyQueue, lessonOptions } from "@/lib/studySetup";
 import { DeckProgressGrid } from "./DeckCard";
-import { CardDesigner } from "./CardDesigner";
 import { personalDeckResumeKey, resolveResumeIndex } from "@/lib/studyResume";
 import { OverflowMenu } from "@/components/ui/OverflowMenu";
 import { ContentBadge } from "@/components/ui/StudyUI";
@@ -62,6 +60,11 @@ import {
   Upload,
   X,
 } from '@/components/ui/icons';
+
+// Editors that open on a click (card designer, card fields, import preview) load then, not with the deck list.
+const CardDesigner = onDemand(() => import("./CardDesigner").then(module => module.CardDesigner));
+const CardFields = onDemand(() => import("./CardFields").then(module => module.CardFields), <p role="status" className="study-copy">Đang tải…</p>);
+const ImportPreviewEditor = onDemand(() => import("./ImportPreviewEditor").then(module => module.default), <p role="status" className="study-copy">Đang tải…</p>);
 const manualConfig = (): DeckConfig => normalizeConfig({ version: 5, noteTypes: builtinNoteTypes() });
 const emptyPage = <T,>(): Page<T> => ({
   content: [],

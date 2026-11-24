@@ -12,6 +12,7 @@ dist
 dist-ssr
 artifacts/deck-sharing/
 artifacts/card-notes/
+artifacts/card-font-size/
 *.local
 
 # Local environment files (keep the example file tracked)

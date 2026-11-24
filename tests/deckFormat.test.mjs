@@ -278,7 +278,7 @@ test('the contract fixtures are identical in the backend when it is checked out 
 });
 
 // ---- note type editing helpers ----
-import { addNoteTypeField, cloneNoteType, moveFaceField, moveNoteTypeField, removeNoteTypeField, setFaceField, updateNoteTypeField } from '../src/lib/noteTypeEdit.ts';
+import { addNoteTypeField, cloneNoteType, faceFontSize, moveFaceField, moveNoteTypeField, removeNoteTypeField, setFaceField, syncFaceFontSize, updateNoteTypeField } from '../src/lib/noteTypeEdit.ts';
 
 test('every note type edit keeps the type valid', () => {
   const valid = type => { const issues = []; return sanitizeNoteType(type, 't', issues) !== undefined && issues.length === 0; };
@@ -332,4 +332,19 @@ test('example lines round-trip and report lines that cannot be read', () => {
   const examples = [{ japanese: '猫です。', reading: 'ねこです。', meaning: 'Là mèo.' }, { japanese: '犬', reading: '', meaning: 'chó' }];
   assert.deepEqual(parseExampleLines(exampleLines(examples)), { examples, invalid: 0 });
   assert.deepEqual(parseExampleLines('猫 | mèo\n\nchỉ một phần\n a | b | c | d'), { examples: [{ japanese: '猫', reading: '', meaning: 'mèo' }], invalid: 2 });
+});
+
+test('one shared size for a side reaches every field it shows and stops short text growing', () => {
+  const type = builtinNoteTypes()[0];
+  const valid = value => { const issues = []; return sanitizeNoteType(value, 't', issues) !== undefined && issues.length === 0; };
+  const synced = syncFaceFontSize(type, 'front', 40);
+  assert.ok(valid(synced));
+  for (const key of type.front.show.filter(key => type.fields.some(field => field.key === key))) assert.equal(synced.fields.find(field => field.key === key).style.font.size, 40);
+  for (const field of synced.fields.filter(field => !type.front.show.includes(field.key))) assert.equal(field.style?.font?.size, undefined);
+  assert.equal(synced.front.style.autoFit, false);
+  assert.equal(faceFontSize(synced, 'front'), 40);
+  assert.equal(syncFaceFontSize(type, 'front', 999).fields.find(field => field.key === 'front').style.font.size, 72);
+  // Taking it off leaves the type as it was.
+  assert.deepEqual(syncFaceFontSize(synced, 'front', null), type);
+  assert.equal(faceFontSize(type, 'front'), undefined);
 });

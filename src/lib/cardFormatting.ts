@@ -20,6 +20,30 @@ export const CARD_STYLE_DOC = [
   { property: 'margin-bottom', values: 'như padding-left', example: '8px' },
 ] as const;
 
+// Sizes from the editor's size buttons. em keeps them relative to the field's own size, so a later deck-wide size change
+// moves the emphasised word with the rest.
+const SIZE_OPEN = /<span style="font-size:[\d.]+em">$/;
+// shortcut: only unwraps size spans with no other <span> inside; one wrapped around a hand-written colour span stays.
+const SIZE_SPAN = /<span style="font-size:[\d.]+em">((?:(?!<span\b)[\s\S])*?)<\/span>/g;
+
+/**
+ * Gives the selected text (or, with no selection, the whole line under the caret) its own size in em, or with `null`
+ * its normal size again. Resizing twice replaces the size instead of nesting it. Returns the new range to reselect.
+ */
+export function resizeTextRange(text: string, start: number, end: number, em: number | null): { text: string; start: number; end: number } {
+  if (start === end) {
+    start = start ? text.lastIndexOf('\n', start - 1) + 1 : 0;
+    const lineEnd = text.indexOf('\n', end);
+    end = lineEnd < 0 ? text.length : lineEnd;
+  }
+  for (let open; (open = text.slice(0, start).match(SIZE_OPEN)) && text.startsWith('</span>', end);) { start -= open[0].length; end += 7; }
+  let inner = text.slice(start, end);
+  for (let previous = ''; previous !== inner;) { previous = inner; inner = inner.replace(SIZE_SPAN, '$1'); }
+  if (!inner.trim()) return { text, start, end };
+  const replaced = em === null ? inner : `<span style="font-size:${em}em">${inner}</span>`;
+  return { text: text.slice(0, start) + replaced + text.slice(end), start, end: start + replaced.length };
+}
+
 export function safeCardStyle(property: string, value: string): string | undefined {
   const v = value.trim().toLowerCase();
   if (/url|expression|var\(|[\\<>@]/i.test(v)) return;

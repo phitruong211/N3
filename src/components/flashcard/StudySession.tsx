@@ -19,7 +19,7 @@ import type { Rating, SRSCard } from "@/types";
 import { CardFace, DeckCustomizeDialog } from "./CardPresentation";
 import { CardDesigner } from "./CardDesigner";
 import { useStudyNote, NoteButton, PersonalNoteView, PersonalNoteEditor } from './PersonalCardNote';
-import { X, Undo2, HelpCircle, NavDecks } from '@/components/ui/icons';
+import { X, Undo2, HelpCircle, NavDecks, Maximize2, Minimize2 } from '@/components/ui/icons';
 import { OverflowMenu } from '@/components/ui/OverflowMenu';
 import { StudyCardList } from "./StudyCardList";
 import type { ImportedCard } from "@/lib/ankiImport";
@@ -602,11 +602,15 @@ export function StudySession({
             <NoteButton note={personalNote} compact/>
             <button className="study-session-tool" popoverTarget="study-help" title="Cách dùng và phím tắt" aria-label="Cách dùng và phím tắt"><HelpCircle size={18}/></button>
             {canEditDeck && <button className="study-session-tool" title="Danh sách thẻ · thêm và sửa (L)" aria-label="Danh sách thẻ" aria-pressed={listOpen} onClick={() => setListOpen(open => !open)}><NavDecks size={18}/><span className="study-session-tool-label">Danh sách</span></button>}
+            {/* iPhone Safari cannot put a page in fullscreen, so the button only shows where it works. */}
+            {document.fullscreenEnabled && <button className="study-session-tool" onClick={() => void toggleFullscreen()} aria-pressed={fullscreen}
+              title={fullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'} aria-label="Toàn màn hình">
+              {fullscreen ? <Minimize2 size={18}/> : <Maximize2 size={18}/>}
+            </button>}
             {/* Settings-like actions used once a session at most live behind one menu, so the bar keeps only what is used card by card. */}
             <OverflowMenu label="Thêm tùy chọn" horizontal triggerClassName="study-session-tool" actions={[
               { id: 'style', label: 'Giao diện thẻ', disabled: blocked, onSelect: () => { setError(""); setCustomizing(true); } },
               ...(mode === 'flashcards' ? [{ id: 'shuffle', label: shuffled ? 'Bỏ xáo trộn' : 'Xáo trộn thẻ', onSelect: toggleShuffle }] : []),
-              { id: 'fullscreen', label: fullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình', onSelect: () => void toggleFullscreen() },
             ]}/>
           </div>
         </div>
