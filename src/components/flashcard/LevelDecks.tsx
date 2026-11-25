@@ -3,6 +3,7 @@ import { Check, ChevronRight } from '@/components/ui/icons';
 import { builtInLevels, type DeckKind, type DeckLevel } from '@/lib/deckCatalog';
 import { initialLevel, KIND_GLYPH, KIND_TILT, learnedPercent, levelTabLabel, nextTabIndex, summarizeLevel } from '@/lib/levelDecks';
 import type { LearningStorage } from '@/lib/storage';
+import { GUIDE_LEVELS } from '@/lib/grammarGuide';
 import './levelDecks.css';
 
 export type LevelRow = {
@@ -27,7 +28,7 @@ const LEVEL_KEY = 'deck-level-v1';
 const count = (value: number) => value.toLocaleString('vi-VN');
 
 /** Pick one level, then see its decks with progress and what is waiting; replaces four stacked lists. */
-export function LevelDecks({ mode, rows, storage }: { mode: 'free' | 'scheduled'; rows: LevelRow[]; storage: Pick<LearningStorage, 'getJSON' | 'setJSON'> }) {
+export function LevelDecks({ mode, rows, storage, onGuide }: { mode: 'free' | 'scheduled'; rows: LevelRow[]; storage: Pick<LearningStorage, 'getJSON' | 'setJSON'>; onGuide?: (level: DeckLevel) => void }) {
   const uid = useId();
   const scheduled = mode === 'scheduled';
   const levels = useMemo(() => builtInLevels.filter(level => rows.some(row => row.level === level)), [rows]);
@@ -82,7 +83,17 @@ export function LevelDecks({ mode, rows, storage }: { mode: 'free' | 'scheduled'
             </span>
           </button>
         </li>;
-      })}</ul>
+      })}
+      {onGuide && GUIDE_LEVELS.includes(level) && <li>
+        <button type="button" className="level-row" style={{ '--tone': KINDS.grammar.tone } as React.CSSProperties} onClick={() => onGuide(level)}>
+          <span className="level-seal" style={{ '--tilt': 3 } as React.CSSProperties} aria-hidden="true">解</span>
+          <span className="level-row-main">
+            <span className="level-row-name">Hướng dẫn ngữ pháp<span className="sr-only"> {level}</span></span>
+            <span className="level-row-detail">Bài giảng theo chủ đề, cặp dễ nhầm và tổng ôn</span>
+          </span>
+          <span className="level-row-side"><span className="level-row-note">Đọc bài</span><ChevronRight size={18} className="level-row-chevron" aria-hidden="true"/></span>
+        </button>
+      </li>}</ul>
     </div>
   </section>;
 }
