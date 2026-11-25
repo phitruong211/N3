@@ -394,8 +394,6 @@ button, a, summary, [role="button"], [role="tab"], label { touch-action: manipul
 .reduced-motion .kana-stroke { animation: none; stroke-dashoffset: 0; }
 
 /* Library path: the ink thread between stages draws itself downward once, stage by stage. */
-@keyframes library-thread { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-.library-thread { transform-origin: top; animation: library-thread var(--dur-slow) var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 110ms + 180ms); }
 
 /* Kana games. The sky is ruled paper with faint rain; the ground is an ink wash. */
 .rain-sky { background-image: repeating-linear-gradient(100deg, transparent 0 38px, color-mix(in srgb, var(--color-border) 55%, transparent) 38px 39px), linear-gradient(var(--color-surface), var(--color-surface-alt)); }
