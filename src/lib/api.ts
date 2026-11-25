@@ -15,6 +15,8 @@ export interface ApiUser {
   locale: string;
   timezone: string;
   createdAt: string;
+  /** Set by the backend once a Google account is linked. */
+  googleLinked?: boolean;
 }
 
 interface AuthResponse { accessToken: string; refreshToken: string; expiresIn: number; user: ApiUser }
@@ -110,7 +112,7 @@ async function refreshAccessToken(identity: string | null): Promise<boolean> {
 
 async function apiFetch(path: string, init: RequestInit, retry: boolean): Promise<{ response: Response; identity: ReturnType<typeof sessionIdentity> }> {
   const identity = sessionIdentity();
-  const publicAuth = ['/auth/login', '/auth/register', '/auth/logout', '/auth/refresh'].includes(path);
+  const publicAuth = ['/auth/login', '/auth/register', '/auth/google', '/auth/logout', '/auth/refresh'].includes(path);
   if (!publicAuth && path !== '/auth/me' && (!identity || verifiedSession !== identity)) {
     throw new ApiError(401, 'Đăng nhập để lưu và đồng bộ bộ thẻ của bạn');
   }
@@ -174,6 +176,22 @@ export async function register(email: string, password: string, displayName: str
   signal?.throwIfAborted();
   assertSession(identity);
   saveTokens(response, true); verifiedSession = sessionIdentity(); return response.user;
+}
+
+/** Sign in or sign up with a Google ID token (credential from Google Identity Services). */
+export async function loginWithGoogle(idToken: string, signal?: AbortSignal): Promise<ApiUser> {
+  const identity = sessionIdentity();
+  const response = await apiRequest<AuthResponse>('/auth/google', {
+    method: 'POST', signal, body: JSON.stringify({ idToken, deviceName: navigator.userAgent.slice(0, 200) }),
+  });
+  signal?.throwIfAborted();
+  assertSession(identity);
+  saveTokens(response, true); verifiedSession = sessionIdentity(); return response.user;
+}
+
+/** Link a Google account to the signed-in account. Outside /auth/ so an expired access token is refreshed. */
+export async function linkGoogle(idToken: string): Promise<ApiUser> {
+  return apiRequest<ApiUser>('/users/me/google', { method: 'POST', body: JSON.stringify({ idToken }) });
 }
 
 export async function currentUser(): Promise<ApiUser> { const identity = sessionIdentity(); const user = await apiRequest<ApiUser>('/auth/me'); assertSession(identity); verifiedSession = identity; return user; }
