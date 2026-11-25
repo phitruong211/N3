@@ -15,7 +15,7 @@ test('patternKeys drops 〜, notes in brackets and splits alternatives', () => {
 });
 
 test('each guide becomes lessons whose pattern rows become unique cards', () => {
-  for (const level of ['N3', 'N4']) {
+  for (const level of ['N2', 'N3', 'N4']) {
     const { guide, grammar } = load(level);
     assert.ok(guide.lessons.length >= 10, level);
     const cards = lessonCards(guide.lessons, level, grammar);
@@ -29,4 +29,15 @@ test('a blank line between two tables keeps them apart', () => {
   const { guide } = load('N4');
   const tables = guide.lessons.flatMap(lesson => lesson.blocks).filter(block => block.kind === 'table');
   assert.ok(tables.some(table => table.head[0] === 'Động từ thường'));
+});
+
+test('lesson text helpers split notes, pattern pieces and tips', async () => {
+  const { splitNote, patternPieces, calloutParts } = await import('../src/lib/grammarGuide.ts');
+  assert.deepEqual(splitNote('Nhờ có (kết quả tốt)'), ['Nhờ có', 'kết quả tốt']);
+  assert.deepEqual(splitNote('Cách… một lần'), ['Cách… một lần', '']);
+  assert.deepEqual(patternPieces('〜たとたん(に) / 〜最中だ'), ['たとたん', '最中だ']);
+  assert.deepEqual(patternPieces('〜ば〜ほど'), ['ほど']);
+  assert.deepEqual(patternPieces('V命令'), []);
+  assert.deepEqual(calloutParts('Mẹo ôn: học mỗi ngày'), ['Mẹo ôn', 'học mỗi ngày']);
+  assert.equal(calloutParts('Nhóm này mô tả: thời điểm'), null);
 });

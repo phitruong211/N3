@@ -1,9 +1,11 @@
-/* Grammar guide: lesson nav beside the article on wide screens, a scrolling chip row above it on narrow ones. */
-.guide-layout { display: grid; gap: 20px; align-items: start; }
-@media (min-width: 1024px) { .guide-layout { grid-template-columns: 240px minmax(0, 1fr); gap: 32px; } }
+/* Grammar guide. Reading order inside a pattern: name -> meaning -> note -> how it connects -> example.
+   One column, a measured line length and air between patterns, so each one reads as a unit. */
+.guide-layout { display: grid; gap: 24px; align-items: start; }
+@media (min-width: 1024px) { .guide-layout { grid-template-columns: 230px minmax(0, 1fr); gap: 48px; } }
 
+/* Lesson nav: chips on narrow screens, a sticky list beside the text on wide ones. */
 .guide-nav { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
-.guide-nav button { display: grid; flex: none; gap: 1px; min-height: 44px; padding: 8px 14px; border: 1px solid var(--color-border); border-radius: 8px; text-align: left; color: var(--color-text-secondary); cursor: pointer; transition: background var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft), color var(--dur-fast); }
+.guide-nav button { display: grid; flex: none; gap: 1px; min-height: 44px; padding: 8px 14px; border: 1px solid var(--color-border); border-radius: 8px; text-align: left; color: var(--color-text-secondary); cursor: pointer; transition: background var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft); }
 .guide-nav button b { color: var(--color-text); font-size: .875rem; font-weight: 600; white-space: nowrap; }
 .guide-nav button span { display: none; font-size: .8rem; line-height: 1.35; }
 .guide-nav button:hover { border-color: var(--color-border-strong); background: var(--color-surface-hover); }
@@ -11,39 +13,104 @@
 .guide-nav button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .guide-nav .guide-nav-all b { color: var(--color-grammar); }
 @media (min-width: 1024px) {
-  .guide-nav { position: sticky; top: 80px; flex-direction: column; gap: 4px; max-height: calc(100vh - 110px); overflow: auto; }
+  .guide-nav { position: sticky; top: 80px; flex-direction: column; gap: 2px; max-height: calc(100vh - 110px); overflow: auto; }
+  .guide-nav button { border-color: transparent; border-left: 2px solid var(--color-border); border-radius: 0 6px 6px 0; }
+  .guide-nav button[aria-current="page"] { border-color: transparent; border-left-color: var(--color-grammar); }
   .guide-nav button span { display: block; }
-  .guide-nav .guide-nav-all { margin-top: 8px; }
+  .guide-nav .guide-nav-all { margin-top: 12px; }
 }
 
-.guide-article { min-width: 0; }
-.guide-head { margin: 0 0 16px; color: var(--color-text); font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 1.8rem); font-weight: 400; line-height: 1.25; }
-.guide-head h2 { margin: 0 0 6px; font: inherit; }
-.guide-section-title { margin: 40px 0 12px; padding-top: 20px; border-top: 1px solid var(--color-border-strong); color: var(--color-text); font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; }
-.guide-h3 { margin: 24px 0 10px; color: var(--color-text); font-size: 1rem; font-weight: 600; }
-.guide-p { margin: 0 0 12px; }
-.guide-p strong, .guide-list strong { color: var(--color-text); }
-.guide-list { margin: 0 0 16px; padding-left: 1.2rem; list-style: disc; color: var(--color-text-secondary); font-size: .9rem; line-height: 1.75; }
+.guide-article { min-width: 0; max-width: 720px; }
 .guide-article a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
+.guide-article strong { color: var(--color-text); font-weight: 600; }
 
-.guide-patterns { display: grid; gap: 10px; margin: 0 0 20px; padding: 0; list-style: none; }
-@media (min-width: 1280px) { .guide-patterns { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.guide-pattern { min-width: 0; padding: 14px 16px; border: 1px solid var(--color-border); border-left: 3px solid var(--color-grammar); border-radius: 8px; background: var(--color-surface); overflow-wrap: anywhere; }
-.guide-pattern h4 { margin: 0 0 8px; color: var(--color-text); font-size: 1.15rem; font-weight: 600; line-height: 1.4; }
-.guide-pattern dl { display: grid; gap: 6px; margin: 0; }
-.guide-pattern dl > div { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 8px; }
-.guide-pattern dt { color: var(--color-text-tertiary); font-size: .75rem; font-weight: 600; letter-spacing: .04em; line-height: 1.7; }
-.guide-pattern dd { margin: 0; color: var(--color-text); font-size: .9rem; line-height: 1.6; }
-.guide-quiz .guide-meaning dd { filter: blur(6px); cursor: pointer; transition: filter var(--dur-fast); user-select: none; }
-.guide-quiz .guide-meaning:hover dd, .guide-quiz .guide-meaning:focus dd { filter: none; user-select: auto; }
-.guide-meaning:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: 4px; }
+/* Level 1: the lesson. */
+.guide-lesson-head { margin-bottom: 28px; }
+.guide-lesson-head h2 { margin: 6px 0 0; color: var(--color-text); font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 400; letter-spacing: -.01em; line-height: 1.2; }
+.guide-lesson-head .study-eyebrow { color: var(--color-grammar); }
+.guide-lead { margin: 16px 0 0; padding: 14px 18px; border-radius: 10px; background: color-mix(in srgb, var(--color-grammar) 7%, var(--color-surface)); color: var(--color-text); font-size: .95rem; line-height: 1.7; }
+.guide-lead b { display: block; margin-bottom: 2px; color: var(--color-grammar); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.guide-lesson-head + .guide-lesson > .guide-lead:first-child { margin-top: -12px; margin-bottom: 28px; }
 
-.guide-table-wrap { margin: 0 0 20px; overflow-x: auto; border: 1px solid var(--color-border); border-radius: 8px; }
-.guide-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+/* Level 2: a group inside a lesson. */
+.guide-h3 { display: flex; align-items: center; gap: 12px; margin: 40px 0 8px; color: var(--color-text); font-size: 1.05rem; font-weight: 600; }
+.guide-h3::after { flex: 1; height: 1px; background: var(--color-border); content: ''; }
+.guide-p { margin: 0 0 14px; }
+.guide-list { margin: 8px 0 20px; padding-left: 1.2rem; list-style: disc; color: var(--color-text-secondary); font-size: .95rem; line-height: 1.8; }
+.guide-list li + li { margin-top: 4px; }
+.guide-tip { display: grid; gap: 2px; margin: 20px 0; padding: 12px 16px; border-left: 3px solid var(--color-gold); border-radius: 0 8px 8px 0; background: var(--color-surface-alt); color: var(--color-text); font-size: .92rem; line-height: 1.7; }
+.guide-tip b { color: var(--color-text-secondary); font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+/* Level 3: one pattern. Numbered, separated by space and a hairline instead of boxes. */
+.guide-patterns { margin: 0 0 8px; padding: 0; list-style: none; }
+.guide-pattern { position: relative; padding: 24px 0 24px 44px; border-bottom: 1px solid var(--color-border); overflow-wrap: anywhere; counter-increment: pattern; }
+.guide-pattern::before { position: absolute; top: 28px; left: 0; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: color-mix(in srgb, var(--color-grammar) 12%, transparent); color: var(--color-grammar); font-size: .78rem; font-weight: 700; font-variant-numeric: tabular-nums; content: counter(pattern); }
+.guide-pattern h4 { margin: 0; color: var(--color-text); font-size: 1.4rem; font-weight: 600; line-height: 1.35; }
+.guide-vs { margin: 0 .5em; color: var(--color-text-tertiary); font-family: 'Be Vietnam Pro', sans-serif; font-size: .8rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; vertical-align: middle; }
+.guide-pattern-meaning { margin: 6px 0 0; color: var(--color-text); font-size: 1.05rem; font-weight: 600; line-height: 1.55; }
+.guide-points { margin: 8px 0 0; padding-left: 1.1rem; list-style: disc; color: var(--color-text); font-size: .97rem; line-height: 1.65; }
+.guide-points li + li { margin-top: 4px; }
+.guide-pattern-note { margin: 4px 0 0; color: var(--color-text-secondary); font-size: .88rem; line-height: 1.6; }
+.guide-pattern-note::before { margin-right: 6px; color: var(--color-gold); content: '↳'; }
+.guide-form { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 12px 0 0; font-size: .9rem; }
+.guide-form > span:first-child { color: var(--color-text-tertiary); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.guide-form code { padding: 3px 10px; border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-surface); color: var(--color-text); font-size: .92rem; }
+.guide-examples { display: grid; gap: 6px; margin-top: 12px; padding: 10px 14px; border-radius: 8px; background: var(--color-surface); }
+.guide-examples p { margin: 0; color: var(--color-text); font-size: 1rem; line-height: 1.7; }
+.guide-examples small { display: block; color: var(--color-text-tertiary); font-size: .82rem; }
+.guide-examples mark { padding: 0 1px; border-radius: 2px; background: color-mix(in srgb, var(--color-gold) 30%, transparent); color: inherit; font-weight: 600; }
+
+/* Tổng ôn: one line per pattern. */
+.guide-review-title { display: flex; align-items: baseline; gap: 10px; margin: 36px 0 6px; color: var(--color-text); font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; }
+.guide-review-title span { color: var(--color-grammar); font-family: 'Be Vietnam Pro', sans-serif; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.guide-review { margin: 0 0 8px; padding: 0; list-style: none; }
+.guide-review li { display: grid; gap: 4px 20px; padding: 12px 0; border-bottom: 1px solid var(--color-border); }
+@media (min-width: 640px) { .guide-review li { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: baseline; } }
+.guide-review-pattern { display: grid; gap: 2px; min-width: 0; }
+.guide-review-pattern b { color: var(--color-text); font-size: 1.08rem; font-weight: 600; }
+.guide-review-pattern small { color: var(--color-text-tertiary); font-size: .8rem; }
+.guide-review .guide-meaning { color: var(--color-text); font-size: .95rem; line-height: 1.6; }
+
+/* Self-check: meanings blur until hovered or tapped. */
+.guide-meaning { border-radius: 4px; }
+.guide-quiz .guide-meaning { cursor: pointer; }
+.guide-quiz .guide-meaning > *, .guide-quiz .guide-review .guide-meaning { filter: blur(6px); transition: filter var(--dur-fast); user-select: none; }
+.guide-quiz .guide-meaning:hover > *, .guide-quiz .guide-meaning:focus > *, .guide-quiz .guide-review .guide-meaning:hover, .guide-quiz .guide-review .guide-meaning:focus { filter: none; user-select: auto; }
+.guide-meaning:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+.guide-table-wrap { margin: 12px 0 24px; overflow-x: auto; border: 1px solid var(--color-border); border-radius: 8px; }
+.guide-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
 .guide-table th { background: var(--color-surface-alt); color: var(--color-text-secondary); font-weight: 600; text-align: left; white-space: nowrap; }
-.guide-table th, .guide-table td { padding: 8px 12px; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.guide-table th, .guide-table td { padding: 9px 14px; border-bottom: 1px solid var(--color-border); vertical-align: top; line-height: 1.6; }
 .guide-table tr:last-child td { border-bottom: 0; }
 
-.guide-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-.guide-foot { justify-content: space-between; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--color-border); }
-@media (prefers-reduced-motion: reduce) { .guide-quiz .guide-meaning dd { transition: none; } }
+.guide-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.guide-foot { justify-content: space-between; margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--color-border-strong); }
+@media (prefers-reduced-motion: reduce) { .guide-quiz .guide-meaning > * { transition: none; } }
+.guide-tag { margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--color-surface-alt); color: var(--color-text-secondary); font-family: 'Be Vietnam Pro', sans-serif; font-size: .72rem; font-weight: 500; vertical-align: middle; }
+
+/* Colour by role, the same everywhere, so the eye learns where to look: green = meaning, violet = how it connects,
+   blue = example, amber = note. Muted theme tokens, so it stays soft in every theme. */
+.guide-article { --g-meaning: var(--color-success); --g-form: var(--color-kanji); --g-note: var(--color-grammar); --g-example: #3F6585; }
+.dark .guide-article { --g-example: #8DB4D6; }
+.high-contrast .guide-article { --g-meaning: var(--color-text); --g-form: var(--color-text); --g-note: var(--color-text); --g-example: var(--color-text); }
+
+.guide-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 14px 0 0; color: var(--color-text-secondary); font-size: .8rem; }
+.guide-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.guide-legend span::before { width: 10px; height: 10px; border-radius: 3px; background: var(--c); content: ''; }
+.guide-legend .is-meaning { --c: var(--g-meaning); }
+.guide-legend .is-form { --c: var(--g-form); }
+.guide-legend .is-example { --c: var(--g-example); }
+.guide-legend .is-note { --c: var(--g-note); }
+
+.guide-pattern-meaning, .guide-points { color: var(--g-meaning); }
+.guide-points li::marker { color: var(--g-meaning); }
+.guide-pattern-note { color: color-mix(in srgb, var(--g-note) 75%, var(--color-text)); }
+.guide-pattern-note::before { color: var(--g-note); }
+.guide-form > span:first-child { color: var(--g-form); }
+.guide-form code { border-color: color-mix(in srgb, var(--g-form) 28%, transparent); background: color-mix(in srgb, var(--g-form) 7%, var(--color-surface)); color: color-mix(in srgb, var(--g-form) 70%, var(--color-text)); }
+.guide-examples { border-left: 3px solid color-mix(in srgb, var(--g-example) 55%, transparent); border-radius: 0 8px 8px 0; background: color-mix(in srgb, var(--g-example) 6%, var(--color-surface)); }
+.guide-examples small { color: color-mix(in srgb, var(--g-example) 60%, var(--color-text-tertiary)); }
+.guide-vs { color: var(--color-seal); }
+.guide-review-pattern small { color: color-mix(in srgb, var(--g-form) 75%, var(--color-text-tertiary)); }
+.guide-review .guide-meaning { color: var(--g-meaning); }
