@@ -7,6 +7,7 @@ import type { ThemeMode } from '@/types';
 import { PageHeading } from '@/components/ui/StudyUI';
 import { useAuth } from '@/hooks/useAuth';
 import { AccountLearningStatus } from '@/components/auth/AccountLearningStatus';
+import { GoogleLink } from '@/components/auth/GoogleLink';
 import { UNLIMITED_NEW_CARDS } from '@/lib/deckSchedule';
 
 // Swatch colours are fixed so each card previews its own theme whichever one is active.
@@ -79,6 +80,7 @@ export function SettingsPage() {
           <p className="study-copy mt-1">{user ? `${user.displayName} · ${user.email}` : 'Bạn đang học thử trên thiết bị này.'}</p>
           {user?.role === 'ADMIN' && <p className="mt-1"><a className="underline" href="/admin/reports">Quản trị: báo cáo bộ thẻ</a></p>}
           <button className="study-button mt-4" onClick={() => user ? void signOut() : requestAuth()}>{user ? 'Đăng xuất' : 'Đăng nhập / Đăng ký'}</button>
+          <GoogleLink />
           {user && <div className="mt-5 border-t border-[var(--color-border)] pt-4"><AccountLearningStatus /></div>}
         </section>
         <details className="study-panel">

@@ -3,11 +3,12 @@ import { ArrowRight, Eye, EyeOff, LoaderCircle, LogIn } from '@/components/ui/ic
 import { BrandMark } from '@/components/ui/BrandMark';
 import { Seal } from '@/components/ui/Seal';
 import { useAuth } from '@/hooks/useAuth';
+import { GoogleButton, googleEnabled } from './GoogleButton';
 import './auth.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export function AuthPage({ initialMode = 'login', compact = false }: { initialMode?: 'login' | 'register'; compact?: boolean }) {
-  const { signIn, signUp, enterGuest, setPrompt } = useAuth();
+  const { signIn, signUp, signInWithGoogle, enterGuest, setPrompt } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [mode, setMode] = useState<'login' | 'register'>(initialMode);
@@ -20,11 +21,13 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
 
   async function submit(event: FormEvent) {
     event.preventDefault();
+    await run(() => mode === 'login' ? signIn(email, password) : signUp(email, password, displayName));
+  }
+  async function run(action: () => Promise<void>) {
     if (busy) return;
     setBusy(true); setError('');
     try {
-      if (mode === 'login') await signIn(email, password);
-      else await signUp(email, password, displayName);
+      await action();
       setPrompt(null);
       if (!compact || !/^\/shared\/(?:groups\/)?[^/]+\/?$/.test(location.pathname)) navigate('/today', { replace: true });
     } catch (reason) { setError(reason instanceof Error ? reason.message : 'Không thể kết nối máy chủ.'); }
@@ -53,6 +56,8 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
         {error && <p role="alert" className="text-sm text-[var(--color-error)]">{error}</p>}
         <button className="auth-submit" disabled={busy}>{busy ? <><LoaderCircle className="auth-spinner" size={19}/>Đang kết nối…</> : <>{mode === 'login' ? 'Đăng nhập' : 'Tạo tài khoản'}<ArrowRight size={19}/></>}</button>
       </form>
+      {googleEnabled && <><div className="auth-divider"><span>hoặc</span></div>
+      <GoogleButton disabled={busy} text={mode === 'login' ? 'signin_with' : 'signup_with'} onCredential={idToken => void run(() => signInWithGoogle(idToken))}/></>}
       <button type="button" className="study-button w-full mt-4" disabled={busy && !compact} onClick={() => {
         if (compact) setPrompt(null);
         else { enterGuest(); navigate('/today', { replace: true }); }

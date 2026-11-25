@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { ApiError, currentUser, hasSession, invalidateApiSession, isSessionStorageKey, login, logout, register, sessionIdentity, type ApiUser } from '@/lib/api';
+import { ApiError, currentUser, hasSession, invalidateApiSession, isSessionStorageKey, linkGoogle, login, loginWithGoogle, logout, register, sessionIdentity, type ApiUser } from '@/lib/api';
 import { createLearningStorage, type LearningStorage } from '@/lib/storage';
 import type { ImportedCard, ImportPreview } from '@/lib/ankiImport';
 import type { PageId } from '@/types';
@@ -16,6 +16,8 @@ interface AuthState {
   retryRestore: () => void;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, displayName: string) => Promise<void>;
+  signInWithGoogle: (idToken: string) => Promise<void>;
+  linkGoogleAccount: (idToken: string) => Promise<void>;
   signOut: () => Promise<void>;
   enterGuest: () => void;
   storage: LearningStorage;
@@ -130,6 +132,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     retryRestore: () => setRestoreAttempt(value => value + 1),
     signIn: (email, password) => authenticate(signal => login(email, password, signal)),
     signUp: (email, password, displayName) => authenticate(signal => register(email, password, displayName, signal)),
+    signInWithGoogle: idToken => authenticate(signal => loginWithGoogle(idToken, signal)),
+    linkGoogleAccount: async idToken => { const attempt = generation.current; const account = await linkGoogle(idToken); if (attempt === generation.current) setUser(account); },
     signOut, enterGuest, storage, prompt, setPrompt: changePrompt, requestAuth: () => setPrompt('choice'),
     draft, setDraft, resumePage, rememberPage, guestNotice, dismissGuestNotice: () => setGuestNotice(false), sessionKey,
   }}>{children}</AuthContext.Provider>;
