@@ -44,23 +44,23 @@ export function LibraryHome() {
 
     <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,25rem)] lg:gap-12">
       {/* The next stop stays beside the path; on a phone it comes first. */}
-      <aside aria-label="Chặng tiếp theo" className="relative order-1 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-md)] lg:order-2 lg:sticky lg:top-20">
+      <aside aria-label="Chặng tiếp theo" className="study-panel relative order-1 overflow-hidden shadow-[var(--shadow-sm)] lg:order-2 lg:sticky lg:top-20">
         {/* The stage's own character, pressed faintly into the paper like a watermark; it echoes the seal on the path. */}
-        <span key={current.glyph} aria-hidden="true" className="pointer-events-none absolute -right-3 -top-7 select-none font-jp-serif text-[9.5rem] leading-none text-[var(--color-gold)] opacity-[.13]">{current.glyph}</span>
+        <span key={current.glyph} aria-hidden="true" className="pointer-events-none absolute -right-3 -top-7 select-none font-jp-serif text-[9.5rem] leading-none text-[var(--color-gold)] opacity-[.09]">{current.glyph}</span>
         <h2 className="font-[family-name:var(--font-display)] text-3xl leading-tight tracking-tight text-[var(--color-text)]">{current.name}</h2>
         <p className="study-copy mt-3 max-w-[30ch]">{current.about}</p>
         {currentStatus !== 'practice' && currentStatus !== 'loading' && <div className="mt-5">
           <p className="text-sm tabular-nums text-[var(--color-text-secondary)]">
             <b className="text-[var(--color-text)]">{current.done}</b> / {current.total} {current.unit} đã học
           </p>
-          <span aria-hidden="true" className="mt-2 block h-0.5 rounded-full bg-[var(--color-border)]">
-            <span className="block h-0.5 rounded-full bg-[var(--color-gold)]" style={{ width: `${(current.done! / current.total!) * 100}%` }} />
+          <span aria-hidden="true" className="mt-2 block h-1 overflow-hidden rounded-full bg-[var(--color-border)]">
+            <span className="block h-1 rounded-full transition-[width] duration-500 bg-[var(--color-gold)]" style={{ width: `${(current.done! / current.total!) * 100}%` }} />
           </span>
         </div>}
         <Link to={current.to} className="study-button study-button-primary mt-6 w-full sm:w-auto">{cta} <ArrowRight size={17} /></Link>
       </aside>
 
-      <ol className="order-2 max-w-2xl lg:order-1">
+      <ol className="study-panel order-2 !p-2 lg:order-1">
         {stages.map((stage, i) => {
           const status = statusOf(stage);
           const isCurrent = stage === current;
@@ -68,13 +68,13 @@ export function LibraryHome() {
           const fill = status === 'complete' ? 100 : status === 'started' ? (stage.done! / stage.total!) * 100 : 0;
           return <li key={stage.to} className="relative">
             <Link to={stage.to} aria-current={isCurrent ? 'step' : undefined}
-              className={`relative flex items-start gap-4 rounded-xl px-3 py-4 transition-colors focus-ring ${isCurrent ? 'bg-[var(--color-surface-alt)]' : 'hover:bg-[var(--color-surface-hover)]'}`}>
+              className={`relative flex items-start gap-4 rounded-lg px-3 py-4 transition-colors focus-ring ${isCurrent ? 'bg-[color-mix(in_srgb,var(--color-gold)_9%,transparent)]' : 'hover:bg-[var(--color-surface-hover)]'}`}>
               <Seal glyph={stage.glyph} tone={tone} className={status === 'complete' ? 'stamp-pop' : ''} />
-              <span className="min-w-0 flex-1">
-                <span className="block text-[1.0625rem] leading-[44px] text-[var(--color-text)]">{stage.name}</span>
-                <span className="study-copy -mt-1 block max-w-[52ch] !text-sm !leading-relaxed">{stage.about}</span>
+              <span className="min-w-0 flex-1 pt-0.5">
+                <span className="block text-[1.0625rem] font-medium leading-snug text-[var(--color-text)]">{stage.name}</span>
+                <span className="study-copy mt-1 block !text-sm !leading-relaxed">{stage.about}</span>
               </span>
-              <span className="flex h-11 shrink-0 items-center gap-2 text-sm tabular-nums text-[var(--color-text-secondary)]">
+              <span className="flex shrink-0 items-center gap-2 pt-0.5 text-sm tabular-nums text-[var(--color-text-secondary)]">
                 {status === 'complete' && <span className="text-[var(--color-success)]">Hoàn thành</span>}
                 {(status === 'started' || status === 'new') && <span><b className="text-[var(--color-text)]">{stage.done}</b> / {stage.total}</span>}
                 {status === 'loading' && loading && <span className="text-[var(--color-text-tertiary)]">…</span>}
