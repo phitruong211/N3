@@ -76,3 +76,20 @@ function rowBack(head: string[], row: string[]): string {
   const lead = (title: string) => /^(Nghĩa|Khác nhau)/.test(title);
   return [...parts.filter(([title]) => lead(title)).map(([, text]) => text), ...parts.filter(([title]) => !lead(title)).map(([title, text]) => `【${title}】\n${text}`)].join('\n\n');
 }
+
+/** "Nhờ có (kết quả tốt)" -> ["Nhờ có", "kết quả tốt"]: a trailing aside reads better as its own note line. */
+export function splitNote(text: string): [string, string] {
+  const match = text.match(/^(.*\S)\s*\(([^()]+)\)$/);
+  return match ? [match[1], match[2]] : [text, ''];
+}
+
+/** Pieces of a pattern to mark in its example: "〜ば〜ほど" -> ["ほど"], "〜たとたん(に)" -> ["たとたん"]. One-kana pieces would mark noise. */
+export function patternPieces(pattern: string): string[] {
+  return pattern.split('/').flatMap(part => part.replace(/[(（][^)）]*[)）]/g, '').split(/[〜～+\s]/)).filter(piece => piece.length > 1 && /^[぀-ヿ一-鿿]+$/.test(piece));
+}
+
+/** "Mẹo ôn: …" -> ["Mẹo ôn", "…"]: the guide's tips, shown as call-outs. */
+export function calloutParts(text: string): [string, string] | null {
+  const match = text.match(/^(Mẹo ôn|Lưu ý[^:]*|Cách nhớ nhanh|Phân biệt nhanh|Quy tắc chọn|Bẫy thường gặp|Mức độ chắc chắn[^:]*):\s*(.*)$/);
+  return match ? [match[1], match[2]] : null;
+}
