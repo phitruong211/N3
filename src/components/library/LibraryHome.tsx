@@ -35,60 +35,91 @@ export function LibraryHome() {
     { to: '/library/exam', glyph: '試', name: 'Đề thi JLPT', about: 'Đề thật có đồng hồ đếm ngược, chấm điểm tự động.' },
   ];
 
+  const path = stages.filter(s => s.tracked);
+  const practice = stages.filter(s => !s.tracked);
   const current = stages.find(s => statusOf(s) !== 'complete') ?? stages[stages.length - 1];
   const currentStatus = statusOf(current);
   const cta = { new: 'Bắt đầu học', started: 'Học tiếp', loading: 'Mở chặng này', practice: 'Vào luyện tập', complete: 'Ôn lại' }[currentStatus];
+  const pct = (s: Stage) => (s.total ? Math.min(100, (s.done! / s.total) * 100) : 0);
+  const step = String(stages.indexOf(current) + 1).padStart(2, '0');
 
   return <div className="study-page">
     <PageHeading title="Thư viện" subtitle="Sáu chặng, đi từ chữ cái đến đề thi thật. Học lần lượt từ trên xuống." />
 
-    <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,25rem)] lg:gap-12">
-      {/* The next stop stays beside the path; on a phone it comes first. */}
-      <aside aria-label="Chặng tiếp theo" className="study-panel relative order-1 overflow-hidden shadow-[var(--shadow-sm)] lg:order-2 lg:sticky lg:top-20">
-        {/* The stage's own character, pressed faintly into the paper like a watermark; it echoes the seal on the path. */}
-        <span key={current.glyph} aria-hidden="true" className="pointer-events-none absolute -right-3 -top-7 select-none font-jp-serif text-[9.5rem] leading-none text-[var(--color-gold)] opacity-[.09]">{current.glyph}</span>
-        <h2 className="font-[family-name:var(--font-display)] text-3xl leading-tight tracking-tight text-[var(--color-text)]">{current.name}</h2>
-        <p className="study-copy mt-3 max-w-[30ch]">{current.about}</p>
-        {currentStatus !== 'practice' && currentStatus !== 'loading' && <div className="mt-5">
-          <p className="text-sm tabular-nums text-[var(--color-text-secondary)]">
-            <b className="text-[var(--color-text)]">{current.done}</b> / {current.total} {current.unit} đã học
-          </p>
-          <span aria-hidden="true" className="mt-2 block h-1 overflow-hidden rounded-full bg-[var(--color-border)]">
-            <span className="block h-1 rounded-full transition-[width] duration-500 bg-[var(--color-gold)]" style={{ width: `${(current.done! / current.total!) * 100}%` }} />
-          </span>
-        </div>}
-        <Link to={current.to} className="study-button study-button-primary mt-6 w-full sm:w-auto">{cta} <ArrowRight size={17} /></Link>
-      </aside>
+    {/* The next stop: the one thing to do when you open the library. */}
+    <section aria-label="Chặng tiếp theo" className="study-panel relative overflow-hidden shadow-[var(--shadow-sm)]">
+      <span key={current.glyph} aria-hidden="true" lang="ja" className="pointer-events-none absolute -bottom-10 right-4 select-none font-jp-serif text-[13rem] leading-none text-[var(--color-gold)] opacity-[.1] sm:right-10">{current.glyph}</span>
+      <div className="relative grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+        <div className="min-w-0">
+          <p className="study-eyebrow">Chặng {step} · {currentStatus === 'started' ? 'Đang học' : currentStatus === 'complete' ? 'Đã xong' : 'Tiếp theo'}</p>
+          <h2 className="mt-2 font-[family-name:var(--font-display)] text-[2rem] leading-tight tracking-tight text-[var(--color-text)] sm:text-[2.5rem]">{current.name}</h2>
+          <p className="study-copy mt-2 max-w-[52ch]">{current.about}</p>
+          {current.tracked && current.total ? <div className="mt-5 max-w-md">
+            <p className="flex items-baseline justify-between text-sm tabular-nums text-[var(--color-text-secondary)]">
+              <span><b className="text-base text-[var(--color-text)]">{current.done}</b> / {current.total} {current.unit} đã học</span>
+              <span>{Math.round(pct(current))}%</span>
+            </p>
+            <Meter value={pct(current)} className="mt-2" />
+          </div> : null}
+        </div>
+        <Link to={current.to} className="study-button study-button-primary w-full md:w-auto">{cta} <ArrowRight size={17} /></Link>
+      </div>
+    </section>
 
-      <ol className="study-panel order-2 !p-2 lg:order-1">
-        {stages.map((stage, i) => {
+    <section aria-labelledby="lib-path" className="grid gap-4">
+      <h2 id="lib-path" className="study-eyebrow">Lộ trình</h2>
+      <ol className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        {path.map((stage, i) => {
           const status = statusOf(stage);
           const isCurrent = stage === current;
-          const tone = status === 'complete' ? 'var(--color-seal)' : status === 'started' ? 'var(--color-gold)' : 'var(--color-text-tertiary)';
-          const fill = status === 'complete' ? 100 : status === 'started' ? (stage.done! / stage.total!) * 100 : 0;
-          return <li key={stage.to} className="relative">
+          const tone = status === 'complete' ? 'var(--color-seal)' : status === 'started' || isCurrent ? 'var(--color-gold)' : 'var(--color-text-tertiary)';
+          return <li key={stage.to} className="min-w-0">
             <Link to={stage.to} aria-current={isCurrent ? 'step' : undefined}
-              className={`relative flex items-start gap-4 rounded-lg px-3 py-4 transition-colors focus-ring ${isCurrent ? 'bg-[color-mix(in_srgb,var(--color-gold)_9%,transparent)]' : 'hover:bg-[var(--color-surface-hover)]'}`}>
-              <Seal glyph={stage.glyph} tone={tone} className={status === 'complete' ? 'stamp-pop' : ''} />
-              <span className="min-w-0 flex-1 pt-0.5">
-                <span className="block text-[1.0625rem] font-medium leading-snug text-[var(--color-text)]">{stage.name}</span>
+              className={`study-panel group flex h-full flex-col gap-4 !p-5 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] focus-ring ${isCurrent ? '!border-[var(--color-gold)]' : 'hover:border-[var(--color-border-strong)]'}`}>
+              <span className="flex items-center justify-between">
+                <Seal glyph={stage.glyph} tone={tone} className={status === 'complete' ? 'stamp-pop' : ''} />
+                <span className="font-[family-name:var(--font-display)] text-sm tabular-nums text-[var(--color-text-tertiary)]">{String(i + 1).padStart(2, '0')}</span>
+              </span>
+              <span className="flex-1">
+                <span className="block text-[1.0625rem] font-medium text-[var(--color-text)]">{stage.name}</span>
                 <span className="study-copy mt-1 block !text-sm !leading-relaxed">{stage.about}</span>
               </span>
-              <span className="flex shrink-0 items-center gap-2 pt-0.5 text-sm tabular-nums text-[var(--color-text-secondary)]">
-                {status === 'complete' && <span className="text-[var(--color-success)]">Hoàn thành</span>}
-                {(status === 'started' || status === 'new') && <span><b className="text-[var(--color-text)]">{stage.done}</b> / {stage.total}</span>}
-                {status === 'loading' && loading && <span className="text-[var(--color-text-tertiary)]">…</span>}
-                {status === 'practice' && <span>Luyện tập</span>}
-                <ChevronRight size={18} className="text-[var(--color-text-tertiary)]" />
+              <span className="block">
+                <span className="flex items-baseline justify-between text-xs tabular-nums text-[var(--color-text-secondary)]">
+                  {status === 'complete' ? <span className="text-[var(--color-success)]">Hoàn thành</span>
+                    : status === 'loading' ? <span>{loading ? 'Đang tải…' : '—'}</span>
+                    : <span><b className="text-sm text-[var(--color-text)]">{stage.done}</b> / {stage.total} {stage.unit}</span>}
+                  <ChevronRight size={16} className="text-[var(--color-text-tertiary)] transition-transform group-hover:translate-x-0.5" />
+                </span>
+                <Meter value={pct(stage)} className="mt-2" />
               </span>
             </Link>
-            {/* The path between two seals fills with ink as far as you have come in the stage above it. */}
-            {i < stages.length - 1 && <span aria-hidden="true" className="pointer-events-none absolute bottom-[-1rem] left-[2.125rem] top-[3.75rem] w-0.5 -translate-x-1/2 bg-[var(--color-border)]">
-              <span className="library-thread absolute inset-x-0 top-0 bg-[var(--color-gold)]" style={{ height: `${fill}%`, '--i': i } as React.CSSProperties} />
-            </span>}
           </li>;
         })}
       </ol>
-    </div>
+    </section>
+
+    <section aria-labelledby="lib-practice" className="grid gap-4">
+      <h2 id="lib-practice" className="study-eyebrow">Luyện tập</h2>
+      <ul className="grid gap-3 md:grid-cols-2">
+        {practice.map(stage => <li key={stage.to} className="min-w-0">
+          <Link to={stage.to} aria-current={stage === current ? 'step' : undefined}
+            className="study-panel group flex h-full items-center gap-4 !p-5 transition-[border-color,box-shadow] duration-200 hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-md)] focus-ring">
+            <Seal glyph={stage.glyph} tone="var(--color-accent)" />
+            <span className="min-w-0 flex-1">
+              <span className="block text-[1.0625rem] font-medium text-[var(--color-text)]">{stage.name}</span>
+              <span className="study-copy mt-0.5 block !text-sm !leading-relaxed">{stage.about}</span>
+            </span>
+            <ChevronRight size={18} className="shrink-0 text-[var(--color-text-tertiary)] transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </li>)}
+      </ul>
+    </section>
   </div>;
+}
+
+function Meter({ value, className = '' }: { value: number; className?: string }) {
+  return <span aria-hidden="true" className={`block h-1 overflow-hidden rounded-full bg-[var(--color-border)] ${className}`}>
+    <span className="block h-full rounded-full bg-[var(--color-gold)] transition-[width] duration-700 ease-out" style={{ width: `${value}%` }} />
+  </span>;
 }
