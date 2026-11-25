@@ -1,0 +1,69 @@
+/* Grammar lessons: group list left, cards right (one row of chips on narrow screens). Red marks the pattern inside a sentence. */
+.lesson-layout { display: grid; gap: 20px; align-items: start; }
+@media (min-width: 1024px) { .lesson-layout { grid-template-columns: 240px minmax(0, 1fr); gap: 32px; } }
+
+.lesson-groups { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.lesson-groups button { display: flex; flex: none; justify-content: space-between; gap: 8px; min-height: 40px; padding: 7px 12px; border: 1.5px solid var(--color-border); border-radius: 999px; color: var(--color-text-secondary); text-align: left; cursor: pointer; }
+.lesson-groups small { color: var(--color-text-tertiary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lesson-groups button:hover { background: var(--color-surface-hover); color: var(--color-text); }
+.lesson-groups button[aria-pressed="true"] { border-color: var(--color-text); background: var(--color-text); color: var(--color-bg); font-weight: 600; }
+.lesson-groups button[aria-pressed="true"] small { color: var(--color-bg); }
+.lesson-groups button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+@media (min-width: 1024px) {
+  .lesson-groups { position: sticky; top: 80px; flex-direction: column; gap: 2px; max-height: calc(100vh - 110px); overflow: auto; }
+  .lesson-groups button { padding: 9px 10px; border: 0; border-left: 3px solid transparent; border-radius: 0 8px 8px 0; }
+  .lesson-groups button[aria-pressed="true"] { border-left-color: var(--color-text); background: var(--color-surface-alt); color: var(--color-text); }
+  .lesson-groups button[aria-pressed="true"] small { color: var(--color-text-tertiary); }
+}
+
+.lesson-body { min-width: 0; max-width: 760px; }
+.lesson-body h2 { margin: 0 0 8px; color: var(--color-text); font-size: clamp(1.5rem, 3.4vw, 2rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
+.lesson-body h3 { margin: 26px 0 10px; color: var(--color-text); font-size: 1.06rem; font-weight: 600; }
+.lesson-body b { color: var(--color-text); font-weight: 700; }
+.lesson-lead { margin: 0 0 16px; max-width: 68ch; color: var(--color-text-secondary); line-height: 1.65; }
+.lesson-pic { margin: 14px 0; padding: 16px 18px; border-radius: 14px; background: var(--color-surface-alt); color: var(--color-text); line-height: 1.6; }
+.lesson-pic strong { display: block; margin-bottom: 4px; color: var(--color-text-secondary); font-size: .8rem; }
+.lesson-pic p { margin: 0 0 4px; }
+.lesson-pic ul { margin: 4px 0 0; padding-left: 20px; list-style: disc; }
+
+.lesson-tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 6px; }
+.lesson-pill { min-height: 44px; padding: 8px 14px; border: 1.5px solid var(--color-border); border-radius: 999px; background: var(--color-surface); color: var(--color-text); font-size: .94rem; font-weight: 600; cursor: pointer; }
+.lesson-pill[aria-pressed="true"] { border-color: var(--color-text); background: var(--color-text); color: var(--color-bg); }
+.lesson-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 6px 0 0; color: var(--color-text-secondary); font-size: .8rem; }
+.lesson-chip { display: inline-block; padding: 1px 7px; border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-surface-alt); color: var(--color-text-secondary); font-size: .875rem; font-weight: 600; white-space: nowrap; }
+.lesson-chip.is-v { color: var(--color-text); }
+
+/* One pattern: a card that opens on tap, the punched hole of a study card on its left. */
+.lesson-cards { display: grid; gap: 8px; }
+.lesson-card { position: relative; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); }
+.lesson-card::before { position: absolute; top: 20px; left: 11px; width: 9px; height: 9px; border: 1.5px solid var(--color-border); border-radius: 50%; background: var(--color-bg); content: ''; }
+.lesson-card summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; min-height: 52px; padding: 14px 18px 14px 30px; list-style: none; cursor: pointer; }
+.lesson-card summary::-webkit-details-marker { display: none; }
+.lesson-card summary:focus-visible { border-radius: 16px; outline: 2px solid var(--color-accent); outline-offset: -2px; }
+.lesson-name { color: var(--color-text); font-size: 1.25rem; font-weight: 700; }
+.lesson-lv { padding: 1px 6px; border-radius: 5px; background: var(--color-surface-alt); color: var(--color-text-tertiary); font-size: .75rem; font-weight: 700; }
+.lesson-lv.is-n3 { color: var(--color-text); }
+.lesson-note { color: var(--color-text-secondary); font-size: .8rem; }
+.lesson-more { display: flex; flex-direction: column; gap: 6px; padding: 0 18px 14px 30px; }
+.lesson-form { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0; color: var(--color-text-secondary); font-size: .875rem; }
+.lesson-meaning { margin: 2px 0 0; color: var(--color-text); font-weight: 600; }
+.lesson-ex { margin: 4px 0 0; color: var(--color-text); font-size: 1.06rem; line-height: 1.7; }
+.lesson-ex mark { border-bottom: 2px solid currentColor; background: none; color: var(--color-seal); font-weight: 700; }
+.lesson-vn { margin: 0; color: var(--color-text-secondary); font-size: .94rem; }
+
+.lesson-table { overflow-x: auto; }
+.lesson-table table { width: 100%; border-collapse: collapse; font-size: .94rem; }
+.lesson-table th, .lesson-table td { padding: 8px 10px; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
+.lesson-table th { color: var(--color-text-secondary); font-size: .8rem; }
+
+.lesson-compare { margin-top: 26px; padding-top: 8px; border-top: 1px solid var(--color-border); }
+.lesson-compare summary { min-height: 44px; padding: 10px 0; color: var(--color-text); font-size: 1.06rem; font-weight: 700; cursor: pointer; }
+.lesson-small { color: var(--color-text-secondary); font-size: .875rem; }
+.lesson-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; margin: 12px 0; }
+.lesson-rules > div { padding: 12px 16px; border: 1px solid var(--color-border); border-radius: 14px; color: var(--color-text); }
+.lesson-rules strong { display: block; color: var(--color-text-secondary); font-size: .8rem; }
+.lesson-pairs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; }
+.lesson-pair { padding: 14px 18px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); color: var(--color-text); }
+.lesson-pair h4 { margin: 0 0 6px; font-size: 1.15rem; font-weight: 700; }
+.lesson-pair p { margin: 0 0 6px; }
+.lesson-pair ul { margin: 6px 0 0; padding-left: 18px; list-style: disc; }

@@ -37,6 +37,7 @@ const ListeningPage = lazy(() => import('@/components/listening/ListeningPage').
 const ProgressPage = lazy(() => import('@/components/progress/ProgressPage').then((module) => ({ default: module.ProgressPage })));
 const BookmarksPage = lazy(() => import('@/components/bookmarks/BookmarksPage').then((module) => ({ default: module.BookmarksPage })));
 const ExamPage = lazy(() => import('@/components/exam/ExamPage').then(module => ({ default: module.ExamPage })));
+const LessonsPage = lazy(() => import('@/components/lessons/LessonsPage').then(module => ({ default: module.LessonsPage })));
 const SettingsPage = lazy(() => import('@/components/settings/SettingsPage').then((module) => ({ default: module.SettingsPage })));
 
 // Constants, so a gate's effect does not re-run on every render.
@@ -89,6 +90,7 @@ function AppContent() {
           </Route>
           <Route path="/decks" element={<LibraryGate><FlashcardPage /></LibraryGate>} />
           <Route path="/review" element={<LibraryGate><AnkiPage /></LibraryGate>} />
+          <Route path="/lessons" element={<LibraryGate parts={GRAMMAR}><LessonsPage /></LibraryGate>} />
           <Route path="/quiz" element={<LibraryGate><QuizPage /></LibraryGate>} />
           <Route path="/progress" element={<LibraryGate><ProgressPage /></LibraryGate>} />
           <Route path="/saved" element={<LibraryGate><BookmarksPage /></LibraryGate>} />

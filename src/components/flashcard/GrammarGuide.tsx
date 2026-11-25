@@ -42,7 +42,7 @@ export function GrammarGuide({ level, lesson, onLesson, onStudy, onExit }: {
 
   return <div className="study-page" ref={top} style={{ scrollMarginTop: 72 }}>
     <PageHeading title={`Hướng dẫn ngữ pháp ${level}`} subtitle={`${guide.lessons.length} bài · ${total} mẫu và cặp dễ nhầm`}
-      action={<button type="button" className="study-button" onClick={onExit}>← Bộ thẻ</button>}/>
+      action={<button type="button" className="study-button" onClick={onExit}>← N4–N3</button>}/>
     <div className="guide-layout">
       <nav aria-label="Bài học" className="guide-nav">
         {guide.lessons.map((item, index) => <button key={item.title} type="button" aria-current={index === lesson ? 'page' : undefined} onClick={() => go(index)}>

@@ -1,7 +1,7 @@
 import { useApp } from '@/hooks/useApp';
 import { isNavigationItemActive, MOBILE_NAV_ITEMS } from './navigationItems';
 
-/** Phones: the five study pages. Settings, progress and saved cards are in the account menu of the header. */
+/** Phones: the six study pages. Settings, progress and saved cards are in the account menu of the header. */
 export function BottomNav() {
   const { currentPage, setCurrentPage } = useApp();
   return <nav className="fixed inset-x-0 bottom-0 z-40 flex border-t border-[var(--color-border)]/70 bg-[color-mix(in_srgb,var(--color-surface)_85%,transparent)] ps-[env(safe-area-inset-left)] pe-[env(safe-area-inset-right)] pb-safe backdrop-blur-xl lg:hidden" aria-label="Điều hướng điện thoại">
