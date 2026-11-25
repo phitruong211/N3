@@ -58,6 +58,7 @@ export function AuthPage({ initialMode = 'login', compact = false }: { initialMo
       </form>
       {googleEnabled && <><div className="auth-divider"><span>hoặc</span></div>
       <GoogleButton disabled={busy} text={mode === 'login' ? 'signin_with' : 'signup_with'} onCredential={idToken => void run(() => signInWithGoogle(idToken))}/></>}
+      {!googleEnabled && import.meta.env.DEV && <p className="auth-hint mt-4">Nút Google đang ẩn: đặt VITE_GOOGLE_CLIENT_ID trong .env.local rồi chạy lại npm run dev.</p>}
       <button type="button" className="study-button w-full mt-4" disabled={busy && !compact} onClick={() => {
         if (compact) setPrompt(null);
         else { enterGuest(); navigate('/today', { replace: true }); }
