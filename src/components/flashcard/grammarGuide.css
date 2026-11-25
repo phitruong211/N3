@@ -1,0 +1,49 @@
+/* Grammar guide: lesson nav beside the article on wide screens, a scrolling chip row above it on narrow ones. */
+.guide-layout { display: grid; gap: 20px; align-items: start; }
+@media (min-width: 1024px) { .guide-layout { grid-template-columns: 240px minmax(0, 1fr); gap: 32px; } }
+
+.guide-nav { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.guide-nav button { display: grid; flex: none; gap: 1px; min-height: 44px; padding: 8px 14px; border: 1px solid var(--color-border); border-radius: 8px; text-align: left; color: var(--color-text-secondary); cursor: pointer; transition: background var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft), color var(--dur-fast); }
+.guide-nav button b { color: var(--color-text); font-size: .875rem; font-weight: 600; white-space: nowrap; }
+.guide-nav button span { display: none; font-size: .8rem; line-height: 1.35; }
+.guide-nav button:hover { border-color: var(--color-border-strong); background: var(--color-surface-hover); }
+.guide-nav button[aria-current="page"] { border-color: var(--color-grammar); background: color-mix(in srgb, var(--color-grammar) 9%, var(--color-surface)); }
+.guide-nav button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.guide-nav .guide-nav-all b { color: var(--color-grammar); }
+@media (min-width: 1024px) {
+  .guide-nav { position: sticky; top: 80px; flex-direction: column; gap: 4px; max-height: calc(100vh - 110px); overflow: auto; }
+  .guide-nav button span { display: block; }
+  .guide-nav .guide-nav-all { margin-top: 8px; }
+}
+
+.guide-article { min-width: 0; }
+.guide-head { margin: 0 0 16px; color: var(--color-text); font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 1.8rem); font-weight: 400; line-height: 1.25; }
+.guide-head h2 { margin: 0 0 6px; font: inherit; }
+.guide-section-title { margin: 40px 0 12px; padding-top: 20px; border-top: 1px solid var(--color-border-strong); color: var(--color-text); font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; }
+.guide-h3 { margin: 24px 0 10px; color: var(--color-text); font-size: 1rem; font-weight: 600; }
+.guide-p { margin: 0 0 12px; }
+.guide-p strong, .guide-list strong { color: var(--color-text); }
+.guide-list { margin: 0 0 16px; padding-left: 1.2rem; list-style: disc; color: var(--color-text-secondary); font-size: .9rem; line-height: 1.75; }
+.guide-article a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
+
+.guide-patterns { display: grid; gap: 10px; margin: 0 0 20px; padding: 0; list-style: none; }
+@media (min-width: 1280px) { .guide-patterns { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.guide-pattern { min-width: 0; padding: 14px 16px; border: 1px solid var(--color-border); border-left: 3px solid var(--color-grammar); border-radius: 8px; background: var(--color-surface); overflow-wrap: anywhere; }
+.guide-pattern h4 { margin: 0 0 8px; color: var(--color-text); font-size: 1.15rem; font-weight: 600; line-height: 1.4; }
+.guide-pattern dl { display: grid; gap: 6px; margin: 0; }
+.guide-pattern dl > div { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 8px; }
+.guide-pattern dt { color: var(--color-text-tertiary); font-size: .75rem; font-weight: 600; letter-spacing: .04em; line-height: 1.7; }
+.guide-pattern dd { margin: 0; color: var(--color-text); font-size: .9rem; line-height: 1.6; }
+.guide-quiz .guide-meaning dd { filter: blur(6px); cursor: pointer; transition: filter var(--dur-fast); user-select: none; }
+.guide-quiz .guide-meaning:hover dd, .guide-quiz .guide-meaning:focus dd { filter: none; user-select: auto; }
+.guide-meaning:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: 4px; }
+
+.guide-table-wrap { margin: 0 0 20px; overflow-x: auto; border: 1px solid var(--color-border); border-radius: 8px; }
+.guide-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.guide-table th { background: var(--color-surface-alt); color: var(--color-text-secondary); font-weight: 600; text-align: left; white-space: nowrap; }
+.guide-table th, .guide-table td { padding: 8px 12px; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.guide-table tr:last-child td { border-bottom: 0; }
+
+.guide-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.guide-foot { justify-content: space-between; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--color-border); }
+@media (prefers-reduced-motion: reduce) { .guide-quiz .guide-meaning dd { transition: none; } }
