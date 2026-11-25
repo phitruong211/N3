@@ -15,7 +15,7 @@ test('patternKeys drops 〜, notes in brackets and splits alternatives', () => {
 });
 
 test('each guide becomes lessons whose pattern rows become unique cards', () => {
-  for (const level of ['N3', 'N4']) {
+  for (const level of ['N2', 'N3', 'N4']) {
     const { guide, grammar } = load(level);
     assert.ok(guide.lessons.length >= 10, level);
     const cards = lessonCards(guide.lessons, level, grammar);

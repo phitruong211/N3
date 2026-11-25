@@ -6,9 +6,10 @@ import type { CardView } from '@/lib/cards';
 import { calloutParts, isPatternTable, lessonCards, parseGuide, patternPieces, splitNote, type GuideBlock, type GuideLesson } from '@/lib/grammarGuide';
 import n3 from '@/data/guide/N3.md?raw';
 import n4 from '@/data/guide/N4.md?raw';
+import n2 from '@/data/guide/N2.md?raw';
 import './grammarGuide.css';
 
-const SOURCES: Record<string, string> = { N3: n3, N4: n4 };
+const SOURCES: Record<string, string> = { N2: n2, N3: n3, N4: n4 };
 /** The last tab: every lesson on one page. */
 export const REVIEW_ALL = -1;
 

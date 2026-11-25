@@ -10,7 +10,7 @@ export type GuideBlock =
   | { kind: 'list'; items: string[] }
   | { kind: 'table'; head: string[]; rows: string[][] };
 /** Levels with a guide in src/data/guide. */
-export const GUIDE_LEVELS: readonly string[] = ['N4', 'N3'];
+export const GUIDE_LEVELS: readonly string[] = ['N4', 'N3', 'N2'];
 export interface GuideLesson { title: string; blocks: GuideBlock[] }
 export interface Guide { title: string; lessons: GuideLesson[] }
 
