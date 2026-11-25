@@ -55,6 +55,9 @@ export function GrammarGuide({ level, lesson, onLesson, onStudy, onExit }: {
           <h2>{all ? `Ôn nhanh toàn bộ ${level}` : current.title.replace(/^\d+\.\s*/, '')}</h2>
           {all && <p className="guide-lead">Mỗi dòng chỉ giữ mẫu, cách nối và nghĩa. Che nghĩa, tự nói nghĩa trong đầu, rồi chạm vào ô để kiểm tra.</p>}
           {patterns > 0 && <div className="guide-actions">{quiz}{study}</div>}
+          {patterns > 0 && <p className="guide-legend" aria-label="Chú thích màu">
+            <span className="is-meaning">Nghĩa</span><span className="is-form">Cách nối</span>{!all && <><span className="is-example">Ví dụ</span><span className="is-note">Lưu ý</span></>}
+          </p>}
         </header>
         {shown.map(item => <section key={item.title} className="guide-lesson">
           {all && <h3 className="guide-review-title"><span>{lessonLabel(item.title)}</span>{item.title.replace(/^\d+\.\s*/, '')}</h3>}

@@ -88,3 +88,29 @@
 .guide-foot { justify-content: space-between; margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--color-border-strong); }
 @media (prefers-reduced-motion: reduce) { .guide-quiz .guide-meaning > * { transition: none; } }
 .guide-tag { margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--color-surface-alt); color: var(--color-text-secondary); font-family: 'Be Vietnam Pro', sans-serif; font-size: .72rem; font-weight: 500; vertical-align: middle; }
+
+/* Colour by role, the same everywhere, so the eye learns where to look: green = meaning, violet = how it connects,
+   blue = example, amber = note. Muted theme tokens, so it stays soft in every theme. */
+.guide-article { --g-meaning: var(--color-success); --g-form: var(--color-kanji); --g-note: var(--color-grammar); --g-example: #3F6585; }
+.dark .guide-article { --g-example: #8DB4D6; }
+.high-contrast .guide-article { --g-meaning: var(--color-text); --g-form: var(--color-text); --g-note: var(--color-text); --g-example: var(--color-text); }
+
+.guide-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 14px 0 0; color: var(--color-text-secondary); font-size: .8rem; }
+.guide-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.guide-legend span::before { width: 10px; height: 10px; border-radius: 3px; background: var(--c); content: ''; }
+.guide-legend .is-meaning { --c: var(--g-meaning); }
+.guide-legend .is-form { --c: var(--g-form); }
+.guide-legend .is-example { --c: var(--g-example); }
+.guide-legend .is-note { --c: var(--g-note); }
+
+.guide-pattern-meaning, .guide-points { color: var(--g-meaning); }
+.guide-points li::marker { color: var(--g-meaning); }
+.guide-pattern-note { color: color-mix(in srgb, var(--g-note) 75%, var(--color-text)); }
+.guide-pattern-note::before { color: var(--g-note); }
+.guide-form > span:first-child { color: var(--g-form); }
+.guide-form code { border-color: color-mix(in srgb, var(--g-form) 28%, transparent); background: color-mix(in srgb, var(--g-form) 7%, var(--color-surface)); color: color-mix(in srgb, var(--g-form) 70%, var(--color-text)); }
+.guide-examples { border-left: 3px solid color-mix(in srgb, var(--g-example) 55%, transparent); border-radius: 0 8px 8px 0; background: color-mix(in srgb, var(--g-example) 6%, var(--color-surface)); }
+.guide-examples small { color: color-mix(in srgb, var(--g-example) 60%, var(--color-text-tertiary)); }
+.guide-vs { color: var(--color-seal); }
+.guide-review-pattern small { color: color-mix(in srgb, var(--g-form) 75%, var(--color-text-tertiary)); }
+.guide-review .guide-meaning { color: var(--g-meaning); }
