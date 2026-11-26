@@ -39,3 +39,23 @@ export function formParts(f: string): FormPart[] {
   if (last < f.length) parts.push({ text: f.slice(last) });
   return parts;
 }
+
+export interface LessonQuiz { g: number; q: string; o: string[]; w: string; t: string }
+/** 文の組み立て: four pieces in the right order; the one at `s` goes in the ★ slot. */
+export interface LessonStar { g: number; pre: string; post: string; c: string[]; s: number; t: string }
+/** The pairs the exam asks most, with the one question that settles each. */
+export interface LessonTop { g: number; t: string; q: string }
+
+/** "〜たとたん(に) / 〜最中に" -> ["たとたん", "最中に"]; one-kana patterns like 〜と stay, so と can match. */
+const names = (text: string) => text.replace(/\(.*?\)|[a-zà-ỹ]+/gi, '').split(/\s*\/\s*|〜|\s+\+\s+/).map(s => s.replace(/[〜\s]/g, '')).filter(Boolean);
+
+/** Where a confusable pair is taught: the section of its last side in lesson order, so both sides come first. Null when no side is in the group. */
+export function pairSection(pair: Pick<LessonPair, 't'>, pats: Pick<LessonPattern, 'n' | 'sub'>[]): string | null {
+  let last = -1;
+  for (const side of pair.t.split(/\s+vs\s+/).flatMap(names)) {
+    let at = pats.findIndex(p => names(p.n).includes(side));
+    if (at < 0 && side.length > 1) at = pats.findIndex(p => p.n.includes(side));
+    last = Math.max(last, at);
+  }
+  return last < 0 ? null : pats[last].sub;
+}

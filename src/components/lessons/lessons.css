@@ -34,19 +34,12 @@
 .lesson-chip.is-v { color: var(--color-text); }
 
 /* One pattern: a card that opens on tap, the punched hole of a study card on its left. */
-.lesson-cards { display: grid; gap: 8px; }
-.lesson-card { position: relative; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); }
-.lesson-card::before { position: absolute; top: 20px; left: 11px; width: 9px; height: 9px; border: 1.5px solid var(--color-border); border-radius: 50%; background: var(--color-bg); content: ''; }
-.lesson-card summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; min-height: 52px; padding: 14px 18px 14px 30px; list-style: none; cursor: pointer; }
-.lesson-card summary::-webkit-details-marker { display: none; }
-.lesson-card summary:focus-visible { border-radius: 16px; outline: 2px solid var(--color-accent); outline-offset: -2px; }
 .lesson-name { color: var(--color-text); font-size: 1.25rem; font-weight: 700; }
 .lesson-lv { padding: 1px 6px; border-radius: 5px; background: var(--color-surface-alt); color: var(--color-text-tertiary); font-size: .75rem; font-weight: 700; }
 .lesson-lv.is-n3 { color: var(--color-text); }
 .lesson-note { color: var(--color-text-secondary); font-size: .8rem; }
-.lesson-more { display: flex; flex-direction: column; gap: 6px; padding: 0 18px 14px 30px; }
 .lesson-form { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0; color: var(--color-text-secondary); font-size: .875rem; }
-.lesson-meaning { margin: 2px 0 0; color: var(--color-text); font-weight: 600; }
+.lesson-meaning { color: var(--color-text); font-weight: 600; }
 .lesson-ex { margin: 4px 0 0; color: var(--color-text); font-size: 1.06rem; line-height: 1.7; }
 .lesson-ex mark { border-bottom: 2px solid currentColor; background: none; color: var(--color-seal); font-weight: 700; }
 .lesson-vn { margin: 0; color: var(--color-text-secondary); font-size: .94rem; }
@@ -56,14 +49,105 @@
 .lesson-table th, .lesson-table td { padding: 8px 10px; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
 .lesson-table th { color: var(--color-text-secondary); font-size: .8rem; }
 
-.lesson-compare { margin-top: 26px; padding-top: 8px; border-top: 1px solid var(--color-border); }
-.lesson-compare summary { min-height: 44px; padding: 10px 0; color: var(--color-text); font-size: 1.06rem; font-weight: 700; cursor: pointer; }
 .lesson-small { color: var(--color-text-secondary); font-size: .875rem; }
 .lesson-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; margin: 12px 0; }
 .lesson-rules > div { padding: 12px 16px; border: 1px solid var(--color-border); border-radius: 14px; color: var(--color-text); }
 .lesson-rules strong { display: block; color: var(--color-text-secondary); font-size: .8rem; }
-.lesson-pairs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; }
-.lesson-pair { padding: 14px 18px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); color: var(--color-text); }
-.lesson-pair h4 { margin: 0 0 6px; font-size: 1.15rem; font-weight: 700; }
-.lesson-pair p { margin: 0 0 6px; }
-.lesson-pair ul { margin: 6px 0 0; padding-left: 18px; list-style: disc; }
+
+/* A lesson reads in order: the plan, each part (overview table → patterns → what to tell apart), a summary, then a check. */
+.lesson-groups small.is-done { color: var(--color-success); font-weight: 600; }
+.lesson-groups .lesson-groups-top { margin-top: 0; font-weight: 600; }
+@media (min-width: 1024px) { .lesson-groups .lesson-groups-top { margin-top: 10px; } }
+.lesson-head .study-eyebrow { margin: 0 0 6px; color: var(--color-text-secondary); }
+.lesson-plan { margin: 16px 0; padding: 16px 18px; border: 1px solid var(--color-border); border-radius: 14px; color: var(--color-text); }
+.lesson-plan > strong { display: block; margin-bottom: 6px; color: var(--color-text-secondary); font-size: .8rem; }
+.lesson-plan ol { margin: 0; padding-left: 22px; list-style: decimal; }
+.lesson-plan li { padding: 2px 0; }
+.lesson-plan li button { padding: 4px 0; color: var(--color-text); font-weight: 600; text-align: left; text-decoration: underline; text-decoration-color: var(--color-border-strong); text-underline-offset: 3px; cursor: pointer; }
+.lesson-plan li small { margin-left: 8px; color: var(--color-text-tertiary); font-size: .8rem; }
+.lesson-goal { margin: 12px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: .92rem; }
+.lesson-goal b { margin-right: 4px; }
+.lesson-goal-pair { padding: 2px 10px; border-radius: 999px; background: var(--color-surface-alt); font-size: .88rem; }
+
+.lesson-section { margin-top: 36px; scroll-margin-top: 80px; }
+.lesson-body .lesson-h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--color-border-strong); font-size: 1.25rem; font-weight: 700; }
+.lesson-h3 span { color: var(--color-seal); font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.lesson-kicker { margin: 18px 0 8px; color: var(--color-text-secondary); font-size: .8rem; font-weight: 700; }
+
+
+.lesson-contrast { margin-top: 8px; }
+.lesson-pair { margin: 10px 0; padding: 14px 18px; border: 1px solid var(--color-border); border-left: 3px solid var(--color-seal); border-radius: 4px 14px 14px 4px; background: var(--color-surface); color: var(--color-text); }
+.lesson-pair h4 { margin: 0 0 8px; font-size: 1.15rem; font-weight: 700; }
+.lesson-vs { margin: 0 .55em; color: var(--color-seal); font-family: 'Be Vietnam Pro', sans-serif; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; vertical-align: middle; }
+.lesson-diff { margin: 0; padding-left: 18px; list-style: disc; line-height: 1.6; }
+.lesson-diff li + li { margin-top: 4px; }
+.lesson-diff li > b:first-child { margin-right: 6px; }
+.lesson-diff li > b:first-child::after { content: ':'; }
+.lesson-pair-ex { display: grid; gap: 4px; margin: 10px 0 0; padding: 10px 14px; border-radius: 10px; background: var(--color-surface-alt); list-style: none; }
+.lesson-pair-ex li.is-right { color: var(--color-success); }
+.lesson-pair-ex li.is-wrong { color: var(--color-error); }
+
+.lesson-keys { display: grid; gap: 10px; }
+.lesson-key { padding: 12px 16px; border-radius: 14px; background: var(--color-surface-alt); color: var(--color-text); }
+.lesson-key b { display: block; margin-top: 4px; font-size: 1.1rem; }
+.lesson-key p { margin: 4px 0 0; }
+.lesson-key p span { color: var(--color-text-secondary); font-weight: 600; }
+.lesson-badge { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--color-seal); color: var(--color-text-inverse); font-size: .7rem; font-weight: 700; }
+
+.lesson-quiz { display: grid; gap: 14px; margin: 12px 0 0; padding: 0; list-style: none; counter-reset: q; }
+.lesson-quiz > li { padding: 16px 18px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); counter-increment: q; }
+.lesson-quiz > li .lesson-kicker { margin-top: 0; }
+.lesson-q { margin: 0; color: var(--color-text); font-size: 1.15rem; line-height: 1.9; }
+.lesson-q::before { margin-right: 8px; color: var(--color-text-tertiary); font-family: 'Be Vietnam Pro', sans-serif; font-size: .85rem; font-weight: 700; content: 'Câu ' counter(q) '.'; }
+.lesson-blank { color: var(--color-seal); }
+.lesson-slot { display: inline-block; min-width: 3.2em; margin: 0 4px; border-bottom: 2px solid var(--color-text); text-align: center; vertical-align: baseline; }
+.lesson-slot.is-star { border-bottom-color: var(--color-seal); color: var(--color-seal); font-size: .8em; }
+.lesson-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+@media (max-width: 520px) { .lesson-opts { grid-template-columns: minmax(0, 1fr); } }
+.lesson-opts button { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 14px; border: 1.5px solid var(--color-border); border-radius: 12px; background: var(--color-surface); color: var(--color-text); font-size: 1.05rem; text-align: left; cursor: pointer; }
+.lesson-opts button span { color: var(--color-text-tertiary); font-family: 'Be Vietnam Pro', sans-serif; font-size: .85rem; font-weight: 700; }
+.lesson-opts button:hover:not(:disabled) { border-color: var(--color-text); }
+.lesson-opts button:disabled { cursor: default; }
+.lesson-opts button.is-right { border-color: var(--color-success); background: color-mix(in srgb, var(--color-success) 12%, var(--color-surface)); }
+.lesson-opts button.is-wrong { border-color: var(--color-error); background: color-mix(in srgb, var(--color-error) 10%, var(--color-surface)); }
+.lesson-opts button:focus-visible, .lesson-plan li button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.lesson-why { margin-top: 12px; padding: 10px 14px; border-left: 3px solid var(--color-border-strong); border-radius: 0 10px 10px 0; background: var(--color-surface-alt); color: var(--color-text); }
+.lesson-why p { margin: 4px 0 0; }
+.lesson-why b.is-right { color: var(--color-success); }
+.lesson-why b.is-wrong { color: var(--color-error); }
+.lesson-result { margin-top: 16px; padding: 18px; border-radius: 16px; background: var(--color-surface-alt); color: var(--color-text); text-align: center; }
+.lesson-score { margin: 0; font-size: 2.6rem; font-weight: 800; line-height: 1.1; }
+.lesson-result p { margin: 6px 0 12px; }
+
+.lesson-top { display: grid; gap: 4px 24px; margin: 16px 0 0; padding: 0; list-style: none; counter-reset: t; }
+@media (min-width: 900px) { .lesson-top { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.lesson-top li { display: grid; gap: 4px; padding: 12px 0 12px 2.4em; border-bottom: 1px solid var(--color-border); counter-increment: t; position: relative; color: var(--color-text); }
+.lesson-top li::before { position: absolute; left: 0; top: 10px; color: var(--color-text-tertiary); font-size: 1.25rem; font-weight: 800; content: counter(t); }
+.lesson-top b { font-size: 1.1rem; }
+.lesson-top p { margin: 0; }
+.lesson-go { justify-self: start; padding: 4px 0; color: var(--color-text-secondary); font-size: .875rem; font-weight: 600; text-decoration: underline; cursor: pointer; }
+.lesson-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--color-border-strong); }
+.lesson-top li { align-content: start; }
+
+/* Pattern rows: a comparison table that opens. Wide screens: three columns under one header; phones: stacked. */
+.lesson-rows-head, .lesson-row summary { display: grid; grid-template-columns: minmax(8.5rem, 1fr) minmax(7rem, .9fr) minmax(0, 1.6fr) 18px; gap: 4px 16px; align-items: baseline; }
+.lesson-rows-head { padding: 8px 12px; color: var(--color-text-tertiary); font-size: .75rem; font-weight: 700; }
+.lesson-row { border-top: 1px solid var(--color-border); }
+.lesson-row summary { min-height: 52px; padding: 12px; list-style: none; cursor: pointer; }
+.lesson-row summary::-webkit-details-marker { display: none; }
+.lesson-row summary::after { color: var(--color-text-tertiary); font-size: 1.1rem; line-height: 1; content: '›'; transition: transform var(--dur-fast, .15s); }
+.lesson-row[open] summary::after { transform: rotate(90deg); }
+.lesson-row summary:hover { background: var(--color-surface-hover); }
+.lesson-row summary:focus-visible { border-radius: 8px; outline: 2px solid var(--color-accent); outline-offset: -2px; }
+.lesson-row-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.lesson-row-name small { flex-basis: 100%; }
+.lesson-row-ex { margin: 0 12px 14px; padding: 10px 14px; border-left: 3px solid var(--color-seal); border-radius: 0 10px 10px 0; background: var(--color-surface-alt); }
+.lesson-row-ex .lesson-ex { margin: 0; }
+.lesson-row-ex .lesson-vn { margin: 2px 0 0; }
+@media (max-width: 640px) {
+  .lesson-rows-head { display: none; }
+  .lesson-row summary { grid-template-columns: minmax(0, 1fr) 18px; gap: 6px 10px; }
+  .lesson-row summary > :not(.lesson-row-name) { grid-column: 1; }
+  .lesson-row summary::after { grid-column: 2; grid-row: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .lesson-row summary::after { transition: none; } }
