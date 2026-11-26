@@ -34,19 +34,12 @@
 .lesson-chip.is-v { color: var(--color-text); }
 
 /* One pattern: a card that opens on tap, the punched hole of a study card on its left. */
-.lesson-cards { display: grid; gap: 8px; }
-.lesson-card { position: relative; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); }
-.lesson-card::before { position: absolute; top: 20px; left: 11px; width: 9px; height: 9px; border: 1.5px solid var(--color-border); border-radius: 50%; background: var(--color-bg); content: ''; }
-.lesson-card summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; min-height: 52px; padding: 14px 18px 14px 30px; list-style: none; cursor: pointer; }
-.lesson-card summary::-webkit-details-marker { display: none; }
-.lesson-card summary:focus-visible { border-radius: 16px; outline: 2px solid var(--color-accent); outline-offset: -2px; }
 .lesson-name { color: var(--color-text); font-size: 1.25rem; font-weight: 700; }
 .lesson-lv { padding: 1px 6px; border-radius: 5px; background: var(--color-surface-alt); color: var(--color-text-tertiary); font-size: .75rem; font-weight: 700; }
 .lesson-lv.is-n3 { color: var(--color-text); }
 .lesson-note { color: var(--color-text-secondary); font-size: .8rem; }
-.lesson-more { display: flex; flex-direction: column; gap: 6px; padding: 0 18px 14px 30px; }
 .lesson-form { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0; color: var(--color-text-secondary); font-size: .875rem; }
-.lesson-meaning { margin: 2px 0 0; color: var(--color-text); font-weight: 600; }
+.lesson-meaning { color: var(--color-text); font-weight: 600; }
 .lesson-ex { margin: 4px 0 0; color: var(--color-text); font-size: 1.06rem; line-height: 1.7; }
 .lesson-ex mark { border-bottom: 2px solid currentColor; background: none; color: var(--color-seal); font-weight: 700; }
 .lesson-vn { margin: 0; color: var(--color-text-secondary); font-size: .94rem; }
@@ -81,12 +74,6 @@
 .lesson-h3 span { color: var(--color-seal); font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .lesson-kicker { margin: 18px 0 8px; color: var(--color-text-secondary); font-size: .8rem; font-weight: 700; }
 
-.lesson-overview table { font-size: .92rem; }
-.lesson-overview th[scope=row] { min-width: 9rem; }
-.lesson-overview th[scope=row] small { display: block; color: var(--color-text-tertiary); font-size: .75rem; font-weight: 500; }
-.lesson-jump { padding: 0; color: var(--color-text); font-size: 1.05rem; font-weight: 700; text-align: left; text-decoration: underline; text-decoration-color: var(--color-border-strong); text-underline-offset: 4px; cursor: pointer; }
-.lesson-jump:hover { text-decoration-color: currentColor; }
-.lesson-overview td { color: var(--color-text); }
 
 .lesson-contrast { margin-top: 8px; }
 .lesson-pair { margin: 10px 0; padding: 14px 18px; border: 1px solid var(--color-border); border-left: 3px solid var(--color-seal); border-radius: 4px 14px 14px 4px; background: var(--color-surface); color: var(--color-text); }
@@ -123,7 +110,7 @@
 .lesson-opts button:disabled { cursor: default; }
 .lesson-opts button.is-right { border-color: var(--color-success); background: color-mix(in srgb, var(--color-success) 12%, var(--color-surface)); }
 .lesson-opts button.is-wrong { border-color: var(--color-error); background: color-mix(in srgb, var(--color-error) 10%, var(--color-surface)); }
-.lesson-opts button:focus-visible, .lesson-jump:focus-visible, .lesson-plan li button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.lesson-opts button:focus-visible, .lesson-plan li button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .lesson-why { margin-top: 12px; padding: 10px 14px; border-left: 3px solid var(--color-border-strong); border-radius: 0 10px 10px 0; background: var(--color-surface-alt); color: var(--color-text); }
 .lesson-why p { margin: 4px 0 0; }
 .lesson-why b.is-right { color: var(--color-success); }
@@ -141,9 +128,26 @@
 .lesson-go { justify-self: start; padding: 4px 0; color: var(--color-text-secondary); font-size: .875rem; font-weight: 600; text-decoration: underline; cursor: pointer; }
 .lesson-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--color-border-strong); }
 .lesson-top li { align-content: start; }
-/* Phones: each overview row stacks (pattern, then how it connects, then meaning) instead of three thin columns. */
+
+/* Pattern rows: a comparison table that opens. Wide screens: three columns under one header; phones: stacked. */
+.lesson-rows-head, .lesson-row summary { display: grid; grid-template-columns: minmax(8.5rem, 1fr) minmax(7rem, .9fr) minmax(0, 1.6fr) 18px; gap: 4px 16px; align-items: baseline; }
+.lesson-rows-head { padding: 8px 12px; color: var(--color-text-tertiary); font-size: .75rem; font-weight: 700; }
+.lesson-row { border-top: 1px solid var(--color-border); }
+.lesson-row summary { min-height: 52px; padding: 12px; list-style: none; cursor: pointer; }
+.lesson-row summary::-webkit-details-marker { display: none; }
+.lesson-row summary::after { color: var(--color-text-tertiary); font-size: 1.1rem; line-height: 1; content: '›'; transition: transform var(--dur-fast, .15s); }
+.lesson-row[open] summary::after { transform: rotate(90deg); }
+.lesson-row summary:hover { background: var(--color-surface-hover); }
+.lesson-row summary:focus-visible { border-radius: 8px; outline: 2px solid var(--color-accent); outline-offset: -2px; }
+.lesson-row-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.lesson-row-name small { flex-basis: 100%; }
+.lesson-row-ex { margin: 0 12px 14px; padding: 10px 14px; border-left: 3px solid var(--color-seal); border-radius: 0 10px 10px 0; background: var(--color-surface-alt); }
+.lesson-row-ex .lesson-ex { margin: 0; }
+.lesson-row-ex .lesson-vn { margin: 2px 0 0; }
 @media (max-width: 640px) {
-  .lesson-overview thead { display: none; }
-  .lesson-overview tr { display: grid; gap: 4px; padding: 10px 0; border-bottom: 1px solid var(--color-border); }
-  .lesson-overview th, .lesson-overview td { padding: 0; border: 0; }
+  .lesson-rows-head { display: none; }
+  .lesson-row summary { grid-template-columns: minmax(0, 1fr) 18px; gap: 6px 10px; }
+  .lesson-row summary > :not(.lesson-row-name) { grid-column: 1; }
+  .lesson-row summary::after { grid-column: 2; grid-row: 1; }
 }
+@media (prefers-reduced-motion: reduce) { .lesson-row summary::after { transition: none; } }

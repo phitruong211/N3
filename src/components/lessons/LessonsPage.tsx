@@ -78,6 +78,7 @@ export function LessonsPage() {
 
 function Lesson({ group, onGo, onScore }: { group: LessonGroup; onGo: (id: number) => void; onScore: (right: number, total: number) => void }) {
   const [level, setLevel] = useState<Level>('all');
+  const [examples, setExamples] = useState(false);
   const sections = [...new Set(group.pats.map(p => p.sub))];
   const pats = group.pats.filter(p => level === 'all' || p.lv.includes(level));
   const pairs = useMemo(() => {
@@ -121,6 +122,7 @@ function Lesson({ group, onGo, onScore }: { group: LessonGroup; onGo: (id: numbe
 
     <div className="lesson-tools" role="group" aria-label="Lọc theo trình độ">
       {(['all', 'N4', 'N3'] as const).map(item => <button key={item} type="button" className="lesson-pill" aria-pressed={level === item} onClick={() => setLevel(item)}>{item === 'all' ? 'Tất cả' : item}</button>)}
+      <button type="button" className="lesson-pill" aria-pressed={examples} onClick={() => setExamples(!examples)}>{examples ? 'Thu gọn ví dụ' : 'Hiện tất cả ví dụ'}</button>
     </div>
     <p className="lesson-legend">Nhãn nối: <span><Chip kind="v">V</Chip> động từ</span><span><Chip kind="n">N</Chip> danh từ</span><span><Chip kind="a">A</Chip> tính từ</span><span><Chip kind="p">名詞修飾形</Chip> như thể thường nhưng Aな→な, N→の</span></p>
 
@@ -129,14 +131,7 @@ function Lesson({ group, onGo, onScore }: { group: LessonGroup; onGo: (id: numbe
       const contrast = pairs.get(sub) ?? [];
       return <section key={sub} id={`sec-${i}`} className="lesson-section">
         <h3 className="lesson-h3"><span>Phần {i + 1}</span>{sub || 'Các mẫu trong bài'}</h3>
-        {!shown.length ? <p className="lesson-small">Phần này không có mẫu {level}.</p> : <>
-          {shown.length > 1 && <>
-            <p className="lesson-kicker">Nhìn nhanh cả phần</p>
-            <Overview pats={shown}/>
-            <p className="lesson-kicker">Từng mẫu: bấm để xem ví dụ</p>
-          </>}
-          <div className="lesson-cards">{shown.map(p => <PatternCard key={p.id} p={p}/>)}</div>
-        </>}
+        {shown.length ? <Patterns pats={shown} open={examples}/> : <p className="lesson-small">Phần này không có mẫu {level}.</p>}
         {contrast.length > 0 && <div className="lesson-contrast">
           <p className="lesson-kicker">Phân biệt các mẫu dễ nhầm</p>
           {contrast.map(pair => <PairCard key={pair.t} pair={pair}/>)}
@@ -179,29 +174,28 @@ function Lesson({ group, onGo, onScore }: { group: LessonGroup; onGo: (id: numbe
   </>;
 }
 
-/** The section's patterns side by side, so the differences show before the details. */
-function Overview({ pats }: { pats: LessonPattern[] }) {
-  return <div className="lesson-table lesson-overview"><table>
-    <thead><tr><th scope="col">Mẫu</th><th scope="col">Nối với</th><th scope="col">Nghĩa</th></tr></thead>
-    <tbody>{pats.map(p => <tr key={p.id}>
-      <th scope="row"><button type="button" className="lesson-jump font-jp" lang="ja" onClick={() => openCard(p.id)}>{p.n}</button>{p.note && <small>{p.note}</small>}</th>
-      <td><Form f={p.f}/></td>
-      <td>{rich(p.m)}</td>
-    </tr>)}</tbody>
-  </table></div>;
+/** A part's patterns as rows: name, how it connects and meaning stay side by side to compare; a tap opens the example. */
+function Patterns({ pats, open }: { pats: LessonPattern[]; open: boolean }) {
+  return <div className="lesson-rows">
+    <div className="lesson-rows-head" aria-hidden="true"><span>Mẫu</span><span>Nối với</span><span>Nghĩa</span></div>
+    {/* The key remounts each row when "show all" flips, since <details> keeps its own open state. */}
+    {pats.map(p => <PatternRow key={`${p.id}-${open}`} p={p} open={open}/>)}
+  </div>;
 }
 
-function PatternCard({ p }: { p: LessonPattern }) {
+function PatternRow({ p, open }: { p: LessonPattern; open: boolean }) {
   const at = locate(p);
-  return <details className="lesson-card" id={`p-${p.id}`}>
+  return <details className="lesson-row" open={open}>
     <summary>
-      <span lang="ja" className="lesson-name font-jp">{p.n}</span>
-      <span className={'lesson-lv' + (p.lv.includes('N3') ? ' is-n3' : '')}>{p.lv}</span>
-      {p.note && <span className="lesson-note">{p.note}</span>}
+      <span className="lesson-row-name">
+        <span lang="ja" className="lesson-name font-jp">{p.n}</span>
+        <span className={'lesson-lv' + (p.lv.includes('N3') ? ' is-n3' : '')}>{p.lv}</span>
+        {p.note && <small className="lesson-note">{p.note}</small>}
+      </span>
+      <span className="lesson-row-form">{p.f && <Form f={p.f}/>}</span>
+      <span className="lesson-meaning">{rich(p.m)}</span>
     </summary>
-    <div className="lesson-more">
-      {p.f && <Form f={p.f}/>}
-      <p className="lesson-meaning">{rich(p.m)}</p>
+    <div className="lesson-row-ex">
       <p className="lesson-ex font-jp" lang="ja">{at ? <>{p.jp.slice(0, at[0])}<mark>{p.jp.slice(at[0], at[0] + at[1])}</mark>{p.jp.slice(at[0] + at[1])}</> : p.jp}</p>
       <p className="lesson-vn">{rich(p.vn)}</p>
     </div>
@@ -298,9 +292,3 @@ const Chip = ({ kind, children }: { kind: string; children: ReactNode }) => <spa
 /** The lesson text marks emphasis with <b> and nothing else. */
 const rich = (text: string): ReactNode[] => text.split(/<b>(.*?)<\/b>/).map((part, i) => i % 2 ? <b key={i}>{part}</b> : part);
 const jump = (id: string) => document.getElementById(id)?.scrollIntoView({ block: 'start', behavior: 'smooth' });
-function openCard(id: number) {
-  const card = document.getElementById(`p-${id}`) as HTMLDetailsElement | null;
-  if (!card) return;
-  card.open = true;
-  card.scrollIntoView({ block: 'center', behavior: 'smooth' });
-}
