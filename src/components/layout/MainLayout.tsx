@@ -26,7 +26,7 @@ export function MainLayout({ children }: { children: ReactNode }) {
         return;
       }
       if (!isSequence) return;
-      const pageMap: Record<string, PageId> = { d: 'dashboard', v: 'vocabulary', f: 'flashcards', s: 'srs', q: 'quiz', p: 'progress', b: 'bookmarks' };
+      const pageMap: Record<string, PageId> = { d: 'dashboard', v: 'vocabulary', f: 'flashcards', s: 'srs', q: 'quiz', p: 'progress', b: 'bookmarks', l: 'lessons' };
       const page = pageMap[event.key.toLowerCase()];
       if (page) { event.preventDefault(); setCurrentPage(page); lastKeyRef.current = { key: '', time: 0 }; }
     };

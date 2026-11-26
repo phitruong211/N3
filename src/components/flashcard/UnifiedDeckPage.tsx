@@ -13,10 +13,6 @@ import { ImportedDecks } from './ImportedDecks';
 import { DeckCard } from './DeckCard';
 import { LevelDecks, TodayDecks, type LevelRow } from './LevelDecks';
 import { StudySetupSheet } from './StudySetupSheet';
-import { onDemand } from '@/components/ui/onDemand';
-import { AppLoading } from '@/components/ui/AppLoading';
-
-const GrammarGuide = onDemand(() => import('./GrammarGuide').then(module => module.GrammarGuide), <AppLoading message="Đang mở bài học…"/>);
 
 export type DeckPageMode = 'free' | 'scheduled';
 
@@ -25,8 +21,6 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
   const { getJSON, setJSON } = useLearningStorage();
   const { user } = useAuth();
   const [setupDeck, setSetupDeck] = useState<BuiltInDeckDefinition | null>(null);
-  // Kept here, not in the guide, so closing a study session returns to the same lesson.
-  const [guide, setGuide] = useState<{ level: string; lesson: number } | null>(null);
   const [session, setSession] = useState<{ id: string; name: string; cards: CardView[]; template: DeckTemplateConfig; initialIndex: number; mode: 'flashcards' | 'anki' } | null>(null);
 
   const decks = useMemo(() => buildBuiltInDecks(vocabulary, kanji, grammar, n5Decks), [vocabulary, kanji, grammar, n5Decks]);
@@ -100,9 +94,6 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     onComplete={session.mode === 'flashcards' ? () => setJSON(builtInDeckResumeKey(session.id), null) : undefined}
     onExit={() => setSession(null)}/>;
 
-  if (guide) return <GrammarGuide level={guide.level} lesson={guide.lesson} onLesson={lesson => setGuide({ ...guide, lesson })} onExit={() => setGuide(null)}
-    onStudy={(id, name, cards) => setSession({ id, name, cards, template: defaultDeckTemplate(), initialIndex: 0, mode: 'flashcards' })}/>;
-
   return <div className="study-page" data-reduced-motion={settings.reducedMotion || undefined}>
     <PageHeading title={mode === 'free' ? 'Bộ thẻ' : 'Ôn ngắt quãng'} subtitle={mode === 'free' ? 'Học tự do, không ảnh hưởng lịch ôn.' : undefined}/>
 
@@ -110,13 +101,13 @@ export function UnifiedDeckPage({ mode }: { mode: DeckPageMode }) {
     {/* Guests have no personal-deck section on the review page, but their saved cards still need a way in. */}
     {!user && mode === 'scheduled' && saved.cards.length > 0 && <div className="max-w-sm">{savedCard(saved)}</div>}
 
-    {mode === 'free' ? <LevelDecks mode={mode} rows={levelRows} storage={{ getJSON, setJSON }} onGuide={level => setGuide({ level, lesson: 0 })}/>
+    {mode === 'free' ? <LevelDecks mode={mode} rows={levelRows} storage={{ getJSON, setJSON }}/>
       // Reviewing is about today, so the page leads with what is due; browsing every deck stays one tap away.
       : <>
         <TodayDecks rows={levelRows} onBrowse={() => setCurrentPage('flashcards')}/>
         <details className="level-more">
           <summary>Tất cả bộ theo trình độ</summary>
-          <LevelDecks mode={mode} rows={levelRows} storage={{ getJSON, setJSON }} onGuide={level => setGuide({ level, lesson: 0 })}/>
+          <LevelDecks mode={mode} rows={levelRows} storage={{ getJSON, setJSON }}/>
         </details>
       </>}
 

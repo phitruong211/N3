@@ -379,6 +379,7 @@ export type PageId =
   | 'anki'
   | 'srs'
   | 'quiz'
+  | 'lessons'
   | 'listening'
   | 'exam'
   | 'progress'

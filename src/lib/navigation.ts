@@ -13,6 +13,7 @@ export const PAGE_PATHS: Record<PageId, string> = {
   anki: '/review',
   srs: '/review',
   quiz: '/quiz',
+  lessons: '/lessons',
   progress: '/progress',
   bookmarks: '/saved',
   settings: '/settings',

@@ -63,6 +63,7 @@ export const NavLibrary = ink('NavLibrary', <><path d="M12 7c-2-1.6-5-2-8-1.5v12
 export const NavDecks = ink('NavDecks', <><path d="M8 6h9.5a2 2 0 0 1 2 2v8.5"/><rect x="4.5" y="8.5" width="12.5" height="11" rx="2"/>{accent(8.5, 12.5)}</>);
 export const NavReview = ink('NavReview', <><path d="M19 11.5a7 7 0 0 0-12.4-3.8L5 9.5"/><path d="M5 5v4.5h4.5"/><path d="M5 12.5a7 7 0 0 0 12.4 3.8l1.6-1.8"/><path d="M19 19v-4.5h-4.5"/>{accent(12, 12, 1.6)}</>);
 export const NavQuiz = ink('NavQuiz', <><circle cx="12" cy="12" r="8.5"/><path d="M9.7 9.7a2.4 2.4 0 0 1 4.6.8c0 1.6-2.3 1.9-2.3 3.3"/>{accent(12, 16.6, 1.2)}</>);
+export const NavLessons = ink('NavLessons', <><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M8.5 8h7"/><path d="M8.5 12h7"/><path d="M8.5 16h3.5"/>{accent(15.5, 16, 1.4)}</>);
 export const NavSettings = ink('NavSettings', <><path d="M4 8h16"/><path d="M4 16h16"/>{accent(9, 8, 2.2)}{accent(15, 16, 2.2)}</>);
 
 export const Copy = ink('Copy', <><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5v-2a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"/></>);
