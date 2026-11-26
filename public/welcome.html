@@ -118,7 +118,6 @@ header a:hover{color:var(--seal-text)}
 [data-fx=focus] .si.on img{transform:scale(1.18)}
 [data-fx=focus] .si[data-i="1"] img{transform-origin:25% 35%}
 [data-fx=focus] .si[data-i="2"] img{transform-origin:75% 40%}
-[data-fx=focus] .si[data-i="3"] img{transform-origin:50% 75%}
 /* 聴: mở tròn từ giữa như sóng âm, kèm vòng gợn */
 [data-fx=iris] .si{clip-path:circle(0% at 50% 50%)}
 [data-fx=iris] .si.on,[data-fx=iris] .si.prev{clip-path:circle(80% at 50% 50%)}
@@ -143,11 +142,6 @@ header a:hover{color:var(--seal-text)}
 .beat:not(.on) h3 small{transform:scale(1.9) rotate(8deg);opacity:0}
 .beat.big h3{font-size:clamp(36px,4.2vw,64px)}
 .beat p{max-width:21em;color:var(--dim);font-size:1.02em}
-.flow{display:flex;flex-wrap:wrap;gap:.1em .6em;font:italic 400 clamp(20px,2vw,28px)/1.35 var(--serif);margin-top:4px}
-.flow span{opacity:.25;transform:translateX(-12px);transition:opacity .5s,transform .5s var(--ease)}
-.flow span.on{opacity:1;transform:none}
-.flow span+span::before{content:'→';margin-right:.6em;color:var(--seal-text);font-style:normal}
-.beat .soon{font-size:.8em;color:rgba(243,239,231,.55);font-style:italic}
 
 @media(max-width:860px){
   .scene-in{display:block}
@@ -176,8 +170,7 @@ header a:hover{color:var(--seal-text)}
 .end-body{position:relative;z-index:1;max-width:min(46em,100%);margin-left:clamp(0px,9vw,140px)}
 .end h2{font:400 italic clamp(40px,6.6vw,100px)/1.06 var(--serif);letter-spacing:-.02em;margin-bottom:.5em}
 .end p{max-width:34em;color:rgba(243,239,231,.86);margin-bottom:1em}
-.end .cta{margin-top:20px}.end .have{margin:18px 0 0;font-size:.9em;color:var(--dim)}.end .have a{color:var(--paper);border-bottom:1px solid var(--line);text-decoration:none}
-.end-cap{position:absolute;z-index:1;right:var(--pad);bottom:20px;color:var(--dim);font-size:12px;letter-spacing:.06em;text-transform:none;max-width:60vw;text-align:right}
+.end .cta{margin-top:20px}
 footer{padding:32px var(--pad) 40px;border-top:1px solid var(--line);color:var(--dim);display:grid;gap:12px;background:var(--bg2)}
 footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer small{font:400 12px/1.7 var(--mono);letter-spacing:.04em;color:rgba(243,239,231,.55);max-width:110ch}
@@ -191,7 +184,7 @@ h2.rv>span{display:block;clip-path:inset(-20% 100% -20% 0);transition:clip-path 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .rv,.beat,h2.rv>span{opacity:1;transform:none;filter:none;clip-path:none}.tile{opacity:1}.h-kanji span b{clip-path:none;filter:none}.beat h3 small{transform:none;opacity:1}.ripple{display:none}
-  .h-text .w,.br-text .w,.flow span{opacity:1;transform:none}.p-kanji{color:var(--paper);-webkit-text-stroke-color:transparent;transform:none;opacity:1}
+  .h-text .w,.br-text .w{opacity:1;transform:none}.p-kanji{color:var(--paper);-webkit-text-stroke-color:transparent;transform:none;opacity:1}
   .si{clip-path:none!important;opacity:1!important;filter:none!important}.si:not(.on){display:none}.curve circle{opacity:1}
 }
 </style>
@@ -217,8 +210,7 @@ h2.rv>span{display:block;clip-path:inset(-20% 100% -20% 0);transition:clip-path 
       <p class="h-title" id="hTitle">Từ cảnh đẹp<br>đến tiếng Nhật</p>
 
       <div class="h-text" id="hText">
-        <p>Có một đất nước mà bốn mùa nghe như bốn đất nước khác nhau.</p>
-        <p>Bạn muốn hiểu nó bằng chính ngôn ngữ của nó — rồi chạm vào bức tường đầu tiên: chữ viết.</p>
+        <p>Muốn hiểu Nhật Bản, hãy bắt đầu từ chữ viết.</p>
       </div>
       <div class="h-cta" id="hCta"><a class="cta" href="/today?guest=1" data-go>Học thử ngay <span>→</span></a></div>
     </div>
@@ -234,7 +226,7 @@ h2.rv>span{display:block;clip-path:inset(-20% 100% -20% 0);transition:clip-path 
       <p class="cap mono"></p>
     </div></div>
     <div class="beats">
-      <article class="beat big"><h3>Một đất nước đẹp đến mức người ta học cả ngôn ngữ để hiểu nó.</h3><p>Cao 3.776 m, núi Phú Sĩ đổi dáng theo từng mùa.</p></article><article class="beat"><h3>Hanami<small>花見</small></h3><p>Cả nước rủ nhau ngắm hoa nở — chỉ khoảng một tuần.</p></article><article class="beat"><h3>Hàng nghìn cổng torii<small>鳥居</small></h3><p>Mỗi cổng do một người hay một doanh nghiệp dâng tặng.</p></article><article class="beat"><h3>Mái nhà chắp tay<small>合掌造り</small></h3><p>Rơm dốc đứng, tuyết phủ mùa đông. Di sản UNESCO.</p></article><article class="beat big"><h3>Nhưng những tấm biển kia chưa đọc được.</h3><p>Ba bảng chữ. 2.136 chữ Hán thường dụng. Động từ nằm cuối câu.</p></article>
+      <article class="beat"><h3>Phú Sĩ<small>富士山</small></h3></article><article class="beat"><h3>Hanami<small>花見</small></h3></article><article class="beat"><h3>Torii<small>鳥居</small></h3></article><article class="beat"><h3>Shirakawa-gō<small>合掌造り</small></h3></article><article class="beat big"><h3>Nhưng những tấm biển kia chưa đọc được.</h3></article>
     </div>
   </div>
 </section>
@@ -243,13 +235,13 @@ h2.rv>span{display:block;clip-path:inset(-20% 100% -20% 0);transition:clip-path 
     <div class="num"><span data-count>0</span></div>
     <p class="br-cap">chữ Hán thường dụng.</p>
     <div class="br-line"><i></i></div>
-    <p class="br-text">Quên là chuyện bình thường. Vấn đề là ôn lại lúc nào.</p>
+    <p class="br-text">Không cần nhớ hết. Chỉ cần ôn đúng lúc.</p>
   </div>
 </section>
 <section class="scene alt" data-tone="blue" data-k="復" data-fx="focus">
   <div class="scene-in">
     <div class="stage-col"><div class="panel">
-      <figure class="si" data-i="0" data-cap=""><img src="/landing/algorithm.jpg" alt="Chuỗi xoắn sáng cùng các công thức" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="object-position:50% 45%"></figure><figure class="si" data-i="1" data-cap=""><img src="/landing/algorithm.jpg" alt="Chuỗi xoắn sáng cùng các công thức" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="object-position:50% 45%"></figure><figure class="si" data-i="2" data-cap=""><img src="/landing/algorithm.jpg" alt="Chuỗi xoắn sáng cùng các công thức" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="object-position:50% 45%"></figure><figure class="si" data-i="3" data-cap=""><img src="/landing/algorithm.jpg" alt="Chuỗi xoắn sáng cùng các công thức" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="object-position:50% 45%"></figure>
+      <figure class="si" data-i="0" data-cap=""><img src="/landing/algorithm.jpg" alt="Chuỗi xoắn sáng cùng các công thức" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="object-position:50% 45%"></figure><figure class="si" data-i="1" data-cap=""><img src="/landing/algorithm.jpg" alt="Chuỗi xoắn sáng cùng các công thức" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="object-position:50% 45%"></figure><figure class="si" data-i="2" data-cap=""><img src="/landing/algorithm.jpg" alt="Chuỗi xoắn sáng cùng các công thức" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="object-position:50% 45%"></figure>
       <svg class="curve" viewBox="0 0 400 240" aria-hidden="true">
   <path d="M20 40 C50 55 85 150 140 205 L140 40 C170 50 210 105 260 160 L260 40 C300 48 340 80 385 112"/>
   <circle cx="140" cy="40" r="6"/><circle cx="260" cy="40" r="6"/><circle cx="385" cy="112" r="6"/>
@@ -258,16 +250,8 @@ h2.rv>span{display:block;clip-path:inset(-20% 100% -20% 0);transition:clip-path 
       <p class="cap mono"></p>
     </div></div>
     <div class="beats">
-      <article class="beat big"><h3>Quên đúng lúc, nhớ đúng lúc.</h3><p>Mỗi thẻ quay lại ngay trước khi bạn quên.</p></article><article class="beat"><h3>Lịch ôn FSRS<small>間隔</small></h3><p>Độ khó và độ bền được tính riêng cho từng thẻ.</p></article><article class="beat"><h3>Không chờ mạng<small>速</small></h3><p>Lượt ôn lưu vào máy trước, gửi sau. Mất mạng cũng không mất bài.</p></article><article class="beat"><h3>Ghi chú riêng<small>記</small></h3><p>Bấm N để ghi lại điều bạn hay nhầm.</p></article>
+      <article class="beat big"><h3>Mỗi thẻ quay lại ngay trước khi bạn quên.</h3></article><article class="beat"><h3>Lịch ôn FSRS<small>間隔</small></h3><p>Tính riêng cho từng thẻ.</p></article><article class="beat"><h3>Ôn cả khi mất mạng<small>速</small></h3><p>Lưu trên máy, đồng bộ sau.</p></article>
     </div>
-  </div>
-</section>
-<section class="bridge" data-to="1881">
-  <div class="br-in">
-    <div class="num"><span data-count>0</span></div>
-    <p class="br-cap">từ vựng đã sẵn trong thư viện.</p>
-    <div class="br-line"><i></i></div>
-    <p class="br-text">Có từ rồi. Còn đôi tai và kỳ thi?</p>
   </div>
 </section>
 <section class="scene" data-tone="warm" data-k="聴" data-fx="iris">
@@ -279,7 +263,7 @@ h2.rv>span{display:block;clip-path:inset(-20% 100% -20% 0);transition:clip-path 
       <p class="cap mono"></p>
     </div></div>
     <div class="beats">
-      <article class="beat"><h3>Nghe cho quen tai<small>聴</small></h3><p>2.644 tập podcast từ bốn nguồn, ở tầm N4–N2.</p></article><article class="beat"><h3>Thi thử cho quen áp lực<small>問</small></h3><p>Đề N3 chia ba phần, mỗi phần một đồng hồ. Câu sai quay thẳng về hàng ôn.</p><div class="flow"><span>làm đề</span><span>câu sai</span><span>hàng ôn</span></div><p class="soon">Tính năng đang thiết kế.</p></article><article class="beat"><h3>Chia sẻ cho đỡ cô đơn<small>共</small></h3><p>Một liên kết cho cả bộ thẻ. Người nhận xem thử không cần đăng nhập.</p></article>
+      <article class="beat"><h3>Nghe<small>聴</small></h3><p>Podcast tiếng Nhật từ N4 đến N2.</p></article><article class="beat"><h3>Thi thử<small>問</small></h3><p>Đề JLPT có đồng hồ, chấm điểm tự động.</p></article><article class="beat"><h3>Chia sẻ<small>共</small></h3><p>Một liên kết cho cả bộ thẻ.</p></article>
     </div>
   </div>
 </section>
@@ -288,12 +272,9 @@ h2.rv>span{display:block;clip-path:inset(-20% 100% -20% 0);transition:clip-path 
     <div class="end-img" id="endImg"><img src="/landing/photos/960-cherry_blossoms_-_eish_-ji_-_kamakura__kanagawa__japan_-_dsc08077.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></div>
     <div class="end-body">
       <h2 class="rv"><span>Nhớ là một nhịp,<br>không phải một nỗ lực.</span></h2>
-      <p class="rv">Không huy hiệu, không bảng xếp hạng, không chuỗi ngày bắt buộc. Chỉ có đúng thứ cần ôn, vào đúng lúc cần ôn.</p>
-      <p class="rv">Không cần tài khoản. Mở lên và học chữ đầu tiên.</p>
+      <p class="rv">Không huy hiệu, không bảng xếp hạng. Không cần tài khoản.</p>
       <a class="cta rv" href="/today?guest=1" data-go>Học thử ngay <span>→</span></a>
-      <p class="rv have">Đã có tài khoản? <a href="/" data-go>Đăng nhập</a></p>
     </div>
-    <p class="mono end-cap">Hoa anh đào, Kamakura — ảnh Daderot, CC0</p>
   </section>
 </main>
 
@@ -321,7 +302,7 @@ h2.rv>span{display:block;clip-path:inset(-20% 100% -20% 0);transition:clip-path 
 
   const scenes = $$('.scene').map(el => ({
     el, tone: el.dataset.tone, beats: $$('.beat', el), imgs: $$('.si', el), cap: $('.cap', el),
-    panel: $('.panel', el), ripple: $('.ripple', el), curve: $('.curve path', el), dots: $$('.curve circle', el), flow: $$('.flow span', el), active: -1
+    panel: $('.panel', el), ripple: $('.ripple', el), curve: $('.curve path', el), dots: $$('.curve circle', el), active: -1
   }));
   scenes.forEach(s => { if (s.curve) { s.len = s.curve.getTotalLength(); s.curve.style.strokeDasharray = s.len; s.curve.style.strokeDashoffset = s.len; } });
 
@@ -408,10 +389,6 @@ h2.rv>span{display:block;clip-path:inset(-20% 100% -20% 0);transition:clip-path 
         s.curve.style.strokeDashoffset = s.len * (1 - draw);
         s.dots.forEach((d, k) => d.classList.toggle('on', draw > s.dotAt[k]));
       }
-      s.flow.forEach((f, k) => {
-        const b = f.closest('.beat'), fr = b.getBoundingClientRect();
-        f.classList.toggle('on', b.classList.contains('on') && (vh * .62 - fr.top) / fr.height * s.flow.length * 1.1 > k * .6);
-      });
     });
     if (cur >= 0) {
       document.documentElement.dataset.tone = scenes[cur].tone;
